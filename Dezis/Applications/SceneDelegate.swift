@@ -16,6 +16,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             guard let windowScene = (scene as? UIWindowScene) else { return }
             
             window = UIWindow(windowScene: windowScene)
+        //TODO: - need to change navigation
             let root = TabBarController() /*UINavigationController(rootViewController: TabBarController())*/ /*UserTypeSelectionViewController())*/
             window?.rootViewController = root
             window?.makeKeyAndVisible()
