@@ -1,0 +1,564 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		AF4B1DD12C9AE38E00FDA3EC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1DD02C9AE38E00FDA3EC /* AppDelegate.swift */; };
+		AF4B1DD32C9AE38E00FDA3EC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1DD22C9AE38E00FDA3EC /* SceneDelegate.swift */; };
+		AF4B1DD52C9AE38E00FDA3EC /* UserTypeSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1DD42C9AE38E00FDA3EC /* UserTypeSelectionViewController.swift */; };
+		AF4B1DDA2C9AE39000FDA3EC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AF4B1DD92C9AE39000FDA3EC /* Assets.xcassets */; };
+		AF4B1DDD2C9AE39000FDA3EC /* Base in Resources */ = {isa = PBXBuildFile; fileRef = AF4B1DDC2C9AE39000FDA3EC /* Base */; };
+		AF4B1DE92C9AEEC600FDA3EC /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1DE82C9AEEC600FDA3EC /* Profile.swift */; };
+		AF4B1DEB2C9AEEEC00FDA3EC /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1DEA2C9AEEEC00FDA3EC /* ViewModel.swift */; };
+		AF4B1DF12C9B153C00FDA3EC /* HexExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1DF02C9B153C00FDA3EC /* HexExtention.swift */; };
+		AF4B1DF52C9B28ED00FDA3EC /* ClientLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1DF42C9B28ED00FDA3EC /* ClientLoginViewController.swift */; };
+		AF4B1DF72C9B290D00FDA3EC /* AdminLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1DF62C9B290D00FDA3EC /* AdminLoginViewController.swift */; };
+		AF4B1DF92C9B32A300FDA3EC /* SuccessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1DF82C9B32A300FDA3EC /* SuccessViewController.swift */; };
+		AF4B1DFB2C9B42D300FDA3EC /* NewUserRegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1DFA2C9B42D300FDA3EC /* NewUserRegisterViewController.swift */; };
+		AF4B1DFD2C9B52AE00FDA3EC /* СonfirmationСodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1DFC2C9B52AE00FDA3EC /* СonfirmationСodeViewController.swift */; };
+		AF4B1E022C9C17BA00FDA3EC /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1E012C9C17B900FDA3EC /* EndPoint.swift */; };
+		AF4B1E052C9C1C8B00FDA3EC /* URLSession+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1E042C9C1C8B00FDA3EC /* URLSession+Extension.swift */; };
+		AF4B1E072C9C1F6000FDA3EC /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1E062C9C1F6000FDA3EC /* NetworkError.swift */; };
+		AF4B1E092C9C221000FDA3EC /* NetworkRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1E082C9C221000FDA3EC /* NetworkRequest.swift */; };
+		AF4B1E0B2C9C24D300FDA3EC /* NetworkDataFetch.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1E0A2C9C24D300FDA3EC /* NetworkDataFetch.swift */; };
+		AF4B1E0D2C9D9B3500FDA3EC /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1E0C2C9D9B3500FDA3EC /* TabBarController.swift */; };
+		AF4B1E0F2C9D9B8200FDA3EC /* ClientHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1E0E2C9D9B8200FDA3EC /* ClientHomeViewController.swift */; };
+		AF4B1E132C9D9C2F00FDA3EC /* ServicesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1E122C9D9C2F00FDA3EC /* ServicesViewController.swift */; };
+		AF4B1E152C9D9CB400FDA3EC /* PersonalAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1E142C9D9CB400FDA3EC /* PersonalAccountViewController.swift */; };
+		AF4B1E172C9FFF3200FDA3EC /* LabelSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1E162C9FFF3200FDA3EC /* LabelSettings.swift */; };
+		AF4B1E192CA0202000FDA3EC /* TextFieldSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1E182CA0202000FDA3EC /* TextFieldSettings.swift */; };
+		AF4B1E1B2CA0222A00FDA3EC /* ButtonSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1E1A2CA0222A00FDA3EC /* ButtonSettings.swift */; };
+		AF4B1E1D2CA05B5200FDA3EC /* ImageSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1E1C2CA05B5200FDA3EC /* ImageSettings.swift */; };
+		AF4B1E1F2CA06E5500FDA3EC /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1E1E2CA06E5500FDA3EC /* SettingsViewController.swift */; };
+		AF4B1E212CA06E6C00FDA3EC /* UserInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1E202CA06E6C00FDA3EC /* UserInfoViewController.swift */; };
+		AF4B1E232CA06E7E00FDA3EC /* AboutUsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1E222CA06E7E00FDA3EC /* AboutUsViewController.swift */; };
+		AF4B1E262CA0727300FDA3EC /* ClientErrorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1E252CA0727300FDA3EC /* ClientErrorViewController.swift */; };
+		AF4B1E282CA0729300FDA3EC /* ServerErrorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1E272CA0729300FDA3EC /* ServerErrorViewController.swift */; };
+		AF4B1E2B2CA0736200FDA3EC /* ClientChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1E2A2CA0736200FDA3EC /* ClientChatViewController.swift */; };
+		AF4B1E2D2CA19C6000FDA3EC /* ChekBoxButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1E2C2CA19C6000FDA3EC /* ChekBoxButton.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		AF4B1DCD2C9AE38E00FDA3EC /* Dezis.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dezis.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AF4B1DD02C9AE38E00FDA3EC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		AF4B1DD22C9AE38E00FDA3EC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		AF4B1DD42C9AE38E00FDA3EC /* UserTypeSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTypeSelectionViewController.swift; sourceTree = "<group>"; };
+		AF4B1DD92C9AE39000FDA3EC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		AF4B1DDC2C9AE39000FDA3EC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		AF4B1DDE2C9AE39000FDA3EC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AF4B1DE82C9AEEC600FDA3EC /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
+		AF4B1DEA2C9AEEEC00FDA3EC /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		AF4B1DF02C9B153C00FDA3EC /* HexExtention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexExtention.swift; sourceTree = "<group>"; };
+		AF4B1DF42C9B28ED00FDA3EC /* ClientLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientLoginViewController.swift; sourceTree = "<group>"; };
+		AF4B1DF62C9B290D00FDA3EC /* AdminLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminLoginViewController.swift; sourceTree = "<group>"; };
+		AF4B1DF82C9B32A300FDA3EC /* SuccessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessViewController.swift; sourceTree = "<group>"; };
+		AF4B1DFA2C9B42D300FDA3EC /* NewUserRegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewUserRegisterViewController.swift; sourceTree = "<group>"; };
+		AF4B1DFC2C9B52AE00FDA3EC /* СonfirmationСodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "СonfirmationСodeViewController.swift"; sourceTree = "<group>"; };
+		AF4B1E012C9C17B900FDA3EC /* EndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
+		AF4B1E042C9C1C8B00FDA3EC /* URLSession+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+Extension.swift"; sourceTree = "<group>"; };
+		AF4B1E062C9C1F6000FDA3EC /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		AF4B1E082C9C221000FDA3EC /* NetworkRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequest.swift; sourceTree = "<group>"; };
+		AF4B1E0A2C9C24D300FDA3EC /* NetworkDataFetch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkDataFetch.swift; sourceTree = "<group>"; };
+		AF4B1E0C2C9D9B3500FDA3EC /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		AF4B1E0E2C9D9B8200FDA3EC /* ClientHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientHomeViewController.swift; sourceTree = "<group>"; };
+		AF4B1E122C9D9C2F00FDA3EC /* ServicesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicesViewController.swift; sourceTree = "<group>"; };
+		AF4B1E142C9D9CB400FDA3EC /* PersonalAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalAccountViewController.swift; sourceTree = "<group>"; };
+		AF4B1E162C9FFF3200FDA3EC /* LabelSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelSettings.swift; sourceTree = "<group>"; };
+		AF4B1E182CA0202000FDA3EC /* TextFieldSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldSettings.swift; sourceTree = "<group>"; };
+		AF4B1E1A2CA0222A00FDA3EC /* ButtonSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonSettings.swift; sourceTree = "<group>"; };
+		AF4B1E1C2CA05B5200FDA3EC /* ImageSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSettings.swift; sourceTree = "<group>"; };
+		AF4B1E1E2CA06E5500FDA3EC /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		AF4B1E202CA06E6C00FDA3EC /* UserInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoViewController.swift; sourceTree = "<group>"; };
+		AF4B1E222CA06E7E00FDA3EC /* AboutUsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutUsViewController.swift; sourceTree = "<group>"; };
+		AF4B1E252CA0727300FDA3EC /* ClientErrorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientErrorViewController.swift; sourceTree = "<group>"; };
+		AF4B1E272CA0729300FDA3EC /* ServerErrorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerErrorViewController.swift; sourceTree = "<group>"; };
+		AF4B1E2A2CA0736200FDA3EC /* ClientChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientChatViewController.swift; sourceTree = "<group>"; };
+		AF4B1E2C2CA19C6000FDA3EC /* ChekBoxButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChekBoxButton.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		AF4B1DCA2C9AE38E00FDA3EC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		AF4B1DC42C9AE38E00FDA3EC = {
+			isa = PBXGroup;
+			children = (
+				AF4B1DCF2C9AE38E00FDA3EC /* Dezis */,
+				AF4B1DCE2C9AE38E00FDA3EC /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		AF4B1DCE2C9AE38E00FDA3EC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AF4B1DCD2C9AE38E00FDA3EC /* Dezis.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		AF4B1DCF2C9AE38E00FDA3EC /* Dezis */ = {
+			isa = PBXGroup;
+			children = (
+				AF4B1DFE2C9C0F7800FDA3EC /* Applications */,
+				AF4B1DE72C9AEE2100FDA3EC /* Models */,
+				AF4B1DE52C9AE6DF00FDA3EC /* Views */,
+				AF4B1DE62C9AE6E600FDA3EC /* ViewModels */,
+				AF4B1E002C9C179800FDA3EC /* Network */,
+				AF4B1E032C9C1C1F00FDA3EC /* Extensions */,
+				AF4B1DFF2C9C107D00FDA3EC /* Supporting Files */,
+			);
+			path = Dezis;
+			sourceTree = "<group>";
+		};
+		AF4B1DE52C9AE6DF00FDA3EC /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				AF4B1DF32C9B28BD00FDA3EC /* AdminViews */,
+				AF4B1DF22C9B28A900FDA3EC /* ClientViews */,
+				AF4B1DD42C9AE38E00FDA3EC /* UserTypeSelectionViewController.swift */,
+				AF4B1DF82C9B32A300FDA3EC /* SuccessViewController.swift */,
+				AF4B1E252CA0727300FDA3EC /* ClientErrorViewController.swift */,
+				AF4B1E272CA0729300FDA3EC /* ServerErrorViewController.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		AF4B1DE62C9AE6E600FDA3EC /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				AF4B1DEA2C9AEEEC00FDA3EC /* ViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		AF4B1DE72C9AEE2100FDA3EC /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				AF4B1DE82C9AEEC600FDA3EC /* Profile.swift */,
+				AF4B1E162C9FFF3200FDA3EC /* LabelSettings.swift */,
+				AF4B1E182CA0202000FDA3EC /* TextFieldSettings.swift */,
+				AF4B1E1A2CA0222A00FDA3EC /* ButtonSettings.swift */,
+				AF4B1E1C2CA05B5200FDA3EC /* ImageSettings.swift */,
+				AF4B1E2C2CA19C6000FDA3EC /* ChekBoxButton.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		AF4B1DF22C9B28A900FDA3EC /* ClientViews */ = {
+			isa = PBXGroup;
+			children = (
+				AF4B1E112C9D9BB700FDA3EC /* ClientLoginViews */,
+				AF4B1E102C9D9B9700FDA3EC /* ClientMainViews */,
+			);
+			path = ClientViews;
+			sourceTree = "<group>";
+		};
+		AF4B1DF32C9B28BD00FDA3EC /* AdminViews */ = {
+			isa = PBXGroup;
+			children = (
+				AF4B1DF62C9B290D00FDA3EC /* AdminLoginViewController.swift */,
+			);
+			path = AdminViews;
+			sourceTree = "<group>";
+		};
+		AF4B1DFE2C9C0F7800FDA3EC /* Applications */ = {
+			isa = PBXGroup;
+			children = (
+				AF4B1DD22C9AE38E00FDA3EC /* SceneDelegate.swift */,
+				AF4B1DD02C9AE38E00FDA3EC /* AppDelegate.swift */,
+			);
+			path = Applications;
+			sourceTree = "<group>";
+		};
+		AF4B1DFF2C9C107D00FDA3EC /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				AF4B1DDE2C9AE39000FDA3EC /* Info.plist */,
+				AF4B1DDB2C9AE39000FDA3EC /* LaunchScreen.storyboard */,
+				AF4B1DD92C9AE39000FDA3EC /* Assets.xcassets */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		AF4B1E002C9C179800FDA3EC /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				AF4B1E012C9C17B900FDA3EC /* EndPoint.swift */,
+				AF4B1E062C9C1F6000FDA3EC /* NetworkError.swift */,
+				AF4B1E082C9C221000FDA3EC /* NetworkRequest.swift */,
+				AF4B1E0A2C9C24D300FDA3EC /* NetworkDataFetch.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		AF4B1E032C9C1C1F00FDA3EC /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				AF4B1DF02C9B153C00FDA3EC /* HexExtention.swift */,
+				AF4B1E042C9C1C8B00FDA3EC /* URLSession+Extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		AF4B1E102C9D9B9700FDA3EC /* ClientMainViews */ = {
+			isa = PBXGroup;
+			children = (
+				AF4B1E0C2C9D9B3500FDA3EC /* TabBarController.swift */,
+				AF4B1E0E2C9D9B8200FDA3EC /* ClientHomeViewController.swift */,
+				AF4B1E122C9D9C2F00FDA3EC /* ServicesViewController.swift */,
+				AF4B1E2A2CA0736200FDA3EC /* ClientChatViewController.swift */,
+				AF4B1E242CA0721700FDA3EC /* PersonalAccountViews */,
+			);
+			path = ClientMainViews;
+			sourceTree = "<group>";
+		};
+		AF4B1E112C9D9BB700FDA3EC /* ClientLoginViews */ = {
+			isa = PBXGroup;
+			children = (
+				AF4B1DFA2C9B42D300FDA3EC /* NewUserRegisterViewController.swift */,
+				AF4B1DFC2C9B52AE00FDA3EC /* СonfirmationСodeViewController.swift */,
+				AF4B1DF42C9B28ED00FDA3EC /* ClientLoginViewController.swift */,
+			);
+			path = ClientLoginViews;
+			sourceTree = "<group>";
+		};
+		AF4B1E242CA0721700FDA3EC /* PersonalAccountViews */ = {
+			isa = PBXGroup;
+			children = (
+				AF4B1E142C9D9CB400FDA3EC /* PersonalAccountViewController.swift */,
+				AF4B1E1E2CA06E5500FDA3EC /* SettingsViewController.swift */,
+				AF4B1E202CA06E6C00FDA3EC /* UserInfoViewController.swift */,
+				AF4B1E222CA06E7E00FDA3EC /* AboutUsViewController.swift */,
+			);
+			path = PersonalAccountViews;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		AF4B1DCC2C9AE38E00FDA3EC /* Dezis */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AF4B1DE12C9AE39000FDA3EC /* Build configuration list for PBXNativeTarget "Dezis" */;
+			buildPhases = (
+				AF4B1DC92C9AE38E00FDA3EC /* Sources */,
+				AF4B1DCA2C9AE38E00FDA3EC /* Frameworks */,
+				AF4B1DCB2C9AE38E00FDA3EC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Dezis;
+			productName = Dezis;
+			productReference = AF4B1DCD2C9AE38E00FDA3EC /* Dezis.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		AF4B1DC52C9AE38E00FDA3EC /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1530;
+				LastUpgradeCheck = 1530;
+				TargetAttributes = {
+					AF4B1DCC2C9AE38E00FDA3EC = {
+						CreatedOnToolsVersion = 15.3;
+					};
+				};
+			};
+			buildConfigurationList = AF4B1DC82C9AE38E00FDA3EC /* Build configuration list for PBXProject "Dezis" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = AF4B1DC42C9AE38E00FDA3EC;
+			productRefGroup = AF4B1DCE2C9AE38E00FDA3EC /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				AF4B1DCC2C9AE38E00FDA3EC /* Dezis */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		AF4B1DCB2C9AE38E00FDA3EC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AF4B1DDA2C9AE39000FDA3EC /* Assets.xcassets in Resources */,
+				AF4B1DDD2C9AE39000FDA3EC /* Base in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		AF4B1DC92C9AE38E00FDA3EC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AF4B1E0F2C9D9B8200FDA3EC /* ClientHomeViewController.swift in Sources */,
+				AF4B1E232CA06E7E00FDA3EC /* AboutUsViewController.swift in Sources */,
+				AF4B1E262CA0727300FDA3EC /* ClientErrorViewController.swift in Sources */,
+				AF4B1DEB2C9AEEEC00FDA3EC /* ViewModel.swift in Sources */,
+				AF4B1E132C9D9C2F00FDA3EC /* ServicesViewController.swift in Sources */,
+				AF4B1E2B2CA0736200FDA3EC /* ClientChatViewController.swift in Sources */,
+				AF4B1E282CA0729300FDA3EC /* ServerErrorViewController.swift in Sources */,
+				AF4B1E072C9C1F6000FDA3EC /* NetworkError.swift in Sources */,
+				AF4B1DF92C9B32A300FDA3EC /* SuccessViewController.swift in Sources */,
+				AF4B1E172C9FFF3200FDA3EC /* LabelSettings.swift in Sources */,
+				AF4B1DE92C9AEEC600FDA3EC /* Profile.swift in Sources */,
+				AF4B1E092C9C221000FDA3EC /* NetworkRequest.swift in Sources */,
+				AF4B1E1F2CA06E5500FDA3EC /* SettingsViewController.swift in Sources */,
+				AF4B1DFB2C9B42D300FDA3EC /* NewUserRegisterViewController.swift in Sources */,
+				AF4B1E0D2C9D9B3500FDA3EC /* TabBarController.swift in Sources */,
+				AF4B1E1D2CA05B5200FDA3EC /* ImageSettings.swift in Sources */,
+				AF4B1E192CA0202000FDA3EC /* TextFieldSettings.swift in Sources */,
+				AF4B1E1B2CA0222A00FDA3EC /* ButtonSettings.swift in Sources */,
+				AF4B1DF72C9B290D00FDA3EC /* AdminLoginViewController.swift in Sources */,
+				AF4B1E152C9D9CB400FDA3EC /* PersonalAccountViewController.swift in Sources */,
+				AF4B1DF52C9B28ED00FDA3EC /* ClientLoginViewController.swift in Sources */,
+				AF4B1E022C9C17BA00FDA3EC /* EndPoint.swift in Sources */,
+				AF4B1DF12C9B153C00FDA3EC /* HexExtention.swift in Sources */,
+				AF4B1E212CA06E6C00FDA3EC /* UserInfoViewController.swift in Sources */,
+				AF4B1DD52C9AE38E00FDA3EC /* UserTypeSelectionViewController.swift in Sources */,
+				AF4B1E2D2CA19C6000FDA3EC /* ChekBoxButton.swift in Sources */,
+				AF4B1DD12C9AE38E00FDA3EC /* AppDelegate.swift in Sources */,
+				AF4B1E052C9C1C8B00FDA3EC /* URLSession+Extension.swift in Sources */,
+				AF4B1DFD2C9B52AE00FDA3EC /* СonfirmationСodeViewController.swift in Sources */,
+				AF4B1DD32C9AE38E00FDA3EC /* SceneDelegate.swift in Sources */,
+				AF4B1E0B2C9C24D300FDA3EC /* NetworkDataFetch.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		AF4B1DDB2C9AE39000FDA3EC /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AF4B1DDC2C9AE39000FDA3EC /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		AF4B1DDF2C9AE39000FDA3EC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		AF4B1DE02C9AE39000FDA3EC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		AF4B1DE22C9AE39000FDA3EC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = H26KGNHNNP;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Dezis/Supporting Files/Info.plist";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tatu.Dezis;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		AF4B1DE32C9AE39000FDA3EC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = H26KGNHNNP;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Dezis/Supporting Files/Info.plist";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tatu.Dezis;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		AF4B1DC82C9AE38E00FDA3EC /* Build configuration list for PBXProject "Dezis" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AF4B1DDF2C9AE39000FDA3EC /* Debug */,
+				AF4B1DE02C9AE39000FDA3EC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AF4B1DE12C9AE39000FDA3EC /* Build configuration list for PBXNativeTarget "Dezis" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AF4B1DE22C9AE39000FDA3EC /* Debug */,
+				AF4B1DE32C9AE39000FDA3EC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = AF4B1DC52C9AE38E00FDA3EC /* Project object */;
+}
