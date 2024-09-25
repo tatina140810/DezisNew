@@ -6,6 +6,7 @@
 //
 
 import UIKit
+// комент для теста
 
 class NewUserRegisterViewController: UIViewController {
     
@@ -69,116 +70,148 @@ class NewUserRegisterViewController: UIViewController {
             super.viewDidLoad()
             view.backgroundColor = .white
             setupUI()
+            createAttributedText()
+            createSecondAttributedText()
+            
+        }
+    private func createAttributedText() {
+        let fullText = "У вас уже есть аккаунт? Войти"
+        
+        let attributedString = NSMutableAttributedString(string: fullText)
+
+        let range = (fullText as NSString).range(of: "Войти")
+        attributedString.addAttribute(.foregroundColor, value: UIColor.blue, range: range)
+        attributedString.addAttribute(.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: range)
+        
+        loginLabel.attributedText = attributedString
+
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(attributedTextTapped))
+        loginLabel.isUserInteractionEnabled = true
+       loginLabel.addGestureRecognizer(tapGesture)
+    }
+    
+    private func createSecondAttributedText() {
+        let fullText = "Не удалось зарегистрироваться? Связаться"
+        
+        let attributedString = NSMutableAttributedString(string: fullText)
+
+        let range = (fullText as NSString).range(of: "Связаться")
+        attributedString.addAttribute(.foregroundColor, value: UIColor.blue, range: range)
+        attributedString.addAttribute(.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: range)
+        
+        supportContactLabel.attributedText = attributedString
+
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(attributedSecondTextTapped))
+        supportContactLabel.isUserInteractionEnabled = true
+        supportContactLabel.addGestureRecognizer(tapGesture)
+    }
+    
+        
+        // Mark: - Setup UI Elements
+    private func setupUI(){
+        
+        view.addSubview(titleLabel)
+        titleLabel.snp.makeConstraints{make in
+            make.leading.equalToSuperview().offset(16)
+            make.top.equalToSuperview().offset(65)
+        }
+        view.addSubview(nameTextField)
+        nameTextField.snp.makeConstraints{make in
+            make.top.equalTo(titleLabel.snp.bottom).offset(28)
+            make.leading.equalToSuperview().offset(16)
+            make.trailing.equalToSuperview().offset(-16)
+            make.height.equalTo(48)
+        }
+        view.addSubview(phoneNumberTextField)
+        phoneNumberTextField.snp.makeConstraints{make in
+            make.top.equalTo(nameTextField.snp.bottom).offset(8)
+            make.leading.equalToSuperview().offset(16)
+            make.trailing.equalToSuperview().offset(-16)
+            make.height.equalTo(48)
+        }
+        view.addSubview(emailTextField)
+        emailTextField.snp.makeConstraints{make in
+            make.top.equalTo(phoneNumberTextField.snp.bottom).offset(8)
+            make.leading.equalToSuperview().offset(16)
+            make.trailing.equalToSuperview().offset(-16)
+            make.height.equalTo(48)
+        }
+        view.addSubview(orderNumberTextField)
+        orderNumberTextField.snp.makeConstraints{make in
+            make.top.equalTo(emailTextField.snp.bottom).offset(8)
+            make.leading.equalToSuperview().offset(16)
+            make.trailing.equalToSuperview().offset(-16)
+            make.height.equalTo(48)
+        }
+        view.addSubview(adressTextField)
+        adressTextField.snp.makeConstraints{make in
+            make.top.equalTo(orderNumberTextField.snp.bottom).offset(8)
+            make.leading.equalToSuperview().offset(16)
+            make.trailing.equalToSuperview().offset(-16)
+            make.height.equalTo(48)
+        }
+        view.addSubview(houseNumberTextField)
+        houseNumberTextField.snp.makeConstraints{make in
+            make.top.equalTo(adressTextField.snp.bottom).offset(8)
+            make.leading.equalToSuperview().offset(16)
+            make.trailing.equalToSuperview().offset(-16)
+            make.height.equalTo(48)
+        }
+        view.addSubview(apartmentNumberTextField)
+        apartmentNumberTextField.snp.makeConstraints{make in
+            make.top.equalTo(houseNumberTextField.snp.bottom).offset(8)
+            make.leading.equalToSuperview().offset(16)
+            make.trailing.equalToSuperview().offset(-16)
+            make.height.equalTo(48)
+        }
+        view.addSubview(apartmentNumberTextField)
+        apartmentNumberTextField.snp.makeConstraints{make in
+            make.top.equalTo(houseNumberTextField.snp.bottom).offset(8)
+            make.leading.equalToSuperview().offset(16)
+            make.trailing.equalToSuperview().offset(-16)
+            make.height.equalTo(48)
+        }
+        view.addSubview(checkMarkButton)
+        checkMarkButton.snp.makeConstraints{make in
+            make.top.equalTo(apartmentNumberTextField.snp.bottom).offset(16)
+            make.leading.equalToSuperview().offset(16)
+            make.width.equalTo(24)
+            make.height.equalTo(24)
+        }
+        view.addSubview(privacyAgreementLabel)
+        privacyAgreementLabel.snp.makeConstraints { make in
+            make.leading.equalTo(checkMarkButton.snp.trailing).offset(10)
+            make.trailing.equalToSuperview().offset(-20)
+            make.top.equalTo(apartmentNumberTextField.snp.bottom).offset(16)
             
         }
         
-        // Mark: - Setup UI Elements
-        private func setupUI(){
-            
-            view.addSubview(titleLabel)
-            titleLabel.snp.makeConstraints{make in
-                make.leading.equalToSuperview().offset(16)
-                make.top.equalToSuperview().offset(144)
-            }
-            view.addSubview(nameTextField)
-            nameTextField.snp.makeConstraints{make in
-                make.top.equalTo(titleLabel.snp.bottom).offset(28)
-                make.leading.equalToSuperview().offset(16)
-                make.trailing.equalToSuperview().offset(-16)
-                make.height.equalTo(48)
-            }
-            view.addSubview(phoneNumberTextField)
-            phoneNumberTextField.snp.makeConstraints{make in
-                make.top.equalTo(nameTextField.snp.bottom).offset(8)
-                make.leading.equalToSuperview().offset(16)
-                make.trailing.equalToSuperview().offset(-16)
-                make.height.equalTo(48)
-            }
-            view.addSubview(emailTextField)
-            emailTextField.snp.makeConstraints{make in
-                make.top.equalTo(phoneNumberTextField.snp.bottom).offset(8)
-                make.leading.equalToSuperview().offset(16)
-                make.trailing.equalToSuperview().offset(-16)
-                make.height.equalTo(48)
-            }
-            view.addSubview(orderNumberTextField)
-            orderNumberTextField.snp.makeConstraints{make in
-                make.top.equalTo(emailTextField.snp.bottom).offset(8)
-                make.leading.equalToSuperview().offset(16)
-                make.trailing.equalToSuperview().offset(-16)
-                make.height.equalTo(48)
-            }
-            view.addSubview(adressTextField)
-            adressTextField.snp.makeConstraints{make in
-                make.top.equalTo(orderNumberTextField.snp.bottom).offset(8)
-                make.leading.equalToSuperview().offset(16)
-                make.trailing.equalToSuperview().offset(-16)
-                make.height.equalTo(48)
-            }
-            view.addSubview(houseNumberTextField)
-            houseNumberTextField.snp.makeConstraints{make in
-                make.top.equalTo(adressTextField.snp.bottom).offset(8)
-                make.leading.equalToSuperview().offset(16)
-                make.trailing.equalToSuperview().offset(-16)
-                make.height.equalTo(48)
-            }
-            view.addSubview(apartmentNumberTextField)
-            apartmentNumberTextField.snp.makeConstraints{make in
-                make.top.equalTo(houseNumberTextField.snp.bottom).offset(8)
-                make.leading.equalToSuperview().offset(16)
-                make.trailing.equalToSuperview().offset(-16)
-                make.height.equalTo(48)
-            }
-            view.addSubview(apartmentNumberTextField)
-            apartmentNumberTextField.snp.makeConstraints{make in
-                make.top.equalTo(houseNumberTextField.snp.bottom).offset(8)
-                make.leading.equalToSuperview().offset(16)
-                make.trailing.equalToSuperview().offset(-16)
-                make.height.equalTo(48)
-            }
-            view.addSubview(checkMarkButton)
-            checkMarkButton.snp.makeConstraints{make in
-                make.top.equalTo(apartmentNumberTextField.snp.bottom).offset(16)
-                make.leading.equalToSuperview().offset(16)
-                make.width.equalTo(24)
-                make.height.equalTo(24)
-            }
-            
-                
-    
-
-            
-          
-//
-//            view.addSubview(privacyAgreementLabel)
-//            NSLayoutConstraint.activate([
-//                privacyAgreementLabel.leadingAnchor.constraint(equalTo: checkMarkButton.trailingAnchor, constant: 5),
-//                privacyAgreementLabel.topAnchor.constraint(equalTo: apartmentNumberTextField.bottomAnchor, constant: 16),
-//                privacyAgreementLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16)
-//            ])
-//            view.addSubview(loginLabel)
-//            NSLayoutConstraint.activate([
-//                loginLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-//                loginLabel.topAnchor.constraint(equalTo: checkMarkButton.bottomAnchor, constant: 16),
-//            ])
-//            
-//            view.addSubview(signUpButton)
-//            NSLayoutConstraint.activate([
-//                signUpButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-//                signUpButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-//                signUpButton.topAnchor.constraint(equalTo: loginLabel.bottomAnchor, constant: 20),
-//                signUpButton.heightAnchor.constraint(equalToConstant: 48)
-//            ])
-//            
-//            view.addSubview(supportContactLabel)
-//            NSLayoutConstraint.activate([
-//                supportContactLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-//                
-//                supportContactLabel.topAnchor.constraint(equalTo: signUpButton.bottomAnchor, constant: 20),
-//            ])
+        view.addSubview(loginLabel)
+        loginLabel.snp.makeConstraints{make in
+            make.top.equalTo(checkMarkButton.snp.bottom).offset(20)
+            make.leading.equalToSuperview().offset(16)
+        }
+        view.addSubview(signUpButton)
+        signUpButton.snp.makeConstraints{make in
+            make.top.equalTo(loginLabel.snp.bottom).offset(20)
+            make.leading.equalToSuperview().offset(16)
+            make.trailing.equalToSuperview().offset(-16)
+            make.height.equalTo(48)}
+        
+        view.addSubview(supportContactLabel)
+        supportContactLabel.snp.makeConstraints{make in
+            make.top.equalTo(signUpButton.snp.bottom).offset(20)
+            make.leading.equalToSuperview().offset(16)
             
         }
-     
+    }
+    @objc func attributedTextTapped() {
+       
+        print("Login tapped!")
+    }
+    @objc func attributedSecondTextTapped(){
+        print("Support contact tapped!")
+    }
     @objc func signUpButtonTapped(){
         let vc = СonfirmationСodeViewController()
         vc.modalPresentationStyle = .fullScreen
