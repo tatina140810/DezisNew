@@ -13,7 +13,6 @@
 		AF4B1DDA2C9AE39000FDA3EC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AF4B1DD92C9AE39000FDA3EC /* Assets.xcassets */; };
 		AF4B1DDD2C9AE39000FDA3EC /* Base in Resources */ = {isa = PBXBuildFile; fileRef = AF4B1DDC2C9AE39000FDA3EC /* Base */; };
 		AF4B1DE92C9AEEC600FDA3EC /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1DE82C9AEEC600FDA3EC /* Profile.swift */; };
-		AF4B1DEB2C9AEEEC00FDA3EC /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1DEA2C9AEEEC00FDA3EC /* ViewModel.swift */; };
 		AF4B1DF12C9B153C00FDA3EC /* HexExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1DF02C9B153C00FDA3EC /* HexExtention.swift */; };
 		AF4B1DF52C9B28ED00FDA3EC /* ClientLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1DF42C9B28ED00FDA3EC /* ClientLoginViewController.swift */; };
 		AF4B1DF72C9B290D00FDA3EC /* AdminLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1DF62C9B290D00FDA3EC /* AdminLoginViewController.swift */; };
@@ -40,6 +39,15 @@
 		AF4B1E282CA0729300FDA3EC /* ServerErrorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1E272CA0729300FDA3EC /* ServerErrorViewController.swift */; };
 		AF4B1E2B2CA0736200FDA3EC /* ClientChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1E2A2CA0736200FDA3EC /* ClientChatViewController.swift */; };
 		AF4B1E2D2CA19C6000FDA3EC /* ChekBoxButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1E2C2CA19C6000FDA3EC /* ChekBoxButton.swift */; };
+		AF4B1E312CA2EFEF00FDA3EC /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1E302CA2EFEF00FDA3EC /* OnboardingViewController.swift */; };
+		AF4B1E342CA2F5C400FDA3EC /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = AF4B1E332CA2F5C400FDA3EC /* SnapKit */; };
+		AF4B1E362CA2F5C400FDA3EC /* SnapKit-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = AF4B1E352CA2F5C400FDA3EC /* SnapKit-Dynamic */; };
+		AF4B1E382CA2F6D200FDA3EC /* OnboardingSecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1E372CA2F6D200FDA3EC /* OnboardingSecondViewController.swift */; };
+		AF4B1E3A2CA2F74D00FDA3EC /* OnboardingThirdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1E392CA2F74D00FDA3EC /* OnboardingThirdViewController.swift */; };
+		AF4B1E3C2CA30E5E00FDA3EC /* OnboardingForthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1E3B2CA30E5E00FDA3EC /* OnboardingForthViewController.swift */; };
+		AF4B1E3E2CA3DDAA00FDA3EC /* OnboardingPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1E3D2CA3DDAA00FDA3EC /* OnboardingPageViewController.swift */; };
+		AF4B1E402CA3E0D400FDA3EC /* OnboardingFifthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1E3F2CA3E0D400FDA3EC /* OnboardingFifthViewController.swift */; };
+		AF4B1E422CA3E0F400FDA3EC /* OnboardingSixthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1E412CA3E0F400FDA3EC /* OnboardingSixthViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,7 +59,6 @@
 		AF4B1DDC2C9AE39000FDA3EC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AF4B1DDE2C9AE39000FDA3EC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AF4B1DE82C9AEEC600FDA3EC /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
-		AF4B1DEA2C9AEEEC00FDA3EC /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		AF4B1DF02C9B153C00FDA3EC /* HexExtention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexExtention.swift; sourceTree = "<group>"; };
 		AF4B1DF42C9B28ED00FDA3EC /* ClientLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientLoginViewController.swift; sourceTree = "<group>"; };
 		AF4B1DF62C9B290D00FDA3EC /* AdminLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminLoginViewController.swift; sourceTree = "<group>"; };
@@ -78,6 +85,13 @@
 		AF4B1E272CA0729300FDA3EC /* ServerErrorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerErrorViewController.swift; sourceTree = "<group>"; };
 		AF4B1E2A2CA0736200FDA3EC /* ClientChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientChatViewController.swift; sourceTree = "<group>"; };
 		AF4B1E2C2CA19C6000FDA3EC /* ChekBoxButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChekBoxButton.swift; sourceTree = "<group>"; };
+		AF4B1E302CA2EFEF00FDA3EC /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
+		AF4B1E372CA2F6D200FDA3EC /* OnboardingSecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingSecondViewController.swift; sourceTree = "<group>"; };
+		AF4B1E392CA2F74D00FDA3EC /* OnboardingThirdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingThirdViewController.swift; sourceTree = "<group>"; };
+		AF4B1E3B2CA30E5E00FDA3EC /* OnboardingForthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingForthViewController.swift; sourceTree = "<group>"; };
+		AF4B1E3D2CA3DDAA00FDA3EC /* OnboardingPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPageViewController.swift; sourceTree = "<group>"; };
+		AF4B1E3F2CA3E0D400FDA3EC /* OnboardingFifthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingFifthViewController.swift; sourceTree = "<group>"; };
+		AF4B1E412CA3E0F400FDA3EC /* OnboardingSixthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingSixthViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +99,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF4B1E342CA2F5C400FDA3EC /* SnapKit in Frameworks */,
+				AF4B1E362CA2F5C400FDA3EC /* SnapKit-Dynamic in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -113,7 +129,7 @@
 				AF4B1DFE2C9C0F7800FDA3EC /* Applications */,
 				AF4B1DE72C9AEE2100FDA3EC /* Models */,
 				AF4B1DE52C9AE6DF00FDA3EC /* Views */,
-				AF4B1DE62C9AE6E600FDA3EC /* ViewModels */,
+				AF4B1E2E2CA2EF6B00FDA3EC /* Presenters */,
 				AF4B1E002C9C179800FDA3EC /* Network */,
 				AF4B1E032C9C1C1F00FDA3EC /* Extensions */,
 				AF4B1DFF2C9C107D00FDA3EC /* Supporting Files */,
@@ -124,6 +140,7 @@
 		AF4B1DE52C9AE6DF00FDA3EC /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				AF4B1E2F2CA2EFCE00FDA3EC /* OnBoarding */,
 				AF4B1DF32C9B28BD00FDA3EC /* AdminViews */,
 				AF4B1DF22C9B28A900FDA3EC /* ClientViews */,
 				AF4B1DD42C9AE38E00FDA3EC /* UserTypeSelectionViewController.swift */,
@@ -132,14 +149,6 @@
 				AF4B1E272CA0729300FDA3EC /* ServerErrorViewController.swift */,
 			);
 			path = Views;
-			sourceTree = "<group>";
-		};
-		AF4B1DE62C9AE6E600FDA3EC /* ViewModels */ = {
-			isa = PBXGroup;
-			children = (
-				AF4B1DEA2C9AEEEC00FDA3EC /* ViewModel.swift */,
-			);
-			path = ViewModels;
 			sourceTree = "<group>";
 		};
 		AF4B1DE72C9AEE2100FDA3EC /* Models */ = {
@@ -244,6 +253,27 @@
 			path = PersonalAccountViews;
 			sourceTree = "<group>";
 		};
+		AF4B1E2E2CA2EF6B00FDA3EC /* Presenters */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Presenters;
+			sourceTree = "<group>";
+		};
+		AF4B1E2F2CA2EFCE00FDA3EC /* OnBoarding */ = {
+			isa = PBXGroup;
+			children = (
+				AF4B1E3D2CA3DDAA00FDA3EC /* OnboardingPageViewController.swift */,
+				AF4B1E302CA2EFEF00FDA3EC /* OnboardingViewController.swift */,
+				AF4B1E372CA2F6D200FDA3EC /* OnboardingSecondViewController.swift */,
+				AF4B1E392CA2F74D00FDA3EC /* OnboardingThirdViewController.swift */,
+				AF4B1E3B2CA30E5E00FDA3EC /* OnboardingForthViewController.swift */,
+				AF4B1E3F2CA3E0D400FDA3EC /* OnboardingFifthViewController.swift */,
+				AF4B1E412CA3E0F400FDA3EC /* OnboardingSixthViewController.swift */,
+			);
+			path = OnBoarding;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -260,6 +290,10 @@
 			dependencies = (
 			);
 			name = Dezis;
+			packageProductDependencies = (
+				AF4B1E332CA2F5C400FDA3EC /* SnapKit */,
+				AF4B1E352CA2F5C400FDA3EC /* SnapKit-Dynamic */,
+			);
 			productName = Dezis;
 			productReference = AF4B1DCD2C9AE38E00FDA3EC /* Dezis.app */;
 			productType = "com.apple.product-type.application";
@@ -288,6 +322,9 @@
 				Base,
 			);
 			mainGroup = AF4B1DC42C9AE38E00FDA3EC;
+			packageReferences = (
+				AF4B1E322CA2F5C400FDA3EC /* XCRemoteSwiftPackageReference "SnapKit" */,
+			);
 			productRefGroup = AF4B1DCE2C9AE38E00FDA3EC /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -315,19 +352,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				AF4B1E0F2C9D9B8200FDA3EC /* ClientHomeViewController.swift in Sources */,
+				AF4B1E3C2CA30E5E00FDA3EC /* OnboardingForthViewController.swift in Sources */,
 				AF4B1E232CA06E7E00FDA3EC /* AboutUsViewController.swift in Sources */,
 				AF4B1E262CA0727300FDA3EC /* ClientErrorViewController.swift in Sources */,
-				AF4B1DEB2C9AEEEC00FDA3EC /* ViewModel.swift in Sources */,
 				AF4B1E132C9D9C2F00FDA3EC /* ServicesViewController.swift in Sources */,
 				AF4B1E2B2CA0736200FDA3EC /* ClientChatViewController.swift in Sources */,
 				AF4B1E282CA0729300FDA3EC /* ServerErrorViewController.swift in Sources */,
 				AF4B1E072C9C1F6000FDA3EC /* NetworkError.swift in Sources */,
 				AF4B1DF92C9B32A300FDA3EC /* SuccessViewController.swift in Sources */,
+				AF4B1E402CA3E0D400FDA3EC /* OnboardingFifthViewController.swift in Sources */,
 				AF4B1E172C9FFF3200FDA3EC /* LabelSettings.swift in Sources */,
 				AF4B1DE92C9AEEC600FDA3EC /* Profile.swift in Sources */,
 				AF4B1E092C9C221000FDA3EC /* NetworkRequest.swift in Sources */,
+				AF4B1E3E2CA3DDAA00FDA3EC /* OnboardingPageViewController.swift in Sources */,
 				AF4B1E1F2CA06E5500FDA3EC /* SettingsViewController.swift in Sources */,
 				AF4B1DFB2C9B42D300FDA3EC /* NewUserRegisterViewController.swift in Sources */,
+				AF4B1E382CA2F6D200FDA3EC /* OnboardingSecondViewController.swift in Sources */,
 				AF4B1E0D2C9D9B3500FDA3EC /* TabBarController.swift in Sources */,
 				AF4B1E1D2CA05B5200FDA3EC /* ImageSettings.swift in Sources */,
 				AF4B1E192CA0202000FDA3EC /* TextFieldSettings.swift in Sources */,
@@ -335,9 +375,11 @@
 				AF4B1DF72C9B290D00FDA3EC /* AdminLoginViewController.swift in Sources */,
 				AF4B1E152C9D9CB400FDA3EC /* PersonalAccountViewController.swift in Sources */,
 				AF4B1DF52C9B28ED00FDA3EC /* ClientLoginViewController.swift in Sources */,
+				AF4B1E422CA3E0F400FDA3EC /* OnboardingSixthViewController.swift in Sources */,
 				AF4B1E022C9C17BA00FDA3EC /* EndPoint.swift in Sources */,
 				AF4B1DF12C9B153C00FDA3EC /* HexExtention.swift in Sources */,
 				AF4B1E212CA06E6C00FDA3EC /* UserInfoViewController.swift in Sources */,
+				AF4B1E312CA2EFEF00FDA3EC /* OnboardingViewController.swift in Sources */,
 				AF4B1DD52C9AE38E00FDA3EC /* UserTypeSelectionViewController.swift in Sources */,
 				AF4B1E2D2CA19C6000FDA3EC /* ChekBoxButton.swift in Sources */,
 				AF4B1DD12C9AE38E00FDA3EC /* AppDelegate.swift in Sources */,
@@ -345,6 +387,7 @@
 				AF4B1DFD2C9B52AE00FDA3EC /* СonfirmationСodeViewController.swift in Sources */,
 				AF4B1DD32C9AE38E00FDA3EC /* SceneDelegate.swift in Sources */,
 				AF4B1E0B2C9C24D300FDA3EC /* NetworkDataFetch.swift in Sources */,
+				AF4B1E3A2CA2F74D00FDA3EC /* OnboardingThirdViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -559,6 +602,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		AF4B1E322CA2F5C400FDA3EC /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.7.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		AF4B1E332CA2F5C400FDA3EC /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AF4B1E322CA2F5C400FDA3EC /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+		AF4B1E352CA2F5C400FDA3EC /* SnapKit-Dynamic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AF4B1E322CA2F5C400FDA3EC /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = "SnapKit-Dynamic";
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = AF4B1DC52C9AE38E00FDA3EC /* Project object */;
 }

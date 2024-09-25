@@ -113,19 +113,20 @@ class ClientLoginViewController: UIViewController {
         ])
         
     }
-    
     @objc func signUpButtonTapped(){
         let vc = NewUserRegisterViewController()
-        navigationController?.pushViewController(vc, animated: true)
-        
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true, completion: nil)
         
     }
-        @objc func loginButtonTapped(){
-            let vc = NewUserRegisterViewController()
-            navigationController?.pushViewController(vc, animated: true)
-    
-    
-        }
+    @objc func loginButtonTapped(){
+        let vc = NewUserRegisterViewController()
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true, completion: nil)
+        
+    }
+   
+      
 }
 
 

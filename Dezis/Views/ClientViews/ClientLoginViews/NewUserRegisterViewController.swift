@@ -76,109 +76,122 @@ class NewUserRegisterViewController: UIViewController {
         private func setupUI(){
             
             view.addSubview(titleLabel)
-            NSLayoutConstraint.activate([
-                titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-                titleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 144),
-            ])
+            titleLabel.snp.makeConstraints{make in
+                make.leading.equalToSuperview().offset(16)
+                make.top.equalToSuperview().offset(144)
+            }
             view.addSubview(nameTextField)
-            NSLayoutConstraint.activate([
-                nameTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-                nameTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-                nameTextField.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 28),
-                nameTextField.heightAnchor.constraint(equalToConstant: 48),
-            ])
+            nameTextField.snp.makeConstraints{make in
+                make.top.equalTo(titleLabel.snp.bottom).offset(28)
+                make.leading.equalToSuperview().offset(16)
+                make.trailing.equalToSuperview().offset(-16)
+                make.height.equalTo(48)
+            }
             view.addSubview(phoneNumberTextField)
-            NSLayoutConstraint.activate([
-                phoneNumberTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-                phoneNumberTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-                phoneNumberTextField.topAnchor.constraint(equalTo: nameTextField.bottomAnchor, constant: 8),
-                phoneNumberTextField.heightAnchor.constraint(equalToConstant: 48),
-            ])
+            phoneNumberTextField.snp.makeConstraints{make in
+                make.top.equalTo(nameTextField.snp.bottom).offset(8)
+                make.leading.equalToSuperview().offset(16)
+                make.trailing.equalToSuperview().offset(-16)
+                make.height.equalTo(48)
+            }
             view.addSubview(emailTextField)
-            NSLayoutConstraint.activate([
-                emailTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-                emailTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-                emailTextField.topAnchor.constraint(equalTo: phoneNumberTextField.bottomAnchor, constant: 8),
-                emailTextField.heightAnchor.constraint(equalToConstant: 48),
-            ])
+            emailTextField.snp.makeConstraints{make in
+                make.top.equalTo(phoneNumberTextField.snp.bottom).offset(8)
+                make.leading.equalToSuperview().offset(16)
+                make.trailing.equalToSuperview().offset(-16)
+                make.height.equalTo(48)
+            }
             view.addSubview(orderNumberTextField)
-            NSLayoutConstraint.activate([
-                orderNumberTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-                orderNumberTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-                orderNumberTextField.topAnchor.constraint(equalTo: emailTextField.bottomAnchor, constant: 8),
-                orderNumberTextField.heightAnchor.constraint(equalToConstant: 48),
-            ])
+            orderNumberTextField.snp.makeConstraints{make in
+                make.top.equalTo(emailTextField.snp.bottom).offset(8)
+                make.leading.equalToSuperview().offset(16)
+                make.trailing.equalToSuperview().offset(-16)
+                make.height.equalTo(48)
+            }
             view.addSubview(adressTextField)
-            NSLayoutConstraint.activate([
-                adressTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-                adressTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-                adressTextField.topAnchor.constraint(equalTo: orderNumberTextField.bottomAnchor, constant: 8),
-                adressTextField.heightAnchor.constraint(equalToConstant: 48),
-            ])
+            adressTextField.snp.makeConstraints{make in
+                make.top.equalTo(orderNumberTextField.snp.bottom).offset(8)
+                make.leading.equalToSuperview().offset(16)
+                make.trailing.equalToSuperview().offset(-16)
+                make.height.equalTo(48)
+            }
             view.addSubview(houseNumberTextField)
-            NSLayoutConstraint.activate([
-                houseNumberTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-                houseNumberTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-                houseNumberTextField.topAnchor.constraint(equalTo: adressTextField.bottomAnchor, constant: 8),
-                houseNumberTextField.heightAnchor.constraint(equalToConstant: 48),
-            ])
+            houseNumberTextField.snp.makeConstraints{make in
+                make.top.equalTo(adressTextField.snp.bottom).offset(8)
+                make.leading.equalToSuperview().offset(16)
+                make.trailing.equalToSuperview().offset(-16)
+                make.height.equalTo(48)
+            }
             view.addSubview(apartmentNumberTextField)
-            NSLayoutConstraint.activate([
-                apartmentNumberTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-                apartmentNumberTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-                apartmentNumberTextField.topAnchor.constraint(equalTo: houseNumberTextField.bottomAnchor, constant: 8),
-                apartmentNumberTextField.heightAnchor.constraint(equalToConstant: 48),
-            ])
-            
+            apartmentNumberTextField.snp.makeConstraints{make in
+                make.top.equalTo(houseNumberTextField.snp.bottom).offset(8)
+                make.leading.equalToSuperview().offset(16)
+                make.trailing.equalToSuperview().offset(-16)
+                make.height.equalTo(48)
+            }
+            view.addSubview(apartmentNumberTextField)
+            apartmentNumberTextField.snp.makeConstraints{make in
+                make.top.equalTo(houseNumberTextField.snp.bottom).offset(8)
+                make.leading.equalToSuperview().offset(16)
+                make.trailing.equalToSuperview().offset(-16)
+                make.height.equalTo(48)
+            }
             view.addSubview(checkMarkButton)
-            NSLayoutConstraint.activate([
-                checkMarkButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-                checkMarkButton.topAnchor.constraint(equalTo: apartmentNumberTextField.bottomAnchor, constant: 16),
-                checkMarkButton.heightAnchor.constraint(equalToConstant: 24),
-                checkMarkButton.widthAnchor.constraint(equalToConstant: 24),
-            ])
-            view.addSubview(privacyAgreementLabel)
-            NSLayoutConstraint.activate([
-                privacyAgreementLabel.leadingAnchor.constraint(equalTo: checkMarkButton.trailingAnchor, constant: 5),
-                privacyAgreementLabel.topAnchor.constraint(equalTo: apartmentNumberTextField.bottomAnchor, constant: 16),
-                privacyAgreementLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16)
-            ])
-            view.addSubview(loginLabel)
-            NSLayoutConstraint.activate([
-                loginLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-                loginLabel.topAnchor.constraint(equalTo: checkMarkButton.bottomAnchor, constant: 16),
-            ])
+            checkMarkButton.snp.makeConstraints{make in
+                make.top.equalTo(apartmentNumberTextField.snp.bottom).offset(16)
+                make.leading.equalToSuperview().offset(16)
+                make.width.equalTo(24)
+                make.height.equalTo(24)
+            }
             
-            view.addSubview(signUpButton)
-            NSLayoutConstraint.activate([
-                signUpButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-                signUpButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-                signUpButton.topAnchor.constraint(equalTo: loginLabel.bottomAnchor, constant: 20),
-                signUpButton.heightAnchor.constraint(equalToConstant: 48)
-            ])
-            
-            view.addSubview(supportContactLabel)
-            NSLayoutConstraint.activate([
-                supportContactLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
                 
-                supportContactLabel.topAnchor.constraint(equalTo: signUpButton.bottomAnchor, constant: 20),
-            ])
+    
+
+            
+          
+//
+//            view.addSubview(privacyAgreementLabel)
+//            NSLayoutConstraint.activate([
+//                privacyAgreementLabel.leadingAnchor.constraint(equalTo: checkMarkButton.trailingAnchor, constant: 5),
+//                privacyAgreementLabel.topAnchor.constraint(equalTo: apartmentNumberTextField.bottomAnchor, constant: 16),
+//                privacyAgreementLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16)
+//            ])
+//            view.addSubview(loginLabel)
+//            NSLayoutConstraint.activate([
+//                loginLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+//                loginLabel.topAnchor.constraint(equalTo: checkMarkButton.bottomAnchor, constant: 16),
+//            ])
+//            
+//            view.addSubview(signUpButton)
+//            NSLayoutConstraint.activate([
+//                signUpButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+//                signUpButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+//                signUpButton.topAnchor.constraint(equalTo: loginLabel.bottomAnchor, constant: 20),
+//                signUpButton.heightAnchor.constraint(equalToConstant: 48)
+//            ])
+//            
+//            view.addSubview(supportContactLabel)
+//            NSLayoutConstraint.activate([
+//                supportContactLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+//                
+//                supportContactLabel.topAnchor.constraint(equalTo: signUpButton.bottomAnchor, constant: 20),
+//            ])
             
         }
      
+    @objc func signUpButtonTapped(){
+        let vc = СonfirmationСodeViewController()
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true, completion: nil)
         
-        @objc func signUpButtonTapped(){
-            let vc = СonfirmationСodeViewController()
-            navigationController?.pushViewController(vc, animated: true)
-            
-            
-        }
-        @objc func loginButtonTapped(){
-            let vc = NewUserRegisterViewController()
-            navigationController?.pushViewController(vc, animated: true)
-            
-            
-        }
+    }
+    @objc func loginButtonTapped(){
+        let vc = NewUserRegisterViewController()
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true, completion: nil)
+        
+    }
+       
     }
     
 

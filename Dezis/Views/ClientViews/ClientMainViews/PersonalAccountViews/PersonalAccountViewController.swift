@@ -44,18 +44,20 @@ class PersonalAccountViewController: UIViewController {
         NSLayoutConstraint.activate([
             userInfoButton.leadingAnchor.constraint(equalTo: personImage.trailingAnchor, constant: 25),
             userInfoButton.topAnchor.constraint(equalTo: userImage.bottomAnchor, constant: 30),
+            userInfoButton.heightAnchor.constraint(equalToConstant: 40),
+            userInfoButton.widthAnchor.constraint(equalToConstant: 300)
         ])
         view.addSubview(lineImage)
         NSLayoutConstraint.activate([
             lineImage.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             lineImage.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant:  -16),
             lineImage.topAnchor.constraint(equalTo: personImage.bottomAnchor, constant: 10),
-            lineImage.heightAnchor.constraint(equalToConstant: 1)
+            lineImage.heightAnchor.constraint(equalToConstant: 2)
         ])
         view.addSubview(shieldImage)
         NSLayoutConstraint.activate([
             shieldImage.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            shieldImage.topAnchor.constraint(equalTo: lineImage.bottomAnchor, constant: 40),
+            shieldImage.topAnchor.constraint(equalTo: lineImage.bottomAnchor, constant: 100),
             shieldImage.heightAnchor.constraint(equalToConstant: 24),
             shieldImage.widthAnchor.constraint(equalToConstant: 24)
         ])
