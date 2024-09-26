@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4061B8DFFEC52EF1268906C9 /* Pods_Dezis.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D594A6880D984FC3775947A /* Pods_Dezis.framework */; };
 		AF4B1DD12C9AE38E00FDA3EC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1DD02C9AE38E00FDA3EC /* AppDelegate.swift */; };
 		AF4B1DD32C9AE38E00FDA3EC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1DD22C9AE38E00FDA3EC /* SceneDelegate.swift */; };
 		AF4B1DD52C9AE38E00FDA3EC /* UserTypeSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1DD42C9AE38E00FDA3EC /* UserTypeSelectionViewController.swift */; };
@@ -40,8 +41,6 @@
 		AF4B1E2B2CA0736200FDA3EC /* ClientChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1E2A2CA0736200FDA3EC /* ClientChatViewController.swift */; };
 		AF4B1E2D2CA19C6000FDA3EC /* ChekBoxButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1E2C2CA19C6000FDA3EC /* ChekBoxButton.swift */; };
 		AF4B1E312CA2EFEF00FDA3EC /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1E302CA2EFEF00FDA3EC /* OnboardingViewController.swift */; };
-		AF4B1E342CA2F5C400FDA3EC /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = AF4B1E332CA2F5C400FDA3EC /* SnapKit */; };
-		AF4B1E362CA2F5C400FDA3EC /* SnapKit-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = AF4B1E352CA2F5C400FDA3EC /* SnapKit-Dynamic */; };
 		AF4B1E382CA2F6D200FDA3EC /* OnboardingSecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1E372CA2F6D200FDA3EC /* OnboardingSecondViewController.swift */; };
 		AF4B1E3A2CA2F74D00FDA3EC /* OnboardingThirdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1E392CA2F74D00FDA3EC /* OnboardingThirdViewController.swift */; };
 		AF4B1E3C2CA30E5E00FDA3EC /* OnboardingForthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1E3B2CA30E5E00FDA3EC /* OnboardingForthViewController.swift */; };
@@ -51,6 +50,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9D594A6880D984FC3775947A /* Pods_Dezis.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Dezis.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		ABC7905C0E1157EB74B80A5D /* Pods-Dezis.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dezis.release.xcconfig"; path = "Target Support Files/Pods-Dezis/Pods-Dezis.release.xcconfig"; sourceTree = "<group>"; };
 		AF4B1DCD2C9AE38E00FDA3EC /* Dezis.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dezis.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF4B1DD02C9AE38E00FDA3EC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AF4B1DD22C9AE38E00FDA3EC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -92,6 +93,7 @@
 		AF4B1E3D2CA3DDAA00FDA3EC /* OnboardingPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPageViewController.swift; sourceTree = "<group>"; };
 		AF4B1E3F2CA3E0D400FDA3EC /* OnboardingFifthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingFifthViewController.swift; sourceTree = "<group>"; };
 		AF4B1E412CA3E0F400FDA3EC /* OnboardingSixthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingSixthViewController.swift; sourceTree = "<group>"; };
+		F7FB7E9CD196CCFDB56042EF /* Pods-Dezis.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dezis.debug.xcconfig"; path = "Target Support Files/Pods-Dezis/Pods-Dezis.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,19 +101,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AF4B1E342CA2F5C400FDA3EC /* SnapKit in Frameworks */,
-				AF4B1E362CA2F5C400FDA3EC /* SnapKit-Dynamic in Frameworks */,
+				4061B8DFFEC52EF1268906C9 /* Pods_Dezis.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		92F8C4BAC264DDF5D7E47087 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				F7FB7E9CD196CCFDB56042EF /* Pods-Dezis.debug.xcconfig */,
+				ABC7905C0E1157EB74B80A5D /* Pods-Dezis.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		AF4B1DC42C9AE38E00FDA3EC = {
 			isa = PBXGroup;
 			children = (
 				AF4B1DCF2C9AE38E00FDA3EC /* Dezis */,
 				AF4B1DCE2C9AE38E00FDA3EC /* Products */,
+				92F8C4BAC264DDF5D7E47087 /* Pods */,
+				C763DB0EBC3E8B7B24CC5B50 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -274,6 +286,14 @@
 			path = OnBoarding;
 			sourceTree = "<group>";
 		};
+		C763DB0EBC3E8B7B24CC5B50 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9D594A6880D984FC3775947A /* Pods_Dezis.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -281,19 +301,17 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = AF4B1DE12C9AE39000FDA3EC /* Build configuration list for PBXNativeTarget "Dezis" */;
 			buildPhases = (
+				4A54431F471E028B3818FA8D /* [CP] Check Pods Manifest.lock */,
 				AF4B1DC92C9AE38E00FDA3EC /* Sources */,
 				AF4B1DCA2C9AE38E00FDA3EC /* Frameworks */,
 				AF4B1DCB2C9AE38E00FDA3EC /* Resources */,
+				71E139D973546DA5615A0A9F /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = Dezis;
-			packageProductDependencies = (
-				AF4B1E332CA2F5C400FDA3EC /* SnapKit */,
-				AF4B1E352CA2F5C400FDA3EC /* SnapKit-Dynamic */,
-			);
 			productName = Dezis;
 			productReference = AF4B1DCD2C9AE38E00FDA3EC /* Dezis.app */;
 			productType = "com.apple.product-type.application";
@@ -322,9 +340,6 @@
 				Base,
 			);
 			mainGroup = AF4B1DC42C9AE38E00FDA3EC;
-			packageReferences = (
-				AF4B1E322CA2F5C400FDA3EC /* XCRemoteSwiftPackageReference "SnapKit" */,
-			);
 			productRefGroup = AF4B1DCE2C9AE38E00FDA3EC /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -345,6 +360,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		4A54431F471E028B3818FA8D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Dezis-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		71E139D973546DA5615A0A9F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Dezis/Pods-Dezis-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Dezis/Pods-Dezis-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Dezis/Pods-Dezis-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		AF4B1DC92C9AE38E00FDA3EC /* Sources */ = {
@@ -457,7 +514,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -514,7 +571,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -526,12 +583,14 @@
 		};
 		AF4B1DE22C9AE39000FDA3EC /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F7FB7E9CD196CCFDB56042EF /* Pods-Dezis.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = H26KGNHNNP;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Dezis/Supporting Files/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -554,12 +613,14 @@
 		};
 		AF4B1DE32C9AE39000FDA3EC /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = ABC7905C0E1157EB74B80A5D /* Pods-Dezis.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = H26KGNHNNP;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Dezis/Supporting Files/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -602,30 +663,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		AF4B1E322CA2F5C400FDA3EC /* XCRemoteSwiftPackageReference "SnapKit" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.7.1;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		AF4B1E332CA2F5C400FDA3EC /* SnapKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = AF4B1E322CA2F5C400FDA3EC /* XCRemoteSwiftPackageReference "SnapKit" */;
-			productName = SnapKit;
-		};
-		AF4B1E352CA2F5C400FDA3EC /* SnapKit-Dynamic */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = AF4B1E322CA2F5C400FDA3EC /* XCRemoteSwiftPackageReference "SnapKit" */;
-			productName = "SnapKit-Dynamic";
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = AF4B1DC52C9AE38E00FDA3EC /* Project object */;
 }
