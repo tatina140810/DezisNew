@@ -8,6 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		4061B8DFFEC52EF1268906C9 /* Pods_Dezis.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D594A6880D984FC3775947A /* Pods_Dezis.framework */; };
+		7263071F2CA576B4000C585B /* AdminTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7263071E2CA576B4000C585B /* AdminTabBarController.swift */; };
+		726307212CA576DD000C585B /* AdminHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 726307202CA576DD000C585B /* AdminHomeViewController.swift */; };
+		726307232CA576FF000C585B /* AdminOrdersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 726307222CA576FF000C585B /* AdminOrdersViewController.swift */; };
+		726307262CA5772C000C585B /* OrdersCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 726307252CA5772C000C585B /* OrdersCollectionViewCell.swift */; };
+		726307292CA5776E000C585B /* AdminPersonalAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 726307282CA5776E000C585B /* AdminPersonalAccountViewController.swift */; };
+		7263072B2CA577AD000C585B /* AdminSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7263072A2CA577AD000C585B /* AdminSettingsViewController.swift */; };
+		7263072D2CA577C4000C585B /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7263072C2CA577C4000C585B /* SettingsCell.swift */; };
+		726307302CA577FC000C585B /* AdminProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7263072F2CA577FC000C585B /* AdminProfileViewController.swift */; };
+		726307322CA57818000C585B /* ProfileDetailsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 726307312CA57818000C585B /* ProfileDetailsCell.swift */; };
 		AF4B1DD12C9AE38E00FDA3EC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1DD02C9AE38E00FDA3EC /* AppDelegate.swift */; };
 		AF4B1DD32C9AE38E00FDA3EC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1DD22C9AE38E00FDA3EC /* SceneDelegate.swift */; };
 		AF4B1DD52C9AE38E00FDA3EC /* UserTypeSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1DD42C9AE38E00FDA3EC /* UserTypeSelectionViewController.swift */; };
@@ -50,6 +59,15 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7263071E2CA576B4000C585B /* AdminTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminTabBarController.swift; sourceTree = "<group>"; };
+		726307202CA576DD000C585B /* AdminHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminHomeViewController.swift; sourceTree = "<group>"; };
+		726307222CA576FF000C585B /* AdminOrdersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminOrdersViewController.swift; sourceTree = "<group>"; };
+		726307252CA5772C000C585B /* OrdersCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrdersCollectionViewCell.swift; sourceTree = "<group>"; };
+		726307282CA5776E000C585B /* AdminPersonalAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminPersonalAccountViewController.swift; sourceTree = "<group>"; };
+		7263072A2CA577AD000C585B /* AdminSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminSettingsViewController.swift; sourceTree = "<group>"; };
+		7263072C2CA577C4000C585B /* SettingsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCell.swift; sourceTree = "<group>"; };
+		7263072F2CA577FC000C585B /* AdminProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminProfileViewController.swift; sourceTree = "<group>"; };
+		726307312CA57818000C585B /* ProfileDetailsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetailsCell.swift; sourceTree = "<group>"; };
 		9D594A6880D984FC3775947A /* Pods_Dezis.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Dezis.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ABC7905C0E1157EB74B80A5D /* Pods-Dezis.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dezis.release.xcconfig"; path = "Target Support Files/Pods-Dezis/Pods-Dezis.release.xcconfig"; sourceTree = "<group>"; };
 		AF4B1DCD2C9AE38E00FDA3EC /* Dezis.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dezis.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -108,6 +126,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		726307242CA57713000C585B /* AdminOrders */ = {
+			isa = PBXGroup;
+			children = (
+				726307222CA576FF000C585B /* AdminOrdersViewController.swift */,
+				726307252CA5772C000C585B /* OrdersCollectionViewCell.swift */,
+			);
+			path = AdminOrders;
+			sourceTree = "<group>";
+		};
+		726307272CA5774A000C585B /* AdminSettings */ = {
+			isa = PBXGroup;
+			children = (
+				7263072A2CA577AD000C585B /* AdminSettingsViewController.swift */,
+				7263072C2CA577C4000C585B /* SettingsCell.swift */,
+			);
+			path = AdminSettings;
+			sourceTree = "<group>";
+		};
+		7263072E2CA577E1000C585B /* AdminProfile */ = {
+			isa = PBXGroup;
+			children = (
+				7263072F2CA577FC000C585B /* AdminProfileViewController.swift */,
+				726307312CA57818000C585B /* ProfileDetailsCell.swift */,
+			);
+			path = AdminProfile;
+			sourceTree = "<group>";
+		};
 		92F8C4BAC264DDF5D7E47087 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -189,6 +234,12 @@
 			isa = PBXGroup;
 			children = (
 				AF4B1DF62C9B290D00FDA3EC /* AdminLoginViewController.swift */,
+				7263071E2CA576B4000C585B /* AdminTabBarController.swift */,
+				726307202CA576DD000C585B /* AdminHomeViewController.swift */,
+				726307242CA57713000C585B /* AdminOrders */,
+				726307282CA5776E000C585B /* AdminPersonalAccountViewController.swift */,
+				726307272CA5774A000C585B /* AdminSettings */,
+				7263072E2CA577E1000C585B /* AdminProfile */,
 			);
 			path = AdminViews;
 			sourceTree = "<group>";
@@ -418,12 +469,16 @@
 				AF4B1E072C9C1F6000FDA3EC /* NetworkError.swift in Sources */,
 				AF4B1DF92C9B32A300FDA3EC /* SuccessViewController.swift in Sources */,
 				AF4B1E402CA3E0D400FDA3EC /* OnboardingFifthViewController.swift in Sources */,
+				7263072D2CA577C4000C585B /* SettingsCell.swift in Sources */,
 				AF4B1E172C9FFF3200FDA3EC /* LabelSettings.swift in Sources */,
 				AF4B1DE92C9AEEC600FDA3EC /* Profile.swift in Sources */,
 				AF4B1E092C9C221000FDA3EC /* NetworkRequest.swift in Sources */,
+				7263071F2CA576B4000C585B /* AdminTabBarController.swift in Sources */,
 				AF4B1E3E2CA3DDAA00FDA3EC /* OnboardingPageViewController.swift in Sources */,
+				7263072B2CA577AD000C585B /* AdminSettingsViewController.swift in Sources */,
 				AF4B1E1F2CA06E5500FDA3EC /* SettingsViewController.swift in Sources */,
 				AF4B1DFB2C9B42D300FDA3EC /* NewUserRegisterViewController.swift in Sources */,
+				726307262CA5772C000C585B /* OrdersCollectionViewCell.swift in Sources */,
 				AF4B1E382CA2F6D200FDA3EC /* OnboardingSecondViewController.swift in Sources */,
 				AF4B1E0D2C9D9B3500FDA3EC /* TabBarController.swift in Sources */,
 				AF4B1E1D2CA05B5200FDA3EC /* ImageSettings.swift in Sources */,
@@ -432,13 +487,18 @@
 				AF4B1DF72C9B290D00FDA3EC /* AdminLoginViewController.swift in Sources */,
 				AF4B1E152C9D9CB400FDA3EC /* PersonalAccountViewController.swift in Sources */,
 				AF4B1DF52C9B28ED00FDA3EC /* ClientLoginViewController.swift in Sources */,
+				726307292CA5776E000C585B /* AdminPersonalAccountViewController.swift in Sources */,
+				726307302CA577FC000C585B /* AdminProfileViewController.swift in Sources */,
 				AF4B1E422CA3E0F400FDA3EC /* OnboardingSixthViewController.swift in Sources */,
 				AF4B1E022C9C17BA00FDA3EC /* EndPoint.swift in Sources */,
+				726307212CA576DD000C585B /* AdminHomeViewController.swift in Sources */,
 				AF4B1DF12C9B153C00FDA3EC /* HexExtention.swift in Sources */,
 				AF4B1E212CA06E6C00FDA3EC /* UserInfoViewController.swift in Sources */,
 				AF4B1E312CA2EFEF00FDA3EC /* OnboardingViewController.swift in Sources */,
+				726307322CA57818000C585B /* ProfileDetailsCell.swift in Sources */,
 				AF4B1DD52C9AE38E00FDA3EC /* UserTypeSelectionViewController.swift in Sources */,
 				AF4B1E2D2CA19C6000FDA3EC /* ChekBoxButton.swift in Sources */,
+				726307232CA576FF000C585B /* AdminOrdersViewController.swift in Sources */,
 				AF4B1DD12C9AE38E00FDA3EC /* AppDelegate.swift in Sources */,
 				AF4B1E052C9C1C8B00FDA3EC /* URLSession+Extension.swift in Sources */,
 				AF4B1DFD2C9B52AE00FDA3EC /* СonfirmationСodeViewController.swift in Sources */,
