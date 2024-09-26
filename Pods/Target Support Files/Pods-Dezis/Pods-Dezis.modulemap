@@ -1,0 +1,6 @@
+framework module Pods_Dezis {
+  umbrella header "Pods-Dezis-umbrella.h"
+
+  export *
+  module * { export * }
+}
