@@ -18,23 +18,11 @@ class ClientLoginViewController: UIViewController {
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-    private var nameTextField: UITextField = {
-        let view = UITextField()
-        view.placeholder = "Имя"
-        view.backgroundColor = UIColor(hex: "#F6F6F7")
-        view.layer.cornerRadius = 8
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
+    private var nameTextField = TextFieldSettings().textFieldMaker(placeholder: "Имя")
+   
     
-    private var emailTextField: UITextField = {
-        let view = UITextField()
-        view.placeholder = "Email"
-        view.backgroundColor = UIColor(hex: "#F6F6F7")
-        view.layer.cornerRadius = 8
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
+    private var emailTextField = TextFieldSettings().textFieldMaker(placeholder: "Email")
+      
     private var signUpButton: UIButton = {
         let view = UIButton()
         view.setTitle( "Регистрация", for: .normal)

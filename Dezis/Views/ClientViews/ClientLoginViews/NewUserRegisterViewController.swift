@@ -14,35 +14,44 @@ class NewUserRegisterViewController: UIViewController {
     
     private var titleLabel = LabelSettings().labelMaker(text: "Регистрация", font: UIFont.systemFont(ofSize: 28))
     
-    private var nameTextField = TextFieldSettings().textFieldMaker(placeholder: "Имя", backgroundColor: UIColor(hex: "#F6F6F7"))
+    private var nameTextField = TextFieldSettings().textFieldMaker(placeholder: "Имя*", backgroundColor: UIColor(hex: "#F6F6F7"))
     
-    private var phoneNumberTextField = TextFieldSettings().textFieldMaker(placeholder: "Номер телефона", backgroundColor: UIColor(hex: "#F6F6F7"))
+    private var phoneNumberTextField = TextFieldSettings().textFieldMaker(placeholder: "Номер телефона*", backgroundColor: UIColor(hex: "#F6F6F7"))
     
-    private var emailTextField = TextFieldSettings().textFieldMaker(placeholder: "Email", backgroundColor: UIColor(hex: "#F6F6F7"))
+    private var emailTextField = TextFieldSettings().textFieldMaker(placeholder: "Email*", backgroundColor: UIColor(hex: "#F6F6F7"))
     
     private var orderNumberTextField = TextFieldSettings().textFieldMaker(placeholder: "Номер заказа", backgroundColor: UIColor(hex: "#F6F6F7"))
     
-    private var adressTextField = TextFieldSettings().textFieldMaker(placeholder: "Адрес", backgroundColor: UIColor(hex: "#F6F6F7"))
+    private var adressTextField = TextFieldSettings().textFieldMaker(placeholder: "Адрес*", backgroundColor: UIColor(hex: "#F6F6F7"))
     
-    private var houseNumberTextField = TextFieldSettings().textFieldMaker(placeholder: "Номер дома", backgroundColor: UIColor(hex: "#F6F6F7"))
+    private var houseNumberTextField = TextFieldSettings().textFieldMaker(placeholder: "Номер дома*", backgroundColor: UIColor(hex: "#F6F6F7"))
     
-    private var apartmentNumberTextField = TextFieldSettings().textFieldMaker(placeholder: "Номер квартиры", backgroundColor: UIColor(hex: "#F6F6F7"))
+    private var apartmentNumberTextField = TextFieldSettings().textFieldMaker(placeholder: "Номер квартиры*", backgroundColor: UIColor(hex: "#F6F6F7"))
     
-    private var checkMarkButton = CheckboxButton()
+    private var privacyCheckMarkButton = CheckboxButton()
+    private var consentCheckMarkButton = CheckboxButton()
     
-  
-        private var privacyAgreementLabel: UILabel = {
+    private var privacyAgreementLabel: UILabel = {
+        let view = UILabel()
+        view.text = "Я принимаю политику конфиденциальности"
+        view.font = UIFont(name: "Roboto", size: 8)
+        view.numberOfLines = 0
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+        private var consentDataLabel: UILabel = {
             let view = UILabel()
             view.text = "Согласие на обработку персональных данных"
-            view.font = UIFont(name: "Roboto", size: 10)
+            view.font = UIFont(name: "Roboto", size: 8)
             view.numberOfLines = 0
             view.translatesAutoresizingMaskIntoConstraints = false
             return view
         }()
+   
         private var loginLabel: UILabel = {
             let view = UILabel()
             view.text = "У вас уже есть аккаунт? Войти"
-            view.font = UIFont(name: "Roboto", size: 10)
+            view.font = UIFont(name: "Roboto", size: 8)
             view.textColor = UIColor(hex: "#B5B5B5")
             view.translatesAutoresizingMaskIntoConstraints = false
             return view
@@ -164,15 +173,9 @@ class NewUserRegisterViewController: UIViewController {
             make.trailing.equalToSuperview().offset(-16)
             make.height.equalTo(48)
         }
-        view.addSubview(apartmentNumberTextField)
-        apartmentNumberTextField.snp.makeConstraints{make in
-            make.top.equalTo(houseNumberTextField.snp.bottom).offset(8)
-            make.leading.equalToSuperview().offset(16)
-            make.trailing.equalToSuperview().offset(-16)
-            make.height.equalTo(48)
-        }
-        view.addSubview(checkMarkButton)
-        checkMarkButton.snp.makeConstraints{make in
+
+        view.addSubview(privacyCheckMarkButton)
+        privacyCheckMarkButton.snp.makeConstraints{make in
             make.top.equalTo(apartmentNumberTextField.snp.bottom).offset(16)
             make.leading.equalToSuperview().offset(16)
             make.width.equalTo(24)
@@ -180,23 +183,38 @@ class NewUserRegisterViewController: UIViewController {
         }
         view.addSubview(privacyAgreementLabel)
         privacyAgreementLabel.snp.makeConstraints { make in
-            make.leading.equalTo(checkMarkButton.snp.trailing).offset(10)
-            make.trailing.equalToSuperview().offset(-20)
-            make.top.equalTo(apartmentNumberTextField.snp.bottom).offset(16)
+            make.leading.equalTo(privacyCheckMarkButton.snp.trailing).offset(5)
+            make.trailing.equalToSuperview().offset(-16)
+            make.top.equalTo(apartmentNumberTextField.snp.bottom).offset(10)
             
         }
+        view.addSubview(consentCheckMarkButton)
+        consentCheckMarkButton.snp.makeConstraints{make in
+            make.top.equalTo(privacyCheckMarkButton.snp.bottom).offset(16)
+            make.leading.equalToSuperview().offset(16)
+            make.width.equalTo(24)
+            make.height.equalTo(24)
+        }
+        view.addSubview(consentDataLabel)
+        consentDataLabel.snp.makeConstraints { make in
+            make.leading.equalTo(consentCheckMarkButton.snp.trailing).offset(5)
+            make.trailing.equalToSuperview().offset(-16)
+            make.top.equalTo(privacyAgreementLabel.snp.bottom).offset(8)
+        }
+            
         
         view.addSubview(loginLabel)
         loginLabel.snp.makeConstraints{make in
-            make.top.equalTo(checkMarkButton.snp.bottom).offset(20)
+            make.top.equalTo(consentDataLabel.snp.bottom).offset(20)
             make.leading.equalToSuperview().offset(16)
         }
         view.addSubview(signUpButton)
-        signUpButton.snp.makeConstraints{make in
-            make.top.equalTo(loginLabel.snp.bottom).offset(20)
-            make.leading.equalToSuperview().offset(16)
-            make.trailing.equalToSuperview().offset(-16)
-            make.height.equalTo(48)}
+            signUpButton.snp.makeConstraints{make in
+                make.top.equalTo(loginLabel.snp.bottom).offset(20)
+                make.leading.equalToSuperview().offset(16)
+                make.trailing.equalToSuperview().offset(-16)
+                make.height.equalTo(48)
+            }
         
         view.addSubview(supportContactLabel)
         supportContactLabel.snp.makeConstraints{make in
@@ -205,6 +223,7 @@ class NewUserRegisterViewController: UIViewController {
             
         }
     }
+        
     @objc func attributedTextTapped() {
        
         print("Login tapped!")
@@ -225,6 +244,6 @@ class NewUserRegisterViewController: UIViewController {
         
     }
        
-    }
+}
     
 
