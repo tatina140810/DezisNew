@@ -18,23 +18,11 @@ class ClientLoginViewController: UIViewController {
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-    private var nameTextField: UITextField = {
-        let view = UITextField()
-        view.placeholder = "Имя"
-        view.backgroundColor = UIColor(hex: "#F6F6F7")
-        view.layer.cornerRadius = 8
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-  
-    private var emailTextField: UITextField = {
-        let view = UITextField()
-        view.placeholder = "Email"
-        view.backgroundColor = UIColor(hex: "#F6F6F7")
-        view.layer.cornerRadius = 8
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
+    private var nameTextField = TextFieldSettings().textFieldMaker(placeholder: "Имя")
+   
+    
+    private var emailTextField = TextFieldSettings().textFieldMaker(placeholder: "Email")
+      
     private var signUpButton: UIButton = {
         let view = UIButton()
         view.setTitle( "Регистрация", for: .normal)
@@ -44,7 +32,7 @@ class ClientLoginViewController: UIViewController {
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-  
+    
     private var loginButton: UIButton = {
         let view = UIButton()
         view.setTitle( "Войти", for: .normal)
@@ -67,6 +55,8 @@ class ClientLoginViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         setupUI()
+        validateFields()
+        createAttributedText()
         
     }
     
@@ -74,59 +64,126 @@ class ClientLoginViewController: UIViewController {
     private func setupUI(){
         
         view.addSubview(titleLabel)
-        NSLayoutConstraint.activate([
-            titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            titleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 218),
-        ])
+        titleLabel.snp.makeConstraints{make in
+            make.leading.equalToSuperview().offset(16)
+            make.top.equalToSuperview().offset(218)
+        }
+        
         view.addSubview(nameTextField)
-        NSLayoutConstraint.activate([
-            nameTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            nameTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            nameTextField.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 28),
-            nameTextField.heightAnchor.constraint(equalToConstant: 48),
-        ])
+        nameTextField.snp.makeConstraints{make in
+            make.top.equalTo(titleLabel.snp.bottom).offset(28)
+            make.leading.equalToSuperview().offset(16)
+            make.trailing.equalToSuperview().offset(-16)
+            make.height.equalTo(48)
+        }
+        
         view.addSubview(emailTextField)
-        NSLayoutConstraint.activate([
-            emailTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            emailTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            emailTextField.topAnchor.constraint(equalTo: nameTextField.bottomAnchor, constant: 8),
-            emailTextField.heightAnchor.constraint(equalToConstant: 48),
-        ])
+        emailTextField.snp.makeConstraints {make in
+            make.top.equalTo(nameTextField.snp.bottom).offset(28)
+            make.leading.equalToSuperview().offset(16)
+            make.trailing.equalToSuperview().offset(-16)
+            make.height.equalTo(48)}
+        
         view.addSubview(signUpButton)
-        NSLayoutConstraint.activate([
-            signUpButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            signUpButton.topAnchor.constraint(equalTo: emailTextField.bottomAnchor, constant: 20),
-        ])
-      
-        view.addSubview(loginButton)
-        NSLayoutConstraint.activate([
-            loginButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            loginButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            loginButton.topAnchor.constraint(equalTo: signUpButton.bottomAnchor, constant: 20),
-            loginButton.heightAnchor.constraint(equalToConstant: 48)
-        ])
-        view.addSubview(supportContactLabel)
-        NSLayoutConstraint.activate([
-            supportContactLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+        signUpButton.snp.makeConstraints{make in
+            make.top.equalTo(emailTextField.snp.bottom).offset(20)
+            make.leading.equalToSuperview().offset(16)
             
-            supportContactLabel.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: 20),
-        ])
+        }
         
-    }
-    @objc func signUpButtonTapped(){
-        let vc = NewUserRegisterViewController()
-        vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: true, completion: nil)
+        view.addSubview(loginButton)
+        loginButton.snp.makeConstraints{make in
+            make.leading.equalToSuperview().offset(16)
+            make.trailing.equalToSuperview().offset(-16)
+            make.top.equalTo(signUpButton.snp.bottom).offset(20)
+            make.height.equalTo(48)
+        }
         
+        view.addSubview(supportContactLabel)
+        supportContactLabel.snp.makeConstraints{make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(loginButton.snp.bottom).offset(20)
+        }
     }
-    @objc func loginButtonTapped(){
-        let vc = NewUserRegisterViewController()
-        vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: true, completion: nil)
+    
+    private func createAttributedText() {
+        let fullText = "Не удалось войти? Связаться"
         
+        let attributedString = NSMutableAttributedString(string: fullText)
+        
+        let range = (fullText as NSString).range(of: "Связаться")
+        attributedString.addAttribute(.foregroundColor, value: UIColor.black, range: range)
+        attributedString.addAttribute(.font, value: UIFont.boldSystemFont(ofSize: supportContactLabel.font.pointSize), range: range)
+        
+        supportContactLabel.attributedText = attributedString
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(attributedTextTapped))
+        supportContactLabel.isUserInteractionEnabled = true
+        supportContactLabel.addGestureRecognizer(tapGesture)
     }
-   
-      
+    
+    // Mark: - TextField validation
+    
+    private func validateFields() -> Bool {
+        
+        guard let name = nameTextField.text, !name.isEmpty else {
+            showAlert(message: "Пожалуйста, введите имя.")
+            return false
+        }
+        
+        guard let email = emailTextField.text, !email.isEmpty else {
+            showAlert(message: "Пожалуйста, введите email.")
+            return false
+        }
+        
+        
+        if !isValidEmail(email) {
+            showAlert(message: "Введите корректный email.")
+            return false
+        }
+        
+        return true
+    }
+    
+    
+    private func isValidEmail(_ email: String) -> Bool {
+        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+        let emailPred = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+        return emailPred.evaluate(with: email)
+    }
+    
+    
+    private func showAlert(message: String) {
+        let alert = UIAlertController(title: "Ошибка", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        present(alert, animated: true)
+    }
+    
+    
+    @objc func signUpButtonTapped() {
+        
+        if validateFields() {
+            let vc = NewUserRegisterViewController()
+            vc.modalPresentationStyle = .fullScreen
+            present(vc, animated: true, completion: nil)
+        }
+    }
+    
+    @objc func loginButtonTapped() {
+        
+        if validateFields() {
+            let vc = NewUserRegisterViewController()
+            vc.modalPresentationStyle = .fullScreen
+            present(vc, animated: true, completion: nil)
+        }
+    }
+    
+    @objc func attributedTextTapped() {
+        // переход на страницу свзяаться
+        
+        print("Support contact tapped!")
+    }
+    
 }
 
 

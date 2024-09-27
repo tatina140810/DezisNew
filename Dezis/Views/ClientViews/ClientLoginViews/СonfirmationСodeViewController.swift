@@ -13,7 +13,6 @@ class СonfirmationСodeViewController: UIViewController {
         let view = UILabel()
         view.text = "Код"
         view.font = UIFont.boldSystemFont(ofSize: 24)
-        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
@@ -21,51 +20,32 @@ class СonfirmationСodeViewController: UIViewController {
         let view = UILabel()
         view.text = "Вам отправили код на электронную почту"
         view.font = UIFont(name: "Roboto", size: 16)
-        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     private var codeStack: UIStackView = {
         let view = UIStackView()
         view.axis = .horizontal
         view.spacing = 20
-        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-    private var firstNumber: UITextField = {
-        let view = UITextField()
-        view.placeholder = "0"
-        view.backgroundColor = UIColor(hex: "#F6F6F7")
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
+    
+    private var firstNumber = TextFieldSettings().textFieldMaker(placeholder: "0")
+   
+    private var secondNumber = TextFieldSettings().textFieldMaker(placeholder: "0")
+        
+    private var thirdNumber = TextFieldSettings().textFieldMaker(placeholder: "0")
+        
+    private var forthNumber = TextFieldSettings().textFieldMaker(placeholder: "0")
+        
+    private var newCodeButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Отправить снова", for: .normal)
+        button.titleLabel?.font = UIFont(name: "Roboto", size: 16)
+        button.addTarget(self, action: #selector(newCodeButtonTapped), for: .touchUpInside)
+        button.setTitleColor(.blue, for: .normal)
+        return button
     }()
-    private var secondNumber: UITextField = {
-        let view = UITextField()
-        view.placeholder = "0"
-        view.backgroundColor = UIColor(hex: "#F6F6F7")
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-    private var thirdNumber: UITextField = {
-        let view = UITextField()
-        view.placeholder = "0"
-        view.backgroundColor = UIColor(hex: "#F6F6F7")
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-    private var forthNumber: UITextField = {
-        let view = UITextField()
-        view.placeholder = "0"
-        view.backgroundColor = UIColor(hex: "#F6F6F7")
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-    private var newCodeLabel: UILabel = {
-        let view = UILabel()
-        view.text = "Отправить снова"
-        view.font = UIFont(name: "Roboto", size: 16)
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
+
     
     
     private var nextButton: UIButton = {
@@ -75,7 +55,6 @@ class СonfirmationСodeViewController: UIViewController {
         view.backgroundColor = UIColor(hex: "#5191BA")
         view.layer.cornerRadius = 8
         view.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
-        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
@@ -87,70 +66,76 @@ class СonfirmationСodeViewController: UIViewController {
     }
     private func setupUI(){
         view.addSubview(codeLabel)
-        NSLayoutConstraint.activate([
-            codeLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 180),
-            codeLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16)
-        ])
+        codeLabel.snp.makeConstraints {make in
+            make.top.equalToSuperview().offset(180)
+            make.leading.equalToSuperview().offset(16)
+        }
+       
         view.addSubview(confirmationLabel)
-        NSLayoutConstraint.activate([
-            confirmationLabel.topAnchor.constraint(equalTo: codeLabel.bottomAnchor, constant: 40),
-                   confirmationLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16)
-        ])
-        
+        confirmationLabel.snp.makeConstraints {make in
+            make.top.equalTo(codeLabel.snp.bottom).offset(40)
+            make.leading.equalToSuperview().offset(16)
+        }
+            
         view.addSubview(codeStack)
-        NSLayoutConstraint.activate([
-            codeStack.topAnchor.constraint(equalTo: confirmationLabel.bottomAnchor, constant: 50),
-                    codeStack.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-                    codeStack.heightAnchor.constraint(equalToConstant: 44),
-                    codeStack.widthAnchor.constraint(equalToConstant: 272)
-        ])
+        codeStack.snp.makeConstraints{make in
+            make.top.equalTo(confirmationLabel.snp.bottom).offset(50)
+            make.centerX.equalToSuperview()
+            make.height.equalTo(44)
+            make.width.equalTo(272)
+        }
         
         codeStack.addSubview(firstNumber)
-        NSLayoutConstraint.activate([
-            firstNumber.leadingAnchor.constraint(equalTo: codeStack.leadingAnchor),
-            firstNumber.topAnchor.constraint(equalTo: codeStack.topAnchor),
-            firstNumber.bottomAnchor.constraint(equalTo:  codeStack.bottomAnchor),
-            firstNumber.widthAnchor.constraint(equalToConstant: 46)
-        ])
+        firstNumber.snp.makeConstraints{ make in
+            make.leading.equalTo(codeStack.snp.leading)
+            make.top.equalTo(codeStack)
+            make.bottom.equalTo(codeStack)
+            make.width.equalTo(46)
+        }
+            
         codeStack.addSubview(secondNumber)
-        NSLayoutConstraint.activate([
-            secondNumber.leadingAnchor.constraint(equalTo: firstNumber.trailingAnchor, constant: 29),
-            secondNumber.topAnchor.constraint(equalTo: codeStack.topAnchor),
-            secondNumber.bottomAnchor.constraint(equalTo:  codeStack.bottomAnchor),
-            secondNumber.widthAnchor.constraint(equalToConstant: 46)
-        ])
+        secondNumber.snp.makeConstraints{ make in
+            make.leading.equalTo(firstNumber.snp.trailing).offset(20)
+            make.top.equalTo(codeStack)
+            make.bottom.equalTo(codeStack)
+            make.width.equalTo(46)
+        }
         codeStack.addSubview(thirdNumber)
-        NSLayoutConstraint.activate([
-            thirdNumber.leadingAnchor.constraint(equalTo: secondNumber.trailingAnchor, constant: 29),
-            thirdNumber.topAnchor.constraint(equalTo: codeStack.topAnchor),
-            thirdNumber.bottomAnchor.constraint(equalTo:  codeStack.bottomAnchor),
-            thirdNumber.widthAnchor.constraint(equalToConstant: 46)
-        ])
+        thirdNumber.snp.makeConstraints{ make in
+            make.leading.equalTo(secondNumber.snp.trailing).offset(20)
+            make.top.equalTo(codeStack)
+            make.bottom.equalTo(codeStack)
+            make.width.equalTo(46)
+        }
         codeStack.addSubview(forthNumber)
-        NSLayoutConstraint.activate([
-            forthNumber.leadingAnchor.constraint(equalTo: thirdNumber.trailingAnchor, constant: 29),
-            forthNumber.topAnchor.constraint(equalTo: codeStack.topAnchor),
-            forthNumber.bottomAnchor.constraint(equalTo:  codeStack.bottomAnchor),
-            forthNumber.widthAnchor.constraint(equalToConstant: 46)
-        ])
-        view.addSubview(newCodeLabel)
-        NSLayoutConstraint.activate([
-            newCodeLabel.topAnchor.constraint(equalTo: codeStack.bottomAnchor, constant: 20),
-                    newCodeLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16)
-        ])
+        forthNumber.snp.makeConstraints { make in
+            make.leading.equalTo(thirdNumber.snp.trailing).offset(20)
+            make.top.equalTo(codeStack)
+            make.bottom.equalTo(codeStack)
+            make.width.equalTo(46)
+        }
+       
+        view.addSubview(newCodeButton)
+        newCodeButton.snp.makeConstraints { make in
+            make.top.equalTo(codeStack.snp.bottom).offset(20)
+            make.leading.equalToSuperview().offset(16)
+        }
         
         view.addSubview(nextButton)
-        NSLayoutConstraint.activate([
-            nextButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-                   nextButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-                   nextButton.topAnchor.constraint(equalTo: newCodeLabel.bottomAnchor, constant: 50),
-                   nextButton.heightAnchor.constraint(equalToConstant: 48)
-        ])
-        
+        nextButton.snp.makeConstraints{make in
+            make.leading.equalToSuperview().offset(16)
+            make.trailing.equalToSuperview().offset(-16)
+            make.top.equalTo(newCodeButton.snp.bottom).offset(50)
+            make.height.equalTo(48)
+        }
+    }
+    @objc func newCodeButtonTapped() {
+        print("New code Button")
     }
     @objc func nextButtonTapped(){
         let vc = SuccessViewController()
         vc.titleLabel.text = "Вы успешно зарегистрировались"
+        vc.nextViewControllerType = .client
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true, completion: nil)
     }
