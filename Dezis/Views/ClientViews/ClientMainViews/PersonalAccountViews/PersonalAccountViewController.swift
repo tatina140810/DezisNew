@@ -1,114 +1,186 @@
 import UIKit
+import SnapKit
 
 class PersonalAccountViewController: UIViewController {
+   
+    let imagePicker = ImagePicker()
     
-    private var userImage = ImageSettings().imageMaker(image: UIImage(resource: .frame5731))
+    private var userImage: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(resource: .vector), for: .normal)
+        button.addTarget(self, action: #selector(userImageTapped), for: .touchUpInside)
+        return button
+    }()
     
-    private var personImage = ImageSettings().imageMaker(image: UIImage(systemName: "person.fill")!)
+    private var nameLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Aleksey Ivanovich"
+        label.font = UIFont.systemFont(ofSize: 20)
+        return label
+    }()
     
-    private var userInfoButton = ButtonSettings().buttonMaker(title: "Профиль", titleColor: UIColor.black, backgroundColor: UIColor.clear, target: self, action: #selector(userInfoButtonTapped))
-    private var lineImage = ImageSettings().imageMaker(image: nil, backgroundColor: UIColor.black)
+    private var tableView: UITableView = {
+        let view = UITableView()
+        view.rowHeight = 60
+        view.tintColor = .black
+        return view
+    }()
     
-    private var shieldImage = ImageSettings().imageMaker(image: UIImage(systemName: "shield")!)
+    let cellIdentifier = "cell"
     
-    private var aboutUsButton = ButtonSettings().buttonMaker(title: "О нас", titleColor: UIColor.black, backgroundColor: UIColor.clear, target: self, action: #selector(aboutUsButtonTapped))
-    private var secondlineImage = ImageSettings().imageMaker(image: nil, backgroundColor: UIColor.black)
-    private var gearImage = ImageSettings().imageMaker(image: UIImage(systemName: "gearshape.fill")!)
+    enum CellType {
+            case userInfo, aboutUs, settings
+        }
     
-    private var settingsButton = ButtonSettings().buttonMaker(title: "Настройки", titleColor: UIColor.black, backgroundColor: UIColor.clear, target: self, action: #selector(settingsButtonTapped))
-    private var thirdlineImage = ImageSettings().imageMaker(image: nil, backgroundColor: UIColor.black)
-    private var exitLabel = LabelSettings().labelMaker(text: "Выйти")
-      
+    let cellContent: [(image: UIImage?, title: String, type: CellType)] = [
+           (image: UIImage(systemName: "person.fill"), title: "Профиль", type: .userInfo),
+           (image: UIImage(systemName: "shield"), title: "О нас", type: .aboutUs),
+           (image: UIImage(systemName: "gearshape.fill"), title: "Настройки", type: .settings)
+       ]
+    private var exitButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Выход", for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        button.addTarget(self, action: #selector(exitButtonTapped), for: .touchUpInside)
+        return button
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         setupUI()
-    }
-    func setupUI(){
-        view.addSubview(userImage)
-        NSLayoutConstraint.activate([
-            userImage.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            userImage.topAnchor.constraint(equalTo: view.topAnchor, constant: 90),
-            userImage.widthAnchor.constraint(equalToConstant: 130),
-            userImage.heightAnchor.constraint(equalToConstant: 152)
-        ])
-        view.addSubview(personImage)
-        NSLayoutConstraint.activate([
-            personImage.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            personImage.topAnchor.constraint(equalTo: userImage.bottomAnchor, constant: 30),
-            personImage.heightAnchor.constraint(equalToConstant: 24),
-            personImage.widthAnchor.constraint(equalToConstant: 24)
-        ])
-        
-        view.addSubview(userInfoButton)
-        NSLayoutConstraint.activate([
-            userInfoButton.leadingAnchor.constraint(equalTo: personImage.trailingAnchor, constant: 25),
-            userInfoButton.topAnchor.constraint(equalTo: userImage.bottomAnchor, constant: 30),
-            userInfoButton.heightAnchor.constraint(equalToConstant: 40),
-            userInfoButton.widthAnchor.constraint(equalToConstant: 300)
-        ])
-        view.addSubview(lineImage)
-        NSLayoutConstraint.activate([
-            lineImage.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            lineImage.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant:  -16),
-            lineImage.topAnchor.constraint(equalTo: personImage.bottomAnchor, constant: 10),
-            lineImage.heightAnchor.constraint(equalToConstant: 2)
-        ])
-        view.addSubview(shieldImage)
-        NSLayoutConstraint.activate([
-            shieldImage.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            shieldImage.topAnchor.constraint(equalTo: lineImage.bottomAnchor, constant: 100),
-            shieldImage.heightAnchor.constraint(equalToConstant: 24),
-            shieldImage.widthAnchor.constraint(equalToConstant: 24)
-        ])
-        
-        view.addSubview(aboutUsButton)
-        NSLayoutConstraint.activate([
-            aboutUsButton.leadingAnchor.constraint(equalTo: shieldImage.trailingAnchor, constant: 25),
-            aboutUsButton.topAnchor.constraint(equalTo: lineImage.bottomAnchor, constant: 30),
-        ])
-        
-        view.addSubview(secondlineImage)
-        NSLayoutConstraint.activate([
-            lineImage.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            lineImage.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant:  -16),
-            lineImage.topAnchor.constraint(equalTo: aboutUsButton.bottomAnchor, constant: -30),
-            lineImage.heightAnchor.constraint(equalToConstant: 1)
-        ])
-//        
-        view.addSubview(gearImage)
-        NSLayoutConstraint.activate([
-            gearImage.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            gearImage.topAnchor.constraint(equalTo: aboutUsButton.bottomAnchor, constant: 40),
-            gearImage.heightAnchor.constraint(equalToConstant: 24),
-            gearImage.widthAnchor.constraint(equalToConstant: 24)
-        ])
-        
-        view.addSubview(settingsButton)
-        NSLayoutConstraint.activate([
-            settingsButton.leadingAnchor.constraint(equalTo: gearImage.trailingAnchor, constant: 25),
-            settingsButton.topAnchor.constraint(equalTo: aboutUsButton.bottomAnchor, constant: 30),
-        ])
-        view.addSubview(exitLabel)
-        NSLayoutConstraint.activate([
-            exitLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            exitLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -120)])
+        tableViewSettings()
     }
     
-    @objc func userInfoButtonTapped() {
+    private func tableViewSettings() {
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
+    }
+    
+    func navigateToViewController(at indexPath: IndexPath) {
+            let content = cellContent[indexPath.row]
+            let viewController: UIViewController
+
+            switch content.type {
+            case .userInfo:
+                viewController = UserInfoViewController()
+            case .aboutUs:
+                viewController = AboutUsViewController()
+            case .settings:
+                viewController = SettingsViewController()
+            }
+
+            navigationController?.pushViewController(viewController, animated: true)
+        }
+    
+    
+    private func setupUI() {
+        view.addSubview(userImage)
+        userImage.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(90)
+            make.centerX.equalToSuperview()
+            make.height.equalTo(152)
+            make.width.equalTo(130)
+        }
+        
+        view.addSubview(nameLabel)
+        nameLabel.snp.makeConstraints { make in
+            make.top.equalTo(userImage.snp.bottom).offset(30)
+            make.centerX.equalToSuperview()
+        }
+        
+        view.addSubview(tableView)
+        tableView.snp.makeConstraints { make in
+            make.top.equalTo(nameLabel.snp.bottom).offset(60)
+            make.leading.equalToSuperview().offset(16)
+            make.trailing.equalToSuperview().offset(-16)
+            make.height.equalTo(250)
+        }
+        view.addSubview(exitButton)
+           exitButton.snp.makeConstraints { make in
+               make.bottom.equalToSuperview().offset(-90)
+               make.centerX.equalToSuperview()
+               make.height.equalTo(44)
+               make.width.equalTo(100)
+           }
+    }
+    @objc private func userImageTapped() {
+        let alertController = UIAlertController(title: "Выберите фото профиля", message: "Выберите фото из галереи или сделайте новое фото.", preferredStyle: .actionSheet)
+        
+        let cameraAction = UIAlertAction(title: "Камера", style: .default) { [weak self] _ in
+            guard UIImagePickerController.isSourceTypeAvailable(.camera) else {
+                let alert = UIAlertController(title: "Ошибка", message: "Камера не доступна.", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default))
+                self?.present(alert, animated: true)
+                return
+            }
+            self?.showImagePicker(sourceType: .camera)
+        }
+        
+        let photoLibraryAction = UIAlertAction(title: "Галерея", style: .default) { [weak self] _ in
+            self?.showImagePicker(sourceType: .photoLibrary)
+        }
+        
+  
+        let cancelAction = UIAlertAction(title: "Отменить", style: .cancel)
+        
+    
+        alertController.addAction(cameraAction)
+        alertController.addAction(photoLibraryAction)
+        alertController.addAction(cancelAction)
+   
+        present(alertController, animated: true)
+    }
+
+    private func showImagePicker(sourceType: UIImagePickerController.SourceType) {
+        imagePicker.showImagePicker(in: self) { [weak self] image in
+           
+            self?.userImage.setImage(image, for: .normal)
+            self?.userImage.setTitle("Image Selected", for: .normal)
+        }
+    }
+
+    @objc private func userInfoButtonTapped() {
         let vc = UserInfoViewController()
         navigationController?.pushViewController(vc, animated: true)
         print("User info Button Tapped")
     }
-    @objc func aboutUsButtonTapped() {
+    
+    @objc private func aboutUsButtonTapped() {
         let vc = AboutUsViewController()
         navigationController?.pushViewController(vc, animated: true)
         print("About Us Button Tapped")
     }
-    @objc func settingsButtonTapped() {
+    
+    @objc private func settingsButtonTapped() {
         let vc = SettingsViewController()
         navigationController?.pushViewController(vc, animated: true)
         print("Settings Button Tapped")
     }
+    @objc private func exitButtonTapped() {
+        print("Exit button tapped")
+        // Add your exit logic here
+    }
+}
+
+// MARK: - UITableViewDelegate, UITableViewDataSource
+extension PersonalAccountViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+            navigateToViewController(at: indexPath)
+        }
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return cellContent.count
+    }
     
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
+        
+        let content = cellContent[indexPath.row]
+        cell.imageView?.image = content.image
+        cell.textLabel?.text = content.title
+        
+        return cell
+    }
 }
