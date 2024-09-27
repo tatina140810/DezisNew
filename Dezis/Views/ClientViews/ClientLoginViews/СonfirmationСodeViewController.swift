@@ -135,6 +135,7 @@ class СonfirmationСodeViewController: UIViewController {
     @objc func nextButtonTapped(){
         let vc = SuccessViewController()
         vc.titleLabel.text = "Вы успешно зарегистрировались"
+        vc.nextViewControllerType = .client
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true, completion: nil)
     }

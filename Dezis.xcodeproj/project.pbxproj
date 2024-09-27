@@ -34,7 +34,7 @@
 		AF4B1E072C9C1F6000FDA3EC /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1E062C9C1F6000FDA3EC /* NetworkError.swift */; };
 		AF4B1E092C9C221000FDA3EC /* NetworkRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1E082C9C221000FDA3EC /* NetworkRequest.swift */; };
 		AF4B1E0B2C9C24D300FDA3EC /* NetworkDataFetch.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1E0A2C9C24D300FDA3EC /* NetworkDataFetch.swift */; };
-		AF4B1E0D2C9D9B3500FDA3EC /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1E0C2C9D9B3500FDA3EC /* TabBarController.swift */; };
+		AF4B1E0D2C9D9B3500FDA3EC /* ClientTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1E0C2C9D9B3500FDA3EC /* ClientTabBarController.swift */; };
 		AF4B1E0F2C9D9B8200FDA3EC /* ClientHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1E0E2C9D9B8200FDA3EC /* ClientHomeViewController.swift */; };
 		AF4B1E132C9D9C2F00FDA3EC /* ServicesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1E122C9D9C2F00FDA3EC /* ServicesViewController.swift */; };
 		AF4B1E152C9D9CB400FDA3EC /* PersonalAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1E142C9D9CB400FDA3EC /* PersonalAccountViewController.swift */; };
@@ -56,6 +56,7 @@
 		AF4B1E3E2CA3DDAA00FDA3EC /* OnboardingPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1E3D2CA3DDAA00FDA3EC /* OnboardingPageViewController.swift */; };
 		AF4B1E402CA3E0D400FDA3EC /* OnboardingFifthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1E3F2CA3E0D400FDA3EC /* OnboardingFifthViewController.swift */; };
 		AF4B1E422CA3E0F400FDA3EC /* OnboardingSixthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1E412CA3E0F400FDA3EC /* OnboardingSixthViewController.swift */; };
+		AF9F2FEA2CA6A75500BBBB2C /* AdminChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9F2FE92CA6A75500BBBB2C /* AdminChatViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -89,7 +90,7 @@
 		AF4B1E062C9C1F6000FDA3EC /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		AF4B1E082C9C221000FDA3EC /* NetworkRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequest.swift; sourceTree = "<group>"; };
 		AF4B1E0A2C9C24D300FDA3EC /* NetworkDataFetch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkDataFetch.swift; sourceTree = "<group>"; };
-		AF4B1E0C2C9D9B3500FDA3EC /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		AF4B1E0C2C9D9B3500FDA3EC /* ClientTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientTabBarController.swift; sourceTree = "<group>"; };
 		AF4B1E0E2C9D9B8200FDA3EC /* ClientHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientHomeViewController.swift; sourceTree = "<group>"; };
 		AF4B1E122C9D9C2F00FDA3EC /* ServicesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicesViewController.swift; sourceTree = "<group>"; };
 		AF4B1E142C9D9CB400FDA3EC /* PersonalAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalAccountViewController.swift; sourceTree = "<group>"; };
@@ -111,6 +112,7 @@
 		AF4B1E3D2CA3DDAA00FDA3EC /* OnboardingPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPageViewController.swift; sourceTree = "<group>"; };
 		AF4B1E3F2CA3E0D400FDA3EC /* OnboardingFifthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingFifthViewController.swift; sourceTree = "<group>"; };
 		AF4B1E412CA3E0F400FDA3EC /* OnboardingSixthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingSixthViewController.swift; sourceTree = "<group>"; };
+		AF9F2FE92CA6A75500BBBB2C /* AdminChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminChatViewController.swift; sourceTree = "<group>"; };
 		F7FB7E9CD196CCFDB56042EF /* Pods-Dezis.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dezis.debug.xcconfig"; path = "Target Support Files/Pods-Dezis/Pods-Dezis.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -197,6 +199,7 @@
 		AF4B1DE52C9AE6DF00FDA3EC /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				AF9F2FE82CA6A72A00BBBB2C /* Chat */,
 				AF4B1E2F2CA2EFCE00FDA3EC /* OnBoarding */,
 				AF4B1DF32C9B28BD00FDA3EC /* AdminViews */,
 				AF4B1DF22C9B28A900FDA3EC /* ClientViews */,
@@ -286,7 +289,7 @@
 		AF4B1E102C9D9B9700FDA3EC /* ClientMainViews */ = {
 			isa = PBXGroup;
 			children = (
-				AF4B1E0C2C9D9B3500FDA3EC /* TabBarController.swift */,
+				AF4B1E0C2C9D9B3500FDA3EC /* ClientTabBarController.swift */,
 				AF4B1E0E2C9D9B8200FDA3EC /* ClientHomeViewController.swift */,
 				AF4B1E122C9D9C2F00FDA3EC /* ServicesViewController.swift */,
 				AF4B1E2A2CA0736200FDA3EC /* ClientChatViewController.swift */,
@@ -335,6 +338,14 @@
 				AF4B1E412CA3E0F400FDA3EC /* OnboardingSixthViewController.swift */,
 			);
 			path = OnBoarding;
+			sourceTree = "<group>";
+		};
+		AF9F2FE82CA6A72A00BBBB2C /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				AF9F2FE92CA6A75500BBBB2C /* AdminChatViewController.swift */,
+			);
+			path = Chat;
 			sourceTree = "<group>";
 		};
 		C763DB0EBC3E8B7B24CC5B50 /* Frameworks */ = {
@@ -480,10 +491,11 @@
 				AF4B1DFB2C9B42D300FDA3EC /* NewUserRegisterViewController.swift in Sources */,
 				726307262CA5772C000C585B /* OrdersCollectionViewCell.swift in Sources */,
 				AF4B1E382CA2F6D200FDA3EC /* OnboardingSecondViewController.swift in Sources */,
-				AF4B1E0D2C9D9B3500FDA3EC /* TabBarController.swift in Sources */,
+				AF4B1E0D2C9D9B3500FDA3EC /* ClientTabBarController.swift in Sources */,
 				AF4B1E1D2CA05B5200FDA3EC /* ImageSettings.swift in Sources */,
 				AF4B1E192CA0202000FDA3EC /* TextFieldSettings.swift in Sources */,
 				AF4B1E1B2CA0222A00FDA3EC /* ButtonSettings.swift in Sources */,
+				AF9F2FEA2CA6A75500BBBB2C /* AdminChatViewController.swift in Sources */,
 				AF4B1DF72C9B290D00FDA3EC /* AdminLoginViewController.swift in Sources */,
 				AF4B1E152C9D9CB400FDA3EC /* PersonalAccountViewController.swift in Sources */,
 				AF4B1DF52C9B28ED00FDA3EC /* ClientLoginViewController.swift in Sources */,

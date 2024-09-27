@@ -124,10 +124,11 @@ class AdminLoginViewController: UIViewController {
     }
     
     @objc func loginButtonTapped() {
-        let vc = AdminTabBarController()
-        let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate
-        sceneDelegate?.window?.rootViewController = vc
-        sceneDelegate?.window?.makeKeyAndVisible()
+        let vc = SuccessViewController()
+        vc.nextViewControllerType = .admin
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true, completion: nil)
+    
     }
 
     @objc func attributedTextTapped() {

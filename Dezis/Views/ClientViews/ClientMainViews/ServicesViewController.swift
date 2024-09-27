@@ -9,10 +9,13 @@ import UIKit
 
 class ServicesViewController: UIViewController {
     
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         setupNavigationItems()
+       
     }
     func setupNavigationItems(){
         navigationController?.navigationBar.backgroundColor = UIColor(hex: "#5191BA")
@@ -21,8 +24,8 @@ class ServicesViewController: UIViewController {
         navigationItem.leftBarButtonItem = leftButton
     }
     @objc func leftButtonTapped() {
-        // Действие при нажатии кнопки
         print("Left button tapped")
     }
+   
     
 }

@@ -49,6 +49,8 @@ class AdminHomeViewController: UIViewController {
     }
     
     @objc func rightButtonTapped() {
-        print("Right button tapped")
+       let vc = AdminChatViewController()
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true, completion: nil)
     }
 }
