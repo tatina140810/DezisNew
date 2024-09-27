@@ -1,12 +1,5 @@
-//
-//  NewUserRegisterViewController.swift
-//  Dezis
-//
-//  Created by Tatina Dzhakypbekova on 18/9/24.
-//
-
 import UIKit
-// комент для теста
+
 
 class NewUserRegisterViewController: UIViewController {
     
@@ -39,84 +32,72 @@ class NewUserRegisterViewController: UIViewController {
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-        private var consentDataLabel: UILabel = {
-            let view = UILabel()
-            view.text = "Согласие на обработку персональных данных"
-            view.font = UIFont(name: "Roboto", size: 8)
-            view.numberOfLines = 0
-            view.translatesAutoresizingMaskIntoConstraints = false
-            return view
-        }()
-   
-        private var loginLabel: UILabel = {
-            let view = UILabel()
-            view.text = "У вас уже есть аккаунт? Войти"
-            view.font = UIFont(name: "Roboto", size: 8)
-            view.textColor = UIColor(hex: "#B5B5B5")
-            view.translatesAutoresizingMaskIntoConstraints = false
-            return view
-        }()
-        private var signUpButton: UIButton = {
-            let view = UIButton()
-            view.setTitle( "Зарегистрироваться", for: .normal)
-            view.setTitleColor(.white, for: .normal)
-            view.backgroundColor = UIColor(hex: "#5191BA")
-            view.layer.cornerRadius = 8
-            view.addTarget(self, action: #selector(signUpButtonTapped), for: .touchUpInside)
-            view.translatesAutoresizingMaskIntoConstraints = false
-            return view
-        }()
-        private var supportContactLabel: UILabel = {
-            let view = UILabel()
-            view.text = "Не удалось зарегистрироваться? Связаться"
-            view.font = UIFont(name: "Roboto", size: 12)
-            view.translatesAutoresizingMaskIntoConstraints = false
-            return view
-        }()
+    private var consentDataLabel: UILabel = {
+        let view = UILabel()
+        view.text = "Согласие на обработку персональных данных"
+        view.font = UIFont(name: "Roboto", size: 8)
+        view.numberOfLines = 0
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private var loginLabel: UILabel = {
+        let view = UILabel()
+        view.text = "У вас уже есть аккаунт? Войти"
+        view.font = UIFont(name: "Roboto", size: 8)
+        view.textColor = UIColor(hex: "#B5B5B5")
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    private var signUpButton: UIButton = {
+        let view = UIButton()
+        view.setTitle( "Зарегистрироваться", for: .normal)
+        view.setTitleColor(.white, for: .normal)
+        view.backgroundColor = UIColor(hex: "#5191BA")
+        view.layer.cornerRadius = 8
+        view.addTarget(self, action: #selector(signUpButtonTapped), for: .touchUpInside)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    private var supportContactLabel: UILabel = {
+        let view = UILabel()
+        view.text = "Не удалось зарегистрироваться? Связаться"
+        view.font = UIFont(name: "Roboto", size: 12)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = .white
+        setupUI()
+        createAttributedText()
+        createSecondAttributedText()
         
-        
-        override func viewDidLoad() {
-            super.viewDidLoad()
-            view.backgroundColor = .white
-            setupUI()
-            createAttributedText()
-            createSecondAttributedText()
-            
-        }
+    }
+    // Mark: - Attributed Text Links
+    
     private func createAttributedText() {
-        let fullText = "У вас уже есть аккаунт? Войти"
-        
-        let attributedString = NSMutableAttributedString(string: fullText)
-
-        let range = (fullText as NSString).range(of: "Войти")
-        attributedString.addAttribute(.foregroundColor, value: UIColor.blue, range: range)
-        attributedString.addAttribute(.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: range)
-        
-        loginLabel.attributedText = attributedString
-
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(attributedTextTapped))
-        loginLabel.isUserInteractionEnabled = true
-       loginLabel.addGestureRecognizer(tapGesture)
+        AttributedTextHelper.configureAttributedText(
+            for: loginLabel,
+            fullText: "У вас уже есть аккаунт? Войти",
+            tappableText: "Войти",
+            tapTarget: self,
+            action: #selector(attributedTextTapped))
     }
     
     private func createSecondAttributedText() {
-        let fullText = "Не удалось зарегистрироваться? Связаться"
-        
-        let attributedString = NSMutableAttributedString(string: fullText)
-
-        let range = (fullText as NSString).range(of: "Связаться")
-        attributedString.addAttribute(.foregroundColor, value: UIColor.blue, range: range)
-        attributedString.addAttribute(.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: range)
-        
-        supportContactLabel.attributedText = attributedString
-
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(attributedSecondTextTapped))
-        supportContactLabel.isUserInteractionEnabled = true
-        supportContactLabel.addGestureRecognizer(tapGesture)
+        AttributedTextHelper.configureAttributedText(
+            for: supportContactLabel,
+            fullText: "Не удалось зарегистрироваться? Связаться",
+            tappableText: "Связаться",
+            tapTarget: self,
+            action: #selector(attributedSecondTextTapped))
     }
     
-        
-        // Mark: - Setup UI Elements
+    // Mark: - Setup UI Elements
+    
     private func setupUI(){
         
         view.addSubview(titleLabel)
@@ -173,7 +154,7 @@ class NewUserRegisterViewController: UIViewController {
             make.trailing.equalToSuperview().offset(-16)
             make.height.equalTo(48)
         }
-
+        
         view.addSubview(privacyCheckMarkButton)
         privacyCheckMarkButton.snp.makeConstraints{make in
             make.top.equalTo(apartmentNumberTextField.snp.bottom).offset(16)
@@ -201,7 +182,7 @@ class NewUserRegisterViewController: UIViewController {
             make.trailing.equalToSuperview().offset(-16)
             make.top.equalTo(privacyAgreementLabel.snp.bottom).offset(8)
         }
-            
+        
         
         view.addSubview(loginLabel)
         loginLabel.snp.makeConstraints{make in
@@ -209,12 +190,12 @@ class NewUserRegisterViewController: UIViewController {
             make.leading.equalToSuperview().offset(16)
         }
         view.addSubview(signUpButton)
-            signUpButton.snp.makeConstraints{make in
-                make.top.equalTo(loginLabel.snp.bottom).offset(20)
-                make.leading.equalToSuperview().offset(16)
-                make.trailing.equalToSuperview().offset(-16)
-                make.height.equalTo(48)
-            }
+        signUpButton.snp.makeConstraints{make in
+            make.top.equalTo(loginLabel.snp.bottom).offset(20)
+            make.leading.equalToSuperview().offset(16)
+            make.trailing.equalToSuperview().offset(-16)
+            make.height.equalTo(48)
+        }
         
         view.addSubview(supportContactLabel)
         supportContactLabel.snp.makeConstraints{make in
@@ -223,9 +204,10 @@ class NewUserRegisterViewController: UIViewController {
             
         }
     }
-        
+    // Mark: - Target functions
+    
     @objc func attributedTextTapped() {
-       
+        
         print("Login tapped!")
     }
     @objc func attributedSecondTextTapped(){
@@ -243,7 +225,7 @@ class NewUserRegisterViewController: UIViewController {
         present(vc, animated: true, completion: nil)
         
     }
-       
-}
     
+}
+
 
