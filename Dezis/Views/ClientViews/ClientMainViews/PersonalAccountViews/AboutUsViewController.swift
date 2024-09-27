@@ -8,6 +8,7 @@
 import UIKit
 
 class AboutUsViewController: UIViewController {
+    
     private var settingsTitleLabel = LabelSettings().labelMaker(text: "О Нас")
 
     override func viewDidLoad() {
@@ -19,9 +20,11 @@ class AboutUsViewController: UIViewController {
     
     private func setupUI(){
         view.addSubview(settingsTitleLabel)
-        NSLayoutConstraint.activate([
-            settingsTitleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            settingsTitleLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor)])
+        settingsTitleLabel.snp.makeConstraints{make in
+            make.centerX.equalToSuperview()
+            make.centerY.equalToSuperview()
+            
+        }
     }
 
     }

@@ -57,6 +57,7 @@
 		AF4B1E402CA3E0D400FDA3EC /* OnboardingFifthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1E3F2CA3E0D400FDA3EC /* OnboardingFifthViewController.swift */; };
 		AF4B1E422CA3E0F400FDA3EC /* OnboardingSixthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1E412CA3E0F400FDA3EC /* OnboardingSixthViewController.swift */; };
 		AF9F2FEA2CA6A75500BBBB2C /* AdminChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9F2FE92CA6A75500BBBB2C /* AdminChatViewController.swift */; };
+		AF9F2FEC2CA6BA1A00BBBB2C /* AttributedTextHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9F2FEB2CA6BA1A00BBBB2C /* AttributedTextHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -113,6 +114,7 @@
 		AF4B1E3F2CA3E0D400FDA3EC /* OnboardingFifthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingFifthViewController.swift; sourceTree = "<group>"; };
 		AF4B1E412CA3E0F400FDA3EC /* OnboardingSixthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingSixthViewController.swift; sourceTree = "<group>"; };
 		AF9F2FE92CA6A75500BBBB2C /* AdminChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminChatViewController.swift; sourceTree = "<group>"; };
+		AF9F2FEB2CA6BA1A00BBBB2C /* AttributedTextHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributedTextHelper.swift; sourceTree = "<group>"; };
 		F7FB7E9CD196CCFDB56042EF /* Pods-Dezis.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dezis.debug.xcconfig"; path = "Target Support Files/Pods-Dezis/Pods-Dezis.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -220,6 +222,7 @@
 				AF4B1E1A2CA0222A00FDA3EC /* ButtonSettings.swift */,
 				AF4B1E1C2CA05B5200FDA3EC /* ImageSettings.swift */,
 				AF4B1E2C2CA19C6000FDA3EC /* ChekBoxButton.swift */,
+				AF9F2FEB2CA6BA1A00BBBB2C /* AttributedTextHelper.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -292,7 +295,6 @@
 				AF4B1E0C2C9D9B3500FDA3EC /* ClientTabBarController.swift */,
 				AF4B1E0E2C9D9B8200FDA3EC /* ClientHomeViewController.swift */,
 				AF4B1E122C9D9C2F00FDA3EC /* ServicesViewController.swift */,
-				AF4B1E2A2CA0736200FDA3EC /* ClientChatViewController.swift */,
 				AF4B1E242CA0721700FDA3EC /* PersonalAccountViews */,
 			);
 			path = ClientMainViews;
@@ -344,6 +346,7 @@
 			isa = PBXGroup;
 			children = (
 				AF9F2FE92CA6A75500BBBB2C /* AdminChatViewController.swift */,
+				AF4B1E2A2CA0736200FDA3EC /* ClientChatViewController.swift */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -488,6 +491,7 @@
 				AF4B1E3E2CA3DDAA00FDA3EC /* OnboardingPageViewController.swift in Sources */,
 				7263072B2CA577AD000C585B /* AdminSettingsViewController.swift in Sources */,
 				AF4B1E1F2CA06E5500FDA3EC /* SettingsViewController.swift in Sources */,
+				AF9F2FEC2CA6BA1A00BBBB2C /* AttributedTextHelper.swift in Sources */,
 				AF4B1DFB2C9B42D300FDA3EC /* NewUserRegisterViewController.swift in Sources */,
 				726307262CA5772C000C585B /* OrdersCollectionViewCell.swift in Sources */,
 				AF4B1E382CA2F6D200FDA3EC /* OnboardingSecondViewController.swift in Sources */,

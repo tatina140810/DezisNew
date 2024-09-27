@@ -107,19 +107,13 @@ class ClientLoginViewController: UIViewController {
     }
     
     private func createAttributedText() {
-        let fullText = "Не удалось войти? Связаться"
-        
-        let attributedString = NSMutableAttributedString(string: fullText)
-        
-        let range = (fullText as NSString).range(of: "Связаться")
-        attributedString.addAttribute(.foregroundColor, value: UIColor.black, range: range)
-        attributedString.addAttribute(.font, value: UIFont.boldSystemFont(ofSize: supportContactLabel.font.pointSize), range: range)
-        
-        supportContactLabel.attributedText = attributedString
-        
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(attributedTextTapped))
-        supportContactLabel.isUserInteractionEnabled = true
-        supportContactLabel.addGestureRecognizer(tapGesture)
+        AttributedTextHelper.configureAttributedText(
+            for: supportContactLabel,
+            fullText: "Не удалось войти? Связаться",
+            tappableText: "Связаться",
+            tapTarget: self,
+            action: #selector(attributedTextTapped))
+       
     }
     
     // Mark: - TextField validation
