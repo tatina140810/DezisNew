@@ -56,6 +56,8 @@
 		AF4B1E3E2CA3DDAA00FDA3EC /* OnboardingPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1E3D2CA3DDAA00FDA3EC /* OnboardingPageViewController.swift */; };
 		AF4B1E402CA3E0D400FDA3EC /* OnboardingFifthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1E3F2CA3E0D400FDA3EC /* OnboardingFifthViewController.swift */; };
 		AF4B1E422CA3E0F400FDA3EC /* OnboardingSixthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1E412CA3E0F400FDA3EC /* OnboardingSixthViewController.swift */; };
+		AF74D5502CA7C97B00B64D6E /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF74D54F2CA7C97B00B64D6E /* KeychainManager.swift */; };
+		AF74D5522CA7EB3200B64D6E /* NewUserRegistratinSecondPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF74D5512CA7EB3200B64D6E /* NewUserRegistratinSecondPageViewController.swift */; };
 		AF9F2FEA2CA6A75500BBBB2C /* AdminChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9F2FE92CA6A75500BBBB2C /* AdminChatViewController.swift */; };
 		AF9F2FEC2CA6BA1A00BBBB2C /* AttributedTextHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9F2FEB2CA6BA1A00BBBB2C /* AttributedTextHelper.swift */; };
 		AF9F2FEE2CA6D3CF00BBBB2C /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9F2FED2CA6D3CF00BBBB2C /* ImagePicker.swift */; };
@@ -114,6 +116,8 @@
 		AF4B1E3D2CA3DDAA00FDA3EC /* OnboardingPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPageViewController.swift; sourceTree = "<group>"; };
 		AF4B1E3F2CA3E0D400FDA3EC /* OnboardingFifthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingFifthViewController.swift; sourceTree = "<group>"; };
 		AF4B1E412CA3E0F400FDA3EC /* OnboardingSixthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingSixthViewController.swift; sourceTree = "<group>"; };
+		AF74D54F2CA7C97B00B64D6E /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
+		AF74D5512CA7EB3200B64D6E /* NewUserRegistratinSecondPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewUserRegistratinSecondPageViewController.swift; sourceTree = "<group>"; };
 		AF9F2FE92CA6A75500BBBB2C /* AdminChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminChatViewController.swift; sourceTree = "<group>"; };
 		AF9F2FEB2CA6BA1A00BBBB2C /* AttributedTextHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributedTextHelper.swift; sourceTree = "<group>"; };
 		AF9F2FED2CA6D3CF00BBBB2C /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
@@ -226,6 +230,7 @@
 				AF4B1E2C2CA19C6000FDA3EC /* ChekBoxButton.swift */,
 				AF9F2FEB2CA6BA1A00BBBB2C /* AttributedTextHelper.swift */,
 				AF9F2FED2CA6D3CF00BBBB2C /* ImagePicker.swift */,
+				AF74D54F2CA7C97B00B64D6E /* KeychainManager.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -307,6 +312,7 @@
 			isa = PBXGroup;
 			children = (
 				AF4B1DFA2C9B42D300FDA3EC /* NewUserRegisterViewController.swift */,
+				AF74D5512CA7EB3200B64D6E /* NewUserRegistratinSecondPageViewController.swift */,
 				AF4B1DFC2C9B52AE00FDA3EC /* СonfirmationСodeViewController.swift */,
 				AF4B1DF42C9B28ED00FDA3EC /* ClientLoginViewController.swift */,
 			);
@@ -488,6 +494,7 @@
 				AF4B1E402CA3E0D400FDA3EC /* OnboardingFifthViewController.swift in Sources */,
 				7263072D2CA577C4000C585B /* SettingsCell.swift in Sources */,
 				AF4B1E172C9FFF3200FDA3EC /* LabelSettings.swift in Sources */,
+				AF74D5522CA7EB3200B64D6E /* NewUserRegistratinSecondPageViewController.swift in Sources */,
 				AF4B1DE92C9AEEC600FDA3EC /* Profile.swift in Sources */,
 				AF4B1E092C9C221000FDA3EC /* NetworkRequest.swift in Sources */,
 				7263071F2CA576B4000C585B /* AdminTabBarController.swift in Sources */,
@@ -505,6 +512,7 @@
 				AF4B1E1B2CA0222A00FDA3EC /* ButtonSettings.swift in Sources */,
 				AF9F2FEA2CA6A75500BBBB2C /* AdminChatViewController.swift in Sources */,
 				AF4B1DF72C9B290D00FDA3EC /* AdminLoginViewController.swift in Sources */,
+				AF74D5502CA7C97B00B64D6E /* KeychainManager.swift in Sources */,
 				AF4B1E152C9D9CB400FDA3EC /* PersonalAccountViewController.swift in Sources */,
 				AF4B1DF52C9B28ED00FDA3EC /* ClientLoginViewController.swift in Sources */,
 				726307292CA5776E000C585B /* AdminPersonalAccountViewController.swift in Sources */,

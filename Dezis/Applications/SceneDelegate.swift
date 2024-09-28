@@ -23,7 +23,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         if hasCompletedOnboarding {
             
-            window?.rootViewController = UserTypeSelectionViewController()
+           window?.rootViewController = UserTypeSelectionViewController()
+          
         } else {
             
             let root = UINavigationController(rootViewController: UserTypeSelectionViewController())

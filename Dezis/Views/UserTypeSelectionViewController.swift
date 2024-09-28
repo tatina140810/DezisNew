@@ -69,7 +69,7 @@ class UserTypeSelectionViewController: UIViewController {
     }
 
     @objc func clientButtonTapped(){
-        let vc = ClientLoginViewController()
+        let vc = NewUserRegisterViewController()
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true, completion: nil)
         

@@ -1,16 +1,20 @@
 PODS:
+  - KeychainSwift (20.0.0)
   - SnapKit (5.0.1)
 
 DEPENDENCIES:
+  - KeychainSwift (~> 20.0)
   - SnapKit (~> 5.0.0)
 
 SPEC REPOS:
   trunk:
+    - KeychainSwift
     - SnapKit
 
 SPEC CHECKSUMS:
+  KeychainSwift: 0ce6a4d13f7228054d1a71bb1b500448fb2ab837
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
 
-PODFILE CHECKSUM: cd7ff5c16208a93deb56f61e03bacc38b3e07db1
+PODFILE CHECKSUM: 34c11ccf9c572b8d41b54dd1f400a13577982005
 
 COCOAPODS: 1.13.0
