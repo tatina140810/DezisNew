@@ -1,9 +1,14 @@
 import UIKit
-
+import SnapKit
 
 class NewUserRegisterViewController: UIViewController {
     
-    // Mark: - Create UI Elements
+    // MARK: - Create UI Elements
+    private var logoImage: UIImageView = {
+        let image = UIImageView()
+        image.image = UIImage(resource: .image8)
+        return image
+    }()
     
     private var titleLabel = LabelSettings().labelMaker(text: "Регистрация", font: UIFont.systemFont(ofSize: 28))
     
@@ -13,70 +18,47 @@ class NewUserRegisterViewController: UIViewController {
     
     private var emailTextField = TextFieldSettings().textFieldMaker(placeholder: "Email*", backgroundColor: UIColor(hex: "#F6F6F7"))
     
-    private var orderNumberTextField = TextFieldSettings().textFieldMaker(placeholder: "Номер заказа", backgroundColor: UIColor(hex: "#F6F6F7"))
-    
-    private var adressTextField = TextFieldSettings().textFieldMaker(placeholder: "Адрес*", backgroundColor: UIColor(hex: "#F6F6F7"))
-    
-    private var houseNumberTextField = TextFieldSettings().textFieldMaker(placeholder: "Номер дома*", backgroundColor: UIColor(hex: "#F6F6F7"))
-    
-    private var apartmentNumberTextField = TextFieldSettings().textFieldMaker(placeholder: "Номер квартиры*", backgroundColor: UIColor(hex: "#F6F6F7"))
-    
-    private var privacyCheckMarkButton = CheckboxButton()
-    private var consentCheckMarkButton = CheckboxButton()
-    
-    private var privacyAgreementLabel: UILabel = {
+    private var status = ""
+    private var errorLabel: UILabel = {
         let view = UILabel()
-        view.text = "Я принимаю политику конфиденциальности"
-        view.font = UIFont(name: "Roboto", size: 8)
-        view.numberOfLines = 0
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-    private var consentDataLabel: UILabel = {
-        let view = UILabel()
-        view.text = "Согласие на обработку персональных данных"
-        view.font = UIFont(name: "Roboto", size: 8)
-        view.numberOfLines = 0
-        view.translatesAutoresizingMaskIntoConstraints = false
+        view.text = ""
+        view.font = UIFont.systemFont(ofSize: 12)
+        view.textColor = .red
+        view.textAlignment = .left
         return view
     }()
     
     private var loginLabel: UILabel = {
         let view = UILabel()
-        view.text = "У вас уже есть аккаунт? Войти"
+        view.text = "Уже есть аккаунт? Войти"
         view.font = UIFont(name: "Roboto", size: 8)
         view.textColor = UIColor(hex: "#B5B5B5")
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-    private var signUpButton: UIButton = {
-        let view = UIButton()
-        view.setTitle( "Зарегистрироваться", for: .normal)
-        view.setTitleColor(.white, for: .normal)
-        view.backgroundColor = UIColor(hex: "#5191BA")
-        view.layer.cornerRadius = 8
-        view.addTarget(self, action: #selector(signUpButtonTapped), for: .touchUpInside)
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-    private var supportContactLabel: UILabel = {
-        let view = UILabel()
-        view.text = "Не удалось зарегистрироваться? Связаться"
-        view.font = UIFont(name: "Roboto", size: 12)
-        view.translatesAutoresizingMaskIntoConstraints = false
+        view.textAlignment = .center
+  
         return view
     }()
     
+    private var signUpButton: UIButton = {
+        let view = UIButton()
+        view.setTitle("Продолжить", for: .normal)
+        view.setTitleColor(.white, for: .normal)
+        view.backgroundColor = UIColor(hex: "#5191BA")
+        view.layer.cornerRadius = 8
+       
+        return view
+    }()
+    
+    // MARK: - View Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         setupUI()
         createAttributedText()
-        createSecondAttributedText()
-        
+        signUpButton.addTarget(self, action: #selector(signUpButtonTapped), for: .touchUpInside)
     }
-    // Mark: - Attributed Text Links
+    
+    // MARK: - Attributed Text Links
     
     private func createAttributedText() {
         AttributedTextHelper.configureAttributedText(
@@ -84,148 +66,108 @@ class NewUserRegisterViewController: UIViewController {
             fullText: "У вас уже есть аккаунт? Войти",
             tappableText: "Войти",
             tapTarget: self,
-            action: #selector(attributedTextTapped))
+            action: #selector(attributedTextTapped)
+        )
     }
     
-    private func createSecondAttributedText() {
-        AttributedTextHelper.configureAttributedText(
-            for: supportContactLabel,
-            fullText: "Не удалось зарегистрироваться? Связаться",
-            tappableText: "Связаться",
-            tapTarget: self,
-            action: #selector(attributedSecondTextTapped))
-    }
+    // MARK: - Setup UI Elements
     
-    // Mark: - Setup UI Elements
-    
-    private func setupUI(){
-        
-        view.addSubview(titleLabel)
-        titleLabel.snp.makeConstraints{make in
-            make.leading.equalToSuperview().offset(16)
-            make.top.equalToSuperview().offset(65)
+    private func setupUI() {
+        view.addSubview(logoImage)
+        logoImage.snp.makeConstraints {make in
+            make.centerX.equalToSuperview()
+            make.top.equalToSuperview().offset(83)
+            make.height.width.equalTo(140)
         }
+        view.addSubview(titleLabel)
+        titleLabel.snp.makeConstraints { make in
+            make.leading.equalToSuperview().offset(16)
+            make.top.equalTo(logoImage.snp.bottom).offset(30)
+        }
+        
         view.addSubview(nameTextField)
-        nameTextField.snp.makeConstraints{make in
+        nameTextField.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(28)
             make.leading.equalToSuperview().offset(16)
             make.trailing.equalToSuperview().offset(-16)
             make.height.equalTo(48)
         }
+        
         view.addSubview(phoneNumberTextField)
-        phoneNumberTextField.snp.makeConstraints{make in
+        phoneNumberTextField.snp.makeConstraints { make in
             make.top.equalTo(nameTextField.snp.bottom).offset(8)
             make.leading.equalToSuperview().offset(16)
             make.trailing.equalToSuperview().offset(-16)
             make.height.equalTo(48)
         }
+        
         view.addSubview(emailTextField)
-        emailTextField.snp.makeConstraints{make in
+        emailTextField.snp.makeConstraints { make in
             make.top.equalTo(phoneNumberTextField.snp.bottom).offset(8)
             make.leading.equalToSuperview().offset(16)
             make.trailing.equalToSuperview().offset(-16)
             make.height.equalTo(48)
         }
-        view.addSubview(orderNumberTextField)
-        orderNumberTextField.snp.makeConstraints{make in
-            make.top.equalTo(emailTextField.snp.bottom).offset(8)
-            make.leading.equalToSuperview().offset(16)
-            make.trailing.equalToSuperview().offset(-16)
-            make.height.equalTo(48)
-        }
-        view.addSubview(adressTextField)
-        adressTextField.snp.makeConstraints{make in
-            make.top.equalTo(orderNumberTextField.snp.bottom).offset(8)
-            make.leading.equalToSuperview().offset(16)
-            make.trailing.equalToSuperview().offset(-16)
-            make.height.equalTo(48)
-        }
-        view.addSubview(houseNumberTextField)
-        houseNumberTextField.snp.makeConstraints{make in
-            make.top.equalTo(adressTextField.snp.bottom).offset(8)
-            make.leading.equalToSuperview().offset(16)
-            make.trailing.equalToSuperview().offset(-16)
-            make.height.equalTo(48)
-        }
-        view.addSubview(apartmentNumberTextField)
-        apartmentNumberTextField.snp.makeConstraints{make in
-            make.top.equalTo(houseNumberTextField.snp.bottom).offset(8)
-            make.leading.equalToSuperview().offset(16)
-            make.trailing.equalToSuperview().offset(-16)
-            make.height.equalTo(48)
-        }
+        view.addSubview(errorLabel)
+        errorLabel.snp.makeConstraints{make in
+            make.top.equalTo(emailTextField.snp.bottom).offset(10)
+            make.leading.equalToSuperview().offset(16)}
         
-        view.addSubview(privacyCheckMarkButton)
-        privacyCheckMarkButton.snp.makeConstraints{make in
-            make.top.equalTo(apartmentNumberTextField.snp.bottom).offset(16)
+        view.addSubview(signUpButton)
+        signUpButton.snp.makeConstraints { make in
+            make.top.equalTo(errorLabel.snp.bottom).offset(38)
             make.leading.equalToSuperview().offset(16)
-            make.width.equalTo(24)
-            make.height.equalTo(24)
-        }
-        view.addSubview(privacyAgreementLabel)
-        privacyAgreementLabel.snp.makeConstraints { make in
-            make.leading.equalTo(privacyCheckMarkButton.snp.trailing).offset(5)
             make.trailing.equalToSuperview().offset(-16)
-            make.top.equalTo(apartmentNumberTextField.snp.bottom).offset(10)
-            
+            make.height.equalTo(48)
         }
-        view.addSubview(consentCheckMarkButton)
-        consentCheckMarkButton.snp.makeConstraints{make in
-            make.top.equalTo(privacyCheckMarkButton.snp.bottom).offset(16)
-            make.leading.equalToSuperview().offset(16)
-            make.width.equalTo(24)
-            make.height.equalTo(24)
-        }
-        view.addSubview(consentDataLabel)
-        consentDataLabel.snp.makeConstraints { make in
-            make.leading.equalTo(consentCheckMarkButton.snp.trailing).offset(5)
-            make.trailing.equalToSuperview().offset(-16)
-            make.top.equalTo(privacyAgreementLabel.snp.bottom).offset(8)
-        }
-        
         
         view.addSubview(loginLabel)
-        loginLabel.snp.makeConstraints{make in
-            make.top.equalTo(consentDataLabel.snp.bottom).offset(20)
-            make.leading.equalToSuperview().offset(16)
-        }
-        view.addSubview(signUpButton)
-        signUpButton.snp.makeConstraints{make in
-            make.top.equalTo(loginLabel.snp.bottom).offset(20)
-            make.leading.equalToSuperview().offset(16)
-            make.trailing.equalToSuperview().offset(-16)
-            make.height.equalTo(48)
-        }
-        
-        view.addSubview(supportContactLabel)
-        supportContactLabel.snp.makeConstraints{make in
+        loginLabel.snp.makeConstraints { make in
             make.top.equalTo(signUpButton.snp.bottom).offset(20)
-            make.leading.equalToSuperview().offset(16)
-            
+            make.centerX.equalToSuperview()
         }
     }
-    // Mark: - Target functions
+    
+    // MARK: - Target Functions
     
     @objc func attributedTextTapped() {
-        
-        print("Login tapped!")
-    }
-    @objc func attributedSecondTextTapped(){
-        print("Support contact tapped!")
-    }
-    @objc func signUpButtonTapped(){
-        let vc = СonfirmationСodeViewController()
+        let vc = ClientLoginViewController()
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true, completion: nil)
-        
-    }
-    @objc func loginButtonTapped(){
-        let vc = NewUserRegisterViewController()
-        vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: true, completion: nil)
-        
     }
     
+    @objc func signUpButtonTapped() {
+        // Safely fetch the password and account from text fields
+        guard let password = emailTextField.text, !password.isEmpty,
+              let account = nameTextField.text, !account.isEmpty else {
+            nameTextField.layer.borderColor = UIColor.red.cgColor
+            nameTextField.layer.borderWidth = 1.0
+            phoneNumberTextField.layer.borderColor = UIColor.red.cgColor
+            phoneNumberTextField.layer.borderWidth = 1.0
+            emailTextField.layer.borderColor = UIColor.red.cgColor
+            emailTextField.layer.borderWidth = 1.0
+            
+            errorLabel.text = "*Все поля обязательны для заполнения"
+            return
+        }
+        
+        do {
+           
+            status = try KeychainManager.save(password: password.data(using: .utf8) ?? Data(), account: account)
+            print("Status: \(status)")
+        } catch {
+            showAlert(message: "Error saving password: \(error)")
+        }
+        
+        let vc = NewUserRegistratinSecondPageViewController()
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true, completion: nil)
+    }
+    
+    private func showAlert(message: String) {
+        let alert = UIAlertController(title: "Ошибка", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        present(alert, animated: true)
+    }
 }
-
 

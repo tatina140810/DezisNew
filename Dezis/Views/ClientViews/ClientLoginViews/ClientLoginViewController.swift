@@ -1,15 +1,15 @@
-//
-//  ClientLoginViewController.swift
-//  Dezis
-//
-//  Created by Tatina Dzhakypbekova on 18/9/24.
-//
-
 import UIKit
 
-class ClientLoginViewController: UIViewController {
+class ClientLoginViewController: UIViewController, UITextFieldDelegate {
     
-    // Mark: - Create UI Elements
+    private var validationTimer: Timer?
+    
+    // MARK: - Create UI Elements
+    private var logoImage: UIImageView = {
+        let image = UIImageView()
+        image.image = UIImage(resource: .image8)
+        return image
+    }()
     
     private var titleLabel: UILabel = {
         let view = UILabel()
@@ -18,14 +18,25 @@ class ClientLoginViewController: UIViewController {
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
+    
     private var nameTextField = TextFieldSettings().textFieldMaker(placeholder: "Имя")
-   
     
     private var emailTextField = TextFieldSettings().textFieldMaker(placeholder: "Email")
-      
+   
+    private var errorMasageLabel: UILabel = {
+        let view = UILabel()
+        view.text = ""
+        view.font = UIFont.systemFont(ofSize: 12)
+        view.numberOfLines = 0
+        view.textAlignment = .center
+        view.textColor = .red
+        view.isHidden = true
+        return view
+    }()
+    
     private var signUpButton: UIButton = {
         let view = UIButton()
-        view.setTitle( "Регистрация", for: .normal)
+        view.setTitle("Регистрация", for: .normal)
         view.setTitleColor(.blue, for: .normal)
         view.titleLabel?.font = UIFont.systemFont(ofSize: 16)
         view.addTarget(self, action: #selector(signUpButtonTapped), for: .touchUpInside)
@@ -35,14 +46,16 @@ class ClientLoginViewController: UIViewController {
     
     private var loginButton: UIButton = {
         let view = UIButton()
-        view.setTitle( "Войти", for: .normal)
+        view.setTitle("Войти", for: .normal)
         view.setTitleColor(.white, for: .normal)
-        view.backgroundColor = UIColor(hex: "#5191BA")
+        view.backgroundColor = UIColor(hex: "#BABBBD")
         view.layer.cornerRadius = 8
+        view.isEnabled = false
         view.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
+    
     private var supportContactLabel: UILabel = {
         let view = UILabel()
         view.text = "Не удалось войти? Связаться"
@@ -55,22 +68,34 @@ class ClientLoginViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         setupUI()
-        validateFields()
         createAttributedText()
         
+       
+        nameTextField.delegate = self
+        emailTextField.delegate = self
+        
+    
+        nameTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+        emailTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
     }
     
-    // Mark: - Setup UI Elements
-    private func setupUI(){
+    // MARK: - Setup UI Elements
+    private func setupUI() {
+        view.addSubview(logoImage)
+        logoImage.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(83)
+            make.centerX.equalToSuperview()
+            make.height.width.equalTo(140)
+        }
         
         view.addSubview(titleLabel)
-        titleLabel.snp.makeConstraints{make in
+        titleLabel.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(16)
-            make.top.equalToSuperview().offset(218)
+            make.top.equalTo(logoImage.snp.bottom).offset(30)
         }
         
         view.addSubview(nameTextField)
-        nameTextField.snp.makeConstraints{make in
+        nameTextField.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(28)
             make.leading.equalToSuperview().offset(16)
             make.trailing.equalToSuperview().offset(-16)
@@ -78,21 +103,28 @@ class ClientLoginViewController: UIViewController {
         }
         
         view.addSubview(emailTextField)
-        emailTextField.snp.makeConstraints {make in
+        emailTextField.snp.makeConstraints { make in
             make.top.equalTo(nameTextField.snp.bottom).offset(28)
             make.leading.equalToSuperview().offset(16)
             make.trailing.equalToSuperview().offset(-16)
-            make.height.equalTo(48)}
+            make.height.equalTo(48)
+        }
+        
+        view.addSubview(errorMasageLabel)
+        errorMasageLabel.snp.makeConstraints { make in
+            make.top.equalTo(emailTextField.snp.bottom).offset(10)
+            make.leading.equalToSuperview().offset(25)
+            make.trailing.equalToSuperview().offset(-25)
+        }
         
         view.addSubview(signUpButton)
-        signUpButton.snp.makeConstraints{make in
-            make.top.equalTo(emailTextField.snp.bottom).offset(20)
+        signUpButton.snp.makeConstraints { make in
+            make.top.equalTo(errorMasageLabel.snp.bottom).offset(20)
             make.leading.equalToSuperview().offset(16)
-            
         }
         
         view.addSubview(loginButton)
-        loginButton.snp.makeConstraints{make in
+        loginButton.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(16)
             make.trailing.equalToSuperview().offset(-16)
             make.top.equalTo(signUpButton.snp.bottom).offset(20)
@@ -100,7 +132,7 @@ class ClientLoginViewController: UIViewController {
         }
         
         view.addSubview(supportContactLabel)
-        supportContactLabel.snp.makeConstraints{make in
+        supportContactLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalTo(loginButton.snp.bottom).offset(20)
         }
@@ -112,73 +144,90 @@ class ClientLoginViewController: UIViewController {
             fullText: "Не удалось войти? Связаться",
             tappableText: "Связаться",
             tapTarget: self,
-            action: #selector(attributedTextTapped))
+            action: #selector(attributedTextTapped)
+        )
+    }
+    
+    // MARK: - Validate TextFields on Change
+    @objc private func textFieldDidChange() {
+
+        errorMasageLabel.isHidden = true
+        resetValidationTimer()
+    }
+    
+    // MARK: - Reset Validation Timer
+    private func resetValidationTimer() {
        
+        validationTimer?.invalidate()
+        validationTimer = Timer.scheduledTimer(timeInterval: 2.0, target: self, selector: #selector(validateAccountAndPassword), userInfo: nil, repeats: false)
     }
     
-    // Mark: - TextField validation
-    
-    private func validateFields() -> Bool {
-        
-        guard let name = nameTextField.text, !name.isEmpty else {
-            showAlert(message: "Пожалуйста, введите имя.")
-            return false
+    // MARK: - TextField Validation
+    @objc private func validateAccountAndPassword() {
+        guard let account = nameTextField.text, !account.isEmpty,
+              let password = emailTextField.text, !password.isEmpty else {
+            errorMasageLabel.text = "Пожалуйста, заполните все поля."
+            errorMasageLabel.isHidden = false
+            return
         }
         
-        guard let email = emailTextField.text, !email.isEmpty else {
-            showAlert(message: "Пожалуйста, введите email.")
-            return false
+        do {
+            let savedPassword = try KeychainManager.retrievePassword(for: account)
+            if savedPassword == password {
+                loginButton.isEnabled = true
+                loginButton.backgroundColor = UIColor(hex: "#0688C1")
+            } else {
+                nameTextField.layer.borderColor = UIColor.red.cgColor
+                nameTextField.layer.borderWidth = 1.0
+                emailTextField.layer.borderColor = UIColor.red.cgColor
+                emailTextField.layer.borderWidth = 1.0
+                
+                loginButton.isEnabled = false
+                errorMasageLabel.text = "Извините, введен неверный логин или email. Пожалуйста, проверьте правильность введенных данных и попробуйте снова."
+                errorMasageLabel.isHidden = false
+            }
+        } catch let error as KeychainError {
+            switch error {
+            case .itemNotFound:
+                nameTextField.layer.borderColor = UIColor.red.cgColor
+                nameTextField.layer.borderWidth = 1.0
+                emailTextField.layer.borderColor = UIColor.red.cgColor
+                emailTextField.layer.borderWidth = 1.0
+                
+                loginButton.isEnabled = false
+                errorMasageLabel.text = "Извините, введен неверный логин или email. Пожалуйста, проверьте правильность введенных данных и попробуйте снова."
+                errorMasageLabel.isHidden = false
+            case .duplicateItem:
+                print("Duplicate item found in Keychain.")
+            case .unknown(let status):
+                print("Unknown error with status: \(status)")
+            }
+        } catch {
+            print("Unexpected error: \(error)")
         }
-        
-        
-        if !isValidEmail(email) {
-            showAlert(message: "Введите корректный email.")
-            return false
-        }
-        
-        return true
     }
+
     
-    
-    private func isValidEmail(_ email: String) -> Bool {
-        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
-        let emailPred = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
-        return emailPred.evaluate(with: email)
-    }
-    
-    
-    private func showAlert(message: String) {
+    private func showErrorMessage(_ message: String) {
         let alert = UIAlertController(title: "Ошибка", message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default))
         present(alert, animated: true)
     }
     
-    
     @objc func signUpButtonTapped() {
-        
-        if validateFields() {
-            let vc = NewUserRegisterViewController()
-            vc.modalPresentationStyle = .fullScreen
-            present(vc, animated: true, completion: nil)
-        }
+        let vc = NewUserRegisterViewController()
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true, completion: nil)
     }
     
     @objc func loginButtonTapped() {
-        
-        if validateFields() {
-            let vc = NewUserRegisterViewController()
-            vc.modalPresentationStyle = .fullScreen
-            present(vc, animated: true, completion: nil)
-        }
+        print("Login successful!")
+        let vc = ClientTabBarController()
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true, completion: nil)
     }
     
     @objc func attributedTextTapped() {
-        // переход на страницу свзяаться
-        
         print("Support contact tapped!")
     }
-    
 }
-
-
-

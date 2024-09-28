@@ -7,5 +7,6 @@ target 'Dezis' do
 
   # Pods for Dezis
 pod 'SnapKit', '~> 5.0.0'
+pod 'KeychainSwift', '~> 20.0'
 
 end
