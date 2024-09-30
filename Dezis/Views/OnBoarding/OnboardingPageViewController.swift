@@ -25,12 +25,13 @@ extension OnboardingPageViewController {
         pageControl.addTarget(self, action: #selector(pageControlTapped(_:)), for: .valueChanged)
         
         // Инициализация страниц
-        let page1 = OnboardingThirdViewController()
-        let page2 = OnboardingForthViewController()
-        let page3 = OnboardingFifthViewController()
-        let page4 = OnboardingSixthViewController()
+        let page1 = FirstOnboardingViewController()
+        let page2 = SecondOnboardingViewController()
+        let page3 = ThirdOnboardingViewController()
+        let page4 = ForthOnboardingViewController()
+        let page5 = FifthOnboardingViewController()
         
-        pages = [page1, page2, page3, page4]
+        pages = [page1, page2, page3, page4, page5]
         
         
         setViewControllers([pages[initialPage]], direction: .forward, animated: true, completion: nil)
@@ -51,7 +52,7 @@ extension OnboardingPageViewController {
         view.addSubview(pageControl)
         
         pageControl.snp.makeConstraints { make in
-            make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-10)
+            make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-50)
             make.centerX.equalToSuperview()
             make.height.equalTo(20)
             make.width.equalTo(200)
@@ -73,9 +74,9 @@ extension OnboardingPageViewController: UIPageViewControllerDataSource {
         if currentIndex < pages.count - 1 {
             return pages[currentIndex + 1]
         } else if currentIndex == pages.count - 1 {
-            let userTypeSelectVC = UserTypeSelectionViewController()
-            userTypeSelectVC.modalPresentationStyle = .fullScreen
-            present(userTypeSelectVC, animated: true, completion: nil)
+            let tabBar = ClientTabBarController()
+            tabBar.modalPresentationStyle = .fullScreen
+            present(tabBar, animated: true, completion: nil)
             return nil 
         } else {
             return nil

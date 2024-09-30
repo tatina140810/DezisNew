@@ -1,7 +1,13 @@
+//
+//  FifthOnboardingViewController.swift
+//  Dezis
+//
+//  Created by Tatina Dzhakypbekova on 30/9/24.
+//
+
 import UIKit
 
-class OnboardingSixthViewController: UIPageViewController {
-    
+class FifthOnboardingViewController: UIViewController {
     
     private var ellipsImage: UIImageView = {
         let image = UIImageView()
@@ -30,12 +36,20 @@ class OnboardingSixthViewController: UIPageViewController {
         label.textAlignment = .left
         return label
     }()
+    private var skipButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Пропустить", for: .normal)
+        button.tintColor = .black
+        button.addTarget(self, action: #selector(skipButtonTapped), for: .touchUpInside)
+        return button
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = .white
         setupUI()
-        finishOnboarding() 
+        finishOnboarding()
     }
     private func setupUI(){
         
@@ -66,15 +80,27 @@ class OnboardingSixthViewController: UIPageViewController {
             make.leading.equalToSuperview().offset(20)
             make.trailing.equalToSuperview().offset(-20)
         }
+        view.addSubview(skipButton)
+        skipButton.snp.makeConstraints{make in
+            make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-10)
+            make.centerX.equalToSuperview()
+            make.height.equalTo(20)
+            make.width.equalTo(130)}
     }
     
+    
     @objc func finishOnboarding() {
-            UserDefaults.standard.set(true, forKey: "hasCompletedOnboarding")
-            
-            let mainViewController = UserTypeSelectionViewController() 
-            mainViewController.modalPresentationStyle = .fullScreen
-            present(mainViewController, animated: true, completion: nil)
-        }
+        UserDefaults.standard.set(true, forKey: "hasCompletedOnboarding")
+        
+        let mainViewController = ClientTabBarController()
+        mainViewController.modalPresentationStyle = .fullScreen
+        present(mainViewController, animated: true, completion: nil)
+    }
+@objc func skipButtonTapped(){
+    let vc = ClientTabBarController()
+    vc.modalPresentationStyle = .fullScreen
+    present(vc, animated: true, completion: nil)
+}
     
 }
 

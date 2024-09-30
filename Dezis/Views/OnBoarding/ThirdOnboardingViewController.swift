@@ -1,6 +1,6 @@
 import UIKit
 
-class OnboardingFifthViewController: UIPageViewController {
+class ThirdOnboardingViewController: UIPageViewController {
     
     private var ellipsImage: UIImageView = {
         let image = UIImageView()
@@ -23,6 +23,14 @@ class OnboardingFifthViewController: UIPageViewController {
         label.textAlignment = .left
         return label
     }()
+    private var skipButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Пропустить", for: .normal)
+        button.tintColor = .black
+        button.addTarget(self, action: #selector(skipButtonTapped), for: .touchUpInside)
+        return button
+    }()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,7 +59,18 @@ class OnboardingFifthViewController: UIPageViewController {
             
             
         }
+        view.addSubview(skipButton)
+        skipButton.snp.makeConstraints{make in
+            make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-10)
+            make.centerX.equalToSuperview()
+            make.height.equalTo(20)
+            make.width.equalTo(130)}
         
+    }
+    @objc func skipButtonTapped(){
+        let vc = ClientTabBarController()
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true, completion: nil)
     }
     
 }

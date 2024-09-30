@@ -1,7 +1,8 @@
 import UIKit
 import SnapKit
 
-class OnboardingThirdViewController: UIViewController {
+class FirstOnboardingViewController: UIViewController {
+    let gradientLayer = CAGradientLayer()
     
     private var exterminatorImage: UIImageView = {
         let image = UIImageView()
@@ -26,24 +27,32 @@ class OnboardingThirdViewController: UIViewController {
         label.textAlignment = .center
         return label
     }()
+    private var skipButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Пропустить", for: .normal)
+        button.tintColor = .black
+        button.addTarget(self, action: #selector(skipButtonTapped), for: .touchUpInside)
+        return button
+    }()
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        setUpBackground()
         setupUI()
+        setupGradientLayer()
     }
     
-    private func setUpBackground() {
-        let backgroundImage = UIImageView()
-        backgroundImage.image = UIImage(resource: .ellipse3)
-        backgroundImage.contentMode = .scaleAspectFill
-        
-        view.addSubview(backgroundImage)
-        backgroundImage.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
-        }
+    private func setupGradientLayer() {
+        gradientLayer.colors = [UIColor(hex: "#459AD1").cgColor, UIColor(hex: "#5B2FEE").cgColor]
+        gradientLayer.startPoint = CGPoint(x: 0, y: 0)
+        gradientLayer.endPoint = CGPoint(x: 1, y: 1)
+        view.layer.insertSublayer(gradientLayer, at: 0)
+    }
+    
+  
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        gradientLayer.frame = view.bounds
     }
     
     private func setupUI() {
@@ -70,6 +79,17 @@ class OnboardingThirdViewController: UIViewController {
             make.leading.equalToSuperview().offset(20)
             make.trailing.equalToSuperview().inset(20)
         }
-        
+        view.addSubview(skipButton)
+        skipButton.snp.makeConstraints{make in
+            make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-10)
+            make.centerX.equalToSuperview()
+            make.height.equalTo(20)
+            make.width.equalTo(130)}
+    }
+    
+    @objc func skipButtonTapped(){
+        let vc = ClientTabBarController()
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true, completion: nil)
     }
 }
