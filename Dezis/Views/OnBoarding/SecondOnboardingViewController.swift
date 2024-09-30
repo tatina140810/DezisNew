@@ -1,6 +1,6 @@
 import UIKit
 
-class OnboardingForthViewController: UIViewController {
+class SecondOnboardingViewController: UIViewController {
     
     private var titleLabel: UILabel = {
         let label = UILabel()
@@ -24,6 +24,14 @@ class OnboardingForthViewController: UIViewController {
         return image
         
     }()
+    private var skipButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Пропустить", for: .normal)
+        button.tintColor = .black
+        button.addTarget(self, action: #selector(skipButtonTapped), for: .touchUpInside)
+        return button
+    }()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,8 +61,17 @@ class OnboardingForthViewController: UIViewController {
             make.width.equalTo(360)
             
         }
-        
-        
+        view.addSubview(skipButton)
+        skipButton.snp.makeConstraints{make in
+            make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-10)
+            make.centerX.equalToSuperview()
+            make.height.equalTo(20)
+            make.width.equalTo(130)}
+    }
+    @objc func skipButtonTapped(){
+        let vc = ClientTabBarController()
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true, completion: nil)
     }
     
 }

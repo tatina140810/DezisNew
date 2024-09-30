@@ -8,7 +8,7 @@ enum NextViewControllerType {
 class SuccessViewController: UIViewController {
 
     var nextViewControllerType: NextViewControllerType = .admin
-    private var checkImage = ImageSettings().imageMaker(image: UIImage(resource: .checkCircle))
+    private var checkImage = ImageSettings().imageMaker(image: UIImage(resource: .successmark))
     var titleLabel = LabelSettings().labelMaker(text: "Вы успешно авторизовались!", font: UIFont.systemFont(ofSize: 20))
 
     override func viewDidLoad() {
@@ -38,13 +38,7 @@ class SuccessViewController: UIViewController {
     }
 
     private func loadNextViewController() {
-        let vc: UIViewController
-        switch nextViewControllerType {
-        case .admin:
-            vc = AdminTabBarController() // переход на Admin
-        case .client:
-            vc = ClientTabBarController() // переход на Client
-        }
+        let vc = ClientTabBarController()
 
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true, completion: nil)
