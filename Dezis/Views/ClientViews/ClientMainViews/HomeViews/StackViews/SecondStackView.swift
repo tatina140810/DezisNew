@@ -37,7 +37,16 @@ class SecondStackView: UIView {
     
     private let lustDataLabel: UILabel = {
         let label = UILabel()
-        label.text = "Дата: 22.10.2023"
+        label.text = "Дата: "
+        label.font = UIFont.systemFont(ofSize: 12)
+        label.textColor = .white
+        label.numberOfLines = 0
+        label.textAlignment = .left
+        return label
+    }()
+    private let dataLabel: UILabel = {
+        let label = UILabel()
+        label.text = "22.10.2023"
         label.font = UIFont.systemFont(ofSize: 20)
         label.textColor = .white
         label.numberOfLines = 0
@@ -53,7 +62,16 @@ class SecondStackView: UIView {
     
     private let lustTimeLabel: UILabel = {
         let label = UILabel()
-        label.text = "Время: 14:30"
+        label.text = "Время:"
+        label.font = UIFont.systemFont(ofSize: 12)
+        label.textColor = .white
+        label.numberOfLines = 0
+        label.textAlignment = .left
+        return label
+    }()
+    private let timeLabel: UILabel = {
+        let label = UILabel()
+        label.text = "14:30"
         label.font = UIFont.systemFont(ofSize: 20)
         label.textColor = .white
         label.numberOfLines = 0
@@ -68,7 +86,16 @@ class SecondStackView: UIView {
     }()
     private let lustServiceLabel: UILabel = {
         let label = UILabel()
-        label.text = "Услуга: Дезинфекция"
+        label.text = "Услуга:"
+        label.font = UIFont.systemFont(ofSize: 12)
+        label.textColor = .white
+        label.numberOfLines = 0
+        label.textAlignment = .left
+        return label
+    }()
+    private let serviceLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Дезинфекция"
         label.font = UIFont.systemFont(ofSize: 20)
         label.textColor = .white
         label.numberOfLines = 0
@@ -89,28 +116,48 @@ class SecondStackView: UIView {
         horizintalStackView.addArrangedSubview(dataView)
         horizintalStackView.addArrangedSubview(timeView)
         dataView.addSubview(lustDataLabel)
+        dataView.addSubview(dataLabel)
         lustDataLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(8)
             make.leading.equalToSuperview().offset(8)
             make.trailing.equalToSuperview().offset(-30)
-            make.bottom.equalToSuperview().offset(-8)
+        
+        }
+        dataLabel.snp.makeConstraints { make in
+            make.top.equalTo(lustDataLabel.snp.bottom).offset(8)
+            make.leading.equalToSuperview().offset(8)
+            make.trailing.equalToSuperview().offset(-30)
+         
         }
         
         timeView.addSubview(lustTimeLabel)
+        timeView.addSubview(timeLabel)
         lustTimeLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(8)
             make.leading.equalToSuperview().offset(8)
             make.trailing.equalToSuperview().offset(-30)
-            make.bottom.equalToSuperview().offset(-8)
+          
+        }
+        timeLabel.snp.makeConstraints { make in
+            make.top.equalTo(lustTimeLabel.snp.bottom).offset(8)
+            make.leading.equalToSuperview().offset(8)
+            make.trailing.equalToSuperview().offset(-30)
+         
         }
         
         stackView.addArrangedSubview(serviceView)
         serviceView.addSubview(lustServiceLabel)
+        serviceView.addSubview(serviceLabel)
         lustServiceLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(8)
             make.leading.equalToSuperview().offset(8)
             make.trailing.equalToSuperview().offset(-30)
-            make.bottom.equalToSuperview().offset(-8)
+           
+        }
+        serviceLabel.snp.makeConstraints { make in
+            make.top.equalTo(lustServiceLabel.snp.bottom).offset(8)
+            make.leading.equalToSuperview().offset(8)
+            make.trailing.equalToSuperview().offset(-30)
         }
         
         

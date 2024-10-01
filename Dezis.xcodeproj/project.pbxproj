@@ -51,6 +51,7 @@
 		AF74D55C2CAB175D00B64D6E /* FifthOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF74D55B2CAB175D00B64D6E /* FifthOnboardingViewController.swift */; };
 		AF74D55E2CAB1E5400B64D6E /* GradientLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF74D55D2CAB1E5400B64D6E /* GradientLayer.swift */; };
 		AF74D5622CAB26CB00B64D6E /* SuccessAlertForOrderButtonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF74D5612CAB26CB00B64D6E /* SuccessAlertForOrderButtonViewController.swift */; };
+		AF74D5652CAC238600B64D6E /* CustomCellForServicesCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF74D5642CAC238600B64D6E /* CustomCellForServicesCollectionView.swift */; };
 		AF9F2FEC2CA6BA1A00BBBB2C /* AttributedTextHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9F2FEB2CA6BA1A00BBBB2C /* AttributedTextHelper.swift */; };
 		AF9F2FEE2CA6D3CF00BBBB2C /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9F2FED2CA6D3CF00BBBB2C /* ImagePicker.swift */; };
 /* End PBXBuildFile section */
@@ -103,6 +104,7 @@
 		AF74D55B2CAB175D00B64D6E /* FifthOnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FifthOnboardingViewController.swift; sourceTree = "<group>"; };
 		AF74D55D2CAB1E5400B64D6E /* GradientLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientLayer.swift; sourceTree = "<group>"; };
 		AF74D5612CAB26CB00B64D6E /* SuccessAlertForOrderButtonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessAlertForOrderButtonViewController.swift; sourceTree = "<group>"; };
+		AF74D5642CAC238600B64D6E /* CustomCellForServicesCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCellForServicesCollectionView.swift; sourceTree = "<group>"; };
 		AF9F2FEB2CA6BA1A00BBBB2C /* AttributedTextHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributedTextHelper.swift; sourceTree = "<group>"; };
 		AF9F2FED2CA6D3CF00BBBB2C /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		F7FB7E9CD196CCFDB56042EF /* Pods-Dezis.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dezis.debug.xcconfig"; path = "Target Support Files/Pods-Dezis/Pods-Dezis.debug.xcconfig"; sourceTree = "<group>"; };
@@ -244,7 +246,7 @@
 			children = (
 				AF4B1E0C2C9D9B3500FDA3EC /* ClientTabBarController.swift */,
 				AF74D5532CAACE6C00B64D6E /* HomeViews */,
-				AF4B1E122C9D9C2F00FDA3EC /* ServicesViewController.swift */,
+				AF74D5632CAC1EF800B64D6E /* ServicesViews */,
 				AF4B1E242CA0721700FDA3EC /* PersonalAccountViews */,
 			);
 			path = ClientMainViews;
@@ -310,6 +312,15 @@
 				AF74D5592CAADFDA00B64D6E /* ThirdStackView.swift */,
 			);
 			path = StackViews;
+			sourceTree = "<group>";
+		};
+		AF74D5632CAC1EF800B64D6E /* ServicesViews */ = {
+			isa = PBXGroup;
+			children = (
+				AF4B1E122C9D9C2F00FDA3EC /* ServicesViewController.swift */,
+				AF74D5642CAC238600B64D6E /* CustomCellForServicesCollectionView.swift */,
+			);
+			path = ServicesViews;
 			sourceTree = "<group>";
 		};
 		AF9F2FE82CA6A72A00BBBB2C /* Chat */ = {
@@ -443,6 +454,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AF4B1E0F2C9D9B8200FDA3EC /* ClientHomeViewController.swift in Sources */,
+				AF74D5652CAC238600B64D6E /* CustomCellForServicesCollectionView.swift in Sources */,
 				AF4B1E3C2CA30E5E00FDA3EC /* SecondOnboardingViewController.swift in Sources */,
 				AF4B1E232CA06E7E00FDA3EC /* AboutUsViewController.swift in Sources */,
 				AF4B1E262CA0727300FDA3EC /* ClientErrorViewController.swift in Sources */,

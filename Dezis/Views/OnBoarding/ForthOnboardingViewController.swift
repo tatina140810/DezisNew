@@ -5,7 +5,7 @@ class ForthOnboardingViewController: UIPageViewController {
     
     private var vectorImage: UIImageView = {
         let image = UIImageView()
-        image.image = UIImage(resource: .vector3)
+        image.image = UIImage(resource: .wave)
         return image
         
     }()
