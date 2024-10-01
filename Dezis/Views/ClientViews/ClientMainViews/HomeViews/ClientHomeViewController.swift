@@ -109,7 +109,7 @@ class ClientHomeViewController: UIViewController {
             make.top.equalTo(lustOrderLabel.snp.bottom).offset(20)
             make.leading.equalTo(contentView).offset(16)
             make.trailing.equalTo(contentView).offset(-16)
-            make.height.equalTo(173)
+            make.height.equalTo(180)
         }
 
         contentView.addSubview(infoLabel)
