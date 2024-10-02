@@ -27,16 +27,6 @@ class SettingsViewController: UIViewController {
         return button
     }()
     
-//    private var backButton: UIBarButtonItem = {
-//        let view = UIBarButtonItem(image: UIImage(systemName: "arrow.backward"),
-//                                   style: .plain,
-//                                   target: self,
-//                                   action: #selector(backButtonTapped))
-//        view.tintColor = .black
-//        return view
-//    }()
-
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white

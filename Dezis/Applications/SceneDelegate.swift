@@ -17,20 +17,21 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
         window = UIWindow(windowScene: windowScene)
+        window?.rootViewController = CalendarViewController()
        
-        window?.rootViewController = OnboardingPageViewController()
+      //  window?.rootViewController = OnboardingPageViewController()
         
-        let hasCompletedOnboarding = UserDefaults.standard.bool(forKey: "hasCompletedOnboarding")
-        
-        if hasCompletedOnboarding {
-            
-           window?.rootViewController = ClientTabBarController()
-          
-        } else {
-            
-            let root = UINavigationController(rootViewController: ClientTabBarController())
-            
-        }
+//        let hasCompletedOnboarding = UserDefaults.standard.bool(forKey: "hasCompletedOnboarding")
+//        
+//        if hasCompletedOnboarding {
+//            
+//           window?.rootViewController = ClientTabBarController()
+//          
+//        } else {
+//            
+//            let root = UINavigationController(rootViewController: ClientTabBarController())
+//            
+//        }
             window?.makeKeyAndVisible()
         }
         
