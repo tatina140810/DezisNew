@@ -52,6 +52,10 @@
 		AF74D55E2CAB1E5400B64D6E /* GradientLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF74D55D2CAB1E5400B64D6E /* GradientLayer.swift */; };
 		AF74D5622CAB26CB00B64D6E /* SuccessAlertForOrderButtonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF74D5612CAB26CB00B64D6E /* SuccessAlertForOrderButtonViewController.swift */; };
 		AF74D5652CAC238600B64D6E /* CustomCellForServicesCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF74D5642CAC238600B64D6E /* CustomCellForServicesCollectionView.swift */; };
+		AF74D5672CACF36F00B64D6E /* DeratizationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF74D5662CACF36F00B64D6E /* DeratizationViewController.swift */; };
+		AF74D5692CACF39400B64D6E /* DezinsectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF74D5682CACF39400B64D6E /* DezinsectionViewController.swift */; };
+		AF74D56B2CACF3A900B64D6E /* DezinfectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF74D56A2CACF3A900B64D6E /* DezinfectionViewController.swift */; };
+		AF74D56D2CAD835C00B64D6E /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF74D56C2CAD835C00B64D6E /* CalendarViewController.swift */; };
 		AF9F2FEC2CA6BA1A00BBBB2C /* AttributedTextHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9F2FEB2CA6BA1A00BBBB2C /* AttributedTextHelper.swift */; };
 		AF9F2FEE2CA6D3CF00BBBB2C /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9F2FED2CA6D3CF00BBBB2C /* ImagePicker.swift */; };
 /* End PBXBuildFile section */
@@ -105,6 +109,10 @@
 		AF74D55D2CAB1E5400B64D6E /* GradientLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientLayer.swift; sourceTree = "<group>"; };
 		AF74D5612CAB26CB00B64D6E /* SuccessAlertForOrderButtonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessAlertForOrderButtonViewController.swift; sourceTree = "<group>"; };
 		AF74D5642CAC238600B64D6E /* CustomCellForServicesCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCellForServicesCollectionView.swift; sourceTree = "<group>"; };
+		AF74D5662CACF36F00B64D6E /* DeratizationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeratizationViewController.swift; sourceTree = "<group>"; };
+		AF74D5682CACF39400B64D6E /* DezinsectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DezinsectionViewController.swift; sourceTree = "<group>"; };
+		AF74D56A2CACF3A900B64D6E /* DezinfectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DezinfectionViewController.swift; sourceTree = "<group>"; };
+		AF74D56C2CAD835C00B64D6E /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		AF9F2FEB2CA6BA1A00BBBB2C /* AttributedTextHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributedTextHelper.swift; sourceTree = "<group>"; };
 		AF9F2FED2CA6D3CF00BBBB2C /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		F7FB7E9CD196CCFDB56042EF /* Pods-Dezis.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dezis.debug.xcconfig"; path = "Target Support Files/Pods-Dezis/Pods-Dezis.debug.xcconfig"; sourceTree = "<group>"; };
@@ -319,6 +327,10 @@
 			children = (
 				AF4B1E122C9D9C2F00FDA3EC /* ServicesViewController.swift */,
 				AF74D5642CAC238600B64D6E /* CustomCellForServicesCollectionView.swift */,
+				AF74D5662CACF36F00B64D6E /* DeratizationViewController.swift */,
+				AF74D5682CACF39400B64D6E /* DezinsectionViewController.swift */,
+				AF74D56A2CACF3A900B64D6E /* DezinfectionViewController.swift */,
+				AF74D56C2CAD835C00B64D6E /* CalendarViewController.swift */,
 			);
 			path = ServicesViews;
 			sourceTree = "<group>";
@@ -453,6 +465,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF74D56D2CAD835C00B64D6E /* CalendarViewController.swift in Sources */,
 				AF4B1E0F2C9D9B8200FDA3EC /* ClientHomeViewController.swift in Sources */,
 				AF74D5652CAC238600B64D6E /* CustomCellForServicesCollectionView.swift in Sources */,
 				AF4B1E3C2CA30E5E00FDA3EC /* SecondOnboardingViewController.swift in Sources */,
@@ -461,6 +474,7 @@
 				AF4B1E132C9D9C2F00FDA3EC /* ServicesViewController.swift in Sources */,
 				AF4B1E2B2CA0736200FDA3EC /* ClientChatViewController.swift in Sources */,
 				AF4B1E282CA0729300FDA3EC /* ServerErrorViewController.swift in Sources */,
+				AF74D5692CACF39400B64D6E /* DezinsectionViewController.swift in Sources */,
 				AF4B1E072C9C1F6000FDA3EC /* NetworkError.swift in Sources */,
 				AF4B1DF92C9B32A300FDA3EC /* SuccessViewController.swift in Sources */,
 				AF4B1E402CA3E0D400FDA3EC /* ThirdOnboardingViewController.swift in Sources */,
@@ -472,6 +486,8 @@
 				AF74D5622CAB26CB00B64D6E /* SuccessAlertForOrderButtonViewController.swift in Sources */,
 				AF9F2FEE2CA6D3CF00BBBB2C /* ImagePicker.swift in Sources */,
 				AF4B1E1F2CA06E5500FDA3EC /* SettingsViewController.swift in Sources */,
+				AF74D5672CACF36F00B64D6E /* DeratizationViewController.swift in Sources */,
+				AF74D56B2CACF3A900B64D6E /* DezinfectionViewController.swift in Sources */,
 				AF9F2FEC2CA6BA1A00BBBB2C /* AttributedTextHelper.swift in Sources */,
 				AF4B1DFB2C9B42D300FDA3EC /* NewUserRegisterViewController.swift in Sources */,
 				AF4B1E0D2C9D9B3500FDA3EC /* ClientTabBarController.swift in Sources */,
