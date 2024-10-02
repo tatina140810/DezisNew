@@ -39,8 +39,10 @@ class PersonalAccountViewController: UIViewController {
        ]
     private var exitButton: UIButton = {
         let button = UIButton()
-        button.setTitle("Выход", for: .normal)
-        button.setTitleColor(.black, for: .normal)
+        button.setImage(UIImage(resource: .exit), for: .normal)
+        button.setTitle(" Выйти", for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 14)
+        button.setTitleColor(UIColor(hex: "#BABBBD"), for: .normal)
         button.addTarget(self, action: #selector(exitButtonTapped), for: .touchUpInside)
         return button
     }()

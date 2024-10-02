@@ -1,7 +1,7 @@
 import UIKit
 import SnapKit
 
-// Структура для хранения услуг
+
 struct Service {
     let image: UIImage
     let title: String
@@ -10,8 +10,7 @@ struct Service {
 class ServicesViewController: UIViewController {
     
     private var collectionView: UICollectionView!
-    
-    // Массив услуг
+  
     let services = [
         Service(image: UIImage(resource: .serImage1), title: "Дератизация"),
         Service(image: UIImage(resource: .serimage2), title: "Дезинсекция"),
@@ -25,6 +24,24 @@ class ServicesViewController: UIViewController {
         
         setupCollectionView()
     }
+    func navigateToUserViewController(at indexPath: IndexPath) {
+        let service = services[indexPath.row]
+        if indexPath.row == 0 {
+          
+            let deratizationVC = DeratizationViewController()
+            deratizationVC.title = service.title
+            navigationController?.pushViewController(deratizationVC, animated: true)
+        } else if indexPath.row == 1 {
+            let dezinsectionVC = DezinsectionViewController()
+            dezinsectionVC.title = service.title
+            navigationController?.pushViewController(dezinsectionVC, animated: true)
+        } else if indexPath.row == 2 {
+            let dezinfectionVC = DezinfectionViewController()
+            dezinfectionVC.title = service.title
+            navigationController?.pushViewController(dezinfectionVC, animated: true)
+        }
+    }
+
     
     private func setupCollectionView() {
        
@@ -65,6 +82,9 @@ extension ServicesViewController: UICollectionViewDelegate, UICollectionViewData
         cell.configure(with: service)
         return cell
     }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+            navigateToUserViewController(at: indexPath)
+        }
 }
 
    
