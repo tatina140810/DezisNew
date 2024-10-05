@@ -51,8 +51,6 @@
 		AF74D5502CA7C97B00B64D6E /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF74D54F2CA7C97B00B64D6E /* KeychainManager.swift */; };
 		AF74D5522CA7EB3200B64D6E /* NewUserRegistratinSecondPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF74D5512CA7EB3200B64D6E /* NewUserRegistratinSecondPageViewController.swift */; };
 		AF74D5562CAACEAC00B64D6E /* FirstStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF74D5552CAACEAC00B64D6E /* FirstStackView.swift */; };
-		AF74D5582CAADA4E00B64D6E /* SecondStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF74D5572CAADA4E00B64D6E /* SecondStackView.swift */; };
-		AF74D55A2CAADFDA00B64D6E /* ThirdStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF74D5592CAADFDA00B64D6E /* ThirdStackView.swift */; };
 		AF74D55E2CAB1E5400B64D6E /* GradientLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF74D55D2CAB1E5400B64D6E /* GradientLayer.swift */; };
 		AF74D5622CAB26CB00B64D6E /* SuccessAlertForOrderButtonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF74D5612CAB26CB00B64D6E /* SuccessAlertForOrderButtonViewController.swift */; };
 		AF74D5652CAC238600B64D6E /* CustomCellForServicesCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF74D5642CAC238600B64D6E /* CustomCellForServicesCollectionView.swift */; };
@@ -67,6 +65,7 @@
 		AF74D5792CB1171700B64D6E /* SecondOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF74D5722CB1171700B64D6E /* SecondOnboardingViewController.swift */; };
 		AF74D57A2CB1171700B64D6E /* ThirdOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF74D5732CB1171700B64D6E /* ThirdOnboardingViewController.swift */; };
 		AF74D57C2CB1179C00B64D6E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF74D57B2CB1179C00B64D6E /* LaunchScreen.storyboard */; };
+		AF74D57E2CB14B7700B64D6E /* DezinsectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF74D57D2CB14B7700B64D6E /* DezinsectionView.swift */; };
 		AF9F2FEC2CA6BA1A00BBBB2C /* AttributedTextHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9F2FEB2CA6BA1A00BBBB2C /* AttributedTextHelper.swift */; };
 		AF9F2FEE2CA6D3CF00BBBB2C /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9F2FED2CA6D3CF00BBBB2C /* ImagePicker.swift */; };
 /* End PBXBuildFile section */
@@ -119,8 +118,6 @@
 		AF74D54F2CA7C97B00B64D6E /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
 		AF74D5512CA7EB3200B64D6E /* NewUserRegistratinSecondPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewUserRegistratinSecondPageViewController.swift; sourceTree = "<group>"; };
 		AF74D5552CAACEAC00B64D6E /* FirstStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstStackView.swift; sourceTree = "<group>"; };
-		AF74D5572CAADA4E00B64D6E /* SecondStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondStackView.swift; sourceTree = "<group>"; };
-		AF74D5592CAADFDA00B64D6E /* ThirdStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdStackView.swift; sourceTree = "<group>"; };
 		AF74D55D2CAB1E5400B64D6E /* GradientLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientLayer.swift; sourceTree = "<group>"; };
 		AF74D5612CAB26CB00B64D6E /* SuccessAlertForOrderButtonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessAlertForOrderButtonViewController.swift; sourceTree = "<group>"; };
 		AF74D5642CAC238600B64D6E /* CustomCellForServicesCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCellForServicesCollectionView.swift; sourceTree = "<group>"; };
@@ -135,6 +132,7 @@
 		AF74D5722CB1171700B64D6E /* SecondOnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecondOnboardingViewController.swift; sourceTree = "<group>"; };
 		AF74D5732CB1171700B64D6E /* ThirdOnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThirdOnboardingViewController.swift; sourceTree = "<group>"; };
 		AF74D57B2CB1179C00B64D6E /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		AF74D57D2CB14B7700B64D6E /* DezinsectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DezinsectionView.swift; sourceTree = "<group>"; };
 		AF9F2FEB2CA6BA1A00BBBB2C /* AttributedTextHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributedTextHelper.swift; sourceTree = "<group>"; };
 		AF9F2FED2CA6D3CF00BBBB2C /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		F7FB7E9CD196CCFDB56042EF /* Pods-Dezis.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dezis.debug.xcconfig"; path = "Target Support Files/Pods-Dezis/Pods-Dezis.debug.xcconfig"; sourceTree = "<group>"; };
@@ -365,21 +363,20 @@
 		AF74D5532CAACE6C00B64D6E /* HomeViews */ = {
 			isa = PBXGroup;
 			children = (
-				AF74D5542CAACE9400B64D6E /* StackViews */,
+				AF74D5542CAACE9400B64D6E /* HomeElements */,
 				AF4B1E0E2C9D9B8200FDA3EC /* ClientHomeViewController.swift */,
 				AF74D5612CAB26CB00B64D6E /* SuccessAlertForOrderButtonViewController.swift */,
 			);
 			path = HomeViews;
 			sourceTree = "<group>";
 		};
-		AF74D5542CAACE9400B64D6E /* StackViews */ = {
+		AF74D5542CAACE9400B64D6E /* HomeElements */ = {
 			isa = PBXGroup;
 			children = (
 				AF74D5552CAACEAC00B64D6E /* FirstStackView.swift */,
-				AF74D5572CAADA4E00B64D6E /* SecondStackView.swift */,
-				AF74D5592CAADFDA00B64D6E /* ThirdStackView.swift */,
+				AF74D57D2CB14B7700B64D6E /* DezinsectionView.swift */,
 			);
-			path = StackViews;
+			path = HomeElements;
 			sourceTree = "<group>";
 		};
 		AF74D5632CAC1EF800B64D6E /* ServicesViews */ = {
@@ -576,6 +573,7 @@
 				AF74D56B2CACF3A900B64D6E /* DezinfectionViewController.swift in Sources */,
 				AF9F2FEC2CA6BA1A00BBBB2C /* AttributedTextHelper.swift in Sources */,
 				AF4B1DFB2C9B42D300FDA3EC /* NewUserRegisterViewController.swift in Sources */,
+				AF74D57E2CB14B7700B64D6E /* DezinsectionView.swift in Sources */,
 				AF74D5792CB1171700B64D6E /* SecondOnboardingViewController.swift in Sources */,
 				AF4B1E0D2C9D9B3500FDA3EC /* ClientTabBarController.swift in Sources */,
 				AF4B1E1D2CA05B5200FDA3EC /* ImageSettings.swift in Sources */,
@@ -584,8 +582,6 @@
 				AF74D55E2CAB1E5400B64D6E /* GradientLayer.swift in Sources */,
 				AF74D5502CA7C97B00B64D6E /* KeychainManager.swift in Sources */,
 				AF4B1E152C9D9CB400FDA3EC /* PersonalAccountViewController.swift in Sources */,
-				AF74D5582CAADA4E00B64D6E /* SecondStackView.swift in Sources */,
-				AF74D55A2CAADFDA00B64D6E /* ThirdStackView.swift in Sources */,
 				AF4B1DF52C9B28ED00FDA3EC /* ClientLoginViewController.swift in Sources */,
 				AF4B1E022C9C17BA00FDA3EC /* EndPoint.swift in Sources */,
 				AF4B1DF12C9B153C00FDA3EC /* HexExtention.swift in Sources */,
