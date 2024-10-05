@@ -3,7 +3,7 @@ import UIKit
 class ButtonSettings: UIButton {
     func buttonMaker(title: String = "Button",
                      titleColor: UIColor = .white,
-                     backgroundColor: UIColor = UIColor(hex: "#5191BA"),
+                     backgroundColor: UIColor = UIColor(hex: "#0A84FF"),
                      target: Any?,
                      action: Selector,
                      for controlEvent: UIControl.Event = .touchUpInside,
@@ -15,7 +15,9 @@ class ButtonSettings: UIButton {
         button.setTitle(title, for: .normal)
         button.setTitleColor(titleColor, for: .normal)
         button.backgroundColor = backgroundColor
-        button.layer.cornerRadius = 8
+        button.layer.borderColor = UIColor(hex: "#0A84FF").cgColor
+        button.layer.borderWidth = 1
+        button.layer.cornerRadius = 12
         button.addTarget(target, action: action, for: controlEvent)
         button.translatesAutoresizingMaskIntoConstraints = constraints
         

@@ -38,17 +38,11 @@
 		AF4B1E282CA0729300FDA3EC /* ServerErrorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1E272CA0729300FDA3EC /* ServerErrorViewController.swift */; };
 		AF4B1E2B2CA0736200FDA3EC /* ClientChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1E2A2CA0736200FDA3EC /* ClientChatViewController.swift */; };
 		AF4B1E2D2CA19C6000FDA3EC /* ChekBoxButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1E2C2CA19C6000FDA3EC /* ChekBoxButton.swift */; };
-		AF4B1E3A2CA2F74D00FDA3EC /* FirstOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1E392CA2F74D00FDA3EC /* FirstOnboardingViewController.swift */; };
-		AF4B1E3C2CA30E5E00FDA3EC /* SecondOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1E3B2CA30E5E00FDA3EC /* SecondOnboardingViewController.swift */; };
-		AF4B1E3E2CA3DDAA00FDA3EC /* OnboardingPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1E3D2CA3DDAA00FDA3EC /* OnboardingPageViewController.swift */; };
-		AF4B1E402CA3E0D400FDA3EC /* ThirdOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1E3F2CA3E0D400FDA3EC /* ThirdOnboardingViewController.swift */; };
-		AF4B1E422CA3E0F400FDA3EC /* ForthOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1E412CA3E0F400FDA3EC /* ForthOnboardingViewController.swift */; };
 		AF74D5502CA7C97B00B64D6E /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF74D54F2CA7C97B00B64D6E /* KeychainManager.swift */; };
 		AF74D5522CA7EB3200B64D6E /* NewUserRegistratinSecondPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF74D5512CA7EB3200B64D6E /* NewUserRegistratinSecondPageViewController.swift */; };
 		AF74D5562CAACEAC00B64D6E /* FirstStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF74D5552CAACEAC00B64D6E /* FirstStackView.swift */; };
 		AF74D5582CAADA4E00B64D6E /* SecondStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF74D5572CAADA4E00B64D6E /* SecondStackView.swift */; };
 		AF74D55A2CAADFDA00B64D6E /* ThirdStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF74D5592CAADFDA00B64D6E /* ThirdStackView.swift */; };
-		AF74D55C2CAB175D00B64D6E /* FifthOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF74D55B2CAB175D00B64D6E /* FifthOnboardingViewController.swift */; };
 		AF74D55E2CAB1E5400B64D6E /* GradientLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF74D55D2CAB1E5400B64D6E /* GradientLayer.swift */; };
 		AF74D5622CAB26CB00B64D6E /* SuccessAlertForOrderButtonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF74D5612CAB26CB00B64D6E /* SuccessAlertForOrderButtonViewController.swift */; };
 		AF74D5652CAC238600B64D6E /* CustomCellForServicesCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF74D5642CAC238600B64D6E /* CustomCellForServicesCollectionView.swift */; };
@@ -56,6 +50,13 @@
 		AF74D5692CACF39400B64D6E /* DezinsectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF74D5682CACF39400B64D6E /* DezinsectionViewController.swift */; };
 		AF74D56B2CACF3A900B64D6E /* DezinfectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF74D56A2CACF3A900B64D6E /* DezinfectionViewController.swift */; };
 		AF74D56D2CAD835C00B64D6E /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF74D56C2CAD835C00B64D6E /* CalendarViewController.swift */; };
+		AF74D5752CB1171700B64D6E /* FifthOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF74D56E2CB1171700B64D6E /* FifthOnboardingViewController.swift */; };
+		AF74D5762CB1171700B64D6E /* FirstOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF74D56F2CB1171700B64D6E /* FirstOnboardingViewController.swift */; };
+		AF74D5772CB1171700B64D6E /* ForthOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF74D5702CB1171700B64D6E /* ForthOnboardingViewController.swift */; };
+		AF74D5782CB1171700B64D6E /* OnboardingPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF74D5712CB1171700B64D6E /* OnboardingPageViewController.swift */; };
+		AF74D5792CB1171700B64D6E /* SecondOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF74D5722CB1171700B64D6E /* SecondOnboardingViewController.swift */; };
+		AF74D57A2CB1171700B64D6E /* ThirdOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF74D5732CB1171700B64D6E /* ThirdOnboardingViewController.swift */; };
+		AF74D57C2CB1179C00B64D6E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF74D57B2CB1179C00B64D6E /* LaunchScreen.storyboard */; };
 		AF9F2FEC2CA6BA1A00BBBB2C /* AttributedTextHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9F2FEB2CA6BA1A00BBBB2C /* AttributedTextHelper.swift */; };
 		AF9F2FEE2CA6D3CF00BBBB2C /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9F2FED2CA6D3CF00BBBB2C /* ImagePicker.swift */; };
 /* End PBXBuildFile section */
@@ -95,17 +96,11 @@
 		AF4B1E272CA0729300FDA3EC /* ServerErrorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerErrorViewController.swift; sourceTree = "<group>"; };
 		AF4B1E2A2CA0736200FDA3EC /* ClientChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientChatViewController.swift; sourceTree = "<group>"; };
 		AF4B1E2C2CA19C6000FDA3EC /* ChekBoxButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChekBoxButton.swift; sourceTree = "<group>"; };
-		AF4B1E392CA2F74D00FDA3EC /* FirstOnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstOnboardingViewController.swift; sourceTree = "<group>"; };
-		AF4B1E3B2CA30E5E00FDA3EC /* SecondOnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondOnboardingViewController.swift; sourceTree = "<group>"; };
-		AF4B1E3D2CA3DDAA00FDA3EC /* OnboardingPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPageViewController.swift; sourceTree = "<group>"; };
-		AF4B1E3F2CA3E0D400FDA3EC /* ThirdOnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdOnboardingViewController.swift; sourceTree = "<group>"; };
-		AF4B1E412CA3E0F400FDA3EC /* ForthOnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForthOnboardingViewController.swift; sourceTree = "<group>"; };
 		AF74D54F2CA7C97B00B64D6E /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
 		AF74D5512CA7EB3200B64D6E /* NewUserRegistratinSecondPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewUserRegistratinSecondPageViewController.swift; sourceTree = "<group>"; };
 		AF74D5552CAACEAC00B64D6E /* FirstStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstStackView.swift; sourceTree = "<group>"; };
 		AF74D5572CAADA4E00B64D6E /* SecondStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondStackView.swift; sourceTree = "<group>"; };
 		AF74D5592CAADFDA00B64D6E /* ThirdStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdStackView.swift; sourceTree = "<group>"; };
-		AF74D55B2CAB175D00B64D6E /* FifthOnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FifthOnboardingViewController.swift; sourceTree = "<group>"; };
 		AF74D55D2CAB1E5400B64D6E /* GradientLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientLayer.swift; sourceTree = "<group>"; };
 		AF74D5612CAB26CB00B64D6E /* SuccessAlertForOrderButtonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessAlertForOrderButtonViewController.swift; sourceTree = "<group>"; };
 		AF74D5642CAC238600B64D6E /* CustomCellForServicesCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCellForServicesCollectionView.swift; sourceTree = "<group>"; };
@@ -113,6 +108,13 @@
 		AF74D5682CACF39400B64D6E /* DezinsectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DezinsectionViewController.swift; sourceTree = "<group>"; };
 		AF74D56A2CACF3A900B64D6E /* DezinfectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DezinfectionViewController.swift; sourceTree = "<group>"; };
 		AF74D56C2CAD835C00B64D6E /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
+		AF74D56E2CB1171700B64D6E /* FifthOnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FifthOnboardingViewController.swift; sourceTree = "<group>"; };
+		AF74D56F2CB1171700B64D6E /* FirstOnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstOnboardingViewController.swift; sourceTree = "<group>"; };
+		AF74D5702CB1171700B64D6E /* ForthOnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForthOnboardingViewController.swift; sourceTree = "<group>"; };
+		AF74D5712CB1171700B64D6E /* OnboardingPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingPageViewController.swift; sourceTree = "<group>"; };
+		AF74D5722CB1171700B64D6E /* SecondOnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecondOnboardingViewController.swift; sourceTree = "<group>"; };
+		AF74D5732CB1171700B64D6E /* ThirdOnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThirdOnboardingViewController.swift; sourceTree = "<group>"; };
+		AF74D57B2CB1179C00B64D6E /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AF9F2FEB2CA6BA1A00BBBB2C /* AttributedTextHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributedTextHelper.swift; sourceTree = "<group>"; };
 		AF9F2FED2CA6D3CF00BBBB2C /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		F7FB7E9CD196CCFDB56042EF /* Pods-Dezis.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dezis.debug.xcconfig"; path = "Target Support Files/Pods-Dezis/Pods-Dezis.debug.xcconfig"; sourceTree = "<group>"; };
@@ -162,6 +164,7 @@
 			children = (
 				AF4B1DFE2C9C0F7800FDA3EC /* Applications */,
 				AF4B1DE72C9AEE2100FDA3EC /* TemplatesFiles */,
+				AF74D5742CB1171700B64D6E /* OnBoarding */,
 				AF4B1DE52C9AE6DF00FDA3EC /* Views */,
 				AF4B1E2E2CA2EF6B00FDA3EC /* Presenters */,
 				AF4B1E002C9C179800FDA3EC /* Network */,
@@ -175,7 +178,6 @@
 			isa = PBXGroup;
 			children = (
 				AF9F2FE82CA6A72A00BBBB2C /* Chat */,
-				AF4B1E2F2CA2EFCE00FDA3EC /* OnBoarding */,
 				AF4B1DF22C9B28A900FDA3EC /* ClientViews */,
 				AF4B1DF82C9B32A300FDA3EC /* SuccessViewController.swift */,
 				AF4B1E252CA0727300FDA3EC /* ClientErrorViewController.swift */,
@@ -224,6 +226,7 @@
 			children = (
 				AF4B1DDE2C9AE39000FDA3EC /* Info.plist */,
 				AF4B1DDB2C9AE39000FDA3EC /* LaunchScreen.storyboard */,
+				AF74D57B2CB1179C00B64D6E /* LaunchScreen.storyboard */,
 				AF4B1DD92C9AE39000FDA3EC /* Assets.xcassets */,
 			);
 			path = "Supporting Files";
@@ -289,19 +292,6 @@
 			path = Presenters;
 			sourceTree = "<group>";
 		};
-		AF4B1E2F2CA2EFCE00FDA3EC /* OnBoarding */ = {
-			isa = PBXGroup;
-			children = (
-				AF4B1E3D2CA3DDAA00FDA3EC /* OnboardingPageViewController.swift */,
-				AF4B1E392CA2F74D00FDA3EC /* FirstOnboardingViewController.swift */,
-				AF4B1E3B2CA30E5E00FDA3EC /* SecondOnboardingViewController.swift */,
-				AF4B1E3F2CA3E0D400FDA3EC /* ThirdOnboardingViewController.swift */,
-				AF4B1E412CA3E0F400FDA3EC /* ForthOnboardingViewController.swift */,
-				AF74D55B2CAB175D00B64D6E /* FifthOnboardingViewController.swift */,
-			);
-			path = OnBoarding;
-			sourceTree = "<group>";
-		};
 		AF74D5532CAACE6C00B64D6E /* HomeViews */ = {
 			isa = PBXGroup;
 			children = (
@@ -333,6 +323,19 @@
 				AF74D56C2CAD835C00B64D6E /* CalendarViewController.swift */,
 			);
 			path = ServicesViews;
+			sourceTree = "<group>";
+		};
+		AF74D5742CB1171700B64D6E /* OnBoarding */ = {
+			isa = PBXGroup;
+			children = (
+				AF74D56F2CB1171700B64D6E /* FirstOnboardingViewController.swift */,
+				AF74D5722CB1171700B64D6E /* SecondOnboardingViewController.swift */,
+				AF74D5732CB1171700B64D6E /* ThirdOnboardingViewController.swift */,
+				AF74D5702CB1171700B64D6E /* ForthOnboardingViewController.swift */,
+				AF74D56E2CB1171700B64D6E /* FifthOnboardingViewController.swift */,
+				AF74D5712CB1171700B64D6E /* OnboardingPageViewController.swift */,
+			);
+			path = OnBoarding;
 			sourceTree = "<group>";
 		};
 		AF9F2FE82CA6A72A00BBBB2C /* Chat */ = {
@@ -411,6 +414,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF74D57C2CB1179C00B64D6E /* LaunchScreen.storyboard in Resources */,
 				AF4B1DDA2C9AE39000FDA3EC /* Assets.xcassets in Resources */,
 				AF4B1DDD2C9AE39000FDA3EC /* Base in Resources */,
 			);
@@ -465,10 +469,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF74D5762CB1171700B64D6E /* FirstOnboardingViewController.swift in Sources */,
+				AF74D5772CB1171700B64D6E /* ForthOnboardingViewController.swift in Sources */,
 				AF74D56D2CAD835C00B64D6E /* CalendarViewController.swift in Sources */,
 				AF4B1E0F2C9D9B8200FDA3EC /* ClientHomeViewController.swift in Sources */,
+				AF74D5752CB1171700B64D6E /* FifthOnboardingViewController.swift in Sources */,
 				AF74D5652CAC238600B64D6E /* CustomCellForServicesCollectionView.swift in Sources */,
-				AF4B1E3C2CA30E5E00FDA3EC /* SecondOnboardingViewController.swift in Sources */,
+				AF74D5782CB1171700B64D6E /* OnboardingPageViewController.swift in Sources */,
 				AF4B1E232CA06E7E00FDA3EC /* AboutUsViewController.swift in Sources */,
 				AF4B1E262CA0727300FDA3EC /* ClientErrorViewController.swift in Sources */,
 				AF4B1E132C9D9C2F00FDA3EC /* ServicesViewController.swift in Sources */,
@@ -477,12 +484,11 @@
 				AF74D5692CACF39400B64D6E /* DezinsectionViewController.swift in Sources */,
 				AF4B1E072C9C1F6000FDA3EC /* NetworkError.swift in Sources */,
 				AF4B1DF92C9B32A300FDA3EC /* SuccessViewController.swift in Sources */,
-				AF4B1E402CA3E0D400FDA3EC /* ThirdOnboardingViewController.swift in Sources */,
 				AF4B1E172C9FFF3200FDA3EC /* LabelSettings.swift in Sources */,
 				AF74D5522CA7EB3200B64D6E /* NewUserRegistratinSecondPageViewController.swift in Sources */,
 				AF4B1DE92C9AEEC600FDA3EC /* Profile.swift in Sources */,
 				AF4B1E092C9C221000FDA3EC /* NetworkRequest.swift in Sources */,
-				AF4B1E3E2CA3DDAA00FDA3EC /* OnboardingPageViewController.swift in Sources */,
+				AF74D57A2CB1171700B64D6E /* ThirdOnboardingViewController.swift in Sources */,
 				AF74D5622CAB26CB00B64D6E /* SuccessAlertForOrderButtonViewController.swift in Sources */,
 				AF9F2FEE2CA6D3CF00BBBB2C /* ImagePicker.swift in Sources */,
 				AF4B1E1F2CA06E5500FDA3EC /* SettingsViewController.swift in Sources */,
@@ -490,6 +496,7 @@
 				AF74D56B2CACF3A900B64D6E /* DezinfectionViewController.swift in Sources */,
 				AF9F2FEC2CA6BA1A00BBBB2C /* AttributedTextHelper.swift in Sources */,
 				AF4B1DFB2C9B42D300FDA3EC /* NewUserRegisterViewController.swift in Sources */,
+				AF74D5792CB1171700B64D6E /* SecondOnboardingViewController.swift in Sources */,
 				AF4B1E0D2C9D9B3500FDA3EC /* ClientTabBarController.swift in Sources */,
 				AF4B1E1D2CA05B5200FDA3EC /* ImageSettings.swift in Sources */,
 				AF4B1E192CA0202000FDA3EC /* TextFieldSettings.swift in Sources */,
@@ -500,7 +507,6 @@
 				AF74D5582CAADA4E00B64D6E /* SecondStackView.swift in Sources */,
 				AF74D55A2CAADFDA00B64D6E /* ThirdStackView.swift in Sources */,
 				AF4B1DF52C9B28ED00FDA3EC /* ClientLoginViewController.swift in Sources */,
-				AF4B1E422CA3E0F400FDA3EC /* ForthOnboardingViewController.swift in Sources */,
 				AF4B1E022C9C17BA00FDA3EC /* EndPoint.swift in Sources */,
 				AF4B1DF12C9B153C00FDA3EC /* HexExtention.swift in Sources */,
 				AF4B1E212CA06E6C00FDA3EC /* UserInfoViewController.swift in Sources */,
@@ -508,11 +514,9 @@
 				AF4B1DD12C9AE38E00FDA3EC /* AppDelegate.swift in Sources */,
 				AF4B1E052C9C1C8B00FDA3EC /* URLSession+Extension.swift in Sources */,
 				AF4B1DFD2C9B52AE00FDA3EC /* СonfirmationСodeViewController.swift in Sources */,
-				AF74D55C2CAB175D00B64D6E /* FifthOnboardingViewController.swift in Sources */,
 				AF4B1DD32C9AE38E00FDA3EC /* SceneDelegate.swift in Sources */,
 				AF74D5562CAACEAC00B64D6E /* FirstStackView.swift in Sources */,
 				AF4B1E0B2C9C24D300FDA3EC /* NetworkDataFetch.swift in Sources */,
-				AF4B1E3A2CA2F74D00FDA3EC /* FirstOnboardingViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

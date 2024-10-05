@@ -24,19 +24,15 @@ class SecondOnboardingViewController: UIViewController {
         return image
         
     }()
-    private var skipButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("Пропустить", for: .normal)
-        button.tintColor = .black
-        button.addTarget(self, action: #selector(skipButtonTapped), for: .touchUpInside)
-        return button
-    }()
-    
+    private var nextButton = ButtonSettings().buttonMaker(title: "Продолжить", target: self, action: #selector(nextButtonTapped))
+    private var skipButton = ButtonSettings().buttonMaker(title: "Пропустить", backgroundColor: UIColor(hex: "#1B2228"), target: self, action: #selector(skipButtonTapped))
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = UIColor(hex: "#1B2228")
         setupUI()
+        finishOnboarding()
     }
     
     private func setupUI(){
@@ -63,15 +59,38 @@ class SecondOnboardingViewController: UIViewController {
         }
         view.addSubview(skipButton)
         skipButton.snp.makeConstraints{make in
-            make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-10)
+            make.bottom.equalToSuperview().offset(-50)
             make.centerX.equalToSuperview()
-            make.height.equalTo(20)
-            make.width.equalTo(130)}
+            make.height.equalTo(52)
+            make.leading.equalToSuperview().offset(20)
+            make.trailing.equalToSuperview().inset(20)
+        }
+        view.addSubview(nextButton)
+        nextButton.snp.makeConstraints{make in
+            make.bottom.equalTo(skipButton.snp.top).offset(-8)
+            make.centerX.equalToSuperview()
+            make.height.equalTo(52)
+            make.leading.equalToSuperview().offset(20)
+            make.trailing.equalToSuperview().inset(20)
+        }
+        
     }
     @objc func skipButtonTapped(){
         let vc = ClientTabBarController()
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true, completion: nil)
+    }
+    @objc func nextButtonTapped(){
+        let vc = ClientTabBarController()
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true, completion: nil)
+    }
+    @objc func finishOnboarding() {
+        UserDefaults.standard.set(true, forKey: "hasCompletedOnboarding")
+        
+        let mainViewController = ClientTabBarController()
+        mainViewController.modalPresentationStyle = .fullScreen
+        present(mainViewController, animated: true, completion: nil)
     }
     
 }

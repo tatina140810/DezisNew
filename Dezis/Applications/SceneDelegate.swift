@@ -19,19 +19,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(windowScene: windowScene)
        // window?.rootViewController = CalendarViewController()
        
-        window?.rootViewController = OnboardingPageViewController()
+        window?.rootViewController = FirstOnboardingViewController()
         
-        let hasCompletedOnboarding = UserDefaults.standard.bool(forKey: "hasCompletedOnboarding")
-        
-        if hasCompletedOnboarding {
-            
-           window?.rootViewController = ClientTabBarController()
-          
-        } else {
-            
-            let root = UINavigationController(rootViewController: ClientTabBarController())
-            
-        }
+//        let hasCompletedOnboarding = UserDefaults.standard.bool(forKey: "hasCompletedOnboarding")
+//        
+//        if hasCompletedOnboarding {
+//            
+//           window?.rootViewController = ClientTabBarController()
+//          
+//        } else {
+//            
+//            let root = UINavigationController(rootViewController: ClientTabBarController())
+//            
+//        }
             window?.makeKeyAndVisible()
         }
         

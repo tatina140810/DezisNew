@@ -27,41 +27,37 @@ class FirstOnboardingViewController: UIViewController {
         label.textAlignment = .center
         return label
     }()
-    private var skipButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("Пропустить", for: .normal)
-        button.tintColor = .black
-        button.addTarget(self, action: #selector(skipButtonTapped), for: .touchUpInside)
-        return button
-    }()
+    private var nextButton = ButtonSettings().buttonMaker(title: "Продолжить", target: self, action: #selector(nextButtonTapped))
+    private var skipButton = ButtonSettings().buttonMaker(title: "Пропустить", backgroundColor: UIColor(hex: "#1B2228"), target: self, action: #selector(skipButtonTapped))
+
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        setupGradientLayer()
+        view.backgroundColor = UIColor(hex: "#1B2228")
     }
     
-    private func setupGradientLayer() {
-        gradientLayer.colors = [UIColor(hex: "#459AD1").cgColor, UIColor(hex: "#5B2FEE").cgColor]
-        gradientLayer.startPoint = CGPoint(x: 0, y: 0)
-        gradientLayer.endPoint = CGPoint(x: 1, y: 1)
-        view.layer.insertSublayer(gradientLayer, at: 0)
-    }
-    
+//    private func setupGradientLayer() {
+//        gradientLayer.colors = [UIColor(hex: "#459AD1").cgColor, UIColor(hex: "#5B2FEE").cgColor]
+//        gradientLayer.startPoint = CGPoint(x: 0, y: 0)
+//        gradientLayer.endPoint = CGPoint(x: 1, y: 1)
+//        view.layer.insertSublayer(gradientLayer, at: 0)
+//    }
+//    
   
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        gradientLayer.frame = view.bounds
-    }
+//    override func viewDidLayoutSubviews() {
+//        super.viewDidLayoutSubviews()
+//        gradientLayer.frame = view.bounds
+//    }
     
     private func setupUI() {
         view.addSubview(exterminatorImage)
         exterminatorImage.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(78)
-            make.leading.equalToSuperview().offset(30)
+            make.centerX.equalToSuperview()
             make.height.equalTo(500)
-            make.width.equalTo(360)
+            make.width.equalTo(375)
         }
         
         view.addSubview(cockroachImage)
@@ -74,21 +70,37 @@ class FirstOnboardingViewController: UIViewController {
         
         view.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { make in
-            make.top.equalTo(cockroachImage.snp.bottom).offset(30)
+            make.top.equalTo(cockroachImage.snp.bottom).offset(65)
             make.centerX.equalToSuperview()
             make.leading.equalToSuperview().offset(20)
             make.trailing.equalToSuperview().inset(20)
         }
         view.addSubview(skipButton)
         skipButton.snp.makeConstraints{make in
-            make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-10)
+            make.bottom.equalToSuperview().offset(-50)
             make.centerX.equalToSuperview()
-            make.height.equalTo(20)
-            make.width.equalTo(130)}
+            make.height.equalTo(52)
+            make.leading.equalToSuperview().offset(20)
+            make.trailing.equalToSuperview().inset(20)
+        }
+        view.addSubview(nextButton)
+        nextButton.snp.makeConstraints{make in
+            make.bottom.equalTo(skipButton.snp.top).offset(-8)
+            make.centerX.equalToSuperview()
+            make.height.equalTo(52)
+            make.leading.equalToSuperview().offset(20)
+            make.trailing.equalToSuperview().inset(20)
+        }
+        
     }
     
     @objc func skipButtonTapped(){
         let vc = ClientTabBarController()
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true, completion: nil)
+    }
+    @objc func nextButtonTapped(){
+        let vc = SecondOnboardingViewController()
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true, completion: nil)
     }
