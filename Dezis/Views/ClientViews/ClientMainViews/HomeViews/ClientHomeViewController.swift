@@ -17,7 +17,7 @@ class ClientHomeViewController: UIViewController {
     
     private let infoLabel: UILabel = {
         let label = UILabel()
-        label.text = "Информация о записи и услугах"
+        label.text = "Информация о записи"
         label.font = UIFont.boldSystemFont(ofSize: 24)
         label.textColor = .white
         label.textAlignment = .center
@@ -35,6 +35,49 @@ class ClientHomeViewController: UIViewController {
         return label
     }()
     private var dezinsectionView = DezinsectionView()
+   
+    private var dezinsectionDetailsButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Подробнее", for: .normal)
+        button.titleLabel?.textAlignment = .left
+        button.setImage(UIImage(systemName: "arrow.right"), for: .normal)
+        button.imageView?.contentMode = .right
+        button.backgroundColor = UIColor(hex: "#0A84FF")
+        button.layer.cornerRadius = 12
+        button.clipsToBounds = true
+        button.addTarget(self, action: #selector(dezinsectionButtonTapped), for: .touchUpInside)
+        return button
+    }()
+    
+   private var dezinfectionView = DezinfectionView()
+    
+    private var dezinfectionDetailsButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Подробнее", for: .normal)
+        button.titleLabel?.textAlignment = .left
+        button.setImage(UIImage(systemName: "arrow.right"), for: .normal)
+        button.imageView?.contentMode = .right
+        button.backgroundColor = UIColor(hex: "#0A84FF")
+        button.layer.cornerRadius = 12
+        button.clipsToBounds = true
+        button.addTarget(self, action: #selector(dezinfectionButtonTapped), for: .touchUpInside)
+        return button
+    }()
+    
+    private var deratizationView = DeratizationView()
+    
+    private var deratizationDetailsButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Подробнее", for: .normal)
+        button.titleLabel?.textAlignment = .left
+        button.setImage(UIImage(systemName: "arrow.right"), for: .normal)
+        button.imageView?.contentMode = .right
+        button.backgroundColor = UIColor(hex: "#0A84FF")
+        button.layer.cornerRadius = 12
+        button.clipsToBounds = true
+        button.addTarget(self, action: #selector(deratizationButtonTapped), for: .touchUpInside)
+        return button
+    }()
    
     
     override func viewDidLoad() {
@@ -67,33 +110,78 @@ class ClientHomeViewController: UIViewController {
         contentView.addSubview(firstStackView)
         firstStackView.snp.makeConstraints { make in
             make.top.equalTo(infoLabel.snp.bottom)
-            make.leading.equalTo(contentView).offset(16)
-            make.trailing.equalTo(contentView).offset(-16)
+            make.leading.equalTo(contentView).offset(10)
+            make.trailing.equalTo(contentView).offset(-10)
             make.height.equalTo(370)
         }
         
         contentView.addSubview(orderLabel)
         orderLabel.snp.makeConstraints { make in
-            make.top.equalTo(firstStackView.snp.bottom).offset(20)
+            make.top.equalTo(firstStackView.snp.bottom).offset(5)
             make.centerX.equalToSuperview()
-//            make.bottom.equalTo(contentView.snp.bottom).offset(-20)
-            // Это важно для корректной работы scrollView
         }
         contentView.addSubview(dezinsectionView)
         dezinsectionView.snp.makeConstraints { make in
             make.top.equalTo(orderLabel.snp.bottom).offset(20)
             make.leading.equalTo(contentView).offset(16)
             make.trailing.equalTo(contentView).offset(-16)
-            make.height.equalTo(250)
+            make.height.equalTo(270)
+            
+        }
+        dezinsectionView.addSubview(dezinsectionDetailsButton)
+        dezinsectionDetailsButton.snp.makeConstraints { make in
+            make.bottom.equalToSuperview().offset(-40)
+            make.leading.equalTo(contentView).offset(35)
+            make.trailing.equalTo(contentView).offset(-35)
+            make.height.equalTo(44)
+        }
+            
+        contentView.addSubview(dezinfectionView)
+        dezinfectionView.snp.makeConstraints { make in
+            make.top.equalTo(dezinsectionView.snp.bottom).offset(5)
+            make.leading.equalTo(contentView).offset(16)
+            make.trailing.equalTo(contentView).offset(-16)
+            make.height.equalTo(290)
+          
+        }
+        dezinfectionView.addSubview(dezinfectionDetailsButton)
+        dezinfectionDetailsButton.snp.makeConstraints { make in
+            make.bottom.equalToSuperview().offset(-40)
+            make.leading.equalTo(contentView).offset(35)
+            make.trailing.equalTo(contentView).offset(-35)
+            make.height.equalTo(44)
+        }
+        contentView.addSubview(deratizationView)
+        deratizationView.snp.makeConstraints { make in
+            make.top.equalTo(dezinfectionView.snp.bottom).offset(5)
+            make.leading.equalTo(contentView).offset(16)
+            make.trailing.equalTo(contentView).offset(-16)
+            make.height.equalTo(270)
             make.bottom.equalTo(contentView.snp.bottom).offset(-20)
+        }
+        deratizationView.addSubview(deratizationDetailsButton)
+        deratizationDetailsButton.snp.makeConstraints { make in
+            make.bottom.equalToSuperview().offset(-40)
+            make.leading.equalTo(contentView).offset(35)
+            make.trailing.equalTo(contentView).offset(-35)
+            make.height.equalTo(44)
         }
     }
     
-    @objc func orderButtonTapped(){
-        let vc = SuccessAlertForOrderButtonViewController()
-        
-        vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: true, completion: nil)
+    @objc func dezinsectionButtonTapped(){
+     
+        let vc = DezinsectionViewController()
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    @objc func dezinfectionButtonTapped(){
+  
+        let vc = DezinfectionViewController()
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    @objc func deratizationButtonTapped(){
+       
+        let vc = DeratizationViewController()
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
 

@@ -8,6 +8,7 @@ class ClientTabBarController: UITabBarController {
         setupTabBarController()
         tabBar.backgroundColor = UIColor(hex: "#1B2228")
         tabBar.tintColor = UIColor(hex: "#0A84FF")
+        tabBar.barTintColor = UIColor(hex: "#1B2228")
         tabBar.unselectedItemTintColor = .white
         addTabBarBorder()
     }
