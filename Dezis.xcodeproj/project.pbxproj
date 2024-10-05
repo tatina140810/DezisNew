@@ -8,6 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		4061B8DFFEC52EF1268906C9 /* Pods_Dezis.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D594A6880D984FC3775947A /* Pods_Dezis.framework */; };
+		72D39B912CB1511C00D9EB45 /* AdminTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D39B822CB1511C00D9EB45 /* AdminTabBarController.swift */; };
+		72D39B922CB1511C00D9EB45 /* AdminHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D39B832CB1511C00D9EB45 /* AdminHomeViewController.swift */; };
+		72D39B932CB1511C00D9EB45 /* AdminChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D39B8E2CB1511C00D9EB45 /* AdminChatViewController.swift */; };
+		72D39B942CB1511C00D9EB45 /* AdminProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D39B882CB1511C00D9EB45 /* AdminProfileViewController.swift */; };
+		72D39B962CB1511C00D9EB45 /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D39B8C2CB1511C00D9EB45 /* SettingsCell.swift */; };
+		72D39B982CB1511C00D9EB45 /* AdminOrdersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D39B842CB1511C00D9EB45 /* AdminOrdersViewController.swift */; };
+		72D39B992CB1511C00D9EB45 /* OrdersCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D39B852CB1511C00D9EB45 /* OrdersCollectionViewCell.swift */; };
+		72D39B9A2CB1511C00D9EB45 /* AdminPersonalAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D39B872CB1511C00D9EB45 /* AdminPersonalAccountViewController.swift */; };
+		72D39B9B2CB1511C00D9EB45 /* AdminSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D39B8B2CB1511C00D9EB45 /* AdminSettingsViewController.swift */; };
+		72D39B9C2CB1511C00D9EB45 /* ProfileDetailsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D39B892CB1511C00D9EB45 /* ProfileDetailsCell.swift */; };
 		AF4B1DD12C9AE38E00FDA3EC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1DD02C9AE38E00FDA3EC /* AppDelegate.swift */; };
 		AF4B1DD32C9AE38E00FDA3EC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1DD22C9AE38E00FDA3EC /* SceneDelegate.swift */; };
 		AF4B1DDA2C9AE39000FDA3EC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AF4B1DD92C9AE39000FDA3EC /* Assets.xcassets */; };
@@ -62,6 +72,16 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		72D39B822CB1511C00D9EB45 /* AdminTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminTabBarController.swift; sourceTree = "<group>"; };
+		72D39B832CB1511C00D9EB45 /* AdminHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminHomeViewController.swift; sourceTree = "<group>"; };
+		72D39B842CB1511C00D9EB45 /* AdminOrdersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminOrdersViewController.swift; sourceTree = "<group>"; };
+		72D39B852CB1511C00D9EB45 /* OrdersCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrdersCollectionViewCell.swift; sourceTree = "<group>"; };
+		72D39B872CB1511C00D9EB45 /* AdminPersonalAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminPersonalAccountViewController.swift; sourceTree = "<group>"; };
+		72D39B882CB1511C00D9EB45 /* AdminProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminProfileViewController.swift; sourceTree = "<group>"; };
+		72D39B892CB1511C00D9EB45 /* ProfileDetailsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetailsCell.swift; sourceTree = "<group>"; };
+		72D39B8B2CB1511C00D9EB45 /* AdminSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminSettingsViewController.swift; sourceTree = "<group>"; };
+		72D39B8C2CB1511C00D9EB45 /* SettingsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCell.swift; sourceTree = "<group>"; };
+		72D39B8E2CB1511C00D9EB45 /* AdminChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminChatViewController.swift; sourceTree = "<group>"; };
 		9D594A6880D984FC3775947A /* Pods_Dezis.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Dezis.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ABC7905C0E1157EB74B80A5D /* Pods-Dezis.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dezis.release.xcconfig"; path = "Target Support Files/Pods-Dezis/Pods-Dezis.release.xcconfig"; sourceTree = "<group>"; };
 		AF4B1DCD2C9AE38E00FDA3EC /* Dezis.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dezis.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -132,6 +152,55 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		72D39B862CB1511C00D9EB45 /* Orders */ = {
+			isa = PBXGroup;
+			children = (
+				72D39B842CB1511C00D9EB45 /* AdminOrdersViewController.swift */,
+				72D39B852CB1511C00D9EB45 /* OrdersCollectionViewCell.swift */,
+			);
+			path = Orders;
+			sourceTree = "<group>";
+		};
+		72D39B8A2CB1511C00D9EB45 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				72D39B882CB1511C00D9EB45 /* AdminProfileViewController.swift */,
+				72D39B892CB1511C00D9EB45 /* ProfileDetailsCell.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		72D39B8D2CB1511C00D9EB45 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				72D39B8B2CB1511C00D9EB45 /* AdminSettingsViewController.swift */,
+				72D39B8C2CB1511C00D9EB45 /* SettingsCell.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		72D39B8F2CB1511C00D9EB45 /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				72D39B8E2CB1511C00D9EB45 /* AdminChatViewController.swift */,
+			);
+			path = Chat;
+			sourceTree = "<group>";
+		};
+		72D39B902CB1511C00D9EB45 /* AdminViews */ = {
+			isa = PBXGroup;
+			children = (
+				72D39B822CB1511C00D9EB45 /* AdminTabBarController.swift */,
+				72D39B832CB1511C00D9EB45 /* AdminHomeViewController.swift */,
+				72D39B862CB1511C00D9EB45 /* Orders */,
+				72D39B872CB1511C00D9EB45 /* AdminPersonalAccountViewController.swift */,
+				72D39B8A2CB1511C00D9EB45 /* Profile */,
+				72D39B8D2CB1511C00D9EB45 /* Settings */,
+				72D39B8F2CB1511C00D9EB45 /* Chat */,
+			);
+			path = AdminViews;
+			sourceTree = "<group>";
+		};
 		92F8C4BAC264DDF5D7E47087 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -182,6 +251,7 @@
 				AF4B1DF82C9B32A300FDA3EC /* SuccessViewController.swift */,
 				AF4B1E252CA0727300FDA3EC /* ClientErrorViewController.swift */,
 				AF4B1E272CA0729300FDA3EC /* ServerErrorViewController.swift */,
+				72D39B902CB1511C00D9EB45 /* AdminViews */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -479,6 +549,16 @@
 				AF4B1E232CA06E7E00FDA3EC /* AboutUsViewController.swift in Sources */,
 				AF4B1E262CA0727300FDA3EC /* ClientErrorViewController.swift in Sources */,
 				AF4B1E132C9D9C2F00FDA3EC /* ServicesViewController.swift in Sources */,
+				72D39B912CB1511C00D9EB45 /* AdminTabBarController.swift in Sources */,
+				72D39B922CB1511C00D9EB45 /* AdminHomeViewController.swift in Sources */,
+				72D39B932CB1511C00D9EB45 /* AdminChatViewController.swift in Sources */,
+				72D39B942CB1511C00D9EB45 /* AdminProfileViewController.swift in Sources */,
+				72D39B962CB1511C00D9EB45 /* SettingsCell.swift in Sources */,
+				72D39B982CB1511C00D9EB45 /* AdminOrdersViewController.swift in Sources */,
+				72D39B992CB1511C00D9EB45 /* OrdersCollectionViewCell.swift in Sources */,
+				72D39B9A2CB1511C00D9EB45 /* AdminPersonalAccountViewController.swift in Sources */,
+				72D39B9B2CB1511C00D9EB45 /* AdminSettingsViewController.swift in Sources */,
+				72D39B9C2CB1511C00D9EB45 /* ProfileDetailsCell.swift in Sources */,
 				AF4B1E2B2CA0736200FDA3EC /* ClientChatViewController.swift in Sources */,
 				AF4B1E282CA0729300FDA3EC /* ServerErrorViewController.swift in Sources */,
 				AF74D5692CACF39400B64D6E /* DezinsectionViewController.swift in Sources */,
