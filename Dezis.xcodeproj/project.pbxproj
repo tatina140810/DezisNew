@@ -66,6 +66,9 @@
 		AF74D57A2CB1171700B64D6E /* ThirdOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF74D5732CB1171700B64D6E /* ThirdOnboardingViewController.swift */; };
 		AF74D57C2CB1179C00B64D6E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF74D57B2CB1179C00B64D6E /* LaunchScreen.storyboard */; };
 		AF74D57E2CB14B7700B64D6E /* DezinsectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF74D57D2CB14B7700B64D6E /* DezinsectionView.swift */; };
+		AF74D5802CB1561300B64D6E /* DezinfectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF74D57F2CB1561300B64D6E /* DezinfectionView.swift */; };
+		AF74D5822CB1582000B64D6E /* DeratizationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF74D5812CB1582000B64D6E /* DeratizationView.swift */; };
+		AF74D5C42CB41F6600B64D6E /* СhoiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF74D5C32CB41F6600B64D6E /* СhoiceViewController.swift */; };
 		AF9F2FEC2CA6BA1A00BBBB2C /* AttributedTextHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9F2FEB2CA6BA1A00BBBB2C /* AttributedTextHelper.swift */; };
 		AF9F2FEE2CA6D3CF00BBBB2C /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9F2FED2CA6D3CF00BBBB2C /* ImagePicker.swift */; };
 /* End PBXBuildFile section */
@@ -133,6 +136,9 @@
 		AF74D5732CB1171700B64D6E /* ThirdOnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThirdOnboardingViewController.swift; sourceTree = "<group>"; };
 		AF74D57B2CB1179C00B64D6E /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AF74D57D2CB14B7700B64D6E /* DezinsectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DezinsectionView.swift; sourceTree = "<group>"; };
+		AF74D57F2CB1561300B64D6E /* DezinfectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DezinfectionView.swift; sourceTree = "<group>"; };
+		AF74D5812CB1582000B64D6E /* DeratizationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeratizationView.swift; sourceTree = "<group>"; };
+		AF74D5C32CB41F6600B64D6E /* СhoiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "СhoiceViewController.swift"; sourceTree = "<group>"; };
 		AF9F2FEB2CA6BA1A00BBBB2C /* AttributedTextHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributedTextHelper.swift; sourceTree = "<group>"; };
 		AF9F2FED2CA6D3CF00BBBB2C /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		F7FB7E9CD196CCFDB56042EF /* Pods-Dezis.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dezis.debug.xcconfig"; path = "Target Support Files/Pods-Dezis/Pods-Dezis.debug.xcconfig"; sourceTree = "<group>"; };
@@ -247,6 +253,7 @@
 				AF9F2FE82CA6A72A00BBBB2C /* Chat */,
 				AF4B1DF22C9B28A900FDA3EC /* ClientViews */,
 				AF4B1DF82C9B32A300FDA3EC /* SuccessViewController.swift */,
+				AF74D5C32CB41F6600B64D6E /* СhoiceViewController.swift */,
 				AF4B1E252CA0727300FDA3EC /* ClientErrorViewController.swift */,
 				AF4B1E272CA0729300FDA3EC /* ServerErrorViewController.swift */,
 				72D39B902CB1511C00D9EB45 /* AdminViews */,
@@ -375,6 +382,8 @@
 			children = (
 				AF74D5552CAACEAC00B64D6E /* FirstStackView.swift */,
 				AF74D57D2CB14B7700B64D6E /* DezinsectionView.swift */,
+				AF74D57F2CB1561300B64D6E /* DezinfectionView.swift */,
+				AF74D5812CB1582000B64D6E /* DeratizationView.swift */,
 			);
 			path = HomeElements;
 			sourceTree = "<group>";
@@ -551,8 +560,13 @@
 				72D39B932CB1511C00D9EB45 /* AdminChatViewController.swift in Sources */,
 				72D39B982CB1511C00D9EB45 /* AdminOrdersViewController.swift in Sources */,
 				72D39B992CB1511C00D9EB45 /* OrdersCollectionViewCell.swift in Sources */,
+				72D39B9A2CB1511C00D9EB45 /* AdminPersonalAccountViewController.swift in Sources */,
+				AF74D5822CB1582000B64D6E /* DeratizationView.swift in Sources */,
+				72D39B9B2CB1511C00D9EB45 /* AdminSettingsViewController.swift in Sources */,
+				72D39B9C2CB1511C00D9EB45 /* ProfileDetailsCell.swift in Sources */,
 				AF4B1E2B2CA0736200FDA3EC /* ClientChatViewController.swift in Sources */,
 				AF4B1E282CA0729300FDA3EC /* ServerErrorViewController.swift in Sources */,
+				AF74D5802CB1561300B64D6E /* DezinfectionView.swift in Sources */,
 				AF74D5692CACF39400B64D6E /* DezinsectionViewController.swift in Sources */,
 				AF4B1E072C9C1F6000FDA3EC /* NetworkError.swift in Sources */,
 				AF4B1DF92C9B32A300FDA3EC /* SuccessViewController.swift in Sources */,
@@ -578,6 +592,7 @@
 				AF4B1E1D2CA05B5200FDA3EC /* ImageSettings.swift in Sources */,
 				AF4B1E192CA0202000FDA3EC /* TextFieldSettings.swift in Sources */,
 				AF4B1E1B2CA0222A00FDA3EC /* ButtonSettings.swift in Sources */,
+				AF74D5C42CB41F6600B64D6E /* СhoiceViewController.swift in Sources */,
 				AF74D55E2CAB1E5400B64D6E /* GradientLayer.swift in Sources */,
 				AF74D5502CA7C97B00B64D6E /* KeychainManager.swift in Sources */,
 				AF4B1E152C9D9CB400FDA3EC /* PersonalAccountViewController.swift in Sources */,
