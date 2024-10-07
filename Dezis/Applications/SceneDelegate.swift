@@ -18,7 +18,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         window = UIWindow(windowScene: windowScene)
        
-        window?.rootViewController = FirstOnboardingViewController()
+        //window?.rootViewController = FirstOnboardingViewController()
+        window?.rootViewController = AdminChatViewController()
         
         let hasCompletedOnboarding = UserDefaults.standard.bool(forKey: "hasCompletedOnboarding")
         
