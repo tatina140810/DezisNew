@@ -24,11 +24,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         if hasCompletedOnboarding {
             
-           window?.rootViewController = ClientTabBarController()
+           window?.rootViewController = ChoiceViewController()
           
         } else {
             
-            let root = UINavigationController(rootViewController: ClientTabBarController())
+            let root = UINavigationController(rootViewController: ChoiceViewController())
             
             window?.rootViewController = root
         }
