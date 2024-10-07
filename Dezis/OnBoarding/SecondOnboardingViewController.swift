@@ -76,19 +76,19 @@ class SecondOnboardingViewController: UIViewController {
         
     }
     @objc func skipButtonTapped(){
-        let vc = ClientTabBarController()
+        let vc = ChoiceViewController()
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true, completion: nil)
     }
     @objc func nextButtonTapped(){
-        let vc = ClientTabBarController()
+        let vc = ChoiceViewController()
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true, completion: nil)
     }
     @objc func finishOnboarding() {
         UserDefaults.standard.set(true, forKey: "hasCompletedOnboarding")
         
-        let mainViewController = ClientTabBarController()
+        let mainViewController = ChoiceViewController()
         mainViewController.modalPresentationStyle = .fullScreen
         present(mainViewController, animated: true, completion: nil)
     }
