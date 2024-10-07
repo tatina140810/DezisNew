@@ -42,7 +42,7 @@ class AdminTabBarController: UITabBarController {
     }
     
     private func setupTabBarController() {
-        let homeView = UINavigationController(rootViewController: AdminHomeViewController())
+        let homeView = UINavigationController(rootViewController: ClientHomeViewController())
         homeView.tabBarItem = UITabBarItem(title: "Главная", image: UIImage(named: "house"), selectedImage: UIImage(named: "house.fill"))
         
         let historyView = UINavigationController(rootViewController: AdminHistoryViewController())
