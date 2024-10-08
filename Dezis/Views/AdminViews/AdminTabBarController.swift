@@ -17,6 +17,7 @@ class AdminTabBarController: UITabBarController {
         tabBar.backgroundColor = UIColor(hex: "#1B2228")
         tabBar.tintColor = UIColor(hex: "#0A84FF")
         tabBar.unselectedItemTintColor = .white
+        tabBar.barTintColor = UIColor(hex: "#1B2228")
     }
     
     override func viewDidLayoutSubviews() {

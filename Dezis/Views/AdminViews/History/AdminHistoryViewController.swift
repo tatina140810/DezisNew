@@ -44,7 +44,7 @@ class AdminHistoryViewController: UIViewController {
         CategoryModel(categoryName: "Завершенные")
     ]
     
-    private var selectedCategoryIndex = 0 // Track the selected category
+    private var selectedCategoryIndex = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -99,7 +99,8 @@ extension AdminHistoryViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == categoriesCollectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoriesCollectionViewCell.reuseId, for: indexPath) as! CategoriesCollectionViewCell
-            cell.fill(with: categories[indexPath.row])
+            let isSelected = indexPath.row == selectedCategoryIndex
+            cell.fill(with: categories[indexPath.row], isSelected: isSelected)
             return cell
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: OrdersCollectionViewCell.reuseId, for: indexPath) as! OrdersCollectionViewCell
@@ -109,9 +110,11 @@ extension AdminHistoryViewController: UICollectionViewDataSource {
 }
 
 extension AdminHistoryViewController: UICollectionViewDelegate {
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == categoriesCollectionView {
             selectedCategoryIndex = indexPath.row
+            print("selected category\(selectedCategoryIndex)")
             categoriesCollectionView.reloadData()
             ordersCollectionView.reloadData()
         }

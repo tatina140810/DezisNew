@@ -20,9 +20,17 @@ class CategoriesCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
+    private let underlineView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .init(hex: "#0A84FF")
+        view.isHidden = true
+        return view
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         contentView.backgroundColor = .clear
+        contentView.clipsToBounds = false
         setUp()
     }
     
@@ -33,18 +41,26 @@ class CategoriesCollectionViewCell: UICollectionViewCell {
     
     func setUpSubviews() {
         contentView.addSubview(categoryNameLabel)
+        contentView.addSubview(underlineView)
     }
     
     func setUpConstraints() {
         
         categoryNameLabel.snp.makeConstraints { make in
             make.centerX.equalTo(contentView.snp.centerX)
-            make.centerY.equalTo(contentView.snp.centerY)
+            make.top.equalTo(contentView.snp.top)
+        }
+        
+        underlineView.snp.makeConstraints { make in
+            make.height.equalTo(1)
+            make.top.equalTo(categoryNameLabel.snp.bottom).offset(8)
+            make.leading.trailing.equalTo(contentView)
         }
     }
     
-    func fill(with item: CategoryModel) {
+    func fill(with item: CategoryModel, isSelected: Bool) {
         categoryNameLabel.text = item.categoryName
+        underlineView.isHidden = !isSelected
     }
     
     required init?(coder: NSCoder) {
