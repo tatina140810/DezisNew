@@ -45,7 +45,6 @@
 		AF4B1E1F2CA06E5500FDA3EC /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1E1E2CA06E5500FDA3EC /* SettingsViewController.swift */; };
 		AF4B1E212CA06E6C00FDA3EC /* UserInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1E202CA06E6C00FDA3EC /* UserInfoViewController.swift */; };
 		AF4B1E232CA06E7E00FDA3EC /* AboutUsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1E222CA06E7E00FDA3EC /* AboutUsViewController.swift */; };
-		AF4B1E262CA0727300FDA3EC /* ClientErrorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1E252CA0727300FDA3EC /* ClientErrorViewController.swift */; };
 		AF4B1E282CA0729300FDA3EC /* ServerErrorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1E272CA0729300FDA3EC /* ServerErrorViewController.swift */; };
 		AF4B1E2B2CA0736200FDA3EC /* ClientChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1E2A2CA0736200FDA3EC /* ClientChatViewController.swift */; };
 		AF4B1E2D2CA19C6000FDA3EC /* ChekBoxButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1E2C2CA19C6000FDA3EC /* ChekBoxButton.swift */; };
@@ -115,7 +114,6 @@
 		AF4B1E1E2CA06E5500FDA3EC /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		AF4B1E202CA06E6C00FDA3EC /* UserInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoViewController.swift; sourceTree = "<group>"; };
 		AF4B1E222CA06E7E00FDA3EC /* AboutUsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutUsViewController.swift; sourceTree = "<group>"; };
-		AF4B1E252CA0727300FDA3EC /* ClientErrorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientErrorViewController.swift; sourceTree = "<group>"; };
 		AF4B1E272CA0729300FDA3EC /* ServerErrorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerErrorViewController.swift; sourceTree = "<group>"; };
 		AF4B1E2A2CA0736200FDA3EC /* ClientChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientChatViewController.swift; sourceTree = "<group>"; };
 		AF4B1E2C2CA19C6000FDA3EC /* ChekBoxButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChekBoxButton.swift; sourceTree = "<group>"; };
@@ -552,7 +550,6 @@
 				AF74D5752CB1171700B64D6E /* FifthOnboardingViewController.swift in Sources */,
 				AF74D5652CAC238600B64D6E /* CustomCellForServicesCollectionView.swift in Sources */,
 				AF4B1E232CA06E7E00FDA3EC /* AboutUsViewController.swift in Sources */,
-				AF4B1E262CA0727300FDA3EC /* ClientErrorViewController.swift in Sources */,
 				AF4B1E132C9D9C2F00FDA3EC /* ServicesViewController.swift in Sources */,
 				72D39B912CB1511C00D9EB45 /* AdminTabBarController.swift in Sources */,
 				72D39B922CB1511C00D9EB45 /* AdminHomeViewController.swift in Sources */,
