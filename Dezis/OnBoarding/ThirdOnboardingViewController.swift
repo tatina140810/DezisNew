@@ -2,12 +2,6 @@ import UIKit
 
 class ThirdOnboardingViewController: UIPageViewController {
     
-    private var ellipsImage: UIImageView = {
-        let image = UIImageView()
-        image.image = UIImage(resource: .ellipse71)
-        return image
-        
-    }()
     private var sprayImage: UIImageView = {
         let image = UIImageView()
         image.image = UIImage(resource: .image16)
@@ -23,30 +17,24 @@ class ThirdOnboardingViewController: UIPageViewController {
         label.textAlignment = .left
         return label
     }()
-    private var skipButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("Пропустить", for: .normal)
-        button.tintColor = .black
-        button.addTarget(self, action: #selector(skipButtonTapped), for: .touchUpInside)
-        return button
-    }()
+    private var nextButton = ButtonSettings().buttonMaker(title: "Продолжить", target: self, action: #selector(nextButtonTapped))
+    private var skipButton = ButtonSettings().buttonMaker(title: "Пропустить", backgroundColor: UIColor(hex: "#1B2228"), target: self, action: #selector(skipButtonTapped))
+
     
+   
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = UIColor(hex: "#1B2228")
         setupUI()
         
     }
     
     private func setupUI(){
-        view.addSubview(ellipsImage)
-        ellipsImage.snp.makeConstraints{ make in
-            make.edges.equalToSuperview()
-        }
+       
         view.addSubview(sprayImage)
         sprayImage.snp.makeConstraints{ make in
-            make.top.equalToSuperview().offset(142)
+            make.top.equalToSuperview().offset(122)
             make.width.equalTo(360)
             make.height.equalTo(244.8)
             make.leading.trailing.equalToSuperview()
@@ -56,21 +44,33 @@ class ThirdOnboardingViewController: UIPageViewController {
             make.top.equalTo(sprayImage.snp.bottom).offset(100)
             make.leading.equalTo(20)
             make.trailing.equalTo(-20)
-            
-            
         }
         view.addSubview(skipButton)
         skipButton.snp.makeConstraints{make in
-            make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-10)
+            make.bottom.equalToSuperview().offset(-50)
             make.centerX.equalToSuperview()
-            make.height.equalTo(20)
-            make.width.equalTo(130)}
-        
+            make.height.equalTo(52)
+            make.leading.equalToSuperview().offset(20)
+            make.trailing.equalToSuperview().inset(20)
+        }
+        view.addSubview(nextButton)
+        nextButton.snp.makeConstraints{make in
+            make.bottom.equalTo(skipButton.snp.top).offset(-8)
+            make.centerX.equalToSuperview()
+            make.height.equalTo(52)
+            make.leading.equalToSuperview().offset(20)
+            make.trailing.equalToSuperview().inset(20)
+        }
+      
     }
     @objc func skipButtonTapped(){
-        let vc = ClientTabBarController()
+        let vc = ChoiceViewController()
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true, completion: nil)
     }
-    
+    @objc func nextButtonTapped(){
+        let vc = ForthOnboardingViewController()
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true, completion: nil)
+    }
 }

@@ -12,6 +12,8 @@ class DezinfectionViewController: UIViewController {
     private var dezincectionImage:UIImageView = {
         let view = UIImageView()
         view.image = UIImage(resource: .rectangle455)
+        view.layer.cornerRadius = 12
+        view.clipsToBounds = true
         return view
         
     }()
@@ -19,15 +21,7 @@ class DezinfectionViewController: UIViewController {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 20)
         label.text = "Дезинфекция"
-        return label
-    }()
-    private var servicesLabel: UILabel = {
-        let label = UILabel()
-        label.text = "• Уничтожение плесени\n• Уничтожение грибка\n• Дезинфекция от вирусов и бактерий\n• Устранение неприятных запахов\n "
-        label.textAlignment = .left
-        label.font = UIFont.systemFont(ofSize: 16)
-        label.numberOfLines = 0
-        label.lineBreakMode = .byWordWrapping
+        label.textColor = .white
         return label
     }()
     private var servicesDescriptionLabel: UILabel = {
@@ -37,13 +31,14 @@ class DezinfectionViewController: UIViewController {
         label.font = UIFont.systemFont(ofSize: 16)
         label.numberOfLines = 0
         label.lineBreakMode = .byWordWrapping
+        label.textColor = .white
         return label
     }()
     
     private var orderButton: UIButton = {
         let button = UIButton()
         button.setTitle("Заказать услугу", for: .normal)
-        button.backgroundColor = UIColor(hex: "#0688C1")
+        button.backgroundColor = UIColor(hex: "#0A84FF")
         button.layer.cornerRadius = 8
         button.clipsToBounds = true
         button.addTarget(self, action: #selector(orderButtonTapped), for: .touchUpInside)
@@ -55,32 +50,27 @@ class DezinfectionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        view.backgroundColor = .white
-        navigationItem.title = ""
+        view.backgroundColor = UIColor(hex: "#1B2228")
 
         
     }
     private func setupUI(){
-        view.addSubview(dezincectionImage)
-        dezincectionImage.snp.makeConstraints { make in
-            make.top.equalToSuperview()
-            make.leading.equalToSuperview()
-            make.trailing.equalToSuperview()
-            make.height.equalTo(375)
-        }
         view.addSubview(titleLable)
         titleLable.snp.makeConstraints { make in
-            make.top.equalTo(dezincectionImage.snp.bottom).offset(10)
-            make.leading.equalTo(dezincectionImage.snp.leading).offset(14)
+            make.top.equalToSuperview().offset(60)
+            make.centerX.equalToSuperview()
         }
-        view.addSubview(servicesLabel)
-        servicesLabel.snp.makeConstraints { make in
-            make.top.equalTo(dezincectionImage.snp.bottom).offset(50)
+        view.addSubview(dezincectionImage)
+        dezincectionImage.snp.makeConstraints { make in
+            make.top.equalTo(titleLable.snp.bottom).offset(20)
             make.leading.equalToSuperview().offset(20)
+            make.trailing.equalToSuperview().offset(-20)
+            make.height.equalTo(300)
         }
+      
         view.addSubview(servicesDescriptionLabel)
         servicesDescriptionLabel.snp.makeConstraints { make in
-            make.top.equalTo(servicesLabel.snp.bottom).offset(20)
+            make.top.equalTo(dezincectionImage.snp.bottom).offset(20)
             make.leading.equalToSuperview().offset(14)
             make.trailing.equalToSuperview().offset(-14)
         }

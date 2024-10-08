@@ -17,22 +17,20 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
         window = UIWindow(windowScene: windowScene)
-       // window?.rootViewController = CalendarViewController()
+        let hasCompletedOnboarding = UserDefaults.standard.bool(forKey: "hasCompletedOnboarding")
        
-        //window?.rootViewController = FirstOnboardingViewController()
-        window?.rootViewController = ServerErrorViewController()
-        
-//        let hasCompletedOnboarding = UserDefaults.standard.bool(forKey: "hasCompletedOnboarding")
-//        
 //        if hasCompletedOnboarding {
 //            
-//           window?.rootViewController = ClientTabBarController()
+//            let choiceVC = UINavigationController(rootViewController: ChoiceViewController())
+//            
+//           window?.rootViewController = ChoiceViewController()
 //          
 //        } else {
 //            
-//            let root = UINavigationController(rootViewController: ClientTabBarController())
-//            
-//        }
+            let root = UINavigationController(rootViewController: FirstOnboardingViewController())
+            
+            window?.rootViewController = root
+      //  }
             window?.makeKeyAndVisible()
         }
         

@@ -1,14 +1,7 @@
-//
-//  DezinsectionView.swift
-//  Dezis
-//
-//  Created by Tatina Dzhakypbekova on 5/10/24.
-//
-
 import UIKit
 
-class DezinsectionView: UIView {
- 
+class DezinfectionView: UIView {
+   
     private var backgroundView: UIImageView = {
         let image = UIImageView()
         image.backgroundColor = UIColor(hex: "#2B373E")
@@ -19,7 +12,7 @@ class DezinsectionView: UIView {
     
     private let firstTextLabel: UILabel = {
         let label = UILabel()
-        label.text = "Дезинсекция"
+        label.text = "Дезинфекция"
         label.font = UIFont.boldSystemFont(ofSize: 22)
         label.textColor = .white
         label.numberOfLines = 0
@@ -28,7 +21,7 @@ class DezinsectionView: UIView {
     }()
     private let dezinsectionDescriptionLabel: UILabel = {
         let label = UILabel()
-        label.text = "Уничтожение насекомых (тараканы, блохи, комары, мухи, клопы и др.), которые могут быть переносчиками болезней или причинять вред имуществу и человеку. "
+        label.text = "Уничтожения или подавления болезнетворных микроорганизмов (бактерий, вирусов, грибков) на различных поверхностях, в воде и воздухе, чтобы предотвратить распространение инфекций. "
         label.font = UIFont.boldSystemFont(ofSize: 16)
         label.textColor = .white
         label.numberOfLines = 0
@@ -61,8 +54,8 @@ class DezinsectionView: UIView {
             make.leading.equalToSuperview().offset(20)
             make.trailing.equalToSuperview().offset(-20)
         }
+        
     }
-    
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

@@ -9,50 +9,43 @@ import UIKit
 
 class AdminHomeViewController: UIViewController {
     
-    private let calendarLabel: UILabel = {
+    private let infoLabel: UILabel = {
         let view = UILabel()
-        view.text = "Календарь"
-        view.font = .boldSystemFont(ofSize: 22)
-        view.textColor = .init(UIColor(hex: "#21252B"))
-        view.textAlignment = .center
-        view.numberOfLines = 0
-        view.lineBreakMode = .byWordWrapping
+        view.text = "Информация о записи"
+        view.font = .boldSystemFont(ofSize: 24)
+        view.textColor = .init(UIColor(hex: "#FFFFFF"))
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
+    private let editButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "edit"), for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
-        setupNavigationItems()
+        view.backgroundColor = .init(hex: "#1B2228")
         setupUI()
     }
     
-    private func setupNavigationItems(){
-        navigationController?.navigationBar.backgroundColor = UIColor(hex: "#5191BA")
-        navigationController?.navigationBar.tintColor = .white
-        
-        let rightButton = UIBarButtonItem(image: UIImage(named: "chat"), style: .plain, target: self, action: #selector(rightButtonTapped))
-        navigationItem.rightBarButtonItem = rightButton
-        
-        let leftButton = UIBarButtonItem(image: UIImage(named: "logo"), style: .plain, target: self, action: #selector(leftButtonTapped))
-        navigationItem.leftBarButtonItem = leftButton
-    }
-    
     private func setupUI(){
-        view.addSubview(calendarLabel)
-        NSLayoutConstraint.activate([
-            calendarLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 18),
-            calendarLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)])
-    }
-    
-    @objc func leftButtonTapped() {
-        print("Left button tapped")
-    }
-    
-    @objc func rightButtonTapped() {
-        let vc = AdminChatViewController()
-        vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: true, completion: nil)
+        
+        view.addSubview(infoLabel)
+        infoLabel.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(71)
+            make.leading.equalToSuperview().offset(20)
+        }
+        
+        view.addSubview(editButton)
+        editButton.snp.makeConstraints { make in
+            make.centerY.equalTo(infoLabel.snp.centerY)
+            make.trailing.equalToSuperview().offset(-20)
+            make.width.equalTo(24)
+            make.height.equalTo(24)
+        }
     }
 }
