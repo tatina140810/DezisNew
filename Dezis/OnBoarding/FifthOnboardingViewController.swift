@@ -9,18 +9,13 @@ import UIKit
 
 class FifthOnboardingViewController: UIViewController {
     
-    private var ellipsImage: UIImageView = {
+    private var logoImage: UIImageView = {
         let image = UIImageView()
-        image.image = UIImage(resource: .image19)
+        image.image = UIImage(resource: .logo)
         return image
         
     }()
-    private var rectangleImage: UIImageView = {
-        let image = UIImageView()
-        image.image = UIImage(resource: .rectangle4)
-        return image
-        
-    }()
+    
     private var exterminatorImage: UIImageView = {
         let image = UIImageView()
         image.image = UIImage(resource: .image18)
@@ -36,40 +31,28 @@ class FifthOnboardingViewController: UIViewController {
         label.textAlignment = .left
         return label
     }()
-    private var skipButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("Пропустить", for: .normal)
-        button.tintColor = .black
-        button.addTarget(self, action: #selector(skipButtonTapped), for: .touchUpInside)
-        return button
-    }()
+    private var nextButton = ButtonSettings().buttonMaker(title: "Продолжить", target: self, action: #selector(nextButtonTapped))
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .white
+        view.backgroundColor = UIColor(hex: "#1B2228")
         setupUI()
         finishOnboarding()
     }
     private func setupUI(){
         
-        view.addSubview(ellipsImage)
-        ellipsImage.snp.makeConstraints{make in
-            make.top.equalToSuperview().offset(50)
+        view.addSubview(logoImage)
+        logoImage.snp.makeConstraints{make in
+            make.top.equalToSuperview().offset(100)
             make.centerX.equalToSuperview()
-            make.height.equalTo(250)
-            make.width.equalTo(360)
+            make.height.equalTo(203)
+            make.width.equalTo(190)
         }
-        view.addSubview(rectangleImage)
-        rectangleImage.snp.makeConstraints{make in
-            make.bottom.equalToSuperview()
-            make.leading.trailing.equalToSuperview()
-            make.height.equalTo(view.snp.height).multipliedBy(0.5)
-            
-        }
+       
         view.addSubview(exterminatorImage)
         exterminatorImage.snp.makeConstraints{make in
-            make.top.equalTo(rectangleImage.snp.top).offset(-50)
+            make.top.equalTo(logoImage.snp.bottom).offset(30)
             make.centerX.equalToSuperview()
             make.height.equalTo(234)
             make.width.equalTo(360)
@@ -80,27 +63,30 @@ class FifthOnboardingViewController: UIViewController {
             make.leading.equalToSuperview().offset(20)
             make.trailing.equalToSuperview().offset(-20)
         }
-        view.addSubview(skipButton)
-        skipButton.snp.makeConstraints{make in
-            make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-10)
+        view.addSubview(nextButton)
+        nextButton.snp.makeConstraints{make in
+            make.bottom.equalToSuperview().offset(-50)
             make.centerX.equalToSuperview()
-            make.height.equalTo(20)
-            make.width.equalTo(130)}
+            make.height.equalTo(52)
+            make.leading.equalToSuperview().offset(20)
+            make.trailing.equalToSuperview().inset(20)
+        }
+        
     }
     
-    
+    @objc func nextButtonTapped(){
+        let vc = ChoiceViewController()
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true, completion: nil)
+    }
     @objc func finishOnboarding() {
         UserDefaults.standard.set(true, forKey: "hasCompletedOnboarding")
         
-        let mainViewController = ClientTabBarController()
+        let mainViewController = ChoiceViewController()
         mainViewController.modalPresentationStyle = .fullScreen
         present(mainViewController, animated: true, completion: nil)
     }
-@objc func skipButtonTapped(){
-    let vc = ClientTabBarController()
-    vc.modalPresentationStyle = .fullScreen
-    present(vc, animated: true, completion: nil)
-}
+    
     
 }
 

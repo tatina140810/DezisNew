@@ -17,22 +17,20 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
         window = UIWindow(windowScene: windowScene)
-       
-        //window?.rootViewController = FirstOnboardingViewController()
-        window?.rootViewController = AdminChatViewController()
-        
         let hasCompletedOnboarding = UserDefaults.standard.bool(forKey: "hasCompletedOnboarding")
-        
-        if hasCompletedOnboarding {
-            
-           window?.rootViewController = ChoiceViewController()
-          
-        } else {
-            
-            let root = UINavigationController(rootViewController: ChoiceViewController())
+       
+//        if hasCompletedOnboarding {
+//            
+//            let choiceVC = UINavigationController(rootViewController: ChoiceViewController())
+//            
+//           window?.rootViewController = ChoiceViewController()
+//          
+//        } else {
+//            
+            let root = UINavigationController(rootViewController: FirstOnboardingViewController())
             
             window?.rootViewController = root
-        }
+      //  }
             window?.makeKeyAndVisible()
         }
         
