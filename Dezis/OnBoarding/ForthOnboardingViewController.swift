@@ -5,7 +5,7 @@ class ForthOnboardingViewController: UIPageViewController {
     
     private var vectorImage: UIImageView = {
         let image = UIImageView()
-        image.image = UIImage(resource: .wave)
+        image.image = UIImage(resource: .vector21)
         return image
         
     }()
@@ -25,18 +25,14 @@ class ForthOnboardingViewController: UIPageViewController {
         label.textAlignment = .left
         return label
     }()
-    private var skipButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("Пропустить", for: .normal)
-        button.tintColor = .black
-        button.addTarget(self, action: #selector(skipButtonTapped), for: .touchUpInside)
-        return button
-    }()
+    private var nextButton = ButtonSettings().buttonMaker(title: "Продолжить", target: self, action: #selector(nextButtonTapped))
+    private var skipButton = ButtonSettings().buttonMaker(title: "Пропустить", backgroundColor: UIColor(hex: "#1B2228"), target: self, action: #selector(skipButtonTapped))
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .white
+        view.backgroundColor = UIColor(hex: "#1B2228")
         setupUI()
         finishOnboarding() 
     }
@@ -44,7 +40,10 @@ class ForthOnboardingViewController: UIPageViewController {
         
         view.addSubview(vectorImage)
         vectorImage.snp.makeConstraints{make in
-            make.edges.equalToSuperview()
+            make.top.equalToSuperview().offset(50)
+            make.leading.trailing.equalToSuperview()
+            make.height.equalTo(537)
+            
         }
         view.addSubview(orderImage)
         orderImage.snp.makeConstraints{make in
@@ -55,16 +54,27 @@ class ForthOnboardingViewController: UIPageViewController {
         }
         view.addSubview(titleLabel)
         titleLabel.snp.makeConstraints{make in
-            make.top.equalTo(orderImage.snp.bottom).offset(200)
+            make.top.equalTo(orderImage.snp.bottom).offset(20)
             make.leading.equalToSuperview().offset(20)
             make.trailing.equalToSuperview().offset(-20)
         }
         view.addSubview(skipButton)
         skipButton.snp.makeConstraints{make in
-            make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-10)
+            make.bottom.equalToSuperview().offset(-50)
             make.centerX.equalToSuperview()
-            make.height.equalTo(20)
-            make.width.equalTo(130)}
+            make.height.equalTo(52)
+            make.leading.equalToSuperview().offset(20)
+            make.trailing.equalToSuperview().inset(20)
+        }
+        view.addSubview(nextButton)
+        nextButton.snp.makeConstraints{make in
+            make.bottom.equalTo(skipButton.snp.top).offset(-8)
+            make.centerX.equalToSuperview()
+            make.height.equalTo(52)
+            make.leading.equalToSuperview().offset(20)
+            make.trailing.equalToSuperview().inset(20)
+        }
+        
     }
     
     
@@ -76,10 +86,15 @@ class ForthOnboardingViewController: UIPageViewController {
             present(mainViewController, animated: true, completion: nil)
         }
 @objc func skipButtonTapped(){
-    let vc = ClientTabBarController()
+    let vc = ChoiceViewController()
     vc.modalPresentationStyle = .fullScreen
     present(vc, animated: true, completion: nil)
 }
+    @objc func nextButtonTapped(){
+        let vc = FifthOnboardingViewController()
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true, completion: nil)
+    }
     
 }
 

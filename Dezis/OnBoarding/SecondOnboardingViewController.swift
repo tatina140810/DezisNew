@@ -32,19 +32,19 @@ class SecondOnboardingViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = UIColor(hex: "#1B2228")
         setupUI()
-        finishOnboarding()
+     
     }
     
     private func setupUI(){
         view.addSubview(ellipsImage)
         ellipsImage.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide).offset(-50)
+            make.top.equalTo(view.safeAreaLayoutGuide)
             make.leading.trailing.equalToSuperview()
-            make.bottom.equalTo(view.safeAreaLayoutGuide).offset(50)
+            make.height.equalTo(563)
         }
         view.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide).offset(236)
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(150)
             make.leading.equalToSuperview().offset(20)
             make.trailing.equalToSuperview().offset(-20)
             
@@ -81,16 +81,10 @@ class SecondOnboardingViewController: UIViewController {
         present(vc, animated: true, completion: nil)
     }
     @objc func nextButtonTapped(){
-        let vc = ChoiceViewController()
+        let vc = ThirdOnboardingViewController()
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true, completion: nil)
     }
-    @objc func finishOnboarding() {
-        UserDefaults.standard.set(true, forKey: "hasCompletedOnboarding")
-        
-        let mainViewController = ChoiceViewController()
-        mainViewController.modalPresentationStyle = .fullScreen
-        present(mainViewController, animated: true, completion: nil)
-    }
+   
     
 }

@@ -37,19 +37,7 @@ class FirstOnboardingViewController: UIViewController {
         setupUI()
         view.backgroundColor = UIColor(hex: "#1B2228")
     }
-    
-//    private func setupGradientLayer() {
-//        gradientLayer.colors = [UIColor(hex: "#459AD1").cgColor, UIColor(hex: "#5B2FEE").cgColor]
-//        gradientLayer.startPoint = CGPoint(x: 0, y: 0)
-//        gradientLayer.endPoint = CGPoint(x: 1, y: 1)
-//        view.layer.insertSublayer(gradientLayer, at: 0)
-//    }
-//    
-  
-//    override func viewDidLayoutSubviews() {
-//        super.viewDidLayoutSubviews()
-//        gradientLayer.frame = view.bounds
-//    }
+
     
     private func setupUI() {
         view.addSubview(exterminatorImage)
@@ -95,7 +83,7 @@ class FirstOnboardingViewController: UIViewController {
     }
     
     @objc func skipButtonTapped(){
-        let vc = ClientTabBarController()
+        let vc = ChoiceViewController()
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true, completion: nil)
     }

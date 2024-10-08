@@ -1,17 +1,13 @@
 import UIKit
-import SnapKit
 
-class NewUserRegisterViewController: UIViewController {
-    
-    // MARK: - Create UI Elements
-    
+class UserRegisterSecondPageViewController: UIViewController {
+
+  
     private var titleLabel = LabelSettings().labelMaker(text: "Регистрация", font: UIFont.systemFont(ofSize: 28), textColor: .white)
     
-    private var nameTextField = TextFieldSettings().textFieldMaker(placeholder: "ФИО", backgroundColor: UIColor(hex: "#2B373E"))
+    private var adressTextField = TextFieldSettings().textFieldMaker(placeholder: "Адрес", backgroundColor: UIColor(hex: "#2B373E"))
     
-    private var emailTextField = TextFieldSettings().textFieldMaker(placeholder: "example@gmail.com*", backgroundColor: UIColor(hex: "#2B373E"))
-    
-    private var passwordTextField = TextFieldSettings().textFieldMaker(placeholder: "Пароль", backgroundColor: UIColor(hex: "#2B373E"))
+    private var hauseTextField = TextFieldSettings().textFieldMaker(placeholder: "Номер дома/квартиры", backgroundColor: UIColor(hex: "#2B373E"))
     
     private var errorLabel: UILabel = {
         let view = UILabel()
@@ -28,6 +24,7 @@ class NewUserRegisterViewController: UIViewController {
         view.setTitleColor(.white, for: .normal)
         view.backgroundColor = UIColor(hex: "#0A84FF")
         view.layer.cornerRadius = 12
+        view.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
         return view
     }()
     
@@ -49,7 +46,6 @@ class NewUserRegisterViewController: UIViewController {
         view.numberOfLines = 0
         return view
     }()
-    
     // MARK: - View Life Cycle
     
     override func viewDidLoad() {
@@ -58,7 +54,7 @@ class NewUserRegisterViewController: UIViewController {
         setupUI()
         createAttributedText()
         createPrivaciAttributedText()
-        nextButton.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
+       
     }
     
     // MARK: - Attributed Text Links
@@ -85,45 +81,31 @@ class NewUserRegisterViewController: UIViewController {
     // MARK: - Setup UI Elements
     
     private func setupUI() {
+        
         view.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalToSuperview().offset(200)
+            make.top.equalToSuperview().offset(250)
         }
         
-        view.addSubview(nameTextField)
-        nameTextField.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(28)
+        view.addSubview(adressTextField)
+        adressTextField.snp.makeConstraints { make in
+            make.top.equalTo(titleLabel.snp.bottom).offset(8)
             make.leading.equalToSuperview().offset(16)
             make.trailing.equalToSuperview().offset(-16)
             make.height.equalTo(48)
         }
         
-        view.addSubview(emailTextField)
-        emailTextField.snp.makeConstraints { make in
-            make.top.equalTo(nameTextField.snp.bottom).offset(8)
+        view.addSubview(hauseTextField)
+        hauseTextField.snp.makeConstraints { make in
+            make.top.equalTo(adressTextField.snp.bottom).offset(8)
             make.leading.equalToSuperview().offset(16)
             make.trailing.equalToSuperview().offset(-16)
             make.height.equalTo(48)
         }
-        
-        view.addSubview(passwordTextField)
-        passwordTextField.snp.makeConstraints { make in
-            make.top.equalTo(emailTextField.snp.bottom).offset(8)
-            make.leading.equalToSuperview().offset(16)
-            make.trailing.equalToSuperview().offset(-16)
-            make.height.equalTo(48)
-        }
-        
-        view.addSubview(errorLabel)
-        errorLabel.snp.makeConstraints { make in
-            make.top.equalTo(passwordTextField.snp.bottom).offset(10)
-            make.leading.equalToSuperview().offset(16)
-        }
-        
         view.addSubview(nextButton)
         nextButton.snp.makeConstraints { make in
-            make.top.equalTo(errorLabel.snp.bottom).offset(38)
+            make.top.equalTo(hauseTextField.snp.bottom).offset(38)
             make.leading.equalToSuperview().offset(16)
             make.trailing.equalToSuperview().offset(-16)
             make.height.equalTo(48)
@@ -141,39 +123,19 @@ class NewUserRegisterViewController: UIViewController {
             make.centerX.equalToSuperview()
             make.leading.trailing.equalToSuperview().inset(20)
         }
-        
     }
-    
-    // MARK: - Target Functions
-    
     @objc func attributedTextTapped() {
         print("Условием продажи")
     }
     @objc func attributedPrivaciTextTapped() {
         print("Положения о конфиденциальности")
     }
-    
-    @objc func nextButtonTapped() {
-        guard let name = nameTextField.text, !name.isEmpty,
-              let email = emailTextField.text, !email.isEmpty,
-              let password = passwordTextField.text, !password.isEmpty else {
-            errorLabel.text = "*Все поля обязательны для заполнения"
-            nameTextField.layer.borderColor = UIColor.red.cgColor
-            emailTextField.layer.borderColor = UIColor.red.cgColor
-            passwordTextField.layer.borderColor = UIColor.red.cgColor
-            return
-        }
+    @objc private func nextButtonTapped(){
+        let vc = СonfirmationСodeViewController()
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true, completion: nil)
         
-    
-        let vc = UserRegisterSecondPageViewController()
-        let navController = UINavigationController(rootViewController: vc)
-        navController.modalPresentationStyle = .fullScreen
-        present(navController, animated: true, completion: nil)
     }
     
-    private func showAlert(message: String) {
-        let alert = UIAlertController(title: "Ошибка", message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
-        present(alert, animated: true)
-    }
+
 }

@@ -43,8 +43,8 @@ class ChoiceViewController: UIViewController {
         }
     }
     @objc func consumerButtonTapped() {
-        let vc = NewUserRegisterViewController()
-        vc.modalPresentationStyle = .fullScreen
+        let vc = ClientChoiceViewController()
+       vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true, completion: nil)
     }
     @objc func adminButtonTapped() {

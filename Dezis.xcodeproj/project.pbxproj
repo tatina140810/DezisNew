@@ -18,6 +18,7 @@
 		72D39BA32CB15F7D00D9EB45 /* RequestsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D39BA22CB15F7D00D9EB45 /* RequestsCollectionViewCell.swift */; };
 		72D39BA62CB1796F00D9EB45 /* CategoriesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D39BA52CB1796F00D9EB45 /* CategoriesCollectionViewCell.swift */; };
 		72D39BA82CB1870D00D9EB45 /* AdminLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D39BA72CB1870D00D9EB45 /* AdminLoginViewController.swift */; };
+		AF3EDD0F2CB4696E00CAF1FE /* ClientChoiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3EDD0E2CB4696E00CAF1FE /* ClientChoiceViewController.swift */; };
 		AF4B1DD12C9AE38E00FDA3EC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1DD02C9AE38E00FDA3EC /* AppDelegate.swift */; };
 		AF4B1DD32C9AE38E00FDA3EC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1DD22C9AE38E00FDA3EC /* SceneDelegate.swift */; };
 		AF4B1DDA2C9AE39000FDA3EC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AF4B1DD92C9AE39000FDA3EC /* Assets.xcassets */; };
@@ -49,7 +50,7 @@
 		AF4B1E2B2CA0736200FDA3EC /* ClientChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1E2A2CA0736200FDA3EC /* ClientChatViewController.swift */; };
 		AF4B1E2D2CA19C6000FDA3EC /* ChekBoxButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1E2C2CA19C6000FDA3EC /* ChekBoxButton.swift */; };
 		AF74D5502CA7C97B00B64D6E /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF74D54F2CA7C97B00B64D6E /* KeychainManager.swift */; };
-		AF74D5522CA7EB3200B64D6E /* NewUserRegistratinSecondPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF74D5512CA7EB3200B64D6E /* NewUserRegistratinSecondPageViewController.swift */; };
+		AF74D5522CA7EB3200B64D6E /* UserRegisterSecondPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF74D5512CA7EB3200B64D6E /* UserRegisterSecondPageViewController.swift */; };
 		AF74D5562CAACEAC00B64D6E /* FirstStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF74D5552CAACEAC00B64D6E /* FirstStackView.swift */; };
 		AF74D55E2CAB1E5400B64D6E /* GradientLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF74D55D2CAB1E5400B64D6E /* GradientLayer.swift */; };
 		AF74D5622CAB26CB00B64D6E /* SuccessAlertForOrderButtonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF74D5612CAB26CB00B64D6E /* SuccessAlertForOrderButtonViewController.swift */; };
@@ -61,7 +62,6 @@
 		AF74D5752CB1171700B64D6E /* FifthOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF74D56E2CB1171700B64D6E /* FifthOnboardingViewController.swift */; };
 		AF74D5762CB1171700B64D6E /* FirstOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF74D56F2CB1171700B64D6E /* FirstOnboardingViewController.swift */; };
 		AF74D5772CB1171700B64D6E /* ForthOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF74D5702CB1171700B64D6E /* ForthOnboardingViewController.swift */; };
-		AF74D5782CB1171700B64D6E /* OnboardingPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF74D5712CB1171700B64D6E /* OnboardingPageViewController.swift */; };
 		AF74D5792CB1171700B64D6E /* SecondOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF74D5722CB1171700B64D6E /* SecondOnboardingViewController.swift */; };
 		AF74D57A2CB1171700B64D6E /* ThirdOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF74D5732CB1171700B64D6E /* ThirdOnboardingViewController.swift */; };
 		AF74D57C2CB1179C00B64D6E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF74D57B2CB1179C00B64D6E /* LaunchScreen.storyboard */; };
@@ -86,6 +86,7 @@
 		72D39BA72CB1870D00D9EB45 /* AdminLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminLoginViewController.swift; sourceTree = "<group>"; };
 		9D594A6880D984FC3775947A /* Pods_Dezis.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Dezis.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ABC7905C0E1157EB74B80A5D /* Pods-Dezis.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dezis.release.xcconfig"; path = "Target Support Files/Pods-Dezis/Pods-Dezis.release.xcconfig"; sourceTree = "<group>"; };
+		AF3EDD0E2CB4696E00CAF1FE /* ClientChoiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientChoiceViewController.swift; sourceTree = "<group>"; };
 		AF4B1DCD2C9AE38E00FDA3EC /* Dezis.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dezis.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF4B1DD02C9AE38E00FDA3EC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AF4B1DD22C9AE38E00FDA3EC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -119,7 +120,7 @@
 		AF4B1E2A2CA0736200FDA3EC /* ClientChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientChatViewController.swift; sourceTree = "<group>"; };
 		AF4B1E2C2CA19C6000FDA3EC /* ChekBoxButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChekBoxButton.swift; sourceTree = "<group>"; };
 		AF74D54F2CA7C97B00B64D6E /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
-		AF74D5512CA7EB3200B64D6E /* NewUserRegistratinSecondPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewUserRegistratinSecondPageViewController.swift; sourceTree = "<group>"; };
+		AF74D5512CA7EB3200B64D6E /* UserRegisterSecondPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRegisterSecondPageViewController.swift; sourceTree = "<group>"; };
 		AF74D5552CAACEAC00B64D6E /* FirstStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstStackView.swift; sourceTree = "<group>"; };
 		AF74D55D2CAB1E5400B64D6E /* GradientLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientLayer.swift; sourceTree = "<group>"; };
 		AF74D5612CAB26CB00B64D6E /* SuccessAlertForOrderButtonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessAlertForOrderButtonViewController.swift; sourceTree = "<group>"; };
@@ -131,7 +132,6 @@
 		AF74D56E2CB1171700B64D6E /* FifthOnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FifthOnboardingViewController.swift; sourceTree = "<group>"; };
 		AF74D56F2CB1171700B64D6E /* FirstOnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstOnboardingViewController.swift; sourceTree = "<group>"; };
 		AF74D5702CB1171700B64D6E /* ForthOnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForthOnboardingViewController.swift; sourceTree = "<group>"; };
-		AF74D5712CB1171700B64D6E /* OnboardingPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingPageViewController.swift; sourceTree = "<group>"; };
 		AF74D5722CB1171700B64D6E /* SecondOnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecondOnboardingViewController.swift; sourceTree = "<group>"; };
 		AF74D5732CB1171700B64D6E /* ThirdOnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThirdOnboardingViewController.swift; sourceTree = "<group>"; };
 		AF74D57B2CB1179C00B64D6E /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -342,9 +342,10 @@
 			isa = PBXGroup;
 			children = (
 				AF4B1DFA2C9B42D300FDA3EC /* NewUserRegisterViewController.swift */,
-				AF74D5512CA7EB3200B64D6E /* NewUserRegistratinSecondPageViewController.swift */,
+				AF74D5512CA7EB3200B64D6E /* UserRegisterSecondPageViewController.swift */,
 				AF4B1DFC2C9B52AE00FDA3EC /* СonfirmationСodeViewController.swift */,
 				AF4B1DF42C9B28ED00FDA3EC /* ClientLoginViewController.swift */,
+				AF3EDD0E2CB4696E00CAF1FE /* ClientChoiceViewController.swift */,
 			);
 			path = ClientLoginViews;
 			sourceTree = "<group>";
@@ -409,7 +410,6 @@
 				AF74D5732CB1171700B64D6E /* ThirdOnboardingViewController.swift */,
 				AF74D5702CB1171700B64D6E /* ForthOnboardingViewController.swift */,
 				AF74D56E2CB1171700B64D6E /* FifthOnboardingViewController.swift */,
-				AF74D5712CB1171700B64D6E /* OnboardingPageViewController.swift */,
 			);
 			path = OnBoarding;
 			sourceTree = "<group>";
@@ -551,7 +551,6 @@
 				AF4B1E0F2C9D9B8200FDA3EC /* ClientHomeViewController.swift in Sources */,
 				AF74D5752CB1171700B64D6E /* FifthOnboardingViewController.swift in Sources */,
 				AF74D5652CAC238600B64D6E /* CustomCellForServicesCollectionView.swift in Sources */,
-				AF74D5782CB1171700B64D6E /* OnboardingPageViewController.swift in Sources */,
 				AF4B1E232CA06E7E00FDA3EC /* AboutUsViewController.swift in Sources */,
 				AF4B1E262CA0727300FDA3EC /* ClientErrorViewController.swift in Sources */,
 				AF4B1E132C9D9C2F00FDA3EC /* ServicesViewController.swift in Sources */,
@@ -560,10 +559,7 @@
 				72D39B932CB1511C00D9EB45 /* AdminChatViewController.swift in Sources */,
 				72D39B982CB1511C00D9EB45 /* AdminOrdersViewController.swift in Sources */,
 				72D39B992CB1511C00D9EB45 /* OrdersCollectionViewCell.swift in Sources */,
-				72D39B9A2CB1511C00D9EB45 /* AdminPersonalAccountViewController.swift in Sources */,
 				AF74D5822CB1582000B64D6E /* DeratizationView.swift in Sources */,
-				72D39B9B2CB1511C00D9EB45 /* AdminSettingsViewController.swift in Sources */,
-				72D39B9C2CB1511C00D9EB45 /* ProfileDetailsCell.swift in Sources */,
 				AF4B1E2B2CA0736200FDA3EC /* ClientChatViewController.swift in Sources */,
 				AF4B1E282CA0729300FDA3EC /* ServerErrorViewController.swift in Sources */,
 				AF74D5802CB1561300B64D6E /* DezinfectionView.swift in Sources */,
@@ -572,7 +568,7 @@
 				AF4B1DF92C9B32A300FDA3EC /* SuccessViewController.swift in Sources */,
 				AF4B1E172C9FFF3200FDA3EC /* LabelSettings.swift in Sources */,
 				72D39BA82CB1870D00D9EB45 /* AdminLoginViewController.swift in Sources */,
-				AF74D5522CA7EB3200B64D6E /* NewUserRegistratinSecondPageViewController.swift in Sources */,
+				AF74D5522CA7EB3200B64D6E /* UserRegisterSecondPageViewController.swift in Sources */,
 				72D39BA62CB1796F00D9EB45 /* CategoriesCollectionViewCell.swift in Sources */,
 				AF4B1DE92C9AEEC600FDA3EC /* Profile.swift in Sources */,
 				AF4B1E092C9C221000FDA3EC /* NetworkRequest.swift in Sources */,
@@ -597,6 +593,7 @@
 				AF74D5502CA7C97B00B64D6E /* KeychainManager.swift in Sources */,
 				AF4B1E152C9D9CB400FDA3EC /* PersonalAccountViewController.swift in Sources */,
 				AF4B1DF52C9B28ED00FDA3EC /* ClientLoginViewController.swift in Sources */,
+				AF3EDD0F2CB4696E00CAF1FE /* ClientChoiceViewController.swift in Sources */,
 				AF4B1E022C9C17BA00FDA3EC /* EndPoint.swift in Sources */,
 				72D39B9E2CB1566800D9EB45 /* AdminHistoryViewController.swift in Sources */,
 				AF4B1DF12C9B153C00FDA3EC /* HexExtention.swift in Sources */,
