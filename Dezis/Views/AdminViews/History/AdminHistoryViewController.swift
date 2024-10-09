@@ -40,7 +40,7 @@ class AdminHistoryViewController: UIViewController {
     }()
     
     private var categories: [CategoryModel] = [
-        CategoryModel(categoryName: "Новые запросы"),
+        CategoryModel(categoryName: "Новые заказы"),
         CategoryModel(categoryName: "Завершенные")
     ]
     

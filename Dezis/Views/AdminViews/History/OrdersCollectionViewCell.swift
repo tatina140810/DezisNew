@@ -14,7 +14,7 @@ class OrdersCollectionViewCell: UICollectionViewCell {
     private let nameLabel: UILabel = {
         let view = UILabel()
         view.text = "Alexey Ivanovich"
-        view.font = .systemFont(ofSize: 16)
+        view.font = UIFont(name: "SFProDisplay-Regular", size: 16)
         view.textColor = .init(UIColor(hex: "#FFFFFF"))
         view.textAlignment = .center
         view.numberOfLines = 0
@@ -26,7 +26,7 @@ class OrdersCollectionViewCell: UICollectionViewCell {
     private let serviceLabel: UILabel = {
         let view = UILabel()
         view.text = "Услуги:"
-        view.font = .systemFont(ofSize: 16)
+        view.font = UIFont(name: "SFProDisplay-Regular", size: 14)
         view.textColor = .init(UIColor(hex: "#0A84FF"))
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
@@ -35,7 +35,7 @@ class OrdersCollectionViewCell: UICollectionViewCell {
     private let addresslabel: UILabel = {
         let view = UILabel()
         view.text = "Адрес:"
-        view.font = .systemFont(ofSize: 16)
+        view.font = UIFont(name: "SFProDisplay-Regular", size: 14)
         view.textColor = .init(UIColor(hex: "#0A84FF"))
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
@@ -44,7 +44,7 @@ class OrdersCollectionViewCell: UICollectionViewCell {
     private let dateLabel: UILabel = {
         let view = UILabel()
         view.text = "Дата:"
-        view.font = .systemFont(ofSize: 16)
+        view.font = UIFont(name: "SFProDisplay-Regular", size: 14)
         view.textColor = .init(UIColor(hex: "#0A84FF"))
         view.translatesAutoresizingMaskIntoConstraints = false
         return view

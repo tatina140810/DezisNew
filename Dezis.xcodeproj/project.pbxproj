@@ -9,9 +9,7 @@
 /* Begin PBXBuildFile section */
 		4061B8DFFEC52EF1268906C9 /* Pods_Dezis.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D594A6880D984FC3775947A /* Pods_Dezis.framework */; };
 		72D39B912CB1511C00D9EB45 /* AdminTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D39B822CB1511C00D9EB45 /* AdminTabBarController.swift */; };
-		72D39B922CB1511C00D9EB45 /* AdminHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D39B832CB1511C00D9EB45 /* AdminHomeViewController.swift */; };
 		72D39B932CB1511C00D9EB45 /* AdminChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D39B8E2CB1511C00D9EB45 /* AdminChatViewController.swift */; };
-		72D39B982CB1511C00D9EB45 /* AdminOrdersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D39B842CB1511C00D9EB45 /* AdminOrdersViewController.swift */; };
 		72D39B992CB1511C00D9EB45 /* OrdersCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D39B852CB1511C00D9EB45 /* OrdersCollectionViewCell.swift */; };
 		72D39B9E2CB1566800D9EB45 /* AdminHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D39B9D2CB1566800D9EB45 /* AdminHistoryViewController.swift */; };
 		72D39BA02CB157ED00D9EB45 /* AdminRequestsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D39B9F2CB157ED00D9EB45 /* AdminRequestsViewController.swift */; };
@@ -75,8 +73,6 @@
 
 /* Begin PBXFileReference section */
 		72D39B822CB1511C00D9EB45 /* AdminTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminTabBarController.swift; sourceTree = "<group>"; };
-		72D39B832CB1511C00D9EB45 /* AdminHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminHomeViewController.swift; sourceTree = "<group>"; };
-		72D39B842CB1511C00D9EB45 /* AdminOrdersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminOrdersViewController.swift; sourceTree = "<group>"; };
 		72D39B852CB1511C00D9EB45 /* OrdersCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrdersCollectionViewCell.swift; sourceTree = "<group>"; };
 		72D39B8E2CB1511C00D9EB45 /* AdminChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminChatViewController.swift; sourceTree = "<group>"; };
 		72D39B9D2CB1566800D9EB45 /* AdminHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminHistoryViewController.swift; sourceTree = "<group>"; };
@@ -156,14 +152,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		72D39B862CB1511C00D9EB45 /* Orders */ = {
-			isa = PBXGroup;
-			children = (
-				72D39B842CB1511C00D9EB45 /* AdminOrdersViewController.swift */,
-			);
-			path = Orders;
-			sourceTree = "<group>";
-		};
 		72D39B8F2CB1511C00D9EB45 /* Chat */ = {
 			isa = PBXGroup;
 			children = (
@@ -177,11 +165,9 @@
 			children = (
 				72D39BA72CB1870D00D9EB45 /* AdminLoginViewController.swift */,
 				72D39B822CB1511C00D9EB45 /* AdminTabBarController.swift */,
-				72D39B832CB1511C00D9EB45 /* AdminHomeViewController.swift */,
 				72D39BA42CB171F700D9EB45 /* History */,
-				72D39BA12CB15F5D00D9EB45 /* Requests */,
 				72D39B8F2CB1511C00D9EB45 /* Chat */,
-				72D39B862CB1511C00D9EB45 /* Orders */,
+				72D39BA12CB15F5D00D9EB45 /* Requests */,
 			);
 			path = AdminViews;
 			sourceTree = "<group>";
@@ -563,9 +549,7 @@
 				AF74D5752CB1171700B64D6E /* FifthOnboardingViewController.swift in Sources */,
 				AF4B1E232CA06E7E00FDA3EC /* AboutUsViewController.swift in Sources */,
 				72D39B912CB1511C00D9EB45 /* AdminTabBarController.swift in Sources */,
-				72D39B922CB1511C00D9EB45 /* AdminHomeViewController.swift in Sources */,
 				72D39B932CB1511C00D9EB45 /* AdminChatViewController.swift in Sources */,
-				72D39B982CB1511C00D9EB45 /* AdminOrdersViewController.swift in Sources */,
 				72D39B992CB1511C00D9EB45 /* OrdersCollectionViewCell.swift in Sources */,
 				AF74D5822CB1582000B64D6E /* DeratizationView.swift in Sources */,
 				AF4B1E2B2CA0736200FDA3EC /* ClientChatViewController.swift in Sources */,

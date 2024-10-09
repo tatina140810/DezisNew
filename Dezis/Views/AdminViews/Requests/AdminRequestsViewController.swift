@@ -12,7 +12,7 @@ class AdminRequestsViewController: UIViewController {
     private let titleLabel: UILabel = {
         let view = UILabel()
         view.text = "Запросы для входа"
-        view.font = .boldSystemFont(ofSize: 24)
+        view.font = UIFont(name: "SFProDisplay-Bold", size: 24)
         view.textColor = .init(UIColor(hex: "#FFFFFF"))
         view.textAlignment = .center
         view.numberOfLines = 0
