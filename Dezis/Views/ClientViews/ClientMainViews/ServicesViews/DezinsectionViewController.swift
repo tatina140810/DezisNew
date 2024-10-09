@@ -8,6 +8,7 @@
 import UIKit
 
 class DezinsectionViewController: UIViewController {
+    
         private var dezincectionImage:UIImageView = {
             let view = UIImageView()
             view.image = UIImage(resource: .rectangle454)

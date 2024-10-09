@@ -2,7 +2,7 @@ import UIKit
 
 class LabelSettings: UILabel {
     
-    func labelMaker(text: String, font: UIFont = .boldSystemFont(ofSize: 16),
+    func labelMaker(text: String, font: UIFont = UIFont(name: "SFProDisplay-Bold", size: 16)!,
                     textColor: UIColor = .black,
                     textAligmat: NSTextAlignment = .left,
                     numberOfLines: Int = 0,
@@ -14,7 +14,7 @@ class LabelSettings: UILabel {
         label.textColor = textColor
         label.textAlignment = textAligmat
         label.numberOfLines = numberOfLines
-        label.translatesAutoresizingMaskIntoConstraints = constraints
+        
         
         return label
     }

@@ -5,7 +5,16 @@ class NewUserRegisterViewController: UIViewController {
     
     // MARK: - Create UI Elements
     
-    private var titleLabel = LabelSettings().labelMaker(text: "Регистрация", font: UIFont.systemFont(ofSize: 28), textColor: .white)
+    private var titleLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Регистрация"
+        label.font = UIFont(name: "SFProDisplay-Bold", size: 24)
+        label.textColor = .white
+        label.textAlignment = .center
+        label.numberOfLines = 0
+        return label
+    }()
+
     
     private var nameTextField = TextFieldSettings().textFieldMaker(placeholder: "ФИО", backgroundColor: UIColor(hex: "#2B373E"))
     
@@ -16,7 +25,7 @@ class NewUserRegisterViewController: UIViewController {
     private var errorLabel: UILabel = {
         let view = UILabel()
         view.text = ""
-        view.font = UIFont.systemFont(ofSize: 12)
+        view.font = UIFont(name: "SFProDisplay-Regular", size: 12)
         view.textColor = .red
         view.textAlignment = .left
         return view
@@ -28,13 +37,14 @@ class NewUserRegisterViewController: UIViewController {
         view.setTitleColor(.white, for: .normal)
         view.backgroundColor = UIColor(hex: "#0A84FF")
         view.layer.cornerRadius = 12
+        view.titleLabel?.font = UIFont(name: "SFProDisplay-Bold", size: 16)
         return view
     }()
     
     private var privacyLabel: UILabel = {
         let view = UILabel()
         view.text = "Выбирая «Зарегистрироваться», вы подтверждаете свое согласие с Условием продажи и принимаете условия"
-        view.font = UIFont.systemFont(ofSize: 12)
+        view.font = UIFont(name: "SFProDisplay-Regular", size: 12)
         view.textColor = .white
         view.textAlignment = .center
         view.numberOfLines = 0
@@ -43,7 +53,7 @@ class NewUserRegisterViewController: UIViewController {
     private var confidentialityLabel: UILabel = {
         let view = UILabel()
         view.text = "Положения о конфиденциальности."
-        view.font = UIFont.systemFont(ofSize: 12)
+        view.font = UIFont(name: "SFProDisplay-Regular", size: 12)
         view.textColor = .white
         view.textAlignment = .center
         view.numberOfLines = 0
