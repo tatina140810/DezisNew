@@ -12,7 +12,7 @@ class СonfirmationСodeViewController: UIViewController {
     private var codeLabel: UILabel = {
         let view = UILabel()
         view.text = "Введите код"
-        view.font = UIFont.boldSystemFont(ofSize: 24)
+        view.font = UIFont(name: "SFProDisplay-Bold", size: 24)
         view.textColor = .white
         return view
     }()
@@ -20,7 +20,7 @@ class СonfirmationСodeViewController: UIViewController {
     private var confirmationLabel: UILabel = {
         let view = UILabel()
         view.text = "Мы отправили вам код на почту"
-        view.font = UIFont(name: "Roboto", size: 16)
+        view.font = UIFont(name: "SFProDisplay-Regular", size: 18)
         view.textColor = .white
         return view
     }()
@@ -31,16 +31,15 @@ class СonfirmationСodeViewController: UIViewController {
     private var newCodeButton: UIButton = {
         let button = UIButton()
         button.setTitle("Отправить снова", for: .normal)
-        button.titleLabel?.font = UIFont(name: "Roboto", size: 12)
+        button.titleLabel?.font = UIFont(name: "SFProDisplay-Regular", size: 12)
         button.tintColor = UIColor(hex: "#5FBEF4")
         button.addTarget(self, action: #selector(newCodeButtonTapped), for: .touchUpInside)
-        button.setTitleColor(.blue, for: .normal)
         return button
     }()
     private var oneMinuteLabel: UILabel = {
         let view = UILabel()
         view.text = "через 1 минуту"
-        view.font = UIFont(name: "Roboto", size: 12)
+        view.font = UIFont(name: "SFProDisplay-Regular", size: 12)
         view.textColor = .white
         return view
     }()
@@ -51,6 +50,7 @@ class СonfirmationСodeViewController: UIViewController {
         view.setTitleColor(.white, for: .normal)
         view.backgroundColor = UIColor(hex: "#0A84FF")
         view.layer.cornerRadius = 12
+        view.titleLabel?.font = UIFont(name: "SFProDisplay-Bold", size: 16)
         view.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
         return view
     }()
@@ -58,7 +58,7 @@ class СonfirmationСodeViewController: UIViewController {
     private var privacyLabel: UILabel = {
         let view = UILabel()
         view.text = "Выбирая «Зарегистрироваться», вы подтверждаете свое согласие с Условием продажи и принимаете условия"
-        view.font = UIFont.systemFont(ofSize: 12)
+        view.font = UIFont(name: "SFProDisplay-Regular", size: 12)
         view.textColor = .white
         view.textAlignment = .center
         view.numberOfLines = 0
@@ -67,7 +67,7 @@ class СonfirmationСodeViewController: UIViewController {
     private var confidentialityLabel: UILabel = {
         let view = UILabel()
         view.text = "Положения о конфиденциальности."
-        view.font = UIFont.systemFont(ofSize: 12)
+        view.font = UIFont(name: "SFProDisplay-Regular", size: 12)
         view.textColor = .white
         view.textAlignment = .center
         view.numberOfLines = 0
@@ -78,6 +78,8 @@ class СonfirmationСodeViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = UIColor(hex: "#1B2228")
         setupUI()
+        createAttributedText()
+        createPrivaciAttributedText()
         
     }
     private func setupUI(){
@@ -110,7 +112,7 @@ class СonfirmationСodeViewController: UIViewController {
         }
         view.addSubview(nextButton)
         nextButton.snp.makeConstraints { make in
-            make.top.equalTo(oneMinuteLabel.snp.bottom).offset(5)
+            make.top.equalTo(oneMinuteLabel.snp.bottom).offset(10)
             make.leading.equalToSuperview().offset(16)
             make.trailing.equalToSuperview().offset(-16)
             make.height.equalTo(48)
@@ -159,8 +161,6 @@ class СonfirmationСodeViewController: UIViewController {
     }
     @objc func nextButtonTapped(){
         let vc = SuccessViewController()
-        vc.titleLabel.text = "Вы успешно зарегистрировались"
-        vc.nextViewControllerType = .client
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true, completion: nil)
     }

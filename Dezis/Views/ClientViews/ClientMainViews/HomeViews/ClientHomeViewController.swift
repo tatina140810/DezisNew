@@ -18,7 +18,7 @@ class ClientHomeViewController: UIViewController {
     private let infoLabel: UILabel = {
         let label = UILabel()
         label.text = "Информация о записи"
-        label.font = UIFont.boldSystemFont(ofSize: 24)
+        label.font = UIFont(name: "SFProDisplay-Bold", size: 24)
         label.textColor = .white
         label.textAlignment = .center
         return label
@@ -28,7 +28,7 @@ class ClientHomeViewController: UIViewController {
     private let orderLabel: UILabel = {
         let label = UILabel()
         label.text = "Услуги"
-        label.font = UIFont.boldSystemFont(ofSize: 24)
+        label.font = UIFont(name: "SFProDisplay-Bold", size: 24)
         label.textColor = .white
         label.textAlignment = .center
         label.numberOfLines = 0

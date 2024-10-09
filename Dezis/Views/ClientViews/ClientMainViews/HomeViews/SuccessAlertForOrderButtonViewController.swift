@@ -2,8 +2,7 @@
 import UIKit
 
 class SuccessAlertForOrderButtonViewController: UIViewController {
-    
-   // let vc = ClientHomeViewController()
+  
    
     private var alertImage: UIImageView = {
         let view = UIImageView()
@@ -20,7 +19,7 @@ class SuccessAlertForOrderButtonViewController: UIViewController {
     private var titleLabel: UILabel = {
         let view = UILabel()
         view.text = "Заявка успешно отправлена. Наш менеджер свяжется с вами в ближайшее время!"
-        view.font = UIFont.systemFont(ofSize: 14)
+        view.font = UIFont(name: "SFProDisplay-Regular", size: 14)
         view.textAlignment = .center
         view.numberOfLines = 0
         return view

@@ -31,7 +31,7 @@ class CalendarViewController: UIViewController {
         private var titleLabel: UILabel = {
             let label = UILabel()
             label.text = "Выберите услугу:"
-            label.font = UIFont.boldSystemFont(ofSize: 18)
+            label.font = UIFont(name: "SFProDisplay-Bold", size: 18)
             label.textColor = .white
             label.textAlignment = .left
             return label

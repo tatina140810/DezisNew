@@ -70,7 +70,7 @@ class FirstStackView: UIView {
     private let firstTextLabel: UILabel = {
         let label = UILabel()
         label.text = "Запись ведется не менее чем за один день до даты услуги."
-        label.font = UIFont.boldSystemFont(ofSize: 18)
+        label.font = UIFont(name: "SFProDisplay-Bold", size: 18)
         label.textColor = .white
         label.numberOfLines = 0
         label.textAlignment = .left
@@ -80,7 +80,7 @@ class FirstStackView: UIView {
     private let secondTextLabel: UILabel = {
         let label = UILabel()
         label.text = "После бронирования услуги, наш менеджер свяжется с вами для подтверждения заявки и уточнения деталей."
-        label.font = UIFont.boldSystemFont(ofSize: 18)
+        label.font = UIFont(name: "SFProDisplay-Bold", size: 18)
         label.textColor = .white
         label.textAlignment = .left
         label.numberOfLines = 0
@@ -90,7 +90,7 @@ class FirstStackView: UIView {
     private let thirdTextLabel: UILabel = {
         let label = UILabel()
         label.text = "Изменение или отмена бронирования возможны не позднее, чем за 24 часа до назначенного времени."
-        label.font = UIFont.boldSystemFont(ofSize: 18)
+        label.font = UIFont(name: "SFProDisplay-Bold", size: 18)
         label.textColor = .white
         label.textAlignment = .left
         label.numberOfLines = 0

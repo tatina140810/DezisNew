@@ -11,7 +11,7 @@ class ThirdOnboardingViewController: UIPageViewController {
     private var titleLabel: UILabel = {
         let label = UILabel()
         label.text = "Вы указываете проблему-мы создаем чистоту быстро и профессионально."
-        label.font = UIFont.boldSystemFont(ofSize: 20)
+        label.font = UIFont(name: "SFProDisplay-Bold", size: 20)
         label.textColor = .white
         label.numberOfLines = 0
         label.textAlignment = .left

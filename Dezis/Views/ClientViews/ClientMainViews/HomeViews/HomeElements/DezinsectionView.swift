@@ -20,7 +20,7 @@ class DezinsectionView: UIView {
     private let firstTextLabel: UILabel = {
         let label = UILabel()
         label.text = "Дезинсекция"
-        label.font = UIFont.boldSystemFont(ofSize: 22)
+        label.font = UIFont(name: "SFProDisplay-Bold", size: 22)
         label.textColor = .white
         label.numberOfLines = 0
         label.textAlignment = .left
@@ -29,7 +29,7 @@ class DezinsectionView: UIView {
     private let dezinsectionDescriptionLabel: UILabel = {
         let label = UILabel()
         label.text = "Уничтожение насекомых (тараканы, блохи, комары, мухи, клопы и др.), которые могут быть переносчиками болезней или причинять вред имуществу и человеку. "
-        label.font = UIFont.boldSystemFont(ofSize: 16)
+        label.font = UIFont(name: "SFProDisplay-Bold", size: 16)
         label.textColor = .white
         label.numberOfLines = 0
         label.textAlignment = .left

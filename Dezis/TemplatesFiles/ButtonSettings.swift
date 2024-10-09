@@ -20,6 +20,7 @@ class ButtonSettings: UIButton {
         button.layer.cornerRadius = 12
         button.addTarget(target, action: action, for: controlEvent)
         button.translatesAutoresizingMaskIntoConstraints = constraints
+      button.titleLabel?.font = UIFont(name: "SFProDisplay-Bold", size: 16)
         
         return button
     }
