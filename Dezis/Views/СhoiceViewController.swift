@@ -48,7 +48,7 @@ class ChoiceViewController: UIViewController {
         present(vc, animated: true, completion: nil)
     }
     @objc func adminButtonTapped() {
-        let vc = AdminTabBarController()
+        let vc = AdminLoginViewController()
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true, completion: nil)
     }
