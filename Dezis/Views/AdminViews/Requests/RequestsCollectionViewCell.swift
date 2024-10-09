@@ -14,7 +14,7 @@ class RequestsCollectionViewCell: UICollectionViewCell {
     private let dateLabel: UILabel = {
         let view = UILabel()
         view.text = "Дата:"
-        view.font = .systemFont(ofSize: 16)
+        view.font = UIFont(name: "SFProDisplay-Regular", size: 16)
         view.textColor = .init(UIColor(hex: "#0A84FF"))
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
@@ -23,7 +23,7 @@ class RequestsCollectionViewCell: UICollectionViewCell {
     private let nameLabel: UILabel = {
         let view = UILabel()
         view.text = "ФИО"
-        view.font = .systemFont(ofSize: 16)
+        view.font = UIFont(name: "SFProDisplay-Regular", size: 16)
         view.textColor = .init(UIColor(hex: "#0A84FF"))
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
@@ -32,7 +32,7 @@ class RequestsCollectionViewCell: UICollectionViewCell {
     private let emailLabel: UILabel = {
         let view = UILabel()
         view.text = "Почта:"
-        view.font = .systemFont(ofSize: 16)
+        view.font = UIFont(name: "SFProDisplay-Regular", size: 16)
         view.textColor = .init(UIColor(hex: "#0A84FF"))
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
@@ -41,7 +41,7 @@ class RequestsCollectionViewCell: UICollectionViewCell {
     private let phoneNumberLabel: UILabel = {
         let view = UILabel()
         view.text = "Телефон:"
-        view.font = .systemFont(ofSize: 16)
+        view.font = UIFont(name: "SFProDisplay-Regular", size: 16)
         view.textColor = .init(UIColor(hex: "#0A84FF"))
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
@@ -50,7 +50,7 @@ class RequestsCollectionViewCell: UICollectionViewCell {
     private let addressLabel: UILabel = {
         let view = UILabel()
         view.text = "Адрес:"
-        view.font = .systemFont(ofSize: 16)
+        view.font = UIFont(name: "SFProDisplay-Regular", size: 16)
         view.textColor = .init(UIColor(hex: "#0A84FF"))
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
@@ -59,32 +59,34 @@ class RequestsCollectionViewCell: UICollectionViewCell {
     private let houseNumberLabel: UILabel = {
         let view = UILabel()
         view.text = "Номер квартиры/дома:"
-        view.font = .systemFont(ofSize: 16)
+        view.font = UIFont(name: "SFProDisplay-Regular", size: 16)
         view.textColor = .init(UIColor(hex: "#0A84FF"))
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
     private let confirmButton: UIButton = {
-        let view = UIButton()
-        view.setTitle("Подтвердить", for: .normal)
-        view.setTitleColor(.white, for: .normal)
-        view.backgroundColor = UIColor(hex: "#0A84FF")
-        view.layer.cornerRadius = 10
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
+        let button = UIButton()
+        button.setTitle("Подтвердить", for: .normal)
+        button.titleLabel?.font = UIFont(name: "SFProDisplay-Bold", size: 16)
+        button.setTitleColor(.white, for: .normal)
+        button.backgroundColor = UIColor(hex: "#0A84FF")
+        button.layer.cornerRadius = 10
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
     }()
     
     private let denyButton: UIButton = {
-        let view = UIButton()
-        view.setTitle("Отказать", for: .normal)
-        view.setTitleColor(.white, for: .normal)
-        view.backgroundColor = .clear
-        view.layer.borderWidth = 1
-        view.layer.borderColor = UIColor(hex: "#0A84FF").cgColor
-        view.layer.cornerRadius = 10
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
+        let button = UIButton()
+        button.setTitle("Отказать", for: .normal)
+        button.titleLabel?.font = UIFont(name: "SFProDisplay-Bold", size: 16)
+        button.setTitleColor(.white, for: .normal)
+        button.backgroundColor = .clear
+        button.layer.borderWidth = 1
+        button.layer.borderColor = UIColor(hex: "#0A84FF").cgColor
+        button.layer.cornerRadius = 10
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
     }()
     
     override init(frame: CGRect) {

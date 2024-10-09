@@ -43,8 +43,6 @@ class AdminTabBarController: UITabBarController {
     }
     
     private func setupTabBarController() {
-        let homeView = UINavigationController(rootViewController: ClientHomeViewController())
-        homeView.tabBarItem = UITabBarItem(title: "Главная", image: UIImage(named: "house"), selectedImage: UIImage(named: "house.fill"))
         
         let historyView = UINavigationController(rootViewController: AdminHistoryViewController())
         historyView.tabBarItem = UITabBarItem(title: "История", image: UIImage(named: "clock1"), selectedImage: UIImage(named: "clock1.fill"))
@@ -55,6 +53,6 @@ class AdminTabBarController: UITabBarController {
         let requestView = UINavigationController(rootViewController: AdminRequestsViewController())
         requestView.tabBarItem = UITabBarItem(title: "Запросы", image: UIImage(named: "notification"), selectedImage: UIImage(named: "notification.fill"))
         
-        setViewControllers([homeView, historyView, chatView, requestView], animated: true)
+        setViewControllers([historyView, chatView, requestView], animated: true)
     }
 }
