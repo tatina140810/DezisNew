@@ -59,6 +59,14 @@ class NewUserRegisterViewController: UIViewController {
         view.numberOfLines = 0
         return view
     }()
+    private var backButton: UIButton = {
+        let view = UIButton()
+        view.setTitle("Назад", for: .normal)
+        view.setTitleColor(UIColor(hex: "#0A84FF"), for: .normal)
+        //view.tintColor = UIColor(hex: "#0A84FF")
+        view.titleLabel?.font = UIFont.systemFont(ofSize: 16)
+        return view
+    }()
     
     // MARK: - View Life Cycle
     
@@ -68,11 +76,15 @@ class NewUserRegisterViewController: UIViewController {
         setupUI()
         createAttributedText()
         createPrivaciAttributedText()
-        nextButton.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
+        setupAddTarget()
+        
     }
     
     // MARK: - Attributed Text Links
-    
+    private func setupAddTarget(){
+        backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
+        nextButton.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
+    }
     private func createAttributedText() {
         AttributedTextHelper.configureAttributedText(
             for: privacyLabel,
@@ -95,6 +107,13 @@ class NewUserRegisterViewController: UIViewController {
     // MARK: - Setup UI Elements
     
     private func setupUI() {
+        view.addSubview(backButton)
+        backButton.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(50)
+            make.leading.equalToSuperview().offset(20)
+            make.height.equalTo(22)
+            make.width.equalTo(55)
+        }
         view.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
@@ -185,5 +204,10 @@ class NewUserRegisterViewController: UIViewController {
         let alert = UIAlertController(title: "Ошибка", message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default))
         present(alert, animated: true)
+    }
+    @objc func backButtonTapped(){
+        let vc = ClientChoiceViewController()
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true, completion: nil)
     }
 }

@@ -45,7 +45,6 @@ class ClientHomeViewController: UIViewController {
         button.backgroundColor = UIColor(hex: "#0A84FF")
         button.layer.cornerRadius = 12
         button.clipsToBounds = true
-        button.addTarget(self, action: #selector(dezinsectionButtonTapped), for: .touchUpInside)
         button.titleLabel?.font = UIFont(name: "SFProDisplay-Bold", size: 16)
 
         return button
@@ -62,7 +61,6 @@ class ClientHomeViewController: UIViewController {
         button.backgroundColor = UIColor(hex: "#0A84FF")
         button.layer.cornerRadius = 12
         button.clipsToBounds = true
-        button.addTarget(self, action: #selector(dezinfectionButtonTapped), for: .touchUpInside)
         button.titleLabel?.font = UIFont(name: "SFProDisplay-Bold", size: 16)
 
         return button
@@ -80,7 +78,6 @@ class ClientHomeViewController: UIViewController {
         button.layer.cornerRadius = 12
         button.clipsToBounds = true
         button.titleLabel?.font = UIFont(name: "SFProDisplay-Bold", size: 16)
-        button.addTarget(self, action: #selector(deratizationButtonTapped), for: .touchUpInside)
         return button
     }()
    
@@ -88,8 +85,13 @@ class ClientHomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(hex: "#1B2228")
-        
+        setupAddTarget()
         setupUI()
+    }
+    private func setupAddTarget() {
+        deratizationDetailsButton.addTarget(self, action: #selector(deratizationButtonTapped), for: .touchUpInside)
+        dezinfectionDetailsButton.addTarget(self, action: #selector(dezinfectionButtonTapped), for: .touchUpInside)
+        dezinsectionDetailsButton.addTarget(self, action: #selector(dezinsectionButtonTapped), for: .touchUpInside)
     }
   
     
