@@ -46,6 +46,8 @@ class ClientHomeViewController: UIViewController {
         button.layer.cornerRadius = 12
         button.clipsToBounds = true
         button.addTarget(self, action: #selector(dezinsectionButtonTapped), for: .touchUpInside)
+        button.titleLabel?.font = UIFont(name: "SFProDisplay-Bold", size: 16)
+
         return button
     }()
     
@@ -61,6 +63,8 @@ class ClientHomeViewController: UIViewController {
         button.layer.cornerRadius = 12
         button.clipsToBounds = true
         button.addTarget(self, action: #selector(dezinfectionButtonTapped), for: .touchUpInside)
+        button.titleLabel?.font = UIFont(name: "SFProDisplay-Bold", size: 16)
+
         return button
     }()
     
@@ -75,6 +79,7 @@ class ClientHomeViewController: UIViewController {
         button.backgroundColor = UIColor(hex: "#0A84FF")
         button.layer.cornerRadius = 12
         button.clipsToBounds = true
+        button.titleLabel?.font = UIFont(name: "SFProDisplay-Bold", size: 16)
         button.addTarget(self, action: #selector(deratizationButtonTapped), for: .touchUpInside)
         return button
     }()

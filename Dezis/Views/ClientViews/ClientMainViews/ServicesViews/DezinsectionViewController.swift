@@ -43,7 +43,7 @@ class DezinsectionViewController: UIViewController {
             button.layer.cornerRadius = 8
             button.clipsToBounds = true
             button.addTarget(self, action: #selector(orderButtonTapped), for: .touchUpInside)
-            
+            button.titleLabel?.font = UIFont(name: "SFProDisplay-Bold", size: 16)
             return button
             
         }()
@@ -84,7 +84,7 @@ class DezinsectionViewController: UIViewController {
             }
         }
         @objc func orderButtonTapped(){
-            let vc = SuccessAlertForOrderButtonViewController()
+            let vc = ViewControllerForAlert()
         
             vc.modalPresentationStyle = .fullScreen
             present(vc, animated: true, completion: nil)

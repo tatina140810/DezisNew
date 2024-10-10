@@ -1,9 +1,3 @@
-//
-//  DezinfectionViewController.swift
-//  Dezis
-//
-//  Created by Tatina Dzhakypbekova on 2/10/24.
-//
 
 import UIKit
 
@@ -42,7 +36,7 @@ class DezinfectionViewController: UIViewController {
         button.layer.cornerRadius = 8
         button.clipsToBounds = true
         button.addTarget(self, action: #selector(orderButtonTapped), for: .touchUpInside)
-        
+        button.titleLabel?.font = UIFont(name: "SFProDisplay-Bold", size: 16)
         return button
         
     }()
@@ -83,10 +77,8 @@ class DezinfectionViewController: UIViewController {
         }
     }
     @objc func orderButtonTapped(){
-        let vc = SuccessAlertForOrderButtonViewController()
-    
-        vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: true, completion: nil)
+        let vc = ViewControllerForAlert()
+        navigationController?.present(vc, animated: true)
     }
 
 }

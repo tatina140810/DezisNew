@@ -7,7 +7,7 @@ class ClientLoginViewController: UIViewController, UITextFieldDelegate {
     private var titleLabel: UILabel = {
         let view = UILabel()
         view.text = "Вход"
-        view.font = UIFont(name: "SFProDisplay-Regular", size: 24)
+        view.font = UIFont(name: "SFProDisplay-Bold", size: 24)
         view.textAlignment = .center
         view.textColor = .white
  
@@ -43,9 +43,8 @@ class ClientLoginViewController: UIViewController, UITextFieldDelegate {
         view.setTitleColor(.white, for: .normal)
         view.backgroundColor = UIColor(hex: "#0A84FF")
         view.layer.cornerRadius = 8
-        view.titleLabel?.font = UIFont(name: "SFProDisplay-Regular", size: 16)
+        view.titleLabel?.font = UIFont(name: "SFProDisplay-Bold", size: 16)
         view.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
-        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     private var privacyLabel: UILabel = {
