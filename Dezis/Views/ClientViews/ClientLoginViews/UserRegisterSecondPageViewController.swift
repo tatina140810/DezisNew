@@ -33,7 +33,6 @@ class UserRegisterSecondPageViewController: UIViewController {
         view.backgroundColor = UIColor(hex: "#0A84FF")
         view.layer.cornerRadius = 12
         view.titleLabel?.font = UIFont(name: "SFProDisplay-Bold", size: 16)
-        view.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
         return view
     }()
     
@@ -55,7 +54,14 @@ class UserRegisterSecondPageViewController: UIViewController {
         view.numberOfLines = 0
         return view
     }()
-    // MARK: - View Life Cycle
+    private var backButton: UIButton = {
+        let view = UIButton()
+        view.setTitle("Назад", for: .normal)
+        view.setTitleColor(UIColor(hex: "#0A84FF"), for: .normal)
+        view.titleLabel?.font = UIFont.systemFont(ofSize: 16)
+        return view
+    }()
+ 
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,11 +69,14 @@ class UserRegisterSecondPageViewController: UIViewController {
         setupUI()
         createAttributedText()
         createPrivaciAttributedText()
+        setupAddTarget()
        
     }
     
-    // MARK: - Attributed Text Links
-    
+    private func setupAddTarget(){
+        backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
+        nextButton.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
+    }
     private func createAttributedText() {
         AttributedTextHelper.configureAttributedText(
             for: privacyLabel,
@@ -90,6 +99,14 @@ class UserRegisterSecondPageViewController: UIViewController {
     // MARK: - Setup UI Elements
     
     private func setupUI() {
+        
+        view.addSubview(backButton)
+        backButton.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(50)
+            make.leading.equalToSuperview().offset(20)
+            make.height.equalTo(22)
+            make.width.equalTo(55)
+        }
         
         view.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { make in
@@ -144,6 +161,10 @@ class UserRegisterSecondPageViewController: UIViewController {
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true, completion: nil)
         
+    }
+    @objc private func backButtonTapped() {
+        print("Back button tapped")
+        navigationController?.popViewController(animated: true)
     }
     
 
