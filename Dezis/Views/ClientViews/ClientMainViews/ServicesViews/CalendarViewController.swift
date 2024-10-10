@@ -86,7 +86,7 @@ class CalendarViewController: UIViewController {
             }
         }
         @objc func orderButtonTapped(){
-            let vc = SuccessAlertForOrderButtonViewController()
+            let vc = ViewControllerForAlert()
             
             vc.modalPresentationStyle = .fullScreen
             present(vc, animated: true, completion: nil)
