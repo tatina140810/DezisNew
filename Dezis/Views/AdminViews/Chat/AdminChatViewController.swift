@@ -7,12 +7,7 @@ class AdminChatViewController: UIViewController {
         let label = UILabel()
         label.text = "Чаты"
         label.textColor = UIColor.white
-        
-        if let sfProDisplayFont = UIFont(name: "SF Pro Display", size: 24) {
-            label.font = UIFontMetrics(forTextStyle: .headline).scaledFont(for: sfProDisplayFont)
-        } else {
-            label.font = UIFont.systemFont(ofSize: 24, weight: .bold)
-        }
+        label.font = UIFont(name: "SFProDisplay-Bold", size: 24)
         label.textAlignment = .center
         return label
     }()
@@ -46,7 +41,7 @@ class AdminChatViewController: UIViewController {
         view.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(view.safeAreaLayoutGuide).offset(21)
+            make.top.equalToSuperview().offset(64)
         }
 
         view.addSubview(tableView)
@@ -93,14 +88,14 @@ class ChatMessageCell: UITableViewCell {
     
     private let nameLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 16, weight: .medium)
+        label.font = UIFont(name: "SFProDisplay-Regular", size: 16)
         label.textColor = .white
         return label
     }()
     
     private let messageLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 14, weight: .regular)
+        label.font = UIFont(name: "SFProDisplay-Regular", size: 14)
         label.textColor = UIColor(hex: "#818C99")
         return label
     }()

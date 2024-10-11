@@ -27,7 +27,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //          
 //        } else {
 //            
-            let root = UINavigationController(rootViewController: FirstOnboardingViewController())
+           // let root = UINavigationController(rootViewController: FirstOnboardingViewController())
+        let root = UINavigationController(rootViewController: ServerErrorViewController())
             
             window?.rootViewController = root
       //  }
