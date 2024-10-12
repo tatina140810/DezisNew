@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		18FA88D62CB6D7EC00C66BAF /* OpenChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18FA88D52CB6D7EC00C66BAF /* OpenChatViewController.swift */; };
 		4061B8DFFEC52EF1268906C9 /* Pods_Dezis.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D594A6880D984FC3775947A /* Pods_Dezis.framework */; };
 		72D39B912CB1511C00D9EB45 /* AdminTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D39B822CB1511C00D9EB45 /* AdminTabBarController.swift */; };
 		72D39B932CB1511C00D9EB45 /* AdminChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D39B8E2CB1511C00D9EB45 /* AdminChatViewController.swift */; };
@@ -75,6 +76,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		18FA88D52CB6D7EC00C66BAF /* OpenChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenChatViewController.swift; sourceTree = "<group>"; };
 		72D39B822CB1511C00D9EB45 /* AdminTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminTabBarController.swift; sourceTree = "<group>"; };
 		72D39B852CB1511C00D9EB45 /* OrdersCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrdersCollectionViewCell.swift; sourceTree = "<group>"; };
 		72D39B8E2CB1511C00D9EB45 /* AdminChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminChatViewController.swift; sourceTree = "<group>"; };
@@ -162,6 +164,7 @@
 			isa = PBXGroup;
 			children = (
 				72D39B8E2CB1511C00D9EB45 /* AdminChatViewController.swift */,
+				18FA88D52CB6D7EC00C66BAF /* OpenChatViewController.swift */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -593,6 +596,7 @@
 				AFF6187C2CB69D5200C64C95 /* DezinfectionViewController.swift in Sources */,
 				AF74D5502CA7C97B00B64D6E /* KeychainManager.swift in Sources */,
 				AF4B1E152C9D9CB400FDA3EC /* PersonalAccountViewController.swift in Sources */,
+				18FA88D62CB6D7EC00C66BAF /* OpenChatViewController.swift in Sources */,
 				AF4B1DF52C9B28ED00FDA3EC /* ClientLoginViewController.swift in Sources */,
 				AF3EDD0F2CB4696E00CAF1FE /* ClientChoiceViewController.swift in Sources */,
 				AF4B1E022C9C17BA00FDA3EC /* EndPoint.swift in Sources */,
