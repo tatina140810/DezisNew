@@ -50,14 +50,14 @@ class ClientChoiceViewController: UIViewController {
         }
     }
     @objc func registerButtonTapped() {
-        let vc = NewUserRegisterViewController()
+        let vc = UINavigationController(rootViewController: NewUserRegisterViewController())
       
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true, completion: nil)
         
     }
     @objc func loginButtonTapped() {
-        let vc = ClientLoginViewController()
+        let vc = UINavigationController(rootViewController: ClientLoginViewController())
        
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true, completion: nil)

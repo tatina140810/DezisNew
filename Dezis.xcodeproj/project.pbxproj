@@ -70,6 +70,8 @@
 		AFF6187E2CB69D5A00C64C95 /* DeratizationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF6187D2CB69D5A00C64C95 /* DeratizationViewController.swift */; };
 		AFF618812CB7B32C00C64C95 /* ViewControllerForAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF618802CB7B32C00C64C95 /* ViewControllerForAlert.swift */; };
 		AFF618832CB82FA000C64C95 /* ClientHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF618822CB82FA000C64C95 /* ClientHistoryViewController.swift */; };
+		AFF618852CB85E2100C64C95 /* CellForChat.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF618842CB85E2100C64C95 /* CellForChat.swift */; };
+		AFF618872CB85F6A00C64C95 /* CustomNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF618862CB85F6A00C64C95 /* CustomNavigationBar.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -139,6 +141,8 @@
 		AFF6187D2CB69D5A00C64C95 /* DeratizationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeratizationViewController.swift; sourceTree = "<group>"; };
 		AFF618802CB7B32C00C64C95 /* ViewControllerForAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerForAlert.swift; sourceTree = "<group>"; };
 		AFF618822CB82FA000C64C95 /* ClientHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientHistoryViewController.swift; sourceTree = "<group>"; };
+		AFF618842CB85E2100C64C95 /* CellForChat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellForChat.swift; sourceTree = "<group>"; };
+		AFF618862CB85F6A00C64C95 /* CustomNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationBar.swift; sourceTree = "<group>"; };
 		F7FB7E9CD196CCFDB56042EF /* Pods-Dezis.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dezis.debug.xcconfig"; path = "Target Support Files/Pods-Dezis/Pods-Dezis.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -404,6 +408,8 @@
 			isa = PBXGroup;
 			children = (
 				AF4B1E2A2CA0736200FDA3EC /* ClientChatViewController.swift */,
+				AFF618842CB85E2100C64C95 /* CellForChat.swift */,
+				AFF618862CB85F6A00C64C95 /* CustomNavigationBar.swift */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -575,6 +581,7 @@
 				AF4B1DFB2C9B42D300FDA3EC /* NewUserRegisterViewController.swift in Sources */,
 				AF74D57E2CB14B7700B64D6E /* DezinsectionView.swift in Sources */,
 				72D39BA02CB157ED00D9EB45 /* AdminRequestsViewController.swift in Sources */,
+				AFF618872CB85F6A00C64C95 /* CustomNavigationBar.swift in Sources */,
 				AF74D5792CB1171700B64D6E /* SecondOnboardingViewController.swift in Sources */,
 				72D39BA32CB15F7D00D9EB45 /* RequestsCollectionViewCell.swift in Sources */,
 				AF4B1E0D2C9D9B3500FDA3EC /* ClientTabBarController.swift in Sources */,
@@ -589,6 +596,7 @@
 				AF4B1DF52C9B28ED00FDA3EC /* ClientLoginViewController.swift in Sources */,
 				AF3EDD0F2CB4696E00CAF1FE /* ClientChoiceViewController.swift in Sources */,
 				AF4B1E022C9C17BA00FDA3EC /* EndPoint.swift in Sources */,
+				AFF618852CB85E2100C64C95 /* CellForChat.swift in Sources */,
 				AFF618832CB82FA000C64C95 /* ClientHistoryViewController.swift in Sources */,
 				72D39B9E2CB1566800D9EB45 /* AdminHistoryViewController.swift in Sources */,
 				AFF618812CB7B32C00C64C95 /* ViewControllerForAlert.swift in Sources */,
