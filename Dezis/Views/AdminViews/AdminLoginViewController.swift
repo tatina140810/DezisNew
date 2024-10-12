@@ -12,7 +12,7 @@ class AdminLoginViewController: UIViewController {
     private let loginLabel: UILabel = {
         let view = UILabel()
         view.text = "Вход админа"
-        view.font = .boldSystemFont(ofSize: 24)
+        view.font = UIFont(name: "SFProDisplay-Bold", size: 24)
         view.textColor = .init(UIColor(hex: "#FFFFFF"))
         view.numberOfLines = 0
         view.textAlignment = .center
@@ -26,15 +26,18 @@ class AdminLoginViewController: UIViewController {
         field.backgroundColor = UIColor(hex: "#2B373E")
         field.textColor = .white
         field.attributedPlaceholder = NSAttributedString(
-                string: "Логин",
-                attributes: [NSAttributedString.Key.foregroundColor: UIColor.white.withAlphaComponent(0.7)])
+            string: "Логин",
+            attributes: [
+                NSAttributedString.Key.foregroundColor: UIColor.white.withAlphaComponent(0.7),
+                NSAttributedString.Key.font: UIFont(name: "SFProDisplay-Regular", size: 14)
+            ])
         field.layer.cornerRadius = 10
+        field.font = UIFont(name: "SFProDisplay-Regular", size: 14)
         field.translatesAutoresizingMaskIntoConstraints = false
         
         let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 15, height: field.frame.height))
         field.leftView = paddingView
         field.leftViewMode = .always
-        
         return field
     }()
     
@@ -44,8 +47,12 @@ class AdminLoginViewController: UIViewController {
         field.textColor = .white
         field.attributedPlaceholder = NSAttributedString(
                 string: "Пароль",
-                attributes: [NSAttributedString.Key.foregroundColor: UIColor.white.withAlphaComponent(0.7)])
+                attributes: [
+                    NSAttributedString.Key.foregroundColor: UIColor.white.withAlphaComponent(0.7),
+                    NSAttributedString.Key.font: UIFont(name: "SFProDisplay-Regular", size: 14)
+                ])
         field.layer.cornerRadius = 10
+        field.font = UIFont(name: "SFProDisplay-Regular", size: 14)
         field.translatesAutoresizingMaskIntoConstraints = false
         
         let eyeButton = UIButton(type: .custom)
@@ -72,6 +79,7 @@ class AdminLoginViewController: UIViewController {
     private let continueButton: UIButton = {
         let button = UIButton()
         button.setTitle("Продолжить", for: .normal)
+        button.titleLabel?.font = UIFont(name: "SFProDisplay-Bold", size: 16)
         button.setTitleColor(.white, for: .normal)
         button.backgroundColor = .init(hex: "#0A84FF")
         button.layer.cornerRadius = 12
@@ -85,6 +93,7 @@ class AdminLoginViewController: UIViewController {
         textView.isEditable = false
         textView.isScrollEnabled = false
         textView.backgroundColor = .clear
+        textView.font = UIFont(name: "SFProDisplay-Regular", size: 12)
         textView.textColor = .white
         textView.linkTextAttributes = [
             .foregroundColor: UIColor.systemBlue
@@ -93,7 +102,7 @@ class AdminLoginViewController: UIViewController {
         let fullText = "Выбирая «Зарегистрироваться», вы подтверждаете свое согласие с Условием продажи и принимаете условия Положения о конфиденциальности."
         
         let termsOfService = "Условием продажи"
-        let privacyPolicy = "Положения о конфиденциальности"
+        let privacyPolicy = "Положения о конфиденциальности."
         
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = .center

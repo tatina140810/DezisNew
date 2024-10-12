@@ -2,79 +2,45 @@ import UIKit
 import SnapKit
 
 class PersonalAccountViewController: UIViewController {
-   
+    
     let imagePicker = ImagePicker()
     
     private var userImage: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(resource: .vector), for: .normal)
+        button.setImage(UIImage(resource: .profile1), for: .normal)
         button.addTarget(self, action: #selector(userImageTapped), for: .touchUpInside)
         return button
     }()
     
     private var nameLabel: UILabel = {
         let label = UILabel()
-        label.text = "Aleksey Ivanovich"
+        label.text = "Ф.И.О."
         label.font = UIFont.systemFont(ofSize: 20)
+        label.textColor = .white
+        label.textAlignment = .left
         return label
     }()
     
-    private var tableView: UITableView = {
-        let view = UITableView()
-        view.rowHeight = 60
-        view.tintColor = .black
-        return view
-    }()
-    
-    let cellIdentifier = "cell"
-    
-    enum CellType {
-            case userInfo, aboutUs, settings
-        }
-    
-    let cellContent: [(image: UIImage?, title: String, type: CellType)] = [
-           (image: UIImage(systemName: "person.fill"), title: "Профиль", type: .userInfo),
-           (image: UIImage(systemName: "shield"), title: "О нас", type: .aboutUs),
-           (image: UIImage(systemName: "gearshape.fill"), title: "Настройки", type: .settings)
-       ]
-    private var exitButton: UIButton = {
+    private var historyButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(resource: .exit), for: .normal)
-        button.setTitle(" Выйти", for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 14)
-        button.setTitleColor(UIColor(hex: "#BABBBD"), for: .normal)
-        button.addTarget(self, action: #selector(exitButtonTapped), for: .touchUpInside)
+        button.setTitle("История заказов", for: .normal)
+        button.titleLabel?.font = UIFont(name: "SFProDisplay-Regular", size: 16)
+        button.tintColor = . white
+        button.backgroundColor = UIColor(hex: "#2B373E")
+        button.layer.cornerRadius = 12
+        button.clipsToBounds = true
+        button.addTarget(self, action: #selector(historyButtonTapped), for: .touchUpInside)
         return button
+        
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = UIColor(hex: "#1B2228")
         setupUI()
-        tableViewSettings()
+        
     }
     
-    private func tableViewSettings() {
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
-    }
-    
-    func navigateToViewController(at indexPath: IndexPath) {
-            let content = cellContent[indexPath.row]
-            let viewController: UIViewController
-
-            switch content.type {
-            case .userInfo:
-                viewController = UserInfoViewController()
-            case .aboutUs:
-                viewController = AboutUsViewController()
-            case .settings:
-                viewController = SettingsViewController()
-            }
-
-            navigationController?.pushViewController(viewController, animated: true)
-        }
     
     
     private func setupUI() {
@@ -89,23 +55,23 @@ class PersonalAccountViewController: UIViewController {
         view.addSubview(nameLabel)
         nameLabel.snp.makeConstraints { make in
             make.top.equalTo(userImage.snp.bottom).offset(30)
-            make.centerX.equalToSuperview()
+            make.leading.equalToSuperview().offset(20)
         }
         
-        view.addSubview(tableView)
-        tableView.snp.makeConstraints { make in
-            make.top.equalTo(nameLabel.snp.bottom).offset(60)
-            make.leading.equalToSuperview().offset(16)
-            make.trailing.equalToSuperview().offset(-16)
-            make.height.equalTo(250)
+        
+        view.addSubview(historyButton)
+        historyButton.snp.makeConstraints { make in
+            make.bottom.equalToSuperview().offset(-90)
+            make.leading.trailing.equalToSuperview().inset(20)
+            make.height.equalTo(44)
+            
         }
-        view.addSubview(exitButton)
-           exitButton.snp.makeConstraints { make in
-               make.bottom.equalToSuperview().offset(-90)
-               make.centerX.equalToSuperview()
-               make.height.equalTo(44)
-               make.width.equalTo(100)
-           }
+    }
+    @objc func historyButtonTapped() {
+        let vc = ClientHistoryViewController()
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true, completion: nil)
+        
     }
     @objc private func userImageTapped() {
         let alertController = UIAlertController(title: "Выберите фото профиля", message: "Выберите фото из галереи или сделайте новое фото.", preferredStyle: .actionSheet)
@@ -124,65 +90,22 @@ class PersonalAccountViewController: UIViewController {
             self?.showImagePicker(sourceType: .photoLibrary)
         }
         
-  
+        
         let cancelAction = UIAlertAction(title: "Отменить", style: .cancel)
         
-    
+        
         alertController.addAction(cameraAction)
         alertController.addAction(photoLibraryAction)
         alertController.addAction(cancelAction)
-   
+        
         present(alertController, animated: true)
     }
-
+    
     private func showImagePicker(sourceType: UIImagePickerController.SourceType) {
         imagePicker.showImagePicker(in: self) { [weak self] image in
-           
+            
             self?.userImage.setImage(image, for: .normal)
             self?.userImage.setTitle("Image Selected", for: .normal)
         }
-    }
-
-    @objc private func userInfoButtonTapped() {
-        let vc = UserInfoViewController()
-        navigationController?.pushViewController(vc, animated: true)
-        print("User info Button Tapped")
-    }
-    
-    @objc private func aboutUsButtonTapped() {
-        let vc = AboutUsViewController()
-        navigationController?.pushViewController(vc, animated: true)
-        print("About Us Button Tapped")
-    }
-    
-    @objc private func settingsButtonTapped() {
-        let vc = SettingsViewController()
-        navigationController?.pushViewController(vc, animated: true)
-        print("Settings Button Tapped")
-    }
-    @objc private func exitButtonTapped() {
-        print("Exit button tapped")
-        // Add your exit logic here
-    }
-}
-
-// MARK: - UITableViewDelegate, UITableViewDataSource
-extension PersonalAccountViewController: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-            navigateToViewController(at: indexPath)
-        }
-
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return cellContent.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
-        
-        let content = cellContent[indexPath.row]
-        cell.imageView?.image = content.image
-        cell.textLabel?.text = content.title
-        
-        return cell
     }
 }

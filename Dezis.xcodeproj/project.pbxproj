@@ -10,9 +10,7 @@
 		18FA88D62CB6D7EC00C66BAF /* OpenChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18FA88D52CB6D7EC00C66BAF /* OpenChatViewController.swift */; };
 		4061B8DFFEC52EF1268906C9 /* Pods_Dezis.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D594A6880D984FC3775947A /* Pods_Dezis.framework */; };
 		72D39B912CB1511C00D9EB45 /* AdminTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D39B822CB1511C00D9EB45 /* AdminTabBarController.swift */; };
-		72D39B922CB1511C00D9EB45 /* AdminHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D39B832CB1511C00D9EB45 /* AdminHomeViewController.swift */; };
 		72D39B932CB1511C00D9EB45 /* AdminChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D39B8E2CB1511C00D9EB45 /* AdminChatViewController.swift */; };
-		72D39B982CB1511C00D9EB45 /* AdminOrdersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D39B842CB1511C00D9EB45 /* AdminOrdersViewController.swift */; };
 		72D39B992CB1511C00D9EB45 /* OrdersCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D39B852CB1511C00D9EB45 /* OrdersCollectionViewCell.swift */; };
 		72D39B9E2CB1566800D9EB45 /* AdminHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D39B9D2CB1566800D9EB45 /* AdminHistoryViewController.swift */; };
 		72D39BA02CB157ED00D9EB45 /* AdminRequestsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D39B9F2CB157ED00D9EB45 /* AdminRequestsViewController.swift */; };
@@ -51,7 +49,6 @@
 		AF74D5522CA7EB3200B64D6E /* UserRegisterSecondPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF74D5512CA7EB3200B64D6E /* UserRegisterSecondPageViewController.swift */; };
 		AF74D5562CAACEAC00B64D6E /* FirstStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF74D5552CAACEAC00B64D6E /* FirstStackView.swift */; };
 		AF74D55E2CAB1E5400B64D6E /* GradientLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF74D55D2CAB1E5400B64D6E /* GradientLayer.swift */; };
-		AF74D5622CAB26CB00B64D6E /* SuccessAlertForOrderButtonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF74D5612CAB26CB00B64D6E /* SuccessAlertForOrderButtonViewController.swift */; };
 		AF74D56D2CAD835C00B64D6E /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF74D56C2CAD835C00B64D6E /* CalendarViewController.swift */; };
 		AF74D5752CB1171700B64D6E /* FifthOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF74D56E2CB1171700B64D6E /* FifthOnboardingViewController.swift */; };
 		AF74D5762CB1171700B64D6E /* FirstOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF74D56F2CB1171700B64D6E /* FirstOnboardingViewController.swift */; };
@@ -72,13 +69,15 @@
 		AFF618782CB69D2800C64C95 /* DezinsectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF618772CB69D2800C64C95 /* DezinsectionViewController.swift */; };
 		AFF6187C2CB69D5200C64C95 /* DezinfectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF6187B2CB69D5200C64C95 /* DezinfectionViewController.swift */; };
 		AFF6187E2CB69D5A00C64C95 /* DeratizationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF6187D2CB69D5A00C64C95 /* DeratizationViewController.swift */; };
+		AFF618812CB7B32C00C64C95 /* ViewControllerForAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF618802CB7B32C00C64C95 /* ViewControllerForAlert.swift */; };
+		AFF618832CB82FA000C64C95 /* ClientHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF618822CB82FA000C64C95 /* ClientHistoryViewController.swift */; };
+		AFF618852CB85E2100C64C95 /* CellForChat.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF618842CB85E2100C64C95 /* CellForChat.swift */; };
+		AFF618872CB85F6A00C64C95 /* CustomNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF618862CB85F6A00C64C95 /* CustomNavigationBar.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		18FA88D52CB6D7EC00C66BAF /* OpenChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenChatViewController.swift; sourceTree = "<group>"; };
 		72D39B822CB1511C00D9EB45 /* AdminTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminTabBarController.swift; sourceTree = "<group>"; };
-		72D39B832CB1511C00D9EB45 /* AdminHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminHomeViewController.swift; sourceTree = "<group>"; };
-		72D39B842CB1511C00D9EB45 /* AdminOrdersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminOrdersViewController.swift; sourceTree = "<group>"; };
 		72D39B852CB1511C00D9EB45 /* OrdersCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrdersCollectionViewCell.swift; sourceTree = "<group>"; };
 		72D39B8E2CB1511C00D9EB45 /* AdminChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminChatViewController.swift; sourceTree = "<group>"; };
 		72D39B9D2CB1566800D9EB45 /* AdminHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminHistoryViewController.swift; sourceTree = "<group>"; };
@@ -122,7 +121,6 @@
 		AF74D5512CA7EB3200B64D6E /* UserRegisterSecondPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRegisterSecondPageViewController.swift; sourceTree = "<group>"; };
 		AF74D5552CAACEAC00B64D6E /* FirstStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstStackView.swift; sourceTree = "<group>"; };
 		AF74D55D2CAB1E5400B64D6E /* GradientLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientLayer.swift; sourceTree = "<group>"; };
-		AF74D5612CAB26CB00B64D6E /* SuccessAlertForOrderButtonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessAlertForOrderButtonViewController.swift; sourceTree = "<group>"; };
 		AF74D56C2CAD835C00B64D6E /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		AF74D56E2CB1171700B64D6E /* FifthOnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FifthOnboardingViewController.swift; sourceTree = "<group>"; };
 		AF74D56F2CB1171700B64D6E /* FirstOnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstOnboardingViewController.swift; sourceTree = "<group>"; };
@@ -143,6 +141,10 @@
 		AFF618772CB69D2800C64C95 /* DezinsectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DezinsectionViewController.swift; sourceTree = "<group>"; };
 		AFF6187B2CB69D5200C64C95 /* DezinfectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DezinfectionViewController.swift; sourceTree = "<group>"; };
 		AFF6187D2CB69D5A00C64C95 /* DeratizationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeratizationViewController.swift; sourceTree = "<group>"; };
+		AFF618802CB7B32C00C64C95 /* ViewControllerForAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerForAlert.swift; sourceTree = "<group>"; };
+		AFF618822CB82FA000C64C95 /* ClientHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientHistoryViewController.swift; sourceTree = "<group>"; };
+		AFF618842CB85E2100C64C95 /* CellForChat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellForChat.swift; sourceTree = "<group>"; };
+		AFF618862CB85F6A00C64C95 /* CustomNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationBar.swift; sourceTree = "<group>"; };
 		F7FB7E9CD196CCFDB56042EF /* Pods-Dezis.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dezis.debug.xcconfig"; path = "Target Support Files/Pods-Dezis/Pods-Dezis.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -158,14 +160,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		72D39B862CB1511C00D9EB45 /* Orders */ = {
-			isa = PBXGroup;
-			children = (
-				72D39B842CB1511C00D9EB45 /* AdminOrdersViewController.swift */,
-			);
-			path = Orders;
-			sourceTree = "<group>";
-		};
 		72D39B8F2CB1511C00D9EB45 /* Chat */ = {
 			isa = PBXGroup;
 			children = (
@@ -180,11 +174,9 @@
 			children = (
 				72D39BA72CB1870D00D9EB45 /* AdminLoginViewController.swift */,
 				72D39B822CB1511C00D9EB45 /* AdminTabBarController.swift */,
-				72D39B832CB1511C00D9EB45 /* AdminHomeViewController.swift */,
 				72D39BA42CB171F700D9EB45 /* History */,
-				72D39BA12CB15F5D00D9EB45 /* Requests */,
 				72D39B8F2CB1511C00D9EB45 /* Chat */,
-				72D39B862CB1511C00D9EB45 /* Orders */,
+				72D39BA12CB15F5D00D9EB45 /* Requests */,
 			);
 			path = AdminViews;
 			sourceTree = "<group>";
@@ -359,6 +351,7 @@
 				AF4B1E1E2CA06E5500FDA3EC /* SettingsViewController.swift */,
 				AF4B1E202CA06E6C00FDA3EC /* UserInfoViewController.swift */,
 				AF4B1E222CA06E7E00FDA3EC /* AboutUsViewController.swift */,
+				AFF618822CB82FA000C64C95 /* ClientHistoryViewController.swift */,
 			);
 			path = PersonalAccountViews;
 			sourceTree = "<group>";
@@ -375,7 +368,7 @@
 			children = (
 				AF74D5542CAACE9400B64D6E /* HomeElements */,
 				AF4B1E0E2C9D9B8200FDA3EC /* ClientHomeViewController.swift */,
-				AF74D5612CAB26CB00B64D6E /* SuccessAlertForOrderButtonViewController.swift */,
+				AFF618802CB7B32C00C64C95 /* ViewControllerForAlert.swift */,
 			);
 			path = HomeViews;
 			sourceTree = "<group>";
@@ -418,6 +411,8 @@
 			isa = PBXGroup;
 			children = (
 				AF4B1E2A2CA0736200FDA3EC /* ClientChatViewController.swift */,
+				AFF618842CB85E2100C64C95 /* CellForChat.swift */,
+				AFF618862CB85F6A00C64C95 /* CustomNavigationBar.swift */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -566,9 +561,7 @@
 				AF74D5752CB1171700B64D6E /* FifthOnboardingViewController.swift in Sources */,
 				AF4B1E232CA06E7E00FDA3EC /* AboutUsViewController.swift in Sources */,
 				72D39B912CB1511C00D9EB45 /* AdminTabBarController.swift in Sources */,
-				72D39B922CB1511C00D9EB45 /* AdminHomeViewController.swift in Sources */,
 				72D39B932CB1511C00D9EB45 /* AdminChatViewController.swift in Sources */,
-				72D39B982CB1511C00D9EB45 /* AdminOrdersViewController.swift in Sources */,
 				72D39B992CB1511C00D9EB45 /* OrdersCollectionViewCell.swift in Sources */,
 				AF74D5822CB1582000B64D6E /* DeratizationView.swift in Sources */,
 				AF4B1E2B2CA0736200FDA3EC /* ClientChatViewController.swift in Sources */,
@@ -585,13 +578,13 @@
 				AF4B1E092C9C221000FDA3EC /* NetworkRequest.swift in Sources */,
 				AF74D57A2CB1171700B64D6E /* ThirdOnboardingViewController.swift in Sources */,
 				AFF618782CB69D2800C64C95 /* DezinsectionViewController.swift in Sources */,
-				AF74D5622CAB26CB00B64D6E /* SuccessAlertForOrderButtonViewController.swift in Sources */,
 				AF9F2FEE2CA6D3CF00BBBB2C /* ImagePicker.swift in Sources */,
 				AF4B1E1F2CA06E5500FDA3EC /* SettingsViewController.swift in Sources */,
 				AF9F2FEC2CA6BA1A00BBBB2C /* AttributedTextHelper.swift in Sources */,
 				AF4B1DFB2C9B42D300FDA3EC /* NewUserRegisterViewController.swift in Sources */,
 				AF74D57E2CB14B7700B64D6E /* DezinsectionView.swift in Sources */,
 				72D39BA02CB157ED00D9EB45 /* AdminRequestsViewController.swift in Sources */,
+				AFF618872CB85F6A00C64C95 /* CustomNavigationBar.swift in Sources */,
 				AF74D5792CB1171700B64D6E /* SecondOnboardingViewController.swift in Sources */,
 				72D39BA32CB15F7D00D9EB45 /* RequestsCollectionViewCell.swift in Sources */,
 				AF4B1E0D2C9D9B3500FDA3EC /* ClientTabBarController.swift in Sources */,
@@ -607,7 +600,10 @@
 				AF4B1DF52C9B28ED00FDA3EC /* ClientLoginViewController.swift in Sources */,
 				AF3EDD0F2CB4696E00CAF1FE /* ClientChoiceViewController.swift in Sources */,
 				AF4B1E022C9C17BA00FDA3EC /* EndPoint.swift in Sources */,
+				AFF618852CB85E2100C64C95 /* CellForChat.swift in Sources */,
+				AFF618832CB82FA000C64C95 /* ClientHistoryViewController.swift in Sources */,
 				72D39B9E2CB1566800D9EB45 /* AdminHistoryViewController.swift in Sources */,
+				AFF618812CB7B32C00C64C95 /* ViewControllerForAlert.swift in Sources */,
 				AF4B1DF12C9B153C00FDA3EC /* HexExtention.swift in Sources */,
 				AF4B1E212CA06E6C00FDA3EC /* UserInfoViewController.swift in Sources */,
 				AF4B1E2D2CA19C6000FDA3EC /* ChekBoxButton.swift in Sources */,

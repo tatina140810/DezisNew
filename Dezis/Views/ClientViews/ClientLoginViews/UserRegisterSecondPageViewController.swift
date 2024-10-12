@@ -33,7 +33,6 @@ class UserRegisterSecondPageViewController: UIViewController {
         view.backgroundColor = UIColor(hex: "#0A84FF")
         view.layer.cornerRadius = 12
         view.titleLabel?.font = UIFont(name: "SFProDisplay-Bold", size: 16)
-        view.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
         return view
     }()
     
@@ -55,7 +54,7 @@ class UserRegisterSecondPageViewController: UIViewController {
         view.numberOfLines = 0
         return view
     }()
-    // MARK: - View Life Cycle
+   
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,11 +62,16 @@ class UserRegisterSecondPageViewController: UIViewController {
         setupUI()
         createAttributedText()
         createPrivaciAttributedText()
+        setupAddTarget()
        
     }
     
-    // MARK: - Attributed Text Links
-    
+    private func setupAddTarget(){
+        let backButton = UIBarButtonItem(title: "Назад", style: .plain, target: self, action: #selector(backButtonTapped))
+
+        navigationItem.leftBarButtonItem = backButton
+        nextButton.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
+    }
     private func createAttributedText() {
         AttributedTextHelper.configureAttributedText(
             for: privacyLabel,
@@ -90,6 +94,7 @@ class UserRegisterSecondPageViewController: UIViewController {
     // MARK: - Setup UI Elements
     
     private func setupUI() {
+        
         
         view.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { make in
@@ -140,10 +145,15 @@ class UserRegisterSecondPageViewController: UIViewController {
         print("Положения о конфиденциальности")
     }
     @objc private func nextButtonTapped(){
-        let vc = СonfirmationСodeViewController()
+        let vc = UINavigationController(rootViewController:СonfirmationСodeViewController())
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true, completion: nil)
         
+    }
+    @objc private func backButtonTapped() {
+        let vc = UINavigationController(rootViewController: NewUserRegisterViewController())
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true, completion: nil)
     }
     
 

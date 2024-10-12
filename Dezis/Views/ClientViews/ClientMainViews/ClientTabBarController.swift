@@ -11,6 +11,7 @@ class ClientTabBarController: UITabBarController {
         tabBar.barTintColor = UIColor(hex: "#1B2228")
         tabBar.unselectedItemTintColor = .white
         addTabBarBorder()
+        navigationController?.navigationBar.barTintColor = UIColor(hex: "#1B2228")
     }
     private func addTabBarBorder() {
     
@@ -41,23 +42,5 @@ class ClientTabBarController: UITabBarController {
 
         setViewControllers([homeView, calendarView, chatView, personalAccount], animated: true)
     }
-//    func setTabBarAppearence (){
-//        let positionOnX: CGFloat = 13
-//        let positionOnY: CGFloat = 6
-//        let width = tabBar.bounds.width - positionOnX * 2
-//        let height = tabBar.bounds.height + positionOnY
-//        let roundLayer = CAShapeLayer()
-//        
-//        let bezierPath = UIBezierPath(
-//            roundedRect: CGRect(x: positionOnX, y: tabBar.bounds.minY-positionOnY, width: width, height: height),
-//            cornerRadius: 12)
-//        roundLayer.path = bezierPath.cgPath
-//        tabBar.layer.insertSublayer(roundLayer, at: 0)
-//        tabBar.itemWidth = width / 5
-//        tabBar.itemPositioning = .centered
-//        roundLayer.fillColor =  UIColor(hex: "#0688C1").cgColor
-//        tabBar.unselectedItemTintColor = .white
-//        
-//    }
 }
 

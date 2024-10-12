@@ -60,19 +60,22 @@ class NewUserRegisterViewController: UIViewController {
         return view
     }()
     
-    // MARK: - View Life Cycle
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(hex: "#1B2228")
         setupUI()
         createAttributedText()
         createPrivaciAttributedText()
-        nextButton.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
+        setupAddTarget()
     }
     
     // MARK: - Attributed Text Links
-    
+    private func setupAddTarget(){
+        let backButton = UIBarButtonItem(title: "Назад", style: .plain, target: self, action: #selector(backButtonTapped))
+
+        navigationItem.leftBarButtonItem = backButton
+        nextButton.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
+    }
     private func createAttributedText() {
         AttributedTextHelper.configureAttributedText(
             for: privacyLabel,
@@ -95,6 +98,7 @@ class NewUserRegisterViewController: UIViewController {
     // MARK: - Setup UI Elements
     
     private func setupUI() {
+        
         view.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
@@ -175,15 +179,20 @@ class NewUserRegisterViewController: UIViewController {
         }
         
     
-        let vc = UserRegisterSecondPageViewController()
-        let navController = UINavigationController(rootViewController: vc)
-        navController.modalPresentationStyle = .fullScreen
-        present(navController, animated: true, completion: nil)
+        let vc = UINavigationController(rootViewController: UserRegisterSecondPageViewController()) 
+       
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true, completion: nil)
     }
     
     private func showAlert(message: String) {
         let alert = UIAlertController(title: "Ошибка", message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default))
         present(alert, animated: true)
+    }
+    @objc func backButtonTapped(){
+        let vc = ClientChoiceViewController()
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true, completion: nil)
     }
 }
