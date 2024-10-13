@@ -13,7 +13,8 @@ extension EndPoint {
     var url: URL {
         var components = URLComponents()
         components.scheme = "https"
-        components.host = ""
+        components.host = "http://209.38.228.54/"
+        components.port = 8084
         components.path = "/"
         guard let url = components.url else {
             preconditionFailure("Invalid URL components: \(components)")
@@ -24,7 +25,7 @@ extension EndPoint {
 
 extension EndPoint {
     static var user: Self {
-        EndPoint(path: "user")
+        EndPoint(path: "v1/user/")
     }
 }
 extension EndPoint {
