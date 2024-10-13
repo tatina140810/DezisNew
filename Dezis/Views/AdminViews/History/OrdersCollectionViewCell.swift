@@ -23,6 +23,14 @@ class OrdersCollectionViewCell: UICollectionViewCell {
         return view
     }()
     
+    private let serviceStackView: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .vertical
+        stack.spacing = 15
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        return stack
+    }()
+    
     private let serviceLabel: UILabel = {
         let view = UILabel()
         view.text = "Услуги:"
@@ -30,6 +38,23 @@ class OrdersCollectionViewCell: UICollectionViewCell {
         view.textColor = .init(UIColor(hex: "#0A84FF"))
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
+    }()
+    
+    private let serviceDetailLabel: UILabel = {
+        let view = UILabel()
+        view.text = "Дезинфекция"
+        view.font = UIFont(name: "SFProDisplay-Regular", size: 14)
+        view.textColor = .init(UIColor(hex: "#FFFFFF"))
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private let addressStackView: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .vertical
+        stack.spacing = 15
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        return stack
     }()
     
     private let addresslabel: UILabel = {
@@ -41,6 +66,23 @@ class OrdersCollectionViewCell: UICollectionViewCell {
         return view
     }()
     
+    private let addressDetaillabel: UILabel = {
+        let view = UILabel()
+        view.text = "Восток-5"
+        view.font = UIFont(name: "SFProDisplay-Regular", size: 14)
+        view.textColor = .init(UIColor(hex: "#FFFFFF"))
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private let dateStackView: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .vertical
+        stack.spacing = 15
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        return stack
+    }()
+    
     private let dateLabel: UILabel = {
         let view = UILabel()
         view.text = "Дата:"
@@ -50,13 +92,44 @@ class OrdersCollectionViewCell: UICollectionViewCell {
         return view
     }()
     
-    private let stackView: UIStackView = {
+    private let dateDetailLabel: UILabel = {
+        let view = UILabel()
+        view.text = "17.11.2024"
+        view.font = UIFont(name: "SFProDisplay-Regular", size: 14)
+        view.textColor = .init(UIColor(hex: "#FFFFFF"))
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private let timeDetailLabel: UILabel = {
+        let view = UILabel()
+        view.text = "21:30"
+        view.font = UIFont(name: "SFProDisplay-Regular", size: 14)
+        view.textColor = .init(UIColor(hex: "#FFFFFF"))
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private let completeButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Завершить", for: .normal)
+        button.titleLabel?.font = UIFont(name: "SFProDisplay-Regular", size: 16)
+        button.setTitleColor(.white, for: .normal)
+        button.backgroundColor = .init(hex: "#0A84FF")
+        button.layer.cornerRadius = 10
+        button.isEnabled = true
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    private let mainStackView: UIStackView = {
         let stack = UIStackView()
         stack.axis = .horizontal
-        stack.spacing = 15
+        stack.spacing = 32
         stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
+
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -74,10 +147,22 @@ class OrdersCollectionViewCell: UICollectionViewCell {
     
     private func setUpSubviews() {
         contentView.addSubview(nameLabel)
-        contentView.addSubview(stackView)
-        stackView.addArrangedSubview(serviceLabel)
-        stackView.addArrangedSubview(addresslabel)
-        stackView.addArrangedSubview(dateLabel)
+        contentView.addSubview(mainStackView)
+        
+        mainStackView.addArrangedSubview(serviceStackView)
+        serviceStackView.addArrangedSubview(serviceLabel)
+        serviceStackView.addArrangedSubview(serviceDetailLabel)
+        
+        mainStackView.addArrangedSubview(addressStackView)
+        addressStackView.addArrangedSubview(addresslabel)
+        addressStackView.addArrangedSubview(addressDetaillabel)
+        
+        mainStackView.addArrangedSubview(dateStackView)
+        dateStackView.addArrangedSubview(dateLabel)
+        dateStackView.addArrangedSubview(dateDetailLabel)
+        dateStackView.addArrangedSubview(timeDetailLabel)
+        
+        contentView.addSubview(completeButton)
     }
     
     private func setUpConstraints() {
@@ -85,13 +170,25 @@ class OrdersCollectionViewCell: UICollectionViewCell {
         nameLabel.snp.makeConstraints { make in
             make.top.equalTo(contentView.snp.top).offset(24)
             make.centerX.equalTo(contentView.snp.centerX)
+        }
             
-            stackView.distribution = .equalSpacing
-            stackView.snp.makeConstraints { make in
-                make.top.equalTo(nameLabel.snp.bottom).offset(12)
-                make.leading.equalTo(contentView.snp.leading).offset(24)
-                make.trailing.equalTo(contentView.snp.trailing).offset(-24)
-            }
+        mainStackView.distribution = .equalSpacing
+        mainStackView.snp.makeConstraints { make in
+            make.top.equalTo(nameLabel.snp.bottom).offset(12)
+            make.leading.equalTo(contentView.snp.leading).offset(24)
+            make.trailing.equalTo(contentView.snp.trailing).offset(-24)
+            make.height.equalTo(76)
+        }
+        
+        serviceStackView.distribution = .equalSpacing
+        addressStackView.distribution = .equalSpacing
+        dateStackView.distribution = .equalSpacing
+        
+        completeButton.snp.makeConstraints { make in
+            make.bottom.equalTo(contentView.snp.bottom).offset(-24)
+            make.leading.equalTo(contentView.snp.leading).offset(24)
+            make.trailing.equalTo(contentView.snp.trailing).offset(-24)
+            make.height.equalTo(44)
         }
     }
     

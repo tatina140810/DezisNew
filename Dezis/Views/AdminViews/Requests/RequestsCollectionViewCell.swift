@@ -11,6 +11,14 @@ class RequestsCollectionViewCell: UICollectionViewCell {
     
     static var reuseId = "requestsCell"
     
+    private let titlesStackView: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .vertical
+        stack.spacing = 8
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        return stack
+    }()
+    
     private let dateLabel: UILabel = {
         let view = UILabel()
         view.text = "Дата:"
@@ -65,6 +73,68 @@ class RequestsCollectionViewCell: UICollectionViewCell {
         return view
     }()
     
+    private let detailsStackView: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .vertical
+        stack.spacing = 8
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        return stack
+    }()
+    
+    private let dateDetailLabel: UILabel = {
+        let view = UILabel()
+        view.text = "17.11.2024"
+        view.font = UIFont(name: "SFProDisplay-Regular", size: 16)
+        view.textColor = .init(UIColor(hex: "#FFFFFF"))
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private let nameDetailLabel: UILabel = {
+        let view = UILabel()
+        view.text = "Ishenbekov Bektur"
+        view.font = UIFont(name: "SFProDisplay-Regular", size: 16)
+        view.textColor = .init(UIColor(hex: "#FFFFFF"))
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private let emailDatailLabel: UILabel = {
+        let view = UILabel()
+        view.text = "ishenbekovbektur1@gmail.com"
+        view.font = UIFont(name: "SFProDisplay-Regular", size: 16)
+        view.textColor = .init(UIColor(hex: "#FFFFFF"))
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private let phoneNumberDetailsLabel: UILabel = {
+        let view = UILabel()
+        view.text = "+996 500 848 484"
+        view.font = UIFont(name: "SFProDisplay-Regular", size: 16)
+        view.textColor = .init(UIColor(hex: "#FFFFFF"))
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private let addressDetailLabel: UILabel = {
+        let view = UILabel()
+        view.text = "Восток-5"
+        view.font = UIFont(name: "SFProDisplay-Regular", size: 16)
+        view.textColor = .init(UIColor(hex: "#FFFFFF"))
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private let houseNumberDetailLabel: UILabel = {
+        let view = UILabel()
+        view.text = "51/12"
+        view.font = UIFont(name: "SFProDisplay-Regular", size: 16)
+        view.textColor = .init(UIColor(hex: "#FFFFFF"))
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     private let confirmButton: UIButton = {
         let button = UIButton()
         button.setTitle("Подтвердить", for: .normal)
@@ -105,50 +175,40 @@ class RequestsCollectionViewCell: UICollectionViewCell {
     }
     
     private func setUpSubviews() {
-        contentView.addSubview(dateLabel)
-        contentView.addSubview(nameLabel)
-        contentView.addSubview(emailLabel)
-        contentView.addSubview(phoneNumberLabel)
-        contentView.addSubview(addressLabel)
-        contentView.addSubview(houseNumberLabel)
+        contentView.addSubview(titlesStackView)
+        titlesStackView.addArrangedSubview(dateLabel)
+        titlesStackView.addArrangedSubview(nameLabel)
+        titlesStackView.addArrangedSubview(emailLabel)
+        titlesStackView.addArrangedSubview(phoneNumberLabel)
+        titlesStackView.addArrangedSubview(addressLabel)
+        titlesStackView.addArrangedSubview(houseNumberLabel)
+        contentView.addSubview(detailsStackView)
+        detailsStackView.addArrangedSubview(dateDetailLabel)
+        detailsStackView.addArrangedSubview(nameDetailLabel)
+        detailsStackView.addArrangedSubview(emailDatailLabel)
+        detailsStackView.addArrangedSubview(phoneNumberDetailsLabel)
+        detailsStackView.addArrangedSubview(addressDetailLabel)
+        detailsStackView.addArrangedSubview(houseNumberDetailLabel)
         contentView.addSubview(confirmButton)
         contentView.addSubview(denyButton)
     }
     
     private func setUpConstraints() {
         
-        dateLabel.snp.makeConstraints { make in
+        titlesStackView.distribution = .equalSpacing
+        titlesStackView.snp.makeConstraints { make in
             make.top.equalTo(contentView.snp.top).offset(16)
             make.leading.equalTo(contentView.snp.leading).offset(16)
         }
         
-        nameLabel.snp.makeConstraints { make in
-            make.top.equalTo(dateLabel.snp.bottom).offset(8)
-            make.leading.equalTo(contentView.snp.leading).offset(16)
-        }
-        
-        emailLabel.snp.makeConstraints { make in
-            make.top.equalTo(nameLabel.snp.bottom).offset(8)
-            make.leading.equalTo(contentView.snp.leading).offset(16)
-        }
-        
-        phoneNumberLabel.snp.makeConstraints { make in
-            make.top.equalTo(emailLabel.snp.bottom).offset(8)
-            make.leading.equalTo(contentView.snp.leading).offset(16)
-        }
-        
-        addressLabel.snp.makeConstraints { make in
-            make.top.equalTo(phoneNumberLabel.snp.bottom).offset(8)
-            make.leading.equalTo(contentView.snp.leading).offset(16)
-        }
-        
-        houseNumberLabel.snp.makeConstraints { make in
-            make.top.equalTo(addressLabel.snp.bottom).offset(8)
-            make.leading.equalTo(contentView.snp.leading).offset(16)
+        detailsStackView.distribution = .equalSpacing
+        detailsStackView.snp.makeConstraints { make in
+            make.centerY.equalTo(titlesStackView)
+            make.leading.equalTo(titlesStackView.snp.trailing).offset(12)
         }
         
         confirmButton.snp.makeConstraints { make in
-            make.top.equalTo(houseNumberLabel.snp.bottom).offset(20)
+            make.top.equalTo(titlesStackView.snp.bottom).offset(20)
             make.leading.equalTo(contentView.snp.leading).offset(17.5)
             make.trailing.equalTo(contentView.snp.trailing).offset(-17.5)
             make.height.equalTo(44)

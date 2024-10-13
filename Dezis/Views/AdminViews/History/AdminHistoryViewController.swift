@@ -28,7 +28,7 @@ class AdminHistoryViewController: UIViewController {
     
     private let ordersCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: UIScreen.main.bounds.width - 40, height: 149)
+        layout.itemSize = CGSize(width: UIScreen.main.bounds.width - 40, height: 211)
         layout.scrollDirection = .vertical
         layout.minimumLineSpacing = 12
         
