@@ -29,7 +29,7 @@ class AdminLoginViewController: UIViewController {
             string: "Логин",
             attributes: [
                 NSAttributedString.Key.foregroundColor: UIColor.white.withAlphaComponent(0.7),
-                NSAttributedString.Key.font: UIFont(name: "SFProDisplay-Regular", size: 14)
+                NSAttributedString.Key.font: UIFont(name: "SFProDisplay-Regular", size: 14)!
             ])
         field.layer.cornerRadius = 10
         field.font = UIFont(name: "SFProDisplay-Regular", size: 14)
@@ -49,7 +49,7 @@ class AdminLoginViewController: UIViewController {
                 string: "Пароль",
                 attributes: [
                     NSAttributedString.Key.foregroundColor: UIColor.white.withAlphaComponent(0.7),
-                    NSAttributedString.Key.font: UIFont(name: "SFProDisplay-Regular", size: 14)
+                    NSAttributedString.Key.font: UIFont(name: "SFProDisplay-Regular", size: 14)!
                 ])
         field.layer.cornerRadius = 10
         field.font = UIFont(name: "SFProDisplay-Regular", size: 14)

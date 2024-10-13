@@ -7,8 +7,8 @@ class ChoiceViewController: UIViewController {
         image.image = UIImage(resource: .logo)
         return image
     }()
-    private var consumerButton = ButtonSettings().buttonMaker(title: "Пользователь", target: self, action: #selector(consumerButtonTapped))
-    private var adminButton = ButtonSettings().buttonMaker(title:"Администратор", backgroundColor: UIColor(hex: "#1B2228"), target: self, action: #selector(adminButtonTapped))
+    private lazy var consumerButton = ButtonSettings().buttonMaker(title: "Пользователь", target: self, action: #selector(consumerButtonTapped))
+    private lazy var adminButton = ButtonSettings().buttonMaker(title:"Администратор", backgroundColor: UIColor(hex: "#1B2228"), target: self, action: #selector(adminButtonTapped))
         
     override func viewDidLoad() {
         super.viewDidLoad()

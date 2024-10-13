@@ -5,7 +5,7 @@ class PersonalAccountViewController: UIViewController {
     
     let imagePicker = ImagePicker()
     
-    private var userImage: UIButton = {
+    private lazy var userImage: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(resource: .profile1), for: .normal)
         button.addTarget(self, action: #selector(userImageTapped), for: .touchUpInside)
@@ -21,7 +21,7 @@ class PersonalAccountViewController: UIViewController {
         return label
     }()
     
-    private var historyButton: UIButton = {
+    private lazy var historyButton: UIButton = {
         let button = UIButton()
         button.setTitle("История заказов", for: .normal)
         button.titleLabel?.font = UIFont(name: "SFProDisplay-Regular", size: 16)

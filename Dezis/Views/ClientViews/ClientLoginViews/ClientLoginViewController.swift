@@ -37,7 +37,7 @@ class ClientLoginViewController: UIViewController, UITextFieldDelegate {
         return view
     }()
     
-    private var loginButton: UIButton = {
+    private lazy var loginButton: UIButton = {
         let view = UIButton()
         view.setTitle("Продолжить", for: .normal)
         view.setTitleColor(.white, for: .normal)

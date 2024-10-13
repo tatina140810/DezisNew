@@ -14,8 +14,8 @@ class ClientChoiceViewController: UIViewController {
         image.image = UIImage(resource: .logo)
         return image
     }()
-    private var registerButton = ButtonSettings().buttonMaker(title: "Регистрация", target: self, action: #selector(registerButtonTapped))
-    private var loginButton = ButtonSettings().buttonMaker(title:"Войти", backgroundColor: UIColor(hex: "#1B2228"), target: self, action: #selector(loginButtonTapped))
+    private lazy var registerButton = ButtonSettings().buttonMaker(title: "Регистрация", target: self, action: #selector(registerButtonTapped))
+    private lazy var loginButton = ButtonSettings().buttonMaker(title:"Войти", backgroundColor: UIColor(hex: "#1B2228"), target: self, action: #selector(loginButtonTapped))
         
     override func viewDidLoad() {
         super.viewDidLoad()

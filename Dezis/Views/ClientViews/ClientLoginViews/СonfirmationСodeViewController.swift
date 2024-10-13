@@ -28,7 +28,7 @@ class СonfirmationСodeViewController: UIViewController {
     
     private var codeTextField = TextFieldSettings().textFieldMaker(placeholder: "Код:", backgroundColor: UIColor(hex: "#2B373E"))
    
-    private var newCodeButton: UIButton = {
+    private lazy var newCodeButton: UIButton = {
         let button = UIButton()
         button.setTitle("Отправить снова", for: .normal)
         button.titleLabel?.font = UIFont(name: "SFProDisplay-Regular", size: 12)
@@ -44,7 +44,7 @@ class СonfirmationСodeViewController: UIViewController {
         return view
     }()
     
-    private var nextButton: UIButton = {
+    private lazy var nextButton: UIButton = {
         let view = UIButton()
         view.setTitle("Продолжить", for: .normal)
         view.setTitleColor(.white, for: .normal)

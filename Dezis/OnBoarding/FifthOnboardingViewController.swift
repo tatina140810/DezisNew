@@ -31,7 +31,7 @@ class FifthOnboardingViewController: UIViewController {
         label.textAlignment = .left
         return label
     }()
-    private var nextButton = ButtonSettings().buttonMaker(title: "Продолжить", target: self, action: #selector(nextButtonTapped))
+    private lazy var nextButton = ButtonSettings().buttonMaker(title: "Продолжить", target: self, action: #selector(nextButtonTapped))
     
     override func viewDidLoad() {
         super.viewDidLoad()

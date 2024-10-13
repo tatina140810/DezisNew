@@ -35,7 +35,7 @@ class DeratizationViewController: UIViewController {
         return label
     }()
     
-    private var orderButton: UIButton = {
+    private lazy var orderButton: UIButton = {
         let button = UIButton()
         button.setTitle("Заказать услугу", for: .normal)
         button.backgroundColor = UIColor(hex: "#0A84FF")

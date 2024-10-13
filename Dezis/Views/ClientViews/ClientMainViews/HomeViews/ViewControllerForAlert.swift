@@ -23,7 +23,7 @@ class ViewControllerForAlert: UIViewController {
         view.numberOfLines = 0
         return view
     }()
-    var homeButton: UIButton = {
+    private lazy var homeButton: UIButton = {
         let button = UIButton()
         button.setTitle("На главную", for: .normal)
         button.backgroundColor = UIColor(hex: "#0A84FF")
