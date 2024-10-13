@@ -5,74 +5,254 @@ class PersonalAccountViewController: UIViewController {
     
     let imagePicker = ImagePicker()
     
-    private lazy var userImage: UIButton = {
+    private lazy var userImage: UIImageView = {
+        let image = UIImageView()
+        image.image = UIImage(named: "user")
+        image.contentMode = .scaleAspectFill
+        image.clipsToBounds = true
+        image.layer.cornerRadius = 60
+        return image
+    }()
+    
+    private lazy var editButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(resource: .profile1), for: .normal)
+        button.setImage(UIImage(named: "edit"), for: .normal)
+        button.tintColor = .white
         button.addTarget(self, action: #selector(userImageTapped), for: .touchUpInside)
         return button
     }()
     
-    private var nameLabel: UILabel = {
+    private let nameLabel: UILabel = {
         let label = UILabel()
         label.text = "Ф.И.О."
-        label.font = UIFont.systemFont(ofSize: 20)
+        label.font = UIFont(name: "SFProDisplay-Regular", size: 16)
         label.textColor = .white
         label.textAlignment = .left
         return label
+    }()
+    
+    private let nameTextField: UITextField = {
+        let field = UITextField()
+        field.text = "Элдос Мактракер Реков"
+        field.font = UIFont(name: "SFProDisplay-Regular", size: 16)
+        field.textColor = .white
+        field.backgroundColor = UIColor(hex: "#2B373E")
+        field.layer.cornerRadius = 8
+        field.clipsToBounds = true
+        field.isUserInteractionEnabled = false
+        
+        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 15, height: field.frame.height))
+        field.leftView = paddingView
+        field.leftViewMode = .always
+        
+        return field
+    }()
+    
+    private let emailLabel: UILabel = {
+        let label = UILabel()
+        label.text = "E-mail"
+        label.font = UIFont(name: "SFProDisplay-Regular", size: 16)
+        label.textColor = .white
+        return label
+    }()
+    
+    private let emailTextField: UITextField = {
+        let field = UITextField()
+        field.text = "traker@gmail.com"
+        field.font = UIFont(name: "SFProDisplay-Regular", size: 16)
+        field.textColor = .white
+        field.backgroundColor = UIColor(hex: "#2B373E")
+        field.layer.cornerRadius = 8
+        field.clipsToBounds = true
+        field.isUserInteractionEnabled = false
+        
+        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 15, height: field.frame.height))
+        field.leftView = paddingView
+        field.leftViewMode = .always
+        
+        return field
+    }()
+    
+    private let passwordLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Пароль"
+        label.font = UIFont(name: "SFProDisplay-Regular", size: 16)
+        label.textColor = .white
+        return label
+    }()
+    
+    private let passwordTextField: UITextField = {
+        let field = UITextField()
+        field.text = "*********"
+        field.font = UIFont(name: "SFProDisplay-Regular", size: 16)
+        field.textColor = .white
+        field.backgroundColor = UIColor(hex: "#2B373E")
+        field.layer.cornerRadius = 8
+        field.isSecureTextEntry = true
+        field.clipsToBounds = true
+        field.isUserInteractionEnabled = false
+        
+        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 15, height: field.frame.height))
+        field.leftView = paddingView
+        field.leftViewMode = .always
+        
+        return field
+    }()
+    
+    private let phoneLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Номер телефона"
+        label.font = UIFont(name: "SFProDisplay-Regular", size: 16)
+        label.textColor = .white
+        return label
+    }()
+    
+    private let phoneTextField: UITextField = {
+        let field = UITextField()
+        field.text = "+996 999-899-000"
+        field.font = UIFont(name: "SFProDisplay-Regular", size: 16)
+        field.textColor = .white
+        field.backgroundColor = UIColor(hex: "#2B373E")
+        field.layer.cornerRadius = 8
+        field.clipsToBounds = true
+        
+        let editButton = UIButton(type: .custom)
+        editButton.setImage(UIImage(named: "edit2"), for: .normal)
+        editButton.tintColor = .init(hex: "#0A84FF")
+        editButton.frame = CGRect(x: 0, y: 0, width: 24, height: 24)
+        editButton.addTarget(nil, action: #selector(enableEditing), for: .touchUpInside)
+        
+        let rightPaddingView = UIView(frame: CGRect(x: -15, y: 0, width: 24, height: 24))
+        rightPaddingView.addSubview(editButton)
+        editButton.center = rightPaddingView.center
+        
+        field.rightView = rightPaddingView
+        field.rightViewMode = .always
+        
+        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 15, height: field.frame.height))
+        field.leftView = paddingView
+        field.leftViewMode = .always
+        
+        field.isUserInteractionEnabled = false
+        return field
     }()
     
     private lazy var historyButton: UIButton = {
         let button = UIButton()
         button.setTitle("История заказов", for: .normal)
         button.titleLabel?.font = UIFont(name: "SFProDisplay-Regular", size: 16)
-        button.tintColor = . white
+        button.setTitleColor(.white, for: .normal)
         button.backgroundColor = UIColor(hex: "#2B373E")
-        button.layer.cornerRadius = 12
+        button.layer.cornerRadius = 8
         button.clipsToBounds = true
+        button.contentHorizontalAlignment = .left
+        button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 0)
+        
+        let arrowImageView = UIImageView(image: UIImage(named: "arrow-right"))
+        arrowImageView.tintColor = UIColor(hex: "#0A84FF")
+        button.addSubview(arrowImageView)
+        
+        arrowImageView.snp.makeConstraints { make in
+            make.centerY.equalTo(button.snp.centerY)
+            make.trailing.equalToSuperview().offset(-15)
+        }
+        
         button.addTarget(self, action: #selector(historyButtonTapped), for: .touchUpInside)
         return button
-        
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(hex: "#1B2228")
         setupUI()
-        
     }
-    
-    
     
     private func setupUI() {
         view.addSubview(userImage)
         userImage.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(90)
+            make.top.equalToSuperview().offset(71)
             make.centerX.equalToSuperview()
-            make.height.equalTo(152)
-            make.width.equalTo(130)
+            make.height.equalTo(120)
+            make.width.equalTo(120)
+        }
+
+        view.addSubview(editButton)
+        editButton.snp.makeConstraints { make in
+            make.bottom.equalTo(userImage.snp.bottom)
+            make.trailing.equalTo(userImage.snp.trailing)
+            make.height.width.equalTo(30)
         }
         
         view.addSubview(nameLabel)
         nameLabel.snp.makeConstraints { make in
-            make.top.equalTo(userImage.snp.bottom).offset(30)
+            make.top.equalTo(userImage.snp.bottom).offset(40)
             make.leading.equalToSuperview().offset(20)
         }
         
+        view.addSubview(nameTextField)
+        nameTextField.snp.makeConstraints { make in
+            make.top.equalTo(nameLabel.snp.bottom).offset(8)
+            make.leading.equalToSuperview().offset(20)
+            make.trailing.equalToSuperview().offset(-20)
+            make.height.equalTo(35)
+        }
+        
+        view.addSubview(emailLabel)
+        emailLabel.snp.makeConstraints { make in
+            make.top.equalTo(nameTextField.snp.bottom).offset(16)
+            make.leading.equalToSuperview().offset(20)
+        }
+        
+        view.addSubview(emailTextField)
+        emailTextField.snp.makeConstraints { make in
+            make.top.equalTo(emailLabel.snp.bottom).offset(8)
+            make.leading.equalToSuperview().offset(20)
+            make.trailing.equalToSuperview().offset(-20)
+            make.height.equalTo(35)
+        }
+        
+        view.addSubview(passwordLabel)
+        passwordLabel.snp.makeConstraints { make in
+            make.top.equalTo(emailTextField.snp.bottom).offset(16)
+            make.leading.equalToSuperview().offset(20)
+        }
+        
+        view.addSubview(passwordTextField)
+        passwordTextField.snp.makeConstraints { make in
+            make.top.equalTo(passwordLabel.snp.bottom).offset(8)
+            make.leading.equalToSuperview().offset(20)
+            make.trailing.equalToSuperview().offset(-20)
+            make.height.equalTo(35)
+        }
+        
+        view.addSubview(phoneLabel)
+        phoneLabel.snp.makeConstraints { make in
+            make.top.equalTo(passwordTextField.snp.bottom).offset(16)
+            make.leading.equalToSuperview().offset(20)
+        }
+        
+        view.addSubview(phoneTextField)
+        phoneTextField.snp.makeConstraints { make in
+            make.top.equalTo(phoneLabel.snp.bottom).offset(8)
+            make.leading.equalToSuperview().offset(20)
+            make.trailing.equalToSuperview().offset(-20)
+            make.height.equalTo(35)
+        }
         
         view.addSubview(historyButton)
         historyButton.snp.makeConstraints { make in
-            make.bottom.equalToSuperview().offset(-90)
-            make.leading.trailing.equalToSuperview().inset(20)
-            make.height.equalTo(44)
-            
+            make.top.equalTo(phoneTextField.snp.bottom).offset(40)
+            make.leading.equalToSuperview().offset(20)
+            make.trailing.equalToSuperview().offset(-20)
+            make.height.equalTo(40)
         }
     }
+    
     @objc func historyButtonTapped() {
-        let vc = ClientHistoryViewController()
-        vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: true, completion: nil)
-        
+        let historyViewController = ClientHistoryViewController()
+        navigationController?.pushViewController(historyViewController, animated: true)
     }
+    
     @objc private func userImageTapped() {
         let alertController = UIAlertController(title: "Выберите фото профиля", message: "Выберите фото из галереи или сделайте новое фото.", preferredStyle: .actionSheet)
         
@@ -90,9 +270,7 @@ class PersonalAccountViewController: UIViewController {
             self?.showImagePicker(sourceType: .photoLibrary)
         }
         
-        
         let cancelAction = UIAlertAction(title: "Отменить", style: .cancel)
-        
         
         alertController.addAction(cameraAction)
         alertController.addAction(photoLibraryAction)
@@ -101,11 +279,14 @@ class PersonalAccountViewController: UIViewController {
         present(alertController, animated: true)
     }
     
+    @objc private func enableEditing() {
+        phoneTextField.isUserInteractionEnabled = true
+        phoneTextField.becomeFirstResponder()
+    }
+    
     private func showImagePicker(sourceType: UIImagePickerController.SourceType) {
         imagePicker.showImagePicker(in: self) { [weak self] image in
-            
-            self?.userImage.setImage(image, for: .normal)
-            self?.userImage.setTitle("Image Selected", for: .normal)
+            self?.userImage.image = image
         }
     }
 }
