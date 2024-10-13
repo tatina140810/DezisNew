@@ -39,9 +39,7 @@
 		AF4B1E192CA0202000FDA3EC /* TextFieldSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1E182CA0202000FDA3EC /* TextFieldSettings.swift */; };
 		AF4B1E1B2CA0222A00FDA3EC /* ButtonSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1E1A2CA0222A00FDA3EC /* ButtonSettings.swift */; };
 		AF4B1E1D2CA05B5200FDA3EC /* ImageSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1E1C2CA05B5200FDA3EC /* ImageSettings.swift */; };
-		AF4B1E1F2CA06E5500FDA3EC /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1E1E2CA06E5500FDA3EC /* SettingsViewController.swift */; };
 		AF4B1E212CA06E6C00FDA3EC /* UserInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1E202CA06E6C00FDA3EC /* UserInfoViewController.swift */; };
-		AF4B1E232CA06E7E00FDA3EC /* AboutUsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1E222CA06E7E00FDA3EC /* AboutUsViewController.swift */; };
 		AF4B1E282CA0729300FDA3EC /* ServerErrorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1E272CA0729300FDA3EC /* ServerErrorViewController.swift */; };
 		AF4B1E2B2CA0736200FDA3EC /* ClientChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1E2A2CA0736200FDA3EC /* ClientChatViewController.swift */; };
 		AF4B1E2D2CA19C6000FDA3EC /* ChekBoxButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1E2C2CA19C6000FDA3EC /* ChekBoxButton.swift */; };
@@ -114,9 +112,7 @@
 		AF4B1E182CA0202000FDA3EC /* TextFieldSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldSettings.swift; sourceTree = "<group>"; };
 		AF4B1E1A2CA0222A00FDA3EC /* ButtonSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonSettings.swift; sourceTree = "<group>"; };
 		AF4B1E1C2CA05B5200FDA3EC /* ImageSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSettings.swift; sourceTree = "<group>"; };
-		AF4B1E1E2CA06E5500FDA3EC /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		AF4B1E202CA06E6C00FDA3EC /* UserInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoViewController.swift; sourceTree = "<group>"; };
-		AF4B1E222CA06E7E00FDA3EC /* AboutUsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutUsViewController.swift; sourceTree = "<group>"; };
 		AF4B1E272CA0729300FDA3EC /* ServerErrorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerErrorViewController.swift; sourceTree = "<group>"; };
 		AF4B1E2A2CA0736200FDA3EC /* ClientChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientChatViewController.swift; sourceTree = "<group>"; };
 		AF4B1E2C2CA19C6000FDA3EC /* ChekBoxButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChekBoxButton.swift; sourceTree = "<group>"; };
@@ -356,9 +352,7 @@
 			isa = PBXGroup;
 			children = (
 				AF4B1E142C9D9CB400FDA3EC /* PersonalAccountViewController.swift */,
-				AF4B1E1E2CA06E5500FDA3EC /* SettingsViewController.swift */,
 				AF4B1E202CA06E6C00FDA3EC /* UserInfoViewController.swift */,
-				AF4B1E222CA06E7E00FDA3EC /* AboutUsViewController.swift */,
 				AFF618822CB82FA000C64C95 /* ClientHistoryViewController.swift */,
 			);
 			path = PersonalAccountViews;
@@ -568,7 +562,6 @@
 				AF74D56D2CAD835C00B64D6E /* CalendarViewController.swift in Sources */,
 				AF4B1E0F2C9D9B8200FDA3EC /* ClientHomeViewController.swift in Sources */,
 				AF74D5752CB1171700B64D6E /* FifthOnboardingViewController.swift in Sources */,
-				AF4B1E232CA06E7E00FDA3EC /* AboutUsViewController.swift in Sources */,
 				72D39B912CB1511C00D9EB45 /* AdminTabBarController.swift in Sources */,
 				72D39B932CB1511C00D9EB45 /* AdminChatViewController.swift in Sources */,
 				AFF6188B2CBBA3E700C64C95 /* EntryAllowedViewController.swift in Sources */,
@@ -589,7 +582,6 @@
 				AF74D57A2CB1171700B64D6E /* ThirdOnboardingViewController.swift in Sources */,
 				AFF618782CB69D2800C64C95 /* DezinsectionViewController.swift in Sources */,
 				AF9F2FEE2CA6D3CF00BBBB2C /* ImagePicker.swift in Sources */,
-				AF4B1E1F2CA06E5500FDA3EC /* SettingsViewController.swift in Sources */,
 				AF9F2FEC2CA6BA1A00BBBB2C /* AttributedTextHelper.swift in Sources */,
 				AF4B1DFB2C9B42D300FDA3EC /* NewUserRegisterViewController.swift in Sources */,
 				AF74D57E2CB14B7700B64D6E /* DezinsectionView.swift in Sources */,

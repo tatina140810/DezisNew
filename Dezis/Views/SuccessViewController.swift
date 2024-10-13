@@ -26,7 +26,7 @@ class SuccessViewController: UIViewController {
            view.numberOfLines = 0
            return view
        }()
-       private var nextButton: UIButton = {
+    private lazy var nextButton: UIButton = {
            let view = UIButton()
            view.setTitle("Продолжить", for: .normal)
            view.setTitleColor(.white, for: .normal)
