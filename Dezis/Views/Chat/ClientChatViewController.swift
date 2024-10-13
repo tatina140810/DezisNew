@@ -1,45 +1,36 @@
-//
-//  ClientChatViewController.swift
-//  Dezis
-//
-//  Created by Tatina Dzhakypbekova on 22/9/24.
-//
 
 import UIKit
-
-class ClientChatViewController: UIViewController {
+protocol IClientChatViewController: AnyObject {
+  
+}
+class ClientChatViewController: UIViewController, IClientChatViewController {
+    
+    private var presenter: IClientChatPresenter?
     
     private lazy var navigationBarView: CustomNavigationBar = {
-            let view = CustomNavigationBar()
-            return view
-        }()
-
-        private lazy var tableView: UITableView = {
-            let view = UITableView()
-            view.register(CellForChat.self, forCellReuseIdentifier: "ChatCell")
-            view.separatorStyle = .none
-            view.backgroundColor = UIColor(hex: "#1B2228")
-            return view
-        }()
+        let view = CustomNavigationBar()
+        return view
+    }()
+    
+    private lazy var tableView: UITableView = {
+        let view = UITableView()
+        view.register(CellForChat.self, forCellReuseIdentifier: "ChatCell")
+        view.separatorStyle = .none
+        view.backgroundColor = UIColor(hex: "#1B2228")
+        return view
+    }()
     private lazy var textField = TextFieldSettings().textFieldMaker(placeholder: "",  backgroundColor: UIColor(hex: "#161718"), cornerRadius: 16)
-                                    
+    
     private lazy var emodziImage: UIButton = {
         let image = UIButton()
         image.setImage(UIImage(resource: .shape), for: .normal)
         return image
     }()
     
-        
-    let messages = [
-        (message: "Здравствуйте!", time: "18:48", checkmark: UIImage(resource: .twoRead)),
-        (message: "Здраствуйте! Все хорошо, как я могу расплатится?!", time: "18:49", checkmark: UIImage(resource: .twoRead)),
-        (message: "Хорошо", time: "18:50", checkmark: UIImage(resource: .twoRead))
-    ]
-
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(hex: "#1B2228")
-        
+        self.presenter = ClientChatPresenter(view: self)
         tableView.delegate = self
         tableView.dataSource = self
         tableView.estimatedRowHeight = 44
@@ -47,7 +38,43 @@ class ClientChatViewController: UIViewController {
         
         setupConstraints()
         navigationControllerSettings()
+        NotificationCenterSetup()
     }
+    private func NotificationCenterSetup(){
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+         
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+
+
+@objc func keyboardWillShow(_ notification: Notification) {
+    if let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+        let keyboardHeight = keyboardFrame.cgRectValue.height
+        let duration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double ?? 0.3
+        
+        UIView.animate(withDuration: duration) {
+            self.view.frame.origin.y = -keyboardHeight
+        }
+    }
+}
+override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    self.view.endEditing(true)
+}
+
+
+
+@objc func keyboardWillHide(_ notification: Notification) {
+    let duration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double ?? 0.3
+
+    UIView.animate(withDuration: duration) {
+        self.view.frame.origin.y = 0
+    }
+}
+
     private func navigationControllerSettings() {
         navigationController?.navigationBar.isUserInteractionEnabled = true
         let backButton = UIBarButtonItem(title: "Назад", style: .plain, target: self, action: #selector(backButtonTapped))
@@ -96,28 +123,36 @@ class ClientChatViewController: UIViewController {
         present(vc, animated: true, completion: nil)
         
     }
-    }
+}
 extension ClientChatViewController: UITableViewDelegate, UITableViewDataSource {
-  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            return messages.count
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        guard let list = presenter?.getChats() else {
+            
+            return 0
+        }
+        return list.count
+    }
+        
+        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "ChatCell", for: indexPath) as! CellForChat
+            guard let list = presenter?.getChats() else {
+                return cell
+            }
+            let messageData = list[indexPath.row]
+            let isIncoming = indexPath.row % 2 == 0
+            cell.configure(message: messageData.message, time: messageData.time, checkmark: messageData.checkmark, isIncoming: isIncoming)
+            cell.backgroundColor = UIColor(hex: "#1B2228")
+            
+            return cell
         }
         
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ChatCell", for: indexPath) as! CellForChat
-        let messageData = messages[indexPath.row]
-        let isIncoming = indexPath.row % 2 == 0
-        cell.configure(message: messageData.message, time: messageData.time, checkmark: messageData.checkmark, isIncoming: isIncoming)
-        cell.backgroundColor = UIColor(hex: "#1B2228")
-
-        return cell
-    }
-        
-      func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-         
+        func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+            
             return UITableView.automaticDimension
         }
-  
+        
     }
-    
+
 
    

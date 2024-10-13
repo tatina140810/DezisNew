@@ -17,6 +17,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             window?.rootViewController = choiceVC
         } else {
             let root = UINavigationController(rootViewController: FirstOnboardingViewController())
+       
             window?.rootViewController = root
         }
         
