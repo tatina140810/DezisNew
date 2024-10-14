@@ -1,105 +1,205 @@
+//
+//  AdminLoginViewController.swift
+//  Dezis
+//
+//  Created by Telegey Nurbekova on 05/10/24.
+//
+
 import UIKit
 
 class AdminLoginViewController: UIViewController {
-    // Mark: - Create UI Elements
     
-    private var loginLabel = LabelSettings().labelMaker(text: "Логин", font: UIFont.systemFont(ofSize: 19))
+    private let loginLabel: UILabel = {
+        let view = UILabel()
+        view.text = "Вход админа"
+        view.font = UIFont(name: "SFProDisplay-Bold", size: 24)
+        view.textColor = .init(UIColor(hex: "#FFFFFF"))
+        view.numberOfLines = 0
+        view.textAlignment = .center
+        view.lineBreakMode = .byWordWrapping
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
     
-    private var loginTextField = TextFieldSettings().textFieldMaker(placeholder: "от 5 до 20 символов")
-    
-    private var loginComentLabel = LabelSettings().labelMaker(text: "Допускаются буквы, цифры и символы подчеркивания.", font: UIFont.boldSystemFont(ofSize: 12), textColor: UIColor(hex: "#B5B5B5"))
-    
-    private var passwordLabel = LabelSettings().labelMaker(text: "Пароль", font: UIFont.systemFont(ofSize: 19))
-      
-    private var passwordTextField = TextFieldSettings().textFieldMaker(placeholder: "от 8 до 20 символов")
-    
-    private var passwordComentLabel = LabelSettings().labelMaker(text: "Требуется наличие букв, цифр и специальных символов.", font: UIFont.systemFont(ofSize: 12), textColor: UIColor(hex: "#B5B5B5"))
+    private lazy var loginTextField: UITextField = {
+        var field = UITextField()
+        field.backgroundColor = UIColor(hex: "#2B373E")
+        field.textColor = .white
+        field.attributedPlaceholder = NSAttributedString(
+            string: "Логин",
+            attributes: [
+                NSAttributedString.Key.foregroundColor: UIColor.white.withAlphaComponent(0.7),
+                NSAttributedString.Key.font: UIFont(name: "SFProDisplay-Regular", size: 14)!
+            ])
+        field.layer.cornerRadius = 10
+        field.font = UIFont(name: "SFProDisplay-Regular", size: 14)
+        field.translatesAutoresizingMaskIntoConstraints = false
         
-    private var loginButton = ButtonSettings().buttonMaker(title: "Войти", target: self, action: #selector(loginButtonTapped), for: .touchUpInside)
+        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 15, height: field.frame.height))
+        field.leftView = paddingView
+        field.leftViewMode = .always
+        return field
+    }()
     
-    private var supportContactLabel = LabelSettings().labelMaker(text: "Не удалось войти? Связаться", font: UIFont.systemFont(ofSize: 19))
-       
+    private let passwordTextField: UITextField = {
+        var field = UITextField()
+        field.backgroundColor = UIColor(hex: "#2B373E")
+        field.textColor = .white
+        field.attributedPlaceholder = NSAttributedString(
+                string: "Пароль",
+                attributes: [
+                    NSAttributedString.Key.foregroundColor: UIColor.white.withAlphaComponent(0.7),
+                    NSAttributedString.Key.font: UIFont(name: "SFProDisplay-Regular", size: 14)!
+                ])
+        field.layer.cornerRadius = 10
+        field.font = UIFont(name: "SFProDisplay-Regular", size: 14)
+        field.translatesAutoresizingMaskIntoConstraints = false
+        
+        let eyeButton = UIButton(type: .custom)
+        eyeButton.setImage(UIImage(systemName: "eye"), for: .normal)
+        eyeButton.tintColor = .white
+        eyeButton.frame = CGRect(x: 0, y: 0, width: 24, height: 24)
+        eyeButton.addTarget(nil, action: #selector(togglePasswordVisibility), for: .touchUpInside)
+        
+        let rightPaddingView = UIView(frame: CGRect(x: 0, y: 0, width: 48, height: 24))
+        rightPaddingView.addSubview(eyeButton)
+        eyeButton.center = rightPaddingView.center
+        
+        field.rightView = rightPaddingView
+        field.rightViewMode = .always
+        
+        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 15, height: field.frame.height))
+        field.leftView = paddingView
+        field.leftViewMode = .always
+        
+        return field
+    }()
+    
+    
+    private let continueButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Продолжить", for: .normal)
+        button.titleLabel?.font = UIFont(name: "SFProDisplay-Bold", size: 16)
+        button.setTitleColor(.white, for: .normal)
+        button.backgroundColor = .init(hex: "#0A84FF")
+        button.layer.cornerRadius = 12
+        button.isEnabled = true
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    private let termsTextView: UITextView = {
+        let textView = UITextView()
+        textView.isEditable = false
+        textView.isScrollEnabled = false
+        textView.backgroundColor = .clear
+        textView.font = UIFont(name: "SFProDisplay-Regular", size: 12)
+        textView.textColor = .white
+        textView.linkTextAttributes = [
+            .foregroundColor: UIColor.systemBlue
+        ]
+        
+        let fullText = "Выбирая «Зарегистрироваться», вы подтверждаете свое согласие с Условием продажи и принимаете условия Положения о конфиденциальности."
+        
+        let termsOfService = "Условием продажи"
+        let privacyPolicy = "Положения о конфиденциальности."
+        
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.alignment = .center
+
+        let attributedString = NSMutableAttributedString(string: fullText, attributes: [
+            .font: UIFont.systemFont(ofSize: 12),
+            .foregroundColor: UIColor.white,
+            .paragraphStyle: paragraphStyle
+        ])
+        
+        let termsRange = (fullText as NSString).range(of: termsOfService)
+        let privacyRange = (fullText as NSString).range(of: privacyPolicy)
+        
+        attributedString.addAttribute(.link, value: "terms://", range: termsRange)
+        attributedString.addAttribute(.link, value: "privacy://", range: privacyRange)
+        
+        textView.attributedText = attributedString
+        textView.translatesAutoresizingMaskIntoConstraints = false
+        
+        return textView
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = .init(hex: "#1B2228")
         setupUI()
-        createAttributedText()
+        setupAddTarget()
     }
     
-    // Mark: - Setup UI Elements
     private func setupUI() {
+        
         view.addSubview(loginLabel)
-        NSLayoutConstraint.activate([
-            loginLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            loginLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 252),
-        ])
         view.addSubview(loginTextField)
-        NSLayoutConstraint.activate([
-            loginTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            loginTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            loginTextField.topAnchor.constraint(equalTo: loginLabel.bottomAnchor, constant: 5),
-            loginTextField.heightAnchor.constraint(equalToConstant: 48),
-        ])
-        view.addSubview(loginComentLabel)
-        NSLayoutConstraint.activate([
-            loginComentLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            loginComentLabel.topAnchor.constraint(equalTo: loginTextField.bottomAnchor, constant: 5),
-        ])
-        view.addSubview(passwordLabel)
-        NSLayoutConstraint.activate([
-            passwordLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            passwordLabel.topAnchor.constraint(equalTo: loginComentLabel.bottomAnchor, constant: 20),
-        ])
         view.addSubview(passwordTextField)
-        NSLayoutConstraint.activate([
-            passwordTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            passwordTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            passwordTextField.topAnchor.constraint(equalTo: passwordLabel.bottomAnchor, constant: 5),
-            passwordTextField.heightAnchor.constraint(equalToConstant: 48),
-        ])
-        view.addSubview(passwordComentLabel)
-        NSLayoutConstraint.activate([
-            passwordComentLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            passwordComentLabel.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 5),
-        ])
-        view.addSubview(loginButton)
-        NSLayoutConstraint.activate([
-            loginButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            loginButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            loginButton.topAnchor.constraint(equalTo: passwordComentLabel.bottomAnchor, constant: 20),
-            loginButton.heightAnchor.constraint(equalToConstant: 48)
-        ])
-        view.addSubview(supportContactLabel)
-        NSLayoutConstraint.activate([
-            supportContactLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            supportContactLabel.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: 20),
-        ])
-    }
-    
-    private func createAttributedText() {
-        let fullText = "Не удалось войти? Связаться"
+        view.addSubview(continueButton)
+        view.addSubview(termsTextView)
         
-        let attributedString = NSMutableAttributedString(string: fullText)
-
-        let range = (fullText as NSString).range(of: "Связаться")
-        attributedString.addAttribute(.foregroundColor, value: UIColor.blue, range: range)
-        attributedString.addAttribute(.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: range)
+        loginLabel.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(244)
+            make.centerX.equalToSuperview()
+        }
         
-        supportContactLabel.attributedText = attributedString
-
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(attributedTextTapped))
-        supportContactLabel.isUserInteractionEnabled = true
-        supportContactLabel.addGestureRecognizer(tapGesture)
+        loginTextField.snp.makeConstraints { make in
+            make.top.equalTo(loginLabel.snp.bottom).offset(24)
+            make.leading.equalToSuperview().offset(20)
+            make.trailing.equalToSuperview().offset(-20)
+            make.height.equalTo(50)
+        }
+        
+        passwordTextField.snp.makeConstraints { make in
+            make.top.equalTo(loginTextField.snp.bottom).offset(10)
+            make.leading.equalToSuperview().offset(20)
+            make.trailing.equalToSuperview().offset(-20)
+            make.height.equalTo(50)
+        }
+        
+        continueButton.snp.makeConstraints { make in
+            make.top.equalTo(passwordTextField.snp.bottom).offset(12)
+            make.leading.equalToSuperview().offset(20)
+            make.trailing.equalToSuperview().offset(-20)
+            make.height.equalTo(52)
+        }
+        
+        termsTextView.snp.makeConstraints { make in
+            make.bottom.equalToSuperview().offset(-34)
+            make.leading.equalToSuperview().offset(20)
+            make.trailing.equalToSuperview().offset(-20)
+        }
     }
     
-    @objc func loginButtonTapped() {
-        let vc = SuccessViewController()
-        navigationController?.pushViewController(vc, animated: true)
+    private func setupAddTarget() {
+        continueButton.addTarget(self, action: #selector(continueButtonTapped), for: .touchUpInside)
     }
     
-    @objc func attributedTextTapped() {
-       
-        print("Support contact tapped!")
+    @objc private func togglePasswordVisibility() {
+        passwordTextField.isSecureTextEntry.toggle()
+        
+        if let eyeButton = passwordTextField.rightView?.subviews.first as? UIButton {
+            let imageName = passwordTextField.isSecureTextEntry ? "eye" : "eye.slash"
+            eyeButton.setImage(UIImage(systemName: imageName), for: .normal)
+        }
+    }
+    
+    @objc private func continueButtonTapped() {
+        let vc = AdminTabBarController()
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true, completion: nil)
     }
 }
 
+extension AdminLoginViewController: UITextViewDelegate {
+    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
+        if URL.scheme == "terms" {
+            print("Условие продажи")
+        } else if URL.scheme == "privacy" {
+            print("Положение о конфиденциальности")
+        }
+        return false
+    }
+}

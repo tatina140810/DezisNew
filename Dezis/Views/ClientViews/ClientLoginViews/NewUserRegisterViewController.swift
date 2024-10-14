@@ -1,184 +1,198 @@
-//
-//  NewUserRegisterViewController.swift
-//  Dezis
-//
-//  Created by Tatina Dzhakypbekova on 18/9/24.
-//
-
 import UIKit
+import SnapKit
 
 class NewUserRegisterViewController: UIViewController {
     
-    // Mark: - Create UI Elements
+    // MARK: - Create UI Elements
     
-    private var titleLabel = LabelSettings().labelMaker(text: "Регистрация", font: UIFont.systemFont(ofSize: 28))
+    private var titleLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Регистрация"
+        label.font = UIFont(name: "SFProDisplay-Bold", size: 24)
+        label.textColor = .white
+        label.textAlignment = .center
+        label.numberOfLines = 0
+        return label
+    }()
+
     
-    private var nameTextField = TextFieldSettings().textFieldMaker(placeholder: "Имя", backgroundColor: UIColor(hex: "#F6F6F7"))
+    private var nameTextField = TextFieldSettings().textFieldMaker(placeholder: "ФИО", backgroundColor: UIColor(hex: "#2B373E"))
     
-    private var phoneNumberTextField = TextFieldSettings().textFieldMaker(placeholder: "Номер телефона", backgroundColor: UIColor(hex: "#F6F6F7"))
+    private var emailTextField = TextFieldSettings().textFieldMaker(placeholder: "example@gmail.com*", backgroundColor: UIColor(hex: "#2B373E"))
     
-    private var emailTextField = TextFieldSettings().textFieldMaker(placeholder: "Email", backgroundColor: UIColor(hex: "#F6F6F7"))
+    private var passwordTextField = TextFieldSettings().textFieldMaker(placeholder: "Пароль", backgroundColor: UIColor(hex: "#2B373E"))
     
-    private var orderNumberTextField = TextFieldSettings().textFieldMaker(placeholder: "Номер заказа", backgroundColor: UIColor(hex: "#F6F6F7"))
+    private var errorLabel: UILabel = {
+        let view = UILabel()
+        view.text = ""
+        view.font = UIFont(name: "SFProDisplay-Regular", size: 12)
+        view.textColor = .red
+        view.textAlignment = .left
+        return view
+    }()
     
-    private var adressTextField = TextFieldSettings().textFieldMaker(placeholder: "Адрес", backgroundColor: UIColor(hex: "#F6F6F7"))
+    private var nextButton: UIButton = {
+        let view = UIButton()
+        view.setTitle("Продолжить", for: .normal)
+        view.setTitleColor(.white, for: .normal)
+        view.backgroundColor = UIColor(hex: "#0A84FF")
+        view.layer.cornerRadius = 12
+        view.titleLabel?.font = UIFont(name: "SFProDisplay-Bold", size: 16)
+        return view
+    }()
     
-    private var houseNumberTextField = TextFieldSettings().textFieldMaker(placeholder: "Номер дома", backgroundColor: UIColor(hex: "#F6F6F7"))
+    private var privacyLabel: UILabel = {
+        let view = UILabel()
+        view.text = "Выбирая «Зарегистрироваться», вы подтверждаете свое согласие с Условием продажи и принимаете условия"
+        view.font = UIFont(name: "SFProDisplay-Regular", size: 12)
+        view.textColor = .white
+        view.textAlignment = .center
+        view.numberOfLines = 0
+        return view
+    }()
+    private var confidentialityLabel: UILabel = {
+        let view = UILabel()
+        view.text = "Положения о конфиденциальности."
+        view.font = UIFont(name: "SFProDisplay-Regular", size: 12)
+        view.textColor = .white
+        view.textAlignment = .center
+        view.numberOfLines = 0
+        return view
+    }()
     
-    private var apartmentNumberTextField = TextFieldSettings().textFieldMaker(placeholder: "Номер квартиры", backgroundColor: UIColor(hex: "#F6F6F7"))
-    
-    private var checkMarkButton = CheckboxButton()
-    
-  
-        private var privacyAgreementLabel: UILabel = {
-            let view = UILabel()
-            view.text = "Согласие на обработку персональных данных"
-            view.font = UIFont(name: "Roboto", size: 10)
-            view.numberOfLines = 0
-            view.translatesAutoresizingMaskIntoConstraints = false
-            return view
-        }()
-        private var loginLabel: UILabel = {
-            let view = UILabel()
-            view.text = "У вас уже есть аккаунт? Войти"
-            view.font = UIFont(name: "Roboto", size: 10)
-            view.textColor = UIColor(hex: "#B5B5B5")
-            view.translatesAutoresizingMaskIntoConstraints = false
-            return view
-        }()
-        private var signUpButton: UIButton = {
-            let view = UIButton()
-            view.setTitle( "Зарегистрироваться", for: .normal)
-            view.setTitleColor(.white, for: .normal)
-            view.backgroundColor = UIColor(hex: "#5191BA")
-            view.layer.cornerRadius = 8
-            view.addTarget(self, action: #selector(signUpButtonTapped), for: .touchUpInside)
-            view.translatesAutoresizingMaskIntoConstraints = false
-            return view
-        }()
-        private var supportContactLabel: UILabel = {
-            let view = UILabel()
-            view.text = "Не удалось зарегистрироваться? Связаться"
-            view.font = UIFont(name: "Roboto", size: 12)
-            view.translatesAutoresizingMaskIntoConstraints = false
-            return view
-        }()
-        
-        
-        override func viewDidLoad() {
-            super.viewDidLoad()
-            view.backgroundColor = .white
-            setupUI()
-            
-        }
-        
-        // Mark: - Setup UI Elements
-        private func setupUI(){
-            
-            view.addSubview(titleLabel)
-            NSLayoutConstraint.activate([
-                titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-                titleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 144),
-            ])
-            view.addSubview(nameTextField)
-            NSLayoutConstraint.activate([
-                nameTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-                nameTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-                nameTextField.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 28),
-                nameTextField.heightAnchor.constraint(equalToConstant: 48),
-            ])
-            view.addSubview(phoneNumberTextField)
-            NSLayoutConstraint.activate([
-                phoneNumberTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-                phoneNumberTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-                phoneNumberTextField.topAnchor.constraint(equalTo: nameTextField.bottomAnchor, constant: 8),
-                phoneNumberTextField.heightAnchor.constraint(equalToConstant: 48),
-            ])
-            view.addSubview(emailTextField)
-            NSLayoutConstraint.activate([
-                emailTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-                emailTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-                emailTextField.topAnchor.constraint(equalTo: phoneNumberTextField.bottomAnchor, constant: 8),
-                emailTextField.heightAnchor.constraint(equalToConstant: 48),
-            ])
-            view.addSubview(orderNumberTextField)
-            NSLayoutConstraint.activate([
-                orderNumberTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-                orderNumberTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-                orderNumberTextField.topAnchor.constraint(equalTo: emailTextField.bottomAnchor, constant: 8),
-                orderNumberTextField.heightAnchor.constraint(equalToConstant: 48),
-            ])
-            view.addSubview(adressTextField)
-            NSLayoutConstraint.activate([
-                adressTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-                adressTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-                adressTextField.topAnchor.constraint(equalTo: orderNumberTextField.bottomAnchor, constant: 8),
-                adressTextField.heightAnchor.constraint(equalToConstant: 48),
-            ])
-            view.addSubview(houseNumberTextField)
-            NSLayoutConstraint.activate([
-                houseNumberTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-                houseNumberTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-                houseNumberTextField.topAnchor.constraint(equalTo: adressTextField.bottomAnchor, constant: 8),
-                houseNumberTextField.heightAnchor.constraint(equalToConstant: 48),
-            ])
-            view.addSubview(apartmentNumberTextField)
-            NSLayoutConstraint.activate([
-                apartmentNumberTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-                apartmentNumberTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-                apartmentNumberTextField.topAnchor.constraint(equalTo: houseNumberTextField.bottomAnchor, constant: 8),
-                apartmentNumberTextField.heightAnchor.constraint(equalToConstant: 48),
-            ])
-            
-            view.addSubview(checkMarkButton)
-            NSLayoutConstraint.activate([
-                checkMarkButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-                checkMarkButton.topAnchor.constraint(equalTo: apartmentNumberTextField.bottomAnchor, constant: 16),
-                checkMarkButton.heightAnchor.constraint(equalToConstant: 24),
-                checkMarkButton.widthAnchor.constraint(equalToConstant: 24),
-            ])
-            view.addSubview(privacyAgreementLabel)
-            NSLayoutConstraint.activate([
-                privacyAgreementLabel.leadingAnchor.constraint(equalTo: checkMarkButton.trailingAnchor, constant: 5),
-                privacyAgreementLabel.topAnchor.constraint(equalTo: apartmentNumberTextField.bottomAnchor, constant: 16),
-                privacyAgreementLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16)
-            ])
-            view.addSubview(loginLabel)
-            NSLayoutConstraint.activate([
-                loginLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-                loginLabel.topAnchor.constraint(equalTo: checkMarkButton.bottomAnchor, constant: 16),
-            ])
-            
-            view.addSubview(signUpButton)
-            NSLayoutConstraint.activate([
-                signUpButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-                signUpButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-                signUpButton.topAnchor.constraint(equalTo: loginLabel.bottomAnchor, constant: 20),
-                signUpButton.heightAnchor.constraint(equalToConstant: 48)
-            ])
-            
-            view.addSubview(supportContactLabel)
-            NSLayoutConstraint.activate([
-                supportContactLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-                
-                supportContactLabel.topAnchor.constraint(equalTo: signUpButton.bottomAnchor, constant: 20),
-            ])
-            
-        }
-     
-        
-        @objc func signUpButtonTapped(){
-            let vc = СonfirmationСodeViewController()
-            navigationController?.pushViewController(vc, animated: true)
-            
-            
-        }
-        @objc func loginButtonTapped(){
-            let vc = NewUserRegisterViewController()
-            navigationController?.pushViewController(vc, animated: true)
-            
-            
-        }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = UIColor(hex: "#1B2228")
+        setupUI()
+        createAttributedText()
+        createPrivaciAttributedText()
+        setupAddTarget()
     }
     
+    // MARK: - Attributed Text Links
+    private func setupAddTarget(){
+        let backButton = UIBarButtonItem(title: "Назад", style: .plain, target: self, action: #selector(backButtonTapped))
 
+        navigationItem.leftBarButtonItem = backButton
+        nextButton.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
+    }
+    private func createAttributedText() {
+        AttributedTextHelper.configureAttributedText(
+            for: privacyLabel,
+            fullText: "Выбирая «Зарегистрироваться», вы подтверждаете свое согласие с Условием продажи и принимаете условия",
+            tappableText: "Условием продажи",
+            tapTarget: self,
+            action: #selector(attributedTextTapped)
+        )
+    }
+    private func createPrivaciAttributedText() {
+        AttributedTextHelper.configureAttributedText(
+            for: confidentialityLabel,
+            fullText: "Положения о конфиденциальности",
+            tappableText: "Положения о конфиденциальности",
+            tapTarget: self,
+            action: #selector(attributedPrivaciTextTapped)
+        )
+    }
+    
+    // MARK: - Setup UI Elements
+    
+    private func setupUI() {
+        
+        view.addSubview(titleLabel)
+        titleLabel.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalToSuperview().offset(200)
+        }
+        
+        view.addSubview(nameTextField)
+        nameTextField.snp.makeConstraints { make in
+            make.top.equalTo(titleLabel.snp.bottom).offset(28)
+            make.leading.equalToSuperview().offset(16)
+            make.trailing.equalToSuperview().offset(-16)
+            make.height.equalTo(48)
+        }
+        
+        view.addSubview(emailTextField)
+        emailTextField.snp.makeConstraints { make in
+            make.top.equalTo(nameTextField.snp.bottom).offset(8)
+            make.leading.equalToSuperview().offset(16)
+            make.trailing.equalToSuperview().offset(-16)
+            make.height.equalTo(48)
+        }
+        
+        view.addSubview(passwordTextField)
+        passwordTextField.snp.makeConstraints { make in
+            make.top.equalTo(emailTextField.snp.bottom).offset(8)
+            make.leading.equalToSuperview().offset(16)
+            make.trailing.equalToSuperview().offset(-16)
+            make.height.equalTo(48)
+        }
+        
+        view.addSubview(errorLabel)
+        errorLabel.snp.makeConstraints { make in
+            make.top.equalTo(passwordTextField.snp.bottom).offset(10)
+            make.leading.equalToSuperview().offset(16)
+        }
+        
+        view.addSubview(nextButton)
+        nextButton.snp.makeConstraints { make in
+            make.top.equalTo(errorLabel.snp.bottom).offset(38)
+            make.leading.equalToSuperview().offset(16)
+            make.trailing.equalToSuperview().offset(-16)
+            make.height.equalTo(48)
+        }
+        view.addSubview(confidentialityLabel)
+        confidentialityLabel.snp.makeConstraints { make in
+            make.bottom.equalToSuperview().offset(-50)
+            make.centerX.equalToSuperview()
+            make.leading.trailing.equalToSuperview().inset(20)
+        }
+        
+        view.addSubview(privacyLabel)
+        privacyLabel.snp.makeConstraints { make in
+            make.bottom.equalTo(confidentialityLabel.snp.top).offset(-3)
+            make.centerX.equalToSuperview()
+            make.leading.trailing.equalToSuperview().inset(20)
+        }
+        
+    }
+    
+    // MARK: - Target Functions
+    
+    @objc func attributedTextTapped() {
+        print("Условием продажи")
+    }
+    @objc func attributedPrivaciTextTapped() {
+        print("Положения о конфиденциальности")
+    }
+    
+    @objc func nextButtonTapped() {
+        guard let name = nameTextField.text, !name.isEmpty,
+              let email = emailTextField.text, !email.isEmpty,
+              let password = passwordTextField.text, !password.isEmpty else {
+            errorLabel.text = "*Все поля обязательны для заполнения"
+            nameTextField.layer.borderColor = UIColor.red.cgColor
+            emailTextField.layer.borderColor = UIColor.red.cgColor
+            passwordTextField.layer.borderColor = UIColor.red.cgColor
+            return
+        }
+        
+    
+        let vc = UINavigationController(rootViewController: UserRegisterSecondPageViewController()) 
+       
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true, completion: nil)
+    }
+    
+    private func showAlert(message: String) {
+        let alert = UIAlertController(title: "Ошибка", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        present(alert, animated: true)
+    }
+    @objc func backButtonTapped(){
+        let vc = ClientChoiceViewController()
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true, completion: nil)
+    }
+}

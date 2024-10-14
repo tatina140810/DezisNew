@@ -1,112 +1,292 @@
 import UIKit
+import SnapKit
 
 class PersonalAccountViewController: UIViewController {
     
-    private var userImage = ImageSettings().imageMaker(image: UIImage(resource: .frame5731))
+    let imagePicker = ImagePicker()
     
-    private var personImage = ImageSettings().imageMaker(image: UIImage(systemName: "person.fill")!)
+    private lazy var userImage: UIImageView = {
+        let image = UIImageView()
+        image.image = UIImage(named: "user")
+        image.contentMode = .scaleAspectFill
+        image.clipsToBounds = true
+        image.layer.cornerRadius = 60
+        return image
+    }()
     
-    private var userInfoButton = ButtonSettings().buttonMaker(title: "Профиль", titleColor: UIColor.black, backgroundColor: UIColor.clear, target: self, action: #selector(userInfoButtonTapped))
-    private var lineImage = ImageSettings().imageMaker(image: nil, backgroundColor: UIColor.black)
+    private lazy var editButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "edit"), for: .normal)
+        button.tintColor = .white
+        button.addTarget(self, action: #selector(userImageTapped), for: .touchUpInside)
+        return button
+    }()
     
-    private var shieldImage = ImageSettings().imageMaker(image: UIImage(systemName: "shield")!)
+    private let nameLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Ф.И.О."
+        label.font = UIFont(name: "SFProDisplay-Regular", size: 16)
+        label.textColor = .white
+        label.textAlignment = .left
+        return label
+    }()
     
-    private var aboutUsButton = ButtonSettings().buttonMaker(title: "О нас", titleColor: UIColor.black, backgroundColor: UIColor.clear, target: self, action: #selector(aboutUsButtonTapped))
-    private var secondlineImage = ImageSettings().imageMaker(image: nil, backgroundColor: UIColor.black)
-    private var gearImage = ImageSettings().imageMaker(image: UIImage(systemName: "gearshape.fill")!)
+    private let nameTextField: UITextField = {
+        let field = UITextField()
+        field.text = "Элдос Мактракер Реков"
+        field.font = UIFont(name: "SFProDisplay-Regular", size: 16)
+        field.textColor = .white
+        field.backgroundColor = UIColor(hex: "#2B373E")
+        field.layer.cornerRadius = 8
+        field.clipsToBounds = true
+        field.isUserInteractionEnabled = false
+        
+        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 15, height: field.frame.height))
+        field.leftView = paddingView
+        field.leftViewMode = .always
+        
+        return field
+    }()
     
-    private var settingsButton = ButtonSettings().buttonMaker(title: "Настройки", titleColor: UIColor.black, backgroundColor: UIColor.clear, target: self, action: #selector(settingsButtonTapped))
-    private var thirdlineImage = ImageSettings().imageMaker(image: nil, backgroundColor: UIColor.black)
-    private var exitLabel = LabelSettings().labelMaker(text: "Выйти")
-      
+    private let emailLabel: UILabel = {
+        let label = UILabel()
+        label.text = "E-mail"
+        label.font = UIFont(name: "SFProDisplay-Regular", size: 16)
+        label.textColor = .white
+        return label
+    }()
+    
+    private let emailTextField: UITextField = {
+        let field = UITextField()
+        field.text = "traker@gmail.com"
+        field.font = UIFont(name: "SFProDisplay-Regular", size: 16)
+        field.textColor = .white
+        field.backgroundColor = UIColor(hex: "#2B373E")
+        field.layer.cornerRadius = 8
+        field.clipsToBounds = true
+        field.isUserInteractionEnabled = false
+        
+        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 15, height: field.frame.height))
+        field.leftView = paddingView
+        field.leftViewMode = .always
+        
+        return field
+    }()
+    
+    private let passwordLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Пароль"
+        label.font = UIFont(name: "SFProDisplay-Regular", size: 16)
+        label.textColor = .white
+        return label
+    }()
+    
+    private let passwordTextField: UITextField = {
+        let field = UITextField()
+        field.text = "*********"
+        field.font = UIFont(name: "SFProDisplay-Regular", size: 16)
+        field.textColor = .white
+        field.backgroundColor = UIColor(hex: "#2B373E")
+        field.layer.cornerRadius = 8
+        field.isSecureTextEntry = true
+        field.clipsToBounds = true
+        field.isUserInteractionEnabled = false
+        
+        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 15, height: field.frame.height))
+        field.leftView = paddingView
+        field.leftViewMode = .always
+        
+        return field
+    }()
+    
+    private let phoneLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Номер телефона"
+        label.font = UIFont(name: "SFProDisplay-Regular", size: 16)
+        label.textColor = .white
+        return label
+    }()
+    
+    private let phoneTextField: UITextField = {
+        let field = UITextField()
+        field.text = "+996 999-899-000"
+        field.font = UIFont(name: "SFProDisplay-Regular", size: 16)
+        field.textColor = .white
+        field.backgroundColor = UIColor(hex: "#2B373E")
+        field.layer.cornerRadius = 8
+        field.clipsToBounds = true
+        
+        let editButton = UIButton(type: .custom)
+        editButton.setImage(UIImage(named: "edit2"), for: .normal)
+        editButton.tintColor = .init(hex: "#0A84FF")
+        editButton.frame = CGRect(x: 0, y: 0, width: 24, height: 24)
+        editButton.addTarget(nil, action: #selector(enableEditing), for: .touchUpInside)
+        
+        let rightPaddingView = UIView(frame: CGRect(x: -15, y: 0, width: 24, height: 24))
+        rightPaddingView.addSubview(editButton)
+        editButton.center = rightPaddingView.center
+        
+        field.rightView = rightPaddingView
+        field.rightViewMode = .always
+        
+        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 15, height: field.frame.height))
+        field.leftView = paddingView
+        field.leftViewMode = .always
+        
+        field.isUserInteractionEnabled = false
+        return field
+    }()
+    
+    private lazy var historyButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("История заказов", for: .normal)
+        button.titleLabel?.font = UIFont(name: "SFProDisplay-Regular", size: 16)
+        button.setTitleColor(.white, for: .normal)
+        button.backgroundColor = UIColor(hex: "#2B373E")
+        button.layer.cornerRadius = 8
+        button.clipsToBounds = true
+        button.contentHorizontalAlignment = .left
+        button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 0)
+        
+        let arrowImageView = UIImageView(image: UIImage(named: "arrow-right"))
+        arrowImageView.tintColor = UIColor(hex: "#0A84FF")
+        button.addSubview(arrowImageView)
+        
+        arrowImageView.snp.makeConstraints { make in
+            make.centerY.equalTo(button.snp.centerY)
+            make.trailing.equalToSuperview().offset(-15)
+        }
+        
+        button.addTarget(self, action: #selector(historyButtonTapped), for: .touchUpInside)
+        return button
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = UIColor(hex: "#1B2228")
         setupUI()
     }
-    func setupUI(){
+    
+    private func setupUI() {
         view.addSubview(userImage)
-        NSLayoutConstraint.activate([
-            userImage.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            userImage.topAnchor.constraint(equalTo: view.topAnchor, constant: 90),
-            userImage.widthAnchor.constraint(equalToConstant: 130),
-            userImage.heightAnchor.constraint(equalToConstant: 152)
-        ])
-        view.addSubview(personImage)
-        NSLayoutConstraint.activate([
-            personImage.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            personImage.topAnchor.constraint(equalTo: userImage.bottomAnchor, constant: 30),
-            personImage.heightAnchor.constraint(equalToConstant: 24),
-            personImage.widthAnchor.constraint(equalToConstant: 24)
-        ])
+        userImage.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(71)
+            make.centerX.equalToSuperview()
+            make.height.equalTo(120)
+            make.width.equalTo(120)
+        }
+
+        view.addSubview(editButton)
+        editButton.snp.makeConstraints { make in
+            make.bottom.equalTo(userImage.snp.bottom)
+            make.trailing.equalTo(userImage.snp.trailing)
+            make.height.width.equalTo(30)
+        }
         
-        view.addSubview(userInfoButton)
-        NSLayoutConstraint.activate([
-            userInfoButton.leadingAnchor.constraint(equalTo: personImage.trailingAnchor, constant: 25),
-            userInfoButton.topAnchor.constraint(equalTo: userImage.bottomAnchor, constant: 30),
-        ])
-        view.addSubview(lineImage)
-        NSLayoutConstraint.activate([
-            lineImage.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            lineImage.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant:  -16),
-            lineImage.topAnchor.constraint(equalTo: personImage.bottomAnchor, constant: 10),
-            lineImage.heightAnchor.constraint(equalToConstant: 1)
-        ])
-        view.addSubview(shieldImage)
-        NSLayoutConstraint.activate([
-            shieldImage.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            shieldImage.topAnchor.constraint(equalTo: lineImage.bottomAnchor, constant: 40),
-            shieldImage.heightAnchor.constraint(equalToConstant: 24),
-            shieldImage.widthAnchor.constraint(equalToConstant: 24)
-        ])
+        view.addSubview(nameLabel)
+        nameLabel.snp.makeConstraints { make in
+            make.top.equalTo(userImage.snp.bottom).offset(40)
+            make.leading.equalToSuperview().offset(20)
+        }
         
-        view.addSubview(aboutUsButton)
-        NSLayoutConstraint.activate([
-            aboutUsButton.leadingAnchor.constraint(equalTo: shieldImage.trailingAnchor, constant: 25),
-            aboutUsButton.topAnchor.constraint(equalTo: lineImage.bottomAnchor, constant: 30),
-        ])
+        view.addSubview(nameTextField)
+        nameTextField.snp.makeConstraints { make in
+            make.top.equalTo(nameLabel.snp.bottom).offset(8)
+            make.leading.equalToSuperview().offset(20)
+            make.trailing.equalToSuperview().offset(-20)
+            make.height.equalTo(35)
+        }
         
-        view.addSubview(secondlineImage)
-        NSLayoutConstraint.activate([
-            lineImage.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            lineImage.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant:  -16),
-            lineImage.topAnchor.constraint(equalTo: aboutUsButton.bottomAnchor, constant: -30),
-            lineImage.heightAnchor.constraint(equalToConstant: 1)
-        ])
-//        
-        view.addSubview(gearImage)
-        NSLayoutConstraint.activate([
-            gearImage.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            gearImage.topAnchor.constraint(equalTo: aboutUsButton.bottomAnchor, constant: 40),
-            gearImage.heightAnchor.constraint(equalToConstant: 24),
-            gearImage.widthAnchor.constraint(equalToConstant: 24)
-        ])
+        view.addSubview(emailLabel)
+        emailLabel.snp.makeConstraints { make in
+            make.top.equalTo(nameTextField.snp.bottom).offset(16)
+            make.leading.equalToSuperview().offset(20)
+        }
         
-        view.addSubview(settingsButton)
-        NSLayoutConstraint.activate([
-            settingsButton.leadingAnchor.constraint(equalTo: gearImage.trailingAnchor, constant: 25),
-            settingsButton.topAnchor.constraint(equalTo: aboutUsButton.bottomAnchor, constant: 30),
-        ])
-        view.addSubview(exitLabel)
-        NSLayoutConstraint.activate([
-            exitLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            exitLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -120)])
+        view.addSubview(emailTextField)
+        emailTextField.snp.makeConstraints { make in
+            make.top.equalTo(emailLabel.snp.bottom).offset(8)
+            make.leading.equalToSuperview().offset(20)
+            make.trailing.equalToSuperview().offset(-20)
+            make.height.equalTo(35)
+        }
+        
+        view.addSubview(passwordLabel)
+        passwordLabel.snp.makeConstraints { make in
+            make.top.equalTo(emailTextField.snp.bottom).offset(16)
+            make.leading.equalToSuperview().offset(20)
+        }
+        
+        view.addSubview(passwordTextField)
+        passwordTextField.snp.makeConstraints { make in
+            make.top.equalTo(passwordLabel.snp.bottom).offset(8)
+            make.leading.equalToSuperview().offset(20)
+            make.trailing.equalToSuperview().offset(-20)
+            make.height.equalTo(35)
+        }
+        
+        view.addSubview(phoneLabel)
+        phoneLabel.snp.makeConstraints { make in
+            make.top.equalTo(passwordTextField.snp.bottom).offset(16)
+            make.leading.equalToSuperview().offset(20)
+        }
+        
+        view.addSubview(phoneTextField)
+        phoneTextField.snp.makeConstraints { make in
+            make.top.equalTo(phoneLabel.snp.bottom).offset(8)
+            make.leading.equalToSuperview().offset(20)
+            make.trailing.equalToSuperview().offset(-20)
+            make.height.equalTo(35)
+        }
+        
+        view.addSubview(historyButton)
+        historyButton.snp.makeConstraints { make in
+            make.top.equalTo(phoneTextField.snp.bottom).offset(40)
+            make.leading.equalToSuperview().offset(20)
+            make.trailing.equalToSuperview().offset(-20)
+            make.height.equalTo(40)
+        }
     }
     
-    @objc func userInfoButtonTapped() {
-        let vc = UserInfoViewController()
-        navigationController?.pushViewController(vc, animated: true)
-        print("User info Button Tapped")
-    }
-    @objc func aboutUsButtonTapped() {
-        let vc = AboutUsViewController()
-        navigationController?.pushViewController(vc, animated: true)
-        print("About Us Button Tapped")
-    }
-    @objc func settingsButtonTapped() {
-        let vc = SettingsViewController()
-        navigationController?.pushViewController(vc, animated: true)
-        print("Settings Button Tapped")
+    @objc func historyButtonTapped() {
+        let historyViewController = ClientHistoryViewController()
+        navigationController?.pushViewController(historyViewController, animated: true)
     }
     
+    @objc private func userImageTapped() {
+        let alertController = UIAlertController(title: "Выберите фото профиля", message: "Выберите фото из галереи или сделайте новое фото.", preferredStyle: .actionSheet)
+        
+        let cameraAction = UIAlertAction(title: "Камера", style: .default) { [weak self] _ in
+            guard UIImagePickerController.isSourceTypeAvailable(.camera) else {
+                let alert = UIAlertController(title: "Ошибка", message: "Камера не доступна.", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default))
+                self?.present(alert, animated: true)
+                return
+            }
+            self?.showImagePicker(sourceType: .camera)
+        }
+        
+        let photoLibraryAction = UIAlertAction(title: "Галерея", style: .default) { [weak self] _ in
+            self?.showImagePicker(sourceType: .photoLibrary)
+        }
+        
+        let cancelAction = UIAlertAction(title: "Отменить", style: .cancel)
+        
+        alertController.addAction(cameraAction)
+        alertController.addAction(photoLibraryAction)
+        alertController.addAction(cancelAction)
+        
+        present(alertController, animated: true)
+    }
+    
+    @objc private func enableEditing() {
+        phoneTextField.isUserInteractionEnabled = true
+        phoneTextField.becomeFirstResponder()
+    }
+    
+    private func showImagePicker(sourceType: UIImagePickerController.SourceType) {
+        imagePicker.showImagePicker(in: self) { [weak self] image in
+            self?.userImage.image = image
+        }
+    }
 }

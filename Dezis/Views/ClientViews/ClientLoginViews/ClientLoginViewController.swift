@@ -1,132 +1,168 @@
-//
-//  ClientLoginViewController.swift
-//  Dezis
-//
-//  Created by Tatina Dzhakypbekova on 18/9/24.
-//
-
 import UIKit
 
-class ClientLoginViewController: UIViewController {
-    
-    // Mark: - Create UI Elements
+class ClientLoginViewController: UIViewController, UITextFieldDelegate {
+
+    // MARK: - Create UI Elements
     
     private var titleLabel: UILabel = {
         let view = UILabel()
-        view.text = "С возвращением!"
-        view.font = UIFont.systemFont(ofSize: 28)
-        view.translatesAutoresizingMaskIntoConstraints = false
+        view.text = "Вход"
+        view.font = UIFont(name: "SFProDisplay-Bold", size: 24)
+        view.textAlignment = .center
+        view.textColor = .white
+ 
         return view
     }()
-    private var nameTextField: UITextField = {
-        let view = UITextField()
-        view.placeholder = "Имя"
-        view.backgroundColor = UIColor(hex: "#F6F6F7")
-        view.layer.cornerRadius = 8
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-  
-    private var emailTextField: UITextField = {
-        let view = UITextField()
-        view.placeholder = "Email"
-        view.backgroundColor = UIColor(hex: "#F6F6F7")
-        view.layer.cornerRadius = 8
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-    private var signUpButton: UIButton = {
-        let view = UIButton()
-        view.setTitle( "Регистрация", for: .normal)
-        view.setTitleColor(.blue, for: .normal)
-        view.titleLabel?.font = UIFont.systemFont(ofSize: 16)
-        view.addTarget(self, action: #selector(signUpButtonTapped), for: .touchUpInside)
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-  
-    private var loginButton: UIButton = {
-        let view = UIButton()
-        view.setTitle( "Войти", for: .normal)
-        view.setTitleColor(.white, for: .normal)
-        view.backgroundColor = UIColor(hex: "#5191BA")
-        view.layer.cornerRadius = 8
-        view.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-    private var supportContactLabel: UILabel = {
+    
+    private var emailTextField = TextFieldSettings().textFieldMaker(placeholder: "example@gmail.com", backgroundColor: UIColor(hex: "#2B373E"))
+    private var passwordTextField = TextFieldSettings().textFieldMaker(placeholder: "Пароль", backgroundColor: UIColor(hex: "#2B373E"))
+   
+    private var errorMasageLabel: UILabel = {
         let view = UILabel()
-        view.text = "Не удалось войти? Связаться"
-        view.font = UIFont(name: "Roboto", size: 19)
-        view.translatesAutoresizingMaskIntoConstraints = false
+        view.text = ""
+        view.font = UIFont(name: "SFProDisplay-Regular", size: 12)
+        view.numberOfLines = 0
+        view.textAlignment = .center
+        view.textColor = .red
+        view.isHidden = true
         return view
     }()
+    private var forgotPasswordLabel: UILabel = {
+        let view = UILabel()
+        view.text = "Забыли пароль?"
+        view.font = UIFont(name: "SFProDisplay-Regular", size: 12)
+        view.numberOfLines = 0
+        view.textAlignment = .left
+        view.textColor = .white
+        return view
+    }()
+    
+    private lazy var loginButton: UIButton = {
+        let view = UIButton()
+        view.setTitle("Продолжить", for: .normal)
+        view.setTitleColor(.white, for: .normal)
+        view.backgroundColor = UIColor(hex: "#0A84FF")
+        view.layer.cornerRadius = 8
+        view.titleLabel?.font = UIFont(name: "SFProDisplay-Bold", size: 16)
+        view.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
+        return view
+    }()
+    private var privacyLabel: UILabel = {
+        let view = UILabel()
+        view.text = "Выбирая «Зарегистрироваться», вы подтверждаете свое согласие с Условием продажи и принимаете условия"
+        view.font = UIFont(name: "SFProDisplay-Regular", size: 12)
+        view.textColor = .white
+        view.textAlignment = .center
+        view.numberOfLines = 0
+        return view
+    }()
+    private var confidentialityLabel: UILabel = {
+        let view = UILabel()
+        view.text = "Положения о конфиденциальности."
+        view.font = UIFont(name: "SFProDisplay-Regular", size: 12)
+        view.textColor = .white
+        view.textAlignment = .center
+        view.numberOfLines = 0
+        return view
+    }()
+  
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = UIColor(hex: "#1B2228")
         setupUI()
-        
+        createAttributedText()
+        createPrivaciAttributedText()
     }
     
-    // Mark: - Setup UI Elements
-    private func setupUI(){
+    // MARK: - Setup UI Elements
+    private func setupUI() {
         
         view.addSubview(titleLabel)
-        NSLayoutConstraint.activate([
-            titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            titleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 218),
-        ])
-        view.addSubview(nameTextField)
-        NSLayoutConstraint.activate([
-            nameTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            nameTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            nameTextField.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 28),
-            nameTextField.heightAnchor.constraint(equalToConstant: 48),
-        ])
-        view.addSubview(emailTextField)
-        NSLayoutConstraint.activate([
-            emailTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            emailTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            emailTextField.topAnchor.constraint(equalTo: nameTextField.bottomAnchor, constant: 8),
-            emailTextField.heightAnchor.constraint(equalToConstant: 48),
-        ])
-        view.addSubview(signUpButton)
-        NSLayoutConstraint.activate([
-            signUpButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            signUpButton.topAnchor.constraint(equalTo: emailTextField.bottomAnchor, constant: 20),
-        ])
-      
-        view.addSubview(loginButton)
-        NSLayoutConstraint.activate([
-            loginButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            loginButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            loginButton.topAnchor.constraint(equalTo: signUpButton.bottomAnchor, constant: 20),
-            loginButton.heightAnchor.constraint(equalToConstant: 48)
-        ])
-        view.addSubview(supportContactLabel)
-        NSLayoutConstraint.activate([
-            supportContactLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            
-            supportContactLabel.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: 20),
-        ])
-        
-    }
-    
-    @objc func signUpButtonTapped(){
-        let vc = NewUserRegisterViewController()
-        navigationController?.pushViewController(vc, animated: true)
-        
-        
-    }
-        @objc func loginButtonTapped(){
-            let vc = NewUserRegisterViewController()
-            navigationController?.pushViewController(vc, animated: true)
-    
-    
+        titleLabel.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalToSuperview().offset(258)
         }
+        
+        view.addSubview(emailTextField)
+        emailTextField.snp.makeConstraints { make in
+            make.top.equalTo(titleLabel.snp.bottom).offset(28)
+            make.leading.equalToSuperview().offset(16)
+            make.trailing.equalToSuperview().offset(-16)
+            make.height.equalTo(48)
+        }
+        
+        view.addSubview(passwordTextField)
+        passwordTextField.snp.makeConstraints { make in
+            make.top.equalTo(emailTextField.snp.bottom).offset(28)
+            make.leading.equalToSuperview().offset(16)
+            make.trailing.equalToSuperview().offset(-16)
+            make.height.equalTo(48)
+        }
+        
+        view.addSubview(errorMasageLabel)
+        errorMasageLabel.snp.makeConstraints { make in
+            make.top.equalTo(passwordTextField.snp.bottom).offset(10)
+            make.leading.equalToSuperview().offset(25)
+        }
+        view.addSubview(forgotPasswordLabel)
+        forgotPasswordLabel.snp.makeConstraints { make in
+            make.top.equalTo(errorMasageLabel.snp.bottom).offset(8)
+            make.leading.equalToSuperview().offset(25)
+        }
+        
+        view.addSubview(loginButton)
+        loginButton.snp.makeConstraints { make in
+            make.top.equalTo(forgotPasswordLabel.snp.bottom).offset(20)
+            make.leading.trailing.equalToSuperview().inset(16)
+            make.height.equalTo(52)
+        }
+        view.addSubview(confidentialityLabel)
+        confidentialityLabel.snp.makeConstraints { make in
+            make.bottom.equalToSuperview().offset(-50)
+            make.centerX.equalToSuperview()
+            make.leading.trailing.equalToSuperview().inset(20)
+        }
+        
+        view.addSubview(privacyLabel)
+        privacyLabel.snp.makeConstraints { make in
+            make.bottom.equalTo(confidentialityLabel.snp.top).offset(-3)
+            make.centerX.equalToSuperview()
+            make.leading.trailing.equalToSuperview().inset(20)
+        }
+    }
+    
+    private func createAttributedText() {
+        AttributedTextHelper.configureAttributedText(
+            for: privacyLabel,
+            fullText: "Выбирая «Зарегистрироваться», вы подтверждаете свое согласие с Условием продажи и принимаете условия",
+            tappableText: "Условием продажи",
+            tapTarget: self,
+            action: #selector(attributedTextTapped)
+        )
+    }
+    private func createPrivaciAttributedText() {
+        AttributedTextHelper.configureAttributedText(
+            for: confidentialityLabel,
+            fullText: "Положения о конфиденциальности",
+            tappableText: "Положения о конфиденциальности",
+            tapTarget: self,
+            action: #selector(attributedPrivaciTextTapped)
+        )
+    }
+   
+    
+    @objc func loginButtonTapped() {
+        print("Login successful!")
+        let vc = ClientTabBarController()
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true, completion: nil)
+    }
+    
+    @objc func attributedTextTapped() {
+        print("Support contact tapped!")
+    }
+    @objc func attributedPrivaciTextTapped() {
+        print("Support contact tapped!")
+    }
 }
-
-
-
