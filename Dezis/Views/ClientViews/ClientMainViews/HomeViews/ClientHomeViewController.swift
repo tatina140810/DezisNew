@@ -36,7 +36,7 @@ class ClientHomeViewController: UIViewController {
     }()
     private var dezinsectionView = DezinsectionView()
    
-    private var dezinsectionDetailsButton: UIButton = {
+    private lazy var dezinsectionDetailsButton: UIButton = {
         let button = UIButton()
         button.setTitle("Подробнее", for: .normal)
         button.titleLabel?.textAlignment = .left
@@ -46,6 +46,17 @@ class ClientHomeViewController: UIViewController {
         button.layer.cornerRadius = 12
         button.clipsToBounds = true
         button.titleLabel?.font = UIFont(name: "SFProDisplay-Bold", size: 16)
+        button.contentHorizontalAlignment = .left
+        button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 0)
+        
+        let arrowImageView = UIImageView(image: UIImage(named: "arrow-right"))
+        arrowImageView.tintColor = UIColor(hex: "#0A84FF")
+        button.addSubview(arrowImageView)
+        
+        arrowImageView.snp.makeConstraints { make in
+            make.centerY.equalTo(button.snp.centerY)
+            make.trailing.equalToSuperview().offset(-15)
+        }
 
         return button
     }()
@@ -62,6 +73,17 @@ class ClientHomeViewController: UIViewController {
         button.layer.cornerRadius = 12
         button.clipsToBounds = true
         button.titleLabel?.font = UIFont(name: "SFProDisplay-Bold", size: 16)
+        button.contentHorizontalAlignment = .left
+        button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 0)
+        
+        let arrowImageView = UIImageView(image: UIImage(named: "arrow-right"))
+        arrowImageView.tintColor = UIColor(hex: "#0A84FF")
+        button.addSubview(arrowImageView)
+        
+        arrowImageView.snp.makeConstraints { make in
+            make.centerY.equalTo(button.snp.centerY)
+            make.trailing.equalToSuperview().offset(-15)
+        }
 
         return button
     }()
@@ -71,17 +93,22 @@ class ClientHomeViewController: UIViewController {
     private var deratizationDetailsButton: UIButton = {
         let button = UIButton()
         button.setTitle("Подробнее", for: .normal)
-        button.titleLabel?.textAlignment = .left
+        button.setTitleColor(.white, for: .normal)
+        button.titleLabel?.font = UIFont(name: "SFProDisplay-Bold", size: 16)
         button.setImage(UIImage(systemName: "arrow.right"), for: .normal)
-        button.imageView?.contentMode = .right
+        button.tintColor = .white
         button.backgroundColor = UIColor(hex: "#0A84FF")
         button.layer.cornerRadius = 12
         button.clipsToBounds = true
-        button.titleLabel?.font = UIFont(name: "SFProDisplay-Bold", size: 16)
+        button.contentHorizontalAlignment = .left
+        button.imageEdgeInsets = UIEdgeInsets(top: 0, left: 80, bottom: 0, right: -50)
+        button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: -70)
+        button.semanticContentAttribute = .forceRightToLeft
+        
         return button
     }()
    
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(hex: "#1B2228")

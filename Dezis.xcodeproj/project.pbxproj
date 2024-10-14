@@ -43,6 +43,8 @@
 		AF4B1E282CA0729300FDA3EC /* ServerErrorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1E272CA0729300FDA3EC /* ServerErrorViewController.swift */; };
 		AF4B1E2B2CA0736200FDA3EC /* ClientChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1E2A2CA0736200FDA3EC /* ClientChatViewController.swift */; };
 		AF4B1E2D2CA19C6000FDA3EC /* ChekBoxButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1E2C2CA19C6000FDA3EC /* ChekBoxButton.swift */; };
+		AF5145FE2CBCED46000D9C97 /* NetworkServiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5145FD2CBCED46000D9C97 /* NetworkServiceViewController.swift */; };
+		AF5146022CBCF398000D9C97 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5146012CBCF398000D9C97 /* APIService.swift */; };
 		AF74D5502CA7C97B00B64D6E /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF74D54F2CA7C97B00B64D6E /* KeychainManager.swift */; };
 		AF74D5522CA7EB3200B64D6E /* UserRegisterSecondPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF74D5512CA7EB3200B64D6E /* UserRegisterSecondPageViewController.swift */; };
 		AF74D5562CAACEAC00B64D6E /* FirstStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF74D5552CAACEAC00B64D6E /* FirstStackView.swift */; };
@@ -116,6 +118,8 @@
 		AF4B1E272CA0729300FDA3EC /* ServerErrorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerErrorViewController.swift; sourceTree = "<group>"; };
 		AF4B1E2A2CA0736200FDA3EC /* ClientChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientChatViewController.swift; sourceTree = "<group>"; };
 		AF4B1E2C2CA19C6000FDA3EC /* ChekBoxButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChekBoxButton.swift; sourceTree = "<group>"; };
+		AF5145FD2CBCED46000D9C97 /* NetworkServiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceViewController.swift; sourceTree = "<group>"; };
+		AF5146012CBCF398000D9C97 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		AF74D54F2CA7C97B00B64D6E /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
 		AF74D5512CA7EB3200B64D6E /* UserRegisterSecondPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRegisterSecondPageViewController.swift; sourceTree = "<group>"; };
 		AF74D5552CAACEAC00B64D6E /* FirstStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstStackView.swift; sourceTree = "<group>"; };
@@ -233,10 +237,11 @@
 			isa = PBXGroup;
 			children = (
 				AF4B1DFE2C9C0F7800FDA3EC /* Applications */,
-				AF4B1DE72C9AEE2100FDA3EC /* TemplatesFiles */,
-				AF74D5742CB1171700B64D6E /* OnBoarding */,
+				AF5145FC2CBCECC4000D9C97 /* Model */,
 				AF4B1DE52C9AE6DF00FDA3EC /* Views */,
 				AF4B1E2E2CA2EF6B00FDA3EC /* Presenters */,
+				AF4B1DE72C9AEE2100FDA3EC /* TemplatesFiles */,
+				AF74D5742CB1171700B64D6E /* OnBoarding */,
 				AF4B1E002C9C179800FDA3EC /* Network */,
 				AF4B1E032C9C1C1F00FDA3EC /* Extensions */,
 				AFF6186E2CB692E700C64C95 /* Font */,
@@ -364,6 +369,15 @@
 				AFF6188E2CBBAFA700C64C95 /* ClientChatPresenter.swift */,
 			);
 			path = Presenters;
+			sourceTree = "<group>";
+		};
+		AF5145FC2CBCECC4000D9C97 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				AF5145FD2CBCED46000D9C97 /* NetworkServiceViewController.swift */,
+				AF5146012CBCF398000D9C97 /* APIService.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		AF74D5532CAACE6C00B64D6E /* HomeViews */ = {
@@ -579,9 +593,11 @@
 				72D39BA62CB1796F00D9EB45 /* CategoriesCollectionViewCell.swift in Sources */,
 				AF4B1DE92C9AEEC600FDA3EC /* Profile.swift in Sources */,
 				AF4B1E092C9C221000FDA3EC /* NetworkRequest.swift in Sources */,
+				AF5145FE2CBCED46000D9C97 /* NetworkServiceViewController.swift in Sources */,
 				AF74D57A2CB1171700B64D6E /* ThirdOnboardingViewController.swift in Sources */,
 				AFF618782CB69D2800C64C95 /* DezinsectionViewController.swift in Sources */,
 				AF9F2FEE2CA6D3CF00BBBB2C /* ImagePicker.swift in Sources */,
+				AF5146022CBCF398000D9C97 /* APIService.swift in Sources */,
 				AF9F2FEC2CA6BA1A00BBBB2C /* AttributedTextHelper.swift in Sources */,
 				AF4B1DFB2C9B42D300FDA3EC /* NewUserRegisterViewController.swift in Sources */,
 				AF74D57E2CB14B7700B64D6E /* DezinsectionView.swift in Sources */,
