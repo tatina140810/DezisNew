@@ -2,10 +2,10 @@ import UIKit
 import Moya
 
 class NetworkServiceViewController: UIViewController {
-   
+    
     let provider = MoyaProvider<APIService>()
     var accessToken: String?
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         requestToken()
@@ -17,8 +17,6 @@ class NetworkServiceViewController: UIViewController {
             print("Токен отсутствует, получение новостей невозможно.")
             return
         }
-
-        // Параметр 'Authorization' добавляется в заголовок
         provider.request(.news) { result in
             switch result {
             case .success(let response):
@@ -37,7 +35,7 @@ class NetworkServiceViewController: UIViewController {
     func requestToken() {
         let username = "admin@mail.com"
         let password = "123"
-
+        
         provider.request(.getToken(username: username, password: password)) { result in
             switch result {
             case .success(let response):
@@ -46,7 +44,6 @@ class NetworkServiceViewController: UIViewController {
                        let token = json["access"] as? String {
                         self.accessToken = token
                         print("Полученный токен: \(token)")
-                        // После получения токена, можно запросить новости
                         self.fetchNews()
                     } else {
                         print("Токен не найден в ответе.")
