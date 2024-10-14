@@ -33,8 +33,8 @@ class NetworkServiceViewController: UIViewController {
     }
     
     func requestToken() {
-        let username = "admin@mail.com"
-        let password = "123"
+        let username = "tatinaios"
+        let password = "123tatinaios!!!"
         
         provider.request(.getToken(username: username, password: password)) { result in
             switch result {
