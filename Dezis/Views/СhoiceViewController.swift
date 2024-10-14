@@ -1,6 +1,9 @@
 import UIKit
+import Reachability
 
 class ChoiceViewController: UIViewController {
+    let reachability = try! Reachability()
+    
     
     private var logoImage: UIImageView = {
         let image = UIImageView()
@@ -14,9 +17,59 @@ class ChoiceViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = UIColor(hex: "#1B2228")
         setupUI()
+        setupReachability()
         
+       
     }
+    func setupReachability(){
+        reachability.whenUnreachable = { _ in
+            DispatchQueue.main.async{
+                self.showNoInternetAlert(message: "Нет интернет-соединения")
+            }
+        }
+            do {
+                try reachability.startNotifier()
+            } catch {
+                print("Unable to start notifier!")
+            }
+    }
+    func showNoInternetAlert(message: String) {
+                let alertView = UIView()
+                alertView.backgroundColor = UIColor(hex: "#0A84FF")
+                let alertLabel = UILabel()
+                alertLabel.text = message
+                alertLabel.textColor = .white
+                alertLabel.textAlignment = .center
+                alertLabel.font = UIFont.systemFont(ofSize: 17, weight: .medium)
+       
+                alertView.addSubview(alertLabel)
+        alertLabel.snp.makeConstraints { make in
+            make.top.equalTo(alertView).offset(20)
+            make.centerX.equalTo(alertView)
+        }
+          
     
+        
+                view.addSubview(alertView)
+    
+                alertView.frame = CGRect(x: 0, y: 0, width: view.frame.width , height: 107)
+                
+   
+                UIView.animate(withDuration: 0.5, animations: {
+                    alertView.frame.origin.y = 50
+                }) { _ in
+             
+                    UIView.animate(withDuration: 0.5, delay: 3, options: [], animations: {
+                        alertView.frame.origin.y = -100
+                    }) { _ in
+                        alertView.removeFromSuperview()
+                    }
+                }
+            }
+            
+            @objc func showAlertButtonTapped() {
+                showNoInternetAlert(message: "Нет соединения с интернетом")
+            }
     private func setupUI(){
         view.addSubview(logoImage)
         logoImage.snp.makeConstraints { make in
