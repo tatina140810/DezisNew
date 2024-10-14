@@ -8,6 +8,7 @@
 import UIKit
 
 class ClientChoiceViewController: UIViewController {
+    let networkServise = NetworkServiceViewController()
 
     private var logoImage: UIImageView = {
         let image = UIImageView()
@@ -61,6 +62,7 @@ class ClientChoiceViewController: UIViewController {
        
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true, completion: nil)
+        networkServise.requestToken()
     }
     
 
