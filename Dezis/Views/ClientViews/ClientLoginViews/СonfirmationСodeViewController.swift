@@ -80,7 +80,13 @@ class СonfirmationСodeViewController: UIViewController {
         setupUI()
         createAttributedText()
         createPrivaciAttributedText()
-        
+        backButtonSetup()
+    }
+    private func backButtonSetup(){
+        let backButton = UIBarButtonItem(title: "Назад", style: .plain, target: self, action: #selector(backButtonTapped))
+
+        navigationItem.leftBarButtonItem = backButton
+        nextButton.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
     }
     private func setupUI(){
         view.addSubview(codeLabel)
@@ -160,7 +166,12 @@ class СonfirmationСodeViewController: UIViewController {
         print("Положения о конфиденциальности")
     }
     @objc func nextButtonTapped(){
-        let vc = SuccessViewController()
+        let vc = EntryAllowedViewController()
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true, completion: nil)
+    }
+    @objc private func backButtonTapped() {
+        let vc = UINavigationController(rootViewController: UserRegisterSecondPageViewController())
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true, completion: nil)
     }

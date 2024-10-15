@@ -62,11 +62,11 @@ class UserRegisterSecondPageViewController: UIViewController {
         setupUI()
         createAttributedText()
         createPrivaciAttributedText()
-        setupAddTarget()
+        backButtonSetup()
        
     }
     
-    private func setupAddTarget(){
+    private func backButtonSetup(){
         let backButton = UIBarButtonItem(title: "Назад", style: .plain, target: self, action: #selector(backButtonTapped))
 
         navigationItem.leftBarButtonItem = backButton
