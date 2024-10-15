@@ -73,9 +73,14 @@ class ClientLoginViewController: UIViewController, UITextFieldDelegate {
         setupUI()
         createAttributedText()
         createPrivaciAttributedText()
+        backButtonSetup()
     }
     
-    // MARK: - Setup UI Elements
+    private func backButtonSetup(){
+        let backButton = UIBarButtonItem(title: "Назад", style: .plain, target: self, action: #selector(backButtonTapped))
+
+        navigationItem.leftBarButtonItem = backButton
+    }
     private func setupUI() {
         
         view.addSubview(titleLabel)
@@ -154,7 +159,7 @@ class ClientLoginViewController: UIViewController, UITextFieldDelegate {
     
     @objc func loginButtonTapped() {
         print("Login successful!")
-        let vc = ClientTabBarController()
+        let vc = EntryAllowedViewController()
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true, completion: nil)
     }
@@ -164,5 +169,10 @@ class ClientLoginViewController: UIViewController, UITextFieldDelegate {
     }
     @objc func attributedPrivaciTextTapped() {
         print("Support contact tapped!")
+    }
+    @objc private func backButtonTapped() {
+        let vc = UINavigationController(rootViewController: ClientChoiceViewController())
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true, completion: nil)
     }
 }

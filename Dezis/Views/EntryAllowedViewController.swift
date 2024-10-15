@@ -29,7 +29,10 @@ class EntryAllowedViewController: UIViewController {
            super.viewDidLoad()
            view.backgroundColor = UIColor(hex: "#1B2228")
            setupUI()
-          
+           DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) { [weak self] in
+                      self?.loadNextViewController()
+                  }
+
            }
        
        private func setupUI(){
@@ -47,6 +50,11 @@ class EntryAllowedViewController: UIViewController {
                make.leading.trailing.equalToSuperview().inset(45)
            }
        }
+    private func loadNextViewController() {
+        let vc = ClientTabBarController()
+            vc.modalPresentationStyle = .fullScreen
+            present(vc, animated: true, completion: nil)
+        }
    }
 
 
