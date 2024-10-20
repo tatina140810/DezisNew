@@ -10,6 +10,8 @@ import SnapKit
 
 class OpenChatViewController: UIViewController {
     
+    private var chatWebSocket: ChatWebSocket!
+    
     private lazy var backButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Назад", for: .normal)
@@ -94,6 +96,8 @@ class OpenChatViewController: UIViewController {
         setupConstraints()
         tableView.delegate = self
         tableView.dataSource = self
+        chatWebSocket = ChatWebSocket()
+        chatWebSocket.connect()
     }
     
     @objc private func backButtonTapped() {
@@ -101,8 +105,21 @@ class OpenChatViewController: UIViewController {
     }
     
     @objc private func sendMessageButtonTapped() {
-        
-    }
+         guard let messageText = messageInputTextField.text, !messageText.isEmpty else { return }
+         
+         chatWebSocket.sendMessage(text: messageText)
+         // Добавьте отправленное сообщение в массив `messages` и обновите `tableView`
+         messages.append((isUserMessage: true, message: messageText, time: getCurrentTime()))
+         tableView.reloadData()
+         messageInputTextField.text = ""
+     }
+
+     // Вспомогательная функция для получения текущего времени
+     private func getCurrentTime() -> String {
+         let dateFormatter = DateFormatter()
+         dateFormatter.dateFormat = "HH:mm"
+         return dateFormatter.string(from: Date())
+     }
     
     private func setupUI() {
         view.backgroundColor = .init(hex: "#1B2228")

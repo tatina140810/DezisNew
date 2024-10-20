@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		18E576572CC5482700302739 /* ChatModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E576562CC5482700302739 /* ChatModel.swift */; };
+		18E576592CC548B100302739 /* ChatWebSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E576582CC548B100302739 /* ChatWebSocket.swift */; };
 		18FA88D62CB6D7EC00C66BAF /* OpenChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18FA88D52CB6D7EC00C66BAF /* OpenChatViewController.swift */; };
 		4061B8DFFEC52EF1268906C9 /* Pods_Dezis.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D594A6880D984FC3775947A /* Pods_Dezis.framework */; };
 		72D39B912CB1511C00D9EB45 /* AdminTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D39B822CB1511C00D9EB45 /* AdminTabBarController.swift */; };
@@ -79,6 +81,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		18E576562CC5482700302739 /* ChatModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatModel.swift; sourceTree = "<group>"; };
+		18E576582CC548B100302739 /* ChatWebSocket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatWebSocket.swift; sourceTree = "<group>"; };
 		18FA88D52CB6D7EC00C66BAF /* OpenChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenChatViewController.swift; sourceTree = "<group>"; };
 		72D39B822CB1511C00D9EB45 /* AdminTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminTabBarController.swift; sourceTree = "<group>"; };
 		72D39B852CB1511C00D9EB45 /* OrdersCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrdersCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -166,9 +170,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		18E576552CC5480F00302739 /* ChatModel */ = {
+			isa = PBXGroup;
+			children = (
+				18E576562CC5482700302739 /* ChatModel.swift */,
+				18E576582CC548B100302739 /* ChatWebSocket.swift */,
+			);
+			path = ChatModel;
+			sourceTree = "<group>";
+		};
 		72D39B8F2CB1511C00D9EB45 /* Chat */ = {
 			isa = PBXGroup;
 			children = (
+				18E576552CC5480F00302739 /* ChatModel */,
 				72D39B8E2CB1511C00D9EB45 /* AdminChatViewController.swift */,
 				18FA88D52CB6D7EC00C66BAF /* OpenChatViewController.swift */,
 			);
@@ -588,6 +602,7 @@
 				AF4B1E072C9C1F6000FDA3EC /* NetworkError.swift in Sources */,
 				AF4B1DF92C9B32A300FDA3EC /* SuccessViewController.swift in Sources */,
 				AF4B1E172C9FFF3200FDA3EC /* LabelSettings.swift in Sources */,
+				18E576572CC5482700302739 /* ChatModel.swift in Sources */,
 				72D39BA82CB1870D00D9EB45 /* AdminLoginViewController.swift in Sources */,
 				AF74D5522CA7EB3200B64D6E /* UserRegisterSecondPageViewController.swift in Sources */,
 				72D39BA62CB1796F00D9EB45 /* CategoriesCollectionViewCell.swift in Sources */,
@@ -623,6 +638,7 @@
 				AFF618832CB82FA000C64C95 /* ClientHistoryViewController.swift in Sources */,
 				72D39B9E2CB1566800D9EB45 /* AdminHistoryViewController.swift in Sources */,
 				AFF6188D2CBBA52600C64C95 /* EntryDeniedViewController.swift in Sources */,
+				18E576592CC548B100302739 /* ChatWebSocket.swift in Sources */,
 				AFF618812CB7B32C00C64C95 /* ViewControllerForAlert.swift in Sources */,
 				AF4B1DF12C9B153C00FDA3EC /* HexExtention.swift in Sources */,
 				AF4B1E212CA06E6C00FDA3EC /* UserInfoViewController.swift in Sources */,

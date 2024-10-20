@@ -12,7 +12,7 @@ enum APIService {
 
 extension APIService: TargetType {
     
-    var baseURL: URL { URL(string: "https://209.38.228.54:8084")! }
+    var baseURL: URL { URL(string: "")! }
     
     var path: String {
         switch self {
