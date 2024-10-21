@@ -181,6 +181,14 @@ class CalendarViewController: UIViewController {
     
     @objc private func dateChanged(_ picker: UIDatePicker) {
         print("Выбранная дата и время: \(picker.date)")
+        let currentDate = picker.date
+        let addedTime = currentDate.addingTimeInterval(6 * 60 * 60) // Добавляем 6 часов (в секундах)
+
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        let newDateString = dateFormatter.string(from: addedTime)
+
+        print("Новое время: \(newDateString)")
     }
     
     @objc private func resetDate() {
@@ -189,6 +197,7 @@ class CalendarViewController: UIViewController {
     
     @objc private func doneTapped() {
         print("Выбор завершен, дата и время: \(datePicker.date)")
+        
         let vc = ViewControllerForAlert()
         navigationController?.present(vc, animated: true)
 

@@ -52,7 +52,7 @@ class ClientChoiceViewController: UIViewController {
     }
     @objc func registerButtonTapped() {
         let vc =  NewUserRegisterViewController()
-      
+        
         navigationController?.pushViewController(vc, animated: true)
         
     }

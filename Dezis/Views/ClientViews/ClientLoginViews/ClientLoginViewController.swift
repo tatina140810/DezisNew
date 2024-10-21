@@ -170,7 +170,8 @@ class ClientLoginViewController: UIViewController, UITextFieldDelegate {
         print("Support contact tapped!")
     }
     @objc private func backButtonTapped() {
-        let vc = UINavigationController(rootViewController: ClientChoiceViewController())
-        navigationController?.pushViewController(vc, animated: true)
+      //  let vc = UINavigationController(rootViewController: ClientChoiceViewController())
+       // navigationController?.pushViewController(vc, animated: true)
+        navigationController?.popViewController(animated: true)
     }
 }

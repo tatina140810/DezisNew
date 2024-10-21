@@ -36,6 +36,11 @@ class SecondOnboardingViewController: UIViewController {
      
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.navigationBar.isHidden = false
+    }
+    
     private func setupUI(){
         view.addSubview(ellipsImage)
         ellipsImage.snp.makeConstraints { make in

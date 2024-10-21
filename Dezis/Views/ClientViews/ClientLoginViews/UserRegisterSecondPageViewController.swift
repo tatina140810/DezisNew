@@ -1,5 +1,26 @@
 import UIKit
 import Moya
+
+struct UserInfo {
+    let username: String
+    let password: String
+    let email: String
+    var address: String
+    var appartmentNumber: String
+}
+
+final class UserRegisterBuilder {
+    class func build(userinfo: UserInfo) -> UIViewController {
+        let view = UserRegisterSecondPageViewController()
+        let presenter = UserRegisterPresenters()
+        view.presenter = presenter
+        presenter.view = view
+        presenter.userInfo = userinfo
+        return view
+    }
+  //  func {}
+}
+
 protocol IUserRegisterSecondPageViewController {
     
 }
@@ -8,9 +29,8 @@ class UserRegisterSecondPageViewController: UIViewController, IUserRegisterSecon
     let adress = ""
     let apartmentNumber = ""
 
-    private var presenter: IUserRegisterPresenters?
+    var presenter: IUserRegisterPresenters?
 
-    
     private var titleLabel: UILabel = {
         let label = UILabel()
         label.text = "Регистрация"
@@ -181,19 +201,23 @@ class UserRegisterSecondPageViewController: UIViewController, IUserRegisterSecon
             return
         }
 
-        if presenter == nil {
-
-            presenter = UserRegisterPresenters(view: NewUserRegisterViewController(), secondView: self)
-        }
-        let username = presenter?.getRegistrInfo().username
-        let email = presenter?.getRegistrInfo().email
-        let password = presenter?.getRegistrInfo().password
-    
-        presenter?.updateSecondPageInfo(adress: adress, apartmentNumber: apartmentNumber)
-     
-        let vc = UINavigationController(rootViewController: СonfirmationСodeViewController())
-        vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: true, completion: nil)
+//        if presenter == nil {
+//
+//            presenter = UserRegisterPresenters(view: NewUserRegisterViewController(), secondView: self)
+//        }
+//        let username = presenter?.getRegistrInfo().username
+//        let email = presenter?.getRegistrInfo().email
+//        let password = presenter?.getRegistrInfo().password
+//    
+//        presenter?.updateSecondPageInfo(adress: adress, apartmentNumber: apartmentNumber)
+        var userInfo = presenter?.getUserInfo()
+        userInfo?.address = adress
+        userInfo?.appartmentNumber = apartmentNumber
+        print(userInfo)
+        presenter?.registerUser(userInfo: userInfo!)
+       // let vc = UINavigationController(rootViewController: СonfirmationСodeViewController())
+     //   vc.modalPresentationStyle = .fullScreen
+     //   present(vc, animated: true, completion: nil)
     }
 
     @objc private func backButtonTapped() {
