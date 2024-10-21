@@ -1,5 +1,6 @@
 PODS:
   - Alamofire (5.10.0)
+  - JWTDecode (3.2.0)
   - KeychainSwift (20.0.0)
   - Moya (15.0.0):
     - Moya/Core (= 15.0.0)
@@ -10,6 +11,7 @@ PODS:
   - Starscream (4.0.8)
 
 DEPENDENCIES:
+  - JWTDecode
   - KeychainSwift (~> 20.0)
   - Moya (~> 15.0)
   - ReachabilitySwift
@@ -19,6 +21,7 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - Alamofire
+    - JWTDecode
     - KeychainSwift
     - Moya
     - ReachabilitySwift
@@ -27,12 +30,13 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   Alamofire: cd0b98508df05796dd2ff278f3bb055a631b5390
+  JWTDecode: 7dae24cb9bf9b608eae61e5081029ec169bb5527
   KeychainSwift: 0ce6a4d13f7228054d1a71bb1b500448fb2ab837
   Moya: 138f0573e53411fb3dc17016add0b748dfbd78ee
   ReachabilitySwift: 32793e867593cfc1177f5d16491e3a197d2fccda
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   Starscream: 19b5533ddb925208db698f0ac508a100b884a1b9
 
-PODFILE CHECKSUM: 4835252d4cc6c2967522fea82551bc4995d43fda
+PODFILE CHECKSUM: 70d4c536fa190fd52d95a06fe4762b7beb659be3
 
-COCOAPODS: 1.15.2
+COCOAPODS: 1.13.0
