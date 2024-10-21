@@ -32,6 +32,7 @@ class SecondOnboardingViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = UIColor(hex: "#1B2228")
         setupUI()
+        navigationController?.navigationBar.isHidden = true
      
     }
     
@@ -77,13 +78,11 @@ class SecondOnboardingViewController: UIViewController {
     }
     @objc func skipButtonTapped(){
         let vc = ChoiceViewController()
-        vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: true, completion: nil)
+        navigationController?.pushViewController(vc, animated: true)
     }
     @objc func nextButtonTapped(){
         let vc = ThirdOnboardingViewController()
-        vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: true, completion: nil)
+        navigationController?.pushViewController(vc, animated: true)
     }
    
     

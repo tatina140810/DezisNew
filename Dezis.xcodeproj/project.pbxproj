@@ -269,13 +269,9 @@
 		AF4B1DE52C9AE6DF00FDA3EC /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				AF51461F2CC64EE4000D9C97 /* GeneralViews */,
 				AF9F2FE82CA6A72A00BBBB2C /* Chat */,
 				AF4B1DF22C9B28A900FDA3EC /* ClientViews */,
-				AF4B1DF82C9B32A300FDA3EC /* SuccessViewController.swift */,
-				AF74D5C32CB41F6600B64D6E /* СhoiceViewController.swift */,
-				AFF6188A2CBBA3E700C64C95 /* EntryAllowedViewController.swift */,
-				AFF6188C2CBBA52600C64C95 /* EntryDeniedViewController.swift */,
-				AF4B1E272CA0729300FDA3EC /* ServerErrorViewController.swift */,
 				72D39B902CB1511C00D9EB45 /* AdminViews */,
 			);
 			path = Views;
@@ -411,6 +407,18 @@
 				AF51461A2CC64A91000D9C97 /* UserNetworkService.swift */,
 			);
 			path = NetworkService;
+			sourceTree = "<group>";
+		};
+		AF51461F2CC64EE4000D9C97 /* GeneralViews */ = {
+			isa = PBXGroup;
+			children = (
+				AF4B1DF82C9B32A300FDA3EC /* SuccessViewController.swift */,
+				AF74D5C32CB41F6600B64D6E /* СhoiceViewController.swift */,
+				AFF6188A2CBBA3E700C64C95 /* EntryAllowedViewController.swift */,
+				AFF6188C2CBBA52600C64C95 /* EntryDeniedViewController.swift */,
+				AF4B1E272CA0729300FDA3EC /* ServerErrorViewController.swift */,
+			);
+			path = GeneralViews;
 			sourceTree = "<group>";
 		};
 		AF74D5532CAACE6C00B64D6E /* HomeViews */ = {

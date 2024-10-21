@@ -27,6 +27,7 @@ class ThirdOnboardingViewController: UIPageViewController {
         super.viewDidLoad()
         view.backgroundColor = UIColor(hex: "#1B2228")
         setupUI()
+        navigationController?.navigationBar.isHidden = true
         
     }
     
@@ -65,12 +66,10 @@ class ThirdOnboardingViewController: UIPageViewController {
     }
     @objc func skipButtonTapped(){
         let vc = ChoiceViewController()
-        vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: true, completion: nil)
+        navigationController?.pushViewController(vc, animated: true)
     }
     @objc func nextButtonTapped(){
         let vc = ForthOnboardingViewController()
-        vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: true, completion: nil)
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
