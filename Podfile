@@ -11,5 +11,6 @@ pod 'KeychainSwift', '~> 20.0'
 pod 'Moya', '~> 15.0'
 pod 'ReachabilitySwift'
 pod 'Starscream', '~> 4.0'
+pod 'JWTDecode'
 
 end
