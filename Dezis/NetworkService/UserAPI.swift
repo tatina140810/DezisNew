@@ -1,31 +1,22 @@
 import Moya
 
-enum APIService {
+enum UserApi {
     case news
-    case contact
-    case user
-    case chat
-    case aboutUs
+    case userRegister(username: String, email: String, number: String, apartmentNumber: String, address: String)
     case getToken(username: String, password: String)
     case refreshToken(refreshToken: String)
 }
 
-extension APIService: TargetType {
+extension UserApi: TargetType {
     
-    var baseURL: URL { URL(string: "https://209.38.228.54:8084")! }
+    var baseURL: URL { URL(string: "http://209.38.228.54:8084")! }
     
     var path: String {
         switch self {
         case .news:
             return "/api/v1/news/"
-        case .contact:
-            return "/api/v1/contact/"
-        case .user:
-            return "/api/v1/user/"
-        case .chat:
-            return "/api/v1/chat/"
-        case .aboutUs:
-            return "/api/v1/about_us/"
+        case .userRegister:
+            return "/api/v1/user/register-user/"
         case .getToken:
             return "/api/token/"
         case .refreshToken:
@@ -35,9 +26,9 @@ extension APIService: TargetType {
     
     var method: Moya.Method {
         switch self {
-        case .news, .contact, .user, .chat, .aboutUs:
+        case .news:
             return .get
-        case .getToken, .refreshToken:
+        case .getToken, .refreshToken, .userRegister:
             return .post
         }
     }
@@ -48,6 +39,8 @@ extension APIService: TargetType {
             return .requestParameters(parameters: ["username": username, "password": password], encoding: JSONEncoding.default)
         case .refreshToken(let refreshToken):
             return .requestParameters(parameters: ["refresh": refreshToken], encoding: JSONEncoding.default)
+        case .userRegister(let username, let email, let number, let apartmentNumber, let address):
+            return .requestParameters(parameters: ["username": username, "email": email, "number": number, "apartment_number": apartmentNumber, "address": address], encoding: JSONEncoding.default)
         default:
             return .requestPlain
         }
@@ -55,15 +48,15 @@ extension APIService: TargetType {
     
     var headers: [String : String]? {
         switch self {
-        case .getToken, .refreshToken:
+        case .getToken, .refreshToken, .userRegister:
             return ["Content-Type": "application/json"]
         default:
-            guard let token = NetworkServiceViewController().accessToken else { return nil }
-            return ["Authorization": "Bearer \(token)", "Content-Type": "application/json"]
+            let token = KeychainService().accessToken
+            if !token.isEmpty {
+                return ["Authorization": "Bearer \(token)", "Content-Type": "application/json"]
+            } else {
+                return nil
+            }
         }
-    }
-    
-    var sampleData: Data {
-        return Data()
     }
 }

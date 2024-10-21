@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		18E576572CC5482700302739 /* ChatModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E576562CC5482700302739 /* ChatModel.swift */; };
+		18E576592CC548B100302739 /* ChatWebSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E576582CC548B100302739 /* ChatWebSocket.swift */; };
 		18FA88D62CB6D7EC00C66BAF /* OpenChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18FA88D52CB6D7EC00C66BAF /* OpenChatViewController.swift */; };
 		4061B8DFFEC52EF1268906C9 /* Pods_Dezis.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D594A6880D984FC3775947A /* Pods_Dezis.framework */; };
 		72D39B912CB1511C00D9EB45 /* AdminTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D39B822CB1511C00D9EB45 /* AdminTabBarController.swift */; };
@@ -43,8 +45,9 @@
 		AF4B1E282CA0729300FDA3EC /* ServerErrorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1E272CA0729300FDA3EC /* ServerErrorViewController.swift */; };
 		AF4B1E2B2CA0736200FDA3EC /* ClientChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1E2A2CA0736200FDA3EC /* ClientChatViewController.swift */; };
 		AF4B1E2D2CA19C6000FDA3EC /* ChekBoxButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1E2C2CA19C6000FDA3EC /* ChekBoxButton.swift */; };
-		AF5145FE2CBCED46000D9C97 /* NetworkServiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5145FD2CBCED46000D9C97 /* NetworkServiceViewController.swift */; };
-		AF5146022CBCF398000D9C97 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5146012CBCF398000D9C97 /* APIService.swift */; };
+		AF51461C2CC64A91000D9C97 /* TokenRefresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5146162CC64A91000D9C97 /* TokenRefresh.swift */; };
+		AF51461D2CC64A91000D9C97 /* UserAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5146192CC64A91000D9C97 /* UserAPI.swift */; };
+		AF51461E2CC64A91000D9C97 /* UserNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF51461A2CC64A91000D9C97 /* UserNetworkService.swift */; };
 		AF74D5502CA7C97B00B64D6E /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF74D54F2CA7C97B00B64D6E /* KeychainManager.swift */; };
 		AF74D5522CA7EB3200B64D6E /* UserRegisterSecondPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF74D5512CA7EB3200B64D6E /* UserRegisterSecondPageViewController.swift */; };
 		AF74D5562CAACEAC00B64D6E /* FirstStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF74D5552CAACEAC00B64D6E /* FirstStackView.swift */; };
@@ -79,6 +82,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		18E576562CC5482700302739 /* ChatModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatModel.swift; sourceTree = "<group>"; };
+		18E576582CC548B100302739 /* ChatWebSocket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatWebSocket.swift; sourceTree = "<group>"; };
 		18FA88D52CB6D7EC00C66BAF /* OpenChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenChatViewController.swift; sourceTree = "<group>"; };
 		72D39B822CB1511C00D9EB45 /* AdminTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminTabBarController.swift; sourceTree = "<group>"; };
 		72D39B852CB1511C00D9EB45 /* OrdersCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrdersCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -118,8 +123,9 @@
 		AF4B1E272CA0729300FDA3EC /* ServerErrorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerErrorViewController.swift; sourceTree = "<group>"; };
 		AF4B1E2A2CA0736200FDA3EC /* ClientChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientChatViewController.swift; sourceTree = "<group>"; };
 		AF4B1E2C2CA19C6000FDA3EC /* ChekBoxButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChekBoxButton.swift; sourceTree = "<group>"; };
-		AF5145FD2CBCED46000D9C97 /* NetworkServiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceViewController.swift; sourceTree = "<group>"; };
-		AF5146012CBCF398000D9C97 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
+		AF5146162CC64A91000D9C97 /* TokenRefresh.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenRefresh.swift; sourceTree = "<group>"; };
+		AF5146192CC64A91000D9C97 /* UserAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAPI.swift; sourceTree = "<group>"; };
+		AF51461A2CC64A91000D9C97 /* UserNetworkService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserNetworkService.swift; sourceTree = "<group>"; };
 		AF74D54F2CA7C97B00B64D6E /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
 		AF74D5512CA7EB3200B64D6E /* UserRegisterSecondPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRegisterSecondPageViewController.swift; sourceTree = "<group>"; };
 		AF74D5552CAACEAC00B64D6E /* FirstStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstStackView.swift; sourceTree = "<group>"; };
@@ -166,9 +172,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		18E576552CC5480F00302739 /* ChatModel */ = {
+			isa = PBXGroup;
+			children = (
+				18E576562CC5482700302739 /* ChatModel.swift */,
+				18E576582CC548B100302739 /* ChatWebSocket.swift */,
+			);
+			path = ChatModel;
+			sourceTree = "<group>";
+		};
 		72D39B8F2CB1511C00D9EB45 /* Chat */ = {
 			isa = PBXGroup;
 			children = (
+				18E576552CC5480F00302739 /* ChatModel */,
 				72D39B8E2CB1511C00D9EB45 /* AdminChatViewController.swift */,
 				18FA88D52CB6D7EC00C66BAF /* OpenChatViewController.swift */,
 			);
@@ -237,7 +253,7 @@
 			isa = PBXGroup;
 			children = (
 				AF4B1DFE2C9C0F7800FDA3EC /* Applications */,
-				AF5145FC2CBCECC4000D9C97 /* Model */,
+				AF51461B2CC64A91000D9C97 /* NetworkService */,
 				AF4B1DE52C9AE6DF00FDA3EC /* Views */,
 				AF4B1E2E2CA2EF6B00FDA3EC /* Presenters */,
 				AF4B1DE72C9AEE2100FDA3EC /* TemplatesFiles */,
@@ -371,13 +387,30 @@
 			path = Presenters;
 			sourceTree = "<group>";
 		};
-		AF5145FC2CBCECC4000D9C97 /* Model */ = {
+		AF5146172CC64A91000D9C97 /* TokenApi */ = {
 			isa = PBXGroup;
 			children = (
-				AF5145FD2CBCED46000D9C97 /* NetworkServiceViewController.swift */,
-				AF5146012CBCF398000D9C97 /* APIService.swift */,
+				AF5146162CC64A91000D9C97 /* TokenRefresh.swift */,
 			);
-			path = Model;
+			path = TokenApi;
+			sourceTree = "<group>";
+		};
+		AF5146182CC64A91000D9C97 /* UserApi */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = UserApi;
+			sourceTree = "<group>";
+		};
+		AF51461B2CC64A91000D9C97 /* NetworkService */ = {
+			isa = PBXGroup;
+			children = (
+				AF5146172CC64A91000D9C97 /* TokenApi */,
+				AF5146182CC64A91000D9C97 /* UserApi */,
+				AF5146192CC64A91000D9C97 /* UserAPI.swift */,
+				AF51461A2CC64A91000D9C97 /* UserNetworkService.swift */,
+			);
+			path = NetworkService;
 			sourceTree = "<group>";
 		};
 		AF74D5532CAACE6C00B64D6E /* HomeViews */ = {
@@ -588,16 +621,16 @@
 				AF4B1E072C9C1F6000FDA3EC /* NetworkError.swift in Sources */,
 				AF4B1DF92C9B32A300FDA3EC /* SuccessViewController.swift in Sources */,
 				AF4B1E172C9FFF3200FDA3EC /* LabelSettings.swift in Sources */,
+				18E576572CC5482700302739 /* ChatModel.swift in Sources */,
+				AF51461E2CC64A91000D9C97 /* UserNetworkService.swift in Sources */,
 				72D39BA82CB1870D00D9EB45 /* AdminLoginViewController.swift in Sources */,
 				AF74D5522CA7EB3200B64D6E /* UserRegisterSecondPageViewController.swift in Sources */,
 				72D39BA62CB1796F00D9EB45 /* CategoriesCollectionViewCell.swift in Sources */,
 				AF4B1DE92C9AEEC600FDA3EC /* Profile.swift in Sources */,
 				AF4B1E092C9C221000FDA3EC /* NetworkRequest.swift in Sources */,
-				AF5145FE2CBCED46000D9C97 /* NetworkServiceViewController.swift in Sources */,
 				AF74D57A2CB1171700B64D6E /* ThirdOnboardingViewController.swift in Sources */,
 				AFF618782CB69D2800C64C95 /* DezinsectionViewController.swift in Sources */,
 				AF9F2FEE2CA6D3CF00BBBB2C /* ImagePicker.swift in Sources */,
-				AF5146022CBCF398000D9C97 /* APIService.swift in Sources */,
 				AF9F2FEC2CA6BA1A00BBBB2C /* AttributedTextHelper.swift in Sources */,
 				AF4B1DFB2C9B42D300FDA3EC /* NewUserRegisterViewController.swift in Sources */,
 				AF74D57E2CB14B7700B64D6E /* DezinsectionView.swift in Sources */,
@@ -605,6 +638,7 @@
 				AFF618872CB85F6A00C64C95 /* CustomNavigationBar.swift in Sources */,
 				AF74D5792CB1171700B64D6E /* SecondOnboardingViewController.swift in Sources */,
 				72D39BA32CB15F7D00D9EB45 /* RequestsCollectionViewCell.swift in Sources */,
+				AF51461D2CC64A91000D9C97 /* UserAPI.swift in Sources */,
 				AF4B1E0D2C9D9B3500FDA3EC /* ClientTabBarController.swift in Sources */,
 				AFF6188F2CBBAFA700C64C95 /* ClientChatPresenter.swift in Sources */,
 				AF4B1E1D2CA05B5200FDA3EC /* ImageSettings.swift in Sources */,
@@ -618,11 +652,13 @@
 				18FA88D62CB6D7EC00C66BAF /* OpenChatViewController.swift in Sources */,
 				AF4B1DF52C9B28ED00FDA3EC /* ClientLoginViewController.swift in Sources */,
 				AF3EDD0F2CB4696E00CAF1FE /* ClientChoiceViewController.swift in Sources */,
+				AF51461C2CC64A91000D9C97 /* TokenRefresh.swift in Sources */,
 				AF4B1E022C9C17BA00FDA3EC /* EndPoint.swift in Sources */,
 				AFF618852CB85E2100C64C95 /* CellForChat.swift in Sources */,
 				AFF618832CB82FA000C64C95 /* ClientHistoryViewController.swift in Sources */,
 				72D39B9E2CB1566800D9EB45 /* AdminHistoryViewController.swift in Sources */,
 				AFF6188D2CBBA52600C64C95 /* EntryDeniedViewController.swift in Sources */,
+				18E576592CC548B100302739 /* ChatWebSocket.swift in Sources */,
 				AFF618812CB7B32C00C64C95 /* ViewControllerForAlert.swift in Sources */,
 				AF4B1DF12C9B153C00FDA3EC /* HexExtention.swift in Sources */,
 				AF4B1E212CA06E6C00FDA3EC /* UserInfoViewController.swift in Sources */,

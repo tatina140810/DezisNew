@@ -4,100 +4,147 @@ import Reachability
 class ChoiceViewController: UIViewController {
     let reachability = try! Reachability()
     
-    
     private var logoImage: UIImageView = {
         let image = UIImageView()
         image.image = UIImage(resource: .logo)
         return image
     }()
-    private lazy var consumerButton = ButtonSettings().buttonMaker(title: "Пользователь", target: self, action: #selector(consumerButtonTapped))
+    
+    private lazy var userButton = ButtonSettings().buttonMaker(title: "Пользователь", target: self, action: #selector(consumerButtonTapped))
+    
+    private lazy var userButtonDescriptionLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Для оформления заказов"
+        label.textColor = .white
+        label.textAlignment = .left
+        label.font = UIFont(name: "SFProDisplay-Bold", size: 18)
+        return label
+    }()
+    
     private lazy var adminButton = ButtonSettings().buttonMaker(title:"Администратор", backgroundColor: UIColor(hex: "#1B2228"), target: self, action: #selector(adminButtonTapped))
-        
+   
+    private lazy var adminButtonDescriptionLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Для управления системой"
+        label.textColor = .white
+        label.textAlignment = .left
+        label.font = UIFont(name: "SFProDisplay-Bold", size: 18)
+        return label
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(hex: "#1B2228")
         setupUI()
         setupReachability()
-        
-       
     }
+    
     func setupReachability(){
         reachability.whenUnreachable = { _ in
             DispatchQueue.main.async{
-                self.showNoInternetAlert(message: "Нет интернет-соединения")
+                self.showNoInternetAlert(message: "Нет интернет-соединения", secondMessage: "Проверьте подключение к интернету")
             }
         }
-            do {
-                try reachability.startNotifier()
-            } catch {
-                print("Unable to start notifier!")
-            }
+        do {
+            try reachability.startNotifier()
+        } catch {
+            print("Unable to start notifier!")
+        }
     }
-    func showNoInternetAlert(message: String) {
-                let alertView = UIView()
-                alertView.backgroundColor = UIColor(hex: "#0A84FF")
-                let alertLabel = UILabel()
-                alertLabel.text = message
-                alertLabel.textColor = .white
-                alertLabel.textAlignment = .center
-                alertLabel.font = UIFont.systemFont(ofSize: 17, weight: .medium)
+    func showNoInternetAlert(message: String, secondMessage: String) {
+        guard let window = UIApplication.shared.windows.first else {return}
+        
+        let alertView = UIView()
+        alertView.backgroundColor = UIColor(hex: "#0A84FF")
        
-                alertView.addSubview(alertLabel)
-        alertLabel.snp.makeConstraints { make in
+        let titleLabel = UILabel()
+        titleLabel.text = message
+        titleLabel.textColor = .white
+        titleLabel.textAlignment = .center
+        titleLabel.font = UIFont(name: "SFProDisplay-Bold", size: 16)
+       
+        let subTitleLabel = UILabel()
+        subTitleLabel.text = secondMessage
+        subTitleLabel.textColor = .white
+        subTitleLabel.textAlignment = .center
+        subTitleLabel.font = UIFont(name: "SFProDisplay-Regular", size: 14)
+        
+        alertView.addSubview(titleLabel)
+        titleLabel.snp.makeConstraints { make in
             make.top.equalTo(alertView).offset(20)
             make.centerX.equalTo(alertView)
         }
-          
-    
+        alertView.addSubview(subTitleLabel)
+        subTitleLabel.snp.makeConstraints { make in
+            make.top.equalTo(titleLabel.snp.bottom).offset(20)
+            make.centerX.equalTo(alertView)
+        }
         
-                view.addSubview(alertView)
-    
-                alertView.frame = CGRect(x: 0, y: 0, width: view.frame.width , height: 107)
-                
-   
-                UIView.animate(withDuration: 0.5, animations: {
-                    alertView.frame.origin.y = 50
-                }) { _ in
-             
-                    UIView.animate(withDuration: 0.5, delay: 3, options: [], animations: {
-                        alertView.frame.origin.y = -100
-                    }) { _ in
-                        alertView.removeFromSuperview()
-                    }
-                }
-            }
+        
+        
+        window.addSubview(alertView)
+        
+        alertView.frame = CGRect(x: 0, y: -107, width: view.frame.width , height: 107)
+        
+        
+        UIView.animate(withDuration: 0.5, animations: {
+            alertView.frame.origin.y = window.safeAreaInsets.top
+        }) { _ in
             
-            @objc func showAlertButtonTapped() {
-                showNoInternetAlert(message: "Нет соединения с интернетом")
+            UIView.animate(withDuration: 0.5, delay: 3, options: [], animations: {
+                alertView.frame.origin.y = -107
+            }) { _ in
+                alertView.removeFromSuperview()
             }
+        }
+    }
+    
+    @objc func showAlertButtonTapped() {
+        showNoInternetAlert(message: "Нет соединения с интернетом", secondMessage: "Проверьте подключение к интернету")
+    }
     private func setupUI(){
+        
         view.addSubview(logoImage)
         logoImage.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.centerY.equalToSuperview()
+            make.centerY.equalToSuperview().offset(-100)
             make.height.equalTo(203)
             make.width.equalTo(190)
         }
         
+        view.addSubview(userButton)
+        userButton.snp.makeConstraints { make in
+            make.top.equalTo(logoImage.snp.bottom).offset(70)
+            make.leading.trailing.equalToSuperview().inset(16)
+            make.height.equalTo(48)
+            
+        }
+        view.addSubview(userButtonDescriptionLabel)
+        userButtonDescriptionLabel.snp.makeConstraints { make in
+            make.top.equalTo(userButton.snp.bottom).offset(4)
+            make.leading.equalTo(16)
+            
+        }
         
         view.addSubview(adminButton)
         adminButton.snp.makeConstraints { make in
-            make.bottom.equalToSuperview().offset(-50)
+            make.top.equalTo(userButtonDescriptionLabel.snp.bottom).offset(20)
             make.leading.trailing.equalToSuperview().inset(16)
             make.height.equalTo(48)
             
         }
         
-        view.addSubview(consumerButton)
-        consumerButton.snp.makeConstraints { make in
-            make.bottom.equalTo(adminButton.snp.top).offset(-20)
-            make.leading.trailing.equalToSuperview().inset(16)
-            make.height.equalTo(48)
+        view.addSubview(adminButtonDescriptionLabel)
+        adminButtonDescriptionLabel.snp.makeConstraints { make in
+            make.top.equalTo(adminButton.snp.bottom).offset(4)
+            make.leading.equalTo(16)
+            
         }
+       
     }
     @objc func consumerButtonTapped() {
         let vc = ClientChoiceViewController()
-       vc.modalPresentationStyle = .fullScreen
+        vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true, completion: nil)
     }
     @objc func adminButtonTapped() {
@@ -106,5 +153,5 @@ class ChoiceViewController: UIViewController {
         present(vc, animated: true, completion: nil)
     }
     
-
+    
 }
