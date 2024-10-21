@@ -145,13 +145,11 @@ class ChoiceViewController: UIViewController {
     }
     @objc func consumerButtonTapped() {
         let vc = ClientChoiceViewController()
-        vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: true, completion: nil)
+        navigationController?.pushViewController(vc, animated: true)
     }
     @objc func adminButtonTapped() {
         let vc = AdminLoginViewController()
-        vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: true, completion: nil)
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     

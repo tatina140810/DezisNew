@@ -88,11 +88,6 @@ class CalendarViewController: UIViewController {
     }
     
     private func checkBoxSettings(){
-        
-        firstCheckBox.tintColor = UIColor(hex: "#0A84FF")
-        
-        secondCheckBox.tintColor = .white
-        thirdCheckBox.tintColor = .white
         firstCheckBox.backgroundColor = UIColor(hex: "#1B2228")
         secondCheckBox.backgroundColor = UIColor(hex: "#1B2228")
         thirdCheckBox.backgroundColor = UIColor(hex: "#1B2228")
@@ -107,9 +102,9 @@ class CalendarViewController: UIViewController {
     private func setupUI() {
         view.addSubview(datePicker)
         datePicker.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(70)
+            make.top.equalToSuperview().offset(71)
             make.leading.trailing.equalToSuperview().inset(16)
-            make.height.equalTo(400)           
+            make.height.equalTo(400)
         }
         view.addSubview(stackView)
         stackView.snp.makeConstraints { make in

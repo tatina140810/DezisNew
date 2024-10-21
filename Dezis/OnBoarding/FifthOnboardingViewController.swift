@@ -39,7 +39,7 @@ class FifthOnboardingViewController: UIViewController {
         view.backgroundColor = UIColor(hex: "#1B2228")
         setupUI()
         finishOnboarding()
-        navigationController?.navigationBar.isHidden = true
+       
     }
     private func setupUI(){
         

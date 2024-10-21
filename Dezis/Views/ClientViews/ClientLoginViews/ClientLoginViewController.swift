@@ -160,8 +160,7 @@ class ClientLoginViewController: UIViewController, UITextFieldDelegate {
     @objc func loginButtonTapped() {
         print("Login successful!")
         let vc = EntryAllowedViewController()
-        vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: true, completion: nil)
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     @objc func attributedTextTapped() {
@@ -172,7 +171,6 @@ class ClientLoginViewController: UIViewController, UITextFieldDelegate {
     }
     @objc private func backButtonTapped() {
         let vc = UINavigationController(rootViewController: ClientChoiceViewController())
-        vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: true, completion: nil)
+        navigationController?.pushViewController(vc, animated: true)
     }
 }

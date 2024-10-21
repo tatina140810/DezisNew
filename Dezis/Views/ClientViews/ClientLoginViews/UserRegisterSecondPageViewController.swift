@@ -1,8 +1,16 @@
 import UIKit
+import Moya
+protocol IUserRegisterSecondPageViewController {
+    
+}
+class UserRegisterSecondPageViewController: UIViewController, IUserRegisterSecondPageViewController {
+    
+    let adress = ""
+    let apartmentNumber = ""
 
-class UserRegisterSecondPageViewController: UIViewController {
+    private var presenter: IUserRegisterPresenters?
 
-  
+    
     private var titleLabel: UILabel = {
         let label = UILabel()
         label.text = "Регистрация"
@@ -15,7 +23,7 @@ class UserRegisterSecondPageViewController: UIViewController {
     
     private var adressTextField = TextFieldSettings().textFieldMaker(placeholder: "Адрес", backgroundColor: UIColor(hex: "#2B373E"))
     
-    private var hauseTextField = TextFieldSettings().textFieldMaker(placeholder: "Номер дома/квартиры", backgroundColor: UIColor(hex: "#2B373E"))
+    private var apartmentNumberTextField = TextFieldSettings().textFieldMaker(placeholder: "Номер дома/квартиры", backgroundColor: UIColor(hex: "#2B373E"))
     
     private var errorLabel: UILabel = {
         let view = UILabel()
@@ -110,8 +118,8 @@ class UserRegisterSecondPageViewController: UIViewController {
             make.height.equalTo(48)
         }
         
-        view.addSubview(hauseTextField)
-        hauseTextField.snp.makeConstraints { make in
+        view.addSubview(apartmentNumberTextField)
+        apartmentNumberTextField.snp.makeConstraints { make in
             make.top.equalTo(adressTextField.snp.bottom).offset(8)
             make.leading.equalToSuperview().offset(16)
             make.trailing.equalToSuperview().offset(-16)
@@ -119,7 +127,7 @@ class UserRegisterSecondPageViewController: UIViewController {
         }
         view.addSubview(nextButton)
         nextButton.snp.makeConstraints { make in
-            make.top.equalTo(hauseTextField.snp.bottom).offset(38)
+            make.top.equalTo(apartmentNumberTextField.snp.bottom).offset(38)
             make.leading.equalToSuperview().offset(16)
             make.trailing.equalToSuperview().offset(-16)
             make.height.equalTo(48)
@@ -144,12 +152,50 @@ class UserRegisterSecondPageViewController: UIViewController {
     @objc func attributedPrivaciTextTapped() {
         print("Положения о конфиденциальности")
     }
-    @objc private func nextButtonTapped(){
-        let vc = UINavigationController(rootViewController:СonfirmationСodeViewController())
+   
+    @objc private func nextButtonTapped() {
+        guard let adress = adressTextField.text, !adress.isEmpty,
+              let apartmentNumber = apartmentNumberTextField.text, !apartmentNumber.isEmpty else {
+         
+            let redPlaceholderAttributes = [NSAttributedString.Key.foregroundColor: UIColor.red]
+                    
+                    if adressTextField.text?.isEmpty == true {
+                        adressTextField.attributedPlaceholder = NSAttributedString(
+                            string: "Введите еще раз",
+                            attributes: redPlaceholderAttributes
+                        )
+                    }
+                    
+                    if apartmentNumberTextField.text?.isEmpty == true {
+                        apartmentNumberTextField.attributedPlaceholder = NSAttributedString(
+                            string: "Введите еще раз",
+                            attributes: redPlaceholderAttributes
+                        )
+                    
+                    }
+            adressTextField.layer.borderColor = UIColor.red.cgColor
+            apartmentNumberTextField.layer.borderColor = UIColor.red.cgColor
+            adressTextField.layer.borderWidth = 1.0
+            apartmentNumberTextField.layer.borderWidth = 1.0
+            
+            return
+        }
+
+        if presenter == nil {
+
+            presenter = UserRegisterPresenters(view: NewUserRegisterViewController(), secondView: self)
+        }
+        let username = presenter?.getRegistrInfo().username
+        let email = presenter?.getRegistrInfo().email
+        let password = presenter?.getRegistrInfo().password
+    
+        presenter?.updateSecondPageInfo(adress: adress, apartmentNumber: apartmentNumber)
+     
+        let vc = UINavigationController(rootViewController: СonfirmationСodeViewController())
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true, completion: nil)
-        
     }
+
     @objc private func backButtonTapped() {
         let vc = UINavigationController(rootViewController: NewUserRegisterViewController())
         vc.modalPresentationStyle = .fullScreen
