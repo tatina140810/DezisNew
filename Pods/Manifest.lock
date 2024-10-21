@@ -7,12 +7,14 @@ PODS:
     - Alamofire (~> 5.0)
   - ReachabilitySwift (5.2.4)
   - SnapKit (5.0.1)
+  - Starscream (4.0.8)
 
 DEPENDENCIES:
   - KeychainSwift (~> 20.0)
   - Moya (~> 15.0)
   - ReachabilitySwift
   - SnapKit (~> 5.0.0)
+  - Starscream (~> 4.0)
 
 SPEC REPOS:
   trunk:
@@ -21,6 +23,7 @@ SPEC REPOS:
     - Moya
     - ReachabilitySwift
     - SnapKit
+    - Starscream
 
 SPEC CHECKSUMS:
   Alamofire: cd0b98508df05796dd2ff278f3bb055a631b5390
@@ -28,7 +31,8 @@ SPEC CHECKSUMS:
   Moya: 138f0573e53411fb3dc17016add0b748dfbd78ee
   ReachabilitySwift: 32793e867593cfc1177f5d16491e3a197d2fccda
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
+  Starscream: 19b5533ddb925208db698f0ac508a100b884a1b9
 
-PODFILE CHECKSUM: 5db34285d331ad7c6702ad29c95767d0683c1728
+PODFILE CHECKSUM: 4835252d4cc6c2967522fea82551bc4995d43fda
 
-COCOAPODS: 1.13.0
+COCOAPODS: 1.15.2
