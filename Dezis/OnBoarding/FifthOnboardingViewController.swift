@@ -39,6 +39,7 @@ class FifthOnboardingViewController: UIViewController {
         view.backgroundColor = UIColor(hex: "#1B2228")
         setupUI()
         finishOnboarding()
+       
     }
     private func setupUI(){
         
@@ -76,8 +77,7 @@ class FifthOnboardingViewController: UIViewController {
     
     @objc func nextButtonTapped(){
         let vc = ChoiceViewController()
-        vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: true, completion: nil)
+        navigationController?.pushViewController(vc, animated: true)
     }
     @objc func finishOnboarding() {
         UserDefaults.standard.set(true, forKey: "hasCompletedOnboarding")

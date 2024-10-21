@@ -1,9 +1,18 @@
 import UIKit
 import SnapKit
 
-class NewUserRegisterViewController: UIViewController {
+protocol INewUserRegisterViewController {
+   
+}
+
+class NewUserRegisterViewController: UIViewController, INewUserRegisterViewController {
     
-    // MARK: - Create UI Elements
+//    let username = ""
+//    let email = ""
+//    let password = ""
+    
+  //  private var presenter: IUserRegisterPresenters?
+   
     
     private var titleLabel: UILabel = {
         let label = UILabel()
@@ -14,7 +23,7 @@ class NewUserRegisterViewController: UIViewController {
         label.numberOfLines = 0
         return label
     }()
-
+    
     
     private var nameTextField = TextFieldSettings().textFieldMaker(placeholder: "ФИО", backgroundColor: UIColor(hex: "#2B373E"))
     
@@ -68,11 +77,13 @@ class NewUserRegisterViewController: UIViewController {
         createPrivaciAttributedText()
         setupAddTarget()
     }
+   
+ 
     
     // MARK: - Attributed Text Links
     private func setupAddTarget(){
         let backButton = UIBarButtonItem(title: "Назад", style: .plain, target: self, action: #selector(backButtonTapped))
-
+        
         navigationItem.leftBarButtonItem = backButton
         nextButton.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
     }
@@ -166,33 +177,65 @@ class NewUserRegisterViewController: UIViewController {
     @objc func attributedPrivaciTextTapped() {
         print("Положения о конфиденциальности")
     }
-    
+  
     @objc func nextButtonTapped() {
-        guard let name = nameTextField.text, !name.isEmpty,
+        guard let username = nameTextField.text, !username.isEmpty,
               let email = emailTextField.text, !email.isEmpty,
               let password = passwordTextField.text, !password.isEmpty else {
-            errorLabel.text = "*Все поля обязательны для заполнения"
-            nameTextField.layer.borderColor = UIColor.red.cgColor
-            emailTextField.layer.borderColor = UIColor.red.cgColor
-            passwordTextField.layer.borderColor = UIColor.red.cgColor
+            
+            let redPlaceholderAttributes = [NSAttributedString.Key.foregroundColor: UIColor.red]
+                    
+                    if nameTextField.text?.isEmpty == true {
+                        nameTextField.attributedPlaceholder = NSAttributedString(
+                            string: "Введите еще раз",
+                            attributes: redPlaceholderAttributes
+                        )
+                    }
+                    
+                    if emailTextField.text?.isEmpty == true {
+                        emailTextField.attributedPlaceholder = NSAttributedString(
+                            string: "Введите еще раз",
+                            attributes: redPlaceholderAttributes
+                        )
+                    }
+                    
+                    if passwordTextField.text?.isEmpty == true {
+                        passwordTextField.attributedPlaceholder = NSAttributedString(
+                            string: "Введите еще раз",
+                            attributes: redPlaceholderAttributes
+                        )
+                    }
+                nameTextField.layer.borderColor = UIColor.red.cgColor
+                    emailTextField.layer.borderColor = UIColor.red.cgColor
+                    passwordTextField.layer.borderColor = UIColor.red.cgColor
+                    nameTextField.layer.borderWidth = 1.0
+                    emailTextField.layer.borderWidth = 1.0
+                    passwordTextField.layer.borderWidth = 1.0
             return
         }
         
-    
-        let vc = UINavigationController(rootViewController: UserRegisterSecondPageViewController()) 
-       
-        vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: true, completion: nil)
+//        if presenter == nil {
+//            presenter = UserRegisterPresenters(view: self, secondView: UserRegisterSecondPageViewController())
+//        }
+        
+     //   presenter?.updateUserInfo(username: username, email: email, password: password)
+        let userInfo = UserInfo(username: username, password: password, email: email, address: "", appartmentNumber: "")
+        let vc = UserRegisterBuilder.build(userinfo: userInfo)
+       // vc.modalPresentationStyle = .fullScreen
+       // present(vc, animated: true, completion: nil)
+        navigationController?.pushViewController(vc, animated: true)
     }
-    
+
+
     private func showAlert(message: String) {
         let alert = UIAlertController(title: "Ошибка", message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default))
         present(alert, animated: true)
     }
     @objc func backButtonTapped(){
-        let vc = ClientChoiceViewController()
-        vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: true, completion: nil)
+       // let vc = ClientChoiceViewController()
+     //   vc.modalPresentationStyle = .fullScreen
+      //  present(vc, animated: true, completion: nil)
+        navigationController?.popViewController(animated: true)
     }
 }

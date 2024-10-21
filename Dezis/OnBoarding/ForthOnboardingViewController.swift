@@ -35,7 +35,14 @@ class ForthOnboardingViewController: UIPageViewController {
         view.backgroundColor = UIColor(hex: "#1B2228")
         setupUI()
         finishOnboarding() 
+        navigationController?.navigationBar.isHidden = true
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.navigationBar.isHidden = false
+    }
+    
     private func setupUI(){
         
         view.addSubview(vectorImage)
@@ -87,13 +94,12 @@ class ForthOnboardingViewController: UIPageViewController {
         }
 @objc func skipButtonTapped(){
     let vc = ChoiceViewController()
-    vc.modalPresentationStyle = .fullScreen
-    present(vc, animated: true, completion: nil)
+    navigationController?.pushViewController(vc, animated: true)
+    
 }
     @objc func nextButtonTapped(){
         let vc = FifthOnboardingViewController()
-        vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: true, completion: nil)
+        navigationController?.pushViewController(vc, animated: true)
     }
     
 }

@@ -88,11 +88,6 @@ class CalendarViewController: UIViewController {
     }
     
     private func checkBoxSettings(){
-        
-        firstCheckBox.tintColor = UIColor(hex: "#0A84FF")
-        
-        secondCheckBox.tintColor = .white
-        thirdCheckBox.tintColor = .white
         firstCheckBox.backgroundColor = UIColor(hex: "#1B2228")
         secondCheckBox.backgroundColor = UIColor(hex: "#1B2228")
         thirdCheckBox.backgroundColor = UIColor(hex: "#1B2228")
@@ -107,9 +102,9 @@ class CalendarViewController: UIViewController {
     private func setupUI() {
         view.addSubview(datePicker)
         datePicker.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(120)
+            make.top.equalToSuperview().offset(71)
             make.leading.trailing.equalToSuperview().inset(16)
-            make.height.equalTo(400)           
+            make.height.equalTo(400)
         }
         view.addSubview(stackView)
         stackView.snp.makeConstraints { make in
@@ -186,6 +181,14 @@ class CalendarViewController: UIViewController {
     
     @objc private func dateChanged(_ picker: UIDatePicker) {
         print("Выбранная дата и время: \(picker.date)")
+        let currentDate = picker.date
+        let addedTime = currentDate.addingTimeInterval(6 * 60 * 60) // Добавляем 6 часов (в секундах)
+
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        let newDateString = dateFormatter.string(from: addedTime)
+
+        print("Новое время: \(newDateString)")
     }
     
     @objc private func resetDate() {
@@ -194,6 +197,7 @@ class CalendarViewController: UIViewController {
     
     @objc private func doneTapped() {
         print("Выбор завершен, дата и время: \(datePicker.date)")
+        
         let vc = ViewControllerForAlert()
         navigationController?.present(vc, animated: true)
 

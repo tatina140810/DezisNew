@@ -28,16 +28,16 @@ class ClientTabBarController: UITabBarController {
        }
 
     func setupTabBarController() {
-        let homeView = UINavigationController(rootViewController: ClientHomeViewController())
+        let homeView = ClientHomeViewController()
         homeView.tabBarItem = UITabBarItem(title: "Главная", image: UIImage(resource: .house), selectedImage: UIImage(resource: .house))
 
-        let calendarView = UINavigationController(rootViewController: CalendarViewController())
+        let calendarView = CalendarViewController()
         calendarView.tabBarItem = UITabBarItem(title: "Календарь", image: UIImage(resource: .clock), selectedImage: UIImage(resource: .clock))
         
-        let chatView = UINavigationController(rootViewController: ClientChatViewController())
+        let chatView = ClientChatViewController()
         chatView.tabBarItem = UITabBarItem(title: "Чат", image: UIImage(resource: .message), selectedImage: UIImage(resource: .message))
 
-        let personalAccount = UINavigationController(rootViewController: PersonalAccountViewController())
+        let personalAccount =  PersonalAccountViewController()
         personalAccount.tabBarItem = UITabBarItem(title: "Профиль", image: UIImage(resource: .profile), selectedImage: UIImage(resource: .profile))
 
         setViewControllers([homeView, calendarView, chatView, personalAccount], animated: true)

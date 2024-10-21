@@ -17,7 +17,7 @@ class ChoiceViewController: UIViewController {
         label.text = "Для оформления заказов"
         label.textColor = .white
         label.textAlignment = .left
-        label.font = UIFont(name: "SFProDisplay-Bold", size: 18)
+        label.font = UIFont(name: "SFProDisplay-Regular", size: 18)
         return label
     }()
     
@@ -28,7 +28,7 @@ class ChoiceViewController: UIViewController {
         label.text = "Для управления системой"
         label.textColor = .white
         label.textAlignment = .left
-        label.font = UIFont(name: "SFProDisplay-Bold", size: 18)
+        label.font = UIFont(name: "SFProDisplay-Regular", size: 18)
         return label
     }()
     
@@ -37,12 +37,13 @@ class ChoiceViewController: UIViewController {
         view.backgroundColor = UIColor(hex: "#1B2228")
         setupUI()
         setupReachability()
+     //   navigationController?.navigationBar.isHidden = true
     }
     
     func setupReachability(){
         reachability.whenUnreachable = { _ in
             DispatchQueue.main.async{
-                self.showNoInternetAlert(message: "Нет интернет-соединения", secondMessage: "Проверьте подключение к интернету")
+                self.showNoInternetAlert(message: "Нет соединения с интернетом", secondMessage: "Проверьте подключение к интернету")
             }
         }
         do {
@@ -52,7 +53,7 @@ class ChoiceViewController: UIViewController {
         }
     }
     func showNoInternetAlert(message: String, secondMessage: String) {
-        guard let window = UIApplication.shared.windows.first else {return}
+    
         
         let alertView = UIView()
         alertView.backgroundColor = UIColor(hex: "#0A84FF")
@@ -71,24 +72,24 @@ class ChoiceViewController: UIViewController {
         
         alertView.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { make in
-            make.top.equalTo(alertView).offset(20)
+            make.top.equalTo(alertView).offset(56)
             make.centerX.equalTo(alertView)
         }
         alertView.addSubview(subTitleLabel)
         subTitleLabel.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(20)
+            make.top.equalTo(titleLabel.snp.bottom).offset(8)
             make.centerX.equalTo(alertView)
         }
         
         
         
-        window.addSubview(alertView)
+      view.addSubview(alertView)
         
         alertView.frame = CGRect(x: 0, y: -107, width: view.frame.width , height: 107)
         
         
         UIView.animate(withDuration: 0.5, animations: {
-            alertView.frame.origin.y = window.safeAreaInsets.top
+            alertView.frame.origin.y = 0
         }) { _ in
             
             UIView.animate(withDuration: 0.5, delay: 3, options: [], animations: {
@@ -106,8 +107,8 @@ class ChoiceViewController: UIViewController {
         
         view.addSubview(logoImage)
         logoImage.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(234)
             make.centerX.equalToSuperview()
-            make.centerY.equalToSuperview().offset(-100)
             make.height.equalTo(203)
             make.width.equalTo(190)
         }
@@ -116,7 +117,7 @@ class ChoiceViewController: UIViewController {
         userButton.snp.makeConstraints { make in
             make.top.equalTo(logoImage.snp.bottom).offset(70)
             make.leading.trailing.equalToSuperview().inset(16)
-            make.height.equalTo(48)
+            make.height.equalTo(52)
             
         }
         view.addSubview(userButtonDescriptionLabel)
@@ -130,7 +131,7 @@ class ChoiceViewController: UIViewController {
         adminButton.snp.makeConstraints { make in
             make.top.equalTo(userButtonDescriptionLabel.snp.bottom).offset(20)
             make.leading.trailing.equalToSuperview().inset(16)
-            make.height.equalTo(48)
+            make.height.equalTo(52)
             
         }
         
@@ -144,13 +145,11 @@ class ChoiceViewController: UIViewController {
     }
     @objc func consumerButtonTapped() {
         let vc = ClientChoiceViewController()
-        vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: true, completion: nil)
+        navigationController?.pushViewController(vc, animated: true)
     }
     @objc func adminButtonTapped() {
         let vc = AdminLoginViewController()
-        vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: true, completion: nil)
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     

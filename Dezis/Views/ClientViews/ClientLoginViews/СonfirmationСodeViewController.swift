@@ -167,12 +167,10 @@ class СonfirmationСodeViewController: UIViewController {
     }
     @objc func nextButtonTapped(){
         let vc = EntryAllowedViewController()
-        vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: true, completion: nil)
+        navigationController?.pushViewController(vc, animated: true)
     }
     @objc private func backButtonTapped() {
-        let vc = UINavigationController(rootViewController: UserRegisterSecondPageViewController())
-        vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: true, completion: nil)
+        let vc = UserRegisterSecondPageViewController()
+        navigationController?.pushViewController(vc, animated: true)
     }
 }

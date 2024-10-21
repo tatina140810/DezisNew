@@ -40,7 +40,7 @@ extension UserApi: TargetType {
         case .refreshToken(let refreshToken):
             return .requestParameters(parameters: ["refresh": refreshToken], encoding: JSONEncoding.default)
         case .userRegister(let username, let email, let number, let apartmentNumber, let address):
-            return .requestParameters(parameters: ["username": username, "email": email, "number": number, "apartment_number": apartmentNumber, "address": address], encoding: JSONEncoding.default)
+            return .requestParameters(parameters: ["username": username, "email": email, "password": number, "apartment_number": apartmentNumber, "address": address], encoding: JSONEncoding.default)
         default:
             return .requestPlain
         }

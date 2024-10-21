@@ -8,7 +8,7 @@
 import UIKit
 
 class ClientChoiceViewController: UIViewController {
-    let networkServise = NetworkServiceViewController()
+    let networkServise = UserNetworkService()
 
     private var logoImage: UIImageView = {
         let image = UIImageView()
@@ -51,18 +51,16 @@ class ClientChoiceViewController: UIViewController {
         }
     }
     @objc func registerButtonTapped() {
-        let vc = UINavigationController(rootViewController: NewUserRegisterViewController())
-      
-        vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: true, completion: nil)
+        let vc =  NewUserRegisterViewController()
+        
+        navigationController?.pushViewController(vc, animated: true)
         
     }
     @objc func loginButtonTapped() {
-        let vc = UINavigationController(rootViewController: ClientLoginViewController())
+        let vc = ClientLoginViewController()
        
-        vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: true, completion: nil)
-        networkServise.requestToken()
+        navigationController?.pushViewController(vc, animated: true)
+        
     }
     
 

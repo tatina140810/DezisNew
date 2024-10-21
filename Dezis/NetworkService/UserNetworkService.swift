@@ -22,8 +22,10 @@ class UserNetworkService {
                 do {
                     
                     guard (200...299).contains(response.statusCode) else {
-                        let errorResponse = try JSONDecoder().decode(ErrorResponse.self, from: response.data)
-                        completion(.failure(NSError(domain: "", code: response.statusCode, userInfo: [NSLocalizedDescriptionKey: errorResponse.message])))
+                      //  let errorResponse = try JSONDecoder().decode(ErrorResponse.self, from: response.data)
+                       // completion(.failure(NSError(domain: "", code: response.statusCode, userInfo: [NSLocalizedDescriptionKey: errorResponse.message])))
+                     //   completion(.failure(response))
+                        
                         return
                     }
                     let userResponse = try JSONDecoder().decode(UserRegisterResponse.self, from: response.data)
