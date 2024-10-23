@@ -7,10 +7,9 @@ class TextFieldSettings: UITextField {
         placeholderColor: UIColor = .white,
         backgroundColor: UIColor = UIColor(hex: "#F6F6F7"),
         textColor: UIColor = .white,
-        cornerRadius: CGFloat = 8
-       // borderStyle: UITextField.BorderStyle = .line,
-       // borderColor: UIColor = UIColor(hex:  "#2B373E"),
-       // borderWidth: CGFloat = 1.0
+        cornerRadius: CGFloat = 8,
+        autocapitalizationType: UITextAutocapitalizationType = .none
+
     ) -> UITextField {
         
         let textField = UITextField()
@@ -18,9 +17,7 @@ class TextFieldSettings: UITextField {
         textField.backgroundColor = backgroundColor
         textField.textColor = textColor
         textField.layer.cornerRadius = cornerRadius
-       // textField.borderStyle = borderStyle
-      //  textField.layer.borderColor = borderColor.cgColor
-       // textField.layer.borderWidth = borderWidth
+        textField.autocapitalizationType = .none
         
         textField.attributedPlaceholder = NSAttributedString(
             string: placeholder,

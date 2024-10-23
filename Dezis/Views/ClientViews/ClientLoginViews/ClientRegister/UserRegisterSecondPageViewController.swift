@@ -12,13 +12,12 @@ struct UserInfo {
 final class UserRegisterBuilder {
     class func build(userinfo: UserInfo) -> UIViewController {
         let view = UserRegisterSecondPageViewController()
-        let presenter = UserRegisterPresenters()
+        let presenter = UserRegisterPresenter()
         view.presenter = presenter
         presenter.view = view
         presenter.userInfo = userinfo
         return view
     }
-  //  func {}
 }
 
 protocol IUserRegisterSecondPageViewController {
@@ -26,9 +25,6 @@ protocol IUserRegisterSecondPageViewController {
 }
 class UserRegisterSecondPageViewController: UIViewController, IUserRegisterSecondPageViewController {
     
-    let adress = ""
-    let apartmentNumber = ""
-
     var presenter: IUserRegisterPresenters?
 
     private var titleLabel: UILabel = {
@@ -201,23 +197,11 @@ class UserRegisterSecondPageViewController: UIViewController, IUserRegisterSecon
             return
         }
 
-//        if presenter == nil {
-//
-//            presenter = UserRegisterPresenters(view: NewUserRegisterViewController(), secondView: self)
-//        }
-//        let username = presenter?.getRegistrInfo().username
-//        let email = presenter?.getRegistrInfo().email
-//        let password = presenter?.getRegistrInfo().password
-//    
-//        presenter?.updateSecondPageInfo(adress: adress, apartmentNumber: apartmentNumber)
         var userInfo = presenter?.getUserInfo()
         userInfo?.address = adress
         userInfo?.appartmentNumber = apartmentNumber
         print(userInfo)
         presenter?.registerUser(userInfo: userInfo!)
-       // let vc = UINavigationController(rootViewController: СonfirmationСodeViewController())
-     //   vc.modalPresentationStyle = .fullScreen
-     //   present(vc, animated: true, completion: nil)
     }
 
     @objc private func backButtonTapped() {

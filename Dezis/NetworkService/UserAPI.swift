@@ -2,8 +2,9 @@ import Moya
 
 enum UserApi {
     case news
-    case userRegister(username: String, email: String, number: String, apartmentNumber: String, address: String)
+    case userRegister(username: String, email: String, password: String, apartmentNumber: String, address: String)
     case getToken(username: String, password: String)
+    case userLogin(email: String, password: String)
     case refreshToken(refreshToken: String)
 }
 
@@ -17,6 +18,8 @@ extension UserApi: TargetType {
             return "/api/v1/news/"
         case .userRegister:
             return "/api/v1/user/register-user/"
+        case .userLogin:
+            return "/api/v1/user/login-user/"
         case .getToken:
             return "/api/token/"
         case .refreshToken:
@@ -30,6 +33,8 @@ extension UserApi: TargetType {
             return .get
         case .getToken, .refreshToken, .userRegister:
             return .post
+        case .userLogin:
+            return .post
         }
     }
     
@@ -39,24 +44,27 @@ extension UserApi: TargetType {
             return .requestParameters(parameters: ["username": username, "password": password], encoding: JSONEncoding.default)
         case .refreshToken(let refreshToken):
             return .requestParameters(parameters: ["refresh": refreshToken], encoding: JSONEncoding.default)
-        case .userRegister(let username, let email, let number, let apartmentNumber, let address):
-            return .requestParameters(parameters: ["username": username, "email": email, "password": number, "apartment_number": apartmentNumber, "address": address], encoding: JSONEncoding.default)
+        case .userRegister(let username, let email, let password, let apartmentNumber, let address):
+            return .requestParameters(parameters: ["username": username, "email": email, "password": password, "apartment_number": apartmentNumber, "address": address], encoding: JSONEncoding.default)
+        case .userLogin(let email, let password):
+            return .requestParameters(parameters: ["email": email, "password": password], encoding: JSONEncoding.default)
         default:
             return .requestPlain
         }
     }
     
     var headers: [String : String]? {
-        switch self {
-        case .getToken, .refreshToken, .userRegister:
-            return ["Content-Type": "application/json"]
-        default:
             let token = KeychainService().accessToken
-            if !token.isEmpty {
-                return ["Authorization": "Bearer \(token)", "Content-Type": "application/json"]
-            } else {
-                return nil
-            }
+            switch self {
+            case .getToken, .refreshToken, .userRegister, .userLogin:
+                return ["Content-Type": "application/json"]
+                
+            case .news, .userLogin :
+                if !token.isEmpty {
+                    return ["Authorization": "Bearer\(token)", "Content-Type": "application/json"]
+                } else {
+                    return nil
+                }
         }
     }
 }
