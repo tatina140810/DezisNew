@@ -1,6 +1,33 @@
 import UIKit
+import Moya
 
-class CalendarViewController: UIViewController {
+struct BookingInfo {
+    var service: String
+    var date: String
+    var time: String
+}
+final class BookingBuilder {
+    class func build(bookingInfo: BookingInfo) -> UIViewController {
+        let view = CalendarViewController()
+        let presenter = CalendarViewControllerPresenter(view: view)
+        view.presenter = presenter
+        presenter.view = view
+        presenter.bookingInfo = bookingInfo
+        return view
+    }
+}
+
+protocol ICalendarViewController {
+    
+}
+
+class CalendarViewController: UIViewController, ICalendarViewController {
+   
+    var presenter: ICalendarPresenter?
+    
+    private var date: String = ""
+    private var time: String = ""
+    private var service: String = ""
     
     private lazy var datePicker: UIDatePicker = {
         let picker = UIDatePicker()
@@ -88,10 +115,14 @@ class CalendarViewController: UIViewController {
     }
     
     private func checkBoxSettings(){
+        
         firstCheckBox.backgroundColor = UIColor(hex: "#1B2228")
         secondCheckBox.backgroundColor = UIColor(hex: "#1B2228")
         thirdCheckBox.backgroundColor = UIColor(hex: "#1B2228")
-        
+        firstCheckBox.addTarget(self, action: #selector(firstCheckBoxTapped), for: .touchUpInside)
+               secondCheckBox.addTarget(self, action: #selector(secondCheckBoxTapped), for: .touchUpInside)
+               thirdCheckBox.addTarget(self, action: #selector(thirdCheckBoxTapped), for: .touchUpInside)
+           
     }
     private func setupAddTarget(){
         resetButton.addTarget(self, action: #selector(resetDate), for: .touchUpInside)
@@ -175,20 +206,34 @@ class CalendarViewController: UIViewController {
     @objc func orderButtonTapped(){
         let vc = ViewControllerForAlert()
         
+        var bookingInfo = presenter?.bookingRequest()
+        bookingInfo?.service = service
+        bookingInfo?.date = date
+        bookingInfo?.time = time
+        print(bookingInfo)
+        
+        if let bookingInfo = presenter?.bookingRequest() {
+            presenter?.booking(bookingInfo: bookingInfo)
+        }
+    
+        
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true, completion: nil)
     }
-    
     @objc private func dateChanged(_ picker: UIDatePicker) {
-        print("Выбранная дата и время: \(picker.date)")
-        let currentDate = picker.date
-       // let addedTime = currentDate.addingTimeInterval(6 * 60 * 60)
-
-//        let dateFormatter = DateFormatter()
-//        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-//        let newDateString = dateFormatter.string(from: addedTime)
-
-       // print("Новое время: \(newDateString)")
+            let currentDate = picker.date
+           
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd"
+            date = dateFormatter.string(from: currentDate)
+          
+            let timeFormatter = DateFormatter()
+            timeFormatter.dateFormat = "HH:mm:ss"
+            time = timeFormatter.string(from: currentDate)
+            
+            print("Выбранная дата: \(date)")
+            print("Выбранное время: \(time)")
+        
     }
     
     @objc private func resetDate() {
@@ -196,12 +241,29 @@ class CalendarViewController: UIViewController {
     }
     
     @objc private func doneTapped() {
-        print("Выбор завершен, дата и время: \(datePicker.date)")
-        
+        print("Выбор завершен, дата и время: \(date) \(time)")
         let vc = ViewControllerForAlert()
         navigationController?.present(vc, animated: true)
 
     }
+    @objc func firstCheckBoxTapped() {
+           service = "Дезинфекция"
+           print("Выбранный сервис: \(service)")
+       }
+
+       @objc func secondCheckBoxTapped() {
+           service = "Дезинcекция"
+           print("Выбранный сервис: \(service)")
+       }
+
+       @objc func thirdCheckBoxTapped() {
+           service = "Дератизация"
+           print("Выбранный сервис: \(service)")
+       }
+    
+    func bookingRequestSuccessful() {
+            print("Бронирование успешно выполнено")
+        }
 }
 
 

@@ -21,7 +21,7 @@ class FirstOnboardingViewController: UIViewController {
     private var titleLabel: UILabel = {
         let label = UILabel()
         label.text = "Добро пожаловать! Готовы к чистым переменам?"
-        label.font = UIFont(name: "SFProDisplay-Bold", size: 22)
+        label.font = UIFont(name: "SFProDisplay-Bold", size: 18)
         label.textColor = .white
         label.numberOfLines = 0
         label.textAlignment = .center
@@ -62,26 +62,23 @@ class FirstOnboardingViewController: UIViewController {
             make.leading.equalToSuperview().offset(16)
         }
         
-        view.addSubview(titleLabel)
-        titleLabel.snp.makeConstraints { make in
-            make.top.equalTo(cockroachImage.snp.bottom).offset(65)
-            make.centerX.equalToSuperview()
-            make.leading.equalToSuperview().offset(20)
-            make.trailing.equalToSuperview().inset(20)
-        }
         view.addSubview(skipButton)
         skipButton.snp.makeConstraints{make in
-            make.bottom.equalToSuperview().offset(-50)
-            make.centerX.equalToSuperview()
+            make.bottom.equalToSuperview().offset(-51)
             make.height.equalTo(52)
             make.leading.equalToSuperview().offset(20)
             make.trailing.equalToSuperview().inset(20)
         }
         view.addSubview(nextButton)
         nextButton.snp.makeConstraints{make in
-            make.bottom.equalTo(skipButton.snp.top).offset(-8)
-            make.centerX.equalToSuperview()
+            make.bottom.equalTo(skipButton.snp.top).offset(-16)
             make.height.equalTo(52)
+            make.leading.equalToSuperview().offset(20)
+            make.trailing.equalToSuperview().inset(20)
+        }
+        view.addSubview(titleLabel)
+        titleLabel.snp.makeConstraints { make in
+            make.bottom.equalTo(nextButton.snp.top).offset(-28)
             make.leading.equalToSuperview().offset(20)
             make.trailing.equalToSuperview().inset(20)
         }

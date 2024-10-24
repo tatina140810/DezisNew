@@ -6,6 +6,7 @@ enum UserApi {
     case getToken(username: String, password: String)
     case userLogin(email: String, password: String)
     case refreshToken(refreshToken: String)
+    case booking (service: String, date: String, time: String)
 }
 
 extension UserApi: TargetType {
@@ -24,6 +25,8 @@ extension UserApi: TargetType {
             return "/api/token/"
         case .refreshToken:
             return "/api/token/refresh/"
+        case .booking:
+            return "/api/v1/contact/booking/"
         }
     }
     
@@ -34,6 +37,8 @@ extension UserApi: TargetType {
         case .getToken, .refreshToken, .userRegister:
             return .post
         case .userLogin:
+            return .post
+        case .booking:
             return .post
         }
     }
@@ -48,6 +53,10 @@ extension UserApi: TargetType {
             return .requestParameters(parameters: ["username": username, "email": email, "password": password, "apartment_number": apartmentNumber, "address": address], encoding: JSONEncoding.default)
         case .userLogin(let email, let password):
             return .requestParameters(parameters: ["email": email, "password": password], encoding: JSONEncoding.default)
+        case .booking(let service, let date, let time):
+            return .requestParameters(parameters: ["service": service,
+                                                   "date": date,
+                                                   "time": time], encoding: JSONEncoding.default)
         default:
             return .requestPlain
         }
@@ -56,7 +65,7 @@ extension UserApi: TargetType {
     var headers: [String : String]? {
             let token = KeychainService().accessToken
             switch self {
-            case .getToken, .refreshToken, .userRegister, .userLogin:
+            case .getToken, .refreshToken, .userRegister, .userLogin, .booking:
                 return ["Content-Type": "application/json"]
                 
             case .news, .userLogin :
