@@ -78,9 +78,9 @@ class DezinsectionViewController: UIViewController {
             view.addSubview(orderButton)
             orderButton.snp.makeConstraints { make in
                 make.bottom.equalToSuperview().offset(-100)
-                make.leading.equalToSuperview().offset(14)
-                make.trailing.equalToSuperview().offset(-14)
-                make.height.equalTo(48)
+                make.leading.equalToSuperview().offset(20)
+                make.trailing.equalToSuperview().offset(-20)
+                make.height.equalTo(50)
             }
         }
         @objc func orderButtonTapped(){
