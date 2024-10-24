@@ -1,6 +1,29 @@
 import UIKit
+import Moya
 
-class CalendarViewController: UIViewController {
+struct BookingInfo {
+    var service: String
+    var date: String
+    var time: String
+}
+final class BookingBuilder {
+    class func build(bookingInfo: BookingInfo) -> UIViewController {
+        let view = CalendarViewController()
+        let presenter = CalendarViewControllerPresenter(view: view)
+        view.presenter = presenter
+        presenter.view = view
+        presenter.bookingInfo = bookingInfo
+        return view
+    }
+}
+
+protocol ICalendarViewController {
+    
+}
+
+class CalendarViewController: UIViewController, ICalendarViewController {
+   
+    var presenter: ICalendarPresenter?
     
     private var date: String = ""
     private var time: String = ""
@@ -183,6 +206,17 @@ class CalendarViewController: UIViewController {
     @objc func orderButtonTapped(){
         let vc = ViewControllerForAlert()
         
+        var bookingInfo = presenter?.bookingRequest()
+        bookingInfo?.service = service
+        bookingInfo?.date = date
+        bookingInfo?.time = time
+        print(bookingInfo)
+        
+        if let bookingInfo = presenter?.bookingRequest() {
+            presenter?.booking(bookingInfo: bookingInfo)
+        }
+    
+        
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true, completion: nil)
     }
@@ -199,7 +233,7 @@ class CalendarViewController: UIViewController {
             
             print("Выбранная дата: \(date)")
             print("Выбранное время: \(time)")
-    
+        
     }
     
     @objc private func resetDate() {
@@ -208,7 +242,6 @@ class CalendarViewController: UIViewController {
     
     @objc private func doneTapped() {
         print("Выбор завершен, дата и время: \(date) \(time)")
-        
         let vc = ViewControllerForAlert()
         navigationController?.present(vc, animated: true)
 
@@ -227,6 +260,10 @@ class CalendarViewController: UIViewController {
            service = "Дератизация"
            print("Выбранный сервис: \(service)")
        }
+    
+    func bookingRequestSuccessful() {
+            print("Бронирование успешно выполнено")
+        }
 }
 
 

@@ -10,14 +10,14 @@ protocol IUserRegisterPresenters: AnyObject {
 
 class UserRegisterPresenter: IUserRegisterPresenters {
     
-    let userRegisterNetworkSeervice = UserNetworkService()
+    let userNetworkSeervice = UserNetworkService()
     
     var view: IUserRegisterSecondPageViewController?
     
     var userInfo: UserInfo?
     
     func registerUser(userInfo: UserInfo) {
-        userRegisterNetworkSeervice.userRegister(username: userInfo.username, email: userInfo.email, password: userInfo.password, apartmentNumber: userInfo.appartmentNumber, address: userInfo.address) { [weak self] result in
+        userNetworkSeervice.userRegister(username: userInfo.username, email: userInfo.email, password: userInfo.password, apartmentNumber: userInfo.appartmentNumber, address: userInfo.address) { [weak self] result in
             switch result {
             case .success(let success):
                 print(success)

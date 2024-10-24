@@ -56,8 +56,8 @@ class UserNetworkService {
             }
         }
     }
-    func booking(user: Int, service: String, date: String, time: String) {
-        provider.request(.booking(user: user, service: service, date: date, time: time)) { result in
+    func booking(service: String, date: String, time: String, completion: @escaping (Result<UserRegisterResponse, Error>) -> Void) {
+        provider.request(.booking(service: service, date: date, time: time)) { result in
             switch result {
             case .success(let response):
                 do {
