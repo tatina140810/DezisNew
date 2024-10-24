@@ -35,7 +35,7 @@ class ClientChoiceViewController: UIViewController {
         view.addSubview(logoImage)
         logoImage.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.centerY.equalToSuperview()
+            make.top.equalToSuperview().offset(234)
             make.height.equalTo(203)
             make.width.equalTo(190)
         }
@@ -43,21 +43,21 @@ class ClientChoiceViewController: UIViewController {
         
         view.addSubview(loginButton)
         loginButton.snp.makeConstraints { make in
-            make.bottom.equalToSuperview().offset(-50)
-            make.leading.trailing.equalToSuperview().inset(16)
-            make.height.equalTo(48)
+            make.bottom.equalToSuperview().offset(-51)
+            make.leading.trailing.equalToSuperview().inset(20)
+            make.height.equalTo(52)
             
         }
         
         view.addSubview(registerButton)
         registerButton.snp.makeConstraints { make in
-            make.bottom.equalTo(loginButton.snp.top).offset(-20)
+            make.bottom.equalTo(loginButton.snp.top).offset(-16)
             make.leading.trailing.equalToSuperview().inset(16)
-            make.height.equalTo(48)
+            make.height.equalTo(52)
         }
     }
     @objc func registerButtonTapped() {
-        let vc =  NewUserRegisterViewController()
+        let vc =  UserRegisterViewController()
         
         navigationController?.pushViewController(vc, animated: true)
         

@@ -17,7 +17,7 @@ class ChoiceViewController: UIViewController {
         label.text = "Для оформления заказов"
         label.textColor = .white
         label.textAlignment = .left
-        label.font = UIFont(name: "SFProDisplay-Regular", size: 18)
+        label.font = UIFont(name: "SFProDisplay-Regular", size: 16)
         return label
     }()
     
@@ -28,7 +28,7 @@ class ChoiceViewController: UIViewController {
         label.text = "Для управления системой"
         label.textColor = .white
         label.textAlignment = .left
-        label.font = UIFont(name: "SFProDisplay-Regular", size: 18)
+        label.font = UIFont(name: "SFProDisplay-Regular", size: 16)
         return label
     }()
     
@@ -37,15 +37,9 @@ class ChoiceViewController: UIViewController {
         view.backgroundColor = UIColor(hex: "#1B2228")
         setupUI()
         setupReachability()
-        backButtonSetup()
         
     }
-    private func backButtonSetup(){
-        let backButton = UIBarButtonItem(title: "Назад", style: .plain, target: self, action: #selector(backButtonTapped))
-        
-        navigationItem.leftBarButtonItem = backButton
-    }
-    
+
     func setupReachability(){
         reachability.whenUnreachable = { _ in
             DispatchQueue.main.async{
@@ -121,22 +115,22 @@ class ChoiceViewController: UIViewController {
         
         view.addSubview(userButton)
         userButton.snp.makeConstraints { make in
-            make.top.equalTo(logoImage.snp.bottom).offset(70)
-            make.leading.trailing.equalToSuperview().inset(16)
+            make.top.equalTo(logoImage.snp.bottom).offset(50)
+            make.leading.trailing.equalToSuperview().inset(20)
             make.height.equalTo(52)
             
         }
         view.addSubview(userButtonDescriptionLabel)
         userButtonDescriptionLabel.snp.makeConstraints { make in
             make.top.equalTo(userButton.snp.bottom).offset(4)
-            make.leading.equalTo(16)
+            make.leading.equalTo(20)
             
         }
         
         view.addSubview(adminButton)
         adminButton.snp.makeConstraints { make in
-            make.top.equalTo(userButtonDescriptionLabel.snp.bottom).offset(20)
-            make.leading.trailing.equalToSuperview().inset(16)
+            make.top.equalTo(userButtonDescriptionLabel.snp.bottom).offset(16)
+            make.leading.trailing.equalToSuperview().inset(20)
             make.height.equalTo(52)
             
         }
@@ -144,7 +138,7 @@ class ChoiceViewController: UIViewController {
         view.addSubview(adminButtonDescriptionLabel)
         adminButtonDescriptionLabel.snp.makeConstraints { make in
             make.top.equalTo(adminButton.snp.bottom).offset(4)
-            make.leading.equalTo(16)
+            make.leading.equalTo(20)
             
         }
        

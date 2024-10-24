@@ -25,12 +25,13 @@ class FifthOnboardingViewController: UIViewController {
     private var titleLabel: UILabel = {
         let label = UILabel()
         label.text = "Готовы к действиям? оставьте заявку и вперед к чистоте!"
-        label.font = UIFont(name: "SFProDisplay-Bold", size: 20)
+        label.font = UIFont(name: "SFProDisplay-Bold", size: 18)
         label.textColor = .white
         label.numberOfLines = 0
         label.textAlignment = .left
         return label
     }()
+    
     private lazy var nextButton = ButtonSettings().buttonMaker(title: "Продолжить", target: self, action: #selector(nextButtonTapped))
     
     override func viewDidLoad() {
@@ -53,20 +54,20 @@ class FifthOnboardingViewController: UIViewController {
        
         view.addSubview(exterminatorImage)
         exterminatorImage.snp.makeConstraints{make in
-            make.top.equalTo(logoImage.snp.bottom).offset(30)
-            make.centerX.equalToSuperview()
+            make.top.equalTo(logoImage.snp.bottom).offset(40)
             make.height.equalTo(234)
-            make.width.equalTo(360)
+            make.leading.trailing.equalToSuperview()
+        
         }
         view.addSubview(titleLabel)
         titleLabel.snp.makeConstraints{make in
-            make.top.equalTo(exterminatorImage.snp.bottom).offset(20)
+            make.top.equalTo(exterminatorImage.snp.bottom).offset(16)
             make.leading.equalToSuperview().offset(20)
             make.trailing.equalToSuperview().offset(-20)
         }
         view.addSubview(nextButton)
         nextButton.snp.makeConstraints{make in
-            make.bottom.equalToSuperview().offset(-50)
+            make.bottom.equalToSuperview().offset(-51)
             make.centerX.equalToSuperview()
             make.height.equalTo(52)
             make.leading.equalToSuperview().offset(20)
@@ -82,9 +83,6 @@ class FifthOnboardingViewController: UIViewController {
     @objc func finishOnboarding() {
         UserDefaults.standard.set(true, forKey: "hasCompletedOnboarding")
         
-        let mainViewController = ChoiceViewController()
-        mainViewController.modalPresentationStyle = .fullScreen
-        present(mainViewController, animated: true, completion: nil)
     }
     
     

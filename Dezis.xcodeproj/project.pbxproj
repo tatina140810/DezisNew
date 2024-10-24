@@ -27,7 +27,7 @@
 		AF4B1DF12C9B153C00FDA3EC /* HexExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1DF02C9B153C00FDA3EC /* HexExtention.swift */; };
 		AF4B1DF52C9B28ED00FDA3EC /* ClientLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1DF42C9B28ED00FDA3EC /* ClientLoginViewController.swift */; };
 		AF4B1DF92C9B32A300FDA3EC /* SuccessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1DF82C9B32A300FDA3EC /* SuccessViewController.swift */; };
-		AF4B1DFB2C9B42D300FDA3EC /* NewUserRegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1DFA2C9B42D300FDA3EC /* NewUserRegisterViewController.swift */; };
+		AF4B1DFB2C9B42D300FDA3EC /* UserRegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1DFA2C9B42D300FDA3EC /* UserRegisterViewController.swift */; };
 		AF4B1DFD2C9B52AE00FDA3EC /* СonfirmationСodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1DFC2C9B52AE00FDA3EC /* СonfirmationСodeViewController.swift */; };
 		AF4B1E022C9C17BA00FDA3EC /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1E012C9C17B900FDA3EC /* EndPoint.swift */; };
 		AF4B1E052C9C1C8B00FDA3EC /* URLSession+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1E042C9C1C8B00FDA3EC /* URLSession+Extension.swift */; };
@@ -108,7 +108,7 @@
 		AF4B1DF02C9B153C00FDA3EC /* HexExtention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexExtention.swift; sourceTree = "<group>"; };
 		AF4B1DF42C9B28ED00FDA3EC /* ClientLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientLoginViewController.swift; sourceTree = "<group>"; };
 		AF4B1DF82C9B32A300FDA3EC /* SuccessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessViewController.swift; sourceTree = "<group>"; };
-		AF4B1DFA2C9B42D300FDA3EC /* NewUserRegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewUserRegisterViewController.swift; sourceTree = "<group>"; };
+		AF4B1DFA2C9B42D300FDA3EC /* UserRegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRegisterViewController.swift; sourceTree = "<group>"; };
 		AF4B1DFC2C9B52AE00FDA3EC /* СonfirmationСodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "СonfirmationСodeViewController.swift"; sourceTree = "<group>"; };
 		AF4B1E012C9C17B900FDA3EC /* EndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
 		AF4B1E042C9C1C8B00FDA3EC /* URLSession+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+Extension.swift"; sourceTree = "<group>"; };
@@ -428,7 +428,7 @@
 		AF5146222CC77B64000D9C97 /* ClientRegister */ = {
 			isa = PBXGroup;
 			children = (
-				AF4B1DFA2C9B42D300FDA3EC /* NewUserRegisterViewController.swift */,
+				AF4B1DFA2C9B42D300FDA3EC /* UserRegisterViewController.swift */,
 				AF74D5512CA7EB3200B64D6E /* UserRegisterSecondPageViewController.swift */,
 				AF4B1DFC2C9B52AE00FDA3EC /* СonfirmationСodeViewController.swift */,
 				AF5146202CC652C8000D9C97 /* UserRegisterPresenter.swift */,
@@ -665,7 +665,7 @@
 				AFF618782CB69D2800C64C95 /* DezinsectionViewController.swift in Sources */,
 				AF9F2FEE2CA6D3CF00BBBB2C /* ImagePicker.swift in Sources */,
 				AF9F2FEC2CA6BA1A00BBBB2C /* AttributedTextHelper.swift in Sources */,
-				AF4B1DFB2C9B42D300FDA3EC /* NewUserRegisterViewController.swift in Sources */,
+				AF4B1DFB2C9B42D300FDA3EC /* UserRegisterViewController.swift in Sources */,
 				AF74D57E2CB14B7700B64D6E /* DezinsectionView.swift in Sources */,
 				72D39BA02CB157ED00D9EB45 /* AdminRequestsViewController.swift in Sources */,
 				AFF618872CB85F6A00C64C95 /* CustomNavigationBar.swift in Sources */,

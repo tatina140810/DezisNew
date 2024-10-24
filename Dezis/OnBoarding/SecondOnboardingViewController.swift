@@ -33,51 +33,45 @@ class SecondOnboardingViewController: UIViewController {
         view.backgroundColor = UIColor(hex: "#1B2228")
         setupUI()
         navigationController?.navigationBar.isHidden = true
-     
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        navigationController?.navigationBar.isHidden = false
+        navigationItem.hidesBackButton = true
     }
     
     private func setupUI(){
         view.addSubview(ellipsImage)
         ellipsImage.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide)
+            make.top.equalToSuperview().offset(68)
             make.leading.trailing.equalToSuperview()
             make.height.equalTo(563)
         }
-        view.addSubview(titleLabel)
-        titleLabel.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide).offset(150)
-            make.leading.equalToSuperview().offset(20)
-            make.trailing.equalToSuperview().offset(-20)
-            
-        }
-        view.addSubview(exterminatorImage)
-        exterminatorImage.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(10)
-            make.leading.equalToSuperview()
-            make.height.equalTo(322)
-            make.width.equalTo(360)
-            
-        }
+       
         view.addSubview(skipButton)
         skipButton.snp.makeConstraints{make in
-            make.bottom.equalToSuperview().offset(-50)
-            make.centerX.equalToSuperview()
+            make.bottom.equalToSuperview().offset(-51)
             make.height.equalTo(52)
             make.leading.equalToSuperview().offset(20)
             make.trailing.equalToSuperview().inset(20)
         }
         view.addSubview(nextButton)
         nextButton.snp.makeConstraints{make in
-            make.bottom.equalTo(skipButton.snp.top).offset(-8)
-            make.centerX.equalToSuperview()
+            make.bottom.equalTo(skipButton.snp.top).offset(-16)
             make.height.equalTo(52)
             make.leading.equalToSuperview().offset(20)
             make.trailing.equalToSuperview().inset(20)
+        }
+        view.addSubview(exterminatorImage)
+        exterminatorImage.snp.makeConstraints { make in
+            make.bottom.equalTo(nextButton.snp.top).offset(-24)
+            make.leading.equalToSuperview()
+            make.height.equalTo(322)
+            make.width.equalTo(375)
+            
+        }
+        view.addSubview(titleLabel)
+        titleLabel.snp.makeConstraints { make in
+            make.bottom.equalTo(exterminatorImage.snp.top).offset(-24)
+            make.leading.equalToSuperview().offset(20)
+            make.trailing.equalToSuperview().offset(-20)
+            
         }
         
     }
