@@ -64,7 +64,7 @@ class FirstOnboardingViewController: UIViewController {
         
         view.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { make in
-            make.top.equalTo(cockroachImage.snp.bottom).offset(65)
+            make.top.equalTo(cockroachImage.snp.bottom).offset(50)
             make.centerX.equalToSuperview()
             make.leading.equalToSuperview().offset(20)
             make.trailing.equalToSuperview().inset(20)

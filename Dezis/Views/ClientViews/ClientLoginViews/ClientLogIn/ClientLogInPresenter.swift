@@ -55,14 +55,13 @@ protocol LoginPresenterProtocol: AnyObject {
 
 class LoginPresenter {
     
-    weak var view: LoginPresenterProtocol? // Для взаимодействия с View (ViewController)
-    private let provider = MoyaProvider<UserApi>() // Инициализируем Moya провайдер
+    weak var view: LoginPresenterProtocol?
+    private let provider = MoyaProvider<UserApi>()
     
     init(view: LoginPresenterProtocol) {
         self.view = view
     }
-    
-    // Метод для выполнения запроса логина
+
     func loginUser(email: String, password: String) {
         provider.request(.userLogin(email: email, password: password)) { [weak self] result in
             switch result {
@@ -71,24 +70,24 @@ class LoginPresenter {
                 print("Тело ответа: \(String(data: response.data, encoding: .utf8) ?? "Нет данных")")
                 
                 do {
-                    // Проверяем статус-код
+                 
                     guard (200...299).contains(response.statusCode) else {
                         let errorResponse = try JSONSerialization.jsonObject(with: response.data, options: []) as? [String: Any]
                         let errorMessage = errorResponse?["message"] as? String ?? "Ошибка сервера"
                         self?.view?.loginFailed(error: errorMessage)
                         return
                     }
-                    
-                    // Обрабатываем успешный вход
+                 
                     print("Успешный вход")
+                    
                     self?.view?.loginSuccess()
                     
                 } catch {
-                    // Обрабатываем ошибку декодирования
+                  
                     self?.view?.loginFailed(error: "Ошибка обработки данных")
                 }
             case .failure(let error):
-                // Обрабатываем сетевую ошибку
+              
                 self?.view?.loginFailed(error: error.localizedDescription)
             }
         }

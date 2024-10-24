@@ -22,7 +22,13 @@ class ClientChoiceViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = UIColor(hex: "#1B2228")
         setupUI()
+        backButtonSetup()
         
+    }
+    private func backButtonSetup(){
+        let backButton = UIBarButtonItem(title: "Назад", style: .plain, target: self, action: #selector(backButtonTapped))
+        
+        navigationItem.leftBarButtonItem = backButton
     }
     
     private func setupUI(){
@@ -61,6 +67,9 @@ class ClientChoiceViewController: UIViewController {
        
         navigationController?.pushViewController(vc, animated: true)
         
+    }
+    @objc func backButtonTapped(){
+        navigationController?.popViewController(animated: true)
     }
     
 

@@ -37,7 +37,13 @@ class ChoiceViewController: UIViewController {
         view.backgroundColor = UIColor(hex: "#1B2228")
         setupUI()
         setupReachability()
-     //   navigationController?.navigationBar.isHidden = true
+        backButtonSetup()
+        
+    }
+    private func backButtonSetup(){
+        let backButton = UIBarButtonItem(title: "Назад", style: .plain, target: self, action: #selector(backButtonTapped))
+        
+        navigationItem.leftBarButtonItem = backButton
     }
     
     func setupReachability(){
@@ -151,6 +157,7 @@ class ChoiceViewController: UIViewController {
         let vc = AdminLoginViewController()
         navigationController?.pushViewController(vc, animated: true)
     }
-    
-    
+    @objc func backButtonTapped(){
+        navigationController?.popViewController(animated: true)
+    }
 }

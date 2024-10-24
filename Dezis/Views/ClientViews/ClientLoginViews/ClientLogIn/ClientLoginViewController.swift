@@ -204,30 +204,13 @@ class ClientLoginViewController: UIViewController, UITextFieldDelegate, LoginPre
                return
            }
 
-//           var userLoginInfo = presenter?.getLoginInfo()
-//           
-//           if userLoginInfo == nil {
-//               print("Ошибка: `getLoginInfo()` вернул nil")
-//               return
-//           }
-//           
         emailTextField.text = email
         passwordTextField.text = password
         presenter.loginUser(email: email, password: password)
 
-           
-//           if let email = userLoginInfo?.email, let password = userLoginInfo?.password {
-//               print("Информация для входа: \(email) \(password)")
-//           } else {
-//               print("Ошибка: email не был установлен")
-//           }
-//           
-//           presenter?.loginUser(userLoginInfo: userLoginInfo!)
-//           
-//           print("Login successful!")
-           
-           let vc = EntryAllowedViewController()
-           navigationController?.pushViewController(vc, animated: true)
+        let vc = EntryAllowedViewController()
+        navigationController?.pushViewController(vc, animated: true)
+        
        }
        
        func isValidEmail(_ email: String) -> Bool {
@@ -236,16 +219,16 @@ class ClientLoginViewController: UIViewController, UITextFieldDelegate, LoginPre
            return emailPredicate.evaluate(with: email)
        }
     func loginSuccess() {
-            // Действия при успешном входе
+        
             print("Успешный вход")
-            // Переход на следующий экран
-            // navigationController?.pushViewController(NextViewController(), animated: true)
+           
+           
         }
         
         func loginFailed(error: String) {
-            // Отображение ошибки
+            
             print("Ошибка входа: \(error)")
-            // Можно показать ошибку в UIAlertController
+           
             let alert = UIAlertController(title: "Ошибка", message: error, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
             present(alert, animated: true, completion: nil)
