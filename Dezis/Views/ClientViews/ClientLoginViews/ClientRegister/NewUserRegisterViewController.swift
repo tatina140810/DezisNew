@@ -1,18 +1,8 @@
 import UIKit
 import SnapKit
 
-protocol INewUserRegisterViewController {
-   
-}
 
-class NewUserRegisterViewController: UIViewController, INewUserRegisterViewController {
-    
-//    let username = ""
-//    let email = ""
-//    let password = ""
-    
-  //  private var presenter: IUserRegisterPresenters?
-   
+class NewUserRegisterViewController: UIViewController {
     
     private var titleLabel: UILabel = {
         let label = UILabel()
@@ -78,9 +68,6 @@ class NewUserRegisterViewController: UIViewController, INewUserRegisterViewContr
         setupAddTarget()
     }
    
- 
-    
-    // MARK: - Attributed Text Links
     private func setupAddTarget(){
         let backButton = UIBarButtonItem(title: "Назад", style: .plain, target: self, action: #selector(backButtonTapped))
         
@@ -105,8 +92,6 @@ class NewUserRegisterViewController: UIViewController, INewUserRegisterViewContr
             action: #selector(attributedPrivaciTextTapped)
         )
     }
-    
-    // MARK: - Setup UI Elements
     
     private func setupUI() {
         
@@ -169,8 +154,6 @@ class NewUserRegisterViewController: UIViewController, INewUserRegisterViewContr
         
     }
     
-    // MARK: - Target Functions
-    
     @objc func attributedTextTapped() {
         print("Условием продажи")
     }
@@ -214,15 +197,8 @@ class NewUserRegisterViewController: UIViewController, INewUserRegisterViewContr
             return
         }
         
-//        if presenter == nil {
-//            presenter = UserRegisterPresenters(view: self, secondView: UserRegisterSecondPageViewController())
-//        }
-        
-     //   presenter?.updateUserInfo(username: username, email: email, password: password)
         let userInfo = UserInfo(username: username, password: password, email: email, address: "", appartmentNumber: "")
         let vc = UserRegisterBuilder.build(userinfo: userInfo)
-       // vc.modalPresentationStyle = .fullScreen
-       // present(vc, animated: true, completion: nil)
         navigationController?.pushViewController(vc, animated: true)
     }
 
@@ -233,9 +209,6 @@ class NewUserRegisterViewController: UIViewController, INewUserRegisterViewContr
         present(alert, animated: true)
     }
     @objc func backButtonTapped(){
-       // let vc = ClientChoiceViewController()
-     //   vc.modalPresentationStyle = .fullScreen
-      //  present(vc, animated: true, completion: nil)
         navigationController?.popViewController(animated: true)
     }
 }

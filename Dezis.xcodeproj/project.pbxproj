@@ -48,7 +48,8 @@
 		AF51461C2CC64A91000D9C97 /* TokenRefresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5146162CC64A91000D9C97 /* TokenRefresh.swift */; };
 		AF51461D2CC64A91000D9C97 /* UserAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5146192CC64A91000D9C97 /* UserAPI.swift */; };
 		AF51461E2CC64A91000D9C97 /* UserNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF51461A2CC64A91000D9C97 /* UserNetworkService.swift */; };
-		AF5146212CC652C8000D9C97 /* UserRegisterPresenters.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5146202CC652C8000D9C97 /* UserRegisterPresenters.swift */; };
+		AF5146212CC652C8000D9C97 /* UserRegisterPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5146202CC652C8000D9C97 /* UserRegisterPresenter.swift */; };
+		AF5146252CC77BBC000D9C97 /* ClientLogInPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5146242CC77BBC000D9C97 /* ClientLogInPresenter.swift */; };
 		AF74D5502CA7C97B00B64D6E /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF74D54F2CA7C97B00B64D6E /* KeychainManager.swift */; };
 		AF74D5522CA7EB3200B64D6E /* UserRegisterSecondPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF74D5512CA7EB3200B64D6E /* UserRegisterSecondPageViewController.swift */; };
 		AF74D5562CAACEAC00B64D6E /* FirstStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF74D5552CAACEAC00B64D6E /* FirstStackView.swift */; };
@@ -127,7 +128,8 @@
 		AF5146162CC64A91000D9C97 /* TokenRefresh.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenRefresh.swift; sourceTree = "<group>"; };
 		AF5146192CC64A91000D9C97 /* UserAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAPI.swift; sourceTree = "<group>"; };
 		AF51461A2CC64A91000D9C97 /* UserNetworkService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserNetworkService.swift; sourceTree = "<group>"; };
-		AF5146202CC652C8000D9C97 /* UserRegisterPresenters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserRegisterPresenters.swift; sourceTree = "<group>"; };
+		AF5146202CC652C8000D9C97 /* UserRegisterPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserRegisterPresenter.swift; sourceTree = "<group>"; };
+		AF5146242CC77BBC000D9C97 /* ClientLogInPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientLogInPresenter.swift; sourceTree = "<group>"; };
 		AF74D54F2CA7C97B00B64D6E /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
 		AF74D5512CA7EB3200B64D6E /* UserRegisterSecondPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRegisterSecondPageViewController.swift; sourceTree = "<group>"; };
 		AF74D5552CAACEAC00B64D6E /* FirstStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstStackView.swift; sourceTree = "<group>"; };
@@ -358,12 +360,9 @@
 		AF4B1E112C9D9BB700FDA3EC /* ClientLoginViews */ = {
 			isa = PBXGroup;
 			children = (
-				AF4B1DFA2C9B42D300FDA3EC /* NewUserRegisterViewController.swift */,
-				AF74D5512CA7EB3200B64D6E /* UserRegisterSecondPageViewController.swift */,
-				AF4B1DFC2C9B52AE00FDA3EC /* СonfirmationСodeViewController.swift */,
-				AF4B1DF42C9B28ED00FDA3EC /* ClientLoginViewController.swift */,
+				AF5146222CC77B64000D9C97 /* ClientRegister */,
+				AF5146232CC77B93000D9C97 /* ClientLogIn */,
 				AF3EDD0E2CB4696E00CAF1FE /* ClientChoiceViewController.swift */,
-				AF5146202CC652C8000D9C97 /* UserRegisterPresenters.swift */,
 			);
 			path = ClientLoginViews;
 			sourceTree = "<group>";
@@ -422,6 +421,26 @@
 				AF4B1E272CA0729300FDA3EC /* ServerErrorViewController.swift */,
 			);
 			path = GeneralViews;
+			sourceTree = "<group>";
+		};
+		AF5146222CC77B64000D9C97 /* ClientRegister */ = {
+			isa = PBXGroup;
+			children = (
+				AF4B1DFA2C9B42D300FDA3EC /* NewUserRegisterViewController.swift */,
+				AF74D5512CA7EB3200B64D6E /* UserRegisterSecondPageViewController.swift */,
+				AF4B1DFC2C9B52AE00FDA3EC /* СonfirmationСodeViewController.swift */,
+				AF5146202CC652C8000D9C97 /* UserRegisterPresenter.swift */,
+			);
+			path = ClientRegister;
+			sourceTree = "<group>";
+		};
+		AF5146232CC77B93000D9C97 /* ClientLogIn */ = {
+			isa = PBXGroup;
+			children = (
+				AF4B1DF42C9B28ED00FDA3EC /* ClientLoginViewController.swift */,
+				AF5146242CC77BBC000D9C97 /* ClientLogInPresenter.swift */,
+			);
+			path = ClientLogIn;
 			sourceTree = "<group>";
 		};
 		AF74D5532CAACE6C00B64D6E /* HomeViews */ = {
@@ -659,6 +678,7 @@
 				AF74D55E2CAB1E5400B64D6E /* GradientLayer.swift in Sources */,
 				AFF6187C2CB69D5200C64C95 /* DezinfectionViewController.swift in Sources */,
 				AF74D5502CA7C97B00B64D6E /* KeychainManager.swift in Sources */,
+				AF5146252CC77BBC000D9C97 /* ClientLogInPresenter.swift in Sources */,
 				AF4B1E152C9D9CB400FDA3EC /* PersonalAccountViewController.swift in Sources */,
 				18FA88D62CB6D7EC00C66BAF /* OpenChatViewController.swift in Sources */,
 				AF4B1DF52C9B28ED00FDA3EC /* ClientLoginViewController.swift in Sources */,
@@ -677,7 +697,7 @@
 				AF4B1DD12C9AE38E00FDA3EC /* AppDelegate.swift in Sources */,
 				AF4B1E052C9C1C8B00FDA3EC /* URLSession+Extension.swift in Sources */,
 				AF4B1DFD2C9B52AE00FDA3EC /* СonfirmationСodeViewController.swift in Sources */,
-				AF5146212CC652C8000D9C97 /* UserRegisterPresenters.swift in Sources */,
+				AF5146212CC652C8000D9C97 /* UserRegisterPresenter.swift in Sources */,
 				AF4B1DD32C9AE38E00FDA3EC /* SceneDelegate.swift in Sources */,
 				AF74D5562CAACEAC00B64D6E /* FirstStackView.swift in Sources */,
 				AF4B1E0B2C9C24D300FDA3EC /* NetworkDataFetch.swift in Sources */,

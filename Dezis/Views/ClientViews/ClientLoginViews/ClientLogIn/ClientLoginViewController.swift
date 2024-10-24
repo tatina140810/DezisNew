@@ -1,8 +1,17 @@
 import UIKit
 
-class ClientLoginViewController: UIViewController, UITextFieldDelegate {
+struct UserLoginInfo{
+    var password: String
+    var email: String
+}
 
-    // MARK: - Create UI Elements
+protocol IClientLoginViewController {
+    
+}
+
+class ClientLoginViewController: UIViewController, UITextFieldDelegate, LoginPresenterProtocol {
+    
+    var presenter: LoginPresenter!
     
     private var titleLabel: UILabel = {
         let view = UILabel()
@@ -10,13 +19,13 @@ class ClientLoginViewController: UIViewController, UITextFieldDelegate {
         view.font = UIFont(name: "SFProDisplay-Bold", size: 24)
         view.textAlignment = .center
         view.textColor = .white
- 
+        
         return view
     }()
     
     private var emailTextField = TextFieldSettings().textFieldMaker(placeholder: "example@gmail.com", backgroundColor: UIColor(hex: "#2B373E"))
     private var passwordTextField = TextFieldSettings().textFieldMaker(placeholder: "Пароль", backgroundColor: UIColor(hex: "#2B373E"))
-   
+    
     private var errorMasageLabel: UILabel = {
         let view = UILabel()
         view.text = ""
@@ -65,11 +74,12 @@ class ClientLoginViewController: UIViewController, UITextFieldDelegate {
         view.numberOfLines = 0
         return view
     }()
-  
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(hex: "#1B2228")
+        presenter = LoginPresenter(view: self)
         setupUI()
         createAttributedText()
         createPrivaciAttributedText()
@@ -78,7 +88,7 @@ class ClientLoginViewController: UIViewController, UITextFieldDelegate {
     
     private func backButtonSetup(){
         let backButton = UIBarButtonItem(title: "Назад", style: .plain, target: self, action: #selector(backButtonTapped))
-
+        
         navigationItem.leftBarButtonItem = backButton
     }
     private func setupUI() {
@@ -156,12 +166,91 @@ class ClientLoginViewController: UIViewController, UITextFieldDelegate {
         )
     }
    
-    
     @objc func loginButtonTapped() {
-        print("Login successful!")
-        let vc = EntryAllowedViewController()
-        navigationController?.pushViewController(vc, animated: true)
-    }
+           guard let email = emailTextField.text, !email.isEmpty,
+                 let password = passwordTextField.text, !password.isEmpty else {
+               
+               let redPlaceholderAttributes = [NSAttributedString.Key.foregroundColor: UIColor.red]
+               
+               if emailTextField.text?.isEmpty == true {
+                   emailTextField.attributedPlaceholder = NSAttributedString(
+                       string: "Введите еще раз",
+                       attributes: redPlaceholderAttributes
+                   )
+               }
+               
+               if passwordTextField.text?.isEmpty == true {
+                   passwordTextField.attributedPlaceholder = NSAttributedString(
+                       string: "Введите еще раз",
+                       attributes: redPlaceholderAttributes
+                   )
+               }
+               
+               emailTextField.layer.borderColor = UIColor.red.cgColor
+               passwordTextField.layer.borderColor = UIColor.red.cgColor
+               emailTextField.layer.borderWidth = 1.0
+               passwordTextField.layer.borderWidth = 1.0
+               
+               return
+           }
+         
+           if !isValidEmail(email) {
+               emailTextField.attributedPlaceholder = NSAttributedString(
+                   string: "Неверный формат email",
+                   attributes: [NSAttributedString.Key.foregroundColor: UIColor.red]
+               )
+               emailTextField.layer.borderColor = UIColor.red.cgColor
+               emailTextField.layer.borderWidth = 1.0
+               return
+           }
+
+//           var userLoginInfo = presenter?.getLoginInfo()
+//           
+//           if userLoginInfo == nil {
+//               print("Ошибка: `getLoginInfo()` вернул nil")
+//               return
+//           }
+//           
+        emailTextField.text = email
+        passwordTextField.text = password
+        presenter.loginUser(email: email, password: password)
+
+           
+//           if let email = userLoginInfo?.email, let password = userLoginInfo?.password {
+//               print("Информация для входа: \(email) \(password)")
+//           } else {
+//               print("Ошибка: email не был установлен")
+//           }
+//           
+//           presenter?.loginUser(userLoginInfo: userLoginInfo!)
+//           
+//           print("Login successful!")
+           
+           let vc = EntryAllowedViewController()
+           navigationController?.pushViewController(vc, animated: true)
+       }
+       
+       func isValidEmail(_ email: String) -> Bool {
+           let emailRegex = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}$"
+           let emailPredicate = NSPredicate(format: "SELF MATCHES %@", emailRegex)
+           return emailPredicate.evaluate(with: email)
+       }
+    func loginSuccess() {
+            // Действия при успешном входе
+            print("Успешный вход")
+            // Переход на следующий экран
+            // navigationController?.pushViewController(NextViewController(), animated: true)
+        }
+        
+        func loginFailed(error: String) {
+            // Отображение ошибки
+            print("Ошибка входа: \(error)")
+            // Можно показать ошибку в UIAlertController
+            let alert = UIAlertController(title: "Ошибка", message: error, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            present(alert, animated: true, completion: nil)
+        }
+
     
     @objc func attributedTextTapped() {
         print("Support contact tapped!")
@@ -170,8 +259,7 @@ class ClientLoginViewController: UIViewController, UITextFieldDelegate {
         print("Support contact tapped!")
     }
     @objc private func backButtonTapped() {
-      //  let vc = UINavigationController(rootViewController: ClientChoiceViewController())
-       // navigationController?.pushViewController(vc, animated: true)
+      
         navigationController?.popViewController(animated: true)
     }
 }
