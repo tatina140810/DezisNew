@@ -7,7 +7,13 @@
 
 import UIKit
 
-class AdminLoginViewController: UIViewController {
+protocol IAdminLoginView {
+    func showError(message: String)
+}
+
+class AdminLoginView: UIViewController {
+    
+    private var presenter: IAdminLoginPresenter?
     
     private let loginLabel: UILabel = {
         let view = UILabel()
@@ -130,6 +136,8 @@ class AdminLoginViewController: UIViewController {
         view.backgroundColor = .init(hex: "#1B2228")
         setupUI()
         setupAddTarget()
+        
+        presenter = AdminLoginPresenter(view: self)
     }
     
     private func setupUI() {
@@ -141,7 +149,7 @@ class AdminLoginViewController: UIViewController {
         view.addSubview(termsTextView)
         
         loginLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(244)
+            make.top.equalToSuperview().offset(278)
             make.centerX.equalToSuperview()
         }
         
@@ -187,13 +195,19 @@ class AdminLoginViewController: UIViewController {
     }
     
     @objc private func continueButtonTapped() {
-        let vc = AdminTabBarController()
-        vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: true, completion: nil)
+        let login = loginTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+        let password = passwordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+        
+        guard !login.isEmpty, !password.isEmpty else {
+            showError(message: "Пожалуйста, введите логин и пароль.")
+            return
+        }
+        
+        presenter?.loginAdmin(login: login, password: password)
     }
 }
 
-extension AdminLoginViewController: UITextViewDelegate {
+extension AdminLoginView: UITextViewDelegate {
     func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
         if URL.scheme == "terms" {
             print("Условие продажи")
@@ -201,5 +215,13 @@ extension AdminLoginViewController: UITextViewDelegate {
             print("Положение о конфиденциальности")
         }
         return false
+    }
+}
+
+extension AdminLoginView: IAdminLoginView {
+    func showError(message: String) {
+        let alert = UIAlertController(title: "Ошибка", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        present(alert, animated: true)
     }
 }

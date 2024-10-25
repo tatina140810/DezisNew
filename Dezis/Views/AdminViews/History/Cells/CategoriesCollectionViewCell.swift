@@ -14,7 +14,7 @@ class CategoriesCollectionViewCell: UICollectionViewCell {
     private let categoryNameLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: "SFProDisplay-Bold", size: 16)
-        label.textColor = .init(hex: "#FFFFFF)")
+        label.textColor = .init(hex: "#FFFFFF")
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -24,13 +24,13 @@ class CategoriesCollectionViewCell: UICollectionViewCell {
         let view = UIView()
         view.backgroundColor = .init(hex: "#0A84FF")
         view.isHidden = true
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         contentView.backgroundColor = .clear
-        contentView.clipsToBounds = false
         setUp()
     }
     
@@ -40,23 +40,27 @@ class CategoriesCollectionViewCell: UICollectionViewCell {
     }
     
     func setUpSubviews() {
+        contentView.clipsToBounds = false
         contentView.addSubview(categoryNameLabel)
         contentView.addSubview(underlineView)
     }
     
     func setUpConstraints() {
-        
+
         categoryNameLabel.snp.makeConstraints { make in
+            make.top.equalTo(contentView.snp.top).offset(8)
             make.centerX.equalTo(contentView.snp.centerX)
-            make.top.equalTo(contentView.snp.top)
         }
         
+     
         underlineView.snp.makeConstraints { make in
             make.height.equalTo(1)
             make.top.equalTo(categoryNameLabel.snp.bottom).offset(8)
-            make.leading.trailing.equalTo(contentView)
+            make.leading.equalTo(contentView.snp.leading)
+            make.trailing.equalTo(contentView.snp.trailing)
         }
     }
+
     
     func fill(with item: CategoryModel, isSelected: Bool) {
         categoryNameLabel.text = item.categoryName

@@ -18,6 +18,8 @@ class ClientHistoryViewController: UIViewController {
         return label
     }()
     
+    private let firstOrderView = FirstOrderView()
+    
     private let allOrdersLabel: UILabel = {
         let label = UILabel()
         label.text = "Все обработки:"
@@ -66,9 +68,17 @@ class ClientHistoryViewController: UIViewController {
             make.leading.equalToSuperview().offset(20)
         }
         
+        view.addSubview(firstOrderView)
+        firstOrderView.translatesAutoresizingMaskIntoConstraints = false
+        firstOrderView.snp.makeConstraints { make in
+            make.top.equalTo(firstOrderLabel.snp.bottom).offset(12)
+            make.leading.equalToSuperview().offset(20)
+            make.trailing.equalToSuperview().offset(-20)
+            make.height.equalTo(211)
+        }
         view.addSubview(allOrdersLabel)
         allOrdersLabel.snp.makeConstraints { make in
-            make.top.equalTo(firstOrderLabel.snp.bottom).offset(20)
+            make.top.equalTo(firstOrderView.snp.bottom).offset(20)
             make.leading.equalToSuperview().offset(20)
         }
         

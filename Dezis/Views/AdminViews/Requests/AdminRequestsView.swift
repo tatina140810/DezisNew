@@ -7,7 +7,13 @@
 
 import UIKit
 
-class AdminRequestsViewController: UIViewController {
+protocol IAdminRequestView {
+
+}
+
+class AdminRequestsView: UIViewController,IAdminRequestView {
+    
+    private var presenter: IAdminRequestPresenter!
     
     private let titleLabel: UILabel = {
         let view = UILabel()
@@ -65,7 +71,7 @@ class AdminRequestsViewController: UIViewController {
     }
 }
 
-extension AdminRequestsViewController: UICollectionViewDataSource {
+extension AdminRequestsView: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 3
@@ -73,6 +79,37 @@ extension AdminRequestsViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RequestsCollectionViewCell.reuseId, for: indexPath) as! RequestsCollectionViewCell
+        
+        cell.onConfirmTapped = {
+            self.confirmRequest(for: indexPath)
+        }
+        cell.onDenyTapped = {
+            self.denyRequest(for: indexPath)
+        }
         return cell
+    }
+    
+    private func confirmRequest(for indexPath: IndexPath) {
+        DispatchQueue.main.async {
+            let sureAlert = SureAlertView()
+            sureAlert.showAlert(on: self.view, message: "Вы уверены, что хотите подтвердить запрос?", yesButtonText: "Подтвердить", noButtonText: "Отмена")
+            
+            sureAlert.onConfirm = {
+                let successAlert = CustomAlertView()
+                successAlert.showAlert(on: self.view, withMessage: "Вы подтвердили запрос!", imageName: "check-circle")
+            }
+        }
+    }
+
+    private func denyRequest(for indexPath: IndexPath) {
+        DispatchQueue.main.async {
+            let sureAlert = SureAlertView()
+            sureAlert.showAlert(on: self.view, message: "Вы уверены, что хотите отклонить запрос?", yesButtonText: "Отклонить", noButtonText: "Отмена")
+            
+            sureAlert.onConfirm = {
+                let successAlert = CustomAlertView()
+                successAlert.showAlert(on: self.view, withMessage: "Запрос отклонен!", imageName: "slash")
+            }
+        }
     }
 }
