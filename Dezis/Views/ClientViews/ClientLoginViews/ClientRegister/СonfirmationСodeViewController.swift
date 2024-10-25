@@ -89,22 +89,23 @@ class СonfirmationСodeViewController: UIViewController {
         nextButton.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
     }
     private func setupUI(){
+        
         view.addSubview(codeLabel)
         codeLabel.snp.makeConstraints {make in
-            make.top.equalToSuperview().offset(200)
+            make.top.equalToSuperview().offset(293)
             make.centerX.equalToSuperview()
         }
        
         view.addSubview(confirmationLabel)
         confirmationLabel.snp.makeConstraints {make in
-            make.top.equalTo(codeLabel.snp.bottom).offset(20)
+            make.top.equalTo(codeLabel.snp.bottom).offset(12)
             make.centerX.equalToSuperview()
         }
         view.addSubview(codeTextField)
         codeTextField.snp.makeConstraints {make in
-            make.top.equalTo(confirmationLabel.snp.bottom).offset(20)
-            make.leading.trailing.equalToSuperview().inset(16)
-            make.height.equalTo(48)
+            make.top.equalTo(confirmationLabel.snp.bottom).offset(24)
+            make.leading.trailing.equalToSuperview().inset(20)
+            make.height.equalTo(50)
         }
         view.addSubview(newCodeButton)
         newCodeButton.snp.makeConstraints {make in
@@ -119,9 +120,9 @@ class СonfirmationСodeViewController: UIViewController {
         view.addSubview(nextButton)
         nextButton.snp.makeConstraints { make in
             make.top.equalTo(oneMinuteLabel.snp.bottom).offset(10)
-            make.leading.equalToSuperview().offset(16)
-            make.trailing.equalToSuperview().offset(-16)
-            make.height.equalTo(48)
+            make.leading.equalToSuperview().offset(20)
+            make.trailing.equalToSuperview().offset(-20)
+            make.height.equalTo(52)
         }
         view.addSubview(confidentialityLabel)
         confidentialityLabel.snp.makeConstraints { make in

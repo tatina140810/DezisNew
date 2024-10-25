@@ -80,7 +80,7 @@ class DezinsectionViewController: UIViewController {
                 make.bottom.equalToSuperview().offset(-100)
                 make.leading.equalToSuperview().offset(20)
                 make.trailing.equalToSuperview().offset(-20)
-                make.height.equalTo(50)
+                make.height.equalTo(48)
             }
         }
         @objc func orderButtonTapped(){
