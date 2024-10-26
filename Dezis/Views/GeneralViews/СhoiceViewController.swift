@@ -148,7 +148,7 @@ class ChoiceViewController: UIViewController {
         navigationController?.pushViewController(vc, animated: true)
     }
     @objc func adminButtonTapped() {
-        let vc = AdminLoginViewController()
+        let vc = AdminLoginView()
         navigationController?.pushViewController(vc, animated: true)
     }
     @objc func backButtonTapped(){

@@ -249,8 +249,8 @@ class PersonalAccountViewController: UIViewController {
     }
     
     @objc func historyButtonTapped() {
-        let historyViewController = ClientHistoryViewController()
-        navigationController?.pushViewController(historyViewController, animated: true)
+        let vc = ClientHistoryViewController()
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     @objc private func userImageTapped() {
