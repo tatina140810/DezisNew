@@ -11,7 +11,7 @@ enum UserApi {
 
 extension UserApi: TargetType {
     
-    var baseURL: URL { URL(string: "http://209.38.228.54:8084")! }
+    var baseURL: URL { URL(string: "https://dezis.pp.ua/")! }
     
     var path: String {
         switch self {
