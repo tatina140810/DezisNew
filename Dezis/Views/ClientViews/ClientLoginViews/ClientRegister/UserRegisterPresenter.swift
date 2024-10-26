@@ -19,10 +19,12 @@ class UserRegisterPresenter: IUserRegisterPresenters {
     func registerUser(userInfo: UserInfo) {
         userNetworkSeervice.userRegister(username: userInfo.username, email: userInfo.email, password: userInfo.password, apartmentNumber: userInfo.appartmentNumber, address: userInfo.address) { [weak self] result in
             switch result {
-            case .success(let success):
-                print(success)
-            case .failure(let failure):
-                print(failure)
+            case .success(let response):
+                print("Registration success: \(response)")
+            case .failure(let error):
+                
+                print("Registration failed with error: \(error)")
+                
             }
         }
     }

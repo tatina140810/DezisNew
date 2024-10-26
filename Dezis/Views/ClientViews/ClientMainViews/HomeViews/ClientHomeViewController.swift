@@ -39,24 +39,17 @@ class ClientHomeViewController: UIViewController {
     private lazy var dezinsectionDetailsButton: UIButton = {
         let button = UIButton()
         button.setTitle("Подробнее", for: .normal)
-        button.titleLabel?.textAlignment = .left
-        button.setImage(UIImage(systemName: "arrow.right"), for: .normal)
-        button.imageView?.contentMode = .right
+        button.setTitleColor(.white, for: .normal)
+        button.titleLabel?.font = UIFont(name: "SFProDisplay-Bold", size: 16)
+        button.setImage(UIImage(resource: .arrow), for: .normal)
+        button.tintColor = .white
         button.backgroundColor = UIColor(hex: "#0A84FF")
         button.layer.cornerRadius = 12
         button.clipsToBounds = true
-        button.titleLabel?.font = UIFont(name: "SFProDisplay-Bold", size: 16)
         button.contentHorizontalAlignment = .left
-        button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 0)
-        
-        let arrowImageView = UIImageView(image: UIImage(named: "arrow-right"))
-        arrowImageView.tintColor = UIColor(hex: "#0A84FF")
-        button.addSubview(arrowImageView)
-        
-        arrowImageView.snp.makeConstraints { make in
-            make.centerY.equalTo(button.snp.centerY)
-            make.trailing.equalToSuperview().offset(-15)
-        }
+        button.imageEdgeInsets = UIEdgeInsets(top: 0, left: 190, bottom: 0, right: 10)
+        button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: -70)
+        button.semanticContentAttribute = .forceRightToLeft
 
         return button
     }()
@@ -66,25 +59,18 @@ class ClientHomeViewController: UIViewController {
     private var dezinfectionDetailsButton: UIButton = {
         let button = UIButton()
         button.setTitle("Подробнее", for: .normal)
-        button.titleLabel?.textAlignment = .left
-        button.setImage(UIImage(systemName: "arrow.right"), for: .normal)
-        button.imageView?.contentMode = .right
+        button.setTitleColor(.white, for: .normal)
+        button.titleLabel?.font = UIFont(name: "SFProDisplay-Bold", size: 16)
+        button.setImage(UIImage(resource: .arrow), for: .normal)
+        button.tintColor = .white
         button.backgroundColor = UIColor(hex: "#0A84FF")
         button.layer.cornerRadius = 12
         button.clipsToBounds = true
-        button.titleLabel?.font = UIFont(name: "SFProDisplay-Bold", size: 16)
         button.contentHorizontalAlignment = .left
-        button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 0)
-        
-        let arrowImageView = UIImageView(image: UIImage(named: "arrow-right"))
-        arrowImageView.tintColor = UIColor(hex: "#0A84FF")
-        button.addSubview(arrowImageView)
-        
-        arrowImageView.snp.makeConstraints { make in
-            make.centerY.equalTo(button.snp.centerY)
-            make.trailing.equalToSuperview().offset(-15)
-        }
-
+        button.imageEdgeInsets = UIEdgeInsets(top: 0, left: 190, bottom: 0, right: 10)
+        button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: -70)
+        button.semanticContentAttribute = .forceRightToLeft
+    
         return button
     }()
     
@@ -95,13 +81,13 @@ class ClientHomeViewController: UIViewController {
         button.setTitle("Подробнее", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.titleLabel?.font = UIFont(name: "SFProDisplay-Bold", size: 16)
-        button.setImage(UIImage(systemName: "arrow.right"), for: .normal)
+        button.setImage(UIImage(resource: .arrow), for: .normal)
         button.tintColor = .white
         button.backgroundColor = UIColor(hex: "#0A84FF")
         button.layer.cornerRadius = 12
         button.clipsToBounds = true
         button.contentHorizontalAlignment = .left
-        button.imageEdgeInsets = UIEdgeInsets(top: 0, left: 80, bottom: 0, right: -50)
+        button.imageEdgeInsets = UIEdgeInsets(top: 0, left: 190, bottom: 0, right: 10)
         button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: -70)
         button.semanticContentAttribute = .forceRightToLeft
         
@@ -205,17 +191,18 @@ class ClientHomeViewController: UIViewController {
     @objc func dezinsectionButtonTapped(){
      
         let vc = DezinsectionViewController()
-        navigationController?.pushViewController(vc, animated: true)
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true, completion: nil)
     }
     @objc func dezinfectionButtonTapped(){
   
         let vc = DezinfectionViewController()
-        navigationController?.pushViewController(vc, animated: true)
-    }
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true, completion: nil)    }
     @objc func deratizationButtonTapped(){
        
         let vc = DeratizationViewController()
-        navigationController?.pushViewController(vc, animated: true)
-    }
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true, completion: nil)    }
 }
 

@@ -40,20 +40,20 @@ class EntryDeniedViewController: UIViewController {
                
                view.addSubview(entryAllowedImage)
                entryAllowedImage.snp.makeConstraints { make in
-                   make.centerY.equalToSuperview().offset(-150)
+                   make.top.equalToSuperview().offset(152)
                    make.centerX.equalToSuperview()
                    make.height.width.equalTo(276)
                   
                }
                view.addSubview(titleLabel)
                titleLabel.snp.makeConstraints { make in
-                   make.top.equalTo(entryAllowedImage.snp.bottom).offset(30)
+                   make.top.equalTo(entryAllowedImage.snp.bottom).offset(24)
                    make.leading.trailing.equalToSuperview().inset(45)
                }
                view.addSubview(nextButton)
                nextButton.snp.makeConstraints { make in
-                   make.top.equalTo(titleLabel.snp.bottom).offset(30)
-                   make.leading.trailing.equalToSuperview().inset(16)
+                   make.top.equalTo(titleLabel.snp.bottom).offset(23)
+                   make.leading.trailing.equalToSuperview().inset(20)
                    make.height.equalTo(52)
                    
                }

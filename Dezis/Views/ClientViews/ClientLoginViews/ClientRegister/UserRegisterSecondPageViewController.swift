@@ -202,6 +202,9 @@ class UserRegisterSecondPageViewController: UIViewController, IUserRegisterSecon
         userInfo?.appartmentNumber = apartmentNumber
         print(userInfo)
         presenter?.registerUser(userInfo: userInfo!)
+        
+        let vc = СonfirmationСodeViewController()
+        navigationController?.pushViewController(vc, animated: true)
     }
 
     @objc private func backButtonTapped() {
