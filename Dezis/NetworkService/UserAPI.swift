@@ -50,7 +50,12 @@ extension UserApi: TargetType {
         case .refreshToken(let refreshToken):
             return .requestParameters(parameters: ["refresh": refreshToken], encoding: JSONEncoding.default)
         case .userRegister(let username, let email, let password, let apartmentNumber, let address):
-            return .requestParameters(parameters: ["username": username, "email": email, "password": password, "apartment_number": apartmentNumber, "address": address], encoding: JSONEncoding.default)
+            return .requestParameters(parameters: ["username": username, 
+                                                   "email": email,
+                                                   "apartment_number": apartmentNumber,
+                                                   "address": address,
+                                                   "password": password,],
+                                      encoding: JSONEncoding.default)
         case .userLogin(let email, let password):
             return .requestParameters(parameters: ["email": email, "password": password], encoding: JSONEncoding.default)
         case .booking(let service, let date, let time):
@@ -69,6 +74,7 @@ extension UserApi: TargetType {
                 return ["Content-Type": "application/json"]
                 
             case .news, .userLogin :
+                
                 if !token.isEmpty {
                     return ["Authorization": "Bearer\(token)", "Content-Type": "application/json"]
                 } else {

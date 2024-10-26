@@ -19,6 +19,16 @@ class UserRegisterViewController: UIViewController {
     
     private var passwordTextField = TextFieldSettings().textFieldMaker(placeholder: "Пароль", backgroundColor: UIColor(hex: "#2B373E"))
     
+    private var passwordLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Пароль должен содержать минимум 8 символов"
+        label.font = UIFont(name: "SFProDisplay-Regular", size: 14)
+        label.textColor = .white
+        label.textAlignment = .left
+        label.numberOfLines = 0
+        return label
+    }()
+    
     private lazy var passwordToggleButton: UIButton = {
         let button = UIButton(type: .custom)
         button.setImage(UIImage(systemName: "eye.slash"), for: .normal)
@@ -130,10 +140,17 @@ class UserRegisterViewController: UIViewController {
             make.trailing.equalTo(passwordTextField.snp.trailing).offset(-16)
             make.width.height.equalTo(24)
         }
+        view.addSubview(passwordLabel)
+        passwordLabel.snp.makeConstraints { make in
+            make.top.equalTo(passwordTextField.snp.bottom).offset(5)
+            make.leading.equalToSuperview().offset(20)
+            make.trailing.equalToSuperview().offset(-20)
+           
+        }
         
         view.addSubview(nextButton)
         nextButton.snp.makeConstraints { make in
-            make.top.equalTo(passwordTextField.snp.bottom).offset(24)
+            make.top.equalTo(passwordTextField.snp.bottom).offset(44)
             make.leading.equalToSuperview().offset(20)
             make.trailing.equalToSuperview().offset(-20)
             make.height.equalTo(52)
@@ -202,7 +219,7 @@ class UserRegisterViewController: UIViewController {
             return
         }
         
-        let userInfo = UserInfo(username: username, password: password, email: email, address: "", appartmentNumber: "")
+        let userInfo = UserInfo(username: username, password: password, email: email, address: "", apartmentNumber: "")
         let vc = UserRegisterBuilder.build(userinfo: userInfo)
         navigationController?.pushViewController(vc, animated: true)
     }

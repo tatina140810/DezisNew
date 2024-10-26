@@ -6,7 +6,7 @@ struct UserInfo {
     let password: String
     let email: String
     var address: String
-    var appartmentNumber: String
+    var apartmentNumber: String
 }
 
 final class UserRegisterBuilder {
@@ -172,23 +172,23 @@ class UserRegisterSecondPageViewController: UIViewController, IUserRegisterSecon
     @objc private func nextButtonTapped() {
         guard let adress = adressTextField.text, !adress.isEmpty,
               let apartmentNumber = apartmentNumberTextField.text, !apartmentNumber.isEmpty else {
-         
+            
             let redPlaceholderAttributes = [NSAttributedString.Key.foregroundColor: UIColor.red]
-                    
-                    if adressTextField.text?.isEmpty == true {
-                        adressTextField.attributedPlaceholder = NSAttributedString(
-                            string: "Введите еще раз",
-                            attributes: redPlaceholderAttributes
-                        )
-                    }
-                    
-                    if apartmentNumberTextField.text?.isEmpty == true {
-                        apartmentNumberTextField.attributedPlaceholder = NSAttributedString(
-                            string: "Введите еще раз",
-                            attributes: redPlaceholderAttributes
-                        )
-                    
-                    }
+            
+            if adressTextField.text?.isEmpty == true {
+                adressTextField.attributedPlaceholder = NSAttributedString(
+                    string: "Введите еще раз",
+                    attributes: redPlaceholderAttributes
+                )
+            }
+            
+            if apartmentNumberTextField.text?.isEmpty == true {
+                apartmentNumberTextField.attributedPlaceholder = NSAttributedString(
+                    string: "Введите еще раз",
+                    attributes: redPlaceholderAttributes
+                )
+                
+            }
             adressTextField.layer.borderColor = UIColor.red.cgColor
             apartmentNumberTextField.layer.borderColor = UIColor.red.cgColor
             adressTextField.layer.borderWidth = 1.0
@@ -196,15 +196,23 @@ class UserRegisterSecondPageViewController: UIViewController, IUserRegisterSecon
             
             return
         }
-
-        var userInfo = presenter?.getUserInfo()
-        userInfo?.address = adress
-        userInfo?.appartmentNumber = apartmentNumber
-        print(userInfo)
-        presenter?.registerUser(userInfo: userInfo!)
         
-        let vc = СonfirmationСodeViewController()
-        navigationController?.pushViewController(vc, animated: true)
+        if var userInfo = presenter?.getUserInfo(){
+            userInfo.address = adress
+            userInfo.apartmentNumber = apartmentNumber
+            print(userInfo)
+            
+            presenter?.registerUser(userInfo: userInfo) {[weak self] success in
+                if success {
+                    DispatchQueue.main.async {
+                        let vc = СonfirmationСodeViewController()
+                        self?.navigationController?.pushViewController(vc, animated: true)
+                    }
+                } else {
+                    print("Registration failed.")
+                }
+            }
+        }
     }
 
     @objc private func backButtonTapped() {
