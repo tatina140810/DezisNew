@@ -39,7 +39,7 @@ class UserNetworkService {
             }
         }
     }
-    func userLogin(email: String, password: String) {
+    func userLogin(email: String, password: String, completion: @escaping (Result<UserLoginResponse, Error>) -> Void) {
         provider.request(.userLogin(email: email, password: password)) { result in
             switch result {
             case .success(let response):

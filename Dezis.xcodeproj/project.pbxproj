@@ -59,8 +59,8 @@
 		AF51461D2CC64A91000D9C97 /* UserAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5146192CC64A91000D9C97 /* UserAPI.swift */; };
 		AF51461E2CC64A91000D9C97 /* UserNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF51461A2CC64A91000D9C97 /* UserNetworkService.swift */; };
 		AF5146212CC652C8000D9C97 /* UserRegisterPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5146202CC652C8000D9C97 /* UserRegisterPresenter.swift */; };
-		AF5146252CC77BBC000D9C97 /* ClientLogInPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5146242CC77BBC000D9C97 /* ClientLogInPresenter.swift */; };
 		AF5146272CCA9B31000D9C97 /* CalendarViewControllerPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5146262CCA9B31000D9C97 /* CalendarViewControllerPresenter.swift */; };
+		AF51464D2CCD750D000D9C97 /* ClientLogInPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF51464C2CCD750D000D9C97 /* ClientLogInPresenter.swift */; };
 		AF74D5502CA7C97B00B64D6E /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF74D54F2CA7C97B00B64D6E /* KeychainManager.swift */; };
 		AF74D5522CA7EB3200B64D6E /* UserRegisterSecondPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF74D5512CA7EB3200B64D6E /* UserRegisterSecondPageViewController.swift */; };
 		AF74D5562CAACEAC00B64D6E /* FirstStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF74D5552CAACEAC00B64D6E /* FirstStackView.swift */; };
@@ -150,8 +150,9 @@
 		AF5146192CC64A91000D9C97 /* UserAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAPI.swift; sourceTree = "<group>"; };
 		AF51461A2CC64A91000D9C97 /* UserNetworkService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserNetworkService.swift; sourceTree = "<group>"; };
 		AF5146202CC652C8000D9C97 /* UserRegisterPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserRegisterPresenter.swift; sourceTree = "<group>"; };
-		AF5146242CC77BBC000D9C97 /* ClientLogInPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientLogInPresenter.swift; sourceTree = "<group>"; };
+		AF5146242CC77BBC000D9C97 /* LoginPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPresenter.swift; sourceTree = "<group>"; };
 		AF5146262CCA9B31000D9C97 /* CalendarViewControllerPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewControllerPresenter.swift; sourceTree = "<group>"; };
+		AF51464C2CCD750D000D9C97 /* ClientLogInPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientLogInPresenter.swift; sourceTree = "<group>"; };
 		AF74D54F2CA7C97B00B64D6E /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
 		AF74D5512CA7EB3200B64D6E /* UserRegisterSecondPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRegisterSecondPageViewController.swift; sourceTree = "<group>"; };
 		AF74D5552CAACEAC00B64D6E /* FirstStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstStackView.swift; sourceTree = "<group>"; };
@@ -510,7 +511,8 @@
 			isa = PBXGroup;
 			children = (
 				AF4B1DF42C9B28ED00FDA3EC /* ClientLoginViewController.swift */,
-				AF5146242CC77BBC000D9C97 /* ClientLogInPresenter.swift */,
+				AF51464C2CCD750D000D9C97 /* ClientLogInPresenter.swift */,
+				AF5146242CC77BBC000D9C97 /* LoginPresenter.swift */,
 			);
 			path = ClientLogIn;
 			sourceTree = "<group>";
@@ -760,6 +762,7 @@
 				AF74D5502CA7C97B00B64D6E /* KeychainManager.swift in Sources */,
 				72ABD5AC2CC97EF9004E18E9 /* AdminRequestPresenter.swift in Sources */,
 				AF4B1E152C9D9CB400FDA3EC /* PersonalAccountViewController.swift in Sources */,
+				AF51464D2CCD750D000D9C97 /* ClientLogInPresenter.swift in Sources */,
 				18FA88D62CB6D7EC00C66BAF /* OpenChatViewController.swift in Sources */,
 				AF4B1DF52C9B28ED00FDA3EC /* ClientLoginViewController.swift in Sources */,
 				AF3EDD0F2CB4696E00CAF1FE /* ClientChoiceViewController.swift in Sources */,

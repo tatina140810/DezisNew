@@ -9,9 +9,9 @@ protocol IClientLoginViewController {
     
 }
 
-class ClientLoginViewController: UIViewController, UITextFieldDelegate, LoginPresenterProtocol {
+class ClientLoginViewController: UIViewController, UITextFieldDelegate {
     
-    var presenter: LoginPresenter!
+   var presenter: IClienLogInPresenter?
     
     private var titleLabel: UILabel = {
         let view = UILabel()
@@ -79,7 +79,7 @@ class ClientLoginViewController: UIViewController, UITextFieldDelegate, LoginPre
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(hex: "#1B2228")
-        presenter = LoginPresenter(view: self)
+     //   presenter = IClienLogInPresenter(view: self)
         setupUI()
         createAttributedText()
         createPrivaciAttributedText()
@@ -206,11 +206,11 @@ class ClientLoginViewController: UIViewController, UITextFieldDelegate, LoginPre
 
         emailTextField.text = email
         passwordTextField.text = password
-        presenter.loginUser(email: email, password: password)
-
-        let vc = EntryAllowedViewController()
-        navigationController?.pushViewController(vc, animated: true)
+        presenter?.loginUser(userLoginInfo: UserLoginInfo(password: password, email: email))
         
+        navigationController?.pushViewController(EntryAllowedViewController(), animated: true)
+        
+
        }
        
        func isValidEmail(_ email: String) -> Bool {
