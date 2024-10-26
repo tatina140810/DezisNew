@@ -2,7 +2,7 @@
 import UIKit
 
 class DezinfectionViewController: UIViewController {
-
+    
     private var dezincectionImage:UIImageView = {
         let view = UIImageView()
         view.image = UIImage(resource: .rectangle455)
@@ -40,12 +40,12 @@ class DezinfectionViewController: UIViewController {
         return button
         
     }()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
         view.backgroundColor = UIColor(hex: "#1B2228")
-
+        
         
     }
     private func setupUI(){
@@ -61,7 +61,7 @@ class DezinfectionViewController: UIViewController {
             make.trailing.equalToSuperview().offset(-20)
             make.height.equalTo(300)
         }
-      
+        
         view.addSubview(servicesDescriptionLabel)
         servicesDescriptionLabel.snp.makeConstraints { make in
             make.top.equalTo(dezincectionImage.snp.bottom).offset(20)
@@ -78,7 +78,8 @@ class DezinfectionViewController: UIViewController {
     }
     @objc func orderButtonTapped(){
         let vc = ViewControllerForAlert()
-        navigationController?.present(vc, animated: true)
+        
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true, completion: nil)
     }
-
 }

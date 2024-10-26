@@ -11,7 +11,7 @@ class ThirdOnboardingViewController: UIPageViewController {
     private var titleLabel: UILabel = {
         let label = UILabel()
         label.text = "Вы указываете проблему-мы создаем чистоту быстро и профессионально."
-        label.font = UIFont(name: "SFProDisplay-Bold", size: 20)
+        label.font = UIFont(name: "SFProDisplay-Bold", size: 18)
         label.textColor = .white
         label.numberOfLines = 0
         label.textAlignment = .left
@@ -31,41 +31,34 @@ class ThirdOnboardingViewController: UIPageViewController {
         
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        navigationController?.navigationBar.isHidden = false
-    }
-    
     private func setupUI(){
        
         view.addSubview(sprayImage)
         sprayImage.snp.makeConstraints{ make in
-            make.top.equalToSuperview().offset(122)
-            make.width.equalTo(360)
-            make.height.equalTo(244.8)
+            make.top.equalToSuperview().offset(146)
+            make.height.equalTo(245)
             make.leading.trailing.equalToSuperview()
         }
-        view.addSubview(titleLabel)
-        titleLabel.snp.makeConstraints{ make in
-            make.top.equalTo(sprayImage.snp.bottom).offset(100)
-            make.leading.equalTo(20)
-            make.trailing.equalTo(-20)
-        }
+       
         view.addSubview(skipButton)
         skipButton.snp.makeConstraints{make in
-            make.bottom.equalToSuperview().offset(-50)
-            make.centerX.equalToSuperview()
+            make.bottom.equalToSuperview().offset(-51)
             make.height.equalTo(52)
             make.leading.equalToSuperview().offset(20)
             make.trailing.equalToSuperview().inset(20)
         }
         view.addSubview(nextButton)
         nextButton.snp.makeConstraints{make in
-            make.bottom.equalTo(skipButton.snp.top).offset(-8)
-            make.centerX.equalToSuperview()
+            make.bottom.equalTo(skipButton.snp.top).offset(-16)
             make.height.equalTo(52)
             make.leading.equalToSuperview().offset(20)
             make.trailing.equalToSuperview().inset(20)
+        }
+        view.addSubview(titleLabel)
+        titleLabel.snp.makeConstraints{ make in
+            make.bottom.equalTo(nextButton.snp.top).offset(-135)
+            make.leading.equalTo(20)
+            make.trailing.equalTo(-40)
         }
       
     }

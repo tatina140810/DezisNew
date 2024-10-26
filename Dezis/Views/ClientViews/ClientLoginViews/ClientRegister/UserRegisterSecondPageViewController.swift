@@ -12,13 +12,12 @@ struct UserInfo {
 final class UserRegisterBuilder {
     class func build(userinfo: UserInfo) -> UIViewController {
         let view = UserRegisterSecondPageViewController()
-        let presenter = UserRegisterPresenters()
+        let presenter = UserRegisterPresenter()
         view.presenter = presenter
         presenter.view = view
         presenter.userInfo = userinfo
         return view
     }
-  //  func {}
 }
 
 protocol IUserRegisterSecondPageViewController {
@@ -26,9 +25,6 @@ protocol IUserRegisterSecondPageViewController {
 }
 class UserRegisterSecondPageViewController: UIViewController, IUserRegisterSecondPageViewController {
     
-    let adress = ""
-    let apartmentNumber = ""
-
     var presenter: IUserRegisterPresenters?
 
     private var titleLabel: UILabel = {
@@ -127,30 +123,30 @@ class UserRegisterSecondPageViewController: UIViewController, IUserRegisterSecon
         view.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalToSuperview().offset(250)
+            make.top.equalToSuperview().offset(281)
         }
         
         view.addSubview(adressTextField)
         adressTextField.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(8)
-            make.leading.equalToSuperview().offset(16)
-            make.trailing.equalToSuperview().offset(-16)
-            make.height.equalTo(48)
+            make.top.equalTo(titleLabel.snp.bottom).offset(24)
+            make.leading.equalToSuperview().offset(20)
+            make.trailing.equalToSuperview().offset(-20)
+            make.height.equalTo(50)
         }
         
         view.addSubview(apartmentNumberTextField)
         apartmentNumberTextField.snp.makeConstraints { make in
-            make.top.equalTo(adressTextField.snp.bottom).offset(8)
-            make.leading.equalToSuperview().offset(16)
-            make.trailing.equalToSuperview().offset(-16)
-            make.height.equalTo(48)
+            make.top.equalTo(adressTextField.snp.bottom).offset(20)
+            make.leading.equalToSuperview().offset(20)
+            make.trailing.equalToSuperview().offset(-20)
+            make.height.equalTo(50)
         }
         view.addSubview(nextButton)
         nextButton.snp.makeConstraints { make in
-            make.top.equalTo(apartmentNumberTextField.snp.bottom).offset(38)
-            make.leading.equalToSuperview().offset(16)
-            make.trailing.equalToSuperview().offset(-16)
-            make.height.equalTo(48)
+            make.top.equalTo(apartmentNumberTextField.snp.bottom).offset(24)
+            make.leading.equalToSuperview().offset(20)
+            make.trailing.equalToSuperview().offset(-20)
+            make.height.equalTo(52)
         }
         view.addSubview(confidentialityLabel)
         confidentialityLabel.snp.makeConstraints { make in
@@ -201,27 +197,18 @@ class UserRegisterSecondPageViewController: UIViewController, IUserRegisterSecon
             return
         }
 
-//        if presenter == nil {
-//
-//            presenter = UserRegisterPresenters(view: NewUserRegisterViewController(), secondView: self)
-//        }
-//        let username = presenter?.getRegistrInfo().username
-//        let email = presenter?.getRegistrInfo().email
-//        let password = presenter?.getRegistrInfo().password
-//    
-//        presenter?.updateSecondPageInfo(adress: adress, apartmentNumber: apartmentNumber)
         var userInfo = presenter?.getUserInfo()
         userInfo?.address = adress
         userInfo?.appartmentNumber = apartmentNumber
         print(userInfo)
         presenter?.registerUser(userInfo: userInfo!)
-       // let vc = UINavigationController(rootViewController: СonfirmationСodeViewController())
-     //   vc.modalPresentationStyle = .fullScreen
-     //   present(vc, animated: true, completion: nil)
+        
+        let vc = СonfirmationСodeViewController()
+        navigationController?.pushViewController(vc, animated: true)
     }
 
     @objc private func backButtonTapped() {
-        let vc = UINavigationController(rootViewController: NewUserRegisterViewController())
+        let vc = UINavigationController(rootViewController: UserRegisterViewController())
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true, completion: nil)
     }

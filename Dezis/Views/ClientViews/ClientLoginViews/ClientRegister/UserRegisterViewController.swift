@@ -1,18 +1,7 @@
 import UIKit
 import SnapKit
 
-protocol INewUserRegisterViewController {
-   
-}
-
-class NewUserRegisterViewController: UIViewController, INewUserRegisterViewController {
-    
-//    let username = ""
-//    let email = ""
-//    let password = ""
-    
-  //  private var presenter: IUserRegisterPresenters?
-   
+class UserRegisterViewController: UIViewController {
     
     private var titleLabel: UILabel = {
         let label = UILabel()
@@ -24,20 +13,18 @@ class NewUserRegisterViewController: UIViewController, INewUserRegisterViewContr
         return label
     }()
     
-    
     private var nameTextField = TextFieldSettings().textFieldMaker(placeholder: "ФИО", backgroundColor: UIColor(hex: "#2B373E"))
     
     private var emailTextField = TextFieldSettings().textFieldMaker(placeholder: "example@gmail.com*", backgroundColor: UIColor(hex: "#2B373E"))
     
     private var passwordTextField = TextFieldSettings().textFieldMaker(placeholder: "Пароль", backgroundColor: UIColor(hex: "#2B373E"))
     
-    private var errorLabel: UILabel = {
-        let view = UILabel()
-        view.text = ""
-        view.font = UIFont(name: "SFProDisplay-Regular", size: 12)
-        view.textColor = .red
-        view.textAlignment = .left
-        return view
+    private lazy var passwordToggleButton: UIButton = {
+        let button = UIButton(type: .custom)
+        button.setImage(UIImage(systemName: "eye.slash"), for: .normal)
+        button.tintColor = .white
+        button.addTarget(self, action: #selector(togglePasswordVisibility), for: .touchUpInside)
+        return button
     }()
     
     private var nextButton: UIButton = {
@@ -77,10 +64,7 @@ class NewUserRegisterViewController: UIViewController, INewUserRegisterViewContr
         createPrivaciAttributedText()
         setupAddTarget()
     }
-   
- 
     
-    // MARK: - Attributed Text Links
     private func setupAddTarget(){
         let backButton = UIBarButtonItem(title: "Назад", style: .plain, target: self, action: #selector(backButtonTapped))
         
@@ -106,52 +90,53 @@ class NewUserRegisterViewController: UIViewController, INewUserRegisterViewContr
         )
     }
     
-    // MARK: - Setup UI Elements
-    
     private func setupUI() {
         
         view.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalToSuperview().offset(200)
+            make.top.equalToSuperview().offset(243)
         }
         
         view.addSubview(nameTextField)
         nameTextField.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(28)
-            make.leading.equalToSuperview().offset(16)
-            make.trailing.equalToSuperview().offset(-16)
-            make.height.equalTo(48)
+            make.top.equalTo(titleLabel.snp.bottom).offset(24)
+            make.leading.equalToSuperview().offset(20)
+            make.trailing.equalToSuperview().offset(-20)
+            make.height.equalTo(50)
         }
         
         view.addSubview(emailTextField)
         emailTextField.snp.makeConstraints { make in
-            make.top.equalTo(nameTextField.snp.bottom).offset(8)
-            make.leading.equalToSuperview().offset(16)
-            make.trailing.equalToSuperview().offset(-16)
-            make.height.equalTo(48)
+            make.top.equalTo(nameTextField.snp.bottom).offset(24)
+            make.leading.equalToSuperview().offset(20)
+            make.trailing.equalToSuperview().offset(-20)
+            make.height.equalTo(50)
         }
         
         view.addSubview(passwordTextField)
+        passwordTextField.isSecureTextEntry = true
         passwordTextField.snp.makeConstraints { make in
-            make.top.equalTo(emailTextField.snp.bottom).offset(8)
-            make.leading.equalToSuperview().offset(16)
-            make.trailing.equalToSuperview().offset(-16)
-            make.height.equalTo(48)
+            make.top.equalTo(emailTextField.snp.bottom).offset(24)
+            make.leading.equalToSuperview().offset(20)
+            make.trailing.equalToSuperview().offset(-20)
+            make.height.equalTo(50)
+           
         }
         
-        view.addSubview(errorLabel)
-        errorLabel.snp.makeConstraints { make in
-            make.top.equalTo(passwordTextField.snp.bottom).offset(10)
-            make.leading.equalToSuperview().offset(16)
+        view.addSubview(passwordToggleButton)
+        passwordToggleButton.snp.makeConstraints { make in
+            make.centerY.equalTo(passwordTextField)
+            make.trailing.equalTo(passwordTextField.snp.trailing).offset(-16)
+            make.width.height.equalTo(24)
         }
         
         view.addSubview(nextButton)
         nextButton.snp.makeConstraints { make in
-            make.top.equalTo(errorLabel.snp.bottom).offset(38)
-            make.leading.equalToSuperview().offset(16)
-            make.trailing.equalToSuperview().offset(-16)
-            make.height.equalTo(48)
+            make.top.equalTo(passwordTextField.snp.bottom).offset(24)
+            make.leading.equalToSuperview().offset(20)
+            make.trailing.equalToSuperview().offset(-20)
+            make.height.equalTo(52)
         }
         view.addSubview(confidentialityLabel)
         confidentialityLabel.snp.makeConstraints { make in
@@ -169,73 +154,66 @@ class NewUserRegisterViewController: UIViewController, INewUserRegisterViewContr
         
     }
     
-    // MARK: - Target Functions
-    
     @objc func attributedTextTapped() {
         print("Условием продажи")
     }
     @objc func attributedPrivaciTextTapped() {
         print("Положения о конфиденциальности")
     }
-  
+    @objc private func togglePasswordVisibility() {
+        passwordTextField.isSecureTextEntry.toggle()  // Переключаем видимость пароля
+        let imageName = passwordTextField.isSecureTextEntry ? "eye.slash" : "eye"
+        passwordToggleButton.setImage(UIImage(systemName: imageName), for: .normal)
+    }
+    
     @objc func nextButtonTapped() {
         guard let username = nameTextField.text, !username.isEmpty,
               let email = emailTextField.text, !email.isEmpty,
               let password = passwordTextField.text, !password.isEmpty else {
             
             let redPlaceholderAttributes = [NSAttributedString.Key.foregroundColor: UIColor.red]
-                    
-                    if nameTextField.text?.isEmpty == true {
-                        nameTextField.attributedPlaceholder = NSAttributedString(
-                            string: "Введите еще раз",
-                            attributes: redPlaceholderAttributes
-                        )
-                    }
-                    
-                    if emailTextField.text?.isEmpty == true {
-                        emailTextField.attributedPlaceholder = NSAttributedString(
-                            string: "Введите еще раз",
-                            attributes: redPlaceholderAttributes
-                        )
-                    }
-                    
-                    if passwordTextField.text?.isEmpty == true {
-                        passwordTextField.attributedPlaceholder = NSAttributedString(
-                            string: "Введите еще раз",
-                            attributes: redPlaceholderAttributes
-                        )
-                    }
-                nameTextField.layer.borderColor = UIColor.red.cgColor
-                    emailTextField.layer.borderColor = UIColor.red.cgColor
-                    passwordTextField.layer.borderColor = UIColor.red.cgColor
-                    nameTextField.layer.borderWidth = 1.0
-                    emailTextField.layer.borderWidth = 1.0
-                    passwordTextField.layer.borderWidth = 1.0
+            
+            if nameTextField.text?.isEmpty == true {
+                nameTextField.attributedPlaceholder = NSAttributedString(
+                    string: "Введите еще раз",
+                    attributes: redPlaceholderAttributes
+                )
+            }
+            
+            if emailTextField.text?.isEmpty == true {
+                emailTextField.attributedPlaceholder = NSAttributedString(
+                    string: "Введите еще раз",
+                    attributes: redPlaceholderAttributes
+                )
+            }
+            
+            if passwordTextField.text?.isEmpty == true {
+                passwordTextField.attributedPlaceholder = NSAttributedString(
+                    string: "Введите еще раз",
+                    attributes: redPlaceholderAttributes
+                )
+            }
+            nameTextField.layer.borderColor = UIColor.red.cgColor
+            emailTextField.layer.borderColor = UIColor.red.cgColor
+            passwordTextField.layer.borderColor = UIColor.red.cgColor
+            nameTextField.layer.borderWidth = 1.0
+            emailTextField.layer.borderWidth = 1.0
+            passwordTextField.layer.borderWidth = 1.0
             return
         }
         
-//        if presenter == nil {
-//            presenter = UserRegisterPresenters(view: self, secondView: UserRegisterSecondPageViewController())
-//        }
-        
-     //   presenter?.updateUserInfo(username: username, email: email, password: password)
         let userInfo = UserInfo(username: username, password: password, email: email, address: "", appartmentNumber: "")
         let vc = UserRegisterBuilder.build(userinfo: userInfo)
-       // vc.modalPresentationStyle = .fullScreen
-       // present(vc, animated: true, completion: nil)
         navigationController?.pushViewController(vc, animated: true)
     }
-
-
+    
+    
     private func showAlert(message: String) {
         let alert = UIAlertController(title: "Ошибка", message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default))
         present(alert, animated: true)
     }
     @objc func backButtonTapped(){
-       // let vc = ClientChoiceViewController()
-     //   vc.modalPresentationStyle = .fullScreen
-      //  present(vc, animated: true, completion: nil)
         navigationController?.popViewController(animated: true)
     }
 }

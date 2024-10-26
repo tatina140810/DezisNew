@@ -39,14 +39,14 @@ class EntryAllowedViewController: UIViewController {
            
            view.addSubview(entryAllowedImage)
            entryAllowedImage.snp.makeConstraints { make in
-               make.centerY.equalToSuperview().offset(-150)
+               make.top.equalToSuperview().offset(152)
                make.centerX.equalToSuperview()
                make.height.width.equalTo(276)
               
            }
            view.addSubview(titleLabel)
            titleLabel.snp.makeConstraints { make in
-               make.top.equalTo(entryAllowedImage.snp.bottom).offset(30)
+               make.top.equalTo(entryAllowedImage.snp.bottom).offset(24)
                make.leading.trailing.equalToSuperview().inset(45)
            }
        }
