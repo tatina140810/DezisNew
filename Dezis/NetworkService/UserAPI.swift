@@ -3,7 +3,7 @@ import Moya
 enum UserApi {
     case news
     case userRegister(username: String, email: String, password: String, apartmentNumber: String, address: String)
-    case getToken(username: String, password: String)
+    case getToken(email: String, password: String)
     case userLogin(email: String, password: String)
     case refreshToken(refreshToken: String)
     case booking (service: String, date: String, time: String)
@@ -46,7 +46,7 @@ extension UserApi: TargetType {
     var task: Task {
         switch self {
         case .getToken(let username, let password):
-            return .requestParameters(parameters: ["username": username, "password": password], encoding: JSONEncoding.default)
+            return .requestParameters(parameters: ["email": email, "password": password], encoding: JSONEncoding.default)
         case .refreshToken(let refreshToken):
             return .requestParameters(parameters: ["refresh": refreshToken], encoding: JSONEncoding.default)
         case .userRegister(let username, let email, let password, let apartmentNumber, let address):
@@ -54,7 +54,7 @@ extension UserApi: TargetType {
                                                    "email": email,
                                                    "apartment_number": apartmentNumber,
                                                    "address": address,
-                                                   "password": password,],
+                                                   "password": password],
                                       encoding: JSONEncoding.default)
         case .userLogin(let email, let password):
             return .requestParameters(parameters: ["email": email, "password": password], encoding: JSONEncoding.default)
@@ -73,7 +73,7 @@ extension UserApi: TargetType {
             case .getToken, .refreshToken, .userRegister, .userLogin, .booking:
                 return ["Content-Type": "application/json"]
                 
-            case .news, .userLogin :
+            case .news:
                 
                 if !token.isEmpty {
                     return ["Authorization": "Bearer\(token)", "Content-Type": "application/json"]

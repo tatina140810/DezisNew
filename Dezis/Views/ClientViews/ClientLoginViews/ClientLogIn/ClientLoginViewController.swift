@@ -1,17 +1,19 @@
 import UIKit
 
 struct UserLoginInfo{
-    var password: String
+    
     var email: String
+    var password: String
 }
 
 protocol IClientLoginViewController {
-    
+    func loginSuccess()
+    func loginFailed(error: String)
 }
 
-class ClientLoginViewController: UIViewController, UITextFieldDelegate {
+class ClientLoginViewController: UIViewController, UITextFieldDelegate, IClientLoginViewController{
     
-   var presenter: IClienLogInPresenter?
+    var presenter: IClienLogInPresenter?
     
     private var titleLabel: UILabel = {
         let view = UILabel()
@@ -24,6 +26,7 @@ class ClientLoginViewController: UIViewController, UITextFieldDelegate {
     }()
     
     private var emailTextField = TextFieldSettings().textFieldMaker(placeholder: "example@gmail.com", backgroundColor: UIColor(hex: "#2B373E"))
+    
     private var passwordTextField = TextFieldSettings().textFieldMaker(placeholder: "Пароль", backgroundColor: UIColor(hex: "#2B373E"))
     
     private var errorMasageLabel: UILabel = {
@@ -79,7 +82,6 @@ class ClientLoginViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(hex: "#1B2228")
-     //   presenter = IClienLogInPresenter(view: self)
         setupUI()
         createAttributedText()
         createPrivaciAttributedText()
@@ -165,84 +167,87 @@ class ClientLoginViewController: UIViewController, UITextFieldDelegate {
             action: #selector(attributedPrivaciTextTapped)
         )
     }
-   
+    
     @objc func loginButtonTapped() {
-           guard let email = emailTextField.text, !email.isEmpty,
-                 let password = passwordTextField.text, !password.isEmpty else {
-               
-               let redPlaceholderAttributes = [NSAttributedString.Key.foregroundColor: UIColor.red]
-               
-               if emailTextField.text?.isEmpty == true {
-                   emailTextField.attributedPlaceholder = NSAttributedString(
-                       string: "Введите еще раз",
-                       attributes: redPlaceholderAttributes
-                   )
-               }
-               
-               if passwordTextField.text?.isEmpty == true {
-                   passwordTextField.attributedPlaceholder = NSAttributedString(
-                       string: "Введите еще раз",
-                       attributes: redPlaceholderAttributes
-                   )
-               }
-               
-               emailTextField.layer.borderColor = UIColor.red.cgColor
-               passwordTextField.layer.borderColor = UIColor.red.cgColor
-               emailTextField.layer.borderWidth = 1.0
-               passwordTextField.layer.borderWidth = 1.0
-               
-               return
-           }
-         
-           if !isValidEmail(email) {
-               emailTextField.attributedPlaceholder = NSAttributedString(
-                   string: "Неверный формат email",
-                   attributes: [NSAttributedString.Key.foregroundColor: UIColor.red]
-               )
-               emailTextField.layer.borderColor = UIColor.red.cgColor
-               emailTextField.layer.borderWidth = 1.0
-               return
-           }
-
+        guard let email = emailTextField.text, !email.isEmpty,
+              let password = passwordTextField.text, !password.isEmpty else {
+            
+            let redPlaceholderAttributes = [NSAttributedString.Key.foregroundColor: UIColor.red]
+            
+            if emailTextField.text?.isEmpty == true {
+                emailTextField.attributedPlaceholder = NSAttributedString(
+                    string: "Введите еще раз",
+                    attributes: redPlaceholderAttributes
+                )
+            }
+            
+            if passwordTextField.text?.isEmpty == true {
+                passwordTextField.attributedPlaceholder = NSAttributedString(
+                    string: "Введите еще раз",
+                    attributes: redPlaceholderAttributes
+                )
+            }
+            
+            emailTextField.layer.borderColor = UIColor.red.cgColor
+            passwordTextField.layer.borderColor = UIColor.red.cgColor
+            emailTextField.layer.borderWidth = 1.0
+            passwordTextField.layer.borderWidth = 1.0
+            
+            return
+        }
+        
+        if !isValidEmail(email) {
+            emailTextField.attributedPlaceholder = NSAttributedString(
+                string: "Неверный формат email",
+                attributes: [NSAttributedString.Key.foregroundColor: UIColor.red]
+            )
+            emailTextField.layer.borderColor = UIColor.red.cgColor
+            emailTextField.layer.borderWidth = 1.0
+            return
+        }
+        
         emailTextField.text = email
         passwordTextField.text = password
-        presenter?.loginUser(userLoginInfo: UserLoginInfo(password: password, email: email))
+        presenter?.loginUser(userLoginInfo: UserLoginInfo(email: email, password: password))
+         print ("Button tapped")
         
-        navigationController?.pushViewController(EntryAllowedViewController(), animated: true)
-        
-
-       }
-       
-       func isValidEmail(_ email: String) -> Bool {
-           let emailRegex = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}$"
-           let emailPredicate = NSPredicate(format: "SELF MATCHES %@", emailRegex)
-           return emailPredicate.evaluate(with: email)
-       }
+    }
+    
+    func isValidEmail(_ email: String) -> Bool {
+        let emailRegex = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}$"
+        let emailPredicate = NSPredicate(format: "SELF MATCHES %@", emailRegex)
+        return emailPredicate.evaluate(with: email)
+    }
     func loginSuccess() {
+        print("Успешный вход")
+        navigationController?.pushViewController(EntryAllowedViewController(), animated: true)
+    }
+    
+    
+    func loginFailed(error: String) {
         
-            print("Успешный вход")
-           
-           
-        }
+        print("Ошибка входа: \(error)")
         
-        func loginFailed(error: String) {
-            
-            print("Ошибка входа: \(error)")
-           
-            let alert = UIAlertController(title: "Ошибка", message: error, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-            present(alert, animated: true, completion: nil)
-        }
-
+        displayError(error)
+    }
+    
+    private func displayError(_ message: String) {
+        errorMasageLabel.text = message
+        errorMasageLabel.isHidden = false
+    }
     
     @objc func attributedTextTapped() {
+        let vc = ConfidantionalyPage()
+        navigationController?.pushViewController(vc, animated: true)
         print("Support contact tapped!")
     }
     @objc func attributedPrivaciTextTapped() {
+        let vc = PrivacyPage()
+        navigationController?.pushViewController(vc, animated: true)
         print("Support contact tapped!")
     }
     @objc private func backButtonTapped() {
-      
+        
         navigationController?.popViewController(animated: true)
     }
 }

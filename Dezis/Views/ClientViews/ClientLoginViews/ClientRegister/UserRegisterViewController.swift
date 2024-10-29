@@ -172,11 +172,16 @@ class UserRegisterViewController: UIViewController {
     }
     
     @objc func attributedTextTapped() {
+        let vc = PrivacyPage()
+        navigationController?.pushViewController(vc, animated: true)
         print("Условием продажи")
     }
     @objc func attributedPrivaciTextTapped() {
         print("Положения о конфиденциальности")
+        let vc = ConfidantionalyPage()
+        navigationController?.pushViewController(vc, animated: true)
     }
+    
     @objc private func togglePasswordVisibility() {
         passwordTextField.isSecureTextEntry.toggle()  // Переключаем видимость пароля
         let imageName = passwordTextField.isSecureTextEntry ? "eye.slash" : "eye"
@@ -231,6 +236,6 @@ class UserRegisterViewController: UIViewController {
         present(alert, animated: true)
     }
     @objc func backButtonTapped(){
-        navigationController?.popViewController(animated: true)
+        navigationController?.pushViewController(ClientChoiceViewController(), animated: true)
     }
 }

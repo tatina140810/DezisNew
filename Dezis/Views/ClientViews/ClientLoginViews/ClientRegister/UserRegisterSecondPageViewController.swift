@@ -163,10 +163,14 @@ class UserRegisterSecondPageViewController: UIViewController, IUserRegisterSecon
         }
     }
     @objc func attributedTextTapped() {
+        let vc = PrivacyPage()
+        navigationController?.pushViewController(vc, animated: true)
         print("Условием продажи")
     }
     @objc func attributedPrivaciTextTapped() {
         print("Положения о конфиденциальности")
+        let vc = ConfidantionalyPage()
+        navigationController?.pushViewController(vc, animated: true)
     }
    
     @objc private func nextButtonTapped() {
