@@ -61,6 +61,8 @@
 		AF5146212CC652C8000D9C97 /* UserRegisterPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5146202CC652C8000D9C97 /* UserRegisterPresenter.swift */; };
 		AF5146272CCA9B31000D9C97 /* CalendarViewControllerPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5146262CCA9B31000D9C97 /* CalendarViewControllerPresenter.swift */; };
 		AF51464D2CCD750D000D9C97 /* ClientLogInPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF51464C2CCD750D000D9C97 /* ClientLogInPresenter.swift */; };
+		AF5146892CD0B509000D9C97 /* ConfidantionalyPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5146882CD0B509000D9C97 /* ConfidantionalyPage.swift */; };
+		AF51468B2CD0B522000D9C97 /* PrivacyPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF51468A2CD0B522000D9C97 /* PrivacyPage.swift */; };
 		AF74D5502CA7C97B00B64D6E /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF74D54F2CA7C97B00B64D6E /* KeychainManager.swift */; };
 		AF74D5522CA7EB3200B64D6E /* UserRegisterSecondPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF74D5512CA7EB3200B64D6E /* UserRegisterSecondPageViewController.swift */; };
 		AF74D5562CAACEAC00B64D6E /* FirstStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF74D5552CAACEAC00B64D6E /* FirstStackView.swift */; };
@@ -150,9 +152,10 @@
 		AF5146192CC64A91000D9C97 /* UserAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAPI.swift; sourceTree = "<group>"; };
 		AF51461A2CC64A91000D9C97 /* UserNetworkService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserNetworkService.swift; sourceTree = "<group>"; };
 		AF5146202CC652C8000D9C97 /* UserRegisterPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserRegisterPresenter.swift; sourceTree = "<group>"; };
-		AF5146242CC77BBC000D9C97 /* LoginPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPresenter.swift; sourceTree = "<group>"; };
 		AF5146262CCA9B31000D9C97 /* CalendarViewControllerPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewControllerPresenter.swift; sourceTree = "<group>"; };
 		AF51464C2CCD750D000D9C97 /* ClientLogInPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientLogInPresenter.swift; sourceTree = "<group>"; };
+		AF5146882CD0B509000D9C97 /* ConfidantionalyPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfidantionalyPage.swift; sourceTree = "<group>"; };
+		AF51468A2CD0B522000D9C97 /* PrivacyPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPage.swift; sourceTree = "<group>"; };
 		AF74D54F2CA7C97B00B64D6E /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
 		AF74D5512CA7EB3200B64D6E /* UserRegisterSecondPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRegisterSecondPageViewController.swift; sourceTree = "<group>"; };
 		AF74D5552CAACEAC00B64D6E /* FirstStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstStackView.swift; sourceTree = "<group>"; };
@@ -492,6 +495,8 @@
 				AFF6188A2CBBA3E700C64C95 /* EntryAllowedViewController.swift */,
 				AFF6188C2CBBA52600C64C95 /* EntryDeniedViewController.swift */,
 				AF4B1E272CA0729300FDA3EC /* ServerErrorViewController.swift */,
+				AF5146882CD0B509000D9C97 /* ConfidantionalyPage.swift */,
+				AF51468A2CD0B522000D9C97 /* PrivacyPage.swift */,
 			);
 			path = GeneralViews;
 			sourceTree = "<group>";
@@ -512,7 +517,6 @@
 			children = (
 				AF4B1DF42C9B28ED00FDA3EC /* ClientLoginViewController.swift */,
 				AF51464C2CCD750D000D9C97 /* ClientLogInPresenter.swift */,
-				AF5146242CC77BBC000D9C97 /* LoginPresenter.swift */,
 			);
 			path = ClientLogIn;
 			sourceTree = "<group>";
@@ -748,6 +752,7 @@
 				AF74D5792CB1171700B64D6E /* SecondOnboardingViewController.swift in Sources */,
 				AF5146272CCA9B31000D9C97 /* CalendarViewControllerPresenter.swift in Sources */,
 				72D39BA32CB15F7D00D9EB45 /* RequestsCollectionViewCell.swift in Sources */,
+				AF51468B2CD0B522000D9C97 /* PrivacyPage.swift in Sources */,
 				72ABD5A62CC91592004E18E9 /* CustomAlertView.swift in Sources */,
 				AF51461D2CC64A91000D9C97 /* UserAPI.swift in Sources */,
 				AF4B1E0D2C9D9B3500FDA3EC /* ClientTabBarController.swift in Sources */,
@@ -768,6 +773,7 @@
 				AF3EDD0F2CB4696E00CAF1FE /* ClientChoiceViewController.swift in Sources */,
 				AF51461C2CC64A91000D9C97 /* TokenRefresh.swift in Sources */,
 				AF4B1E022C9C17BA00FDA3EC /* EndPoint.swift in Sources */,
+				AF5146892CD0B509000D9C97 /* ConfidantionalyPage.swift in Sources */,
 				AFF618852CB85E2100C64C95 /* CellForChat.swift in Sources */,
 				AFF618832CB82FA000C64C95 /* ClientHistoryViewController.swift in Sources */,
 				72D39B9E2CB1566800D9EB45 /* AdminHistoryView.swift in Sources */,
