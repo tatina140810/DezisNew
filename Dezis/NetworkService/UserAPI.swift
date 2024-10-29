@@ -45,7 +45,7 @@ extension UserApi: TargetType {
     
     var task: Task {
         switch self {
-        case .getToken(let username, let password):
+        case .getToken(let email, let password):
             return .requestParameters(parameters: ["email": email, "password": password], encoding: JSONEncoding.default)
         case .refreshToken(let refreshToken):
             return .requestParameters(parameters: ["refresh": refreshToken], encoding: JSONEncoding.default)

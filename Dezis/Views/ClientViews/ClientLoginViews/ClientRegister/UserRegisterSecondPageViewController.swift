@@ -199,6 +199,7 @@ class UserRegisterSecondPageViewController: UIViewController, IUserRegisterSecon
             apartmentNumberTextField.layer.borderWidth = 1.0
             
             return
+           
         }
         
         if var userInfo = presenter?.getUserInfo(){
@@ -217,12 +218,13 @@ class UserRegisterSecondPageViewController: UIViewController, IUserRegisterSecon
                 }
             }
         }
+        let vc = СonfirmationСodeViewController()
+        navigationController?.pushViewController(vc, animated: true)
     }
 
     @objc private func backButtonTapped() {
-        let vc = UINavigationController(rootViewController: UserRegisterViewController())
-        vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: true, completion: nil)
+        let vc = UserRegisterViewController()
+        navigationController?.pushViewController(vc, animated: true)
     }
     
 
