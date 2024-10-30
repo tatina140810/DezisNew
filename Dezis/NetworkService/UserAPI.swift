@@ -11,7 +11,7 @@ enum UserApi {
 
 extension UserApi: TargetType {
     
-    var baseURL: URL { URL(string: "https://dezis.pp.ua/")! }
+    var baseURL: URL { URL(string: "https://dezis.pp.ua")! }
     
     var path: String {
         switch self {
@@ -68,18 +68,24 @@ extension UserApi: TargetType {
     }
     
     var headers: [String : String]? {
-            let token = KeychainService().accessToken
-            switch self {
-            case .getToken, .refreshToken, .userRegister, .userLogin, .booking:
-                return ["Content-Type": "application/json"]
-                
-            case .news:
-                
-                if !token.isEmpty {
-                    return ["Authorization": "Bearer\(token)", "Content-Type": "application/json"]
-                } else {
-                    return nil
+//            let token = KeychainService().accessToken
+//            switch self {
+//            case .getToken, .refreshToken, .userRegister, .userLogin:
+            return ["Content-Type": "application/json"]
                 }
+                
+//            case .news:
+//                
+//                if !token.isEmpty {
+//                    return ["Authorization": "Bearer\(token)", "Content-Type": "application/json"]
+//                } else {
+//                    return nil
+//                }
+//        }
+//            case .booking:
+//                return ["Content-Type": "application/json"]
+//            }
+    var sampleData: Data {
+            return Data()
         }
-    }
 }

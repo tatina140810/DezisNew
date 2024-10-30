@@ -1,4 +1,5 @@
 import UIKit
+import Moya
 
 struct UserLoginInfo{
     
@@ -7,14 +8,20 @@ struct UserLoginInfo{
 }
 
 protocol IClientLoginViewController {
-    func loginSuccess()
-    func loginFailed(error: String)
+    func loginFailed(error: Error)
 }
 
-class ClientLoginViewController: UIViewController, UITextFieldDelegate, IClientLoginViewController{
+class ClientLoginViewController: UIViewController, UITextFieldDelegate, IClientLoginViewController {
     
-    var presenter: IClienLogInPresenter?
+    func loginFailed(error: Error) {
+        let errorMessage = error.localizedDescription
+        print("Ошибка входа: \(errorMessage)")
+        displayError(errorMessage)
+    }
     
+    var presenter: IClientLoginPresenter?
+    
+    let network = UserNetworkService()
     private var titleLabel: UILabel = {
         let view = UILabel()
         view.text = "Вход"
@@ -86,6 +93,7 @@ class ClientLoginViewController: UIViewController, UITextFieldDelegate, IClientL
         createAttributedText()
         createPrivaciAttributedText()
         backButtonSetup()
+        presenter = ClientLoginPresenter(view: self)
     }
     
     private func backButtonSetup(){
@@ -208,11 +216,22 @@ class ClientLoginViewController: UIViewController, UITextFieldDelegate, IClientL
         
         emailTextField.text = email
         passwordTextField.text = password
-        presenter?.loginUser(userLoginInfo: UserLoginInfo(email: email, password: password))
-         print ("Button tapped")
+       
+        presenter?.loginUser(email: email, password: password) { [weak self] result in
+                DispatchQueue.main.async {
+                    switch result {
+                    case .success(let message):
+                        print("Login successful: \(message)")
+                        self?.loginSuccess()
+                    case .failure(let error):
+                        print("Login failed: \(error)")
+                        self?.loginFailed(error: error)
+                    }
+                }
+            }
         
     }
-    
+  
     func isValidEmail(_ email: String) -> Bool {
         let emailRegex = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}$"
         let emailPredicate = NSPredicate(format: "SELF MATCHES %@", emailRegex)
