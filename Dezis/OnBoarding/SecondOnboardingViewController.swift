@@ -37,13 +37,7 @@ class SecondOnboardingViewController: UIViewController {
     }
     
     private func setupUI(){
-        view.addSubview(ellipsImage)
-        ellipsImage.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(68)
-            make.leading.trailing.equalToSuperview()
-            make.height.equalTo(563)
-        }
-       
+        
         view.addSubview(skipButton)
         skipButton.snp.makeConstraints{make in
             make.bottom.equalToSuperview().offset(-51)
@@ -58,6 +52,13 @@ class SecondOnboardingViewController: UIViewController {
             make.leading.equalToSuperview().offset(20)
             make.trailing.equalToSuperview().inset(20)
         }
+        view.addSubview(ellipsImage)
+        ellipsImage.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(68)
+            make.leading.trailing.equalToSuperview()
+            make.bottom.equalTo(nextButton.snp.top).offset(-20)
+        }
+       
         view.addSubview(exterminatorImage)
         exterminatorImage.snp.makeConstraints { make in
             make.bottom.equalTo(nextButton.snp.top).offset(-24)

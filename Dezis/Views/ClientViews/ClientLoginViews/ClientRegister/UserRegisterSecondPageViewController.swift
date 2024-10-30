@@ -216,6 +216,7 @@ class UserRegisterSecondPageViewController: UIViewController, IUserRegisterSecon
                             }
                         } else {
                             print("Registration failed.")
+                           
                         }
                     }
                 }
