@@ -207,20 +207,20 @@ class UserRegisterSecondPageViewController: UIViewController, IUserRegisterSecon
             userInfo.apartmentNumber = apartmentNumber
             print(userInfo)
             
-            presenter?.registerUser(userInfo: userInfo) {[weak self] success in
-                if success {
-                    DispatchQueue.main.async {
-                        let vc = СonfirmationСodeViewController()
-                        self?.navigationController?.pushViewController(vc, animated: true)
+            let email = userInfo.email
+                    presenter?.registerUser(userInfo: userInfo) { [weak self] success in
+                        if success {
+                            DispatchQueue.main.async {
+                                let vc = СonfirmationСodeViewController(email: email)
+                                self?.navigationController?.pushViewController(vc, animated: true)
+                            }
+                        } else {
+                            print("Registration failed.")
+                        }
                     }
-                } else {
-                    print("Registration failed.")
                 }
             }
-        }
-        let vc = СonfirmationСodeViewController()
-        navigationController?.pushViewController(vc, animated: true)
-    }
+        
 
     @objc private func backButtonTapped() {
         let vc = UserRegisterViewController()

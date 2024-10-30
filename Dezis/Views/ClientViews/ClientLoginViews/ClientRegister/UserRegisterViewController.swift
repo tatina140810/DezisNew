@@ -1,7 +1,9 @@
 import UIKit
 import SnapKit
 
+
 class UserRegisterViewController: UIViewController {
+   
     
     private var titleLabel: UILabel = {
         let label = UILabel()
@@ -125,6 +127,8 @@ class UserRegisterViewController: UIViewController {
         }
         
         view.addSubview(passwordTextField)
+        passwordTextField.passwordRules = nil
+        passwordTextField.textContentType = .none
         passwordTextField.isSecureTextEntry = true
         passwordTextField.snp.makeConstraints { make in
             make.top.equalTo(emailTextField.snp.bottom).offset(24)
@@ -228,6 +232,10 @@ class UserRegisterViewController: UIViewController {
         let vc = UserRegisterBuilder.build(userinfo: userInfo)
         navigationController?.pushViewController(vc, animated: true)
     }
+    func sendEmail(email: String) {
+        var email = emailTextField.text
+    }
+    
     
     
     private func showAlert(message: String) {
@@ -239,3 +247,4 @@ class UserRegisterViewController: UIViewController {
         navigationController?.pushViewController(ClientChoiceViewController(), animated: true)
     }
 }
+

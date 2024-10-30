@@ -1,13 +1,32 @@
-//
-//  СonfirmationСodeViewController.swift
-//  Dezis
-//
-//  Created by Tatina Dzhakypbekova on 19/9/24.
-//
 
 import UIKit
 
-class СonfirmationСodeViewController: UIViewController {
+struct UserVerify{
+    
+    var email: String
+    var otp: String
+}
+
+protocol IСonfirmationСodeViewController {
+    func loginFailed(error: Error)
+}
+
+
+class СonfirmationСodeViewController: UIViewController, IСonfirmationСodeViewController {
+    
+    var presenter: IСonfirmationСodePresenter?
+    var email: String
+    
+        init(email: String) {
+            self.email = email
+            super.init(nibName: nil, bundle: nil)
+        }
+        
+        required init?(coder: NSCoder) {
+            fatalError("init(coder:) has not been implemented")
+        }
+        
+    
     
     private var codeLabel: UILabel = {
         let view = UILabel()
@@ -26,7 +45,7 @@ class СonfirmationСodeViewController: UIViewController {
     }()
     
     
-    private var codeTextField = TextFieldSettings().textFieldMaker(placeholder: "Код:", backgroundColor: UIColor(hex: "#2B373E"))
+    private var otpTextField = TextFieldSettings().textFieldMaker(placeholder: "Код:", backgroundColor: UIColor(hex: "#2B373E"))
    
     private lazy var newCodeButton: UIButton = {
         let button = UIButton()
@@ -36,11 +55,20 @@ class СonfirmationСodeViewController: UIViewController {
         button.addTarget(self, action: #selector(newCodeButtonTapped), for: .touchUpInside)
         return button
     }()
+    private var errorMasageLabel: UILabel = {
+        let view = UILabel()
+        view.text = "Код введен неверно"
+        view.font = UIFont(name: "SFProDisplay-Regular", size: 12)
+        view.textColor = .red
+        view.isHidden = true
+        return view
+    }()
     private var oneMinuteLabel: UILabel = {
         let view = UILabel()
         view.text = "через 1 минуту"
         view.font = UIFont(name: "SFProDisplay-Regular", size: 12)
         view.textColor = .white
+        view.isHidden = false
         return view
     }()
     
@@ -81,6 +109,7 @@ class СonfirmationСodeViewController: UIViewController {
         createAttributedText()
         createPrivaciAttributedText()
         backButtonSetup()
+        presenter = СonfirmationСodePresenter(view: self)
     }
     private func backButtonSetup(){
         let backButton = UIBarButtonItem(title: "Назад", style: .plain, target: self, action: #selector(backButtonTapped))
@@ -101,15 +130,20 @@ class СonfirmationСodeViewController: UIViewController {
             make.top.equalTo(codeLabel.snp.bottom).offset(12)
             make.centerX.equalToSuperview()
         }
-        view.addSubview(codeTextField)
-        codeTextField.snp.makeConstraints {make in
+        view.addSubview(otpTextField)
+        otpTextField.snp.makeConstraints {make in
             make.top.equalTo(confirmationLabel.snp.bottom).offset(24)
             make.leading.trailing.equalToSuperview().inset(20)
             make.height.equalTo(50)
         }
         view.addSubview(newCodeButton)
         newCodeButton.snp.makeConstraints {make in
-            make.top.equalTo(codeTextField.snp.bottom).offset(5)
+            make.top.equalTo(otpTextField.snp.bottom).offset(5)
+            make.leading.equalToSuperview().offset(16)
+        }
+        view.addSubview(errorMasageLabel)
+        errorMasageLabel.snp.makeConstraints {make in
+            make.top.equalTo(otpTextField.snp.bottom).offset(10)
             make.leading.equalToSuperview().offset(16)
         }
         view.addSubview(oneMinuteLabel)
@@ -157,6 +191,21 @@ class СonfirmationСodeViewController: UIViewController {
             action: #selector(attributedPrivaciTextTapped)
         )
     }
+    func loginSuccess() {
+        print("Успешный вход")
+        navigationController?.pushViewController(EntryAllowedViewController(), animated: true)
+    }
+    func loginFailed(error: Error) {
+        let errorMessage = error.localizedDescription
+        print("Ошибка входа: \(errorMessage)")
+        displayError(errorMessage)
+    }
+    private func displayError(_ message: String) {
+        errorMasageLabel.text = message
+        errorMasageLabel.isHidden = false
+        oneMinuteLabel.isHidden = true
+        newCodeButton.isHidden = true
+    }
     @objc func newCodeButtonTapped() {
         print("New code Button")
     }
@@ -167,11 +216,37 @@ class СonfirmationСodeViewController: UIViewController {
         print("Положения о конфиденциальности")
     }
     @objc func nextButtonTapped(){
-        let vc = EntryAllowedViewController()
-        navigationController?.pushViewController(vc, animated: true)
-    }
+            print("Переданный email: \(email)")
+
+            guard let otp = otpTextField.text, !otp.isEmpty else {
+                let redPlaceholderAttributes = [NSAttributedString.Key.foregroundColor: UIColor.red]
+                
+                otpTextField.attributedPlaceholder = NSAttributedString(
+                    string: "Введите еще раз",
+                    attributes: redPlaceholderAttributes
+                )
+                otpTextField.layer.borderColor = UIColor.red.cgColor
+                otpTextField.layer.borderWidth = 1.0
+                return
+            }
+            
+         
+        presenter?.verifyUser(email: email, otp: otp) { [weak self] result in
+                DispatchQueue.main.async {
+                    switch result {
+                    case .success(let message):
+                        print("Login successful: \(message)")
+                        self?.loginSuccess()
+                    case .failure(let error):
+                        print("Login failed: \(error)")
+                        self?.loginFailed(error: error)
+                    }
+                }
+            }
+        }
+
     @objc private func backButtonTapped() {
         let vc = UserRegisterSecondPageViewController()
-        navigationController?.pushViewController(vc, animated: true)
+        navigationController?.popViewController(animated: true)
     }
 }
