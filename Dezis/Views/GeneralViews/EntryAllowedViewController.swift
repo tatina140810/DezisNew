@@ -29,6 +29,7 @@ class EntryAllowedViewController: UIViewController {
            super.viewDidLoad()
            view.backgroundColor = UIColor(hex: "#1B2228")
            setupUI()
+           navigationController?.navigationBar.isHidden = true
            DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) { [weak self] in
                       self?.loadNextViewController()
                   }

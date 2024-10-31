@@ -100,7 +100,10 @@ class ClientHomeViewController: UIViewController {
         view.backgroundColor = UIColor(hex: "#1B2228")
         setupAddTarget()
         setupUI()
+       
+        
     }
+  
     private func setupAddTarget() {
         deratizationDetailsButton.addTarget(self, action: #selector(deratizationButtonTapped), for: .touchUpInside)
         dezinfectionDetailsButton.addTarget(self, action: #selector(dezinfectionButtonTapped), for: .touchUpInside)
@@ -198,11 +201,13 @@ class ClientHomeViewController: UIViewController {
   
         let vc = DezinfectionViewController()
         vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: true, completion: nil)    }
+        present(vc, animated: true, completion: nil)   
+    }
     @objc func deratizationButtonTapped(){
        
         let vc = DeratizationViewController()
         vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: true, completion: nil)    }
+        present(vc, animated: true, completion: nil)  
+    }
 }
 

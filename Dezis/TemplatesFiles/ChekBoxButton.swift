@@ -2,8 +2,8 @@ import UIKit
 
 class CheckboxButton: UIButton {
    
-    let checkedImage = UIImage(systemName: "checkmark.square.fill")
-    let uncheckedImage = UIImage(systemName: "square.fill")
+    let checkedImage = UIImage(resource: .activeChechBox)
+    let uncheckedImage = UIImage(resource: .inactiveChechBox)
 
     
     var isChecked = false {

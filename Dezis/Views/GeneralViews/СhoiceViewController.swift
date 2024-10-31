@@ -10,7 +10,7 @@ class ChoiceViewController: UIViewController {
         return image
     }()
     
-    private lazy var userButton = ButtonSettings().buttonMaker(title: "Пользователь", target: self, action: #selector(consumerButtonTapped))
+    private lazy var userButton = ButtonSettings().buttonMaker(title: "Пользователь", target: self, action: #selector(userButtonTapped))
     
     private lazy var userButtonDescriptionLabel: UILabel = {
         let label = UILabel()
@@ -41,20 +41,46 @@ class ChoiceViewController: UIViewController {
     }
 
     func setupReachability(){
-        reachability.whenUnreachable = { _ in
-            DispatchQueue.main.async{
-                self.showNoInternetAlert(message: "Нет соединения с интернетом", secondMessage: "Проверьте подключение к интернету")
-            }
-        }
+        reachability.whenUnreachable = { [weak self] _ in
+               DispatchQueue.main.async {
+                   self?.handleNoInternetConnection()
+               }
+           }
+           
+           reachability.whenReachable = { [weak self] _ in
+               DispatchQueue.main.async {
+                   self?.handleInternetConnectionRestored()
+               }
+           }
         do {
             try reachability.startNotifier()
         } catch {
             print("Unable to start notifier!")
         }
     }
-    func showNoInternetAlert(message: String, secondMessage: String) {
+    var originalNavigationBarAppearance: UINavigationBarAppearance?
+    var originalTabBarAppearance: UITabBarAppearance?
     
+    func showNoInternetAlert(message: String, secondMessage: String) {
+        // Сохраняем оригинальные настройки (только при первом вызове)
+        if originalNavigationBarAppearance == nil, originalTabBarAppearance == nil {
+            originalNavigationBarAppearance = UINavigationBar.appearance().standardAppearance
+            originalTabBarAppearance = UITabBar.appearance().standardAppearance
+        }
         
+        // Устанавливаем временные настройки с прозрачным фоном
+        let temporaryNavigationBarAppearance = UINavigationBarAppearance()
+        temporaryNavigationBarAppearance.configureWithTransparentBackground()
+        UINavigationBar.appearance().standardAppearance = temporaryNavigationBarAppearance
+        UINavigationBar.appearance().compactAppearance = temporaryNavigationBarAppearance
+        UINavigationBar.appearance().scrollEdgeAppearance = temporaryNavigationBarAppearance
+        
+        let temporaryTabBarAppearance = UITabBarAppearance()
+        temporaryTabBarAppearance.configureWithTransparentBackground()
+        UITabBar.appearance().standardAppearance = temporaryTabBarAppearance
+        UITabBar.appearance().scrollEdgeAppearance = temporaryTabBarAppearance
+
+        // Создание и показ алерта
         let alertView = UIView()
         alertView.backgroundColor = UIColor(hex: "#0A84FF")
        
@@ -81,28 +107,34 @@ class ChoiceViewController: UIViewController {
             make.centerX.equalTo(alertView)
         }
         
-        
-        
-      view.addSubview(alertView)
-        
-        alertView.frame = CGRect(x: 0, y: -107, width: view.frame.width , height: 107)
-        
+        view.addSubview(alertView)
+        alertView.frame = CGRect(x: 0, y: -107, width: view.frame.width, height: 107)
         
         UIView.animate(withDuration: 0.5, animations: {
             alertView.frame.origin.y = 0
         }) { _ in
-            
             UIView.animate(withDuration: 0.5, delay: 3, options: [], animations: {
                 alertView.frame.origin.y = -107
             }) { _ in
                 alertView.removeFromSuperview()
+                
+                // Восстанавливаем оригинальные настройки после скрытия алерта
+                if let originalNavigationBarAppearance = self.originalNavigationBarAppearance,
+                   let originalTabBarAppearance = self.originalTabBarAppearance {
+                    UINavigationBar.appearance().standardAppearance = originalNavigationBarAppearance
+                    UINavigationBar.appearance().compactAppearance = originalNavigationBarAppearance
+                    UINavigationBar.appearance().scrollEdgeAppearance = originalNavigationBarAppearance
+                    
+                    UITabBar.appearance().standardAppearance = originalTabBarAppearance
+                    UITabBar.appearance().scrollEdgeAppearance = originalTabBarAppearance
+                }
             }
         }
     }
     
-    @objc func showAlertButtonTapped() {
-        showNoInternetAlert(message: "Нет соединения с интернетом", secondMessage: "Проверьте подключение к интернету")
-    }
+//    @objc func showAlertButtonTapped() {
+//        showNoInternetAlert(message: "Нет соединения с интернетом", secondMessage: "Проверьте подключение к интернету")
+//    }
     private func setupUI(){
         
         view.addSubview(logoImage)
@@ -143,7 +175,18 @@ class ChoiceViewController: UIViewController {
         }
        
     }
-    @objc func consumerButtonTapped() {
+    private func handleNoInternetConnection() {
+        showNoInternetAlert(message: "Нет соединения с интернетом", secondMessage: "Проверьте подключение к интернету")
+        userButton.isEnabled = false
+        adminButton.isEnabled = false
+    }
+
+
+    private func handleInternetConnectionRestored() {
+        userButton.isEnabled = true
+        adminButton.isEnabled = true
+    }
+    @objc func userButtonTapped() {
         let vc = ClientChoiceViewController()
         navigationController?.pushViewController(vc, animated: true)
     }
