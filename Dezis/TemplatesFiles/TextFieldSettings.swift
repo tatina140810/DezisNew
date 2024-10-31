@@ -4,7 +4,7 @@ class TextFieldSettings: UITextField {
     
     func textFieldMaker(
         placeholder: String,
-        placeholderColor: UIColor = .white,
+        placeholderColor: UIColor = .lightGray,
         backgroundColor: UIColor = UIColor(hex: "#F6F6F7"),
         textColor: UIColor = .white,
         cornerRadius: CGFloat = 8,

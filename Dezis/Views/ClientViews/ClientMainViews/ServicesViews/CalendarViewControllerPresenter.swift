@@ -19,14 +19,14 @@ class CalendarViewControllerPresenter: ICalendarPresenter {
     }
     
     func booking(bookingInfo: BookingInfo) {
-        userNetworkService.booking(service: bookingInfo.service, date: bookingInfo.date, time: bookingInfo.time) { result in
-            switch result {
-                case .success(let success):
-                    print(success)
-                case .failure(let failure):
-                    print(failure)
-            }
-        }
+//        userNetworkService.booking(service: bookingInfo.service, date: bookingInfo.date, time: bookingInfo.time) { result in
+//            switch result {
+//                case .success(let success):
+//                    print(success)
+//                case .failure(let failure):
+//                    print(failure)
+//            }
+//        }
     }
     
     func bookingRequest() -> BookingInfo? {

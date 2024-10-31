@@ -63,6 +63,7 @@
 		AF51464D2CCD750D000D9C97 /* ClientLogInPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF51464C2CCD750D000D9C97 /* ClientLogInPresenter.swift */; };
 		AF5146892CD0B509000D9C97 /* ConfidantionalyPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5146882CD0B509000D9C97 /* ConfidantionalyPage.swift */; };
 		AF51468B2CD0B522000D9C97 /* PrivacyPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF51468A2CD0B522000D9C97 /* PrivacyPage.swift */; };
+		AF51468D2CD297BC000D9C97 /* СonfirmationСodePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF51468C2CD297BC000D9C97 /* СonfirmationСodePresenter.swift */; };
 		AF74D5502CA7C97B00B64D6E /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF74D54F2CA7C97B00B64D6E /* KeychainManager.swift */; };
 		AF74D5522CA7EB3200B64D6E /* UserRegisterSecondPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF74D5512CA7EB3200B64D6E /* UserRegisterSecondPageViewController.swift */; };
 		AF74D5562CAACEAC00B64D6E /* FirstStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF74D5552CAACEAC00B64D6E /* FirstStackView.swift */; };
@@ -156,6 +157,7 @@
 		AF51464C2CCD750D000D9C97 /* ClientLogInPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientLogInPresenter.swift; sourceTree = "<group>"; };
 		AF5146882CD0B509000D9C97 /* ConfidantionalyPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfidantionalyPage.swift; sourceTree = "<group>"; };
 		AF51468A2CD0B522000D9C97 /* PrivacyPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPage.swift; sourceTree = "<group>"; };
+		AF51468C2CD297BC000D9C97 /* СonfirmationСodePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "СonfirmationСodePresenter.swift"; sourceTree = "<group>"; };
 		AF74D54F2CA7C97B00B64D6E /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
 		AF74D5512CA7EB3200B64D6E /* UserRegisterSecondPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRegisterSecondPageViewController.swift; sourceTree = "<group>"; };
 		AF74D5552CAACEAC00B64D6E /* FirstStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstStackView.swift; sourceTree = "<group>"; };
@@ -506,8 +508,9 @@
 			children = (
 				AF4B1DFA2C9B42D300FDA3EC /* UserRegisterViewController.swift */,
 				AF74D5512CA7EB3200B64D6E /* UserRegisterSecondPageViewController.swift */,
-				AF4B1DFC2C9B52AE00FDA3EC /* СonfirmationСodeViewController.swift */,
 				AF5146202CC652C8000D9C97 /* UserRegisterPresenter.swift */,
+				AF4B1DFC2C9B52AE00FDA3EC /* СonfirmationСodeViewController.swift */,
+				AF51468C2CD297BC000D9C97 /* СonfirmationСodePresenter.swift */,
 			);
 			path = ClientRegister;
 			sourceTree = "<group>";
@@ -763,6 +766,7 @@
 				AF4B1E1B2CA0222A00FDA3EC /* ButtonSettings.swift in Sources */,
 				AF74D5C42CB41F6600B64D6E /* СhoiceViewController.swift in Sources */,
 				AF74D55E2CAB1E5400B64D6E /* GradientLayer.swift in Sources */,
+				AF51468D2CD297BC000D9C97 /* СonfirmationСodePresenter.swift in Sources */,
 				AFF6187C2CB69D5200C64C95 /* DezinfectionViewController.swift in Sources */,
 				AF74D5502CA7C97B00B64D6E /* KeychainManager.swift in Sources */,
 				72ABD5AC2CC97EF9004E18E9 /* AdminRequestPresenter.swift in Sources */,

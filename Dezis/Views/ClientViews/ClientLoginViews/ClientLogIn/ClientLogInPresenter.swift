@@ -1,57 +1,32 @@
-import Foundation
 import UIKit
 
-protocol IClienLogInPresenter: AnyObject {
-    func getLoginInfo() -> UserLoginInfo?
-
-    func loginUser(userLoginInfo: UserLoginInfo)
-
-}
-enum LoginError: Error {
-    case invalidCredentials
-    case serverError(message: String)
+protocol IClientLoginPresenter: AnyObject {
+    func loginUser(email: String, password: String, completion: @escaping (Result<String, Error>) -> Void)
 }
 
 
-class ClientLogInPresenter: IClienLogInPresenter {
-  var view: IClientLoginViewController?
-
-    let userRegisterNetworkService = UserNetworkService()
-
-    var userLoginInfo: UserLoginInfo? = UserLoginInfo(email: "", password: "")
-
-    func getLoginInfo() -> UserLoginInfo? {
-        return userLoginInfo
+class ClientLoginPresenter: IClientLoginPresenter {
+    let networkService = UserNetworkService()
+    
+    private var view: IClientLoginViewController?
+    
+    init(view: IClientLoginViewController) {
+        self.view = view
     }
-
-    func loginUser(userLoginInfo: UserLoginInfo) {
-           userRegisterNetworkService.userLogin(email: userLoginInfo.email, password: userLoginInfo.password) { [weak self] result in
+    
+    func loginUser(email: String, password: String, completion: @escaping (Result<String, Error>) -> Void) {
+           networkService.userLogin(email: email, password: password) { result in
                switch result {
                case .success(let response):
+                   print("Успешный логин: \(response.detail)")
                    DispatchQueue.main.async {
-                       print("Успешный вход: \(response)")
-                       self?.view?.loginSuccess()
+                       completion(.success(response.detail))
                    }
-                case .failure(let error):
+               case .failure(let error):
                    DispatchQueue.main.async {
-                                      self?.view?.loginFailed(error: error.localizedDescription)
-                                  }
-                    
-                    if var loginError = error as? LoginError {
-                        switch loginError {
-                        case .invalidCredentials:
-                            print("Неправильный пароль или email.")
-                            self?.view?.loginFailed(error: "Неправильный пароль или email.")
-                        case .serverError(let message):
-                            print("Ошибка сервера: \(message)")
-                            self?.view?.loginFailed(error: "Ошибка сервера: \(message)")
-                        }
-                    } else {
-                        // Обработка ошибок, не относящихся к LoginError
-                        print("Неизвестная ошибка: \(error.localizedDescription)")
-                        self?.view?.loginFailed(error: "Неизвестная ошибка: \(error.localizedDescription)")
-                    }
-                }
-            }
-        }
-    }
+                       completion(.failure(error))
+                   }
+               }
+           }
+       }
+}

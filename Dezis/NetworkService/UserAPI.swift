@@ -1,8 +1,8 @@
 import Moya
 
 enum UserApi {
-    case news
     case userRegister(username: String, email: String, password: String, apartmentNumber: String, address: String)
+    case verifyUser(email: String, otp: String)
     case getToken(email: String, password: String)
     case userLogin(email: String, password: String)
     case refreshToken(refreshToken: String)
@@ -11,14 +11,14 @@ enum UserApi {
 
 extension UserApi: TargetType {
     
-    var baseURL: URL { URL(string: "https://dezis.pp.ua/")! }
+    var baseURL: URL { URL(string: "https://dezis.pp.ua")! }
     
     var path: String {
         switch self {
-        case .news:
-            return "/api/v1/news/"
         case .userRegister:
             return "/api/v1/user/register-user/"
+        case .verifyUser:
+            return "/api/v1/user/verify-user/"
         case .userLogin:
             return "/api/v1/user/login-user/"
         case .getToken:
@@ -32,9 +32,9 @@ extension UserApi: TargetType {
     
     var method: Moya.Method {
         switch self {
-        case .news:
-            return .get
         case .getToken, .refreshToken, .userRegister:
+            return .post
+        case .verifyUser:
             return .post
         case .userLogin:
             return .post
@@ -46,40 +46,56 @@ extension UserApi: TargetType {
     var task: Task {
         switch self {
         case .getToken(let email, let password):
-            return .requestParameters(parameters: ["email": email, "password": password], encoding: JSONEncoding.default)
+            return .requestParameters(parameters: ["email": email, 
+                                                   "password": password],
+                                      encoding: JSONEncoding.default)
         case .refreshToken(let refreshToken):
             return .requestParameters(parameters: ["refresh": refreshToken], encoding: JSONEncoding.default)
         case .userRegister(let username, let email, let password, let apartmentNumber, let address):
-            return .requestParameters(parameters: ["username": username, 
+            return .requestParameters(parameters: ["username": username,
                                                    "email": email,
                                                    "apartment_number": apartmentNumber,
                                                    "address": address,
                                                    "password": password],
                                       encoding: JSONEncoding.default)
+        case .verifyUser(let email, let otp):
+            return .requestParameters(parameters: ["email": email,
+                                                   "otp": otp],
+                                      encoding: JSONEncoding.default)
+            
         case .userLogin(let email, let password):
-            return .requestParameters(parameters: ["email": email, "password": password], encoding: JSONEncoding.default)
+            return .requestParameters(parameters: ["email": email,
+                                                   "password": password], 
+                                      encoding: JSONEncoding.default)
         case .booking(let service, let date, let time):
             return .requestParameters(parameters: ["service": service,
                                                    "date": date,
-                                                   "time": time], encoding: JSONEncoding.default)
+                                                   "time": time], 
+                                      encoding: JSONEncoding.default)
         default:
             return .requestPlain
         }
     }
     
     var headers: [String : String]? {
-            let token = KeychainService().accessToken
-            switch self {
-            case .getToken, .refreshToken, .userRegister, .userLogin, .booking:
-                return ["Content-Type": "application/json"]
-                
-            case .news:
-                
-                if !token.isEmpty {
-                    return ["Authorization": "Bearer\(token)", "Content-Type": "application/json"]
-                } else {
-                    return nil
+//            let token = KeychainService().accessToken
+//            switch self {
+//            case .getToken, .refreshToken, .userRegister, .userLogin:
+            return ["Content-Type": "application/json"]
                 }
+                
+//            case .news:
+//                
+//                if !token.isEmpty {
+//                    return ["Authorization": "Bearer\(token)", "Content-Type": "application/json"]
+//                } else {
+//                    return nil
+//                }
+//        }
+//            case .booking:
+//                return ["Content-Type": "application/json"]
+//            }
+    var sampleData: Data {
+            return Data()
         }
-    }
 }
