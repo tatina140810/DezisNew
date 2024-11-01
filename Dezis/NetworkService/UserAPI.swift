@@ -7,6 +7,7 @@ enum UserApi {
     case userLogin(email: String, password: String)
     case refreshToken(refreshToken: String)
     case booking (user: Int, service: String, date: String, time: String, is_completed: Bool)
+    case user (id: Int)
 }
 
 extension UserApi: TargetType {
@@ -27,6 +28,8 @@ extension UserApi: TargetType {
             return "/api/token/refresh/"
         case .booking:
             return "/api/v1/contact/booking/"
+        case.user(let id):
+            return "/api/v1/user/list-user/\(id)"
         }
     }
     
@@ -40,6 +43,8 @@ extension UserApi: TargetType {
             return .post
         case .booking:
             return .post
+        case .user:
+            return .get
         }
     }
     
@@ -69,12 +74,13 @@ extension UserApi: TargetType {
                                       encoding: JSONEncoding.default)
         case .booking(let user, let service, let date, let time, let is_completed):
             return .requestParameters(parameters: [ "user": user,
-                "service": service,
-                "date": date,
-                "time": time,
-                "is_completed": true
-              ],
-                                      encoding: JSONEncoding.default)
+                                                    "service": service,
+                                                    "date": date,
+                                                    "time": time,
+                                                    "is_completed": true
+                                                  ], encoding: JSONEncoding.default)
+        case .user(let id):
+            return .requestParameters(parameters: ["id": id], encoding: JSONEncoding.default)
         default:
             return .requestPlain
         }

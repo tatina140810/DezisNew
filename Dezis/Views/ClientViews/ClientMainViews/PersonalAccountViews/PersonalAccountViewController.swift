@@ -1,9 +1,16 @@
 import UIKit
 import SnapKit
 
-class PersonalAccountViewController: UIViewController {
+
+protocol PersonalAccountView: AnyObject {
+    func showUserData(user: UserProfile)
+    func showError(_ error: String)
+}
+
+class PersonalAccountViewController: UIViewController, PersonalAccountView {
     
     let imagePicker = ImagePicker()
+    var presenter: PersonalAccountPresenter?
     
     private lazy var userImage: UIImageView = {
         let image = UIImageView()
@@ -165,7 +172,25 @@ class PersonalAccountViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = UIColor(hex: "#1B2228")
         setupUI()
+        
+        presenter = PersonalAccountPresenter(view: self, userService: UserNetworkService())
+                presenter?.fetchUserData(userID: 40)
     }
+    func showUserData(user: UserProfile) {
+           nameTextField.text = user.name
+           emailTextField.text = user.email
+           phoneTextField.text = user.phone
+           
+           if let url = URL(string: user.avatarURL) {
+           }
+       }
+       
+    func showError(_ error: String) {
+        let alert = UIAlertController(title: "Error", message: error, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        present(alert, animated: true)
+    }
+       
     
     private func setupUI() {
         view.addSubview(userImage)

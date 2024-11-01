@@ -23,6 +23,13 @@ struct BookingLoginResponse: Decodable {
     let time: String
     let is_completed: Bool
 }
+struct UserProfile: Decodable {
+    let id: Int
+    let name: String
+    let email: String
+    let phone: String
+    let avatarURL: String
+}
 
 struct ErrorResponse: Codable {
     let message: String
@@ -150,4 +157,20 @@ func booking(user: Int, service: String, date: String, time: String, is_complete
         }
     }
 }
-}
+    func user(id: Int, completion: @escaping (Result<UserProfile, Error>) -> Void) {
+            provider.request(.user(id: id)) { result in
+                switch result {
+                case .success(let response):
+                    do {
+                        let user = try JSONDecoder().decode(UserProfile.self, from: response.data)
+                        completion(.success(user))
+                    } catch {
+                        completion(.failure(error))
+                    }
+                case .failure(let error):
+                    completion(.failure(error))
+                }
+            }
+        }
+    }
+

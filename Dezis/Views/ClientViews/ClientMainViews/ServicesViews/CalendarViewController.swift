@@ -29,6 +29,7 @@ class CalendarViewController: UIViewController, ICalendarViewController {
     private var date: String = ""
     private var time: String = ""
     private var service: String = ""
+
     
     private lazy var datePicker: UIDatePicker = {
         let picker = UIDatePicker()
@@ -208,18 +209,19 @@ class CalendarViewController: UIViewController, ICalendarViewController {
     }
     
     @objc func orderButtonTapped() {
-        // Create bookingInfo instance by calling bookingRequest() and updating necessary fields
         var bookingInfo = presenter?.bookingRequest()
+       
         bookingInfo?.service = service
         bookingInfo?.date = date
         bookingInfo?.time = time
+        
         if let bookingInfo = bookingInfo {
        
             presenter?.booking(bookingInfo: bookingInfo) { [weak self] result in
                 DispatchQueue.main.async {
                     switch result {
                     case .success:
-                        let vc = SuccessViewController()
+                        let vc = ViewControllerForAlert()
                         self?.navigationController?.pushViewController(vc, animated: true)
                     case .failure(let error):
                        
@@ -259,19 +261,29 @@ class CalendarViewController: UIViewController, ICalendarViewController {
 
     }
     @objc func firstCheckBoxTapped() {
-           service = "Дезинфекция"
-           print("Выбранный сервис: \(service)")
-       }
+            selectService(service: "Дезинфекция", selectedCheckBox: firstCheckBox)
+        }
 
-       @objc func secondCheckBoxTapped() {
-           service = "Дезинcекция"
-           print("Выбранный сервис: \(service)")
-       }
+        @objc func secondCheckBoxTapped() {
+            selectService(service: "Дезинcекция", selectedCheckBox: secondCheckBox)
+        }
 
-       @objc func thirdCheckBoxTapped() {
-           service = "Дератизация"
-           print("Выбранный сервис: \(service)")
-       }
+        @objc func thirdCheckBoxTapped() {
+            selectService(service: "Дератизация", selectedCheckBox: thirdCheckBox)
+        }
+        
+        private func selectService(service: String, selectedCheckBox: CheckboxButton) {
+            // Убираем отметку с других чекбоксов
+            firstCheckBox.isSelected = false
+            secondCheckBox.isSelected = false
+            thirdCheckBox.isSelected = false
+            
+            self.service = service
+            selectedCheckBox.isSelected = true
+            
+            print("Выбранная услуга: \(service)")
+        }
+
     
     func bookingRequestSuccessful() {
             print("Бронирование успешно выполнено")
