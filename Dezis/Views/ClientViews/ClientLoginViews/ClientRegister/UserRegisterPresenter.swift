@@ -26,6 +26,8 @@ class UserRegisterPresenter: IUserRegisterPresenters {
             switch result {
             case .success(let response):
                         print("Registration successful with response: \(response)")
+                        let id = response.id
+                print ("User id: \(id)")
                         completion(true)
                     case .failure(let error):
                         print("Registration failed with error: \(error.localizedDescription)")

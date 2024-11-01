@@ -3,6 +3,8 @@ import Moya
 
 struct UserRegisterResponse: Codable {
     let detail: String
+    let id: Int?
+    let email: String?
 }
 
 struct UserLoginResponse: Decodable {
@@ -12,6 +14,14 @@ struct UserLoginResponse: Decodable {
 struct UserVerifyResponse: Decodable {
     let detail: String
    
+}
+struct BookingLoginResponse: Decodable {
+    let id: Int
+    let user: Int
+    let service: String
+    let date: String
+    let time: String
+    let is_completed: Bool
 }
 
 struct ErrorResponse: Codable {
@@ -44,6 +54,8 @@ class UserNetworkService {
                     }
                     
                     let registerResponse = try JSONDecoder().decode(UserRegisterResponse.self, from: response.data)
+                    print("User ID: \(String(describing: registerResponse.id))")
+                    print("Email: \(String(describing: registerResponse.email))")
                     completion(.success(registerResponse))
                 } catch {
                     print("Ошибка декодирования: \(error)")
@@ -108,19 +120,34 @@ class UserNetworkService {
             }
         }
     }
+
+
+func booking(user: Int, service: String, date: String, time: String, is_completed: Bool, completion: @escaping (Result<BookingLoginResponse, Error>) -> Void) {
+    provider.request(.booking(user: user, service: service, date: date, time: time, is_completed: true)) { result in
+        switch result {
+        case .success(let response):
+            print("Response status code: \(response.statusCode)")
+            let jsonString = String(data: response.data, encoding: .utf8) ?? "Нет данных"
+            print("Полученные данные: \(jsonString)")
+            
+            do {
+                guard (200...299).contains(response.statusCode) else {
+                    let errorResponse = try JSONDecoder().decode(ErrorResponse.self, from: response.data)
+                    completion(.failure(NSError(domain: "", code: response.statusCode, userInfo: [NSLocalizedDescriptionKey: errorResponse.message])))
+                    return
+                }
+                
+                let userResponse = try JSONDecoder().decode(BookingLoginResponse.self, from: response.data)
+                completion(.success(userResponse))
+               
+            } catch {
+                print("Ошибка декодирования: \(error)")
+                completion(.failure(error))
+            }
+            
+        case .failure(let error):
+            completion(.failure(error))
+        }
+    }
 }
-
-//        func booking(service: String, date: String, time: String, completion: @escaping (Result<UserRegisterResponse, Error>) -> Void) {
-//            provider.request(.booking(service: service, date: date, time: time)) { result in
-//                switch result {
-//                case .success(let response):
-//                    completion(self.handleResponse(response, type: UserRegisterResponse.self))
-//                    
-//                case .failure(let error):
-//                    completion(.failure(error))
-//                }
-//            }
-//        }
-//    }
-
-
+}
