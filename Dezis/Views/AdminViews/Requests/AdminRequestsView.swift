@@ -7,11 +7,11 @@
 
 import UIKit
 
-protocol IAdminRequestView {
-
+protocol IAdminRequestView: AnyObject {
+    func reloadData()
 }
 
-class AdminRequestsView: UIViewController,IAdminRequestView {
+class AdminRequestsView: UIViewController, IAdminRequestView {
     
     private var presenter: IAdminRequestPresenter!
     
@@ -44,11 +44,20 @@ class AdminRequestsView: UIViewController,IAdminRequestView {
         super.viewDidLoad()
         view.backgroundColor = .init(hex: "#1B2228")
         setupUI()
+        
         requestsCollectionView.dataSource = self
         requestsCollectionView.register(
             RequestsCollectionViewCell.self,
             forCellWithReuseIdentifier: RequestsCollectionViewCell.reuseId
-        )
+            )
+        
+        presenter = AdminRequestPresenter(view: self)
+        presenter?.loadRequests()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
     }
     
     private func setupUI(){
@@ -69,23 +78,32 @@ class AdminRequestsView: UIViewController,IAdminRequestView {
             make.bottom.equalToSuperview().offset(-10)
         }
     }
+    
+    func reloadData() {
+        requestsCollectionView.reloadData()
+    }
 }
 
 extension AdminRequestsView: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
+        return presenter.numberOfRequests()
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RequestsCollectionViewCell.reuseId, for: indexPath) as! RequestsCollectionViewCell
         
-        cell.onConfirmTapped = {
-            self.confirmRequest(for: indexPath)
+        if let request = presenter.requestAt(indexPath.row) {
+            presenter.loadUserRequest(userId: request.id) { userInfo in
+                DispatchQueue.main.async {
+                    cell.fill(with: userInfo)
+                }
+            }
         }
-        cell.onDenyTapped = {
-            self.denyRequest(for: indexPath)
-        }
+        
+        cell.onConfirmTapped = { self.confirmRequest(for: indexPath) }
+        cell.onDenyTapped = { self.denyRequest(for: indexPath) }
+        
         return cell
     }
     

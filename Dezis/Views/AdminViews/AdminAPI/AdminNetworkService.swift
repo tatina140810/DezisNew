@@ -30,6 +30,15 @@ struct Order: Codable {
     let time: String
 }
 
+struct UserInformation: Codable {
+    let id: Int
+    let username: String?
+    let email: String?
+    let number: String?
+    let avatar: String?
+}
+
+
 class AdminNetworkService {
     
     private let provider = MoyaProvider<AdminApi>(requestClosure: { (endpoint, closure) in
@@ -43,8 +52,6 @@ class AdminNetworkService {
             switch result {
             case .success(let response):
                 print("Response status code: \(response.statusCode)")
-                let jsonString = String(data: response.data, encoding: .utf8) ?? "Нет данных"
-                print("Полученные данные: \(jsonString)")
                 
                 do {
                     guard (200...299).contains(response.statusCode) else {
@@ -59,9 +66,14 @@ class AdminNetworkService {
                     print("Ошибка декодирования: \(error)")
                     completion(.failure(error))
                 }
-
+                
             case .failure(let error):
+                print("Ошибка сети: \(error)")
+                if let response = error.response {
+                    print("Ответ сервера: \(String(data: response.data, encoding: .utf8) ?? "Нет данных")")
+                }
                 completion(.failure(error))
+                
             }
         }
     }
@@ -70,7 +82,6 @@ class AdminNetworkService {
         provider.request(.fetchOrders) { result in
             switch result {
             case .success(let response):
-                print("Response status code: \(response.statusCode)")
                 do {
                     let orders = try JSONDecoder().decode([Order].self, from: response.data)
                     completion(.success(orders))
@@ -78,10 +89,55 @@ class AdminNetworkService {
                     print("Ошибка декодирования: \(error)")
                     completion(.failure(error))
                 }
-                
             case .failure(let error):
+                print("Ошибка сети: \(error)")
                 completion(.failure(error))
             }
         }
     }
+    
+    func fetchUserDetails(userId: Int, completion: @escaping (Result<UserInformation, Error>) -> Void) {
+        provider.request(.fetchUserDetails(userId: userId)) { result in
+            switch result {
+            case .success(let response):
+                do {
+                    let users = try JSONDecoder().decode([UserInformation].self, from: response.data)
+                    
+                    if let userDetails = users.first(where: { $0.id == userId }) {
+                        completion(.success(userDetails))
+                    } else {
+                        
+                        completion(.failure(NSError(domain: "", code: 404, userInfo: [NSLocalizedDescriptionKey: "Пользователь не найден"])))
+                    }
+                } catch {
+                    print("Ошибка декодирования пользователя: \(error)")
+                    completion(.failure(error))
+                }
+            case .failure(let error):
+                print("Ошибка сети: \(error)")
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    func fetchRequests(completion: @escaping (Result<[UserInformation], Error>) -> Void) {
+        provider.request(.fetchRequests) { result in
+            switch result {
+            case .success(let response):
+                do {
+                    if let responseString = String(data: response.data, encoding: .utf8) { }
+                    
+                    let requests = try JSONDecoder().decode([UserInformation].self, from: response.data)
+                    completion(.success(requests))
+                } catch {
+                    print("Ошибка декодирования запросов: \(error)")
+                    completion(.failure(error))
+                }
+            case .failure(let error):
+                print("Ошибка сети: \(error)")
+                completion(.failure(error))
+            }
+        }
+    }
+
 }

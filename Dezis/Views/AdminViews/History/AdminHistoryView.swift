@@ -4,6 +4,7 @@
 //
 //  Created by Telegey Nurbekova on 05/10/24.
 //
+
 import UIKit
 
 protocol IAdminHistoryView {
@@ -14,7 +15,6 @@ protocol IAdminHistoryView {
 class AdminHistoryView: UIViewController, IAdminHistoryView {
     
     private var presenter: IAdminHistoryPresenter!
-    private var orders: [Order] = []
     
     private let categoriesCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -32,7 +32,7 @@ class AdminHistoryView: UIViewController, IAdminHistoryView {
     
     private let ordersCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: UIScreen.main.bounds.width - 40, height: 211)
+        layout.itemSize = CGSize(width: UIScreen.main.bounds.width - 40, height: 240)
         layout.scrollDirection = .vertical
         layout.minimumLineSpacing = 12
         
@@ -45,7 +45,7 @@ class AdminHistoryView: UIViewController, IAdminHistoryView {
     
     private let completedOrdersCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: UIScreen.main.bounds.width - 40, height: 155)
+        layout.itemSize = CGSize(width: UIScreen.main.bounds.width - 40, height: 184)
         layout.scrollDirection = .vertical
         layout.minimumLineSpacing = 12
         
@@ -63,7 +63,9 @@ class AdminHistoryView: UIViewController, IAdminHistoryView {
         view.backgroundColor = .init(hex: "#1B2228")
         
         presenter = AdminHistoryPresenter(view: self)
-
+        
+        presenter?.fetchOrders()
+        
         setupNavBar()
         setupUI()
         
@@ -94,7 +96,7 @@ class AdminHistoryView: UIViewController, IAdminHistoryView {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-         navigationController?.setNavigationBarHidden(true, animated: animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
     }
 
 
@@ -136,6 +138,7 @@ class AdminHistoryView: UIViewController, IAdminHistoryView {
     func reloadData() {
         categoriesCollectionView.reloadData()
         ordersCollectionView.reloadData()
+        completedOrdersCollectionView.reloadData()
     }
     
     func updateCollectionViewVisibility(forCategory index: Int) {
@@ -158,7 +161,7 @@ extension AdminHistoryView: UICollectionViewDataSource {
         } else if collectionView == ordersCollectionView {
             return presenter.numberOfOrders()
         } else {
-            return 6
+            return presenter.numberOfCompletedOrders()
         }
     }
     
@@ -171,26 +174,32 @@ extension AdminHistoryView: UICollectionViewDataSource {
             
             cell.fill(with: category, isSelected: isSelected)
             return cell
+            
         } else if collectionView == ordersCollectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: OrdersCollectionViewCell.reuseId, for: indexPath) as! OrdersCollectionViewCell
             let order = presenter.orderAt(indexPath.row)
-            cell.fill(with: order)
+            let userDetails = presenter.userDetails(for: order.user)
+            cell.fill(with: order, userDetails: userDetails)
             cell.onCompleteTapped = {
                 self.completeOrder(for: indexPath)
             }
             return cell
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CompletedOrdersCollectionViewCell.reuseId, for: indexPath) as! CompletedOrdersCollectionViewCell
+            let completedOrder = presenter.completedOrderAt(indexPath.row)
+            cell.fill(with: completedOrder)
             return cell
         }
     }
-    
     private func completeOrder(for indexPath: IndexPath) {
         DispatchQueue.main.async {
             let sureAlert = SureAlertView()
             sureAlert.showAlert(on: self.view, message: "Заказ завершен?")
             
             sureAlert.onConfirm = {
+                self.presenter.completeOrder(at: indexPath.row)
+                self.ordersCollectionView.reloadData()
+                self.completedOrdersCollectionView.reloadData()
                 let successAlert = CustomAlertView()
                 successAlert.showAlert(on: self.view, withMessage: "Вы завершили заказ!", imageName: "check-circle")
             }

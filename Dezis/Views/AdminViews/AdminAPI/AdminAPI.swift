@@ -10,10 +10,12 @@ import Moya
 enum AdminApi {
     case loginAdmin(login: String, password: String)
     case fetchOrders
+    case fetchUserDetails(userId: Int)
+    case fetchRequests
 }
 
 extension AdminApi: TargetType {
-    var baseURL: URL { URL(string: "http://209.38.228.54:8084")! }
+    var baseURL: URL { URL(string: "https://dezis.pp.ua")! }
     
     var path: String {
         switch self {
@@ -21,6 +23,10 @@ extension AdminApi: TargetType {
             return "/api/v1/user/login-manager/"
         case .fetchOrders:
             return "/api/v1/contact/booking/"
+        case .fetchUserDetails(let userId):
+            return "/api/v1/user/list-user/\(userId)"
+        case . fetchRequests:
+            return "/api/v1/user/list-user/1"
         }
     }
     
@@ -28,7 +34,7 @@ extension AdminApi: TargetType {
         switch self {
         case .loginAdmin:
             return .post
-        case .fetchOrders:
+        case .fetchOrders, .fetchUserDetails, .fetchRequests:
             return .get
         }
     }
@@ -37,7 +43,7 @@ extension AdminApi: TargetType {
         switch self {
         case .loginAdmin(let login, let password):
             return .requestParameters(parameters: ["login": login, "password": password], encoding: JSONEncoding.default)
-        case .fetchOrders:
+        case .fetchOrders, .fetchUserDetails, .fetchRequests:
             return .requestPlain
         }
     }

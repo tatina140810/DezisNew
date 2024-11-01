@@ -45,12 +45,15 @@ class AdminTabBarController: UITabBarController {
     private func setupTabBarController() {
         
         let historyView = UINavigationController(rootViewController: AdminHistoryView())
+        historyView.navigationBar.isHidden = true
         historyView.tabBarItem = UITabBarItem(title: "История", image: UIImage(named: "clock1"), selectedImage: UIImage(named: "clock1.fill"))
         
         let chatView = UINavigationController(rootViewController: AdminChatViewController())
+        chatView.navigationBar.isHidden = true
         chatView.tabBarItem = UITabBarItem(title: "Чаты", image: UIImage(named: "message"), selectedImage: UIImage(named: "message.fill"))
         
         let requestView = UINavigationController(rootViewController: AdminRequestsView())
+        requestView.navigationBar.isHidden = true
         requestView.tabBarItem = UITabBarItem(title: "Запросы", image: UIImage(named: "notification"), selectedImage: UIImage(named: "notification.fill"))
         
         setViewControllers([historyView, chatView, requestView], animated: true)

@@ -31,7 +31,7 @@ class ClientHistoryViewController: UIViewController {
     
     private let ordersCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: UIScreen.main.bounds.width - 40, height: 211)
+        layout.itemSize = CGSize(width: UIScreen.main.bounds.width - 40, height: 184)
         layout.scrollDirection = .vertical
         layout.minimumLineSpacing = 12
         
@@ -50,8 +50,8 @@ class ClientHistoryViewController: UIViewController {
     
         ordersCollectionView.dataSource = self
         ordersCollectionView.register(
-            OrdersCollectionViewCell.self,
-            forCellWithReuseIdentifier: OrdersCollectionViewCell.reuseId
+            CompletedOrdersCollectionViewCell.self,
+            forCellWithReuseIdentifier: CompletedOrdersCollectionViewCell.reuseId
         )
     }
     
@@ -103,7 +103,7 @@ extension ClientHistoryViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: OrdersCollectionViewCell.reuseId, for: indexPath) as! OrdersCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CompletedOrdersCollectionViewCell.reuseId, for: indexPath) as! CompletedOrdersCollectionViewCell
         return cell
     }
 }
