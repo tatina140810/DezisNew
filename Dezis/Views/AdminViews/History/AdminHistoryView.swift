@@ -164,7 +164,7 @@ extension AdminHistoryView: UICollectionViewDataSource {
             return presenter.numberOfCompletedOrders()
         }
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == categoriesCollectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoriesCollectionViewCell.reuseId, for: indexPath) as! CategoriesCollectionViewCell
@@ -187,7 +187,8 @@ extension AdminHistoryView: UICollectionViewDataSource {
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CompletedOrdersCollectionViewCell.reuseId, for: indexPath) as! CompletedOrdersCollectionViewCell
             let completedOrder = presenter.completedOrderAt(indexPath.row)
-            cell.fill(with: completedOrder)
+            let userDetails = presenter.userDetails(for: completedOrder.user)
+            cell.fill(with: completedOrder, userDetails: userDetails)
             return cell
         }
     }
@@ -198,8 +199,6 @@ extension AdminHistoryView: UICollectionViewDataSource {
             
             sureAlert.onConfirm = {
                 self.presenter.completeOrder(at: indexPath.row)
-                self.ordersCollectionView.reloadData()
-                self.completedOrdersCollectionView.reloadData()
                 let successAlert = CustomAlertView()
                 successAlert.showAlert(on: self.view, withMessage: "Вы завершили заказ!", imageName: "check-circle")
             }

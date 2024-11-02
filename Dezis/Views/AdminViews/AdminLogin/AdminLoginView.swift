@@ -9,11 +9,16 @@ import UIKit
 
 protocol IAdminLoginView {
     func showError(message: String)
+    func showInputError(message: String)
+    func navigateToAdminDashboard()
+    func showDocumentation(documentationList: [Documentation])
 }
 
 class AdminLoginView: UIViewController {
     
     private var presenter: IAdminLoginPresenter?
+    
+    private var documentationList: [Documentation] = []
     
     private let loginLabel: UILabel = {
         let view = UILabel()
@@ -31,6 +36,8 @@ class AdminLoginView: UIViewController {
         var field = UITextField()
         field.backgroundColor = UIColor(hex: "#2B373E")
         field.textColor = .white
+        field.layer.borderWidth = 1
+        field.layer.borderColor = UIColor.clear.cgColor
         field.attributedPlaceholder = NSAttributedString(
             string: "Логин",
             attributes: [
@@ -51,12 +58,14 @@ class AdminLoginView: UIViewController {
         var field = UITextField()
         field.backgroundColor = UIColor(hex: "#2B373E")
         field.textColor = .white
+        field.layer.borderWidth = 1
+        field.layer.borderColor = UIColor.clear.cgColor
         field.attributedPlaceholder = NSAttributedString(
-                string: "Пароль",
-                attributes: [
-                    NSAttributedString.Key.foregroundColor: UIColor.white.withAlphaComponent(0.7),
-                    NSAttributedString.Key.font: UIFont(name: "SFProDisplay-Regular", size: 14)!
-                ])
+            string: "Пароль",
+            attributes: [
+                NSAttributedString.Key.foregroundColor: UIColor.white.withAlphaComponent(0.7),
+                NSAttributedString.Key.font: UIFont(name: "SFProDisplay-Regular", size: 14)!
+            ])
         field.layer.cornerRadius = 10
         field.font = UIFont(name: "SFProDisplay-Regular", size: 14)
         field.translatesAutoresizingMaskIntoConstraints = false
@@ -112,7 +121,7 @@ class AdminLoginView: UIViewController {
         
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = .center
-
+        
         let attributedString = NSMutableAttributedString(string: fullText, attributes: [
             .font: UIFont.systemFont(ofSize: 12),
             .foregroundColor: UIColor.white,
@@ -198,30 +207,67 @@ class AdminLoginView: UIViewController {
         let login = loginTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
         let password = passwordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
         
-        guard !login.isEmpty, !password.isEmpty else {
-            showError(message: "Пожалуйста, введите логин и пароль.")
-            return
+        if login.isEmpty || password.isEmpty {
+            showInputError(message: "Пожалуйста, введите логин и пароль.")
+        } else {
+            presenter?.loginAdmin(login: login, password: password)
         }
-        
-        presenter?.loginAdmin(login: login, password: password)
+    }
+    
+    func showInputError(message: String) {
+        loginTextField.layer.borderColor = UIColor.red.cgColor
+        passwordTextField.layer.borderColor = UIColor.red.cgColor
+        loginTextField.text = ""
+        passwordTextField.text = ""
+        loginTextField.attributedPlaceholder = NSAttributedString(
+            string: message,
+            attributes: [
+                .foregroundColor: UIColor.red,
+                .font: UIFont(name: "SFProDisplay-Regular", size: 14)!
+            ]
+        )
+        passwordTextField.attributedPlaceholder = NSAttributedString(
+            string: message,
+            attributes: [
+                .foregroundColor: UIColor.red,
+                .font: UIFont(name: "SFProDisplay-Regular", size: 14)!
+            ]
+        )
+    }
+    
+    func resetInputAppearance() {
+        loginTextField.layer.borderColor = UIColor.clear.cgColor
+        passwordTextField.layer.borderColor = UIColor.clear.cgColor
+        loginTextField.text = "Логин"
+        passwordTextField.text = "Пароль"
     }
 }
 
 extension AdminLoginView: UITextViewDelegate {
+    
     func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
-        if URL.scheme == "terms" {
-            print("Условие продажи")
-        } else if URL.scheme == "privacy" {
-            print("Положение о конфиденциальности")
-        }
-        return false
-    }
+           if URL.scheme == "terms" || URL.scheme == "privacy" {
+               presenter?.fetchDocumentation() 
+               return false
+           }
+           return true
+       }
 }
 
+
 extension AdminLoginView: IAdminLoginView {
+    
     func showError(message: String) {
-        let alert = UIAlertController(title: "Ошибка", message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
-        present(alert, animated: true)
+        showInputError(message: "Введите еще раз")
+    }
+    
+    func navigateToAdminDashboard() {
+        let tabBarController = AdminTabBarController()
+        navigationController?.pushViewController(tabBarController, animated: true)
+    }
+    
+    func showDocumentation(documentationList: [Documentation]) {
+        let documentationVC = DocumentationsList(documentationList: documentationList)
+        navigationController?.pushViewController(documentationVC, animated: true)
     }
 }

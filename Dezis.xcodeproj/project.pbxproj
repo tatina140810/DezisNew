@@ -11,6 +11,7 @@
 		18E576592CC548B100302739 /* ChatWebSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E576582CC548B100302739 /* ChatWebSocket.swift */; };
 		18FA88D62CB6D7EC00C66BAF /* OpenChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18FA88D52CB6D7EC00C66BAF /* OpenChatViewController.swift */; };
 		4061B8DFFEC52EF1268906C9 /* Pods_Dezis.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D594A6880D984FC3775947A /* Pods_Dezis.framework */; };
+		7277F5AD2CD62D2B0010D6A2 /* DocumentationList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7277F5AC2CD62D2B0010D6A2 /* DocumentationList.swift */; };
 		72ABD5962CC8151E004E18E9 /* AdminAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72ABD5952CC8151E004E18E9 /* AdminAPI.swift */; };
 		72ABD5982CC8157A004E18E9 /* AdminNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72ABD5972CC8157A004E18E9 /* AdminNetworkService.swift */; };
 		72ABD59B2CC82F0A004E18E9 /* AdminLoginPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72ABD59A2CC82F0A004E18E9 /* AdminLoginPresenter.swift */; };
@@ -98,6 +99,7 @@
 		18E576562CC5482700302739 /* ChatModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatModel.swift; sourceTree = "<group>"; };
 		18E576582CC548B100302739 /* ChatWebSocket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatWebSocket.swift; sourceTree = "<group>"; };
 		18FA88D52CB6D7EC00C66BAF /* OpenChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenChatViewController.swift; sourceTree = "<group>"; };
+		7277F5AC2CD62D2B0010D6A2 /* DocumentationList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentationList.swift; sourceTree = "<group>"; };
 		72ABD5952CC8151E004E18E9 /* AdminAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminAPI.swift; sourceTree = "<group>"; };
 		72ABD5972CC8157A004E18E9 /* AdminNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminNetworkService.swift; sourceTree = "<group>"; };
 		72ABD59A2CC82F0A004E18E9 /* AdminLoginPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminLoginPresenter.swift; sourceTree = "<group>"; };
@@ -222,6 +224,7 @@
 			children = (
 				72D39BA72CB1870D00D9EB45 /* AdminLoginView.swift */,
 				72ABD59A2CC82F0A004E18E9 /* AdminLoginPresenter.swift */,
+				7277F5AC2CD62D2B0010D6A2 /* DocumentationList.swift */,
 			);
 			path = AdminLogin;
 			sourceTree = "<group>";
@@ -720,6 +723,7 @@
 				72D39B992CB1511C00D9EB45 /* OrdersCollectionViewCell.swift in Sources */,
 				AF74D5822CB1582000B64D6E /* DeratizationView.swift in Sources */,
 				AF4B1E2B2CA0736200FDA3EC /* ClientChatViewController.swift in Sources */,
+				7277F5AD2CD62D2B0010D6A2 /* DocumentationList.swift in Sources */,
 				72ABD5AA2CC96CF0004E18E9 /* SureAlertView.swift in Sources */,
 				AFF6187E2CB69D5A00C64C95 /* DeratizationViewController.swift in Sources */,
 				AF4B1E282CA0729300FDA3EC /* ServerErrorViewController.swift in Sources */,

@@ -13,7 +13,6 @@ class CompletedOrdersCollectionViewCell: UICollectionViewCell {
     
     private let nameLabel: UILabel = {
         let view = UILabel()
-        view.text = "Alexey Ivanovich"
         view.font = UIFont(name: "SFProDisplay-Regular", size: 16)
         view.textColor = .init(UIColor(hex: "#FFFFFF"))
         view.textAlignment = .center
@@ -86,7 +85,7 @@ class CompletedOrdersCollectionViewCell: UICollectionViewCell {
     
     private let streetlabel: UILabel = {
         let view = UILabel()
-        let attributedString = NSMutableAttributedString(string: "Восток-5")
+        let attributedString = NSMutableAttributedString(string: "")
         attributedString.addAttribute(.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: NSRange(location: 0, length: attributedString.length))
         
         view.attributedText = attributedString
@@ -100,7 +99,7 @@ class CompletedOrdersCollectionViewCell: UICollectionViewCell {
     
     private let houseNumberlabel: UILabel = {
         let view = UILabel()
-        let attributedString = NSMutableAttributedString(string: "13/21")
+        let attributedString = NSMutableAttributedString(string: "")
         attributedString.addAttribute(.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: NSRange(location: 0, length: attributedString.length))
         
         view.attributedText = attributedString
@@ -133,7 +132,7 @@ class CompletedOrdersCollectionViewCell: UICollectionViewCell {
     
     private let dateDetailLabel: UILabel = {
         let view = UILabel()
-        let attributedString = NSMutableAttributedString(string: "17.11.2024")
+        let attributedString = NSMutableAttributedString(string: "")
         attributedString.addAttribute(.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: NSRange(location: 0, length: attributedString.length))
         
         view.attributedText = attributedString
@@ -147,7 +146,7 @@ class CompletedOrdersCollectionViewCell: UICollectionViewCell {
     
     private let timeDetailLabel: UILabel = {
         let view = UILabel()
-        let attributedString = NSMutableAttributedString(string: "21:30")
+        let attributedString = NSMutableAttributedString(string: "")
         attributedString.addAttribute(.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: NSRange(location: 0, length: attributedString.length))
         
         view.attributedText = attributedString
@@ -206,6 +205,7 @@ class CompletedOrdersCollectionViewCell: UICollectionViewCell {
         labelsStackView.snp.makeConstraints { make in
             make.top.equalTo(nameLabel.snp.bottom).offset(12)
             make.leading.equalTo(contentView.snp.leading).offset(24)
+            make.height.equalTo(105)
 
         }
         
@@ -214,14 +214,17 @@ class CompletedOrdersCollectionViewCell: UICollectionViewCell {
             make.centerY.equalTo(labelsStackView.snp.centerY)
             make.leading.equalTo(labelsStackView.snp.trailing).offset(15)
             make.trailing.equalTo(contentView.snp.trailing).offset(-24)
+            make.height.equalTo(105)
 
         }
     }
     
-    func fill(with order: Order) {
-        print("Заполняем ячейку данными заказа: \(order)")
-        nameLabel.text = "(user: \(order.user))"
+    func fill(with order: Order, userDetails: UserInformation?) {
+        
+        nameLabel.text = userDetails?.username ?? "Имя не указано"
         serviceDetailLabel.text = order.service
+//        streetlabel.text = userDetails?. ?? "Не предоставлено"
+//        houseNumberlabel.text = user?.number ?? "Не предоставлено"
         dateDetailLabel.text = order.date
         timeDetailLabel.text = order.time
     }

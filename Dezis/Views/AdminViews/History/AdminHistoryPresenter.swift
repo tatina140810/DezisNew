@@ -43,32 +43,19 @@ class AdminHistoryPresenter: IAdminHistoryPresenter {
         self.view = view
     }
     
-//    func fetchOrders() {
-//        networkService.fetchOrders { [weak self] result in
-//            switch result {
-//            case .success(let orders):
-//                print("Заказы получены: \(orders)")
-//                self?.orders = orders
-//                self?.view?.reloadData()
-//            case .failure(let error):
-//                print("Не удалось получить заказы: \(error)")
-//            }
-//        }
-//    }
-    
     func fetchOrders() {
         networkService.fetchOrders { [weak self] result in
             switch result {
             case .success(let orders):
-                print("Заказы получены: \(orders)")
-                self?.orders = orders
-                self?.fetchUserDetailsForOrders(orders)
+                self?.orders = orders.filter { !$0.is_completed }
+                self?.completedOrders = orders.filter { $0.is_completed }
+                self?.fetchUserDetailsForOrders(orders) 
             case .failure(let error):
                 print("Не удалось получить заказы: \(error)")
             }
         }
     }
-    
+
     private func fetchUserDetailsForOrders(_ orders: [Order]) {
         let userIds = Set(orders.map { $0.user })
         let dispatchGroup = DispatchGroup()
@@ -116,11 +103,21 @@ class AdminHistoryPresenter: IAdminHistoryPresenter {
     func completeOrder(at index: Int) {
         guard index < orders.count else { return }
         
-        let completedOrder = orders[index]
-        completedOrders.append(completedOrder)
-        orders.remove(at: index)
-        view?.reloadData()
+        let orderId = orders[index].id
+        networkService.completeOrder(orderId: orderId) { [weak self] result in
+            switch result {
+            case .success:
+                let completedOrder = self?.orders.remove(at: index)
+                if let completedOrder = completedOrder {
+                    self?.completedOrders.append(completedOrder)
+                }
+                self?.view?.reloadData()
+            case .failure(let error):
+                print("Failed to complete order: \(error.localizedDescription)")
+            }
+        }
     }
+
     
     func numberOfCompletedOrders() -> Int {
         return completedOrders.count

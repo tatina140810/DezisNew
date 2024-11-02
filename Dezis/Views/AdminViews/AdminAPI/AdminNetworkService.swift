@@ -28,6 +28,7 @@ struct Order: Codable {
     let service: String
     let date: String
     let time: String
+    let is_completed: Bool
 }
 
 struct UserInformation: Codable {
@@ -36,6 +37,14 @@ struct UserInformation: Codable {
     let email: String?
     let number: String?
     let avatar: String?
+    let is_active: Bool
+}
+
+struct Documentation: Codable {
+    let id: Int
+    let title: String
+    let description: String
+    let file: String
 }
 
 
@@ -139,5 +148,68 @@ class AdminNetworkService {
             }
         }
     }
+    
+    func fetchDocumentation(completion: @escaping (Result<[Documentation], Error>) -> Void) {
+        provider.request(.fetchDocumentation) { result in
+            switch result {
+            case .success(let response):
+                do {
+                    let documentation = try JSONDecoder().decode([Documentation].self, from: response.data)
+                    completion(.success(documentation))
+                } catch {
+                    print("Ошибка декодирования документации: \(error)")
+                    completion(.failure(error))
+                }
+            case .failure(let error):
+                print("Ошибка сети: \(error)")
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    func completeOrder(orderId: Int, completion: @escaping (Result<Void, Error>) -> Void) {
+        provider.request(.completeOrder(orderId: orderId)) { result in
+            switch result {
+            case .success(let response):
+                if (200...299).contains(response.statusCode) {
+                    completion(.success(()))
+                } else {
+                    completion(.failure(NSError(domain: "", code: response.statusCode, userInfo: [NSLocalizedDescriptionKey: "Failed to complete order."])))
+                }
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
 
+    func confirmUser(userId: Int, completion: @escaping (Result<Void, Error>) -> Void) {
+        provider.request(.confirmUser(userId: userId)) { result in
+            switch result {
+            case .success(let response):
+                if (200...299).contains(response.statusCode) {
+                    completion(.success(()))
+                } else {
+                    completion(.failure(NSError(domain: "", code: response.statusCode, userInfo: [NSLocalizedDescriptionKey: "Failed to confirm user."])))
+                }
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+
+    func deleteUser(userId: Int, completion: @escaping (Result<Void, Error>) -> Void) {
+        provider.request(.deleteUser(userId: userId)) { result in
+            switch result {
+            case .success(let response):
+                if response.statusCode == 204 {
+                    completion(.success(()))
+                } else {
+                    let error = NSError(domain: "", code: response.statusCode, userInfo: [NSLocalizedDescriptionKey: "Failed to delete user."])
+                    completion(.failure(error))
+                }
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
 }

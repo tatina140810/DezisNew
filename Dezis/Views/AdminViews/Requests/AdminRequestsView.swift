@@ -91,43 +91,53 @@ extension AdminRequestsView: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RequestsCollectionViewCell.reuseId, for: indexPath) as! RequestsCollectionViewCell
-        
-        if let request = presenter.requestAt(indexPath.row) {
-            presenter.loadUserRequest(userId: request.id) { userInfo in
-                DispatchQueue.main.async {
-                    cell.fill(with: userInfo)
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RequestsCollectionViewCell.reuseId, for: indexPath) as! RequestsCollectionViewCell
+            
+            if let request = presenter.requestAt(indexPath.row), !request.is_active { // Check if the request is inactive
+                cell.fill(with: request)
+                cell.onConfirmTapped = { [weak self] in
+                    self?.confirmRequest(for: indexPath)
                 }
             }
+            
+            cell.onDenyTapped = { self.denyRequest(for: indexPath) }
+            
+            return cell
         }
         
-        cell.onConfirmTapped = { self.confirmRequest(for: indexPath) }
-        cell.onDenyTapped = { self.denyRequest(for: indexPath) }
-        
-        return cell
-    }
-    
     private func confirmRequest(for indexPath: IndexPath) {
         DispatchQueue.main.async {
             let sureAlert = SureAlertView()
             sureAlert.showAlert(on: self.view, message: "Вы уверены, что хотите подтвердить запрос?", yesButtonText: "Подтвердить", noButtonText: "Отмена")
             
             sureAlert.onConfirm = {
-                let successAlert = CustomAlertView()
-                successAlert.showAlert(on: self.view, withMessage: "Вы подтвердили запрос!", imageName: "check-circle")
+                self.presenter.confirmUser(at: indexPath.row) { [weak self] success in
+                    guard let self = self else { return }
+                    if success {
+                        let successAlert = CustomAlertView()
+                        successAlert.showAlert(on: self.view, withMessage: "Вы подтвердили запрос!", imageName: "check-circle")
+                    }
+                }
             }
         }
     }
 
     private func denyRequest(for indexPath: IndexPath) {
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            
             let sureAlert = SureAlertView()
             sureAlert.showAlert(on: self.view, message: "Вы уверены, что хотите отклонить запрос?", yesButtonText: "Отклонить", noButtonText: "Отмена")
             
             sureAlert.onConfirm = {
-                let successAlert = CustomAlertView()
-                successAlert.showAlert(on: self.view, withMessage: "Запрос отклонен!", imageName: "slash")
+                self.presenter.denyUser(at: indexPath.row) { success in
+                    if success {
+                        let successAlert = CustomAlertView()
+                        successAlert.showAlert(on: self.view, withMessage: "Запрос отклонен!", imageName: "slash")
+                    }
+                }
             }
         }
     }
+
 }
