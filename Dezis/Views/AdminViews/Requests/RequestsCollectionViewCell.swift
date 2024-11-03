@@ -86,7 +86,6 @@ class RequestsCollectionViewCell: UICollectionViewCell {
     
     private let dateDetailLabel: UILabel = {
         let view = UILabel()
-        view.text = "17.11.2024"
         view.font = UIFont(name: "SFProDisplay-Regular", size: 16)
         view.textColor = .init(UIColor(hex: "#FFFFFF"))
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -95,7 +94,6 @@ class RequestsCollectionViewCell: UICollectionViewCell {
     
     private let nameDetailLabel: UILabel = {
         let view = UILabel()
-        view.text = "Ishenbekov Bektur"
         view.numberOfLines = 0
         view.font = UIFont(name: "SFProDisplay-Regular", size: 16)
         view.textColor = .init(UIColor(hex: "#FFFFFF"))
@@ -105,7 +103,6 @@ class RequestsCollectionViewCell: UICollectionViewCell {
     
     private let emailDatailLabel: UILabel = {
         let view = UILabel()
-        view.text = "ishenbekovbektur1@gmail.com"
         view.numberOfLines = 0
         view.font = UIFont(name: "SFProDisplay-Regular", size: 16)
         view.textColor = .init(UIColor(hex: "#FFFFFF"))
@@ -115,7 +112,6 @@ class RequestsCollectionViewCell: UICollectionViewCell {
     
     private let phoneNumberDetailsLabel: UILabel = {
         let view = UILabel()
-        view.text = "+996 500 848 484"
         view.numberOfLines = 0
         view.font = UIFont(name: "SFProDisplay-Regular", size: 16)
         view.textColor = .init(UIColor(hex: "#FFFFFF"))
@@ -125,7 +121,6 @@ class RequestsCollectionViewCell: UICollectionViewCell {
     
     private let addressDetailLabel: UILabel = {
         let view = UILabel()
-        view.text = "Восток-5"
         view.numberOfLines = 0
         view.font = UIFont(name: "SFProDisplay-Regular", size: 16)
         view.textColor = .init(UIColor(hex: "#FFFFFF"))
@@ -135,7 +130,6 @@ class RequestsCollectionViewCell: UICollectionViewCell {
     
     private let houseNumberDetailLabel: UILabel = {
         let view = UILabel()
-        view.text = "51/12"
         view.numberOfLines = 0
         view.font = UIFont(name: "SFProDisplay-Regular", size: 16)
         view.textColor = .init(UIColor(hex: "#FFFFFF"))
@@ -200,7 +194,7 @@ class RequestsCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(confirmButton)
         contentView.addSubview(denyButton)
     }
-
+    
     private func setUpConstraints() {
         
         titlesStackView.distribution = .equalSpacing
@@ -218,11 +212,13 @@ class RequestsCollectionViewCell: UICollectionViewCell {
         detailsStackView.snp.makeConstraints { make in
             make.centerY.equalTo(titlesStackView.snp.centerY)
             make.leading.equalTo(titlesStackView.snp.trailing).offset(12)
+            make.trailing.equalTo(contentView.snp.trailing).offset(-16)
         }
         
         houseNumberDetailLabel.snp.makeConstraints { make in
             make.centerY.equalTo(houseNumberLabel.snp.centerY)
             make.leading.equalTo(houseNumberLabel.snp.trailing).offset(8)
+            make.trailing.equalTo(contentView.snp.trailing).offset(-16)
         }
         
         confirmButton.snp.makeConstraints { make in
@@ -231,7 +227,7 @@ class RequestsCollectionViewCell: UICollectionViewCell {
             make.trailing.equalTo(contentView.snp.trailing).offset(-17.5)
             make.height.equalTo(44)
         }
-
+        
         denyButton.snp.makeConstraints { make in
             make.top.equalTo(confirmButton.snp.bottom).offset(10)
             make.leading.equalTo(contentView.snp.leading).offset(17.5)
@@ -252,6 +248,12 @@ class RequestsCollectionViewCell: UICollectionViewCell {
     
     @objc private func denyButtonTapped() {
         onDenyTapped?()
+    }
+    
+    func fill(with userInfo: UserInformation?) {
+        nameDetailLabel.text = userInfo?.username ?? "Имя не указано"
+        emailDatailLabel.text = userInfo?.email ?? "Почта не указана"
+        phoneNumberDetailsLabel.text = userInfo?.number ?? "Телефон не указан"
     }
     
     required init?(coder: NSCoder) {

@@ -7,11 +7,11 @@
 
 import UIKit
 
-protocol IAdminRequestView {
-
+protocol IAdminRequestView: AnyObject {
+    func reloadData()
 }
 
-class AdminRequestsView: UIViewController,IAdminRequestView {
+class AdminRequestsView: UIViewController, IAdminRequestView {
     
     private var presenter: IAdminRequestPresenter!
     
@@ -44,11 +44,20 @@ class AdminRequestsView: UIViewController,IAdminRequestView {
         super.viewDidLoad()
         view.backgroundColor = .init(hex: "#1B2228")
         setupUI()
+        
         requestsCollectionView.dataSource = self
         requestsCollectionView.register(
             RequestsCollectionViewCell.self,
             forCellWithReuseIdentifier: RequestsCollectionViewCell.reuseId
-        )
+            )
+        
+        presenter = AdminRequestPresenter(view: self)
+        presenter?.loadRequests()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
     }
     
     private func setupUI(){
@@ -69,47 +78,66 @@ class AdminRequestsView: UIViewController,IAdminRequestView {
             make.bottom.equalToSuperview().offset(-10)
         }
     }
+    
+    func reloadData() {
+        requestsCollectionView.reloadData()
+    }
 }
 
 extension AdminRequestsView: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
+        return presenter.numberOfRequests()
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RequestsCollectionViewCell.reuseId, for: indexPath) as! RequestsCollectionViewCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RequestsCollectionViewCell.reuseId, for: indexPath) as! RequestsCollectionViewCell
+            
+            if let request = presenter.requestAt(indexPath.row), !request.is_active { // Check if the request is inactive
+                cell.fill(with: request)
+                cell.onConfirmTapped = { [weak self] in
+                    self?.confirmRequest(for: indexPath)
+                }
+            }
+            
+            cell.onDenyTapped = { self.denyRequest(for: indexPath) }
+            
+            return cell
+        }
         
-        cell.onConfirmTapped = {
-            self.confirmRequest(for: indexPath)
-        }
-        cell.onDenyTapped = {
-            self.denyRequest(for: indexPath)
-        }
-        return cell
-    }
-    
     private func confirmRequest(for indexPath: IndexPath) {
         DispatchQueue.main.async {
             let sureAlert = SureAlertView()
             sureAlert.showAlert(on: self.view, message: "Вы уверены, что хотите подтвердить запрос?", yesButtonText: "Подтвердить", noButtonText: "Отмена")
             
             sureAlert.onConfirm = {
-                let successAlert = CustomAlertView()
-                successAlert.showAlert(on: self.view, withMessage: "Вы подтвердили запрос!", imageName: "check-circle")
+                self.presenter.confirmUser(at: indexPath.row) { [weak self] success in
+                    guard let self = self else { return }
+                    if success {
+                        let successAlert = CustomAlertView()
+                        successAlert.showAlert(on: self.view, withMessage: "Вы подтвердили запрос!", imageName: "check-circle")
+                    }
+                }
             }
         }
     }
 
     private func denyRequest(for indexPath: IndexPath) {
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            
             let sureAlert = SureAlertView()
             sureAlert.showAlert(on: self.view, message: "Вы уверены, что хотите отклонить запрос?", yesButtonText: "Отклонить", noButtonText: "Отмена")
             
             sureAlert.onConfirm = {
-                let successAlert = CustomAlertView()
-                successAlert.showAlert(on: self.view, withMessage: "Запрос отклонен!", imageName: "slash")
+                self.presenter.denyUser(at: indexPath.row) { success in
+                    if success {
+                        let successAlert = CustomAlertView()
+                        successAlert.showAlert(on: self.view, withMessage: "Запрос отклонен!", imageName: "slash")
+                    }
+                }
             }
         }
     }
+
 }

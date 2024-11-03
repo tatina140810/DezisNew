@@ -13,7 +13,6 @@ class CompletedOrdersCollectionViewCell: UICollectionViewCell {
     
     private let nameLabel: UILabel = {
         let view = UILabel()
-        view.text = "Alexey Ivanovich"
         view.font = UIFont(name: "SFProDisplay-Regular", size: 16)
         view.textColor = .init(UIColor(hex: "#FFFFFF"))
         view.textAlignment = .center
@@ -23,9 +22,18 @@ class CompletedOrdersCollectionViewCell: UICollectionViewCell {
         return view
     }()
     
-    private let serviceStackView: UIStackView = {
+    private let labelsStackView: UIStackView = {
         let stack = UIStackView()
         stack.axis = .vertical
+        stack.spacing = 25
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        return stack
+    }()
+    
+    private let detailsStackView: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .vertical
+        stack.spacing = 25
         stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
@@ -56,13 +64,6 @@ class CompletedOrdersCollectionViewCell: UICollectionViewCell {
         return view
     }()
     
-    private let addressStackView: UIStackView = {
-        let stack = UIStackView()
-        stack.axis = .vertical
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        return stack
-    }()
-    
     private let addresslabel: UILabel = {
         let view = UILabel()
         view.text = "Адрес:"
@@ -76,7 +77,7 @@ class CompletedOrdersCollectionViewCell: UICollectionViewCell {
     
     private let streetAndNumberStackView: UIStackView = {
         let stack = UIStackView()
-        stack.axis = .vertical
+        stack.axis = .horizontal
         stack.spacing = 10
         stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
@@ -84,7 +85,7 @@ class CompletedOrdersCollectionViewCell: UICollectionViewCell {
     
     private let streetlabel: UILabel = {
         let view = UILabel()
-        let attributedString = NSMutableAttributedString(string: "Восток-5")
+        let attributedString = NSMutableAttributedString(string: "")
         attributedString.addAttribute(.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: NSRange(location: 0, length: attributedString.length))
         
         view.attributedText = attributedString
@@ -98,7 +99,7 @@ class CompletedOrdersCollectionViewCell: UICollectionViewCell {
     
     private let houseNumberlabel: UILabel = {
         let view = UILabel()
-        let attributedString = NSMutableAttributedString(string: "13/21")
+        let attributedString = NSMutableAttributedString(string: "")
         attributedString.addAttribute(.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: NSRange(location: 0, length: attributedString.length))
         
         view.attributedText = attributedString
@@ -108,13 +109,6 @@ class CompletedOrdersCollectionViewCell: UICollectionViewCell {
         view.textColor = .init(UIColor(hex: "#FFFFFF"))
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
-    }()
-    
-    private let dateStackView: UIStackView = {
-        let stack = UIStackView()
-        stack.axis = .vertical
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        return stack
     }()
     
     private let dateLabel: UILabel = {
@@ -130,7 +124,7 @@ class CompletedOrdersCollectionViewCell: UICollectionViewCell {
     
     private let dateAndTimeStackView: UIStackView = {
         let stack = UIStackView()
-        stack.axis = .vertical
+        stack.axis = .horizontal
         stack.spacing = 10
         stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
@@ -138,7 +132,7 @@ class CompletedOrdersCollectionViewCell: UICollectionViewCell {
     
     private let dateDetailLabel: UILabel = {
         let view = UILabel()
-        let attributedString = NSMutableAttributedString(string: "17.11.2024")
+        let attributedString = NSMutableAttributedString(string: "")
         attributedString.addAttribute(.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: NSRange(location: 0, length: attributedString.length))
         
         view.attributedText = attributedString
@@ -152,7 +146,7 @@ class CompletedOrdersCollectionViewCell: UICollectionViewCell {
     
     private let timeDetailLabel: UILabel = {
         let view = UILabel()
-        let attributedString = NSMutableAttributedString(string: "21:30")
+        let attributedString = NSMutableAttributedString(string: "")
         attributedString.addAttribute(.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: NSRange(location: 0, length: attributedString.length))
         
         view.attributedText = attributedString
@@ -163,15 +157,6 @@ class CompletedOrdersCollectionViewCell: UICollectionViewCell {
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-    
-    private let mainStackView: UIStackView = {
-        let stack = UIStackView()
-        stack.axis = .horizontal
-        stack.spacing = 32
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        return stack
-    }()
-
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -189,21 +174,21 @@ class CompletedOrdersCollectionViewCell: UICollectionViewCell {
     
     private func setUpSubviews() {
         contentView.addSubview(nameLabel)
-        contentView.addSubview(mainStackView)
+        contentView.addSubview(labelsStackView)
+        contentView.addSubview(detailsStackView)
         
-        mainStackView.addArrangedSubview(serviceStackView)
-        serviceStackView.addArrangedSubview(serviceLabel)
-        serviceStackView.addArrangedSubview(serviceDetailLabel)
+        labelsStackView.addArrangedSubview(serviceLabel)
+        labelsStackView.addArrangedSubview(addresslabel)
+        labelsStackView.addArrangedSubview(dateLabel)
         
-        mainStackView.addArrangedSubview(addressStackView)
-        addressStackView.addArrangedSubview(addresslabel)
-        addressStackView.addArrangedSubview(streetAndNumberStackView)
+        detailsStackView.addArrangedSubview(serviceDetailLabel)
+        detailsStackView.addArrangedSubview(streetAndNumberStackView)
+        
         streetAndNumberStackView.addArrangedSubview(streetlabel)
         streetAndNumberStackView.addArrangedSubview(houseNumberlabel)
         
-        mainStackView.addArrangedSubview(dateStackView)
-        dateStackView.addArrangedSubview(dateLabel)
-        dateStackView.addArrangedSubview(dateAndTimeStackView)
+        detailsStackView.addArrangedSubview(dateAndTimeStackView)
+        
         dateAndTimeStackView.addArrangedSubview(dateDetailLabel)
         dateAndTimeStackView.addArrangedSubview(timeDetailLabel)
         
@@ -216,21 +201,32 @@ class CompletedOrdersCollectionViewCell: UICollectionViewCell {
             make.centerX.equalTo(contentView.snp.centerX)
         }
         
-        mainStackView.distribution = .equalSpacing
-        mainStackView.snp.makeConstraints { make in
+        labelsStackView.distribution = .equalSpacing
+        labelsStackView.snp.makeConstraints { make in
             make.top.equalTo(nameLabel.snp.bottom).offset(12)
             make.leading.equalTo(contentView.snp.leading).offset(24)
-            make.trailing.equalTo(contentView.snp.trailing).offset(-24)
-            make.height.equalTo(76)
+            make.height.equalTo(105)
+
         }
         
-        serviceStackView.distribution = .equalSpacing
-        addressStackView.distribution = .equalSpacing
-        dateStackView.distribution = .equalSpacing
-        
-        streetAndNumberStackView.distribution = .fillEqually
-        dateAndTimeStackView.distribution = .fillEqually
+        detailsStackView.distribution = .equalSpacing
+        detailsStackView.snp.makeConstraints { make in
+            make.centerY.equalTo(labelsStackView.snp.centerY)
+            make.leading.equalTo(labelsStackView.snp.trailing).offset(15)
+            make.trailing.equalTo(contentView.snp.trailing).offset(-24)
+            make.height.equalTo(105)
+
+        }
+    }
     
+    func fill(with order: Order, userDetails: UserInformation?) {
+        
+        nameLabel.text = userDetails?.username ?? "Имя не указано"
+        serviceDetailLabel.text = order.service
+//        streetlabel.text = userDetails?. ?? "Не предоставлено"
+//        houseNumberlabel.text = user?.number ?? "Не предоставлено"
+        dateDetailLabel.text = order.date
+        timeDetailLabel.text = order.time
     }
     
     required init?(coder: NSCoder) {
