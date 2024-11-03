@@ -24,7 +24,7 @@ struct BookingLoginResponse: Decodable {
     let is_completed: Bool
 }
 struct UserProfile:  Decodable  {
-    let id: Int
+    let id: Int?
     let username: String?
     let email: String
     let password: String
@@ -185,15 +185,16 @@ class UserNetworkService {
         }
     }
     func getUserProfile(email: String, completion: @escaping (Result<UserProfile, Error>) -> Void) {
+        print("Executing network request for email: \(email)")
         provider.request(.getUserProfile(email: email)) { result in
             switch result {
             case .success(let response):
-                do {
-    
-                    let jsonString = String(data: response.data, encoding: .utf8)
-                    print("Received JSON: \(jsonString ?? "No data")")
-                    
+                print("Received response: \(response)")
+                if let jsonString = String(data: response.data, encoding: .utf8) {
+                    print("Received JSON response: \(jsonString)")
+                }
 
+                do {
                     let users = try JSONDecoder().decode([UserProfile].self, from: response.data)
                     
                     if let user = users.first(where: { $0.email.lowercased() == email.lowercased() }) {

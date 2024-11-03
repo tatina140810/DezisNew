@@ -262,8 +262,9 @@ class СonfirmationСodeViewController: UIViewController, IСonfirmationСodeVie
                     self.loginSuccess()
                     
                    
-                    let userService = UserNetworkService()
-                    let entryAllowedVC = EntryAllowedViewController(userService: userService, email: self.email ?? "")
+//                    let userService = UserNetworkService()
+                    let entryAllowedVC = EntryAllowedViewController()
+                   // let entryAllowedVC = EntryAllowedViewController(userService: userService, email: self.email ?? "")
                     
                     self.navigationController?.pushViewController(entryAllowedVC, animated: true)
                     

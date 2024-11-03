@@ -2,21 +2,6 @@ import UIKit
 
 class EntryAllowedViewController: UIViewController{
 
-    private let userService: UserNetworkService
-    var email: String?
-    
-    
-    init(userService: UserNetworkService, email: String) {
-            self.userService = userService
-            self.email = email
-            super.init(nibName: nil, bundle: nil)
-        }
-    required init?(coder: NSCoder) {
-            fatalError("init(coder:) has not been implemented")
-        }
-
-
-    // Добавляем необходимые UI элементы
     private var entryAllowedImage: UIImageView = {
         let view = UIImageView()
         view.image = UIImage(named: "entryAllowed")
@@ -44,29 +29,7 @@ class EntryAllowedViewController: UIViewController{
             self?.loadNextViewController()
         }
 
-        if let email = email {
-            fetchUserData(email: email)
-        }
     }
-
-    func fetchUserData(email: String) {
-        guard !email.isEmpty else {
-            print("Error: Email is empty")
-            return
-        }
-        
-        userService.getUserProfile(email: email) { result in
-            switch result {
-            case .success(let response):
-                print("Registration successful with response: \(response)")
-                
-            case .failure(let error):
-                print (error)
-                
-            }
-        }
-    }
-
     
     private func setupUI() {
         view.addSubview(entryAllowedImage)
@@ -84,16 +47,11 @@ class EntryAllowedViewController: UIViewController{
     }
 
     private func loadNextViewController() {
+        
         let vc = ClientTabBarController()
         navigationController?.pushViewController(vc, animated: true)
     }
 
    
-}
-extension EntryAllowedViewController: RegistrationDelegate {
-    func didRegisterUser(email: String) {
-        self.email = email
-        fetchUserData(email: email)
-    }
 }
 

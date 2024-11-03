@@ -1,12 +1,9 @@
 import UIKit
 import SnapKit
 
-protocol RegistrationDelegate: AnyObject {
-    func didRegisterUser(email: String)
-}
 
 class UserRegisterViewController: UIViewController {
-    weak var delegate: RegistrationDelegate?
+   
     
     private var titleLabel: UILabel = {
         let label = UILabel()
@@ -247,7 +244,8 @@ class UserRegisterViewController: UIViewController {
             passwordTextField.layer.borderWidth = 1.0
             return
         }
-        delegate?.didRegisterUser(email: email)
+        UserDefaults.standard.set(email, forKey: "email")
+
         
         let userInfo = UserInfo(username: username, password: password, email: email, address: "", apartmentNumber: "")
         let vc = UserRegisterBuilder.build(userinfo: userInfo)
@@ -268,10 +266,4 @@ class UserRegisterViewController: UIViewController {
     }
 
 }
-extension UserRegisterViewController: RegistrationDelegate {
-    func didRegisterUser(email: String) {
-        print("Registered user email: \(email)")
-    }
-}
-
 

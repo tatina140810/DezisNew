@@ -235,6 +235,7 @@ class ClientLoginViewController: UIViewController, UITextFieldDelegate, IClientL
                     case .success(let message):
                         print("Login successful: \(message)")
                         self?.loginSuccess()
+                        
                     case .failure(let error):
                         print("Login failed: \(error)")
                         self?.loginFailed(error: error)
@@ -250,14 +251,10 @@ class ClientLoginViewController: UIViewController, UITextFieldDelegate, IClientL
         return emailPredicate.evaluate(with: email)
     }
     func loginSuccess() {
+        let vc = ClientTabBarController()
+        navigationController?.pushViewController(vc, animated: true)
         print("Успешный вход")
-        
-        // Создание экземпляра EntryAllowedViewController с передачей необходимых параметров
-        let userService = UserNetworkService() // Инициализируйте ваш userService
-        let email = "user@example.com" // Используйте email пользователя
-
-        let entryAllowedVC = EntryAllowedViewController(userService: userService, email: email)
-        navigationController?.pushViewController(entryAllowedVC, animated: true)
+      
     }
     
     func loginFailed(error: String) {

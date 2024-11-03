@@ -37,7 +37,9 @@ class ClientTabBarController: UITabBarController {
         }
          
        }
-
+    let userService = UserNetworkService()
+    let email = ""
+    
     func setupTabBarController() {
         let homeView = UINavigationController(rootViewController: ClientHomeViewController()) 
         homeView.tabBarItem = UITabBarItem(title: "Главная", image: UIImage(resource: .house), selectedImage: UIImage(resource: .house))
