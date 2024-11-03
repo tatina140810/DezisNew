@@ -103,11 +103,13 @@ class DezinsectionViewController: UIViewController {
             }
         }
     @objc func orderButtonTapped() {
-        if let tabBarController = self.tabBarController {
-            
-            tabBarController.selectedIndex = 1 
-        }
+        print("button tapped")
+
+        NotificationCenter.default.post(name: NSNotification.Name("SwitchToTab"), object: nil, userInfo: ["tabIndex": 1])
+
+        self.dismiss(animated: true, completion: nil)
     }
+    
     @objc func backButtonTapped(){
         self.dismiss(animated: true, completion: nil)
     }

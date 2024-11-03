@@ -110,6 +110,22 @@ class СonfirmationСodeViewController: UIViewController, IСonfirmationСodeVie
         createPrivaciAttributedText()
         backButtonSetup()
         presenter = СonfirmationСodePresenter(view: self)
+        keyBoardSetUp()
+    }
+    func keyBoardSetUp(){
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+           NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+
+    }
+    @objc func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            let keyboardHeight = keyboardSize.cgRectValue.height
+            self.view.frame.origin.y = -keyboardHeight / 2
+        }
+    }
+
+    @objc func keyboardWillHide(notification: NSNotification) {
+        self.view.frame.origin.y = 0
     }
     private func backButtonSetup(){
         let backButton = UIBarButtonItem(title: "Назад", style: .plain, target: self, action: #selector(backButtonTapped))
@@ -193,7 +209,12 @@ class СonfirmationСodeViewController: UIViewController, IСonfirmationСodeVie
     }
     func loginSuccess() {
         print("Успешный вход")
-        navigationController?.pushViewController(EntryAllowedViewController(), animated: true)
+    
+        let userService = UserNetworkService()
+        let email = ""
+
+        let entryAllowedVC = EntryAllowedViewController(userService: userService, email: email)
+        navigationController?.pushViewController(entryAllowedVC, animated: true)
     }
     func loginFailed(error: Error) {
         let errorMessage = error.localizedDescription
@@ -249,4 +270,9 @@ class СonfirmationСodeViewController: UIViewController, IСonfirmationСodeVie
         let vc = UserRegisterSecondPageViewController()
         navigationController?.popViewController(animated: true)
     }
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+
 }

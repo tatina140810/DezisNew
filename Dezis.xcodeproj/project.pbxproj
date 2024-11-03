@@ -65,6 +65,7 @@
 		AF5146892CD0B509000D9C97 /* ConfidantionalyPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5146882CD0B509000D9C97 /* ConfidantionalyPage.swift */; };
 		AF51468B2CD0B522000D9C97 /* PrivacyPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF51468A2CD0B522000D9C97 /* PrivacyPage.swift */; };
 		AF51468D2CD297BC000D9C97 /* СonfirmationСodePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF51468C2CD297BC000D9C97 /* СonfirmationСodePresenter.swift */; };
+		AF51468F2CD5546F000D9C97 /* PersonalAccauntPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF51468E2CD5546E000D9C97 /* PersonalAccauntPresenter.swift */; };
 		AF74D5502CA7C97B00B64D6E /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF74D54F2CA7C97B00B64D6E /* KeychainManager.swift */; };
 		AF74D5522CA7EB3200B64D6E /* UserRegisterSecondPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF74D5512CA7EB3200B64D6E /* UserRegisterSecondPageViewController.swift */; };
 		AF74D5562CAACEAC00B64D6E /* FirstStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF74D5552CAACEAC00B64D6E /* FirstStackView.swift */; };
@@ -160,6 +161,7 @@
 		AF5146882CD0B509000D9C97 /* ConfidantionalyPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfidantionalyPage.swift; sourceTree = "<group>"; };
 		AF51468A2CD0B522000D9C97 /* PrivacyPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPage.swift; sourceTree = "<group>"; };
 		AF51468C2CD297BC000D9C97 /* СonfirmationСodePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "СonfirmationСodePresenter.swift"; sourceTree = "<group>"; };
+		AF51468E2CD5546E000D9C97 /* PersonalAccauntPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalAccauntPresenter.swift; sourceTree = "<group>"; };
 		AF74D54F2CA7C97B00B64D6E /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
 		AF74D5512CA7EB3200B64D6E /* UserRegisterSecondPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRegisterSecondPageViewController.swift; sourceTree = "<group>"; };
 		AF74D5552CAACEAC00B64D6E /* FirstStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstStackView.swift; sourceTree = "<group>"; };
@@ -452,6 +454,7 @@
 			isa = PBXGroup;
 			children = (
 				AF4B1E142C9D9CB400FDA3EC /* PersonalAccountViewController.swift */,
+				AF51468E2CD5546E000D9C97 /* PersonalAccauntPresenter.swift */,
 				AF4B1E202CA06E6C00FDA3EC /* UserInfoViewController.swift */,
 				72ABD5AF2CCA02BD004E18E9 /* ClientHistory */,
 			);
@@ -782,6 +785,7 @@
 				AF51461C2CC64A91000D9C97 /* TokenRefresh.swift in Sources */,
 				AF4B1E022C9C17BA00FDA3EC /* EndPoint.swift in Sources */,
 				AF5146892CD0B509000D9C97 /* ConfidantionalyPage.swift in Sources */,
+				AF51468F2CD5546F000D9C97 /* PersonalAccauntPresenter.swift in Sources */,
 				AFF618852CB85E2100C64C95 /* CellForChat.swift in Sources */,
 				AFF618832CB82FA000C64C95 /* ClientHistoryViewController.swift in Sources */,
 				72D39B9E2CB1566800D9EB45 /* AdminHistoryView.swift in Sources */,

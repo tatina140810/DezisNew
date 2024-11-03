@@ -1,5 +1,6 @@
 import UIKit
 
+
 protocol IClientLoginPresenter: AnyObject {
     func loginUser(email: String, password: String, completion: @escaping (Result<String, Error>) -> Void)
 }

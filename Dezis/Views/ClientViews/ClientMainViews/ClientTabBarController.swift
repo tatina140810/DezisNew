@@ -12,7 +12,18 @@ class ClientTabBarController: UITabBarController {
         tabBar.unselectedItemTintColor = .white
         addTabBarBorder()
         navigationController?.navigationBar.barTintColor = UIColor(hex: "#1B2228")
+        NotificationCenter.default.addObserver(self, selector: #selector(switchToTab(_:)), name: NSNotification.Name("SwitchToTab"), object: nil)
+      }
+
+      @objc func switchToTab(_ notification: Notification) {
+          if let userInfo = notification.userInfo, let tabIndex = userInfo["tabIndex"] as? Int {
+              self.selectedIndex = tabIndex
+          }
+      }
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name("SwitchToTab"), object: nil)
     }
+
     private func addTabBarBorder() {
     
            let borderView = UIView()
@@ -28,7 +39,7 @@ class ClientTabBarController: UITabBarController {
        }
 
     func setupTabBarController() {
-        let homeView = ClientHomeViewController()
+        let homeView = UINavigationController(rootViewController: ClientHomeViewController()) 
         homeView.tabBarItem = UITabBarItem(title: "Главная", image: UIImage(resource: .house), selectedImage: UIImage(resource: .house))
 
         let calendarView = CalendarViewController()

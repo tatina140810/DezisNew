@@ -1,9 +1,18 @@
 import UIKit
 import SnapKit
 
-class PersonalAccountViewController: UIViewController {
+
+protocol PersonalAccountView: AnyObject {
+    func showUserData(user: UserProfile)
+    func showError(_ error: String)
+}
+
+class PersonalAccountViewController: UIViewController, PersonalAccountView {
     
     let imagePicker = ImagePicker()
+    var presenter: PersonalAccountPresenter?
+//    var email: String?
+ //   weak var delegate: RegistrationDelegate?
     
     private lazy var userImage: UIImageView = {
         let image = UIImageView()
@@ -165,7 +174,30 @@ class PersonalAccountViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = UIColor(hex: "#1B2228")
         setupUI()
+//        presenter = PersonalAccountPresenter(view: self, userService: UserNetworkService())
+//        if let email = email {
+//                   presenter?.fetchUserData(email: email)
+//               }
     }
+    
+    func showUserData(user: UserProfile) {
+        print("User data loaded: \(user)")
+        nameTextField.text = user.username
+        emailTextField.text = user.email
+        phoneTextField.text = user.number
+        passwordTextField.text = user.password
+        
+    
+        if let avatarUrl = user.avatar, let url = URL(string: avatarUrl) {
+        }
+    }
+       
+    func showError(_ error: String) {
+        let alert = UIAlertController(title: "Error", message: error, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        present(alert, animated: true)
+    }
+       
     
     private func setupUI() {
         view.addSubview(userImage)
@@ -290,3 +322,9 @@ class PersonalAccountViewController: UIViewController {
         }
     }
 }
+//extension PersonalAccountViewController: RegistrationDelegate {
+//    func didRegisterUser(email: String) {
+//        delegate?.didRegisterUser(email: email)
+//        presenter?.fetchUserData(email: email)
+//    }
+//}
