@@ -11,6 +11,8 @@ class PersonalAccountViewController: UIViewController, PersonalAccountView {
     
     let imagePicker = ImagePicker()
     var presenter: PersonalAccountPresenter?
+//    var email: String?
+ //   weak var delegate: RegistrationDelegate?
     
     private lazy var userImage: UIImageView = {
         let image = UIImageView()
@@ -172,18 +174,23 @@ class PersonalAccountViewController: UIViewController, PersonalAccountView {
         super.viewDidLoad()
         view.backgroundColor = UIColor(hex: "#1B2228")
         setupUI()
-        
-        presenter = PersonalAccountPresenter(view: self, userService: UserNetworkService())
-                presenter?.fetchUserData(userID: 40)
+//        presenter = PersonalAccountPresenter(view: self, userService: UserNetworkService())
+//        if let email = email {
+//                   presenter?.fetchUserData(email: email)
+//               }
     }
+    
     func showUserData(user: UserProfile) {
-           nameTextField.text = user.name
-           emailTextField.text = user.email
-           phoneTextField.text = user.phone
-           
-           if let url = URL(string: user.avatarURL) {
-           }
-       }
+        print("User data loaded: \(user)")
+        nameTextField.text = user.username
+        emailTextField.text = user.email
+        phoneTextField.text = user.number
+        passwordTextField.text = user.password
+        
+    
+        if let avatarUrl = user.avatar, let url = URL(string: avatarUrl) {
+        }
+    }
        
     func showError(_ error: String) {
         let alert = UIAlertController(title: "Error", message: error, preferredStyle: .alert)
@@ -315,3 +322,9 @@ class PersonalAccountViewController: UIViewController, PersonalAccountView {
         }
     }
 }
+//extension PersonalAccountViewController: RegistrationDelegate {
+//    func didRegisterUser(email: String) {
+//        delegate?.didRegisterUser(email: email)
+//        presenter?.fetchUserData(email: email)
+//    }
+//}

@@ -78,6 +78,12 @@ class UserRegisterSecondPageViewController: UIViewController, IUserRegisterSecon
         view.numberOfLines = 0
         return view
     }()
+    private let activityIndicator: UIActivityIndicatorView = {
+            let indicator = UIActivityIndicatorView(style: .large)
+            indicator.color = .white // Можно изменить цвет
+            indicator.hidesWhenStopped = true // Скрывать, когда остановлен
+            return indicator
+        }()
    
     
     override func viewDidLoad() {
@@ -87,7 +93,40 @@ class UserRegisterSecondPageViewController: UIViewController, IUserRegisterSecon
         createAttributedText()
         createPrivaciAttributedText()
         backButtonSetup()
+        keyBoardSetUp()
+        setupActivityIndicator()
        
+    }
+    private func setupActivityIndicator() {
+           view.addSubview(activityIndicator)
+           activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+           activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+           activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+       }
+       
+       // Показать индикатор
+       func showLoading() {
+           activityIndicator.startAnimating()
+       }
+
+       // Скрыть индикатор
+       func hideLoading() {
+           activityIndicator.stopAnimating()
+       }
+    func keyBoardSetUp(){
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+           NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+
+    }
+    @objc func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            let keyboardHeight = keyboardSize.cgRectValue.height
+            self.view.frame.origin.y = -keyboardHeight / 1.5
+        }
+    }
+
+    @objc func keyboardWillHide(notification: NSNotification) {
+        self.view.frame.origin.y = 0
     }
     
     private func backButtonSetup(){
@@ -227,6 +266,11 @@ class UserRegisterSecondPageViewController: UIViewController, IUserRegisterSecon
         let vc = UserRegisterViewController()
         navigationController?.pushViewController(vc, animated: true)
     }
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+
     
 
 }

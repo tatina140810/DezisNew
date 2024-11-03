@@ -8,6 +8,7 @@ enum UserApi {
     case refreshToken(refreshToken: String)
     case booking (user: Int, service: String, date: String, time: String, is_completed: Bool)
     case user (id: Int)
+    case getUserProfile(email: String)
 }
 
 extension UserApi: TargetType {
@@ -30,6 +31,8 @@ extension UserApi: TargetType {
             return "/api/v1/contact/booking/"
         case.user(let id):
             return "/api/v1/user/list-user/\(id)"
+        case .getUserProfile(_):
+            return "/api/v1/user/list-user/"
         }
     }
     
@@ -44,6 +47,8 @@ extension UserApi: TargetType {
         case .booking:
             return .post
         case .user:
+            return .get
+        case .getUserProfile:
             return .get
         }
     }
@@ -81,8 +86,8 @@ extension UserApi: TargetType {
                                                   ], encoding: JSONEncoding.default)
         case .user(let id):
             return .requestParameters(parameters: ["id": id], encoding: JSONEncoding.default)
-        default:
-            return .requestPlain
+        case .getUserProfile(let email):
+            return .requestParameters(parameters: ["email": email], encoding: URLEncoding.default)
         }
     }
     
@@ -93,17 +98,6 @@ extension UserApi: TargetType {
             return ["Content-Type": "application/json"]
                 }
                 
-//            case .news:
-//                
-//                if !token.isEmpty {
-//                    return ["Authorization": "Bearer\(token)", "Content-Type": "application/json"]
-//                } else {
-//                    return nil
-//                }
-//        }
-//            case .booking:
-//                return ["Content-Type": "application/json"]
-//            }
     var sampleData: Data {
             return Data()
         }

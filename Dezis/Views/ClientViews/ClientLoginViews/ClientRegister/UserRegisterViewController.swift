@@ -1,9 +1,12 @@
 import UIKit
 import SnapKit
 
+protocol RegistrationDelegate: AnyObject {
+    func didRegisterUser(email: String)
+}
 
 class UserRegisterViewController: UIViewController {
-   
+    weak var delegate: RegistrationDelegate?
     
     private var titleLabel: UILabel = {
         let label = UILabel()
@@ -75,6 +78,7 @@ class UserRegisterViewController: UIViewController {
         createAttributedText()
         createPrivaciAttributedText()
         setupAddTarget()
+        keyBoardSetUp()
     }
     
     private func setupAddTarget(){
@@ -101,6 +105,22 @@ class UserRegisterViewController: UIViewController {
             action: #selector(attributedPrivaciTextTapped)
         )
     }
+    func keyBoardSetUp(){
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+           NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+
+    }
+    @objc func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            let keyboardHeight = keyboardSize.cgRectValue.height
+            self.view.frame.origin.y = -keyboardHeight / 1.5
+        }
+    }
+
+    @objc func keyboardWillHide(notification: NSNotification) {
+        self.view.frame.origin.y = 0
+    }
+
     
     private func setupUI() {
         
@@ -227,17 +247,13 @@ class UserRegisterViewController: UIViewController {
             passwordTextField.layer.borderWidth = 1.0
             return
         }
+        delegate?.didRegisterUser(email: email)
         
         let userInfo = UserInfo(username: username, password: password, email: email, address: "", apartmentNumber: "")
         let vc = UserRegisterBuilder.build(userinfo: userInfo)
         navigationController?.pushViewController(vc, animated: true)
     }
-    func sendEmail(email: String) {
-        var email = emailTextField.text
-    }
-    
-    
-    
+   
     private func showAlert(message: String) {
         let alert = UIAlertController(title: "Ошибка", message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default))
@@ -246,5 +262,16 @@ class UserRegisterViewController: UIViewController {
     @objc func backButtonTapped(){
         navigationController?.pushViewController(ClientChoiceViewController(), animated: true)
     }
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+
 }
+extension UserRegisterViewController: RegistrationDelegate {
+    func didRegisterUser(email: String) {
+        print("Registered user email: \(email)")
+    }
+}
+
 

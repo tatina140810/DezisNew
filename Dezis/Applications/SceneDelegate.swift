@@ -10,17 +10,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         window = UIWindow(windowScene: windowScene)
        
-//        let hasCompletedOnboarding = UserDefaults.standard.bool(forKey: "hasCompletedOnboarding")
-//        
-//        if hasCompletedOnboarding {
-//            let choiceVC = UINavigationController(rootViewController: ChoiceViewController()) 
-//            window?.rootViewController = choiceVC
-//        } else {
-           // let root = UINavigationController(rootViewController: FirstOnboardingViewController())
-        let root = UINavigationController(rootViewController: ClientTabBarController())
+        let hasCompletedOnboarding = UserDefaults.standard.bool(forKey: "hasCompletedOnboarding")
+        
+        if hasCompletedOnboarding {
+            let choiceVC = UINavigationController(rootViewController: ChoiceViewController()) 
+            window?.rootViewController = choiceVC
+        } else {
+            let root = UINavigationController(rootViewController: FirstOnboardingViewController())
+       
    
             window?.rootViewController = root
-      // }
+      }
         
         window?.makeKeyAndVisible()
         if #available(iOS 15, *) {

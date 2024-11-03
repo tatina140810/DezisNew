@@ -16,7 +16,7 @@ class ChoiceViewController: UIViewController {
         let label = UILabel()
         label.text = "Для оформления заказов"
         label.textColor = .white
-        label.textAlignment = .left
+        label.textAlignment = .center
         label.font = UIFont(name: "SFProDisplay-Regular", size: 16)
         return label
     }()
@@ -27,7 +27,7 @@ class ChoiceViewController: UIViewController {
         let label = UILabel()
         label.text = "Для управления системой"
         label.textColor = .white
-        label.textAlignment = .left
+        label.textAlignment = .center
         label.font = UIFont(name: "SFProDisplay-Regular", size: 16)
         return label
     }()
@@ -62,13 +62,11 @@ class ChoiceViewController: UIViewController {
     var originalTabBarAppearance: UITabBarAppearance?
     
     func showNoInternetAlert(message: String, secondMessage: String) {
-        // Сохраняем оригинальные настройки (только при первом вызове)
         if originalNavigationBarAppearance == nil, originalTabBarAppearance == nil {
             originalNavigationBarAppearance = UINavigationBar.appearance().standardAppearance
             originalTabBarAppearance = UITabBar.appearance().standardAppearance
         }
-        
-        // Устанавливаем временные настройки с прозрачным фоном
+    
         let temporaryNavigationBarAppearance = UINavigationBarAppearance()
         temporaryNavigationBarAppearance.configureWithTransparentBackground()
         UINavigationBar.appearance().standardAppearance = temporaryNavigationBarAppearance

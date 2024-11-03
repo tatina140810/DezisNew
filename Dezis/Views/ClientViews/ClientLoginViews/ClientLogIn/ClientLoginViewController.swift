@@ -92,15 +92,26 @@ class ClientLoginViewController: UIViewController, UITextFieldDelegate, IClientL
         setupUI()
         createAttributedText()
         createPrivaciAttributedText()
-        backButtonSetup()
+        keyBoardSetUp()
         presenter = ClientLoginPresenter(view: self)
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Назад", style: .plain, target: self, action: #selector(backButtonTapped))
     }
-    
-    private func backButtonSetup(){
-        let backButton = UIBarButtonItem(title: "Назад", style: .plain, target: self, action: #selector(backButtonTapped))
-        
-        navigationItem.leftBarButtonItem = backButton
+    func keyBoardSetUp(){
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+           NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+
     }
+    @objc func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            let keyboardHeight = keyboardSize.cgRectValue.height
+            self.view.frame.origin.y = -keyboardHeight / 2
+        }
+    }
+
+    @objc func keyboardWillHide(notification: NSNotification) {
+        self.view.frame.origin.y = 0
+    }
+
     private func setupUI() {
         
         view.addSubview(titleLabel)
@@ -155,6 +166,7 @@ class ClientLoginViewController: UIViewController, UITextFieldDelegate, IClientL
             make.centerX.equalToSuperview()
             make.leading.trailing.equalToSuperview().inset(20)
         }
+        
     }
     
     private func createAttributedText() {
@@ -239,9 +251,14 @@ class ClientLoginViewController: UIViewController, UITextFieldDelegate, IClientL
     }
     func loginSuccess() {
         print("Успешный вход")
-        navigationController?.pushViewController(EntryAllowedViewController(), animated: true)
+        
+        // Создание экземпляра EntryAllowedViewController с передачей необходимых параметров
+        let userService = UserNetworkService() // Инициализируйте ваш userService
+        let email = "user@example.com" // Используйте email пользователя
+
+        let entryAllowedVC = EntryAllowedViewController(userService: userService, email: email)
+        navigationController?.pushViewController(entryAllowedVC, animated: true)
     }
-    
     
     func loginFailed(error: String) {
         
@@ -268,5 +285,9 @@ class ClientLoginViewController: UIViewController, UITextFieldDelegate, IClientL
     @objc private func backButtonTapped() {
         
         navigationController?.popViewController(animated: true)
+    }
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
 }

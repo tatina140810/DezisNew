@@ -26,6 +26,7 @@ class CalendarViewController: UIViewController, ICalendarViewController {
    
     var presenter: ICalendarPresenter?
     
+    private var user: Int = 0
     private var date: String = ""
     private var time: String = ""
     private var service: String = ""
@@ -209,8 +210,10 @@ class CalendarViewController: UIViewController, ICalendarViewController {
     }
     
     @objc func orderButtonTapped() {
+        
         var bookingInfo = presenter?.bookingRequest()
-       
+        
+        bookingInfo?.user = user
         bookingInfo?.service = service
         bookingInfo?.date = date
         bookingInfo?.time = time
