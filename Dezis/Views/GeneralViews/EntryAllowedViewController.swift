@@ -1,8 +1,10 @@
 import UIKit
 
 class EntryAllowedViewController: UIViewController{
+
     private let userService: UserNetworkService
     var email: String?
+    
     
     init(userService: UserNetworkService, email: String) {
             self.userService = userService

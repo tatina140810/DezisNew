@@ -210,11 +210,11 @@ class СonfirmationСodeViewController: UIViewController, IСonfirmationСodeVie
     func loginSuccess() {
         print("Успешный вход")
     
-        let userService = UserNetworkService()
+       
         let email = ""
 
-        let entryAllowedVC = EntryAllowedViewController(userService: userService, email: email)
-        navigationController?.pushViewController(entryAllowedVC, animated: true)
+//        let entryAllowedVC = EntryAllowedViewController(userService: userService, email: email)
+//        navigationController?.pushViewController(entryAllowedVC, animated: true)
     }
     func loginFailed(error: Error) {
         let errorMessage = error.localizedDescription
@@ -253,21 +253,33 @@ class СonfirmationСodeViewController: UIViewController, IСonfirmationСodeVie
             
          
         presenter?.verifyUser(email: email, otp: otp) { [weak self] result in
-                DispatchQueue.main.async {
-                    switch result {
-                    case .success(let message):
-                        print("Login successful: \(message)")
-                        self?.loginSuccess()
-                    case .failure(let error):
-                        print("Login failed: \(error)")
-                        self?.loginFailed(error: error)
-                    }
+            DispatchQueue.main.async {
+                guard let self = self else { return } // Развернем self, чтобы избежать сильной ссылки
+                
+                switch result {
+                case .success(let message):
+                    print("Login successful: \(message)")
+                    self.loginSuccess()
+                    
+                   
+                    let userService = UserNetworkService()
+                    let entryAllowedVC = EntryAllowedViewController(userService: userService, email: self.email ?? "")
+                    
+                    self.navigationController?.pushViewController(entryAllowedVC, animated: true)
+                    
+                case .failure(let error):
+                    print("Login failed: \(error)")
+                    self.loginFailed(error: error)
                 }
             }
         }
 
+        }
+        
+
+
     @objc private func backButtonTapped() {
-        let vc = UserRegisterSecondPageViewController()
+      
         navigationController?.popViewController(animated: true)
     }
     deinit {
