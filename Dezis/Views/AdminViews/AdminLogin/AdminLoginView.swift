@@ -58,6 +58,7 @@ class AdminLoginView: UIViewController {
         var field = UITextField()
         field.backgroundColor = UIColor(hex: "#2B373E")
         field.textColor = .white
+        field.isSecureTextEntry = true
         field.layer.borderWidth = 1
         field.layer.borderColor = UIColor.clear.cgColor
         field.attributedPlaceholder = NSAttributedString(
@@ -145,7 +146,7 @@ class AdminLoginView: UIViewController {
         view.backgroundColor = .init(hex: "#1B2228")
         setupUI()
         setupAddTarget()
-        
+        setupNavigation()
         presenter = AdminLoginPresenter(view: self)
     }
     
@@ -192,6 +193,34 @@ class AdminLoginView: UIViewController {
     
     private func setupAddTarget() {
         continueButton.addTarget(self, action: #selector(continueButtonTapped), for: .touchUpInside)
+    }
+    
+    private func setupNavigation() {
+        let backButton = UIButton(type: .system)
+        backButton.setTitle("Назад", for: .normal)
+        backButton.setTitleColor(.systemBlue, for: .normal)
+        backButton.titleLabel?.font = UIFont(name: "SFProDisplay-Regular", size: 17)
+
+        let chevronImage = UIImage(resource: .shevron).withRenderingMode(.alwaysTemplate)
+        let resizedChevron = UIGraphicsImageRenderer(size: CGSize(width: 8, height: 14)).image { _ in
+            chevronImage.draw(in: CGRect(origin: .zero, size: CGSize(width: 8, height: 14)))
+        }
+        backButton.setImage(resizedChevron, for: .normal)
+        backButton.tintColor = .systemBlue
+
+        backButton.semanticContentAttribute = .forceLeftToRight
+        backButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: -7, bottom: 0, right: 5)
+        backButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 3, bottom: 0, right: -5)
+
+       
+        backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
+
+        let backBarButtonItem = UIBarButtonItem(customView: backButton)
+        navigationItem.leftBarButtonItem = backBarButtonItem
+    }
+    
+    @objc private func backButtonTapped() {
+        navigationController?.popViewController(animated: true)
     }
     
     @objc private func togglePasswordVisibility() {

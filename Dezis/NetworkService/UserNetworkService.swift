@@ -214,4 +214,22 @@ class UserNetworkService {
             }
         }
     }
+    
+    func fetchClientOrders(completion: @escaping (Result<[Order], Error>) -> Void) {
+        provider.request(.fetchClientOrders) { result in
+            switch result {
+            case .success(let response):
+                do {
+                    let orders = try JSONDecoder().decode([Order].self, from: response.data)
+                    completion(.success(orders))
+                } catch {
+                    print("Ошибка декодирования: \(error)")
+                    completion(.failure(error))
+                }
+            case .failure(let error):
+                print("Ошибка сети: \(error)")
+                completion(.failure(error))
+            }
+        }
+    }
 }

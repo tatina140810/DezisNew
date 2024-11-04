@@ -9,6 +9,7 @@ enum UserApi {
     case booking (user: Int, service: String, date: String, time: String, is_completed: Bool)
     case user (id: Int)
     case getUserProfile(email: String)
+    case fetchClientOrders
 }
 
 extension UserApi: TargetType {
@@ -33,6 +34,8 @@ extension UserApi: TargetType {
             return "/api/v1/user/list-user/\(id)"
         case .getUserProfile(_):
             return "/api/v1/user/list-user/"
+        case .fetchClientOrders:
+            return "/api/v1/contact/booking/"
         }
     }
     
@@ -49,6 +52,8 @@ extension UserApi: TargetType {
         case .user:
             return .get
         case .getUserProfile:
+            return .get
+        case .fetchClientOrders:
             return .get
         }
     }
@@ -89,6 +94,8 @@ extension UserApi: TargetType {
             return .requestParameters(parameters: ["id": id], encoding: JSONEncoding.default)
         case .getUserProfile(let email):
             return .requestParameters(parameters: ["email": email], encoding: URLEncoding.default)
+        case .fetchClientOrders:
+            return .requestPlain
         }
     }
     
