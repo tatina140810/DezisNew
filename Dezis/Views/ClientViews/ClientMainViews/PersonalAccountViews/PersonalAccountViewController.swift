@@ -169,6 +169,18 @@ class PersonalAccountViewController: UIViewController, PersonalAccountView {
         return button
     }()
     
+    private lazy var exitButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Выйти", for: .normal)
+        button.titleLabel?.font = UIFont(name: "SFProDisplay-Regular", size: 16)
+        button.setTitleColor(.red, for: .normal)
+        button.backgroundColor = UIColor(hex: "#2B373E")
+        button.layer.cornerRadius = 8
+        button.clipsToBounds = true
+        button.addTarget(self, action: #selector(exitButtonTapped), for: .touchUpInside)
+        return button
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(hex: "#1B2228")
@@ -273,6 +285,13 @@ class PersonalAccountViewController: UIViewController, PersonalAccountView {
             make.trailing.equalToSuperview().offset(-20)
             make.height.equalTo(40)
         }
+        view.addSubview(exitButton)
+        exitButton.snp.makeConstraints { make in
+            make.top.equalTo(historyButton.snp.bottom).offset(17)
+            make.leading.equalToSuperview().offset(20)
+            make.trailing.equalToSuperview().offset(-20)
+            make.height.equalTo(40)
+        }
     }
     
     @objc func historyButtonTapped() {
@@ -315,6 +334,10 @@ class PersonalAccountViewController: UIViewController, PersonalAccountView {
         imagePicker.showImagePicker(in: self) { [weak self] image in
             self?.userImage.image = image
         }
+    }
+    @objc func exitButtonTapped(){
+        let vc = ExitAlertView()
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
 

@@ -185,7 +185,6 @@ class UserNetworkService {
         }
     }
     func getUserProfile(email: String, completion: @escaping (Result<UserProfile, Error>) -> Void) {
-        print("Executing network request for email: \(email)")
         provider.request(.getUserProfile(email: email)) { result in
             switch result {
             case .success(let response):
@@ -201,7 +200,7 @@ class UserNetworkService {
                         completion(.success(user))
                     } else {
                         print("User not found for email: \(email)")
-                        completion(.failure(NSError(domain: "", code: 404, userInfo: [NSLocalizedDescriptionKey: "User not found"])))
+                        completion(.failure(NSError(domain: "", code: 404, userInfo: [NSLocalizedDescriptionKey: "Юзер не найден"])))
                     }
                 } catch {
                    
