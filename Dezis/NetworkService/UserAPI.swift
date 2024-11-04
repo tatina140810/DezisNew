@@ -1,7 +1,7 @@
 import Moya
 
 enum UserApi {
-    case userRegister(username: String, email: String, password: String, apartmentNumber: String, address: String)
+    case userRegister(username: String, email: String, number: String, password: String, apartmentNumber: String, address: String)
     case verifyUser(email: String, otp: String)
     case getToken(email: String, password: String)
     case userLogin(email: String, password: String)
@@ -61,12 +61,13 @@ extension UserApi: TargetType {
                                       encoding: JSONEncoding.default)
         case .refreshToken(let refreshToken):
             return .requestParameters(parameters: ["refresh": refreshToken], encoding: JSONEncoding.default)
-        case .userRegister(let username, let email, let password, let apartmentNumber, let address):
+        case .userRegister(let username, let email, let number, let password, let apartmentNumber, let address):
             return .requestParameters(parameters: ["username": username,
                                                    "email": email,
                                                    "apartment_number": apartmentNumber,
                                                    "address": address,
-                                                   "password": password],
+                                                   "password": password,
+                                                   "number": number],
                                       encoding: JSONEncoding.default)
         case .verifyUser(let email, let otp):
             return .requestParameters(parameters: ["email": email,
@@ -77,7 +78,7 @@ extension UserApi: TargetType {
             return .requestParameters(parameters: ["email": email,
                                                    "password": password], 
                                       encoding: JSONEncoding.default)
-        case .booking(let user, let service, let date, let time, let is_completed):
+        case .booking(let user, let service, let date, let time, _):
             return .requestParameters(parameters: [ "user": user,
                                                     "service": service,
                                                     "date": date,

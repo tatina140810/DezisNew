@@ -94,7 +94,31 @@ class ClientLoginViewController: UIViewController, UITextFieldDelegate, IClientL
         createPrivaciAttributedText()
         keyBoardSetUp()
         presenter = ClientLoginPresenter(view: self)
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Назад", style: .plain, target: self, action: #selector(backButtonTapped))
+        backButtonSetup()
+    }
+    func backButtonSetup(){
+        let backButton = UIButton(type: .system)
+        backButton.setTitle("Назад", for: .normal)
+        backButton.setTitleColor(.systemBlue, for: .normal)
+        backButton.titleLabel?.font = UIFont(name: "SFProDisplay-Regular", size: 17)
+
+        let chevronImage = UIImage(resource: .shevron).withRenderingMode(.alwaysTemplate)
+        let resizedChevron = UIGraphicsImageRenderer(size: CGSize(width: 8, height: 14)).image { _ in
+            chevronImage.draw(in: CGRect(origin: .zero, size: CGSize(width: 8, height: 14)))
+        }
+        backButton.setImage(resizedChevron, for: .normal)
+        backButton.tintColor = .systemBlue
+
+        backButton.semanticContentAttribute = .forceLeftToRight
+        backButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: -7, bottom: 0, right: 5)
+        backButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 3, bottom: 0, right: -5)
+
+       
+        backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
+
+        let backBarButtonItem = UIBarButtonItem(customView: backButton)
+        navigationItem.leftBarButtonItem = backBarButtonItem
+
     }
     func keyBoardSetUp(){
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)

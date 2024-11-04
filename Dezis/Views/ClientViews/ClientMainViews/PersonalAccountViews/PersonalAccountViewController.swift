@@ -317,12 +317,4 @@ class PersonalAccountViewController: UIViewController, PersonalAccountView {
         }
     }
 }
-//extension PersonalAccountViewController: RegistrationDelegate {
-//    func didRegisterUser(email: String) {
-//        print("имаил получен")
-//        self.email = email
-//        presenter = PersonalAccountPresenter(view: self, userService: UserNetworkService())
-//              presenter?.fetchUserData(email: email)
-//    }
-//}
 

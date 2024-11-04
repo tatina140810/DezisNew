@@ -4,13 +4,26 @@ import UIKit
 class DezinfectionViewController: UIViewController {
     
     private lazy var backButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("Назад", for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 17)
-        button.setTitleColor(UIColor(hex: "#0A84FF"), for: .normal)
-        button.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
-        return button
-        
+        let backButton = UIButton(type: .system)
+        backButton.setTitle("Назад", for: .normal)
+        backButton.setTitleColor(.systemBlue, for: .normal)
+        backButton.titleLabel?.font = UIFont(name: "SFProDisplay-Regular", size: 17)
+
+        let chevronImage = UIImage(resource: .shevron).withRenderingMode(.alwaysTemplate)
+        let resizedChevron = UIGraphicsImageRenderer(size: CGSize(width: 8, height: 14)).image { _ in
+            chevronImage.draw(in: CGRect(origin: .zero, size: CGSize(width: 8, height: 14)))
+        }
+        backButton.setImage(resizedChevron, for: .normal)
+        backButton.tintColor = .systemBlue
+
+        backButton.semanticContentAttribute = .forceLeftToRight
+        backButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: -7, bottom: 0, right: 5)
+        backButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 3, bottom: 0, right: -5)
+
+       
+        backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
+
+        return backButton
     }()
     
     
@@ -65,7 +78,7 @@ class DezinfectionViewController: UIViewController {
         backButton.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(60)
             make.leading.equalToSuperview().offset(20)
-            make.width.equalTo(50)
+            make.width.equalTo(58)
             make.height.equalTo(24)
             
         }

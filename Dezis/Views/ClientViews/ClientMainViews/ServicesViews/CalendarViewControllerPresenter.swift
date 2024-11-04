@@ -3,10 +3,11 @@ import Moya
 
 protocol ICalendarPresenter: AnyObject {
     func bookingRequest() -> BookingInfo?
-    func booking(bookingInfo: BookingInfo, completion: @escaping (Result<BookingLoginResponse, Error>) -> Void)
-}
+    func  booking(bookingInfo: BookingInfo, completion: @escaping (Result<BookingLoginResponse, Error>) -> Void)
+    }
 
 class CalendarViewControllerPresenter: ICalendarPresenter {
+   
 
     var bookingInfo: BookingInfo?
     

@@ -6,16 +6,7 @@ struct BookingInfo {
     var service: String
     var date: String
     var time: String
-}
-final class BookingBuilder {
-    class func build(bookingInfo: BookingInfo) -> UIViewController {
-        let view = CalendarViewController()
-        let presenter = CalendarViewControllerPresenter(view: view)
-        view.presenter = presenter
-        presenter.view = view
-        presenter.bookingInfo = bookingInfo
-        return view
-    }
+    var is_completed: Bool
 }
 
 protocol ICalendarViewController {
@@ -26,10 +17,15 @@ class CalendarViewController: UIViewController, ICalendarViewController {
    
     var presenter: ICalendarPresenter?
     
-    private var user: Int = 0
+    private var user: Int {
+        return UserDefaults.standard.integer(forKey: "userID")
+    }
+   
     private var date: String = ""
     private var time: String = ""
     private var service: String = ""
+    private var isCompleted: Bool = true
+    
 
     
     private lazy var datePicker: UIDatePicker = {
@@ -117,7 +113,21 @@ class CalendarViewController: UIViewController, ICalendarViewController {
         setupAddTarget()
         setupUI()
         checkBoxSettings()
+        setupDatePicker()
+        presenter = CalendarViewControllerPresenter(view: self)
+        
     }
+    private func setupDatePicker() {
+            let calendar = Calendar.current
+            let currentDate = Date()
+            
+            if let startOfMonth = calendar.date(from: calendar.dateComponents([.year, .month], from: currentDate)),
+               let endOfMonth = calendar.date(byAdding: .month, value: 1, to: startOfMonth)?.addingTimeInterval(-1) {
+                
+                datePicker.minimumDate = startOfMonth
+                datePicker.maximumDate = endOfMonth
+            }
+        }
     
     private func checkBoxSettings(){
         
@@ -138,7 +148,7 @@ class CalendarViewController: UIViewController, ICalendarViewController {
     private func setupUI() {
         view.addSubview(datePicker)
         datePicker.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(70)
+            make.top.equalToSuperview().offset(80)
             make.leading.trailing.equalToSuperview().inset(20)
             make.width.equalTo(400)
         }
@@ -208,35 +218,58 @@ class CalendarViewController: UIViewController, ICalendarViewController {
             make.leading.equalTo(thirdCheckBox.snp.trailing).offset(10)
         }
     }
-    
+  
     @objc func orderButtonTapped() {
+        guard user != 0 else {
+            print("Error: User ID not found in UserDefaults.")
+            return
+        }
         
-        var bookingInfo = presenter?.bookingRequest()
+        guard !service.isEmpty, !date.isEmpty, !time.isEmpty else {
+            print("Error: Missing booking information.")
+            return
+        }
         
-        bookingInfo?.user = user
-        bookingInfo?.service = service
-        bookingInfo?.date = date
-        bookingInfo?.time = time
+        let bookingInfo = BookingInfo(
+            user: user,
+            service: service,
+            date: date,
+            time: time,
+            is_completed: true
+        )
         
-        if let bookingInfo = bookingInfo {
-       
-            presenter?.booking(bookingInfo: bookingInfo) { [weak self] result in
-                DispatchQueue.main.async {
-                    switch result {
-                    case .success:
-                        let vc = ViewControllerForAlert()
-                        self?.navigationController?.pushViewController(vc, animated: true)
-                    case .failure(let error):
-                       
-                        print("Booking failed with error: \(error.localizedDescription)")
-                    }
+        print("Создание информации о бронировании:", bookingInfo)
+        guard let presenter = presenter else {
+                print("Error: Presenter is not initialized.")
+                return
+            }
+        
+        presenter.booking(bookingInfo: bookingInfo) { [weak self] result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let response):
+                    print("Бронирование завершено с ответом:", response)
+                    self?.showBookingSuccessAlert(response: response)
+                    
+                case .failure(let error):
+                    print("Ошибка бронирования:", error.localizedDescription)
+                    self?.showBookingErrorAlert(error: error)
                 }
             }
-        } else {
-            print("Failed to create booking info.")
         }
     }
 
+           private func showBookingSuccessAlert(response: BookingLoginResponse) {
+               let vc = ViewControllerForAlert()
+               navigationController?.present(vc, animated: true)
+           }
+           
+           private func showBookingErrorAlert(error: Error) {
+               let alert = UIAlertController(title: "Ошибка бронирования", message: error.localizedDescription, preferredStyle: .alert)
+               alert.addAction(UIAlertAction(title: "OK", style: .default))
+               present(alert, animated: true)
+           }
+       
     @objc private func dateChanged(_ picker: UIDatePicker) {
             let currentDate = picker.date
            
@@ -245,7 +278,7 @@ class CalendarViewController: UIViewController, ICalendarViewController {
             date = dateFormatter.string(from: currentDate)
           
             let timeFormatter = DateFormatter()
-            timeFormatter.dateFormat = "HH:mm:ss"
+            timeFormatter.dateFormat = "HH:mm"
             time = timeFormatter.string(from: currentDate)
             
             print("Выбранная дата: \(date)")
@@ -259,8 +292,6 @@ class CalendarViewController: UIViewController, ICalendarViewController {
     
     @objc private func doneTapped() {
         print("Выбор завершен, дата и время: \(date) \(time)")
-        let vc = ViewControllerForAlert()
-        navigationController?.present(vc, animated: true)
 
     }
     @objc func firstCheckBoxTapped() {
@@ -276,7 +307,6 @@ class CalendarViewController: UIViewController, ICalendarViewController {
         }
         
         private func selectService(service: String, selectedCheckBox: CheckboxButton) {
-            // Убираем отметку с других чекбоксов
             firstCheckBox.isSelected = false
             secondCheckBox.isSelected = false
             thirdCheckBox.isSelected = false
@@ -287,7 +317,6 @@ class CalendarViewController: UIViewController, ICalendarViewController {
             print("Выбранная услуга: \(service)")
         }
 
-    
     func bookingRequestSuccessful() {
             print("Бронирование успешно выполнено")
         }

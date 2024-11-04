@@ -5,6 +5,7 @@ struct UserInfo {
     let username: String
     let password: String
     let email: String
+    let number: String
     var address: String
     var apartmentNumber: String
 }
@@ -94,28 +95,12 @@ class UserRegisterSecondPageViewController: UIViewController, IUserRegisterSecon
         createPrivaciAttributedText()
         backButtonSetup()
         keyBoardSetUp()
-        setupActivityIndicator()
        
     }
-    private func setupActivityIndicator() {
-           view.addSubview(activityIndicator)
-           activityIndicator.translatesAutoresizingMaskIntoConstraints = false
-           activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-           activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-       }
-       
-       // Показать индикатор
-       func showLoading() {
-           activityIndicator.startAnimating()
-       }
-
-       // Скрыть индикатор
-       func hideLoading() {
-           activityIndicator.stopAnimating()
-       }
+   
     func keyBoardSetUp(){
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-           NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
 
     }
     @objc func keyboardWillShow(notification: NSNotification) {
@@ -130,9 +115,28 @@ class UserRegisterSecondPageViewController: UIViewController, IUserRegisterSecon
     }
     
     private func backButtonSetup(){
-        let backButton = UIBarButtonItem(title: "Назад", style: .plain, target: self, action: #selector(backButtonTapped))
+        let backButton = UIButton(type: .system)
+        backButton.setTitle("Назад", for: .normal)
+        backButton.setTitleColor(.systemBlue, for: .normal)
+        backButton.titleLabel?.font = UIFont(name: "SFProDisplay-Regular", size: 17)
 
-        navigationItem.leftBarButtonItem = backButton
+        let chevronImage = UIImage(resource: .shevron).withRenderingMode(.alwaysTemplate)
+        let resizedChevron = UIGraphicsImageRenderer(size: CGSize(width: 8, height: 14)).image { _ in
+            chevronImage.draw(in: CGRect(origin: .zero, size: CGSize(width: 8, height: 14)))
+        }
+        backButton.setImage(resizedChevron, for: .normal)
+        backButton.tintColor = .systemBlue
+
+        backButton.semanticContentAttribute = .forceLeftToRight
+        backButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: -7, bottom: 0, right: 5)
+        backButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 3, bottom: 0, right: -5)
+
+       
+        backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
+
+        let backBarButtonItem = UIBarButtonItem(customView: backButton)
+        navigationItem.leftBarButtonItem = backBarButtonItem
+
         nextButton.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
     }
     private func createAttributedText() {

@@ -11,6 +11,8 @@ class ClientTabBarController: UITabBarController {
         tabBar.barTintColor = UIColor(hex: "#1B2228")
         tabBar.unselectedItemTintColor = .white
         addTabBarBorder()
+        navigationController?.setNavigationBarHidden(true, animated: true)
+       navigationItem.hidesBackButton = true
         navigationController?.navigationBar.barTintColor = UIColor(hex: "#1B2228")
         NotificationCenter.default.addObserver(self, selector: #selector(switchToTab(_:)), name: NSNotification.Name("SwitchToTab"), object: nil)
       }
