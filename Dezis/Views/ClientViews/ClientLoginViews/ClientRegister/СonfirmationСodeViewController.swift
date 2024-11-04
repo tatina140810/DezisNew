@@ -128,9 +128,28 @@ class СonfirmationСodeViewController: UIViewController, IСonfirmationСodeVie
         self.view.frame.origin.y = 0
     }
     private func backButtonSetup(){
-        let backButton = UIBarButtonItem(title: "Назад", style: .plain, target: self, action: #selector(backButtonTapped))
+        let backButton = UIButton(type: .system)
+        backButton.setTitle("Назад", for: .normal)
+        backButton.setTitleColor(.systemBlue, for: .normal)
+        backButton.titleLabel?.font = UIFont(name: "SFProDisplay-Regular", size: 17)
 
-        navigationItem.leftBarButtonItem = backButton
+        let chevronImage = UIImage(resource: .shevron).withRenderingMode(.alwaysTemplate)
+        let resizedChevron = UIGraphicsImageRenderer(size: CGSize(width: 8, height: 14)).image { _ in
+            chevronImage.draw(in: CGRect(origin: .zero, size: CGSize(width: 8, height: 14)))
+        }
+        backButton.setImage(resizedChevron, for: .normal)
+        backButton.tintColor = .systemBlue
+
+        backButton.semanticContentAttribute = .forceLeftToRight
+        backButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: -7, bottom: 0, right: 5)
+        backButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 3, bottom: 0, right: -5)
+
+       
+        backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
+
+        let backBarButtonItem = UIBarButtonItem(customView: backButton)
+        navigationItem.leftBarButtonItem = backBarButtonItem
+
         nextButton.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
     }
     private func setupUI(){
@@ -210,11 +229,11 @@ class СonfirmationСodeViewController: UIViewController, IСonfirmationСodeVie
     func loginSuccess() {
         print("Успешный вход")
     
-        let userService = UserNetworkService()
+       
         let email = ""
 
-        let entryAllowedVC = EntryAllowedViewController(userService: userService, email: email)
-        navigationController?.pushViewController(entryAllowedVC, animated: true)
+//        let entryAllowedVC = EntryAllowedViewController(userService: userService, email: email)
+//        navigationController?.pushViewController(entryAllowedVC, animated: true)
     }
     func loginFailed(error: Error) {
         let errorMessage = error.localizedDescription
@@ -253,21 +272,30 @@ class СonfirmationСodeViewController: UIViewController, IСonfirmationСodeVie
             
          
         presenter?.verifyUser(email: email, otp: otp) { [weak self] result in
-                DispatchQueue.main.async {
-                    switch result {
-                    case .success(let message):
-                        print("Login successful: \(message)")
-                        self?.loginSuccess()
-                    case .failure(let error):
-                        print("Login failed: \(error)")
-                        self?.loginFailed(error: error)
-                    }
+            DispatchQueue.main.async {
+                guard let self = self else { return } 
+                
+                switch result {
+                case .success(let message):
+                    print("Login successful: \(message)")
+                    self.loginSuccess()
+                    
+                    let entryAllowedVC = EntryAllowedViewController()
+                    self.navigationController?.pushViewController(entryAllowedVC, animated: true)
+                    
+                case .failure(let error):
+                    print("Login failed: \(error)")
+                    self.loginFailed(error: error)
                 }
             }
         }
 
+        }
+        
+
+
     @objc private func backButtonTapped() {
-        let vc = UserRegisterSecondPageViewController()
+      
         navigationController?.popViewController(animated: true)
     }
     deinit {

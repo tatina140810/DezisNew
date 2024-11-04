@@ -24,7 +24,7 @@ class EntryDeniedViewController: UIViewController {
         return view
     }()
     
-    private lazy var nextButton = ButtonSettings().buttonMaker(title: "Вернуться ко входу", 
+    private lazy var nextButton = ButtonSettings().buttonMaker(title: "Вернуться ко входу",
                                                                target: self,
                                                                action: #selector(nextButtonTapped))
     
@@ -60,6 +60,7 @@ class EntryDeniedViewController: UIViewController {
         }
     }
     @objc func nextButtonTapped() {
+        
         let vc = ChoiceViewController()
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true, completion: nil)

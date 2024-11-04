@@ -8,11 +8,10 @@ protocol PersonalAccountView: AnyObject {
 }
 
 class PersonalAccountViewController: UIViewController, PersonalAccountView {
+    var email: String?
     
     let imagePicker = ImagePicker()
-    var presenter: PersonalAccountPresenter?
-//    var email: String?
- //   weak var delegate: RegistrationDelegate?
+    var presenter: IPersonalAccountPresenter?
     
     private lazy var userImage: UIImageView = {
         let image = UIImageView()
@@ -42,7 +41,7 @@ class PersonalAccountViewController: UIViewController, PersonalAccountView {
     
     private let nameTextField: UITextField = {
         let field = UITextField()
-        field.text = "Элдос Мактракер Реков"
+        field.text = " "
         field.font = UIFont(name: "SFProDisplay-Regular", size: 16)
         field.textColor = .white
         field.backgroundColor = UIColor(hex: "#2B373E")
@@ -67,7 +66,7 @@ class PersonalAccountViewController: UIViewController, PersonalAccountView {
     
     private let emailTextField: UITextField = {
         let field = UITextField()
-        field.text = "traker@gmail.com"
+        field.text = ""
         field.font = UIFont(name: "SFProDisplay-Regular", size: 16)
         field.textColor = .white
         field.backgroundColor = UIColor(hex: "#2B373E")
@@ -92,7 +91,7 @@ class PersonalAccountViewController: UIViewController, PersonalAccountView {
     
     private let passwordTextField: UITextField = {
         let field = UITextField()
-        field.text = "*********"
+        field.text = ""
         field.font = UIFont(name: "SFProDisplay-Regular", size: 16)
         field.textColor = .white
         field.backgroundColor = UIColor(hex: "#2B373E")
@@ -118,7 +117,7 @@ class PersonalAccountViewController: UIViewController, PersonalAccountView {
     
     private let phoneTextField: UITextField = {
         let field = UITextField()
-        field.text = "+996 999-899-000"
+        field.text = ""
         field.font = UIFont(name: "SFProDisplay-Regular", size: 16)
         field.textColor = .white
         field.backgroundColor = UIColor(hex: "#2B373E")
@@ -174,30 +173,26 @@ class PersonalAccountViewController: UIViewController, PersonalAccountView {
         super.viewDidLoad()
         view.backgroundColor = UIColor(hex: "#1B2228")
         setupUI()
-//        presenter = PersonalAccountPresenter(view: self, userService: UserNetworkService())
-//        if let email = email {
-//                   presenter?.fetchUserData(email: email)
-//               }
+        presenter = PersonalAccountPresenter(view: self, userService: UserNetworkService())
+               presenter?.fetchUserData()
     }
     
     func showUserData(user: UserProfile) {
         print("User data loaded: \(user)")
-        nameTextField.text = user.username
-        emailTextField.text = user.email
-        phoneTextField.text = user.number
-        passwordTextField.text = user.password
-        
-    
-        if let avatarUrl = user.avatar, let url = URL(string: avatarUrl) {
+        DispatchQueue.main.async {
+                self.nameTextField.text = user.username
+                self.emailTextField.text = user.email
+                self.phoneTextField.text = user.number
+                self.passwordTextField.text = user.password
+            }
         }
-    }
        
     func showError(_ error: String) {
-        let alert = UIAlertController(title: "Error", message: error, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        present(alert, animated: true)
-    }
-       
+           
+            let alert = UIAlertController(title: "Error", message: error, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            present(alert, animated: true)
+        }
     
     private func setupUI() {
         view.addSubview(userImage)
@@ -322,9 +317,4 @@ class PersonalAccountViewController: UIViewController, PersonalAccountView {
         }
     }
 }
-//extension PersonalAccountViewController: RegistrationDelegate {
-//    func didRegisterUser(email: String) {
-//        delegate?.didRegisterUser(email: email)
-//        presenter?.fetchUserData(email: email)
-//    }
-//}
+

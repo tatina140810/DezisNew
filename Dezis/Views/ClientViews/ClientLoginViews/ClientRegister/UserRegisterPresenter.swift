@@ -22,7 +22,7 @@ class UserRegisterPresenter: IUserRegisterPresenters {
     }
     
     func registerUser(userInfo: UserInfo, completion: @escaping (Bool) -> Void) {
-        userNetworkService.userRegister(username: userInfo.username, email: userInfo.email, password: userInfo.password, apartmentNumber: userInfo.apartmentNumber, address: userInfo.address) { [weak self] result in
+        userNetworkService.userRegister(username: userInfo.username, email: userInfo.email, number: userInfo.number, password: userInfo.password, apartmentNumber: userInfo.apartmentNumber, address: userInfo.address) { result in
             switch result {
             case .success(let response):
                         print("Registration successful with response: \(response)")

@@ -1,12 +1,9 @@
 import UIKit
 import SnapKit
 
-protocol RegistrationDelegate: AnyObject {
-    func didRegisterUser(email: String)
-}
 
 class UserRegisterViewController: UIViewController {
-    weak var delegate: RegistrationDelegate?
+   
     
     private var titleLabel: UILabel = {
         let label = UILabel()
@@ -21,6 +18,8 @@ class UserRegisterViewController: UIViewController {
     private var nameTextField = TextFieldSettings().textFieldMaker(placeholder: "ФИО", backgroundColor: UIColor(hex: "#2B373E"))
     
     private var emailTextField = TextFieldSettings().textFieldMaker(placeholder: "example@gmail.com*", backgroundColor: UIColor(hex: "#2B373E"))
+    
+    private var numberTextField = TextFieldSettings().textFieldMaker(placeholder: "Номер телефона", backgroundColor: UIColor(hex: "#2B373E"))
     
     private var passwordTextField = TextFieldSettings().textFieldMaker(placeholder: "Пароль", backgroundColor: UIColor(hex: "#2B373E"))
     
@@ -81,10 +80,30 @@ class UserRegisterViewController: UIViewController {
         keyBoardSetUp()
     }
     
-    private func setupAddTarget(){
-        let backButton = UIBarButtonItem(title: "Назад", style: .plain, target: self, action: #selector(backButtonTapped))
+    private func setupAddTarget() {
         
-        navigationItem.leftBarButtonItem = backButton
+        let backButton = UIButton(type: .system)
+        backButton.setTitle("Назад", for: .normal)
+        backButton.setTitleColor(.systemBlue, for: .normal)
+        backButton.titleLabel?.font = UIFont(name: "SFProDisplay-Regular", size: 17)
+
+        let chevronImage = UIImage(resource: .shevron).withRenderingMode(.alwaysTemplate)
+        let resizedChevron = UIGraphicsImageRenderer(size: CGSize(width: 8, height: 14)).image { _ in
+            chevronImage.draw(in: CGRect(origin: .zero, size: CGSize(width: 8, height: 14)))
+        }
+        backButton.setImage(resizedChevron, for: .normal)
+        backButton.tintColor = .systemBlue
+
+        backButton.semanticContentAttribute = .forceLeftToRight
+        backButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: -7, bottom: 0, right: 5)
+        backButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 3, bottom: 0, right: -5)
+
+       
+        backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
+
+        let backBarButtonItem = UIBarButtonItem(customView: backButton)
+        navigationItem.leftBarButtonItem = backBarButtonItem
+
         nextButton.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
     }
     private func createAttributedText() {
@@ -107,7 +126,7 @@ class UserRegisterViewController: UIViewController {
     }
     func keyBoardSetUp(){
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-           NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
 
     }
     @objc func keyboardWillShow(notification: NSNotification) {
@@ -127,7 +146,7 @@ class UserRegisterViewController: UIViewController {
         view.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalToSuperview().offset(243)
+            make.top.equalToSuperview().offset(208)
         }
         
         view.addSubview(nameTextField)
@@ -140,7 +159,14 @@ class UserRegisterViewController: UIViewController {
         
         view.addSubview(emailTextField)
         emailTextField.snp.makeConstraints { make in
-            make.top.equalTo(nameTextField.snp.bottom).offset(24)
+            make.top.equalTo(nameTextField.snp.bottom).offset(20)
+            make.leading.equalToSuperview().offset(20)
+            make.trailing.equalToSuperview().offset(-20)
+            make.height.equalTo(50)
+        }
+        view.addSubview(numberTextField)
+        numberTextField.snp.makeConstraints { make in
+            make.top.equalTo(emailTextField.snp.bottom).offset(20)
             make.leading.equalToSuperview().offset(20)
             make.trailing.equalToSuperview().offset(-20)
             make.height.equalTo(50)
@@ -151,13 +177,12 @@ class UserRegisterViewController: UIViewController {
         passwordTextField.textContentType = .none
         passwordTextField.isSecureTextEntry = true
         passwordTextField.snp.makeConstraints { make in
-            make.top.equalTo(emailTextField.snp.bottom).offset(24)
+            make.top.equalTo(numberTextField.snp.bottom).offset(20)
             make.leading.equalToSuperview().offset(20)
             make.trailing.equalToSuperview().offset(-20)
             make.height.equalTo(50)
            
         }
-        
         view.addSubview(passwordToggleButton)
         passwordToggleButton.snp.makeConstraints { make in
             make.centerY.equalTo(passwordTextField)
@@ -169,12 +194,10 @@ class UserRegisterViewController: UIViewController {
             make.top.equalTo(passwordTextField.snp.bottom).offset(5)
             make.leading.equalToSuperview().offset(20)
             make.trailing.equalToSuperview().offset(-20)
-           
         }
-        
         view.addSubview(nextButton)
         nextButton.snp.makeConstraints { make in
-            make.top.equalTo(passwordTextField.snp.bottom).offset(44)
+            make.top.equalTo(passwordTextField.snp.bottom).offset(24)
             make.leading.equalToSuperview().offset(20)
             make.trailing.equalToSuperview().offset(-20)
             make.height.equalTo(52)
@@ -215,7 +238,8 @@ class UserRegisterViewController: UIViewController {
     @objc func nextButtonTapped() {
         guard let username = nameTextField.text, !username.isEmpty,
               let email = emailTextField.text, !email.isEmpty,
-              let password = passwordTextField.text, !password.isEmpty else {
+              let password = passwordTextField.text, !password.isEmpty,
+              let number = numberTextField.text, !number.isEmpty else {
             
             let redPlaceholderAttributes = [NSAttributedString.Key.foregroundColor: UIColor.red]
             
@@ -232,6 +256,12 @@ class UserRegisterViewController: UIViewController {
                     attributes: redPlaceholderAttributes
                 )
             }
+            if numberTextField.text?.isEmpty == true {
+                numberTextField.attributedPlaceholder = NSAttributedString(
+                    string: "Введите еще раз",
+                          attributes: redPlaceholderAttributes
+                      )
+                  }
             
             if passwordTextField.text?.isEmpty == true {
                 passwordTextField.attributedPlaceholder = NSAttributedString(
@@ -242,14 +272,22 @@ class UserRegisterViewController: UIViewController {
             nameTextField.layer.borderColor = UIColor.red.cgColor
             emailTextField.layer.borderColor = UIColor.red.cgColor
             passwordTextField.layer.borderColor = UIColor.red.cgColor
+            numberTextField.layer.borderColor = UIColor.red.cgColor
             nameTextField.layer.borderWidth = 1.0
             emailTextField.layer.borderWidth = 1.0
             passwordTextField.layer.borderWidth = 1.0
+            numberTextField.layer.borderWidth = 1.0
             return
         }
-        delegate?.didRegisterUser(email: email)
+        UserDefaults.standard.set(email, forKey: "email")
+
         
-        let userInfo = UserInfo(username: username, password: password, email: email, address: "", apartmentNumber: "")
+        let userInfo = UserInfo(username: username,
+                                password: password,
+                                email: email,
+                                number: number,
+                                address: "",
+                                apartmentNumber: "")
         let vc = UserRegisterBuilder.build(userinfo: userInfo)
         navigationController?.pushViewController(vc, animated: true)
     }
@@ -268,10 +306,4 @@ class UserRegisterViewController: UIViewController {
     }
 
 }
-extension UserRegisterViewController: RegistrationDelegate {
-    func didRegisterUser(email: String) {
-        print("Registered user email: \(email)")
-    }
-}
-
 

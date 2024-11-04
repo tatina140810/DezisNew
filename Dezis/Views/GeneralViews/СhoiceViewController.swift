@@ -130,9 +130,6 @@ class ChoiceViewController: UIViewController {
         }
     }
     
-//    @objc func showAlertButtonTapped() {
-//        showNoInternetAlert(message: "Нет соединения с интернетом", secondMessage: "Проверьте подключение к интернету")
-//    }
     private func setupUI(){
         
         view.addSubview(logoImage)
@@ -153,7 +150,7 @@ class ChoiceViewController: UIViewController {
         view.addSubview(userButtonDescriptionLabel)
         userButtonDescriptionLabel.snp.makeConstraints { make in
             make.top.equalTo(userButton.snp.bottom).offset(4)
-            make.leading.equalTo(20)
+            make.centerX.equalToSuperview()
             
         }
         
@@ -168,7 +165,7 @@ class ChoiceViewController: UIViewController {
         view.addSubview(adminButtonDescriptionLabel)
         adminButtonDescriptionLabel.snp.makeConstraints { make in
             make.top.equalTo(adminButton.snp.bottom).offset(4)
-            make.leading.equalTo(20)
+            make.centerX.equalToSuperview()
             
         }
        

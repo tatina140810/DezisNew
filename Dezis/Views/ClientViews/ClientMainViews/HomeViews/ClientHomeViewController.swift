@@ -100,8 +100,9 @@ class ClientHomeViewController: UIViewController {
         view.backgroundColor = UIColor(hex: "#1B2228")
         setupAddTarget()
         setupUI()
-       
-        
+        navigationController?.setNavigationBarHidden(true, animated: true)
+       navigationItem.hidesBackButton = true
+   
     }
   
     private func setupAddTarget() {
