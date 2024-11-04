@@ -115,6 +115,7 @@ class CalendarViewController: UIViewController, ICalendarViewController {
         checkBoxSettings()
         setupDatePicker()
         presenter = CalendarViewControllerPresenter(view: self)
+        overrideUserInterfaceStyle = .light
         
     }
     private func setupDatePicker() {
