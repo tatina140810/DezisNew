@@ -116,7 +116,6 @@ class ChoiceViewController: UIViewController {
             }) { _ in
                 alertView.removeFromSuperview()
                 
-                // Восстанавливаем оригинальные настройки после скрытия алерта
                 if let originalNavigationBarAppearance = self.originalNavigationBarAppearance,
                    let originalTabBarAppearance = self.originalTabBarAppearance {
                     UINavigationBar.appearance().standardAppearance = originalNavigationBarAppearance
