@@ -120,7 +120,7 @@ class СonfirmationСodeViewController: UIViewController, IСonfirmationСodeVie
     @objc func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             let keyboardHeight = keyboardSize.cgRectValue.height
-            self.view.frame.origin.y = -keyboardHeight / 2
+            self.view.frame.origin.y = -keyboardHeight / 2.5
         }
     }
 
@@ -228,12 +228,8 @@ class СonfirmationСodeViewController: UIViewController, IСonfirmationСodeVie
     }
     func loginSuccess() {
         print("Успешный вход")
-    
-       
-        let email = ""
 
-//        let entryAllowedVC = EntryAllowedViewController(userService: userService, email: email)
-//        navigationController?.pushViewController(entryAllowedVC, animated: true)
+
     }
     func loginFailed(error: Error) {
         let errorMessage = error.localizedDescription

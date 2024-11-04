@@ -132,7 +132,7 @@ class UserRegisterViewController: UIViewController {
     @objc func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             let keyboardHeight = keyboardSize.cgRectValue.height
-            self.view.frame.origin.y = -keyboardHeight / 1.5
+            self.view.frame.origin.y = -keyboardHeight / 2.5
         }
     }
 
