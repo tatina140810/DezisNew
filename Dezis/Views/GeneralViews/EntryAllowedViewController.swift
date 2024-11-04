@@ -1,6 +1,10 @@
 import UIKit
+protocol EntryAllowedView: AnyObject {
+    func showError(_ error: String)
+}
 
-class EntryAllowedViewController: UIViewController{
+class EntryAllowedViewController: UIViewController, EntryAllowedView {
+    var presenter: IEntryAllowedPresenter?
 
     private var entryAllowedImage: UIImageView = {
         let view = UIImageView()
@@ -23,14 +27,21 @@ class EntryAllowedViewController: UIViewController{
         view.backgroundColor = UIColor(hex: "#1B2228")
         setupUI()
         navigationController?.navigationBar.isHidden = true
-
-       
+        presenter = EntryAllowedPresenter(view: self, userService: UserNetworkService())
+        presenter?.fetchUserData()
+        
         DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) { [weak self] in
             self?.loadNextViewController()
+            
         }
-
     }
-    
+        
+        func showError(_ error: String) {
+                let alert = UIAlertController(title: "Error", message: error, preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                present(alert, animated: true)
+            }
+
     private func setupUI() {
         view.addSubview(entryAllowedImage)
         entryAllowedImage.snp.makeConstraints { make in
