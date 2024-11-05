@@ -193,7 +193,7 @@ class UserNetworkService {
                 if let jsonString = String(data: response.data, encoding: .utf8) {
                     print("Received JSON response: \(jsonString)")
                 }
-
+                
                 do {
                     let users = try JSONDecoder().decode([UserProfile].self, from: response.data)
                     
@@ -204,7 +204,7 @@ class UserNetworkService {
                         completion(.failure(NSError(domain: "", code: 404, userInfo: [NSLocalizedDescriptionKey: "User not found"])))
                     }
                 } catch {
-                   
+                    
                     completion(.failure(error))
                     print("Failed to decode UserProfile: \(error)")
                 }
@@ -228,6 +228,30 @@ class UserNetworkService {
                 }
             case .failure(let error):
                 print("Ошибка сети: \(error)")
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    func userDetails(id: Int, completion: @escaping (Result<UserProfile, Error>) -> Void) {
+        provider.request(.userDetails(id: id)) { result in
+            switch result {
+            case .success(let response):
+                do {
+                    if let singleUser = try? JSONDecoder().decode(UserProfile.self, from: response.data) {
+                        completion(.success(singleUser))
+                    } else {
+                        let users = try JSONDecoder().decode([UserProfile].self, from: response.data)
+                        if let user = users.first(where: { $0.id == id }) {
+                            completion(.success(user))
+                        } else {
+                            completion(.failure(NSError(domain: "", code: 404, userInfo: [NSLocalizedDescriptionKey: "User not found"])))
+                        }
+                    }
+                } catch {
+                    completion(.failure(error))
+                }
+            case .failure(let error):
                 completion(.failure(error))
             }
         }
