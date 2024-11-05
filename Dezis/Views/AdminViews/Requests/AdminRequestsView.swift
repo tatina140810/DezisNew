@@ -44,7 +44,6 @@ class AdminRequestsView: UIViewController, IAdminRequestView {
         super.viewDidLoad()
         view.backgroundColor = .init(hex: "#1B2228")
         setupUI()
-        setupNavBar()
         setupCollectionViewDelegates()
         
         presenter = AdminRequestPresenter(view: self)
@@ -58,11 +57,6 @@ class AdminRequestsView: UIViewController, IAdminRequestView {
             forCellWithReuseIdentifier: RequestsCollectionViewCell.reuseId
             )
         
-    }
-    
-    private func setupNavBar() {
-        navigationController?.setNavigationBarHidden(true, animated: true)
-        navigationItem.hidesBackButton = true
     }
     
     private func setupUI(){
