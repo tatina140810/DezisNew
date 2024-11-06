@@ -24,6 +24,7 @@ class ExitAlertView: UIViewController {
         let button = UIButton()
         button.setTitle("Отмена", for: .normal)
         button.backgroundColor = UIColor(hex: "#1B2228")
+        button.setTitleColor(UIColor(hex: "#0A84FF"), for: .normal)
         button.tintColor = .white
         button.titleLabel?.font = UIFont(name: "SFProDisplay-Bold", size: 16)
         button.addTarget(self, action: #selector(cancellButtonTapped), for: .touchUpInside)

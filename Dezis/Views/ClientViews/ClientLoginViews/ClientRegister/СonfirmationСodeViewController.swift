@@ -258,7 +258,7 @@ class СonfirmationСodeViewController: UIViewController, IСonfirmationСodeVie
                 let redPlaceholderAttributes = [NSAttributedString.Key.foregroundColor: UIColor.red]
                 
                 otpTextField.attributedPlaceholder = NSAttributedString(
-                    string: "Введите еще раз",
+                    string: "Код введен неверно",
                     attributes: redPlaceholderAttributes
                 )
                 otpTextField.layer.borderColor = UIColor.red.cgColor
