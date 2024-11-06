@@ -66,9 +66,12 @@ class AdminHistoryView: UIViewController, IAdminHistoryView {
         
         presenter?.fetchOrders()
         
-        setupNavBar()
         setupUI()
+        setupCollectionViewDelegates()
         
+    }
+
+    private func setupCollectionViewDelegates() {
         categoriesCollectionView.dataSource = self
         categoriesCollectionView.delegate = self
         categoriesCollectionView.register(
@@ -82,7 +85,7 @@ class AdminHistoryView: UIViewController, IAdminHistoryView {
             OrdersCollectionViewCell.self,
             forCellWithReuseIdentifier: OrdersCollectionViewCell.reuseId
         )
-
+        
         completedOrdersCollectionView.dataSource = self
         completedOrdersCollectionView.delegate = self
         completedOrdersCollectionView.register(
@@ -91,14 +94,7 @@ class AdminHistoryView: UIViewController, IAdminHistoryView {
         )
         
         completedOrdersCollectionView.isHidden = true
-        
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        navigationController?.setNavigationBarHidden(true, animated: animated)
-    }
-
 
     private func setupUI() {
         view.addSubview(categoriesCollectionView)
@@ -130,11 +126,6 @@ class AdminHistoryView: UIViewController, IAdminHistoryView {
         }
     }
     
-    private func setupNavBar() {
-        self.navigationItem.leftBarButtonItem = nil
-        self.navigationItem.hidesBackButton = true
-    }
-    
     func reloadData() {
         categoriesCollectionView.reloadData()
         ordersCollectionView.reloadData()
@@ -150,7 +141,6 @@ class AdminHistoryView: UIViewController, IAdminHistoryView {
             completedOrdersCollectionView.isHidden = false
         }
     }
-
 }
 
 extension AdminHistoryView: UICollectionViewDataSource {

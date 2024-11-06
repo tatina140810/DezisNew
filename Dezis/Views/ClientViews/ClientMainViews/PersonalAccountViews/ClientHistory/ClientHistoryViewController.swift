@@ -7,7 +7,13 @@
 
 import UIKit
 
-class ClientHistoryViewController: UIViewController {
+protocol IClientHistoryViewController {
+    func reloadData()
+}
+
+class ClientHistoryViewController: UIViewController, IClientHistoryViewController {
+    
+    private var presenter: IClientHistoryPresenter!
     
     private let firstOrderLabel: UILabel = {
         let label = UILabel()
@@ -47,18 +53,41 @@ class ClientHistoryViewController: UIViewController {
         view.backgroundColor = .init(hex: "#1B2228")
         setupUI()
         setupNavBar()
-    
+        setupCollectionViewDelegates()
+        
+        presenter = ClientHistoryPresenter(view: self)
+        presenter.fetchClientOrders()
+    }
+
+    private func setupCollectionViewDelegates() {
         ordersCollectionView.dataSource = self
         ordersCollectionView.register(
-            CompletedOrdersCollectionViewCell.self,
-            forCellWithReuseIdentifier: CompletedOrdersCollectionViewCell.reuseId
+            ClientHistoryCollectionViewCell.self,
+            forCellWithReuseIdentifier: ClientHistoryCollectionViewCell.reuseId
         )
     }
     
-    private func setupNavBar(){
-        let backButton = UIBarButtonItem(title: "Назад", style: .plain, target: self, action: #selector(backButtonTapped))
-        
-        navigationItem.leftBarButtonItem = backButton
+    private func setupNavBar() {
+        let backButton = UIButton(type: .system)
+        backButton.setTitle("Назад", for: .normal)
+        backButton.setTitleColor(.systemBlue, for: .normal)
+        backButton.titleLabel?.font = UIFont(name: "SFProDisplay-Regular", size: 17)
+
+        let chevronImage = UIImage(resource: .shevron).withRenderingMode(.alwaysTemplate)
+        let resizedChevron = UIGraphicsImageRenderer(size: CGSize(width: 8, height: 14)).image { _ in
+            chevronImage.draw(in: CGRect(origin: .zero, size: CGSize(width: 8, height: 14)))
+        }
+        backButton.setImage(resizedChevron, for: .normal)
+        backButton.tintColor = .systemBlue
+
+        backButton.semanticContentAttribute = .forceLeftToRight
+        backButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: -7, bottom: 0, right: 5)
+        backButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 3, bottom: 0, right: -5)
+
+        backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
+
+        let backBarButtonItem = UIBarButtonItem(customView: backButton)
+        navigationItem.leftBarButtonItem = backBarButtonItem
     }
     
     private func setupUI() {
@@ -69,13 +98,13 @@ class ClientHistoryViewController: UIViewController {
         }
         
         view.addSubview(firstOrderView)
-        firstOrderView.translatesAutoresizingMaskIntoConstraints = false
         firstOrderView.snp.makeConstraints { make in
             make.top.equalTo(firstOrderLabel.snp.bottom).offset(12)
             make.leading.equalToSuperview().offset(20)
             make.trailing.equalToSuperview().offset(-20)
-            make.height.equalTo(211)
+            make.height.equalTo(184)
         }
+        
         view.addSubview(allOrdersLabel)
         allOrdersLabel.snp.makeConstraints { make in
             make.top.equalTo(firstOrderView.snp.bottom).offset(20)
@@ -91,6 +120,10 @@ class ClientHistoryViewController: UIViewController {
         }
     }
     
+    func reloadData() {
+        ordersCollectionView.reloadData()
+    }
+    
     @objc private func backButtonTapped() {
         navigationController?.popViewController(animated: true)
     }
@@ -99,11 +132,17 @@ class ClientHistoryViewController: UIViewController {
 extension ClientHistoryViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 6
+        return presenter.numberOfClientOrders()
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CompletedOrdersCollectionViewCell.reuseId, for: indexPath) as! CompletedOrdersCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ClientHistoryCollectionViewCell.reuseId, for: indexPath) as! ClientHistoryCollectionViewCell
+        let order = presenter.clientOrderAt(indexPath.row)
+        let userDetails = presenter.getUserDetails()
+        
+        cell.fill(with: order, userDetails: userDetails)
+        
         return cell
     }
 }
+

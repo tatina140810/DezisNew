@@ -1,23 +1,15 @@
 //
-//  firstOrderView.swift
+//  ClientHistoryCollectionViewCell.swift
 //  Dezis
 //
-//  Created by Telegey Nurbekova on 24/10/24.
+//  Created by Telegey Nurbekova on 05/11/24.
 //
 
-import Foundation
 import UIKit
 
-class FirstOrderView: UIView {
+class ClientHistoryCollectionViewCell: UICollectionViewCell {
     
-    private let contentView: UIView = {
-        let view = UIView()
-        view.backgroundColor = UIColor(hex: "#252F35")
-        view.layer.cornerRadius = 16
-        view.layer.masksToBounds = true
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
+    static var reuseId = "clientOrdersCell"
     
     private let nameLabel: UILabel = {
         let view = UILabel()
@@ -181,9 +173,6 @@ class FirstOrderView: UIView {
     }
     
     private func setUpSubviews() {
-        
-        addSubview(contentView)
-        
         contentView.addSubview(nameLabel)
         contentView.addSubview(labelsStackView)
         contentView.addSubview(detailsStackView)
@@ -206,10 +195,6 @@ class FirstOrderView: UIView {
     }
     
     private func setUpConstraints() {
-        
-        contentView.snp.makeConstraints { make in
-            make.top.bottom.leading.trailing.equalToSuperview()
-        }
         
         nameLabel.snp.makeConstraints { make in
             make.top.equalTo(contentView.snp.top).offset(24)
