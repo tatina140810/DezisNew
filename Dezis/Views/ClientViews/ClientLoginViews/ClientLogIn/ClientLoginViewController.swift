@@ -95,6 +95,7 @@ class ClientLoginViewController: UIViewController, UITextFieldDelegate, IClientL
         keyBoardSetUp()
         presenter = ClientLoginPresenter(view: self)
         backButtonSetup()
+        dismissKeyboardGesture()
     }
     func backButtonSetup(){
         let backButton = UIButton(type: .system)

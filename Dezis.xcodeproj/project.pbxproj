@@ -31,6 +31,7 @@
 		72D39BA32CB15F7D00D9EB45 /* RequestsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D39BA22CB15F7D00D9EB45 /* RequestsCollectionViewCell.swift */; };
 		72D39BA62CB1796F00D9EB45 /* CategoriesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D39BA52CB1796F00D9EB45 /* CategoriesCollectionViewCell.swift */; };
 		72D39BA82CB1870D00D9EB45 /* AdminLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D39BA72CB1870D00D9EB45 /* AdminLoginView.swift */; };
+		85C09B2E2CDBB872002B09BC /* keyboardExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C09B2D2CDBB872002B09BC /* keyboardExtension.swift */; };
 		AF3EDD0F2CB4696E00CAF1FE /* ClientChoiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3EDD0E2CB4696E00CAF1FE /* ClientChoiceViewController.swift */; };
 		AF4B1DD12C9AE38E00FDA3EC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1DD02C9AE38E00FDA3EC /* AppDelegate.swift */; };
 		AF4B1DD32C9AE38E00FDA3EC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1DD22C9AE38E00FDA3EC /* SceneDelegate.swift */; };
@@ -126,6 +127,7 @@
 		72D39BA22CB15F7D00D9EB45 /* RequestsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestsCollectionViewCell.swift; sourceTree = "<group>"; };
 		72D39BA52CB1796F00D9EB45 /* CategoriesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesCollectionViewCell.swift; sourceTree = "<group>"; };
 		72D39BA72CB1870D00D9EB45 /* AdminLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminLoginView.swift; sourceTree = "<group>"; };
+		85C09B2D2CDBB872002B09BC /* keyboardExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = keyboardExtension.swift; sourceTree = "<group>"; };
 		9D594A6880D984FC3775947A /* Pods_Dezis.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Dezis.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ABC7905C0E1157EB74B80A5D /* Pods-Dezis.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dezis.release.xcconfig"; path = "Target Support Files/Pods-Dezis/Pods-Dezis.release.xcconfig"; sourceTree = "<group>"; };
 		AF3EDD0E2CB4696E00CAF1FE /* ClientChoiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientChoiceViewController.swift; sourceTree = "<group>"; };
@@ -432,6 +434,7 @@
 			children = (
 				AF4B1DF02C9B153C00FDA3EC /* HexExtention.swift */,
 				AF4B1E042C9C1C8B00FDA3EC /* URLSession+Extension.swift */,
+				85C09B2D2CDBB872002B09BC /* keyboardExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -787,6 +790,7 @@
 				AF74D55E2CAB1E5400B64D6E /* GradientLayer.swift in Sources */,
 				AF51468D2CD297BC000D9C97 /* СonfirmationСodePresenter.swift in Sources */,
 				AFF6187C2CB69D5200C64C95 /* DezinfectionViewController.swift in Sources */,
+				85C09B2E2CDBB872002B09BC /* keyboardExtension.swift in Sources */,
 				AF74D5502CA7C97B00B64D6E /* KeychainManager.swift in Sources */,
 				72ABD5AC2CC97EF9004E18E9 /* AdminRequestPresenter.swift in Sources */,
 				AF4B1E152C9D9CB400FDA3EC /* PersonalAccountViewController.swift in Sources */,
@@ -965,7 +969,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.tatu.Dezisssss;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tatu.Dezisssdd;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;

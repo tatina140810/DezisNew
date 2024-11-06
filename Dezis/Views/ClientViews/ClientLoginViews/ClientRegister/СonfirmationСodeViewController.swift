@@ -111,6 +111,7 @@ class СonfirmationСodeViewController: UIViewController, IСonfirmationСodeVie
         backButtonSetup()
         presenter = СonfirmationСodePresenter(view: self)
         keyBoardSetUp()
+        dismissKeyboardGesture()
     }
     func keyBoardSetUp(){
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)

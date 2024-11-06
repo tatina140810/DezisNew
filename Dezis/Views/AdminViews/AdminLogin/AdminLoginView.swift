@@ -148,6 +148,7 @@ class AdminLoginView: UIViewController {
         setupAddTarget()
         setupNavigation()
         presenter = AdminLoginPresenter(view: self)
+        dismissKeyboardGesture()
     }
     
     private func setupUI() {
