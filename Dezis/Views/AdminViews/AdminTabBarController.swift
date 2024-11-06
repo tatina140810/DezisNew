@@ -12,6 +12,7 @@ class AdminTabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationItem.hidesBackButton = true
         setupTabBarController()
         addTabBarBorder()
         tabBar.backgroundColor = UIColor(hex: "#1B2228")

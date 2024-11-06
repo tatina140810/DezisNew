@@ -33,7 +33,7 @@ class RequestsCollectionViewCell: UICollectionViewCell {
     
     private let nameLabel: UILabel = {
         let view = UILabel()
-        view.text = "ФИО"
+        view.text = "ФИО:"
         view.font = UIFont(name: "SFProDisplay-Regular", size: 16)
         view.textColor = .init(UIColor(hex: "#0A84FF"))
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -229,11 +229,10 @@ class RequestsCollectionViewCell: UICollectionViewCell {
         }
         
         denyButton.snp.makeConstraints { make in
-            make.top.equalTo(confirmButton.snp.bottom).offset(10)
+            make.top.equalTo(confirmButton.snp.bottom).offset(5)
             make.leading.equalTo(contentView.snp.leading).offset(17.5)
             make.trailing.equalTo(contentView.snp.trailing).offset(-17.5)
             make.height.equalTo(44)
-            make.bottom.equalTo(contentView.snp.bottom).offset(-16)
         }
     }
     

@@ -12,6 +12,7 @@
 		18FA88D62CB6D7EC00C66BAF /* OpenChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18FA88D52CB6D7EC00C66BAF /* OpenChatViewController.swift */; };
 		4061B8DFFEC52EF1268906C9 /* Pods_Dezis.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D594A6880D984FC3775947A /* Pods_Dezis.framework */; };
 		7277F5AD2CD62D2B0010D6A2 /* DocumentationList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7277F5AC2CD62D2B0010D6A2 /* DocumentationList.swift */; };
+		7277F5AF2CD951E20010D6A2 /* ClientHistoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7277F5AE2CD951E20010D6A2 /* ClientHistoryCollectionViewCell.swift */; };
 		72ABD5962CC8151E004E18E9 /* AdminAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72ABD5952CC8151E004E18E9 /* AdminAPI.swift */; };
 		72ABD5982CC8157A004E18E9 /* AdminNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72ABD5972CC8157A004E18E9 /* AdminNetworkService.swift */; };
 		72ABD59B2CC82F0A004E18E9 /* AdminLoginPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72ABD59A2CC82F0A004E18E9 /* AdminLoginPresenter.swift */; };
@@ -106,6 +107,7 @@
 		18E576582CC548B100302739 /* ChatWebSocket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatWebSocket.swift; sourceTree = "<group>"; };
 		18FA88D52CB6D7EC00C66BAF /* OpenChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenChatViewController.swift; sourceTree = "<group>"; };
 		7277F5AC2CD62D2B0010D6A2 /* DocumentationList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentationList.swift; sourceTree = "<group>"; };
+		7277F5AE2CD951E20010D6A2 /* ClientHistoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientHistoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		72ABD5952CC8151E004E18E9 /* AdminAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminAPI.swift; sourceTree = "<group>"; };
 		72ABD5972CC8157A004E18E9 /* AdminNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminNetworkService.swift; sourceTree = "<group>"; };
 		72ABD59A2CC82F0A004E18E9 /* AdminLoginPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminLoginPresenter.swift; sourceTree = "<group>"; };
@@ -265,6 +267,7 @@
 				AFF618822CB82FA000C64C95 /* ClientHistoryViewController.swift */,
 				72ABD5B02CCA02D4004E18E9 /* ClientHistoryPresenter.swift */,
 				72ABD5B22CCA03A8004E18E9 /* FirstOrderView.swift */,
+				7277F5AE2CD951E20010D6A2 /* ClientHistoryCollectionViewCell.swift */,
 			);
 			path = ClientHistory;
 			sourceTree = "<group>";
@@ -776,6 +779,7 @@
 				AF4B1E0D2C9D9B3500FDA3EC /* ClientTabBarController.swift in Sources */,
 				AFF6188F2CBBAFA700C64C95 /* ClientChatPresenter.swift in Sources */,
 				72ABD59E2CC83EE2004E18E9 /* AdminHistoryPresenter.swift in Sources */,
+				7277F5AF2CD951E20010D6A2 /* ClientHistoryCollectionViewCell.swift in Sources */,
 				AF4B1E1D2CA05B5200FDA3EC /* ImageSettings.swift in Sources */,
 				AF4B1E192CA0202000FDA3EC /* TextFieldSettings.swift in Sources */,
 				AF4B1E1B2CA0222A00FDA3EC /* ButtonSettings.swift in Sources */,

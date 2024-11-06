@@ -44,20 +44,19 @@ class AdminRequestsView: UIViewController, IAdminRequestView {
         super.viewDidLoad()
         view.backgroundColor = .init(hex: "#1B2228")
         setupUI()
+        setupCollectionViewDelegates()
         
+        presenter = AdminRequestPresenter(view: self)
+        presenter?.loadRequests()
+    }
+    
+    private func setupCollectionViewDelegates() {
         requestsCollectionView.dataSource = self
         requestsCollectionView.register(
             RequestsCollectionViewCell.self,
             forCellWithReuseIdentifier: RequestsCollectionViewCell.reuseId
             )
         
-        presenter = AdminRequestPresenter(view: self)
-        presenter?.loadRequests()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        navigationController?.setNavigationBarHidden(true, animated: animated)
     }
     
     private func setupUI(){
@@ -93,7 +92,7 @@ extension AdminRequestsView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RequestsCollectionViewCell.reuseId, for: indexPath) as! RequestsCollectionViewCell
             
-            if let request = presenter.requestAt(indexPath.row), !request.is_active { // Check if the request is inactive
+            if let request = presenter.requestAt(indexPath.row), !request.is_active { 
                 cell.fill(with: request)
                 cell.onConfirmTapped = { [weak self] in
                     self?.confirmRequest(for: indexPath)
