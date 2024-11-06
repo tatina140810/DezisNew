@@ -16,7 +16,6 @@ class ClientLoginViewController: UIViewController, UITextFieldDelegate, IClientL
     func loginFailed(error: Error) {
         let errorMessage = error.localizedDescription
         print("Ошибка входа: \(errorMessage)")
-        displayError(errorMessage)
     }
     
     var presenter: IClientLoginPresenter?
@@ -32,16 +31,26 @@ class ClientLoginViewController: UIViewController, UITextFieldDelegate, IClientL
         return view
     }()
     
-    private var emailTextField = TextFieldSettings().textFieldMaker(placeholder: "example@gmail.com", backgroundColor: UIColor(hex: "#2B373E"))
+    private var emailTextField = TextFieldSettings().textFieldMaker(placeholder: "Электронная почта*", backgroundColor: UIColor(hex: "#2B373E"))
     
-    private var passwordTextField = TextFieldSettings().textFieldMaker(placeholder: "Пароль", backgroundColor: UIColor(hex: "#2B373E"))
+    private var passwordTextField = TextFieldSettings().textFieldMaker(placeholder: "Пароль*", backgroundColor: UIColor(hex: "#2B373E"))
     
-    private var errorMasageLabel: UILabel = {
+    private var emailErrorMasageLabel: UILabel = {
         let view = UILabel()
         view.text = ""
         view.font = UIFont(name: "SFProDisplay-Regular", size: 12)
         view.numberOfLines = 0
-        view.textAlignment = .center
+        view.textAlignment = .left
+        view.textColor = .red
+        view.isHidden = true
+        return view
+    }()
+    private var passwordErrorMasageLabel: UILabel = {
+        let view = UILabel()
+        view.text = ""
+        view.font = UIFont(name: "SFProDisplay-Regular", size: 12)
+        view.numberOfLines = 0
+        view.textAlignment = .left
         view.textColor = .red
         view.isHidden = true
         return view
@@ -66,6 +75,14 @@ class ClientLoginViewController: UIViewController, UITextFieldDelegate, IClientL
         view.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
         return view
     }()
+    private lazy var passwordToggleButton: UIButton = {
+        let button = UIButton(type: .custom)
+        button.setImage(UIImage(systemName: "eye.slash"), for: .normal)
+        button.tintColor = .white
+        button.addTarget(self, action: #selector(togglePasswordVisibility), for: .touchUpInside)
+        return button
+    }()
+    
     private var privacyLabel: UILabel = {
         let view = UILabel()
         view.text = "Выбирая «Зарегистрироваться», вы подтверждаете свое согласие с Условием продажи и принимаете условия"
@@ -147,34 +164,46 @@ class ClientLoginViewController: UIViewController, UITextFieldDelegate, IClientL
         view.addSubview(emailTextField)
         emailTextField.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(28)
-            make.leading.equalToSuperview().offset(16)
-            make.trailing.equalToSuperview().offset(-16)
-            make.height.equalTo(48)
+            make.leading.equalToSuperview().offset(20)
+            make.trailing.equalToSuperview().offset(-20)
+            make.height.equalTo(50)
+        }
+        view.addSubview(emailErrorMasageLabel)
+        emailErrorMasageLabel.snp.makeConstraints { make in
+            make.top.equalTo(emailTextField.snp.bottom).offset(4)
+            make.leading.equalToSuperview().offset(20)
         }
         
         view.addSubview(passwordTextField)
+        passwordTextField.isSecureTextEntry = true
         passwordTextField.snp.makeConstraints { make in
-            make.top.equalTo(emailTextField.snp.bottom).offset(28)
-            make.leading.equalToSuperview().offset(16)
-            make.trailing.equalToSuperview().offset(-16)
-            make.height.equalTo(48)
+            make.top.equalTo(emailErrorMasageLabel.snp.bottom).offset(10)
+            make.leading.equalToSuperview().offset(20)
+            make.trailing.equalToSuperview().offset(-20)
+            make.height.equalTo(50)
+        }
+        view.addSubview(passwordToggleButton)
+        passwordToggleButton.snp.makeConstraints { make in
+            make.centerY.equalTo(passwordTextField)
+            make.trailing.equalTo(passwordTextField.snp.trailing).offset(-16)
+            make.width.height.equalTo(24)
         }
         
-        view.addSubview(errorMasageLabel)
-        errorMasageLabel.snp.makeConstraints { make in
-            make.top.equalTo(passwordTextField.snp.bottom).offset(10)
-            make.leading.equalToSuperview().offset(25)
+        view.addSubview(passwordErrorMasageLabel)
+        passwordErrorMasageLabel.snp.makeConstraints { make in
+            make.top.equalTo(passwordTextField.snp.bottom).offset(4)
+            make.leading.equalToSuperview().offset(20)
         }
         view.addSubview(forgotPasswordLabel)
         forgotPasswordLabel.snp.makeConstraints { make in
-            make.top.equalTo(errorMasageLabel.snp.bottom).offset(8)
-            make.leading.equalToSuperview().offset(25)
+            make.top.equalTo(passwordErrorMasageLabel.snp.bottom).offset(10)
+            make.leading.equalToSuperview().offset(20)
         }
         
         view.addSubview(loginButton)
         loginButton.snp.makeConstraints { make in
-            make.top.equalTo(forgotPasswordLabel.snp.bottom).offset(20)
-            make.leading.trailing.equalToSuperview().inset(16)
+            make.top.equalTo(forgotPasswordLabel.snp.bottom).offset(10)
+            make.leading.trailing.equalToSuperview().inset(20)
             make.height.equalTo(52)
         }
         view.addSubview(confidentialityLabel)
@@ -213,62 +242,69 @@ class ClientLoginViewController: UIViewController, UITextFieldDelegate, IClientL
     }
     
     @objc func loginButtonTapped() {
+        
+        emailErrorMasageLabel.isHidden = true
+        passwordErrorMasageLabel.isHidden = true
+        emailTextField.layer.borderWidth = 0
+        passwordTextField.layer.borderWidth = 0
+
         guard let email = emailTextField.text, !email.isEmpty,
               let password = passwordTextField.text, !password.isEmpty else {
-            
-            let redPlaceholderAttributes = [NSAttributedString.Key.foregroundColor: UIColor.red]
-            
+                  
             if emailTextField.text?.isEmpty == true {
-                emailTextField.attributedPlaceholder = NSAttributedString(
-                    string: "Введите еще раз",
-                    attributes: redPlaceholderAttributes
-                )
+                emailErrorMasageLabel.text = "Введите корректные данные"
+                emailErrorMasageLabel.isHidden = false
+                emailTextField.layer.borderColor = UIColor.red.cgColor
+                emailTextField.layer.borderWidth = 1.0
             }
-            
+          
             if passwordTextField.text?.isEmpty == true {
-                passwordTextField.attributedPlaceholder = NSAttributedString(
-                    string: "Введите еще раз",
-                    attributes: redPlaceholderAttributes
-                )
+                passwordErrorMasageLabel.text = "Введите корректные данные"
+                passwordErrorMasageLabel.isHidden = false
+                passwordTextField.layer.borderColor = UIColor.red.cgColor
+                passwordTextField.layer.borderWidth = 1.0
             }
             
-            emailTextField.layer.borderColor = UIColor.red.cgColor
-            passwordTextField.layer.borderColor = UIColor.red.cgColor
-            emailTextField.layer.borderWidth = 1.0
-            passwordTextField.layer.borderWidth = 1.0
-            
             return
         }
         
+     
         if !isValidEmail(email) {
-            emailTextField.attributedPlaceholder = NSAttributedString(
-                string: "Неверный формат email",
-                attributes: [NSAttributedString.Key.foregroundColor: UIColor.red]
-            )
+            emailErrorMasageLabel.text = "Введите корректные данные"
+            emailErrorMasageLabel.isHidden = false
             emailTextField.layer.borderColor = UIColor.red.cgColor
             emailTextField.layer.borderWidth = 1.0
+            emailTextField.text = ""
             return
         }
         
-        emailTextField.text = email
-        passwordTextField.text = password
-       
+     
+        emailTextField.layer.borderWidth = 0
+        passwordTextField.layer.borderWidth = 0
+        
         presenter?.loginUser(email: email, password: password) { [weak self] result in
-                DispatchQueue.main.async {
-                    switch result {
-                    case .success(let message):
-                        print("Login successful: \(message)")
-                        self?.loginSuccess()
-                        
-                    case .failure(let error):
-                        print("Login failed: \(error)")
-                        self?.loginFailed(error: error)
-                    }
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let message):
+                    print("Login successful: \(message)")
+                    self?.loginSuccess()
+                    
+                case .failure(let error):
+                    print("Login failed: \(error)")
+                     
+                    self?.emailErrorMasageLabel.text = "Введите корректные данные"
+                    self?.passwordErrorMasageLabel.text = "Введите корректные данные"
+                    self?.emailErrorMasageLabel.isHidden = false
+                    self?.passwordErrorMasageLabel.isHidden = false
+                    self?.emailTextField.layer.borderColor = UIColor.red.cgColor
+                    self?.emailTextField.layer.borderWidth = 1.0
+                    self?.passwordTextField.layer.borderColor = UIColor.red.cgColor
+                    self?.passwordTextField.layer.borderWidth = 1.0
                 }
             }
-        
+        }
     }
-  
+
     func isValidEmail(_ email: String) -> Bool {
         let emailRegex = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}$"
         let emailPredicate = NSPredicate(format: "SELF MATCHES %@", emailRegex)
@@ -285,13 +321,13 @@ class ClientLoginViewController: UIViewController, UITextFieldDelegate, IClientL
         
         print("Ошибка входа: \(error)")
         
-        displayError(error)
+    }
+    @objc private func togglePasswordVisibility() {
+        passwordTextField.isSecureTextEntry.toggle()
+        let imageName = passwordTextField.isSecureTextEntry ? "eye.slash" : "eye"
+        passwordToggleButton.setImage(UIImage(systemName: imageName), for: .normal)
     }
     
-    private func displayError(_ message: String) {
-        errorMasageLabel.text = message
-        errorMasageLabel.isHidden = false
-    }
     
     @objc func attributedTextTapped() {
         let vc = ConfidantionalyPage()

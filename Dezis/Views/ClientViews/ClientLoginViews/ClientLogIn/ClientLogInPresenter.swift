@@ -20,8 +20,12 @@ class ClientLoginPresenter: IClientLoginPresenter {
                switch result {
                case .success(let response):
                    print("Успешный логин: \(response.detail)")
+                   UserDefaults.standard.set(email, forKey: "email")
+                   print("сoхраненый email: \(email)")
+                   
                    DispatchQueue.main.async {
                        completion(.success(response.detail))
+                       
                    }
                case .failure(let error):
                    DispatchQueue.main.async {
