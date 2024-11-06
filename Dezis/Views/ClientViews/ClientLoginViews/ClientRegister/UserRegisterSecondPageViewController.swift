@@ -41,7 +41,26 @@ class UserRegisterSecondPageViewController: UIViewController, IUserRegisterSecon
     private var adressTextField = TextFieldSettings().textFieldMaker(placeholder: "Адрес", backgroundColor: UIColor(hex: "#2B373E"))
     
     private var apartmentNumberTextField = TextFieldSettings().textFieldMaker(placeholder: "Номер дома/квартиры", backgroundColor: UIColor(hex: "#2B373E"))
-    
+    private var adressErrorMessageLabel: UILabel = {
+        let view = UILabel()
+        view.text = ""
+        view.font = UIFont(name: "SFProDisplay-Regular", size: 12)
+        view.numberOfLines = 0
+        view.textAlignment = .left
+        view.textColor = .red
+        view.isHidden = true
+        return view
+    }()
+    private var numberErrorMessageLabel: UILabel = {
+        let view = UILabel()
+        view.text = ""
+        view.font = UIFont(name: "SFProDisplay-Regular", size: 12)
+        view.numberOfLines = 0
+        view.textAlignment = .left
+        view.textColor = .red
+        view.isHidden = true
+        return view
+    }()
     private var errorLabel: UILabel = {
         let view = UILabel()
         view.text = ""
@@ -114,31 +133,42 @@ class UserRegisterSecondPageViewController: UIViewController, IUserRegisterSecon
         self.view.frame.origin.y = 0
     }
     
-    private func backButtonSetup(){
+    private func backButtonSetup() {
         let backButton = UIButton(type: .system)
-        backButton.setTitle("Назад", for: .normal)
-        backButton.setTitleColor(.systemBlue, for: .normal)
-        backButton.titleLabel?.font = UIFont(name: "SFProDisplay-Regular", size: 17)
+        
+        if #available(iOS 15.0, *) {
+            var config = UIButton.Configuration.plain()
+            config.title = "Назад"
+            config.image = UIImage(resource: .shevron).withRenderingMode(.alwaysTemplate)
+            config.baseForegroundColor = .systemBlue
+            config.imagePadding = 7  // Расстояние между изображением и текстом
+            config.imagePlacement = .leading  // Позиционирование изображения слева от текста
+            backButton.configuration = config
+        } else {
+            // Настройка для iOS до 15
+            backButton.setTitle("Назад", for: .normal)
+            backButton.setTitleColor(.systemBlue, for: .normal)
+            backButton.titleLabel?.font = UIFont(name: "SFProDisplay-Regular", size: 17)
 
-        let chevronImage = UIImage(resource: .shevron).withRenderingMode(.alwaysTemplate)
-        let resizedChevron = UIGraphicsImageRenderer(size: CGSize(width: 8, height: 14)).image { _ in
-            chevronImage.draw(in: CGRect(origin: .zero, size: CGSize(width: 8, height: 14)))
+            let chevronImage = UIImage(resource: .shevron).withRenderingMode(.alwaysTemplate)
+            let resizedChevron = UIGraphicsImageRenderer(size: CGSize(width: 8, height: 14)).image { _ in
+                chevronImage.draw(in: CGRect(origin: .zero, size: CGSize(width: 8, height: 14)))
+            }
+            backButton.setImage(resizedChevron, for: .normal)
+            backButton.tintColor = .systemBlue
+
+            backButton.semanticContentAttribute = .forceLeftToRight
+            backButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: -7, bottom: 0, right: 5)
+            backButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 3, bottom: 0, right: -5)
         }
-        backButton.setImage(resizedChevron, for: .normal)
-        backButton.tintColor = .systemBlue
 
-        backButton.semanticContentAttribute = .forceLeftToRight
-        backButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: -7, bottom: 0, right: 5)
-        backButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 3, bottom: 0, right: -5)
-
-       
         backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
-
         let backBarButtonItem = UIBarButtonItem(customView: backButton)
         navigationItem.leftBarButtonItem = backBarButtonItem
 
         nextButton.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
     }
+
     private func createAttributedText() {
         AttributedTextHelper.configureAttributedText(
             for: privacyLabel,
@@ -176,6 +206,11 @@ class UserRegisterSecondPageViewController: UIViewController, IUserRegisterSecon
             make.trailing.equalToSuperview().offset(-20)
             make.height.equalTo(50)
         }
+        view.addSubview(adressErrorMessageLabel)
+        adressErrorMessageLabel.snp.makeConstraints { make in
+            make.top.equalTo(adressTextField.snp.bottom).offset(4)
+            make.leading.equalToSuperview().offset(20)
+        }
         
         view.addSubview(apartmentNumberTextField)
         apartmentNumberTextField.snp.makeConstraints { make in
@@ -183,6 +218,11 @@ class UserRegisterSecondPageViewController: UIViewController, IUserRegisterSecon
             make.leading.equalToSuperview().offset(20)
             make.trailing.equalToSuperview().offset(-20)
             make.height.equalTo(50)
+        }
+        view.addSubview(numberErrorMessageLabel)
+        numberErrorMessageLabel.snp.makeConstraints { make in
+            make.top.equalTo(apartmentNumberTextField.snp.bottom).offset(4)
+            make.leading.equalToSuperview().offset(20)
         }
         view.addSubview(nextButton)
         nextButton.snp.makeConstraints { make in
@@ -220,21 +260,19 @@ class UserRegisterSecondPageViewController: UIViewController, IUserRegisterSecon
         guard let adress = adressTextField.text, !adress.isEmpty,
               let apartmentNumber = apartmentNumberTextField.text, !apartmentNumber.isEmpty else {
             
-            let redPlaceholderAttributes = [NSAttributedString.Key.foregroundColor: UIColor.red]
             
             if adressTextField.text?.isEmpty == true {
-                adressTextField.attributedPlaceholder = NSAttributedString(
-                    string: "Введите еще раз",
-                    attributes: redPlaceholderAttributes
-                )
+                adressErrorMessageLabel.text = "Введите корректные данные"
+                adressErrorMessageLabel.isHidden = false
+                adressTextField.layer.borderColor = UIColor.red.cgColor
+                adressTextField.layer.borderWidth = 1.0
             }
-            
+          
             if apartmentNumberTextField.text?.isEmpty == true {
-                apartmentNumberTextField.attributedPlaceholder = NSAttributedString(
-                    string: "Введите еще раз",
-                    attributes: redPlaceholderAttributes
-                )
-                
+                numberErrorMessageLabel.text = "Введите корректные данные"
+                numberErrorMessageLabel.isHidden = false
+                apartmentNumberTextField.layer.borderColor = UIColor.red.cgColor
+                apartmentNumberTextField.layer.borderWidth = 1.0
             }
             adressTextField.layer.borderColor = UIColor.red.cgColor
             apartmentNumberTextField.layer.borderColor = UIColor.red.cgColor
