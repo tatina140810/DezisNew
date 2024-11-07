@@ -105,9 +105,7 @@ extension UserApi: TargetType {
     }
     
     var headers: [String : String]? {
-//            let token = KeychainService().accessToken
-//            switch self {
-//            case .getToken, .refreshToken, .userRegister, .userLogin:
+            let token = KeychainService().accessToken
             return ["Content-Type": "application/json"]
                 }
                 

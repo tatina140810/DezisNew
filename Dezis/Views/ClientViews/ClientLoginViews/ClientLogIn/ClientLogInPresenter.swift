@@ -34,4 +34,28 @@ class ClientLoginPresenter: IClientLoginPresenter {
                }
            }
        }
+    func fetchUserData() {
+        guard let email = UserDefaults.standard.string(forKey: "email"), !email.isEmpty else {
+            print("Ошибка: Email пуст или не сохранен в UserDefaults")
+            return
+        }
+        
+        print("Fetching user data for email: \(email)")
+
+        networkService.getUserProfile(email: email) { result in
+            switch result {
+            case .success(let userProfile):
+                print("User profile fetched: \(userProfile)")
+                if let userID = userProfile.id {
+                                   UserDefaults.standard.set(userID, forKey: "userID")
+                                   print("User ID saved in UserDefaults: \(userID)")
+                               }
+                
+            case .failure(let error):
+                DispatchQueue.main.async {
+                   print("Error: \(error.localizedDescription)")
+                }
+            }
+        }
+    }
 }

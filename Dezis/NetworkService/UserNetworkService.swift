@@ -75,6 +75,7 @@ class UserNetworkService {
                     let registerResponse = try JSONDecoder().decode(UserRegisterResponse.self, from: response.data)
                     print("User ID: \(String(describing: registerResponse.id))")
                     print("Email: \(String(describing: registerResponse.email))")
+
                     completion(.success(registerResponse))
                 } catch {
                     print("Ошибка декодирования: \(error)")
