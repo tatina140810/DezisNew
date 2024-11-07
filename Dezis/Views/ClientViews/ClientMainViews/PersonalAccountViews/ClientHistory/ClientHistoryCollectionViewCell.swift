@@ -224,7 +224,7 @@ class ClientHistoryCollectionViewCell: UICollectionViewCell {
         nameLabel.text = userDetails?.username ?? "Имя не указано"
         serviceDetailLabel.text = order.service
         streetlabel.text = userDetails?.address ?? "Не предоставлено"
-        houseNumberlabel.text = userDetails?.apartment_number ?? "Не предоставлено"
+        houseNumberlabel.text = userDetails?.apartmentNumber ?? "Не предоставлено"
         dateDetailLabel.text = order.date
         timeDetailLabel.text = order.time
     }
