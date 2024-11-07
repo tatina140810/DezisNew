@@ -27,7 +27,9 @@ struct UserProfile:  Decodable  {
     let id: Int?
     let username: String?
     let email: String
+    let apartment_number: String?
     let password: String
+    let address: String?
     let number: String?
     let avatar: String?
 }
