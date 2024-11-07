@@ -31,26 +31,17 @@ class CalendarViewController: UIViewController, ICalendarViewController {
     private lazy var datePicker: UIDatePicker = {
         let picker = UIDatePicker()
         picker.preferredDatePickerStyle = .inline
-        picker.layer.cornerRadius = 12
+        picker.layer.cornerRadius = 13.33
         picker.clipsToBounds = true
         picker.backgroundColor = UIColor(hex: "#c8cacb")
-        picker.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        
+        let loc = Locale(identifier: "ru_RU")
+        picker.locale = loc
         picker.addTarget(self, action: #selector(dateChanged), for: .valueChanged)
         
         return picker
     }()
    
-    
-    private var stackView: UIStackView = {
-        let view = UIStackView()
-        view.axis = .horizontal
-        view.backgroundColor =  UIColor(hex: "#c8cacb")
-        view.layer.cornerRadius = 12
-        view.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
-        view.clipsToBounds = true
-        return view
-    }()
-    
     private let resetButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Reset", for: .normal)
@@ -75,7 +66,7 @@ class CalendarViewController: UIViewController, ICalendarViewController {
         let button = UIButton()
         button.setTitle("Заказать услугу", for: .normal)
         button.backgroundColor = UIColor(hex: "#0A84FF")
-        button.layer.cornerRadius = 8
+        button.layer.cornerRadius = 12
         button.clipsToBounds = true
         return button
     }()
@@ -149,29 +140,11 @@ class CalendarViewController: UIViewController, ICalendarViewController {
     private func setupUI() {
         view.addSubview(datePicker)
         datePicker.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(80)
+            make.top.equalToSuperview().offset(60)
             make.leading.trailing.equalToSuperview().inset(20)
-            make.width.equalTo(400)
+            make.width.equalTo(356.33)
         }
 
-        view.addSubview(stackView)
-        stackView.snp.makeConstraints { make in
-            make.top.equalTo(datePicker.snp.bottom)
-            make.height.equalTo(44)
-            make.leading.trailing.equalToSuperview().inset(20)
-        }
-
-       stackView.addSubview(resetButton)
-        resetButton.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(20)
-            make.top.equalTo(datePicker.snp.bottom).offset(2)
-        }
-        
-       stackView.addSubview(doneButton)
-        doneButton.snp.makeConstraints { make in
-            make.trailing.equalToSuperview().offset(-20)
-            make.top.equalTo(datePicker.snp.bottom).offset(2)
-        }
         view.addSubview(orderButton)
         orderButton.snp.makeConstraints { make in
             make.bottom.equalToSuperview().offset(-100)
@@ -182,40 +155,40 @@ class CalendarViewController: UIViewController, ICalendarViewController {
         view.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(20)
-            make.top.equalTo(resetButton.snp.bottom).offset(20)
+            make.top.equalTo(datePicker.snp.bottom).offset(67.67)
         }
         view.addSubview(firstCheckBox)
         firstCheckBox.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(20)
             make.height.equalTo(24)
             make.width.equalTo(24)
-            make.top.equalTo(titleLabel.snp.bottom).offset(10)
+            make.top.equalTo(titleLabel.snp.bottom).offset(16)
         }
         view.addSubview(secondCheckBox)
         secondCheckBox.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(20)
             make.height.width.equalTo(24)
-            make.top.equalTo(firstCheckBox.snp.bottom).offset(10)
+            make.top.equalTo(firstCheckBox.snp.bottom).offset(12)
         }
         view.addSubview(thirdCheckBox)
         thirdCheckBox.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(20)
             make.height.width.equalTo(24)
-            make.top.equalTo(secondCheckBox.snp.bottom).offset(10)
+            make.top.equalTo(secondCheckBox.snp.bottom).offset(12)
         }
         view.addSubview(dezinfectionLabel)
         dezinfectionLabel.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(11)
+            make.top.equalTo(titleLabel.snp.bottom).offset(15)
             make.leading.equalTo(firstCheckBox.snp.trailing).offset(10)
         }
         view.addSubview(dezinsectionLabel)
         dezinsectionLabel.snp.makeConstraints { make in
-            make.top.equalTo(dezinfectionLabel.snp.bottom).offset(12)
+            make.top.equalTo(dezinfectionLabel.snp.bottom).offset(14)
             make.leading.equalTo(secondCheckBox.snp.trailing).offset(10)
         }
         view.addSubview(deratizationLabel)
         deratizationLabel.snp.makeConstraints { make in
-            make.top.equalTo(dezinsectionLabel.snp.bottom).offset(12)
+            make.top.equalTo(dezinsectionLabel.snp.bottom).offset(14)
             make.leading.equalTo(thirdCheckBox.snp.trailing).offset(10)
         }
     }

@@ -7,10 +7,9 @@ enum UserApi {
     case userLogin(email: String, password: String)
     case refreshToken(refreshToken: String)
     case booking (user: Int, service: String, date: String, time: String, is_completed: Bool)
-    case user (id: Int)
+    case userDetails (id: Int)
     case getUserProfile(email: String)
     case fetchClientOrders
-    case userDetails(id: Int)
 }
 
 extension UserApi: TargetType {
@@ -31,14 +30,12 @@ extension UserApi: TargetType {
             return "/api/token/refresh/"
         case .booking:
             return "/api/v1/contact/booking/"
-        case.user(let id):
-            return "/api/v1/user/list-user/\(id)"
+        case.userDetails(let id):
+            return "/api/v1/user/list-user/\(id)/"
         case .getUserProfile(_):
             return "/api/v1/user/list-user/"
         case .fetchClientOrders:
             return "/api/v1/contact/booking/"
-        case .userDetails(let id):
-            return "/api/v1/user/list-user/\(id)"
         }
     }
     
@@ -52,14 +49,13 @@ extension UserApi: TargetType {
             return .post
         case .booking:
             return .post
-        case .user:
+        case .userDetails:
             return .get
         case .getUserProfile:
             return .get
         case .fetchClientOrders:
             return .get
-        case .userDetails:
-            return .get
+       
         }
     }
     
@@ -95,19 +91,18 @@ extension UserApi: TargetType {
                                                     "time": time,
                                                     "is_completed": true
                                                   ], encoding: JSONEncoding.default)
-        case .user(let id):
-            return .requestParameters(parameters: ["id": id], encoding: JSONEncoding.default)
+        case .userDetails(let id):
+            return .requestPlain
+
         case .getUserProfile(let email):
             return .requestParameters(parameters: ["email": email], encoding: URLEncoding.default)
-        case .fetchClientOrders, .userDetails:
+        case .fetchClientOrders:
             return .requestPlain
         }
     }
     
     var headers: [String : String]? {
-//            let token = KeychainService().accessToken
-//            switch self {
-//            case .getToken, .refreshToken, .userRegister, .userLogin:
+            let token = KeychainService().accessToken
             return ["Content-Type": "application/json"]
                 }
                 

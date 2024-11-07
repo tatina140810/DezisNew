@@ -98,6 +98,7 @@ class UserRegisterViewController: UIViewController {
         createPrivaciAttributedText()
         setupAddTarget()
         keyBoardSetUp()
+        navigationController?.navigationBar.isHidden = false
     }
     
     private func setupAddTarget() {
@@ -112,7 +113,6 @@ class UserRegisterViewController: UIViewController {
             config.imagePlacement = .leading  
             backButton.configuration = config
         } else {
-            // Настройка для iOS до 15
             backButton.setTitle("Назад", for: .normal)
             backButton.setTitleColor(.systemBlue, for: .normal)
             backButton.titleLabel?.font = UIFont(name: "SFProDisplay-Regular", size: 17)
@@ -215,7 +215,7 @@ class UserRegisterViewController: UIViewController {
         
         view.addSubview(passwordTextField)
         passwordTextField.passwordRules = nil
-        passwordTextField.textContentType = .none
+        passwordTextField.textContentType = .oneTimeCode
         passwordTextField.isSecureTextEntry = true
         passwordTextField.snp.makeConstraints { make in
             make.top.equalTo(numberErrorMessageLabel.snp.bottom).offset(10)
