@@ -250,9 +250,12 @@ class RequestsCollectionViewCell: UICollectionViewCell {
     }
     
     func fill(with userInfo: UserInformation?) {
+        dateDetailLabel.text = userInfo?.created_at ?? "Дата не указана"
         nameDetailLabel.text = userInfo?.username ?? "Имя не указано"
         emailDatailLabel.text = userInfo?.email ?? "Почта не указана"
         phoneNumberDetailsLabel.text = userInfo?.number ?? "Телефон не указан"
+        addressDetailLabel.text = userInfo?.address ?? "Улица не указана"
+        houseNumberDetailLabel.text = userInfo?.apartment_number ?? "-"
     }
     
     required init?(coder: NSCoder) {

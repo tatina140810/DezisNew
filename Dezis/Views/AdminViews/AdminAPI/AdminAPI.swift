@@ -30,13 +30,13 @@ extension AdminApi: TargetType {
         case .fetchUserDetails(let userId):
             return "/api/v1/user/list-user/\(userId)"
         case . fetchRequests:
-            return "/api/v1/user/list-user/"
+            return "/api/v1/user/inactive-users/"
         case .fetchDocumentation:
             return "/api/v1/about_us/documentations/"
         case .completeOrder(let orderId):
             return "/api/v1/contact/bookings/\(orderId)/complete/"
         case .confirmUser(let userId):
-            return "/api/v1/user/confirmation/\(userId)/"
+            return "/api/v1/user/put-request/\(userId)/"
         case .deleteUser(let userId):
             return "/api/v1/user/delete-user/\(userId)/"
         }

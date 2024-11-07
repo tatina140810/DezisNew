@@ -46,6 +46,7 @@ class AdminLoginView: UIViewController {
             ])
         field.layer.cornerRadius = 10
         field.font = UIFont(name: "SFProDisplay-Regular", size: 14)
+        field.autocapitalizationType = .none
         field.translatesAutoresizingMaskIntoConstraints = false
         
         let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 15, height: field.frame.height))
@@ -69,6 +70,7 @@ class AdminLoginView: UIViewController {
             ])
         field.layer.cornerRadius = 10
         field.font = UIFont(name: "SFProDisplay-Regular", size: 14)
+        field.autocapitalizationType = .none
         field.translatesAutoresizingMaskIntoConstraints = false
         
         let eyeButton = UIButton(type: .custom)
