@@ -140,7 +140,7 @@ class CalendarViewController: UIViewController, ICalendarViewController {
     private func setupUI() {
         view.addSubview(datePicker)
         datePicker.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(80)
+            make.top.equalToSuperview().offset(60)
             make.leading.trailing.equalToSuperview().inset(20)
             make.width.equalTo(356.33)
         }

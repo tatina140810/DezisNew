@@ -23,7 +23,7 @@ class CalendarViewControllerPresenter: ICalendarPresenter {
     }
     
     func booking(bookingInfo: BookingInfo, completion: @escaping (Result<BookingLoginResponse, Error>) -> Void) {
-        userNetworkService.booking(user: bookingInfo.user, service: bookingInfo.service, date: bookingInfo.date, time: bookingInfo.time, is_completed: true) { result in
+        userNetworkService.booking(user: bookingInfo.user, service: bookingInfo.service, date: bookingInfo.date, time: bookingInfo.time, isCompleted: true) { result in
             switch result {
             case .success(let response):
                 print("Booking successful with response: \(response)")

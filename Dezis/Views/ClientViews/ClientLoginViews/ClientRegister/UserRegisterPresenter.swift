@@ -26,7 +26,8 @@ class UserRegisterPresenter: IUserRegisterPresenters {
             switch result {
             case .success(let response):
                         print("Registration successful with response: \(response)")
-                        let id = response.id
+                let id = response.userId
+                UserDefaults.standard.set(id, forKey: "userId")
 
                 print ("User id: \(String(describing: id))")
                 
