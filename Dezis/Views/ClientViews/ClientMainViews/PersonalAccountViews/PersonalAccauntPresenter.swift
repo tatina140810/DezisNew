@@ -2,6 +2,7 @@ import Foundation
 
 protocol IPersonalAccountPresenter: AnyObject {
     func fetchUserData()
+    func logOut()
 }
 
 class PersonalAccountPresenter: IPersonalAccountPresenter {
@@ -46,4 +47,23 @@ class PersonalAccountPresenter: IPersonalAccountPresenter {
             }
         }
     }
+    func logOut() {
+        guard let email = UserDefaults.standard.string(forKey: "email") else {
+            print("Ошибка: Email не найден в UserDefaults")
+            return
+        }
+        
+        userService.logOut(email: email){ result in
+            switch result {
+            case .success:
+                UserDefaults.standard.removeObject(forKey: "email")
+                UserDefaults.standard.removeObject(forKey: "userId")
+                print("Пользователь успешно вышел из системы и данные удалены")
+                
+            case .failure(let error):
+                print("Ошибка выхода: \(error.localizedDescription)")
+            }
+        }
+    }
+
 }
