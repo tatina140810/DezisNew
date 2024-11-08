@@ -336,6 +336,7 @@ class PersonalAccountViewController: UIViewController, PersonalAccountView {
         }
     }
     @objc func exitButtonTapped(){
+        presenter?.logOut()
         let vc = ExitAlertView()
         navigationController?.pushViewController(vc, animated: true)
     }

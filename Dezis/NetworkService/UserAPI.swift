@@ -10,6 +10,7 @@ enum UserApi {
     case userDetails (id: Int)
     case getUserProfile(email: String)
     case fetchClientOrders
+    case logOut(email: String)
 }
 
 extension UserApi: TargetType {
@@ -36,6 +37,8 @@ extension UserApi: TargetType {
             return "/api/v1/user/list-user/"
         case .fetchClientOrders:
             return "/api/v1/contact/booking/"
+        case .logOut:
+            return "/api/v1/user/logout-user/"
         }
     }
     
@@ -55,6 +58,8 @@ extension UserApi: TargetType {
             return .get
         case .fetchClientOrders:
             return .get
+        case .logOut:
+            return .post
        
         }
     }
@@ -98,15 +103,21 @@ extension UserApi: TargetType {
             return .requestParameters(parameters: ["email": email], encoding: URLEncoding.default)
         case .fetchClientOrders:
             return .requestPlain
+        case .logOut(let email):
+            return .requestParameters(parameters: ["email": email], encoding: JSONEncoding.default)
+
         }
     }
     
     var headers: [String : String]? {
-            let token = KeychainService().accessToken
-            return ["Content-Type": "application/json"]
-                }
-                
-    var sampleData: Data {
+        let token = KeychainService().accessToken
+        return [
+            "Content-Type": "application/json",
+           // "Authorization": "Bearer \(token)"
+        ]
+        
+        var sampleData: Data {
             return Data()
         }
+    }
 }
