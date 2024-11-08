@@ -302,18 +302,26 @@ enum LoginError: Error {
                     self.logResponse(response)
                     
                     do {
-                        let singleUser = try JSONDecoder().decode(UserProfile.self, from: response.data)
-                        completion(.success(singleUser))
+                        let users = try JSONDecoder().decode([UserProfile].self, from: response.data)
+                        
+                        if let user = users.first {
+                            completion(.success(user))
+                        } else {
+                            completion(.failure(NSError(domain: "", code: 404, userInfo: [NSLocalizedDescriptionKey: "User not found"])))
+                        }
+                        
                     } catch {
+                        print("Ошибка декодирования: \(error)")
                         completion(.failure(error))
                     }
                     
                 case .failure(let error):
+                    print("Ошибка сети: \(error.localizedDescription)")
                     completion(.failure(error))
                 }
             }
         }
- 
+        
         func logOut(email: String, completion: @escaping (Result<UserLogOutResponse, Error>) -> Void) {
             provider.request(.logOut(email: email)) { result in
                 switch result {

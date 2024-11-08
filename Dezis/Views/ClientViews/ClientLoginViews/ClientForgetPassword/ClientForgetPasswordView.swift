@@ -1,28 +1,23 @@
 //
-//  AdminLoginViewController.swift
+//  ClientForgetPasswordView.swift
 //  Dezis
 //
-//  Created by Telegey Nurbekova on 05/10/24.
+//  Created by Telegey Nurbekova on 09/11/24.
 //
 
 import UIKit
 
-protocol IAdminLoginView {
-    func showError(message: String)
+protocol IClientForgetPasswordView {
     func showInputError(message: String)
-    func navigateToAdminDashboard()
-    func showDocumentation(documentationList: [Documentation])
 }
 
-class AdminLoginView: UIViewController {
+class ClientForgetPasswordView: UIViewController {
     
-    private var presenter: IAdminLoginPresenter?
+    private var presenter: IClientForgetPasswordPresenter?
     
-    private var documentationList: [Documentation] = []
-    
-    private let loginLabel: UILabel = {
+    private let changePasswordLabel: UILabel = {
         let view = UILabel()
-        view.text = "Вход"
+        view.text = "Смена пароля"
         view.font = UIFont(name: "SFProDisplay-Bold", size: 24)
         view.textColor = .init(UIColor(hex: "#FFFFFF"))
         view.numberOfLines = 0
@@ -32,14 +27,14 @@ class AdminLoginView: UIViewController {
         return view
     }()
     
-    private lazy var loginTextField: UITextField = {
+    private lazy var newPasswordTextField: UITextField = {
         var field = UITextField()
         field.backgroundColor = UIColor(hex: "#2B373E")
         field.textColor = .white
         field.layer.borderWidth = 1
         field.layer.borderColor = UIColor.clear.cgColor
         field.attributedPlaceholder = NSAttributedString(
-            string: "Логин",
+            string: "Введите новый пароль*",
             attributes: [
                 NSAttributedString.Key.foregroundColor: UIColor.white.withAlphaComponent(0.7),
                 NSAttributedString.Key.font: UIFont(name: "SFProDisplay-Regular", size: 14)!
@@ -55,15 +50,14 @@ class AdminLoginView: UIViewController {
         return field
     }()
     
-    private let passwordTextField: UITextField = {
+    private let confirmPasswordTextField: UITextField = {
         var field = UITextField()
         field.backgroundColor = UIColor(hex: "#2B373E")
         field.textColor = .white
-        field.isSecureTextEntry = true
         field.layer.borderWidth = 1
         field.layer.borderColor = UIColor.clear.cgColor
         field.attributedPlaceholder = NSAttributedString(
-            string: "Пароль",
+            string: "Повторите пароль*",
             attributes: [
                 NSAttributedString.Key.foregroundColor: UIColor.white.withAlphaComponent(0.7),
                 NSAttributedString.Key.font: UIFont(name: "SFProDisplay-Regular", size: 14)!
@@ -72,19 +66,6 @@ class AdminLoginView: UIViewController {
         field.font = UIFont(name: "SFProDisplay-Regular", size: 14)
         field.autocapitalizationType = .none
         field.translatesAutoresizingMaskIntoConstraints = false
-        
-        let eyeButton = UIButton(type: .custom)
-        eyeButton.setImage(UIImage(systemName: "eye"), for: .normal)
-        eyeButton.tintColor = .white
-        eyeButton.frame = CGRect(x: 0, y: 0, width: 24, height: 24)
-        eyeButton.addTarget(nil, action: #selector(togglePasswordVisibility), for: .touchUpInside)
-        
-        let rightPaddingView = UIView(frame: CGRect(x: 0, y: 0, width: 48, height: 24))
-        rightPaddingView.addSubview(eyeButton)
-        eyeButton.center = rightPaddingView.center
-        
-        field.rightView = rightPaddingView
-        field.rightViewMode = .always
         
         let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 15, height: field.frame.height))
         field.leftView = paddingView
@@ -149,41 +130,42 @@ class AdminLoginView: UIViewController {
         setupUI()
         setupAddTarget()
         setupNavigation()
-        presenter = AdminLoginPresenter(view: self)
+        presenter = ClientForgetPasswordPresenter(view: self)
         dismissKeyboardGesture()
+        self.navigationController?.isNavigationBarHidden = false
     }
     
     private func setupUI() {
         
-        view.addSubview(loginLabel)
-        view.addSubview(loginTextField)
-        view.addSubview(passwordTextField)
+        view.addSubview(changePasswordLabel)
+        view.addSubview(newPasswordTextField)
+        view.addSubview(confirmPasswordTextField)
         view.addSubview(continueButton)
         view.addSubview(termsTextView)
         
-        loginLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(278)
+        changePasswordLabel.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(282)
             make.centerX.equalToSuperview()
         }
         
-        loginTextField.snp.makeConstraints { make in
-            make.top.equalTo(loginLabel.snp.bottom).offset(24)
+        newPasswordTextField.snp.makeConstraints { make in
+            make.top.equalTo(changePasswordLabel.snp.bottom).offset(24)
             make.leading.equalToSuperview().offset(20)
             make.trailing.equalToSuperview().offset(-20)
             make.height.equalTo(50)
         }
         
-        passwordTextField.snp.makeConstraints { make in
-            make.top.equalTo(loginTextField.snp.bottom).offset(10)
+        confirmPasswordTextField.snp.makeConstraints { make in
+            make.top.equalTo(newPasswordTextField.snp.bottom).offset(10)
             make.leading.equalToSuperview().offset(20)
             make.trailing.equalToSuperview().offset(-20)
             make.height.equalTo(50)
         }
         
         continueButton.snp.makeConstraints { make in
-            make.top.equalTo(passwordTextField.snp.bottom).offset(12)
+            make.top.equalTo(confirmPasswordTextField.snp.bottom).offset(12)
             make.leading.equalToSuperview().offset(20)
-            make.trailing.equalToSuperview().offset(-20)
+            make.trailing.equalToSuperview().offset(-24)
             make.height.equalTo(52)
         }
         
@@ -226,60 +208,52 @@ class AdminLoginView: UIViewController {
         navigationController?.popViewController(animated: true)
     }
     
-    @objc private func togglePasswordVisibility() {
-        passwordTextField.isSecureTextEntry.toggle()
-        
-        if let eyeButton = passwordTextField.rightView?.subviews.first as? UIButton {
-            let imageName = passwordTextField.isSecureTextEntry ? "eye" : "eye.slash"
-            eyeButton.setImage(UIImage(systemName: imageName), for: .normal)
-        }
-    }
-    
     @objc private func continueButtonTapped() {
-        let login = loginTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
-        let password = passwordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+        guard let newPassword = newPasswordTextField.text, !newPassword.isEmpty,
+              let confirmPassword = confirmPasswordTextField.text, !confirmPassword.isEmpty else {
+            showInputError(message: "Поля не могут быть пустыми")
+            return
+        }
         
-        if login.isEmpty || password.isEmpty {
-            showInputError(message: "Пожалуйста, введите логин и пароль.")
+        if newPassword == confirmPassword && newPassword.count >= 8 {
+            print("Passwords match and are valid.")
+            let vc = ClientLoginViewController()
+            navigationController?.pushViewController(vc, animated: true)
         } else {
-            presenter?.loginAdmin(login: login, password: password)
+            showInputError(message: "Пароли не совпадают или менее 8 символов")
         }
     }
     
     func showInputError(message: String) {
-        loginTextField.layer.borderColor = UIColor.red.cgColor
-        passwordTextField.layer.borderColor = UIColor.red.cgColor
-        loginTextField.text = ""
-        passwordTextField.text = ""
-        loginTextField.attributedPlaceholder = NSAttributedString(
-            string: message,
-            attributes: [
-                .foregroundColor: UIColor.red,
-                .font: UIFont(name: "SFProDisplay-Regular", size: 14)!
-            ]
-        )
-        passwordTextField.attributedPlaceholder = NSAttributedString(
-            string: message,
-            attributes: [
-                .foregroundColor: UIColor.red,
-                .font: UIFont(name: "SFProDisplay-Regular", size: 14)!
-            ]
-        )
-    }
+            newPasswordTextField.layer.borderColor = UIColor.red.cgColor
+            confirmPasswordTextField.layer.borderColor = UIColor.red.cgColor
+            
+            newPasswordTextField.attributedPlaceholder = NSAttributedString(
+                string: message,
+                attributes: [
+                    .foregroundColor: UIColor.red,
+                    .font: UIFont(name: "SFProDisplay-Regular", size: 14)!
+                ]
+            )
+            
+            confirmPasswordTextField.attributedPlaceholder = NSAttributedString(
+                string: message,
+                attributes: [
+                    .foregroundColor: UIColor.red,
+                    .font: UIFont(name: "SFProDisplay-Regular", size: 14)!
+                ]
+            )
+            
+            newPasswordTextField.text = ""
+            confirmPasswordTextField.text = ""
+        }
     
-    func resetInputAppearance() {
-        loginTextField.layer.borderColor = UIColor.clear.cgColor
-        passwordTextField.layer.borderColor = UIColor.clear.cgColor
-        loginTextField.text = "Логин"
-        passwordTextField.text = "Пароль"
-    }
 }
 
-extension AdminLoginView: UITextViewDelegate {
+extension ClientForgetPasswordView: UITextViewDelegate {
     
     func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
            if URL.scheme == "terms" || URL.scheme == "privacy" {
-               presenter?.fetchDocumentation() 
                return false
            }
            return true
@@ -287,19 +261,4 @@ extension AdminLoginView: UITextViewDelegate {
 }
 
 
-extension AdminLoginView: IAdminLoginView {
-    
-    func showError(message: String) {
-        showInputError(message: "Введите еще раз")
-    }
-    
-    func navigateToAdminDashboard() {
-        let tabBarController = AdminTabBarController()
-        navigationController?.pushViewController(tabBarController, animated: true)
-    }
-    
-    func showDocumentation(documentationList: [Documentation]) {
-        let documentationVC = DocumentationsList(documentationList: documentationList)
-        navigationController?.pushViewController(documentationVC, animated: true)
-    }
-}
+extension ClientForgetPasswordView: IClientForgetPasswordView { }
