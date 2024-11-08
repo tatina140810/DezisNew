@@ -290,13 +290,21 @@ class UserNetworkService {
                 self.logResponse(response)
                 
                 do {
-                    let singleUser = try JSONDecoder().decode(UserProfile.self, from: response.data)
-                    completion(.success(singleUser))
+                    let users = try JSONDecoder().decode([UserProfile].self, from: response.data)
+                    
+                    if let user = users.first {
+                        completion(.success(user))
+                    } else {
+                        completion(.failure(NSError(domain: "", code: 404, userInfo: [NSLocalizedDescriptionKey: "User not found"])))
+                    }
+                    
                 } catch {
+                    print("Ошибка декодирования: \(error)")
                     completion(.failure(error))
                 }
                 
             case .failure(let error):
+                print("Ошибка сети: \(error.localizedDescription)")
                 completion(.failure(error))
             }
         }

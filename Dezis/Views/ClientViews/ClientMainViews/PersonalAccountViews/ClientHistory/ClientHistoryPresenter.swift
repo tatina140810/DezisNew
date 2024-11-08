@@ -26,8 +26,8 @@ class ClientHistoryPresenter: IClientHistoryPresenter {
     }
     
     func fetchClientOrders() {
-        guard let clientId = UserDefaults.standard.value(forKey: "userID") as? Int else {
-            print("Error: User ID not found in UserDefaults.")
+        guard let clientId = UserDefaults.standard.value(forKey: "userId") as? Int else {
+            print("Error: User Id not found in UserDefaults.")
             return
         }
         
