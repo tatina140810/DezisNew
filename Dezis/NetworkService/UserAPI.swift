@@ -11,6 +11,7 @@ enum UserApi {
     case getUserProfile(email: String)
     case fetchClientOrders
     case logOut(email: String)
+    case resendOtp (email: String)
 }
 
 extension UserApi: TargetType {
@@ -39,6 +40,8 @@ extension UserApi: TargetType {
             return "/api/v1/contact/booking/"
         case .logOut:
             return "/api/v1/user/logout-user/"
+        case .resendOtp:
+            return "/api/v1/user/resend-otp/"
         }
     }
     
@@ -59,6 +62,8 @@ extension UserApi: TargetType {
         case .fetchClientOrders:
             return .get
         case .logOut:
+            return .post
+        case .resendOtp:
             return .post
        
         }
@@ -104,6 +109,8 @@ extension UserApi: TargetType {
         case .fetchClientOrders:
             return .requestPlain
         case .logOut(let email):
+            return .requestParameters(parameters: ["email": email], encoding: JSONEncoding.default)
+        case .resendOtp(let email):
             return .requestParameters(parameters: ["email": email], encoding: JSONEncoding.default)
 
         }

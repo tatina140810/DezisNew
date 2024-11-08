@@ -71,6 +71,7 @@ class CalendarViewController: UIViewController, ICalendarViewController {
         let button = UIButton()
         button.setTitle("Заказать услугу", for: .normal)
         button.backgroundColor = UIColor(hex: "#0A84FF")
+        button.titleLabel?.font = UIFont(name: "SFProDisplay-Bold", size: 16)
         button.layer.cornerRadius = 12
         button.clipsToBounds = true
         return button

@@ -4,6 +4,7 @@ import Foundation
 protocol IСonfirmationСodePresenter: AnyObject {
     
     func verifyUser(email: String, otp: String, completion: @escaping (Result<String, Error>) -> Void)
+    func resendOtp()
 }
 
 class СonfirmationСodePresenter: IСonfirmationСodePresenter {
@@ -28,6 +29,24 @@ class СonfirmationСodePresenter: IСonfirmationСodePresenter {
                 DispatchQueue.main.async {
                     completion(.failure(error))
                 }
+            }
+        }
+    }
+    func resendOtp() {
+        guard let email = UserDefaults.standard.string(forKey: "email") else {
+            print("Ошибка: Email не найден в UserDefaults")
+            return
+        }
+        
+        userNetworkService.resendOtp(email: email){ result in
+            switch result {
+            case .success:
+                UserDefaults.standard.removeObject(forKey: "email")
+                UserDefaults.standard.removeObject(forKey: "userId")
+                print("Код отправлен на email")
+                
+            case .failure(let error):
+                print("Ошибка: \(error.localizedDescription)")
             }
         }
     }

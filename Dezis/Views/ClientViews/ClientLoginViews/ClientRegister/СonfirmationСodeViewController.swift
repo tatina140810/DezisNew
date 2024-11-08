@@ -47,12 +47,13 @@ class СonfirmationСodeViewController: UIViewController, IСonfirmationСodeVie
     
     private var otpTextField = TextFieldSettings().textFieldMaker(placeholder: "Код:", backgroundColor: UIColor(hex: "#2B373E"))
    
-    private lazy var newCodeButton: UIButton = {
+    private lazy var resendButton: UIButton = {
         let button = UIButton()
+        button.isEnabled = false
         button.setTitle("Отправить снова", for: .normal)
         button.titleLabel?.font = UIFont(name: "SFProDisplay-Regular", size: 12)
-        button.tintColor = UIColor(hex: "#5FBEF4")
-        button.addTarget(self, action: #selector(newCodeButtonTapped), for: .touchUpInside)
+        button.setTitleColor(UIColor(hex: "#5FBEF4"), for: .normal)
+        button.addTarget(self, action: #selector(resendButtonTapped), for: .touchUpInside)
         return button
     }()
     private var errorMasageLabel: UILabel = {
@@ -63,7 +64,7 @@ class СonfirmationСodeViewController: UIViewController, IСonfirmationСodeVie
         view.isHidden = true
         return view
     }()
-    private var oneMinuteLabel: UILabel = {
+    private var timerLabel: UILabel = {
         let view = UILabel()
         view.text = "через 1 минуту"
         view.font = UIFont(name: "SFProDisplay-Regular", size: 12)
@@ -101,6 +102,8 @@ class СonfirmationСodeViewController: UIViewController, IСonfirmationСodeVie
         view.numberOfLines = 0
         return view
     }()
+    private var timer: Timer?
+       private var timeRemaining = 60
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -112,7 +115,37 @@ class СonfirmationСodeViewController: UIViewController, IСonfirmationСodeVie
         presenter = СonfirmationСodePresenter(view: self)
         keyBoardSetUp()
         dismissKeyboardGesture()
+        startTimer()
+                
     }
+private func startTimer() {
+       timeRemaining = 60
+       updateTimerLabel()
+       resendButton.isEnabled = false
+
+       timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
+   }
+
+   @objc private func updateTimer() {
+       if timeRemaining > 0 {
+           timeRemaining -= 1
+           updateTimerLabel()
+       } else {
+           timer?.invalidate()
+           timer = nil
+           resendButton.isEnabled = true
+           timerLabel.text = ""
+       }
+   }
+
+   private func updateTimerLabel() {
+       timerLabel.text = "через \(timeRemaining) секунд"
+   }
+
+   @objc private func resendButtonTapped() {
+       presenter?.resendOtp()
+       startTimer()
+   }
     func keyBoardSetUp(){
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
            NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -172,24 +205,24 @@ class СonfirmationСodeViewController: UIViewController, IСonfirmationСodeVie
             make.leading.trailing.equalToSuperview().inset(20)
             make.height.equalTo(50)
         }
-        view.addSubview(newCodeButton)
-        newCodeButton.snp.makeConstraints {make in
-            make.top.equalTo(otpTextField.snp.bottom).offset(5)
-            make.leading.equalToSuperview().offset(16)
+        view.addSubview(resendButton)
+        resendButton.snp.makeConstraints {make in
+            make.top.equalTo(otpTextField.snp.bottom).offset(4)
+            make.leading.equalToSuperview().offset(20)
         }
         view.addSubview(errorMasageLabel)
         errorMasageLabel.snp.makeConstraints {make in
             make.top.equalTo(otpTextField.snp.bottom).offset(10)
             make.leading.equalToSuperview().offset(16)
         }
-        view.addSubview(oneMinuteLabel)
-        oneMinuteLabel.snp.makeConstraints {make in
-            make.top.equalTo(newCodeButton.snp.bottom).offset(3)
-            make.leading.equalToSuperview().offset(16)
+        view.addSubview(timerLabel)
+        timerLabel.snp.makeConstraints {make in
+            make.top.equalTo(otpTextField.snp.bottom).offset(10)
+            make.leading.equalTo(resendButton.snp.trailing).offset(3)
         }
         view.addSubview(nextButton)
         nextButton.snp.makeConstraints { make in
-            make.top.equalTo(oneMinuteLabel.snp.bottom).offset(10)
+            make.top.equalTo(timerLabel.snp.bottom).offset(24)
             make.leading.equalToSuperview().offset(20)
             make.trailing.equalToSuperview().offset(-20)
             make.height.equalTo(52)
@@ -240,8 +273,8 @@ class СonfirmationСodeViewController: UIViewController, IСonfirmationСodeVie
     private func displayError(_ message: String) {
         errorMasageLabel.text = message
         errorMasageLabel.isHidden = false
-        oneMinuteLabel.isHidden = true
-        newCodeButton.isHidden = true
+        timerLabel.isHidden = true
+        resendButton.isHidden = true
     }
     @objc func newCodeButtonTapped() {
         print("New code Button")
