@@ -34,10 +34,13 @@ struct Order: Codable {
 struct UserInformation: Codable {
     let id: Int
     let username: String?
+    let apartment_number: String?
     let email: String?
     let number: String?
+    let address: String?
     let avatar: String?
     let is_active: Bool
+    let created_at: String?
 }
 
 struct Documentation: Codable {

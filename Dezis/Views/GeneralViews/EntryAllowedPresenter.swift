@@ -23,20 +23,20 @@ class EntryAllowedPresenter: IEntryAllowedPresenter {
         
         print("Fetching user data for email: \(email)")
 
-        userService.getUserProfile(email: email) { [weak self] result in
-            switch result {
-            case .success(let userProfile):
-                print("User profile fetched: \(userProfile)")
-                if let userID = userProfile.id {
-                                   UserDefaults.standard.set(userID, forKey: "userID")
-                                   print("User ID saved in UserDefaults: \(userID)")
-                               }
-                
-            case .failure(let error):
-                DispatchQueue.main.async {
-                    self?.view?.showError("Failed to load user data: \(error.localizedDescription)")
-                }
-            }
-        }
-    }
+//        userService.getUserProfile(email: email) { [weak self] result in
+//            switch result {
+//            case .success(let userProfile):
+//                print("User profile fetched: \(userProfile)")
+//                if let userID = userProfile.id {
+//                                   UserDefaults.standard.set(userID, forKey: "userID")
+//                                   print("User ID saved in UserDefaults: \(userID)")
+//                               }
+//                
+//            case .failure(let error):
+//                DispatchQueue.main.async {
+//                    self?.view?.showError("Failed to load user data: \(error.localizedDescription)")
+//                }
+//            }
+//        }
+  }
 }

@@ -21,6 +21,7 @@ class FirstOrderView: UIView {
     
     private let nameLabel: UILabel = {
         let view = UILabel()
+        view.text = " "
         view.font = UIFont(name: "SFProDisplay-Regular", size: 16)
         view.textColor = .init(UIColor(hex: "#FFFFFF"))
         view.textAlignment = .center
@@ -60,7 +61,7 @@ class FirstOrderView: UIView {
     private let serviceDetailLabel: UILabel = {
         let view = UILabel()
         
-        let attributedString = NSMutableAttributedString(string: "Дезинфекция")
+        let attributedString = NSMutableAttributedString(string: "")
         attributedString.addAttribute(.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: NSRange(location: 0, length: attributedString.length))
         
         view.attributedText = attributedString

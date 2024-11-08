@@ -15,29 +15,33 @@ class PersonalAccountPresenter: IPersonalAccountPresenter {
     }
     
     func fetchUserData() {
-        guard let email = UserDefaults.standard.string(forKey: "email"), !email.isEmpty else {
-            print("Error: Email is empty or not saved in UserDefaults")
-            view?.showError("Email is not available in UserDefaults.")
+        guard let currentUserId = UserDefaults.standard.value(forKey: "userId") as? Int else {
+            DispatchQueue.main.async {
+                self.view?.showError("User ID not found in UserDefaults.")
+            }
             return
         }
         
-        print("Fetching user data for email: \(email)")
-
-        userService.getUserProfile(email: email) { [weak self] result in
+        userService.fetchUser(id: currentUserId) { [weak self] result in
             switch result {
             case .success(let userProfile):
                 print("User profile fetched: \(userProfile)")
-                if let userID = userProfile.id {
-                                   UserDefaults.standard.set(userID, forKey: "userID")
-                                   print("User ID saved in UserDefaults: \(userID)")
-                               }
+                
+               
+                if let fetchedUserId = userProfile.id, fetchedUserId != currentUserId {
+                
+                    UserDefaults.standard.set(fetchedUserId, forKey: "userId")
+                    print("User ID обновлен в UserDefaults: \(fetchedUserId)")
+                }
+                
                 DispatchQueue.main.async {
                     self?.view?.showUserData(user: userProfile)
                 }
                 
             case .failure(let error):
                 DispatchQueue.main.async {
-                    self?.view?.showError("Failed to load user data: \(error.localizedDescription)")
+                    let errorMessage = (error as NSError).localizedDescription
+                    self?.view?.showError("Failed to load user data: \(errorMessage)")
                 }
             }
         }

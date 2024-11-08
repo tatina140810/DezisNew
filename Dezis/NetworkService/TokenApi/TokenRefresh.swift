@@ -1,9 +1,4 @@
-//
-//  TokenRefresh.swift
-//  Dezis
-//
-//  Created by Tatina Dzhakypbekova on 16/10/24.
-//
+
 import UIKit
 import Foundation
 import JWTDecode
