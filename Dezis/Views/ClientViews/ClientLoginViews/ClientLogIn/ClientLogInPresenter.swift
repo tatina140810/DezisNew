@@ -16,46 +16,62 @@ class ClientLoginPresenter: IClientLoginPresenter {
     }
     
     func loginUser(email: String, password: String, completion: @escaping (Result<String, Error>) -> Void) {
-           networkService.userLogin(email: email, password: password) { result in
-               switch result {
-               case .success(let response):
-                   print("Успешный логин: \(response.detail)")
-                   UserDefaults.standard.set(email, forKey: "email")
-                   print("сoхраненый email: \(email)")
-                   
-                   DispatchQueue.main.async {
-                       completion(.success(response.detail))
-                       
-                   }
-               case .failure(let error):
-                   DispatchQueue.main.async {
-                       completion(.failure(error))
-                   }
-               }
-           }
-       }
-//   “ func fetchUserData() {
-//        guard let email = UserDefaults.standard.string(forKey: "email"), !email.isEmpty else {
-//            print("Ошибка: Email пуст или не сохранен в UserDefaults")
-//            return
-//        }
-//        
-//        print("Fetching user data for email: \(email)")
-//
-//        networkService.getUserProfile(email: email) { result in
-//            switch result {
-//            case .success(let userProfile):
-//                print("User profile fetched: \(userProfile)")
-//                if let userID = userProfile.id {
-//                                   UserDefaults.standard.set(userID, forKey: "userID")
-//                                   print("User ID saved in UserDefaults: \(userID)")
-//                               }
-//                
-//            case .failure(let error):
-//                DispatchQueue.main.async {
-//                   print("Error: \(error.localizedDescription)")
-//                }
-//            }
-//        }
-//    }”
+        networkService.userLogin(email: email, password: password) { result in
+            switch result {
+            case .success(let response):
+                print("Успешный логин: \(response.detail)")
+                UserDefaults.standard.set(email, forKey: "email")
+                print("сoхраненый email: \(email)")
+                UserDefaults.standard.set(email, forKey: "email")
+                UserDefaults.standard.set(response.id, forKey: "userId")
+                print("Сохраненный email: \(email)")
+                print("Сохраненный userId: \(response.id)")
+                
+                DispatchQueue.main.async {
+                    completion(.success(response.detail))
+                    
+                }
+            case .failure(let error):
+                DispatchQueue.main.async {
+                    completion(.failure(error))
+                }
+            }
+        }
+    }
+    //    func fetchUserData() {
+    //        guard let email = UserDefaults.standard.string(forKey: "email"), !email.isEmpty else {
+    //            print("Ошибка: Email пуст или не сохранен в UserDefaults")
+    //            return
+    //        }
+    //
+    //        print("Fetching user data for email: \(email)")
+    //
+    //        networkService.getUserProfile(email: email) { result in
+    //            switch result {
+    //            case .success(let userProfile):
+    //                print("User profile fetched: \(userProfile)")
+    //
+    //                // Проверка наличия userID
+    //                if let userID = userProfile.id {
+    //                    let currentUserId = UserDefaults.standard.integer(forKey: "userId")
+    //
+    //                    if currentUserId != userID {
+    //                        UserDefaults.standard.set(userID, forKey: "userId")
+    //                        print("User ID сохранен/обновлен в UserDefaults: \(userID)")
+    //                    } else {
+    //                        print("User ID уже сохранен и совпадает с текущим значением: \(userID)")
+    //                    }
+    //                } else {
+    //                    print("Ошибка: User ID отсутствует в профиле")
+    //                }
+    //
+    //            case .failure(let error):
+    //                DispatchQueue.main.async {
+    //                    print("Error: \(error.localizedDescription)")
+    //                }
+    //            }
+    //        }
+    //    }
+    //
+    //}
 }
