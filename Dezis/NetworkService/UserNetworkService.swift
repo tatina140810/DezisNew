@@ -2,12 +2,12 @@ import UIKit
 import Moya
 
 struct UserRegisterResponse: Decodable {
-    let userId: Int
+    let id: Int
     let detail: Detail
     let tokens: ClientTokens
 
     enum CodingKeys: String, CodingKey {
-        case userId = "user_id"
+        case id = "user_id"
         case detail, tokens
     }
 }
@@ -23,6 +23,11 @@ struct ClientTokens: Decodable {
 
 struct UserLoginResponse: Decodable {
     let detail: String
+    let id: Int
+    enum CodingKeys: String, CodingKey {
+        case id = "user_id"
+        case detail
+    }
 }
 
 struct UserVerifyResponse: Decodable {
@@ -44,7 +49,7 @@ struct BookingLoginResponse: Decodable {
 }
 
 struct UserProfile: Decodable {
-    let id: Int
+    let id: Int?
     let username: String?
     let email: String
     let apartmentNumber: String?
@@ -239,19 +244,24 @@ class UserNetworkService {
                     if let user = users.first(where: { $0.email.lowercased() == email.lowercased() }) {
                         completion(.success(user))
                     } else {
-                        completion(.failure(NSError(domain: "", code: 404, userInfo: [NSLocalizedDescriptionKey: "Юзер не найден"])))
+                        let error = NSError(domain: "", code: 404, userInfo: [NSLocalizedDescriptionKey: "Пользователь с таким email не найден"])
+                        completion(.failure(error))
                     }
-                } catch {
-                    completion(.failure(error))
-                    print("Failed to decode UserProfile: \(error)")
+                    
+                } catch let decodingError {
+                 
+                    print("Ошибка декодирования UserProfile: \(decodingError)")
+                    completion(.failure(decodingError))
                 }
                 
-            case .failure(let error):
-                completion(.failure(error))
+            case .failure(let networkError):
+              
+                print("Ошибка сети: \(networkError.localizedDescription)")
+                completion(.failure(networkError))
             }
         }
     }
-    
+
     func fetchClientOrders(completion: @escaping (Result<[Order], Error>) -> Void) {
         provider.request(.fetchClientOrders) { result in
             switch result {

@@ -18,7 +18,7 @@ class CalendarViewController: UIViewController, ICalendarViewController {
     var presenter: ICalendarPresenter?
     
     private var user: Int {
-        return UserDefaults.standard.integer(forKey: "userID")
+        return UserDefaults.standard.integer(forKey: "userId")
     }
    
     private var date: String = ""
