@@ -38,7 +38,9 @@ struct UserLogOutResponse: Decodable {
         case detail
     }
 }
-
+struct ResendOtpResponse: Decodable {
+    let detail: String
+}
 
 struct UserVerifyResponse: Decodable {
     let detail: String
@@ -325,6 +327,28 @@ enum LoginError: Error {
                         
                         let userResponse = try JSONDecoder().decode(UserLogOutResponse.self, from: response.data)
                         completion(.success(userResponse))
+                    } catch {
+                        print("Ошибка декодирования: \(error)")
+                        completion(.failure(error))
+                    }
+                case .failure(let error):
+                    completion(.failure(error))
+                }
+            }
+        }
+        func resendOtp(email: String, completion: @escaping (Result<ResendOtpResponse, Error>) -> Void) {
+            provider.request(.resendOtp(email: email)) { result in
+                switch result {
+                case .success(let response):
+                    self.logResponse(response)
+                    do {
+                        guard (200...299).contains(response.statusCode) else {
+                            completion(.failure(self.decodeError(from: response.data, statusCode: response.statusCode)))
+                            return
+                        }
+                        
+                        let otpResponse = try JSONDecoder().decode(ResendOtpResponse.self, from: response.data)
+                        completion(.success(otpResponse))
                     } catch {
                         print("Ошибка декодирования: \(error)")
                         completion(.failure(error))

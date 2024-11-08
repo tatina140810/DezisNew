@@ -291,6 +291,7 @@ class UserRegisterSecondPageViewController: UIViewController, IUserRegisterSecon
             let email = userInfo.email
                     presenter?.registerUser(userInfo: userInfo) { [weak self] success in
                         if success {
+                            UserDefaults.standard.set(email, forKey: "email")
                             DispatchQueue.main.async {
                                 let vc = СonfirmationСodeViewController(email: email)
                                 self?.navigationController?.pushViewController(vc, animated: true)

@@ -16,10 +16,15 @@ protocol ICalendarViewController {
 class CalendarViewController: UIViewController, ICalendarViewController {
    
     var presenter: ICalendarPresenter?
-    
-    private var user: Int {
-        return UserDefaults.standard.integer(forKey: "userId")
-    }
+        
+        private var user: Int? {
+               get {
+                   return UserDefaults.standard.value(forKey: "userId") as? Int
+               }
+               set {
+                   UserDefaults.standard.set(newValue, forKey: "userId")
+               }
+           }
    
     private var date: String = ""
     private var time: String = ""
@@ -66,6 +71,7 @@ class CalendarViewController: UIViewController, ICalendarViewController {
         let button = UIButton()
         button.setTitle("Заказать услугу", for: .normal)
         button.backgroundColor = UIColor(hex: "#0A84FF")
+        button.titleLabel?.font = UIFont(name: "SFProDisplay-Bold", size: 16)
         button.layer.cornerRadius = 12
         button.clipsToBounds = true
         return button
@@ -205,7 +211,7 @@ class CalendarViewController: UIViewController, ICalendarViewController {
         }
         
         let bookingInfo = BookingInfo(
-            user: user,
+            user: user!,
             service: service,
             date: date,
             time: time,
