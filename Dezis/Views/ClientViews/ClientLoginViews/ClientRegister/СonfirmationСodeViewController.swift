@@ -47,12 +47,13 @@ class СonfirmationСodeViewController: UIViewController, IСonfirmationСodeVie
     
     private var otpTextField = TextFieldSettings().textFieldMaker(placeholder: "Код:", backgroundColor: UIColor(hex: "#2B373E"))
    
-    private lazy var newCodeButton: UIButton = {
+    private lazy var resendButton: UIButton = {
         let button = UIButton()
+        button.isEnabled = false
         button.setTitle("Отправить снова", for: .normal)
         button.titleLabel?.font = UIFont(name: "SFProDisplay-Regular", size: 12)
-        button.tintColor = UIColor(hex: "#5FBEF4")
-        button.addTarget(self, action: #selector(newCodeButtonTapped), for: .touchUpInside)
+        button.setTitleColor(UIColor(hex: "#5FBEF4"), for: .normal)
+        button.addTarget(self, action: #selector(resendButtonTapped), for: .touchUpInside)
         return button
     }()
     private var errorMasageLabel: UILabel = {
@@ -63,9 +64,9 @@ class СonfirmationСodeViewController: UIViewController, IСonfirmationСodeVie
         view.isHidden = true
         return view
     }()
-    private var oneMinuteLabel: UILabel = {
+    private var timerLabel: UILabel = {
         let view = UILabel()
-        view.text = "через 1 минуту"
+        view.text = "через 1:00 минуту"
         view.font = UIFont(name: "SFProDisplay-Regular", size: 12)
         view.textColor = .white
         view.isHidden = false
@@ -101,6 +102,8 @@ class СonfirmationСodeViewController: UIViewController, IСonfirmationСodeVie
         view.numberOfLines = 0
         return view
     }()
+    private var timer: Timer?
+       private var timeRemaining = 60
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -112,7 +115,37 @@ class СonfirmationСodeViewController: UIViewController, IСonfirmationСodeVie
         presenter = СonfirmationСodePresenter(view: self)
         keyBoardSetUp()
         dismissKeyboardGesture()
+        startTimer()
+                
     }
+private func startTimer() {
+       timeRemaining = 60
+       updateTimerLabel()
+       resendButton.isEnabled = false
+
+       timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
+   }
+
+   @objc private func updateTimer() {
+       if timeRemaining > 0 {
+           timeRemaining -= 1
+           updateTimerLabel()
+       } else {
+           timer?.invalidate()
+           timer = nil
+           resendButton.isEnabled = true
+           timerLabel.text = ""
+       }
+   }
+
+   private func updateTimerLabel() {
+       timerLabel.text = "через 0:\(timeRemaining) секунд"
+   }
+
+   @objc private func resendButtonTapped() {
+       presenter?.resendOtp()
+       startTimer()
+   }
     func keyBoardSetUp(){
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
            NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -130,24 +163,33 @@ class СonfirmationСodeViewController: UIViewController, IСonfirmationСodeVie
     }
     private func backButtonSetup(){
         let backButton = UIButton(type: .system)
-        backButton.setTitle("Назад", for: .normal)
-        backButton.setTitleColor(.systemBlue, for: .normal)
-        backButton.titleLabel?.font = UIFont(name: "SFProDisplay-Regular", size: 17)
+        
+        if #available(iOS 15.0, *) {
+            var config = UIButton.Configuration.plain()
+            config.title = "Назад"
+            config.image = UIImage(resource: .shevron).withRenderingMode(.alwaysTemplate)
+            config.baseForegroundColor = .systemBlue
+            config.imagePadding = 7
+            config.imagePlacement = .leading
+            backButton.configuration = config
+        } else {
+            backButton.setTitle("Назад", for: .normal)
+            backButton.setTitleColor(.systemBlue, for: .normal)
+            backButton.titleLabel?.font = UIFont(name: "SFProDisplay-Regular", size: 17)
 
-        let chevronImage = UIImage(resource: .shevron).withRenderingMode(.alwaysTemplate)
-        let resizedChevron = UIGraphicsImageRenderer(size: CGSize(width: 8, height: 14)).image { _ in
-            chevronImage.draw(in: CGRect(origin: .zero, size: CGSize(width: 8, height: 14)))
+            let chevronImage = UIImage(resource: .shevron).withRenderingMode(.alwaysTemplate)
+            let resizedChevron = UIGraphicsImageRenderer(size: CGSize(width: 8, height: 14)).image { _ in
+                chevronImage.draw(in: CGRect(origin: .zero, size: CGSize(width: 8, height: 14)))
+            }
+            backButton.setImage(resizedChevron, for: .normal)
+            backButton.tintColor = .systemBlue
+
+            backButton.semanticContentAttribute = .forceLeftToRight
+            backButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: -3, bottom: 0, right: -2)
+            backButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 3, bottom: 0, right: -5)
         }
-        backButton.setImage(resizedChevron, for: .normal)
-        backButton.tintColor = .systemBlue
 
-        backButton.semanticContentAttribute = .forceLeftToRight
-        backButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: -7, bottom: 0, right: 5)
-        backButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 3, bottom: 0, right: -5)
-
-       
         backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
-
         let backBarButtonItem = UIBarButtonItem(customView: backButton)
         navigationItem.leftBarButtonItem = backBarButtonItem
 
@@ -172,24 +214,24 @@ class СonfirmationСodeViewController: UIViewController, IСonfirmationСodeVie
             make.leading.trailing.equalToSuperview().inset(20)
             make.height.equalTo(50)
         }
-        view.addSubview(newCodeButton)
-        newCodeButton.snp.makeConstraints {make in
-            make.top.equalTo(otpTextField.snp.bottom).offset(5)
-            make.leading.equalToSuperview().offset(16)
+        view.addSubview(resendButton)
+        resendButton.snp.makeConstraints {make in
+            make.top.equalTo(otpTextField.snp.bottom).offset(4)
+            make.leading.equalToSuperview().offset(20)
         }
         view.addSubview(errorMasageLabel)
         errorMasageLabel.snp.makeConstraints {make in
             make.top.equalTo(otpTextField.snp.bottom).offset(10)
             make.leading.equalToSuperview().offset(16)
         }
-        view.addSubview(oneMinuteLabel)
-        oneMinuteLabel.snp.makeConstraints {make in
-            make.top.equalTo(newCodeButton.snp.bottom).offset(3)
-            make.leading.equalToSuperview().offset(16)
+        view.addSubview(timerLabel)
+        timerLabel.snp.makeConstraints {make in
+            make.top.equalTo(otpTextField.snp.bottom).offset(10)
+            make.leading.equalTo(resendButton.snp.trailing).offset(3)
         }
         view.addSubview(nextButton)
         nextButton.snp.makeConstraints { make in
-            make.top.equalTo(oneMinuteLabel.snp.bottom).offset(10)
+            make.top.equalTo(timerLabel.snp.bottom).offset(24)
             make.leading.equalToSuperview().offset(20)
             make.trailing.equalToSuperview().offset(-20)
             make.height.equalTo(52)
@@ -240,11 +282,8 @@ class СonfirmationСodeViewController: UIViewController, IСonfirmationСodeVie
     private func displayError(_ message: String) {
         errorMasageLabel.text = message
         errorMasageLabel.isHidden = false
-        oneMinuteLabel.isHidden = true
-        newCodeButton.isHidden = true
-    }
-    @objc func newCodeButtonTapped() {
-        print("New code Button")
+        timerLabel.isHidden = true
+        resendButton.isHidden = true
     }
     @objc func attributedTextTapped() {
         print("Условием продажи")
@@ -253,7 +292,6 @@ class СonfirmationСodeViewController: UIViewController, IСonfirmationСodeVie
         print("Положения о конфиденциальности")
     }
     @objc func nextButtonTapped(){
-            print("Переданный email: \(email)")
 
             guard let otp = otpTextField.text, !otp.isEmpty else {
                 let redPlaceholderAttributes = [NSAttributedString.Key.foregroundColor: UIColor.red]

@@ -55,14 +55,16 @@ class ClientLoginViewController: UIViewController, UITextFieldDelegate, IClientL
         view.isHidden = true
         return view
     }()
-    private var forgotPasswordLabel: UILabel = {
-        let view = UILabel()
-        view.text = "Забыли пароль?"
-        view.font = UIFont(name: "SFProDisplay-Regular", size: 12)
-        view.numberOfLines = 0
-        view.textAlignment = .left
-        view.textColor = .white
-        return view
+    
+    private lazy var forgotPasswordButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Забыли пароль?", for: .normal)
+        button.titleLabel?.font = UIFont(name: "SFProDisplay-Regular", size: 14)
+        button.titleLabel?.numberOfLines = 0
+        button.contentHorizontalAlignment = .left
+        button.setTitleColor(.white, for: .normal)
+        button.addTarget(self, action: #selector(handleForgotPassword), for: .touchUpInside)
+        return button
     }()
     
     private lazy var loginButton: UIButton = {
@@ -116,24 +118,33 @@ class ClientLoginViewController: UIViewController, UITextFieldDelegate, IClientL
     }
     func backButtonSetup(){
         let backButton = UIButton(type: .system)
-        backButton.setTitle("Назад", for: .normal)
-        backButton.setTitleColor(.systemBlue, for: .normal)
-        backButton.titleLabel?.font = UIFont(name: "SFProDisplay-Regular", size: 17)
+        
+        if #available(iOS 15.0, *) {
+            var config = UIButton.Configuration.plain()
+            config.title = "Назад"
+            config.image = UIImage(resource: .shevron).withRenderingMode(.alwaysTemplate)
+            config.baseForegroundColor = .systemBlue
+            config.imagePadding = 7
+            config.imagePlacement = .leading
+            backButton.configuration = config
+        } else {
+            backButton.setTitle("Назад", for: .normal)
+            backButton.setTitleColor(.systemBlue, for: .normal)
+            backButton.titleLabel?.font = UIFont(name: "SFProDisplay-Regular", size: 17)
 
-        let chevronImage = UIImage(resource: .shevron).withRenderingMode(.alwaysTemplate)
-        let resizedChevron = UIGraphicsImageRenderer(size: CGSize(width: 8, height: 14)).image { _ in
-            chevronImage.draw(in: CGRect(origin: .zero, size: CGSize(width: 8, height: 14)))
+            let chevronImage = UIImage(resource: .shevron).withRenderingMode(.alwaysTemplate)
+            let resizedChevron = UIGraphicsImageRenderer(size: CGSize(width: 8, height: 14)).image { _ in
+                chevronImage.draw(in: CGRect(origin: .zero, size: CGSize(width: 8, height: 14)))
+            }
+            backButton.setImage(resizedChevron, for: .normal)
+            backButton.tintColor = .systemBlue
+
+            backButton.semanticContentAttribute = .forceLeftToRight
+            backButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+            backButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 3, bottom: 0, right: 0)
         }
-        backButton.setImage(resizedChevron, for: .normal)
-        backButton.tintColor = .systemBlue
 
-        backButton.semanticContentAttribute = .forceLeftToRight
-        backButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: -7, bottom: 0, right: 5)
-        backButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 3, bottom: 0, right: -5)
-
-       
         backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
-
         let backBarButtonItem = UIBarButtonItem(customView: backButton)
         navigationItem.leftBarButtonItem = backBarButtonItem
 
@@ -152,6 +163,11 @@ class ClientLoginViewController: UIViewController, UITextFieldDelegate, IClientL
 
     @objc func keyboardWillHide(notification: NSNotification) {
         self.view.frame.origin.y = 0
+    }
+    
+    @objc private func handleForgotPassword() {
+        let vc = ClientForgetPasswordView()
+        navigationController?.pushViewController(vc, animated: true)
     }
 
     private func setupUI() {
@@ -195,15 +211,15 @@ class ClientLoginViewController: UIViewController, UITextFieldDelegate, IClientL
             make.top.equalTo(passwordTextField.snp.bottom).offset(4)
             make.leading.equalToSuperview().offset(20)
         }
-        view.addSubview(forgotPasswordLabel)
-        forgotPasswordLabel.snp.makeConstraints { make in
+        view.addSubview(forgotPasswordButton)
+        forgotPasswordButton.snp.makeConstraints { make in
             make.top.equalTo(passwordErrorMasageLabel.snp.bottom).offset(10)
             make.leading.equalToSuperview().offset(20)
         }
         
         view.addSubview(loginButton)
         loginButton.snp.makeConstraints { make in
-            make.top.equalTo(forgotPasswordLabel.snp.bottom).offset(10)
+            make.top.equalTo(forgotPasswordButton.snp.bottom).offset(10)
             make.leading.trailing.equalToSuperview().inset(20)
             make.height.equalTo(52)
         }

@@ -37,8 +37,8 @@ class ViewControllerForAlert: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor.black.withAlphaComponent(0.5) // Полупрозрачный фон
-               view.isUserInteractionEnabled = true
+        view.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+        view.isUserInteractionEnabled = true
         setupUI()
         overrideUserInterfaceStyle = .light
     }

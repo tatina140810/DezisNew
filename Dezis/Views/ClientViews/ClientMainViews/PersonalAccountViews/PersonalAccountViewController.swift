@@ -335,9 +335,14 @@ class PersonalAccountViewController: UIViewController, PersonalAccountView {
             self?.userImage.image = image
         }
     }
-    @objc func exitButtonTapped(){
+    @objc func exitButtonTapped() {
+        presenter?.logOut()
+        
         let vc = ExitAlertView()
-        navigationController?.pushViewController(vc, animated: true)
+        vc.modalPresentationStyle = .overFullScreen
+        vc.modalTransitionStyle = .crossDissolve   
+        
+        present(vc, animated: true, completion: nil)
     }
 }
 

@@ -52,7 +52,7 @@ class ClientTabBarController: UITabBarController {
         let chatView = ClientChatViewController()
         chatView.tabBarItem = UITabBarItem(title: "Чат", image: UIImage(resource: .message), selectedImage: UIImage(resource: .message))
 
-        let personalAccount =  PersonalAccountViewController()
+        let personalAccount = PersonalAccountViewController() 
         personalAccount.tabBarItem = UITabBarItem(title: "Профиль", image: UIImage(resource: .profile), selectedImage: UIImage(resource: .profile))
 
         setViewControllers([homeView, calendarView, chatView, personalAccount], animated: true)

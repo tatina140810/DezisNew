@@ -16,10 +16,15 @@ protocol ICalendarViewController {
 class CalendarViewController: UIViewController, ICalendarViewController {
    
     var presenter: ICalendarPresenter?
-    
-    private var user: Int {
-        return UserDefaults.standard.integer(forKey: "userId")
-    }
+        
+        private var user: Int? {
+               get {
+                   return UserDefaults.standard.value(forKey: "userId") as? Int
+               }
+               set {
+                   UserDefaults.standard.set(newValue, forKey: "userId")
+               }
+           }
    
     private var date: String = ""
     private var time: String = ""
@@ -66,6 +71,7 @@ class CalendarViewController: UIViewController, ICalendarViewController {
         let button = UIButton()
         button.setTitle("Заказать услугу", for: .normal)
         button.backgroundColor = UIColor(hex: "#0A84FF")
+        button.titleLabel?.font = UIFont(name: "SFProDisplay-Bold", size: 16)
         button.layer.cornerRadius = 12
         button.clipsToBounds = true
         return button
@@ -114,7 +120,7 @@ class CalendarViewController: UIViewController, ICalendarViewController {
             let currentDate = Date()
             
             if let startOfMonth = calendar.date(from: calendar.dateComponents([.year, .month], from: currentDate)),
-               let endOfMonth = calendar.date(byAdding: .month, value: 1, to: startOfMonth)?.addingTimeInterval(-1) {
+               let endOfMonth = calendar.date(byAdding: .month, value: 2, to: startOfMonth)?.addingTimeInterval(-1) {
                 
                 datePicker.minimumDate = startOfMonth
                 datePicker.maximumDate = endOfMonth
@@ -155,7 +161,7 @@ class CalendarViewController: UIViewController, ICalendarViewController {
         view.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(20)
-            make.top.equalTo(datePicker.snp.bottom).offset(67.67)
+            make.top.equalTo(datePicker.snp.bottom).offset(67)
         }
         view.addSubview(firstCheckBox)
         firstCheckBox.snp.makeConstraints { make in
@@ -205,7 +211,7 @@ class CalendarViewController: UIViewController, ICalendarViewController {
         }
         
         let bookingInfo = BookingInfo(
-            user: user,
+            user: user!,
             service: service,
             date: date,
             time: time,
@@ -252,7 +258,7 @@ class CalendarViewController: UIViewController, ICalendarViewController {
             date = dateFormatter.string(from: currentDate)
           
             let timeFormatter = DateFormatter()
-            timeFormatter.dateFormat = "HH:mm"
+            timeFormatter.dateFormat = "HH:mm:ss"
             time = timeFormatter.string(from: currentDate)
             
             print("Выбранная дата: \(date)")

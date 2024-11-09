@@ -37,7 +37,6 @@ class ChoiceViewController: UIViewController {
         view.backgroundColor = UIColor(hex: "#1B2228")
         setupUI()
         setupReachability()
-        navigationController?.navigationBar.isHidden = true
         
     }
 

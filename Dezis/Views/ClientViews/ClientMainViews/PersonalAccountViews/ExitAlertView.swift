@@ -43,8 +43,8 @@ class ExitAlertView: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor.clear.withAlphaComponent(0.1)
-               view.isUserInteractionEnabled = true
+        view.backgroundColor = UIColor.black.withAlphaComponent(0.7)
+        view.isUserInteractionEnabled = true
         setupUI()
         overrideUserInterfaceStyle = .light
         navigationController?.navigationBar.isHidden = true
@@ -82,15 +82,22 @@ class ExitAlertView: UIViewController {
     }
 
     @objc func cancellButtonTapped() {
-        navigationController?.popViewController(animated: true)
-        
+       
+        dismiss(animated: true, completion: nil)
     }
-    
+
     @objc func continueButtonTapped() {
-        let vc = ChoiceViewController()
-        navigationController?.pushViewController(vc, animated: true)
-        
+        dismiss(animated: true) {
+            guard let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                  let window = scene.windows.first else { return }
+
+            let vc = ChoiceViewController()
+            window.rootViewController = UINavigationController(rootViewController: vc)
+            window.makeKeyAndVisible()
+        }
     }
+
+
     
    
 }
