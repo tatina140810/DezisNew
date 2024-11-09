@@ -100,8 +100,8 @@ class UserRegisterSecondPageViewController: UIViewController, IUserRegisterSecon
     }()
     private let activityIndicator: UIActivityIndicatorView = {
             let indicator = UIActivityIndicatorView(style: .large)
-            indicator.color = .white // Можно изменить цвет
-            indicator.hidesWhenStopped = true // Скрывать, когда остановлен
+            indicator.color = .white
+            indicator.hidesWhenStopped = true 
             return indicator
         }()
    
@@ -222,10 +222,17 @@ class UserRegisterSecondPageViewController: UIViewController, IUserRegisterSecon
         numberErrorMessageLabel.snp.makeConstraints { make in
             make.top.equalTo(apartmentNumberTextField.snp.bottom).offset(4)
             make.leading.equalToSuperview().offset(20)
+            
+        }
+        view.addSubview(errorLabel)
+        errorLabel.snp.makeConstraints { make in
+            make.top.equalTo(numberErrorMessageLabel.snp.bottom).offset(4)
+            make.leading.equalToSuperview().offset(20)
+            
         }
         view.addSubview(nextButton)
         nextButton.snp.makeConstraints { make in
-            make.top.equalTo(apartmentNumberTextField.snp.bottom).offset(24)
+            make.top.equalTo(errorLabel.snp.bottom).offset(10)
             make.leading.equalToSuperview().offset(20)
             make.trailing.equalToSuperview().offset(-20)
             make.height.equalTo(52)
@@ -256,6 +263,10 @@ class UserRegisterSecondPageViewController: UIViewController, IUserRegisterSecon
     }
    
     @objc private func nextButtonTapped() {
+        errorLabel.isHidden = false
+        errorLabel.text = "Мы оправили вам код на почту. Ожидайте."
+        errorLabel.textColor = .white
+        
         guard let adress = adressTextField.text, !adress.isEmpty,
               let apartmentNumber = apartmentNumberTextField.text, !apartmentNumber.isEmpty else {
             

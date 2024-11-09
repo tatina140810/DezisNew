@@ -8,6 +8,7 @@
 import UIKit
 
 class EntryDeniedViewController: UIViewController {
+  
     
     private var entryAllowedImage: UIImageView = {
         let view = UIImageView()
@@ -61,9 +62,14 @@ class EntryDeniedViewController: UIViewController {
     }
     @objc func nextButtonTapped() {
         
-        let vc = ChoiceViewController()
-        vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: true, completion: nil)
+        dismiss(animated: true) {
+            guard let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                  let window = scene.windows.first else { return }
+
+            let vc = ChoiceViewController()
+            window.rootViewController = UINavigationController(rootViewController: vc)
+            window.makeKeyAndVisible()
+        }
     }
 }
 
