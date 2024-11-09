@@ -99,7 +99,7 @@ extension UserApi: TargetType {
                                                     "service": service,
                                                     "date": date,
                                                     "time": time,
-                                                    "is_completed": true
+                                                    "is_completed": false
                                                   ], encoding: JSONEncoding.default)
         case .userDetails(let id):
             return .requestPlain

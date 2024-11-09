@@ -215,15 +215,14 @@ enum LoginError: Error {
                 switch result {
                 case .success(let response):
                     do {
-                        // Логируем JSON-ответ для отладки
+                       
                         if let jsonString = String(data: response.data, encoding: .utf8) {
                             print("Received JSON response: \(jsonString)")
                         }
                         
-                        // Декодируем ответ как массив UserProfile
+                    
                         let users = try JSONDecoder().decode([UserProfile].self, from: response.data)
                         
-                        // Извлекаем первый элемент массива
                         if let user = users.first {
                             completion(.success(user))
                         } else {
