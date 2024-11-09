@@ -166,7 +166,7 @@ class ClientLoginViewController: UIViewController, UITextFieldDelegate, IClientL
     }
     
     @objc private func handleForgotPassword() {
-        let vc = ClientForgetPasswordView()
+        let vc = ClientEmailConfirmView()
         navigationController?.pushViewController(vc, animated: true)
     }
 

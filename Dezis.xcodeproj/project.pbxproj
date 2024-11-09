@@ -13,6 +13,10 @@
 		4061B8DFFEC52EF1268906C9 /* Pods_Dezis.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D594A6880D984FC3775947A /* Pods_Dezis.framework */; };
 		7257D4FD2CDEB5140042258A /* ClientForgetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7257D4FC2CDEB5140042258A /* ClientForgetPasswordView.swift */; };
 		7257D5002CDEB52E0042258A /* ClientForgetPasswordPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7257D4FF2CDEB52E0042258A /* ClientForgetPasswordPresenter.swift */; };
+		7257D50A2CDF6BA40042258A /* ClientEmailConfirmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7257D5092CDF6BA40042258A /* ClientEmailConfirmView.swift */; };
+		7257D50C2CDF6BA70042258A /* ClientEmailConfirmPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7257D50B2CDF6BA70042258A /* ClientEmailConfirmPresenter.swift */; };
+		7257D50E2CDF6BAC0042258A /* ClientEmailCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7257D50D2CDF6BAC0042258A /* ClientEmailCodeView.swift */; };
+		7257D5102CDF6BAF0042258A /* ClientEmailCodePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7257D50F2CDF6BAF0042258A /* ClientEmailCodePresenter.swift */; };
 		7277F5AD2CD62D2B0010D6A2 /* DocumentationList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7277F5AC2CD62D2B0010D6A2 /* DocumentationList.swift */; };
 		7277F5AF2CD951E20010D6A2 /* ClientHistoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7277F5AE2CD951E20010D6A2 /* ClientHistoryCollectionViewCell.swift */; };
 		72ABD5962CC8151E004E18E9 /* AdminAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72ABD5952CC8151E004E18E9 /* AdminAPI.swift */; };
@@ -111,6 +115,10 @@
 		18FA88D52CB6D7EC00C66BAF /* OpenChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenChatViewController.swift; sourceTree = "<group>"; };
 		7257D4FC2CDEB5140042258A /* ClientForgetPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientForgetPasswordView.swift; sourceTree = "<group>"; };
 		7257D4FF2CDEB52E0042258A /* ClientForgetPasswordPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientForgetPasswordPresenter.swift; sourceTree = "<group>"; };
+		7257D5092CDF6BA40042258A /* ClientEmailConfirmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientEmailConfirmView.swift; sourceTree = "<group>"; };
+		7257D50B2CDF6BA70042258A /* ClientEmailConfirmPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientEmailConfirmPresenter.swift; sourceTree = "<group>"; };
+		7257D50D2CDF6BAC0042258A /* ClientEmailCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientEmailCodeView.swift; sourceTree = "<group>"; };
+		7257D50F2CDF6BAF0042258A /* ClientEmailCodePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientEmailCodePresenter.swift; sourceTree = "<group>"; };
 		7277F5AC2CD62D2B0010D6A2 /* DocumentationList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentationList.swift; sourceTree = "<group>"; };
 		7277F5AE2CD951E20010D6A2 /* ClientHistoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientHistoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		72ABD5952CC8151E004E18E9 /* AdminAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminAPI.swift; sourceTree = "<group>"; };
@@ -232,6 +240,10 @@
 		7257D4FE2CDEB5170042258A /* ClientForgetPassword */ = {
 			isa = PBXGroup;
 			children = (
+				7257D5092CDF6BA40042258A /* ClientEmailConfirmView.swift */,
+				7257D50B2CDF6BA70042258A /* ClientEmailConfirmPresenter.swift */,
+				7257D50D2CDF6BAC0042258A /* ClientEmailCodeView.swift */,
+				7257D50F2CDF6BAF0042258A /* ClientEmailCodePresenter.swift */,
 				7257D4FC2CDEB5140042258A /* ClientForgetPasswordView.swift */,
 				7257D4FF2CDEB52E0042258A /* ClientForgetPasswordPresenter.swift */,
 			);
@@ -764,6 +776,7 @@
 				7277F5AD2CD62D2B0010D6A2 /* DocumentationList.swift in Sources */,
 				72ABD5AA2CC96CF0004E18E9 /* SureAlertView.swift in Sources */,
 				AFF6187E2CB69D5A00C64C95 /* DeratizationViewController.swift in Sources */,
+				7257D50C2CDF6BA70042258A /* ClientEmailConfirmPresenter.swift in Sources */,
 				AF4B1E282CA0729300FDA3EC /* ServerErrorViewController.swift in Sources */,
 				72ABD5A22CC90463004E18E9 /* CompletedOrdersCollectionViewCell.swift in Sources */,
 				AF74D5802CB1561300B64D6E /* DezinfectionView.swift in Sources */,
@@ -777,6 +790,7 @@
 				72D39BA62CB1796F00D9EB45 /* CategoriesCollectionViewCell.swift in Sources */,
 				AF4B1DE92C9AEEC600FDA3EC /* Profile.swift in Sources */,
 				AF4B1E092C9C221000FDA3EC /* NetworkRequest.swift in Sources */,
+				7257D5102CDF6BAF0042258A /* ClientEmailCodePresenter.swift in Sources */,
 				AF74D57A2CB1171700B64D6E /* ThirdOnboardingViewController.swift in Sources */,
 				AFF618782CB69D2800C64C95 /* DezinsectionViewController.swift in Sources */,
 				AF9F2FEE2CA6D3CF00BBBB2C /* ImagePicker.swift in Sources */,
@@ -789,12 +803,14 @@
 				AFF618872CB85F6A00C64C95 /* CustomNavigationBar.swift in Sources */,
 				72ABD5982CC8157A004E18E9 /* AdminNetworkService.swift in Sources */,
 				AF74D5792CB1171700B64D6E /* SecondOnboardingViewController.swift in Sources */,
+				7257D50A2CDF6BA40042258A /* ClientEmailConfirmView.swift in Sources */,
 				AF5146272CCA9B31000D9C97 /* CalendarViewControllerPresenter.swift in Sources */,
 				72D39BA32CB15F7D00D9EB45 /* RequestsCollectionViewCell.swift in Sources */,
 				AF51468B2CD0B522000D9C97 /* PrivacyPage.swift in Sources */,
 				72ABD5A62CC91592004E18E9 /* CustomAlertView.swift in Sources */,
 				AF51461D2CC64A91000D9C97 /* UserAPI.swift in Sources */,
 				AF4B1E0D2C9D9B3500FDA3EC /* ClientTabBarController.swift in Sources */,
+				7257D50E2CDF6BAC0042258A /* ClientEmailCodeView.swift in Sources */,
 				AFF6188F2CBBAFA700C64C95 /* ClientChatPresenter.swift in Sources */,
 				72ABD59E2CC83EE2004E18E9 /* AdminHistoryPresenter.swift in Sources */,
 				7277F5AF2CD951E20010D6A2 /* ClientHistoryCollectionViewCell.swift in Sources */,
