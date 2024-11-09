@@ -120,7 +120,7 @@ class CalendarViewController: UIViewController, ICalendarViewController {
             let currentDate = Date()
             
             if let startOfMonth = calendar.date(from: calendar.dateComponents([.year, .month], from: currentDate)),
-               let endOfMonth = calendar.date(byAdding: .month, value: 1, to: startOfMonth)?.addingTimeInterval(-1) {
+               let endOfMonth = calendar.date(byAdding: .month, value: 2, to: startOfMonth)?.addingTimeInterval(-1) {
                 
                 datePicker.minimumDate = startOfMonth
                 datePicker.maximumDate = endOfMonth
@@ -161,7 +161,7 @@ class CalendarViewController: UIViewController, ICalendarViewController {
         view.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(20)
-            make.top.equalTo(datePicker.snp.bottom).offset(67.67)
+            make.top.equalTo(datePicker.snp.bottom).offset(67)
         }
         view.addSubview(firstCheckBox)
         firstCheckBox.snp.makeConstraints { make in
@@ -258,7 +258,7 @@ class CalendarViewController: UIViewController, ICalendarViewController {
             date = dateFormatter.string(from: currentDate)
           
             let timeFormatter = DateFormatter()
-            timeFormatter.dateFormat = "HH:mm"
+            timeFormatter.dateFormat = "HH:mm:ss"
             time = timeFormatter.string(from: currentDate)
             
             print("Выбранная дата: \(date)")
