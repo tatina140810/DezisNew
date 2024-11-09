@@ -141,11 +141,10 @@ class UserRegisterSecondPageViewController: UIViewController, IUserRegisterSecon
             config.title = "Назад"
             config.image = UIImage(resource: .shevron).withRenderingMode(.alwaysTemplate)
             config.baseForegroundColor = .systemBlue
-            config.imagePadding = 7  // Расстояние между изображением и текстом
-            config.imagePlacement = .leading  // Позиционирование изображения слева от текста
+            config.imagePadding = 7
+            config.imagePlacement = .leading
             backButton.configuration = config
         } else {
-            // Настройка для iOS до 15
             backButton.setTitle("Назад", for: .normal)
             backButton.setTitleColor(.systemBlue, for: .normal)
             backButton.titleLabel?.font = UIFont(name: "SFProDisplay-Regular", size: 17)
@@ -158,8 +157,8 @@ class UserRegisterSecondPageViewController: UIViewController, IUserRegisterSecon
             backButton.tintColor = .systemBlue
 
             backButton.semanticContentAttribute = .forceLeftToRight
-            backButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: -7, bottom: 0, right: 5)
-            backButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 3, bottom: 0, right: -5)
+            backButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: -12, bottom: 0, right: 0)
+            backButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 3, bottom: 0, right: 0)
         }
 
         backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
@@ -307,7 +306,7 @@ class UserRegisterSecondPageViewController: UIViewController, IUserRegisterSecon
 
     @objc private func backButtonTapped() {
         let vc = UserRegisterViewController()
-        navigationController?.pushViewController(vc, animated: true)
+        navigationController?.popViewController(animated: true)
     }
     deinit {
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
