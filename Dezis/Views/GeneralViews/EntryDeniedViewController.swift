@@ -25,9 +25,7 @@ class EntryDeniedViewController: UIViewController {
         return view
     }()
     
-    private lazy var nextButton = ButtonSettings().buttonMaker(title: "Вернуться ко входу",
-                                                               target: self,
-                                                               action: #selector(nextButtonTapped))
+    private lazy var nextButton = ButtonSettings().buttonMaker(title: "Вернуться ко входу", target: self, action: #selector(nextButtonTapped))
     
     
     override func viewDidLoad() {
