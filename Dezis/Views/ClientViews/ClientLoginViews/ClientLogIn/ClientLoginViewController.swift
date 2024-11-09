@@ -55,14 +55,16 @@ class ClientLoginViewController: UIViewController, UITextFieldDelegate, IClientL
         view.isHidden = true
         return view
     }()
-    private var forgotPasswordLabel: UILabel = {
-        let view = UILabel()
-        view.text = "Забыли пароль?"
-        view.font = UIFont(name: "SFProDisplay-Regular", size: 12)
-        view.numberOfLines = 0
-        view.textAlignment = .left
-        view.textColor = .white
-        return view
+    
+    private lazy var forgotPasswordButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Забыли пароль?", for: .normal)
+        button.titleLabel?.font = UIFont(name: "SFProDisplay-Regular", size: 14)
+        button.titleLabel?.numberOfLines = 0
+        button.contentHorizontalAlignment = .left
+        button.setTitleColor(.white, for: .normal)
+        button.addTarget(self, action: #selector(handleForgotPassword), for: .touchUpInside)
+        return button
     }()
     
     private lazy var loginButton: UIButton = {
@@ -162,6 +164,11 @@ class ClientLoginViewController: UIViewController, UITextFieldDelegate, IClientL
     @objc func keyboardWillHide(notification: NSNotification) {
         self.view.frame.origin.y = 0
     }
+    
+    @objc private func handleForgotPassword() {
+        let vc = ClientForgetPasswordView()
+        navigationController?.pushViewController(vc, animated: true)
+    }
 
     private func setupUI() {
         
@@ -204,15 +211,15 @@ class ClientLoginViewController: UIViewController, UITextFieldDelegate, IClientL
             make.top.equalTo(passwordTextField.snp.bottom).offset(4)
             make.leading.equalToSuperview().offset(20)
         }
-        view.addSubview(forgotPasswordLabel)
-        forgotPasswordLabel.snp.makeConstraints { make in
+        view.addSubview(forgotPasswordButton)
+        forgotPasswordButton.snp.makeConstraints { make in
             make.top.equalTo(passwordErrorMasageLabel.snp.bottom).offset(10)
             make.leading.equalToSuperview().offset(20)
         }
         
         view.addSubview(loginButton)
         loginButton.snp.makeConstraints { make in
-            make.top.equalTo(forgotPasswordLabel.snp.bottom).offset(10)
+            make.top.equalTo(forgotPasswordButton.snp.bottom).offset(10)
             make.leading.trailing.equalToSuperview().inset(20)
             make.height.equalTo(52)
         }
