@@ -110,7 +110,7 @@ class UserRegisterViewController: UIViewController {
             config.image = UIImage(resource: .shevron).withRenderingMode(.alwaysTemplate)
             config.baseForegroundColor = .systemBlue
             config.imagePadding = 7
-            config.imagePlacement = .leading  
+            config.imagePlacement = .leading
             backButton.configuration = config
         } else {
             backButton.setTitle("Назад", for: .normal)
@@ -125,8 +125,8 @@ class UserRegisterViewController: UIViewController {
             backButton.tintColor = .systemBlue
 
             backButton.semanticContentAttribute = .forceLeftToRight
-            backButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: -7, bottom: 0, right: 5)
-            backButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 3, bottom: 0, right: -5)
+            backButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+            backButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 3, bottom: 0, right: 0)
         }
 
         backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
