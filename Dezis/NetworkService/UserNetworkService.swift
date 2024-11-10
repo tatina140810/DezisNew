@@ -69,13 +69,13 @@ struct UserProfile: Decodable {
     let address: String?
     let number: String
     let avatar: String?
-    let isActive: Bool
+    let isConfirmed: Bool
     let createdAt: String
     
     enum CodingKeys: String, CodingKey {
         case id, username, email, password, address, number, avatar
         case apartmentNumber = "apartment_number"
-        case isActive = "is_active"
+        case isConfirmed = "is_confirmed"
         case createdAt = "created_at"
     }
 }

@@ -79,11 +79,10 @@ class ForthOnboardingViewController: UIPageViewController {
         
     }
     
-@objc func skipButtonTapped(){
-    let vc = ChoiceViewController()
-    navigationController?.pushViewController(vc, animated: true)
-    
-}
+    @objc func skipButtonTapped(){
+        let vc = ChoiceViewController()
+        navigationController?.pushViewController(vc, animated: true)
+    }
     @objc func nextButtonTapped(){
         let vc = FifthOnboardingViewController()
         navigationController?.pushViewController(vc, animated: true)

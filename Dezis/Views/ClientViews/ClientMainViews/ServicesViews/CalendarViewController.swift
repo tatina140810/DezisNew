@@ -14,48 +14,96 @@ protocol ICalendarViewController {
 }
 
 class CalendarViewController: UIViewController, ICalendarViewController {
-   
+    
     var presenter: ICalendarPresenter?
-        
-        private var user: Int? {
-               get {
-                   return UserDefaults.standard.value(forKey: "userId") as? Int
-               }
-               set {
-                   UserDefaults.standard.set(newValue, forKey: "userId")
-               }
-           }
-   
+    
+    private var user: Int? {
+        get {
+            return UserDefaults.standard.value(forKey: "userId") as? Int
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: "userId")
+        }
+    }
+    
     private var date: String = ""
     private var time: String = ""
+    private var serviceArray: [String] = []
+    private var isCompleted: Bool = false
     private var service: String = ""
-    private var isCompleted: Bool = true
     
-
+    
     
     private lazy var datePicker: UIDatePicker = {
         let picker = UIDatePicker()
         picker.preferredDatePickerStyle = .inline
+        picker.datePickerMode = .date
         picker.layer.cornerRadius = 13.33
         picker.clipsToBounds = true
-        picker.backgroundColor = UIColor(hex: "#c8cacb")
-        
+        picker.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        picker.backgroundColor = UIColor(hex: "#C8CACB")
         let loc = Locale(identifier: "ru_RU")
         picker.locale = loc
         picker.addTarget(self, action: #selector(dateChanged), for: .valueChanged)
         
         return picker
     }()
-   
-    private let resetButton: UIButton = {
+    private lazy var timePicker: UIDatePicker = {
+        let timePicker = UIDatePicker()
+        timePicker.datePickerMode = .time
+        timePicker.preferredDatePickerStyle = .wheels
+        timePicker.layer.cornerRadius = 12
+        timePicker.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        timePicker.clipsToBounds = true
+        timePicker.backgroundColor = UIColor(hex: "F9F9F9")
+        timePicker.addTarget(self, action: #selector(timeChanged), for: .valueChanged)
+        timePicker.isHidden = true
+        return timePicker
+    }()
+    private var firstStackView: UIStackView = {
+        let view = UIStackView()
+        view.axis = .horizontal
+        view.alignment = .center
+        view.distribution = .fillProportionally
+        view.spacing = 8
+        view.backgroundColor =  UIColor(hex: "#C8CACB")
+        view.layer.cornerRadius = 12
+        view.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
+        view.clipsToBounds = true
+        view.layoutMargins = UIEdgeInsets(top: 0, left: 16, bottom: 10, right: 16)
+        view.isLayoutMarginsRelativeArrangement = true
+        
+        
+        return view
+    }()
+    
+    private var stackView: UIStackView = {
+        let view = UIStackView()
+        view.axis = .horizontal
+        view.backgroundColor = UIColor(hex: "#F9F9F9")
+        view.layer.cornerRadius = 12
+        view.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
+        view.clipsToBounds = true
+        view.isHidden = true
+        view.distribution = .fillEqually
+        return view
+    }()
+    
+    private lazy var resetButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Reset", for: .normal)
+        button.setTitleColor(UIColor(hex: "#007AFF"), for: .normal)
+        button.setTitle("Сбросить", for: .normal)
+        button.titleLabel?.font = UIFont(name: "SFProDisplay-Regular", size: 17)
+        button.addTarget(self, action: #selector(resetButtonTapped), for: .touchUpInside)
         return button
     }()
     
-    private let doneButton: UIButton = {
+    private lazy var doneButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Done", for: .normal)
+        button.setTitleColor(UIColor(hex: "#007AFF"), for: .normal)
+        button.setTitle("Готово", for: .normal)
+        button.titleLabel?.font = UIFont(name: "SFProDisplay-Bold", size: 17)
+        button.addTarget(self, action: #selector(doneButtonTapped), for: .touchUpInside)
         return button
     }()
     private var titleLabel: UILabel = {
@@ -67,18 +115,19 @@ class CalendarViewController: UIViewController, ICalendarViewController {
         return label
     }()
     
-    private var orderButton: UIButton = {
+    private lazy var orderButton: UIButton = {
         let button = UIButton()
         button.setTitle("Заказать услугу", for: .normal)
         button.backgroundColor = UIColor(hex: "#0A84FF")
         button.titleLabel?.font = UIFont(name: "SFProDisplay-Bold", size: 16)
         button.layer.cornerRadius = 12
         button.clipsToBounds = true
+        button.addTarget(self, action: #selector(orderButtonTapped), for: .touchUpInside)
         return button
     }()
     private var dezinfectionLabel: UILabel = {
         let label = UILabel()
-       label.text = "Дезинфекция"
+        label.text = "Дезинфекция"
         label.font =  UIFont(name: "SFProDisplay-Regular", size: 18)
         label.textColor = .white
         return label
@@ -86,17 +135,40 @@ class CalendarViewController: UIViewController, ICalendarViewController {
     
     private var dezinsectionLabel: UILabel = {
         let label = UILabel()
-       label.text = "Дезинcекция"
+        label.text = "Дезинcекция"
         label.font =  UIFont(name: "SFProDisplay-Regular", size: 18)
         label.textColor = .white
         return label
     }()
     private var deratizationLabel: UILabel = {
         let label = UILabel()
-       label.text = "Дератизация"
+        label.text = "Дератизация"
         label.font =  UIFont(name: "SFProDisplay-Regular", size: 18)
         label.textColor = .white
         return label
+    }()
+    private var timeLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Время"
+        label.font =  UIFont(name: "SFProDisplay-Bold", size: 17)
+        label.textColor = .black
+        return label
+    }()
+    private lazy var timePickerButton: UIButton = {
+        let button = UIButton()
+        button.backgroundColor = UIColor(hex: "#BFC0C1")
+        
+        let currentDate = Date()
+        let formatter = DateFormatter()
+        formatter.timeStyle = .short
+        let currentTime = formatter.string(from: currentDate)
+        
+        button.setTitle(currentTime, for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        button.layer.cornerRadius = 10
+        button.clipsToBounds = true
+        button.addTarget(self, action: #selector(timePickerButtonTapped), for: .touchUpInside)
+        return button
     }()
     
     private var firstCheckBox = CheckboxButton()
@@ -107,7 +179,6 @@ class CalendarViewController: UIViewController, ICalendarViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(hex: "#1B2228")
-        setupAddTarget()
         setupUI()
         checkBoxSettings()
         setupDatePicker()
@@ -115,42 +186,55 @@ class CalendarViewController: UIViewController, ICalendarViewController {
         overrideUserInterfaceStyle = .light
         
     }
-    private func setupDatePicker() {
-            let calendar = Calendar.current
-            let currentDate = Date()
-            
-            if let startOfMonth = calendar.date(from: calendar.dateComponents([.year, .month], from: currentDate)),
-               let endOfMonth = calendar.date(byAdding: .month, value: 2, to: startOfMonth)?.addingTimeInterval(-1) {
-                
-                datePicker.minimumDate = startOfMonth
-                datePicker.maximumDate = endOfMonth
-            }
-        }
-    
     private func checkBoxSettings(){
         
         firstCheckBox.backgroundColor = UIColor(hex: "#1B2228")
         secondCheckBox.backgroundColor = UIColor(hex: "#1B2228")
         thirdCheckBox.backgroundColor = UIColor(hex: "#1B2228")
         firstCheckBox.addTarget(self, action: #selector(firstCheckBoxTapped), for: .touchUpInside)
-               secondCheckBox.addTarget(self, action: #selector(secondCheckBoxTapped), for: .touchUpInside)
-               thirdCheckBox.addTarget(self, action: #selector(thirdCheckBoxTapped), for: .touchUpInside)
-           
-    }
-    private func setupAddTarget(){
-        resetButton.addTarget(self, action: #selector(resetDate), for: .touchUpInside)
-        doneButton.addTarget(self, action: #selector(doneTapped), for: .touchUpInside)
-        orderButton.addTarget(self, action: #selector(orderButtonTapped), for: .touchUpInside)
+        secondCheckBox.addTarget(self, action: #selector(secondCheckBoxTapped), for: .touchUpInside)
+        thirdCheckBox.addTarget(self, action: #selector(thirdCheckBoxTapped), for: .touchUpInside)
+        
     }
     
     private func setupUI() {
         view.addSubview(datePicker)
         datePicker.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(60)
+            make.top.equalToSuperview().offset(100)
             make.leading.trailing.equalToSuperview().inset(20)
-            make.width.equalTo(356.33)
+            make.height.equalTo(312.33)
         }
-
+        firstStackView.addArrangedSubview(timeLabel)
+        
+        firstStackView.addArrangedSubview(timePickerButton)
+        timePickerButton.snp.makeConstraints { make in
+            make.height.equalTo(34)
+            make.width.equalTo(90)
+        }
+        
+        view.addSubview(firstStackView)
+        firstStackView.snp.makeConstraints { make in
+            make.top.equalTo(datePicker.snp.bottom)
+            make.height.equalTo(44)
+            make.leading.trailing.equalToSuperview().inset(20)
+        }
+        view.addSubview(timePicker)
+        timePicker.snp.makeConstraints { make in
+            make.top.equalTo(datePicker.snp.top).offset(78)
+            make.leading.trailing.equalToSuperview().inset(71)
+            make.centerX.equalToSuperview()
+            make.height.equalTo(188)
+        }
+        stackView.addArrangedSubview(resetButton)
+        stackView.addArrangedSubview(doneButton)
+        
+        view.addSubview(stackView)
+        stackView.snp.makeConstraints { make in
+            make.top.equalTo(timePicker.snp.bottom)
+            make.height.equalTo(44)
+            make.leading.trailing.equalToSuperview().inset(71)
+        }
+        
         view.addSubview(orderButton)
         orderButton.snp.makeConstraints { make in
             make.bottom.equalToSuperview().offset(-100)
@@ -161,7 +245,7 @@ class CalendarViewController: UIViewController, ICalendarViewController {
         view.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(20)
-            make.top.equalTo(datePicker.snp.bottom).offset(67)
+            make.top.equalTo(firstStackView.snp.bottom).offset(67)
         }
         view.addSubview(firstCheckBox)
         firstCheckBox.snp.makeConstraints { make in
@@ -198,7 +282,25 @@ class CalendarViewController: UIViewController, ICalendarViewController {
             make.leading.equalTo(thirdCheckBox.snp.trailing).offset(10)
         }
     }
-  
+    private func setupDatePicker() {
+        let calendar = Calendar.current
+        let currentDate = Date()
+        
+        if let startOfMonth = calendar.date(from: calendar.dateComponents([.year, .month], from: currentDate)),
+           let endOfMonth = calendar.date(byAdding: .month, value: 2, to: startOfMonth)?.addingTimeInterval(-1) {
+            
+            datePicker.minimumDate = startOfMonth
+            datePicker.maximumDate = endOfMonth
+        }
+    }
+    
+    
+    @objc private func timeChanged() {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH:mm:ss"
+        time = formatter.string(from: timePicker.date)
+    }
+    
     @objc func orderButtonTapped() {
         guard user != 0 else {
             print("Error: User ID not found in UserDefaults.")
@@ -215,14 +317,14 @@ class CalendarViewController: UIViewController, ICalendarViewController {
             service: service,
             date: date,
             time: time,
-            is_completed: true
+            is_completed: false
         )
         
         print("Создание информации о бронировании:", bookingInfo)
         guard let presenter = presenter else {
-                print("Error: Presenter is not initialized.")
-                return
-            }
+            print("Error: Presenter is not initialized.")
+            return
+        }
         
         presenter.booking(bookingInfo: bookingInfo) { [weak self] result in
             DispatchQueue.main.async {
@@ -238,68 +340,85 @@ class CalendarViewController: UIViewController, ICalendarViewController {
             }
         }
     }
-
-           private func showBookingSuccessAlert(response: BookingLoginResponse) {
-               let vc = ViewControllerForAlert()
-               navigationController?.present(vc, animated: true)
-           }
-           
-           private func showBookingErrorAlert(error: Error) {
-               let alert = UIAlertController(title: "Ошибка бронирования", message: error.localizedDescription, preferredStyle: .alert)
-               alert.addAction(UIAlertAction(title: "OK", style: .default))
-               present(alert, animated: true)
-           }
-       
-    @objc private func dateChanged(_ picker: UIDatePicker) {
-            let currentDate = picker.date
-           
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "yyyy-MM-dd"
-            date = dateFormatter.string(from: currentDate)
-          
-            let timeFormatter = DateFormatter()
-            timeFormatter.dateFormat = "HH:mm:ss"
-            time = timeFormatter.string(from: currentDate)
-            
-            print("Выбранная дата: \(date)")
-            print("Выбранное время: \(time)")
-        
+    
+    private func showBookingSuccessAlert(response: BookingLoginResponse) {
+        let vc = ViewControllerForAlert()
+        navigationController?.present(vc, animated: true)
     }
     
-    @objc private func resetDate() {
+    private func showBookingErrorAlert(error: Error) {
+        let alert = UIAlertController(title: "Ошибка бронирования", message: error.localizedDescription, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        present(alert, animated: true)
+    }
+    
+    @objc private func dateChanged(_ picker: UIDatePicker) {
+        
+        let currentDate = picker.date
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        date = dateFormatter.string(from: currentDate)
+        print("Выбор завершен, дата и время: \(date)")
+        
+    }
+    @objc private func timePickerButtonTapped() {
+        showTimePicker()
+    }
+    private func showTimePicker() {
+        timePicker.isHidden = false
+        stackView.isHidden = false
+    }
+    
+    @objc private func doneButtonTapped() {
+        time = getFormattedTime()
+        print("Выбор завершен, дата и время:\(time)")
+        timePicker.isHidden = true
+        stackView.isHidden = true
+    }
+    
+    
+    @objc private func resetButtonTapped() {
+        timePicker.isHidden = true
+        stackView.isHidden = true
         datePicker.setDate(Date(), animated: true)
     }
     
-    @objc private func doneTapped() {
-        print("Выбор завершен, дата и время: \(date) \(time)")
-
+    private func getFormattedTime() -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH:mm:ss"
+        return formatter.string(from: timePicker.date)
     }
     @objc func firstCheckBoxTapped() {
-            selectService(service: "Дезинфекция", selectedCheckBox: firstCheckBox)
-        }
-
-        @objc func secondCheckBoxTapped() {
-            selectService(service: "Дезинcекция", selectedCheckBox: secondCheckBox)
-        }
-
-        @objc func thirdCheckBoxTapped() {
-            selectService(service: "Дератизация", selectedCheckBox: thirdCheckBox)
+        selectService(service: "Дезинфекция", selectedCheckBox: firstCheckBox)
+    }
+    
+    @objc func secondCheckBoxTapped() {
+        selectService(service: "Дезинcекция", selectedCheckBox: secondCheckBox)
+    }
+    
+    @objc func thirdCheckBoxTapped() {
+        selectService(service: "Дератизация", selectedCheckBox: thirdCheckBox)
+    }
+    
+    private func selectService(service: String, selectedCheckBox: CheckboxButton) {
+        selectedCheckBox.isSelected.toggle()
+        
+        if selectedCheckBox.isSelected {
+            self.serviceArray.append(service)
+        } else {
+            if let index = self.serviceArray.firstIndex(of: service) {
+                self.serviceArray.remove(at: index)
+            }
         }
         
-        private func selectService(service: String, selectedCheckBox: CheckboxButton) {
-            firstCheckBox.isSelected = false
-            secondCheckBox.isSelected = false
-            thirdCheckBox.isSelected = false
-            
-            self.service = service
-            selectedCheckBox.isSelected = true
-            
-            print("Выбранная услуга: \(service)")
-        }
-
+        self.service = self.serviceArray.joined(separator: ", ")
+        print("Выбранные услуги: \(self.service)")
+    }
+    
+    
     func bookingRequestSuccessful() {
-            print("Бронирование успешно выполнено")
-        }
+        print("Бронирование успешно выполнено")
+    }
 }
 
 
