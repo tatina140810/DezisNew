@@ -28,7 +28,7 @@ class EntryAllowedPresenter: IEntryAllowedPresenter {
             DispatchQueue.main.async {
                 switch result {
                 case .success(let userProfile):
-                    if userProfile.isActive {
+                    if userProfile.isConfirmed {
                         self.view?.updateUserProfile(userProfile)
                     } 
                 case .failure(_):

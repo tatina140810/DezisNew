@@ -20,7 +20,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
        
    
             window?.rootViewController = root
-      }
+    }
         
         window?.makeKeyAndVisible()
         if #available(iOS 15, *) {
