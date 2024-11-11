@@ -336,7 +336,6 @@ class PersonalAccountViewController: UIViewController, PersonalAccountView {
         }
     }
     @objc func exitButtonTapped() {
-        presenter?.logOut()
         
         let vc = ExitAlertView()
         vc.modalPresentationStyle = .overFullScreen

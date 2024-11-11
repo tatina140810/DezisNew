@@ -12,7 +12,7 @@ class DezinsectionViewController: UIViewController {
     private lazy var backButton: UIButton = {
         let backButton = UIButton(type: .system)
         backButton.setTitle("Назад", for: .normal)
-        backButton.setTitleColor(.systemBlue, for: .normal)
+
         backButton.titleLabel?.font = UIFont(name: "SFProDisplay-Regular", size: 17)
 
         let chevronImage = UIImage(resource: .shevron).withRenderingMode(.alwaysTemplate)
@@ -20,15 +20,28 @@ class DezinsectionViewController: UIViewController {
             chevronImage.draw(in: CGRect(origin: .zero, size: CGSize(width: 8, height: 14)))
         }
         backButton.setImage(resizedChevron, for: .normal)
-        backButton.tintColor = .systemBlue
 
-        backButton.semanticContentAttribute = .forceLeftToRight
-        backButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: -7, bottom: 0, right: 5)
-        backButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 3, bottom: 0, right: -5)
-
-       
+        if #available(iOS 15.0, *) {
+            var config = UIButton.Configuration.plain()
+            config.image = resizedChevron
+            config.imagePadding = 5
+            config.baseForegroundColor = .systemBlue
+      
+            config.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: -7, bottom: 0, trailing: 0)
+            
+            backButton.configuration = config
+        } else {
+           
+            backButton.setTitleColor(.systemBlue, for: .normal)
+            backButton.setImage(resizedChevron, for: .normal)
+            backButton.tintColor = .systemBlue
+            backButton.semanticContentAttribute = .forceLeftToRight
+            backButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: -7, bottom: 0, right: 5)
+            backButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 3, bottom: 0, right: -5)
+        }
+        
         backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
-
+        
         return backButton
     }()
     private var titleLable: UILabel = {

@@ -38,40 +38,4 @@ class ClientLoginPresenter: IClientLoginPresenter {
             }
         }
     }
-    //    func fetchUserData() {
-    //        guard let email = UserDefaults.standard.string(forKey: "email"), !email.isEmpty else {
-    //            print("Ошибка: Email пуст или не сохранен в UserDefaults")
-    //            return
-    //        }
-    //
-    //        print("Fetching user data for email: \(email)")
-    //
-    //        networkService.getUserProfile(email: email) { result in
-    //            switch result {
-    //            case .success(let userProfile):
-    //                print("User profile fetched: \(userProfile)")
-    //
-    //                // Проверка наличия userID
-    //                if let userID = userProfile.id {
-    //                    let currentUserId = UserDefaults.standard.integer(forKey: "userId")
-    //
-    //                    if currentUserId != userID {
-    //                        UserDefaults.standard.set(userID, forKey: "userId")
-    //                        print("User ID сохранен/обновлен в UserDefaults: \(userID)")
-    //                    } else {
-    //                        print("User ID уже сохранен и совпадает с текущим значением: \(userID)")
-    //                    }
-    //                } else {
-    //                    print("Ошибка: User ID отсутствует в профиле")
-    //                }
-    //
-    //            case .failure(let error):
-    //                DispatchQueue.main.async {
-    //                    print("Error: \(error.localizedDescription)")
-    //                }
-    //            }
-    //        }
-    //    }
-    //
-    //}
 }
