@@ -37,6 +37,7 @@ class ChoiceViewController: UIViewController {
         view.backgroundColor = UIColor(hex: "#1B2228")
         setupUI()
         setupReachability()
+        navigationItem.backButtonTitle = "Назад"
         
     }
 
@@ -187,8 +188,5 @@ class ChoiceViewController: UIViewController {
     @objc func adminButtonTapped() {
         let vc = AdminLoginView()
         navigationController?.pushViewController(vc, animated: true)
-    }
-    @objc func backButtonTapped(){
-        navigationController?.popViewController(animated: true)
     }
 }

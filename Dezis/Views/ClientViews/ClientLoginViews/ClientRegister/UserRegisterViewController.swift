@@ -41,13 +41,14 @@ class UserRegisterViewController: UIViewController {
         return button
     }()
     
-    private var nextButton: UIButton = {
+    private lazy var nextButton: UIButton = {
         let view = UIButton()
         view.setTitle("Продолжить", for: .normal)
         view.setTitleColor(.white, for: .normal)
         view.backgroundColor = UIColor(hex: "#0A84FF")
         view.layer.cornerRadius = 12
         view.titleLabel?.font = UIFont(name: "SFProDisplay-Bold", size: 16)
+        view.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
         return view
     }()
     
@@ -96,46 +97,11 @@ class UserRegisterViewController: UIViewController {
         setupUI()
         createAttributedText()
         createPrivaciAttributedText()
-        setupAddTarget()
         keyBoardSetUp()
-        navigationController?.navigationBar.isHidden = false
+        navigationItem.backButtonTitle = "Назад"
+      
     }
     
-    private func setupAddTarget() {
-        let backButton = UIButton(type: .system)
-        
-        if #available(iOS 15.0, *) {
-            var config = UIButton.Configuration.plain()
-            config.title = "Назад"
-            config.image = UIImage(resource: .shevron).withRenderingMode(.alwaysTemplate)
-            config.baseForegroundColor = .systemBlue
-            config.imagePadding = 7
-            config.imagePlacement = .leading
-            backButton.configuration = config
-        } else {
-            backButton.setTitle("Назад", for: .normal)
-            backButton.setTitleColor(.systemBlue, for: .normal)
-            backButton.titleLabel?.font = UIFont(name: "SFProDisplay-Regular", size: 17)
-
-            let chevronImage = UIImage(resource: .shevron).withRenderingMode(.alwaysTemplate)
-            let resizedChevron = UIGraphicsImageRenderer(size: CGSize(width: 8, height: 14)).image { _ in
-                chevronImage.draw(in: CGRect(origin: .zero, size: CGSize(width: 8, height: 14)))
-            }
-            backButton.setImage(resizedChevron, for: .normal)
-            backButton.tintColor = .systemBlue
-
-            backButton.semanticContentAttribute = .forceLeftToRight
-            backButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-            backButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 3, bottom: 0, right: 0)
-        }
-
-        backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
-        let backBarButtonItem = UIBarButtonItem(customView: backButton)
-        navigationItem.leftBarButtonItem = backBarButtonItem
-
-        nextButton.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
-    }
-
     private func createAttributedText() {
         AttributedTextHelper.configureAttributedText(
             for: privacyLabel,
@@ -378,9 +344,6 @@ class UserRegisterViewController: UIViewController {
         nextButton.alpha = isFormValid ? 1.0 : 0.5
     }
 
-    @objc func backButtonTapped(){
-        navigationController?.popViewController(animated: true)
-    }
     deinit {
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)

@@ -19,7 +19,7 @@ class CalendarViewController: UIViewController, ICalendarViewController {
     
     private var user: Int? {
         get {
-            return UserDefaults.standard.value(forKey: "userId") as? Int
+            return UserDefaults.standard.integer(forKey: "userId")
         }
         set {
             UserDefaults.standard.set(newValue, forKey: "userId")

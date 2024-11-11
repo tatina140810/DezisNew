@@ -119,11 +119,11 @@ class СonfirmationСodeViewController: UIViewController, IСonfirmationСodeVie
         setupUI()
         createAttributedText()
         createPrivaciAttributedText()
-        backButtonSetup()
         presenter = СonfirmationСodePresenter(view: self)
         keyBoardSetUp()
         dismissKeyboardGesture()
         startTimer()
+        navigationItem.backButtonTitle = "Назад"
                 
     }
 private func startTimer() {
@@ -169,40 +169,7 @@ private func startTimer() {
     @objc func keyboardWillHide(notification: NSNotification) {
         self.view.frame.origin.y = 0
     }
-    private func backButtonSetup(){
-        let backButton = UIButton(type: .system)
-        
-        if #available(iOS 15.0, *) {
-            var config = UIButton.Configuration.plain()
-            config.title = "Назад"
-            config.image = UIImage(resource: .shevron).withRenderingMode(.alwaysTemplate)
-            config.baseForegroundColor = .systemBlue
-            config.imagePadding = 7
-            config.imagePlacement = .leading
-            backButton.configuration = config
-        } else {
-            backButton.setTitle("Назад", for: .normal)
-            backButton.setTitleColor(.systemBlue, for: .normal)
-            backButton.titleLabel?.font = UIFont(name: "SFProDisplay-Regular", size: 17)
-
-            let chevronImage = UIImage(resource: .shevron).withRenderingMode(.alwaysTemplate)
-            let resizedChevron = UIGraphicsImageRenderer(size: CGSize(width: 8, height: 14)).image { _ in
-                chevronImage.draw(in: CGRect(origin: .zero, size: CGSize(width: 8, height: 14)))
-            }
-            backButton.setImage(resizedChevron, for: .normal)
-            backButton.tintColor = .systemBlue
-
-            backButton.semanticContentAttribute = .forceLeftToRight
-            backButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: -3, bottom: 0, right: -2)
-            backButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 3, bottom: 0, right: -5)
-        }
-
-        backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
-        let backBarButtonItem = UIBarButtonItem(customView: backButton)
-        navigationItem.leftBarButtonItem = backBarButtonItem
-
-        nextButton.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
-    }
+    
     private func setupUI(){
         
         view.addSubview(codeLabel)
@@ -344,12 +311,6 @@ private func startTimer() {
 
         }
         
-
-
-    @objc private func backButtonTapped() {
-      
-        navigationController?.popViewController(animated: true)
-    }
     deinit {
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)

@@ -70,6 +70,7 @@
 		AF51468B2CD0B522000D9C97 /* PrivacyPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF51468A2CD0B522000D9C97 /* PrivacyPage.swift */; };
 		AF51468D2CD297BC000D9C97 /* СonfirmationСodePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF51468C2CD297BC000D9C97 /* СonfirmationСodePresenter.swift */; };
 		AF51468F2CD5546F000D9C97 /* PersonalAccauntPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF51468E2CD5546E000D9C97 /* PersonalAccauntPresenter.swift */; };
+		AF5BE5672CE1B3E7002532D4 /* ExitAlertPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5BE5662CE1B3DA002532D4 /* ExitAlertPresenter.swift */; };
 		AF6BC7242CD9075F00106766 /* EntryAllowedPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6BC7232CD9075A00106766 /* EntryAllowedPresenter.swift */; };
 		AF6BC7262CD949AE00106766 /* ExitAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6BC7252CD9499C00106766 /* ExitAlertView.swift */; };
 		AF74D5502CA7C97B00B64D6E /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF74D54F2CA7C97B00B64D6E /* KeychainManager.swift */; };
@@ -172,6 +173,7 @@
 		AF51468A2CD0B522000D9C97 /* PrivacyPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPage.swift; sourceTree = "<group>"; };
 		AF51468C2CD297BC000D9C97 /* СonfirmationСodePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "СonfirmationСodePresenter.swift"; sourceTree = "<group>"; };
 		AF51468E2CD5546E000D9C97 /* PersonalAccauntPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalAccauntPresenter.swift; sourceTree = "<group>"; };
+		AF5BE5662CE1B3DA002532D4 /* ExitAlertPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExitAlertPresenter.swift; sourceTree = "<group>"; };
 		AF6BC7232CD9075A00106766 /* EntryAllowedPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryAllowedPresenter.swift; sourceTree = "<group>"; };
 		AF6BC7252CD9499C00106766 /* ExitAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExitAlertView.swift; sourceTree = "<group>"; };
 		AF74D54F2CA7C97B00B64D6E /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
@@ -478,6 +480,7 @@
 			isa = PBXGroup;
 			children = (
 				AF6BC7252CD9499C00106766 /* ExitAlertView.swift */,
+				AF5BE5662CE1B3DA002532D4 /* ExitAlertPresenter.swift */,
 				AF4B1E142C9D9CB400FDA3EC /* PersonalAccountViewController.swift */,
 				AF51468E2CD5546E000D9C97 /* PersonalAccauntPresenter.swift */,
 				AF4B1E202CA06E6C00FDA3EC /* UserInfoViewController.swift */,
@@ -829,6 +832,7 @@
 				72ABD5B12CCA02D4004E18E9 /* ClientHistoryPresenter.swift in Sources */,
 				72ABD5B32CCA03A8004E18E9 /* FirstOrderView.swift in Sources */,
 				AF4B1E2D2CA19C6000FDA3EC /* ChekBoxButton.swift in Sources */,
+				AF5BE5672CE1B3E7002532D4 /* ExitAlertPresenter.swift in Sources */,
 				AF4B1DD12C9AE38E00FDA3EC /* AppDelegate.swift in Sources */,
 				AF4B1E052C9C1C8B00FDA3EC /* URLSession+Extension.swift in Sources */,
 				AF4B1DFD2C9B52AE00FDA3EC /* СonfirmationСodeViewController.swift in Sources */,

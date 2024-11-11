@@ -47,8 +47,12 @@ class ClientHomeViewController: UIViewController {
         button.layer.cornerRadius = 12
         button.clipsToBounds = true
         button.contentHorizontalAlignment = .left
-        button.imageEdgeInsets = UIEdgeInsets(top: 0, left: 190, bottom: 0, right: 10)
-        button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: -70)
+        let screenWidth = UIScreen.main.bounds.width
+
+        let imageLeftInset = screenWidth * 0.53
+
+        button.imageEdgeInsets = UIEdgeInsets(top: 0, left: imageLeftInset, bottom: 0, right: 10)
+        button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
         button.semanticContentAttribute = .forceRightToLeft
 
         return button
@@ -67,8 +71,12 @@ class ClientHomeViewController: UIViewController {
         button.layer.cornerRadius = 12
         button.clipsToBounds = true
         button.contentHorizontalAlignment = .left
-        button.imageEdgeInsets = UIEdgeInsets(top: 0, left: 190, bottom: 0, right: 10)
-        button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: -70)
+        let screenWidth = UIScreen.main.bounds.width
+
+        let imageLeftInset = screenWidth * 0.53
+
+        button.imageEdgeInsets = UIEdgeInsets(top: 0, left: imageLeftInset, bottom: 0, right: 10)
+        button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
         button.semanticContentAttribute = .forceRightToLeft
     
         return button
@@ -87,8 +95,13 @@ class ClientHomeViewController: UIViewController {
         button.layer.cornerRadius = 12
         button.clipsToBounds = true
         button.contentHorizontalAlignment = .left
-        button.imageEdgeInsets = UIEdgeInsets(top: 0, left: 190, bottom: 0, right: 10)
-        button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: -70)
+        
+        let screenWidth = UIScreen.main.bounds.width
+
+        let imageLeftInset = screenWidth * 0.53
+
+        button.imageEdgeInsets = UIEdgeInsets(top: 0, left: imageLeftInset, bottom: 0, right: 10)
+        button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
         button.semanticContentAttribute = .forceRightToLeft
         
         return button

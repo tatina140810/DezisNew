@@ -1,6 +1,8 @@
 import UIKit
 
 class ExitAlertView: UIViewController {
+    
+    var presenter: IExitAlertPresenter?
    
     private var alertImage: UIImageView = {
         let view = UIImageView()
@@ -48,6 +50,7 @@ class ExitAlertView: UIViewController {
         setupUI()
         overrideUserInterfaceStyle = .light
         navigationController?.navigationBar.isHidden = true
+        presenter = ExitAlertPresenter(view: self, userService: UserNetworkService())
     }
     
     private func setupUI(){
@@ -87,6 +90,7 @@ class ExitAlertView: UIViewController {
     }
 
     @objc func continueButtonTapped() {
+        presenter?.logOut()
         dismiss(animated: true) {
             guard let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
                   let window = scene.windows.first else { return }
