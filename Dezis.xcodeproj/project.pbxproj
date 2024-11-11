@@ -11,8 +11,8 @@
 		18E576592CC548B100302739 /* ChatWebSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E576582CC548B100302739 /* ChatWebSocket.swift */; };
 		18FA88D62CB6D7EC00C66BAF /* OpenChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18FA88D52CB6D7EC00C66BAF /* OpenChatViewController.swift */; };
 		4061B8DFFEC52EF1268906C9 /* Pods_Dezis.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D594A6880D984FC3775947A /* Pods_Dezis.framework */; };
-		7257D4FD2CDEB5140042258A /* ClientForgetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7257D4FC2CDEB5140042258A /* ClientForgetPasswordView.swift */; };
-		7257D5002CDEB52E0042258A /* ClientForgetPasswordPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7257D4FF2CDEB52E0042258A /* ClientForgetPasswordPresenter.swift */; };
+		7257D4FD2CDEB5140042258A /* ClientNewPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7257D4FC2CDEB5140042258A /* ClientNewPasswordView.swift */; };
+		7257D5002CDEB52E0042258A /* ClientNewPasswordPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7257D4FF2CDEB52E0042258A /* ClientNewPasswordPresenter.swift */; };
 		7257D50A2CDF6BA40042258A /* ClientEmailConfirmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7257D5092CDF6BA40042258A /* ClientEmailConfirmView.swift */; };
 		7257D50C2CDF6BA70042258A /* ClientEmailConfirmPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7257D50B2CDF6BA70042258A /* ClientEmailConfirmPresenter.swift */; };
 		7257D50E2CDF6BAC0042258A /* ClientEmailCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7257D50D2CDF6BAC0042258A /* ClientEmailCodeView.swift */; };
@@ -114,8 +114,8 @@
 		18E576562CC5482700302739 /* ChatModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatModel.swift; sourceTree = "<group>"; };
 		18E576582CC548B100302739 /* ChatWebSocket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatWebSocket.swift; sourceTree = "<group>"; };
 		18FA88D52CB6D7EC00C66BAF /* OpenChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenChatViewController.swift; sourceTree = "<group>"; };
-		7257D4FC2CDEB5140042258A /* ClientForgetPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientForgetPasswordView.swift; sourceTree = "<group>"; };
-		7257D4FF2CDEB52E0042258A /* ClientForgetPasswordPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientForgetPasswordPresenter.swift; sourceTree = "<group>"; };
+		7257D4FC2CDEB5140042258A /* ClientNewPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientNewPasswordView.swift; sourceTree = "<group>"; };
+		7257D4FF2CDEB52E0042258A /* ClientNewPasswordPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientNewPasswordPresenter.swift; sourceTree = "<group>"; };
 		7257D5092CDF6BA40042258A /* ClientEmailConfirmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientEmailConfirmView.swift; sourceTree = "<group>"; };
 		7257D50B2CDF6BA70042258A /* ClientEmailConfirmPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientEmailConfirmPresenter.swift; sourceTree = "<group>"; };
 		7257D50D2CDF6BAC0042258A /* ClientEmailCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientEmailCodeView.swift; sourceTree = "<group>"; };
@@ -239,15 +239,39 @@
 			path = ChatModel;
 			sourceTree = "<group>";
 		};
-		7257D4FE2CDEB5170042258A /* ClientForgetPassword */ = {
+		720964972CE26EE2005DE163 /* EmailConfirm */ = {
 			isa = PBXGroup;
 			children = (
 				7257D5092CDF6BA40042258A /* ClientEmailConfirmView.swift */,
 				7257D50B2CDF6BA70042258A /* ClientEmailConfirmPresenter.swift */,
+			);
+			path = EmailConfirm;
+			sourceTree = "<group>";
+		};
+		720964982CE26EF5005DE163 /* EmailCode */ = {
+			isa = PBXGroup;
+			children = (
 				7257D50D2CDF6BAC0042258A /* ClientEmailCodeView.swift */,
 				7257D50F2CDF6BAF0042258A /* ClientEmailCodePresenter.swift */,
-				7257D4FC2CDEB5140042258A /* ClientForgetPasswordView.swift */,
-				7257D4FF2CDEB52E0042258A /* ClientForgetPasswordPresenter.swift */,
+			);
+			path = EmailCode;
+			sourceTree = "<group>";
+		};
+		7209649C2CE2856C005DE163 /* NewPassword */ = {
+			isa = PBXGroup;
+			children = (
+				7257D4FC2CDEB5140042258A /* ClientNewPasswordView.swift */,
+				7257D4FF2CDEB52E0042258A /* ClientNewPasswordPresenter.swift */,
+			);
+			path = NewPassword;
+			sourceTree = "<group>";
+		};
+		7257D4FE2CDEB5170042258A /* ClientForgetPassword */ = {
+			isa = PBXGroup;
+			children = (
+				720964972CE26EE2005DE163 /* EmailConfirm */,
+				720964982CE26EF5005DE163 /* EmailCode */,
+				7209649C2CE2856C005DE163 /* NewPassword */,
 			);
 			path = ClientForgetPassword;
 			sourceTree = "<group>";
@@ -767,7 +791,7 @@
 				AF74D5772CB1171700B64D6E /* ForthOnboardingViewController.swift in Sources */,
 				AF74D56D2CAD835C00B64D6E /* CalendarViewController.swift in Sources */,
 				AF4B1E0F2C9D9B8200FDA3EC /* ClientHomeViewController.swift in Sources */,
-				7257D5002CDEB52E0042258A /* ClientForgetPasswordPresenter.swift in Sources */,
+				7257D5002CDEB52E0042258A /* ClientNewPasswordPresenter.swift in Sources */,
 				AF74D5752CB1171700B64D6E /* FifthOnboardingViewController.swift in Sources */,
 				72D39B912CB1511C00D9EB45 /* AdminTabBarController.swift in Sources */,
 				AF6BC7262CD949AE00106766 /* ExitAlertView.swift in Sources */,
@@ -821,7 +845,7 @@
 				AF4B1E192CA0202000FDA3EC /* TextFieldSettings.swift in Sources */,
 				AF4B1E1B2CA0222A00FDA3EC /* ButtonSettings.swift in Sources */,
 				AF74D5C42CB41F6600B64D6E /* СhoiceViewController.swift in Sources */,
-				7257D4FD2CDEB5140042258A /* ClientForgetPasswordView.swift in Sources */,
+				7257D4FD2CDEB5140042258A /* ClientNewPasswordView.swift in Sources */,
 				AF74D55E2CAB1E5400B64D6E /* GradientLayer.swift in Sources */,
 				AF51468D2CD297BC000D9C97 /* СonfirmationСodePresenter.swift in Sources */,
 				AFF6187C2CB69D5200C64C95 /* DezinfectionViewController.swift in Sources */,

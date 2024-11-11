@@ -47,9 +47,15 @@ class AdminHistoryPresenter: IAdminHistoryPresenter {
         networkService.fetchOrders { [weak self] result in
             switch result {
             case .success(let orders):
-                self?.orders = orders.filter { !$0.is_completed }
-                self?.completedOrders = orders.filter { $0.is_completed }
-                self?.fetchUserDetailsForOrders(orders) 
+                self?.orders = orders.filter { !$0.is_completed }.sorted {
+                    ($0.dateTime() ?? Date.distantPast) < ($1.dateTime() ?? Date.distantPast)
+                }
+                self?.completedOrders = orders.filter { $0.is_completed }.sorted {
+                    ($0.dateTime() ?? Date.distantPast) > ($1.dateTime() ?? Date.distantPast)
+                }
+                
+                self?.fetchUserDetailsForOrders(orders)
+                
             case .failure(let error):
                 print("Не удалось получить заказы: \(error)")
             }

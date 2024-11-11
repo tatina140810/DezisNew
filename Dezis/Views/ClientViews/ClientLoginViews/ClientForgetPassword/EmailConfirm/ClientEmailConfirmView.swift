@@ -1,5 +1,5 @@
 //
-//  ClientEmailCodeView.swift
+//  ClientEmailConfirmView.swift
 //  Dezis
 //
 //  Created by Telegey Nurbekova on 09/11/24.
@@ -7,17 +7,18 @@
 
 import UIKit
 
-protocol IClientEmailCodeView {
-
+protocol IClientEmailConfirmView: AnyObject {
+    func showInputError(message: String)
+    func navigateToNextScreen(with email: String, userId: Int)
 }
 
-class ClientEmailCodeView: UIViewController {
+class ClientEmailConfirmView: UIViewController {
     
-    private var presenter: IClientEmailCodePresenter?
+    private var presenter: IClientEmailConfirmPresenter?
     
-    private let sendCodeLabel: UILabel = {
+    private let confirmLabel: UILabel = {
         let view = UILabel()
-        view.text = "Мы отправили код на вашу электронную почту"
+        view.text = "Подтверждение электронной почты"
         view.font = UIFont(name: "SFProDisplay-Bold", size: 24)
         view.textColor = .init(UIColor(hex: "#FFFFFF"))
         view.numberOfLines = 0
@@ -27,14 +28,14 @@ class ClientEmailCodeView: UIViewController {
         return view
     }()
     
-    private lazy var codeTextField: UITextField = {
+    private lazy var emailTextField: UITextField = {
         var field = UITextField()
         field.backgroundColor = UIColor(hex: "#2B373E")
         field.textColor = .white
         field.layer.borderWidth = 1
         field.layer.borderColor = UIColor.clear.cgColor
         field.attributedPlaceholder = NSAttributedString(
-            string: "Код:",
+            string: "Электронная почта*",
             attributes: [
                 NSAttributedString.Key.foregroundColor: UIColor.white.withAlphaComponent(0.7),
                 NSAttributedString.Key.font: UIFont(name: "SFProDisplay-Regular", size: 14)!
@@ -106,34 +107,34 @@ class ClientEmailCodeView: UIViewController {
         setupUI()
         setupAddTarget()
         setupNavigation()
-        presenter = ClientEmailCodePresenter(view: self)
+        presenter = ClientEmailConfirmPresenter(view: self)
         dismissKeyboardGesture()
         self.navigationController?.isNavigationBarHidden = false
     }
     
     private func setupUI() {
         
-        view.addSubview(sendCodeLabel)
-        view.addSubview(codeTextField)
+        view.addSubview(confirmLabel)
+        view.addSubview(emailTextField)
         view.addSubview(sendButton)
         view.addSubview(termsTextView)
         
-        sendCodeLabel.snp.makeConstraints { make in
+        confirmLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(278)
             make.centerX.equalToSuperview()
             make.leading.equalToSuperview().offset(20)
             make.trailing.equalToSuperview().offset(-20)
         }
         
-        codeTextField.snp.makeConstraints { make in
-            make.top.equalTo(sendCodeLabel.snp.bottom).offset(24)
+        emailTextField.snp.makeConstraints { make in
+            make.top.equalTo(confirmLabel.snp.bottom).offset(24)
             make.leading.equalToSuperview().offset(20)
             make.trailing.equalToSuperview().offset(-20)
             make.height.equalTo(50)
         }
         
         sendButton.snp.makeConstraints { make in
-            make.top.equalTo(codeTextField.snp.bottom).offset(24)
+            make.top.equalTo(emailTextField.snp.bottom).offset(24)
             make.leading.equalToSuperview().offset(20)
             make.trailing.equalToSuperview().offset(-24)
             make.height.equalTo(52)
@@ -179,13 +180,18 @@ class ClientEmailCodeView: UIViewController {
     }
     
     @objc private func sendButtonTapped() {
+        guard let emailTF = emailTextField.text, !emailTF.isEmpty else {
+            showInputError(message: "Пожалуйста, введите email")
+            return
+        }
         
-        let vc = ClientForgetPasswordView()
-        navigationController?.pushViewController(vc, animated: true)
+        presenter?.forgotPassword(email: emailTF)
     }
+        
+    
 }
 
-extension ClientEmailCodeView: UITextViewDelegate {
+extension ClientEmailConfirmView: UITextViewDelegate {
     
     func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
            if URL.scheme == "terms" || URL.scheme == "privacy" {
@@ -196,4 +202,25 @@ extension ClientEmailCodeView: UITextViewDelegate {
 }
 
 
-extension ClientEmailCodeView: IClientEmailCodeView { }
+extension ClientEmailConfirmView: IClientEmailConfirmView {
+    
+    func navigateToNextScreen(with email: String, userId: Int) {
+        let vc = ClientEmailCodeView(email: email, userId: userId)
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func showInputError(message: String) {
+        emailTextField.layer.borderColor = UIColor.red.cgColor
+        
+        
+        emailTextField.attributedPlaceholder = NSAttributedString(
+            string: message,
+            attributes: [
+                .foregroundColor: UIColor.red,
+                .font: UIFont(name: "SFProDisplay-Regular", size: 14)!
+            ]
+        )
+        
+        emailTextField.text = ""
+    }
+}

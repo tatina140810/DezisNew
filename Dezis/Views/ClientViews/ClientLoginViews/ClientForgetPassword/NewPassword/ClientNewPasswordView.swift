@@ -7,14 +7,41 @@
 
 import UIKit
 
-protocol IClientForgetPasswordView {
+protocol IClientNewPasswordView {
     func showInputError(message: String)
+    func showLoading()
+    func hideLoading()
+    func navigateToLoginScreen()
 }
 
-class ClientForgetPasswordView: UIViewController {
+class ClientNewPasswordView: UIViewController {
     
-    private var presenter: IClientForgetPasswordPresenter?
+    private var presenter: IClientNewPasswordPresenter?
+    private let userId: Int
     
+    init(userId: Int) {
+        self.userId = userId
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    private let loadingIndicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView(style: .large)
+        indicator.color = .white
+        indicator.translatesAutoresizingMaskIntoConstraints = false
+        return indicator
+    }()
+    
+    private let loadingOverlay: UIView = {
+        let overlay = UIView()
+        overlay.backgroundColor = UIColor(hex: "#1B2228")
+        overlay.translatesAutoresizingMaskIntoConstraints = false
+        overlay.isHidden = true
+        return overlay
+    }()
     private let changePasswordLabel: UILabel = {
         let view = UILabel()
         view.text = "Смена пароля"
@@ -130,7 +157,7 @@ class ClientForgetPasswordView: UIViewController {
         setupUI()
         setupAddTarget()
         setupNavigation()
-        presenter = ClientForgetPasswordPresenter(view: self)
+        presenter = ClientNewPasswordPresenter(view: self, userId: userId)
         dismissKeyboardGesture()
         self.navigationController?.isNavigationBarHidden = false
     }
@@ -142,6 +169,21 @@ class ClientForgetPasswordView: UIViewController {
         view.addSubview(confirmPasswordTextField)
         view.addSubview(continueButton)
         view.addSubview(termsTextView)
+        view.addSubview(loadingIndicator)
+        view.addSubview(loadingOverlay)
+        loadingOverlay.addSubview(loadingIndicator)
+        
+        
+        NSLayoutConstraint.activate([
+            loadingOverlay.topAnchor.constraint(equalTo: view.topAnchor),
+            loadingOverlay.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            loadingOverlay.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            loadingOverlay.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            
+            
+            loadingIndicator.centerXAnchor.constraint(equalTo: loadingOverlay.centerXAnchor),
+            loadingIndicator.centerYAnchor.constraint(equalTo: loadingOverlay.centerYAnchor)
+        ])
         
         changePasswordLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(282)
@@ -181,27 +223,7 @@ class ClientForgetPasswordView: UIViewController {
     }
     
     private func setupNavigation() {
-        let backButton = UIButton(type: .system)
-        backButton.setTitle("Назад", for: .normal)
-        backButton.setTitleColor(.systemBlue, for: .normal)
-        backButton.titleLabel?.font = UIFont(name: "SFProDisplay-Regular", size: 17)
-
-        let chevronImage = UIImage(resource: .shevron).withRenderingMode(.alwaysTemplate)
-        let resizedChevron = UIGraphicsImageRenderer(size: CGSize(width: 8, height: 14)).image { _ in
-            chevronImage.draw(in: CGRect(origin: .zero, size: CGSize(width: 8, height: 14)))
-        }
-        backButton.setImage(resizedChevron, for: .normal)
-        backButton.tintColor = .systemBlue
-
-        backButton.semanticContentAttribute = .forceLeftToRight
-        backButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: -7, bottom: 0, right: 5)
-        backButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 3, bottom: 0, right: -5)
-
-       
-        backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
-
-        let backBarButtonItem = UIBarButtonItem(customView: backButton)
-        navigationItem.leftBarButtonItem = backBarButtonItem
+        navigationItem.hidesBackButton = true
     }
     
     @objc private func backButtonTapped() {
@@ -215,42 +237,15 @@ class ClientForgetPasswordView: UIViewController {
             return
         }
         
-        if newPassword == confirmPassword && newPassword.count >= 8 {
-            print("Passwords match and are valid.")
-            let vc = ClientLoginViewController()
-            navigationController?.pushViewController(vc, animated: true)
+        if newPassword == confirmPassword {
+            presenter?.updatePassword(newPassword: newPassword)
         } else {
-            showInputError(message: "Пароли не совпадают или менее 8 символов")
+            showInputError(message: "Пароли не совпадают")
         }
     }
-    
-    func showInputError(message: String) {
-            newPasswordTextField.layer.borderColor = UIColor.red.cgColor
-            confirmPasswordTextField.layer.borderColor = UIColor.red.cgColor
-            
-            newPasswordTextField.attributedPlaceholder = NSAttributedString(
-                string: message,
-                attributes: [
-                    .foregroundColor: UIColor.red,
-                    .font: UIFont(name: "SFProDisplay-Regular", size: 14)!
-                ]
-            )
-            
-            confirmPasswordTextField.attributedPlaceholder = NSAttributedString(
-                string: message,
-                attributes: [
-                    .foregroundColor: UIColor.red,
-                    .font: UIFont(name: "SFProDisplay-Regular", size: 14)!
-                ]
-            )
-            
-            newPasswordTextField.text = ""
-            confirmPasswordTextField.text = ""
-        }
-    
 }
 
-extension ClientForgetPasswordView: UITextViewDelegate {
+extension ClientNewPasswordView: UITextViewDelegate {
     
     func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
            if URL.scheme == "terms" || URL.scheme == "privacy" {
@@ -261,4 +256,43 @@ extension ClientForgetPasswordView: UITextViewDelegate {
 }
 
 
-extension ClientForgetPasswordView: IClientForgetPasswordView { }
+extension ClientNewPasswordView: IClientNewPasswordView {
+    
+    func showInputError(message: String) {
+        newPasswordTextField.layer.borderColor = UIColor.red.cgColor
+        confirmPasswordTextField.layer.borderColor = UIColor.red.cgColor
+        
+        newPasswordTextField.attributedPlaceholder = NSAttributedString(
+            string: message,
+            attributes: [
+                .foregroundColor: UIColor.red,
+                .font: UIFont(name: "SFProDisplay-Regular", size: 14)!
+            ]
+        )
+        
+        confirmPasswordTextField.attributedPlaceholder = NSAttributedString(
+            string: message,
+            attributes: [
+                .foregroundColor: UIColor.red,
+                .font: UIFont(name: "SFProDisplay-Regular", size: 14)!
+            ]
+        )
+        
+        newPasswordTextField.text = ""
+        confirmPasswordTextField.text = ""
+    }
+    
+    func showLoading() {
+        loadingOverlay.isHidden = false
+        loadingIndicator.startAnimating()
+    }
+    
+    func hideLoading() {
+        loadingIndicator.stopAnimating()
+    }
+    
+    func navigateToLoginScreen() {
+        let loginVC = ClientLoginViewController()
+        navigationController?.setViewControllers([loginVC], animated: true)
+    }
+}
