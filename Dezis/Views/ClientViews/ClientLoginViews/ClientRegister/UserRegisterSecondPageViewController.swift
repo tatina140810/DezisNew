@@ -27,7 +27,7 @@ protocol IUserRegisterSecondPageViewController {
 class UserRegisterSecondPageViewController: UIViewController, IUserRegisterSecondPageViewController {
     
     var presenter: IUserRegisterPresenters?
-
+    
     private var titleLabel: UILabel = {
         let label = UILabel()
         label.text = "Регистрация"
@@ -70,13 +70,14 @@ class UserRegisterSecondPageViewController: UIViewController, IUserRegisterSecon
         return view
     }()
     
-    private var nextButton: UIButton = {
+    private lazy var nextButton: UIButton = {
         let view = UIButton()
         view.setTitle("Продолжить", for: .normal)
         view.setTitleColor(.white, for: .normal)
         view.backgroundColor = UIColor(hex: "#0A84FF")
         view.layer.cornerRadius = 12
         view.titleLabel?.font = UIFont(name: "SFProDisplay-Bold", size: 16)
+        view.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
         return view
     }()
     
@@ -99,12 +100,12 @@ class UserRegisterSecondPageViewController: UIViewController, IUserRegisterSecon
         return view
     }()
     private let activityIndicator: UIActivityIndicatorView = {
-            let indicator = UIActivityIndicatorView(style: .large)
-            indicator.color = .white
-            indicator.hidesWhenStopped = true 
-            return indicator
-        }()
-   
+        let indicator = UIActivityIndicatorView(style: .large)
+        indicator.color = .white
+        indicator.hidesWhenStopped = true
+        return indicator
+    }()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -114,14 +115,20 @@ class UserRegisterSecondPageViewController: UIViewController, IUserRegisterSecon
         createPrivaciAttributedText()
         navigationItem.backButtonTitle = "Назад"
         keyBoardSetUp()
-       
+        
     }
+    
    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+
     func keyBoardSetUp(){
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-
     }
+
     @objc func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             let keyboardHeight = keyboardSize.cgRectValue.height
@@ -132,7 +139,6 @@ class UserRegisterSecondPageViewController: UIViewController, IUserRegisterSecon
     @objc func keyboardWillHide(notification: NSNotification) {
         self.view.frame.origin.y = 0
     }
-
     private func createAttributedText() {
         AttributedTextHelper.configureAttributedText(
             for: privacyLabel,
@@ -226,15 +232,15 @@ class UserRegisterSecondPageViewController: UIViewController, IUserRegisterSecon
         let vc = ConfidantionalyPage()
         navigationController?.pushViewController(vc, animated: true)
     }
-   
+    
     @objc private func nextButtonTapped() {
         errorLabel.isHidden = false
-        errorLabel.text = "Мы оправили вам код на почту. Ожидайте."
+        errorLabel.text = "Проверка данных. Ожидайте."
         errorLabel.textColor = .white
         
-        guard let adress = adressTextField.text, !adress.isEmpty,
+        // Validate input fields
+        guard let address = adressTextField.text, !address.isEmpty,
               let apartmentNumber = apartmentNumberTextField.text, !apartmentNumber.isEmpty else {
-            
             
             if adressTextField.text?.isEmpty == true {
                 adressErrorMessageLabel.text = "Введите корректные данные"
@@ -242,48 +248,63 @@ class UserRegisterSecondPageViewController: UIViewController, IUserRegisterSecon
                 adressTextField.layer.borderColor = UIColor.red.cgColor
                 adressTextField.layer.borderWidth = 1.0
             }
-          
             if apartmentNumberTextField.text?.isEmpty == true {
                 numberErrorMessageLabel.text = "Введите корректные данные"
                 numberErrorMessageLabel.isHidden = false
                 apartmentNumberTextField.layer.borderColor = UIColor.red.cgColor
                 apartmentNumberTextField.layer.borderWidth = 1.0
             }
-            adressTextField.layer.borderColor = UIColor.red.cgColor
-            apartmentNumberTextField.layer.borderColor = UIColor.red.cgColor
-            adressTextField.layer.borderWidth = 1.0
-            apartmentNumberTextField.layer.borderWidth = 1.0
-            
             return
-           
         }
         
-        if var userInfo = presenter?.getUserInfo(){
-            userInfo.address = adress
+        if var userInfo = presenter?.getUserInfo() {
+            userInfo.address = address
             userInfo.apartmentNumber = apartmentNumber
-            print(userInfo)
             
-            let email = userInfo.email
-                    presenter?.registerUser(userInfo: userInfo) { [weak self] success in
-                        if success {
-                            UserDefaults.standard.set(email, forKey: "email")
-                            DispatchQueue.main.async {
-                                let vc = СonfirmationСodeViewController(email: email)
-                                self?.navigationController?.pushViewController(vc, animated: true)
+            presenter?.registerUser(userInfo: userInfo) { [weak self] result in
+                DispatchQueue.main.async {
+                    switch result {
+                        
+                    case .success(_):
+                        let vc = СonfirmationСodeViewController(email: userInfo.email)
+                        self?.navigationController?.pushViewController(vc, animated: true)
+                        self?.showSuccessMessage()
+                        
+                    case .failure(let error):
+                        if let moyaError = error as? MoyaError, case let .statusCode(response) = moyaError {
+                            do {
+                                if let errorResponse = try JSONSerialization.jsonObject(with: response.data, options: []) as? [String: Any],
+                                   let emailErrors = errorResponse["email"] as? [String],
+                                   emailErrors.contains("Пользователь с таким Email уже существует.") {
+                                    self?.errorLabel.text = "Пользователь с таким Email уже существует."
+                                    self?.errorLabel.textColor = .red
+                                    self?.errorLabel.isHidden = false
+                                    return
+                                }
+                            } catch {
+                                print("Error decoding error response: \(error)")
                             }
-                        } else {
-                            print("Registration failed.")
-                           
                         }
+                    
+                        print("Failed to register user: \(error)")
+                        self?.errorLabel.text = "Пользователь с таким Email уже существует."
+                        self?.errorLabel.textColor = .red
+                        self?.errorLabel.isHidden = false
                     }
                 }
             }
-        
-    deinit {
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+        }
     }
-
     
+    
+    private func showSuccessMessage() {
 
+        errorLabel.text = "Мы отправили Вам код на почту."
+        errorLabel.textColor = .green
+        errorLabel.isHidden = false
+    }
 }
+
+      
+
+

@@ -2,7 +2,7 @@ import UIKit
 import Moya
 
 struct UserRegisterResponse: Decodable {
-    let id: Int
+    let id: Int?
     let detail: Detail
     let tokens: ClientTokens
 
@@ -83,7 +83,9 @@ struct UserProfile: Decodable {
 
 struct ErrorResponse: Codable {
     let message: String
+    let email: String
 }
+
 
 enum LoginError: Error {
     case invalidCredentials
