@@ -1,44 +1,38 @@
 import UIKit
+import Moya
 import Foundation
 
 protocol IUserRegisterPresenters: AnyObject {
-    
     func getUserInfo() -> UserInfo?
-    
-    func registerUser(userInfo: UserInfo, completion: @escaping (Bool) -> Void)
+    func registerUser(userInfo: UserInfo, completion: @escaping (Result<UserRegisterResponse, Error>) -> Void)
 }
 
 class UserRegisterPresenter: IUserRegisterPresenters {
-   
+    
     let userNetworkService = UserNetworkService()
-    
     var view: IUserRegisterSecondPageViewController?
-    
     var userInfo: UserInfo?
-
-   
+    
     func getUserInfo() -> UserInfo? {
         return userInfo
     }
     
-    func registerUser(userInfo: UserInfo, completion: @escaping (Bool) -> Void) {
+    func registerUser(userInfo: UserInfo, completion: @escaping (Result<UserRegisterResponse, Error>) -> Void) {
         userNetworkService.userRegister(username: userInfo.username, email: userInfo.email, number: userInfo.number, password: userInfo.password, apartmentNumber: userInfo.apartmentNumber, address: userInfo.address) { result in
             switch result {
-            case .success(let response):
-                        print("Registration successful with response: \(response)")
-                let id = response.id
-                UserDefaults.standard.set(id, forKey: "userId")
-
-                print ("User id: \(String(describing: id))")
+            case .success(let registerResponse):
+                if let userId = registerResponse.id {
+                    UserDefaults.standard.set(userId, forKey: "userId")
+                    print("User ID \(userId) has been saved to UserDefaults.")
+                } else {
+                    print("User ID not found in response.")
+                }
+                completion(.success(registerResponse))
                 
-                        completion(true)
-                    case .failure(let error):
-                        print("Registration failed with error: \(error.localizedDescription)")
-                        completion(false)
-                    }
+            case .failure(let error):
+                print("Failed to register user: \(error)")
+                completion(.failure(error))
+            }
         }
-        
     }
-   
 }
-

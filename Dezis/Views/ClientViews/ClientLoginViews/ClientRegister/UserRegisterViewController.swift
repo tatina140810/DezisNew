@@ -23,12 +23,13 @@ class UserRegisterViewController: UIViewController {
     
     private var passwordTextField = TextFieldSettings().textFieldMaker(placeholder: "Пароль*", backgroundColor: UIColor(hex: "#2B373E"))
     
-    private var passwordLabel: UILabel = {
+    private var passwordErrorLabel: UILabel = {
         let label = UILabel()
-        label.text = "Пароль должен содержать минимум 8 символов"
+        label.text = ""
         label.font = UIFont(name: "SFProDisplay-Regular", size: 14)
-        label.textColor = .white
+        label.textColor = .red
         label.textAlignment = .left
+        label.isHidden = true
         label.numberOfLines = 0
         return label
     }()
@@ -196,15 +197,15 @@ class UserRegisterViewController: UIViewController {
             make.trailing.equalTo(passwordTextField.snp.trailing).offset(-16)
             make.width.height.equalTo(24)
         }
-        view.addSubview(passwordLabel)
-        passwordLabel.snp.makeConstraints { make in
+        view.addSubview(passwordErrorLabel)
+        passwordErrorLabel.snp.makeConstraints { make in
             make.top.equalTo(passwordTextField.snp.bottom).offset(5)
             make.leading.equalToSuperview().offset(20)
             make.trailing.equalToSuperview().offset(-20)
         }
         view.addSubview(nextButton)
         nextButton.snp.makeConstraints { make in
-            make.top.equalTo(passwordTextField.snp.bottom).offset(24)
+            make.top.equalTo(passwordTextField.snp.bottom).offset(45)
             make.leading.equalToSuperview().offset(20)
             make.trailing.equalToSuperview().offset(-20)
             make.height.equalTo(52)
@@ -296,8 +297,13 @@ class UserRegisterViewController: UIViewController {
                  numberTextField.text = ""
                  return
              }
-        
-     
+        if let passwordError = isValidPassword(password) {
+               passwordErrorLabel.text = passwordError
+               passwordErrorLabel.isHidden = false
+               passwordTextField.layer.borderColor = UIColor.red.cgColor
+               passwordTextField.layer.borderWidth = 1.0
+               return
+           }
         emailTextField.layer.borderWidth = 0
         nameTextField.layer.borderWidth = 0
         numberTextField.layer.borderWidth = 0
@@ -327,6 +333,34 @@ class UserRegisterViewController: UIViewController {
            let phonePredicate = NSPredicate(format: "SELF MATCHES %@", phoneRegex)
            return phonePredicate.evaluate(with: number)
        }
+    func isValidPassword(_ password: String) -> String? {
+       
+        if password.count < 8 {
+            return "Пароль должен содержать не менее 8 символов."
+        }
+        
+        let lowercaseLetterRegex = ".*[a-z]+.*"
+        let lowercaseTest = NSPredicate(format:"SELF MATCHES %@", lowercaseLetterRegex)
+        if !lowercaseTest.evaluate(with: password) {
+            return "Пароль должен содержать хотя бы одну строчную букву."
+        }
+
+        let digitRegex = ".*[0-9]+.*"
+        let digitTest = NSPredicate(format:"SELF MATCHES %@", digitRegex)
+        if !digitTest.evaluate(with: password) {
+            return "Пароль должен содержать хотя бы одну цифру."
+        }
+  
+        let specialCharacterRegex = ".*[!@#$%^&*(),.?\":{}|<>]+.*"
+        let specialCharacterTest = NSPredicate(format:"SELF MATCHES %@", specialCharacterRegex)
+        if !specialCharacterTest.evaluate(with: password) {
+            return "Пароль должен содержать хотя бы один специальный символ *[!@#$%^&*(),.?\":{}|<>]+.*/."
+        }
+        
+        return nil
+    }
+
+
    
     private func showAlert(message: String) {
         let alert = UIAlertController(title: "Ошибка", message: message, preferredStyle: .alert)
