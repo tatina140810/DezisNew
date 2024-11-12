@@ -42,6 +42,7 @@ class ClientNewPasswordView: UIViewController {
         overlay.isHidden = true
         return overlay
     }()
+    
     private let changePasswordLabel: UILabel = {
         let view = UILabel()
         view.text = "Смена пароля"

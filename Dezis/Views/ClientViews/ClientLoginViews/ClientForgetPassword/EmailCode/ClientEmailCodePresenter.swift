@@ -24,7 +24,9 @@ class ClientEmailCodePresenter: IClientEmailCodePresenter {
     let networkService = UserNetworkService()
     
     func verifyUser(email: String, otp: String) {
+        view?.showLoading()
         networkService.verifyUser(email: email, otp: otp) { [weak self] result in
+            self?.view?.hideLoading()
             switch result {
             case .success:
                 self?.view?.navigateToNextScreen(with: self?.userId ?? 0)

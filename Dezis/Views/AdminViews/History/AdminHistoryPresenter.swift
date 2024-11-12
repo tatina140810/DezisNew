@@ -50,10 +50,8 @@ class AdminHistoryPresenter: IAdminHistoryPresenter {
                 self?.orders = orders.filter { !$0.is_completed }.sorted {
                     ($0.dateTime() ?? Date.distantPast) < ($1.dateTime() ?? Date.distantPast)
                 }
-                self?.completedOrders = orders.filter { $0.is_completed }.sorted {
-                    ($0.dateTime() ?? Date.distantPast) > ($1.dateTime() ?? Date.distantPast)
-                }
                 
+                self?.completedOrders = orders.filter { $0.is_completed }
                 self?.fetchUserDetailsForOrders(orders)
                 
             case .failure(let error):
@@ -115,7 +113,7 @@ class AdminHistoryPresenter: IAdminHistoryPresenter {
             case .success:
                 let completedOrder = self?.orders.remove(at: index)
                 if let completedOrder = completedOrder {
-                    self?.completedOrders.append(completedOrder)
+                    self?.completedOrders.insert(completedOrder, at: 0)
                 }
                 self?.view?.reloadData()
             case .failure(let error):
