@@ -27,18 +27,19 @@ class AdminRequestPresenter: IAdminRequestPresenter {
     required init(view: IAdminRequestView) {
         self.view = view
     }
-    
+
     func loadRequests() {
         networkService.fetchRequests { [weak self] result in
             switch result {
             case .success(let requests):
-                self?.requests = requests.filter { !$0.is_active }
+                self?.requests = requests.filter { !$0.is_confirmed }.sorted { $0.id > $1.id }
                 self?.view?.reloadData()
             case .failure(let error):
                 print("Ошибка загрузки запросов: \(error)")
             }
         }
     }
+
     
     func loadUserRequest(userId: Int, completion: @escaping (UserInformation?) -> Void) {
         networkService.fetchUserDetails(userId: userId) { result in

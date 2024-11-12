@@ -92,7 +92,7 @@ extension AdminRequestsView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RequestsCollectionViewCell.reuseId, for: indexPath) as! RequestsCollectionViewCell
             
-            if let request = presenter.requestAt(indexPath.row), !request.is_active { 
+        if let request = presenter.requestAt(indexPath.row), !request.is_confirmed {
                 cell.fill(with: request)
                 cell.onConfirmTapped = { [weak self] in
                     self?.confirmRequest(for: indexPath)

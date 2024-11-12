@@ -53,14 +53,14 @@ class ClientHistoryPresenter: IClientHistoryPresenter {
             case .success(let orders):
                 print("Fetched \(orders.count) orders")
                 self?.clientOrders = orders.filter { $0.user == clientId }
+                    .sorted { ($0.dateTime() ?? Date.distantPast) > ($1.dateTime() ?? Date.distantPast) }
                 self?.view?.reloadData()
-                print("Filtered orders count: \(self?.clientOrders.count ?? 0)")
+                print("Filtered and sorted orders count: \(self?.clientOrders.count ?? 0)")
             case .failure(let error):
                 print("Failed to fetch orders: \(error.localizedDescription)")
             }
         }
     }
-
     func numberOfClientOrders() -> Int {
         return clientOrders.count
     }
