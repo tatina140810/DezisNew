@@ -9,8 +9,6 @@ import UIKit
 
 protocol IClientEmailCodeView {
     func showInputError(message: String)
-    func showLoading()
-    func hideLoading()
     func navigateToNextScreen(with userId: Int)
 }
 
@@ -29,21 +27,6 @@ class ClientEmailCodeView: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    private let loadingIndicator: UIActivityIndicatorView = {
-        let indicator = UIActivityIndicatorView(style: .large)
-        indicator.color = .white
-        indicator.translatesAutoresizingMaskIntoConstraints = false
-        return indicator
-    }()
-    
-    private let loadingOverlay: UIView = {
-        let overlay = UIView()
-        overlay.backgroundColor = UIColor(hex: "#1B2228")
-        overlay.translatesAutoresizingMaskIntoConstraints = false
-        overlay.isHidden = true
-        return overlay
-    }()
     
     private let sendCodeLabel: UILabel = {
         let view = UILabel()
@@ -66,10 +49,10 @@ class ClientEmailCodeView: UIViewController {
             string: "Код:",
             attributes: [
                 NSAttributedString.Key.foregroundColor: UIColor.white.withAlphaComponent(0.7),
-                NSAttributedString.Key.font: UIFont(name: "SFProText-Regular", size: 14)!
+                NSAttributedString.Key.font: UIFont(name: "SFProText-Medium", size: 14)!
             ])
         field.layer.cornerRadius = 10
-        field.font = UIFont(name: "SFProText-Regular", size: 14)
+        field.font = UIFont(name: "SFProText-Medium", size: 14)
         field.autocapitalizationType = .none
         field.translatesAutoresizingMaskIntoConstraints = false
         field.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
@@ -107,24 +90,9 @@ class ClientEmailCodeView: UIViewController {
         view.addSubview(sendCodeLabel)
         view.addSubview(codeTextField)
         view.addSubview(sendButton)
-        view.addSubview(loadingIndicator)
-        view.addSubview(loadingOverlay)
-        loadingOverlay.addSubview(loadingIndicator)
-        
-        
-        NSLayoutConstraint.activate([
-            loadingOverlay.topAnchor.constraint(equalTo: view.topAnchor),
-            loadingOverlay.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            loadingOverlay.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            loadingOverlay.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            
-            
-            loadingIndicator.centerXAnchor.constraint(equalTo: loadingOverlay.centerXAnchor),
-            loadingIndicator.centerYAnchor.constraint(equalTo: loadingOverlay.centerYAnchor)
-        ])
-        
+
         sendCodeLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(278)
+            make.centerY.equalToSuperview().offset(-105)
             make.centerX.equalToSuperview()
             make.leading.equalToSuperview().offset(20)
             make.trailing.equalToSuperview().offset(-20)
@@ -183,15 +151,6 @@ extension ClientEmailCodeView: IClientEmailCodeView {
     func navigateToNextScreen(with userId: Int) {
         let nextViewController = ClientNewPasswordView(userId: userId)
         navigationController?.pushViewController(nextViewController, animated: true)
-    }
-    
-    func showLoading() {
-        loadingOverlay.isHidden = false
-        loadingIndicator.startAnimating()
-    }
-    
-    func hideLoading() {
-        loadingIndicator.stopAnimating()
     }
     
     func showInputError(message: String) {

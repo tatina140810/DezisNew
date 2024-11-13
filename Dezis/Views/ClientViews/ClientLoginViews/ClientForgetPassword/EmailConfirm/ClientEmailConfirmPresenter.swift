@@ -23,9 +23,7 @@ class ClientEmailConfirmPresenter: IClientEmailConfirmPresenter {
     let networkService = UserNetworkService()
     
     func forgotPassword(email: String) {
-        view?.showLoading()
         networkService.forgotPassword(email: email) { [weak self] result in
-            self?.view?.hideLoading()
             switch result {
             case .success(let userId):
                 self?.userId = userId

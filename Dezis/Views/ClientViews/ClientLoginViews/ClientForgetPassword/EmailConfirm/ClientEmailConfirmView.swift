@@ -9,29 +9,12 @@ import UIKit
 
 protocol IClientEmailConfirmView: AnyObject {
     func showInputError(message: String)
-    func showLoading()
-    func hideLoading()
     func navigateToNextScreen(with email: String, userId: Int)
 }
 
 class ClientEmailConfirmView: UIViewController {
     
     private var presenter: IClientEmailConfirmPresenter?
-    
-    private let loadingIndicator: UIActivityIndicatorView = {
-        let indicator = UIActivityIndicatorView(style: .large)
-        indicator.color = .white
-        indicator.translatesAutoresizingMaskIntoConstraints = false
-        return indicator
-    }()
-    
-    private let loadingOverlay: UIView = {
-        let overlay = UIView()
-        overlay.backgroundColor = UIColor(hex: "#1B2228")
-        overlay.translatesAutoresizingMaskIntoConstraints = false
-        overlay.isHidden = true
-        return overlay
-    }()
     
     private let confirmLabel: UILabel = {
         let view = UILabel()
@@ -55,10 +38,10 @@ class ClientEmailConfirmView: UIViewController {
             string: "Электронная почта*",
             attributes: [
                 NSAttributedString.Key.foregroundColor: UIColor.white.withAlphaComponent(0.7),
-                NSAttributedString.Key.font: UIFont(name: "SFProText-Regular", size: 14)!
+                NSAttributedString.Key.font: UIFont(name: "SFProText-Medium", size: 14)!
             ])
         field.layer.cornerRadius = 10
-        field.font = UIFont(name: "SFProText-Regular", size: 14)
+        field.font = UIFont(name: "SFProText-Medium", size: 14)
         field.autocapitalizationType = .none
         field.translatesAutoresizingMaskIntoConstraints = false
         
@@ -68,6 +51,15 @@ class ClientEmailConfirmView: UIViewController {
         return field
     }()
     
+    private let errorLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .red
+        label.font = UIFont(name: "SFProText-Regular", size: 14)
+        label.numberOfLines = 0
+        label.isHidden = true
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
     
     private let sendButton: UIButton = {
         let button = UIButton()
@@ -133,26 +125,12 @@ class ClientEmailConfirmView: UIViewController {
         
         view.addSubview(confirmLabel)
         view.addSubview(emailTextField)
+        view.addSubview(errorLabel)
         view.addSubview(sendButton)
         view.addSubview(termsTextView)
-        view.addSubview(loadingIndicator)
-        view.addSubview(loadingOverlay)
-        loadingOverlay.addSubview(loadingIndicator)
-        
-        
-        NSLayoutConstraint.activate([
-            loadingOverlay.topAnchor.constraint(equalTo: view.topAnchor),
-            loadingOverlay.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            loadingOverlay.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            loadingOverlay.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            
-            
-            loadingIndicator.centerXAnchor.constraint(equalTo: loadingOverlay.centerXAnchor),
-            loadingIndicator.centerYAnchor.constraint(equalTo: loadingOverlay.centerYAnchor)
-        ])
         
         confirmLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(278)
+            make.centerY.equalToSuperview().offset(-105)
             make.centerX.equalToSuperview()
             make.leading.equalToSuperview().offset(20)
             make.trailing.equalToSuperview().offset(-20)
@@ -164,9 +142,15 @@ class ClientEmailConfirmView: UIViewController {
             make.trailing.equalToSuperview().offset(-20)
             make.height.equalTo(50)
         }
+
+        errorLabel.snp.makeConstraints { make in
+            make.top.equalTo(emailTextField.snp.bottom).offset(4)
+            make.leading.equalToSuperview().offset(20)
+            make.trailing.equalToSuperview().offset(-20)
+        }
         
         sendButton.snp.makeConstraints { make in
-            make.top.equalTo(emailTextField.snp.bottom).offset(24)
+            make.top.equalTo(errorLabel.snp.bottom).offset(20)
             make.leading.equalToSuperview().offset(20)
             make.trailing.equalToSuperview().offset(-24)
             make.height.equalTo(52)
@@ -216,7 +200,7 @@ class ClientEmailConfirmView: UIViewController {
             showInputError(message: "Пожалуйста, введите email")
             return
         }
-        
+        errorLabel.isHidden = true
         presenter?.forgotPassword(email: emailTF)
     }
         
@@ -241,27 +225,14 @@ extension ClientEmailConfirmView: IClientEmailConfirmView {
         navigationController?.pushViewController(vc, animated: true)
     }
     
-    func showLoading() {
-        loadingOverlay.isHidden = false
-        loadingIndicator.startAnimating()
-    }
-    
-    func hideLoading() {
-        loadingIndicator.stopAnimating()
-    }
-    
     func showInputError(message: String) {
         emailTextField.layer.borderColor = UIColor.red.cgColor
         
         
-        emailTextField.attributedPlaceholder = NSAttributedString(
-            string: message,
-            attributes: [
-                .foregroundColor: UIColor.red,
-                .font: UIFont(name: "SFProDisplay-Regular", size: 14)!
-            ]
-        )
+        errorLabel.text = message
+        errorLabel.isHidden = false
         
         emailTextField.text = ""
     }
+
 }

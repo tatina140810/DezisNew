@@ -405,13 +405,13 @@ class UserNetworkService {
                 self.logResponse(response)
                 
                 if response.statusCode == 404 {
-                    let message = "Пользователь с таким email не найден."
+                    let message = "Указанный адрес электронной почты не найден. Пожалуйста, проверьте правильность введенных данных или зарегистрируйтесь."
                     completion(.failure(NSError(domain: "", code: 404, userInfo: [NSLocalizedDescriptionKey: message])))
                     return
                 }
                 
                 if response.statusCode == 400 {
-                    let message = "Пожалуйста, введите корректный email."
+                    let message = "Пожалуйста, введите корректный адрес электронной почты."
                     completion(.failure(NSError(domain: "", code: 400, userInfo: [NSLocalizedDescriptionKey: message])))
                     return
                 }
