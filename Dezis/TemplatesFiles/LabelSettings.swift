@@ -2,7 +2,7 @@ import UIKit
 
 class LabelSettings: UILabel {
     
-    func labelMaker(text: String, font: UIFont = UIFont(name: "SFProDisplay-Bold", size: 16)!,
+    func labelMaker(text: String, font: UIFont = UIFont(name: " SFProText-Bold", size: 16)!,
                     textColor: UIColor = .black,
                     textAligmat: NSTextAlignment = .left,
                     numberOfLines: Int = 0,

@@ -22,7 +22,7 @@ class EntryAllowedViewController: UIViewController, EntryAllowedView {
     private var titleLabel: UILabel = {
         let view = UILabel()
         view.text = "Пожалуйста, подождите пока администратор даст вам разрешение на вход в приложение!"
-        view.font = UIFont(name: "SFProDisplay-Regular", size: 16)
+        view.font = UIFont(name: "SFProText-Regular", size: 16)
         view.textAlignment = .center
         view.textColor = .white
         view.numberOfLines = 0

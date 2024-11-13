@@ -18,7 +18,7 @@ class ClientHomeViewController: UIViewController {
     private let infoLabel: UILabel = {
         let label = UILabel()
         label.text = "Информация о записи"
-        label.font = UIFont(name: "SFProDisplay-Bold", size: 24)
+        label.font = UIFont(name: "SFProText-Bold", size: 24)
         label.textColor = .white
         label.textAlignment = .center
         return label
@@ -28,7 +28,7 @@ class ClientHomeViewController: UIViewController {
     private let orderLabel: UILabel = {
         let label = UILabel()
         label.text = "Услуги"
-        label.font = UIFont(name: "SFProDisplay-Bold", size: 24)
+        label.font = UIFont(name: "SFProText-Bold", size: 24)
         label.textColor = .white
         label.textAlignment = .center
         label.numberOfLines = 0
@@ -40,7 +40,7 @@ class ClientHomeViewController: UIViewController {
         let button = UIButton()
         button.setTitle("Подробнее", for: .normal)
         button.setTitleColor(.white, for: .normal)
-        button.titleLabel?.font = UIFont(name: "SFProDisplay-Bold", size: 16)
+        button.titleLabel?.font = UIFont(name: "SFProText-Bold", size: 16)
         button.setImage(UIImage(resource: .arrow), for: .normal)
         button.tintColor = .white
         button.backgroundColor = UIColor(hex: "#0A84FF")
@@ -60,11 +60,11 @@ class ClientHomeViewController: UIViewController {
     
    private var dezinfectionView = DezinfectionView()
     
-    private var dezinfectionDetailsButton: UIButton = {
+    private lazy var dezinfectionDetailsButton: UIButton = {
         let button = UIButton()
         button.setTitle("Подробнее", for: .normal)
         button.setTitleColor(.white, for: .normal)
-        button.titleLabel?.font = UIFont(name: "SFProDisplay-Bold", size: 16)
+        button.titleLabel?.font = UIFont(name: "SFProText-Bold", size: 16)
         button.setImage(UIImage(resource: .arrow), for: .normal)
         button.tintColor = .white
         button.backgroundColor = UIColor(hex: "#0A84FF")
@@ -84,11 +84,11 @@ class ClientHomeViewController: UIViewController {
     
     private var deratizationView = DeratizationView()
     
-    private var deratizationDetailsButton: UIButton = {
+    private lazy var deratizationDetailsButton: UIButton = {
         let button = UIButton()
         button.setTitle("Подробнее", for: .normal)
         button.setTitleColor(.white, for: .normal)
-        button.titleLabel?.font = UIFont(name: "SFProDisplay-Bold", size: 16)
+        button.titleLabel?.font = UIFont(name: "SFProText-Bold", size: 16)
         button.setImage(UIImage(resource: .arrow), for: .normal)
         button.tintColor = .white
         button.backgroundColor = UIColor(hex: "#0A84FF")

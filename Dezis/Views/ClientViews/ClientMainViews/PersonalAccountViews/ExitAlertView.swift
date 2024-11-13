@@ -16,7 +16,7 @@ class ExitAlertView: UIViewController {
     private var titleLabel: UILabel = {
         let view = UILabel()
         view.text = "Вы уверенны что хотите выйти?"
-        view.font = UIFont(name: "SFProDisplay-Regular", size: 20)
+        view.font = UIFont(name: "SFProText-Regular", size: 20)
         view.textColor = .white
         view.textAlignment = .center
         view.numberOfLines = 0
@@ -28,7 +28,7 @@ class ExitAlertView: UIViewController {
         button.backgroundColor = UIColor(hex: "#1B2228")
         button.setTitleColor(UIColor(hex: "#0A84FF"), for: .normal)
         button.tintColor = .white
-        button.titleLabel?.font = UIFont(name: "SFProDisplay-Bold", size: 16)
+        button.titleLabel?.font = UIFont(name: "SFProText-Bold", size: 16)
         button.addTarget(self, action: #selector(cancellButtonTapped), for: .touchUpInside)
         return button
     }()
@@ -37,7 +37,7 @@ class ExitAlertView: UIViewController {
         button.setTitle("Продолжить", for: .normal)
         button.backgroundColor = UIColor(hex: "#1B2228")
         button.setTitleColor(.red, for: .normal)
-        button.titleLabel?.font = UIFont(name: "SFProDisplay-Bold", size: 16)
+        button.titleLabel?.font = UIFont(name: "SFProText-Bold", size: 16)
         button.addTarget(self, action: #selector(continueButtonTapped), for: .touchUpInside)
         return button
     }()

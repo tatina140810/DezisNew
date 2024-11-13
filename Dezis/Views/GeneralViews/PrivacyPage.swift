@@ -11,7 +11,7 @@ class PrivacyPage: UIViewController {
     private var privacyLabel: UILabel = {
         let view = UILabel()
         view.text = "Условие продажи"
-        view.font = UIFont(name: "SFProDisplay-Regular", size: 12)
+        view.font = UIFont(name: "SFProText-Regular", size: 12)
         view.textColor = .white
         view.textAlignment = .center
         view.numberOfLines = 0

@@ -22,7 +22,7 @@ class FirstOrderView: UIView {
     private let nameLabel: UILabel = {
         let view = UILabel()
         view.text = " "
-        view.font = UIFont(name: "SFProDisplay-Regular", size: 16)
+        view.font = UIFont(name: "SFProText-Regular", size: 16)
         view.textColor = .init(UIColor(hex: "#FFFFFF"))
         view.textAlignment = .center
         view.numberOfLines = 0
@@ -52,7 +52,7 @@ class FirstOrderView: UIView {
         view.text = "Услуги:"
         view.numberOfLines = 0
         view.lineBreakMode = .byCharWrapping
-        view.font = UIFont(name: "SFProDisplay-Regular", size: 14)
+        view.font = UIFont(name: "SFProText-Regular", size: 14)
         view.textColor = .init(UIColor(hex: "#0A84FF"))
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
@@ -67,7 +67,7 @@ class FirstOrderView: UIView {
         view.attributedText = attributedString
         view.numberOfLines = 0
         view.lineBreakMode = .byCharWrapping
-        view.font = UIFont(name: "SFProDisplay-Regular", size: 14)
+        view.font = UIFont(name: "SFProText-Regular", size: 14)
         view.textColor = .init(UIColor(hex: "#FFFFFF"))
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
@@ -78,7 +78,7 @@ class FirstOrderView: UIView {
         view.text = "Адрес:"
         view.numberOfLines = 0
         view.lineBreakMode = .byCharWrapping
-        view.font = UIFont(name: "SFProDisplay-Regular", size: 14)
+        view.font = UIFont(name: "SFProText-Regular", size: 14)
         view.textColor = .init(UIColor(hex: "#0A84FF"))
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
@@ -100,7 +100,7 @@ class FirstOrderView: UIView {
         view.attributedText = attributedString
         view.numberOfLines = 0
         view.lineBreakMode = .byCharWrapping
-        view.font = UIFont(name: "SFProDisplay-Regular", size: 14)
+        view.font = UIFont(name: "SFProText-Regular", size: 14)
         view.textColor = .init(UIColor(hex: "#FFFFFF"))
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
@@ -114,7 +114,7 @@ class FirstOrderView: UIView {
         view.attributedText = attributedString
         view.numberOfLines = 0
         view.lineBreakMode = .byCharWrapping
-        view.font = UIFont(name: "SFProDisplay-Regular", size: 14)
+        view.font = UIFont(name: "SFProText-Regular", size: 14)
         view.textColor = .init(UIColor(hex: "#FFFFFF"))
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
@@ -125,7 +125,7 @@ class FirstOrderView: UIView {
         view.text = "Дата:"
         view.numberOfLines = 0
         view.lineBreakMode = .byCharWrapping
-        view.font = UIFont(name: "SFProDisplay-Regular", size: 14)
+        view.font = UIFont(name: "SFProText-Regular", size: 14)
         view.textColor = .init(UIColor(hex: "#0A84FF"))
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
@@ -147,7 +147,7 @@ class FirstOrderView: UIView {
         view.attributedText = attributedString
         view.numberOfLines = 0
         view.lineBreakMode = .byCharWrapping
-        view.font = UIFont(name: "SFProDisplay-Regular", size: 14)
+        view.font = UIFont(name: "SFProText-Regular", size: 14)
         view.textColor = .init(UIColor(hex: "#FFFFFF"))
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
@@ -161,7 +161,7 @@ class FirstOrderView: UIView {
         view.attributedText = attributedString
         view.numberOfLines = 0
         view.lineBreakMode = .byCharWrapping
-        view.font = UIFont(name: "SFProDisplay-Regular", size: 14)
+        view.font = UIFont(name: "SFProText-Regular", size: 14)
         view.textColor = .init(UIColor(hex: "#FFFFFF"))
         view.translatesAutoresizingMaskIntoConstraints = false
         return view

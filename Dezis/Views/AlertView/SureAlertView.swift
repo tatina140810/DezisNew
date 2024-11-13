@@ -32,7 +32,7 @@ class SureAlertView: UIView {
         label.textAlignment = .center
         label.numberOfLines = 0
         label.lineBreakMode = .byWordWrapping
-        label.font = UIFont(name: "SFProDisplay-Bold", size: 16)
+        label.font = UIFont(name: "SFProText-Bold", size: 16)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()

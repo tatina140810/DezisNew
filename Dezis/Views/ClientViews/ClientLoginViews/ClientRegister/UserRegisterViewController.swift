@@ -8,7 +8,7 @@ class UserRegisterViewController: UIViewController {
     private var titleLabel: UILabel = {
         let label = UILabel()
         label.text = "Регистрация"
-        label.font = UIFont(name: "SFProDisplay-Bold", size: 24)
+        label.font = UIFont(name: "SFProText-Bold", size: 24)
         label.textColor = .white
         label.textAlignment = .center
         label.numberOfLines = 0
@@ -26,7 +26,7 @@ class UserRegisterViewController: UIViewController {
     private var passwordErrorLabel: UILabel = {
         let label = UILabel()
         label.text = ""
-        label.font = UIFont(name: "SFProDisplay-Regular", size: 14)
+        label.font = UIFont(name: "SFProText-Regular", size: 14)
         label.textColor = .red
         label.textAlignment = .left
         label.isHidden = true
@@ -74,7 +74,7 @@ class UserRegisterViewController: UIViewController {
     private var emailErrorMessageLabel: UILabel = {
         let view = UILabel()
         view.text = ""
-        view.font = UIFont(name: "SFProDisplay-Regular", size: 12)
+        view.font = UIFont(name: "SFProText-Regular", size: 12)
         view.numberOfLines = 0
         view.textAlignment = .left
         view.textColor = .red
@@ -84,7 +84,7 @@ class UserRegisterViewController: UIViewController {
     private var numberErrorMessageLabel: UILabel = {
         let view = UILabel()
         view.text = ""
-        view.font = UIFont(name: "SFProDisplay-Regular", size: 12)
+        view.font = UIFont(name: "SFProText-Regular", size: 12)
         view.numberOfLines = 0
         view.textAlignment = .left
         view.textColor = .red

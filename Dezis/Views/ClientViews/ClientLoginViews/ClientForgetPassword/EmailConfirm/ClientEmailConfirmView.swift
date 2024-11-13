@@ -36,7 +36,7 @@ class ClientEmailConfirmView: UIViewController {
     private let confirmLabel: UILabel = {
         let view = UILabel()
         view.text = "Подтверждение электронной почты"
-        view.font = UIFont(name: "SFProDisplay-Bold", size: 24)
+        view.font = UIFont(name: "SFProText-Bold", size: 24)
         view.textColor = .init(UIColor(hex: "#FFFFFF"))
         view.numberOfLines = 0
         view.textAlignment = .center
@@ -55,10 +55,10 @@ class ClientEmailConfirmView: UIViewController {
             string: "Электронная почта*",
             attributes: [
                 NSAttributedString.Key.foregroundColor: UIColor.white.withAlphaComponent(0.7),
-                NSAttributedString.Key.font: UIFont(name: "SFProDisplay-Regular", size: 14)!
+                NSAttributedString.Key.font: UIFont(name: "SFProText-Regular", size: 14)!
             ])
         field.layer.cornerRadius = 10
-        field.font = UIFont(name: "SFProDisplay-Regular", size: 14)
+        field.font = UIFont(name: "SFProText-Regular", size: 14)
         field.autocapitalizationType = .none
         field.translatesAutoresizingMaskIntoConstraints = false
         
@@ -72,7 +72,7 @@ class ClientEmailConfirmView: UIViewController {
     private let sendButton: UIButton = {
         let button = UIButton()
         button.setTitle("Отправить", for: .normal)
-        button.titleLabel?.font = UIFont(name: "SFProDisplay-Bold", size: 16)
+        button.titleLabel?.font = UIFont(name: "SFProText-Bold", size: 16)
         button.setTitleColor(.white, for: .normal)
         button.backgroundColor = .init(hex: "#0A84FF")
         button.layer.cornerRadius = 12
@@ -86,7 +86,7 @@ class ClientEmailConfirmView: UIViewController {
         textView.isEditable = false
         textView.isScrollEnabled = false
         textView.backgroundColor = .clear
-        textView.font = UIFont(name: "SFProDisplay-Regular", size: 12)
+        textView.font = UIFont(name: "SFProText-Regular", size: 12)
         textView.textColor = .white
         textView.linkTextAttributes = [
             .foregroundColor: UIColor.systemBlue
@@ -187,7 +187,7 @@ class ClientEmailConfirmView: UIViewController {
         let backButton = UIButton(type: .system)
         backButton.setTitle("Назад", for: .normal)
         backButton.setTitleColor(.systemBlue, for: .normal)
-        backButton.titleLabel?.font = UIFont(name: "SFProDisplay-Regular", size: 17)
+        backButton.titleLabel?.font = UIFont(name: "SFProText-Regular", size: 17)
         
         let chevronImage = UIImage(resource: .shevron).withRenderingMode(.alwaysTemplate)
         let resizedChevron = UIGraphicsImageRenderer(size: CGSize(width: 8, height: 14)).image { _ in

@@ -48,7 +48,7 @@ class ClientEmailCodeView: UIViewController {
     private let sendCodeLabel: UILabel = {
         let view = UILabel()
         view.text = "Мы отправили код на вашу электронную почту"
-        view.font = UIFont(name: "SFProDisplay-Bold", size: 24)
+        view.font = UIFont(name: "SFProText-Bold", size: 24)
         view.textColor = .init(UIColor(hex: "#FFFFFF"))
         view.numberOfLines = 0
         view.textAlignment = .center
@@ -66,10 +66,10 @@ class ClientEmailCodeView: UIViewController {
             string: "Код:",
             attributes: [
                 NSAttributedString.Key.foregroundColor: UIColor.white.withAlphaComponent(0.7),
-                NSAttributedString.Key.font: UIFont(name: "SFProDisplay-Regular", size: 14)!
+                NSAttributedString.Key.font: UIFont(name: "SFProText-Regular", size: 14)!
             ])
         field.layer.cornerRadius = 10
-        field.font = UIFont(name: "SFProDisplay-Regular", size: 14)
+        field.font = UIFont(name: "SFProText-Regular", size: 14)
         field.autocapitalizationType = .none
         field.translatesAutoresizingMaskIntoConstraints = false
         field.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
@@ -83,7 +83,7 @@ class ClientEmailCodeView: UIViewController {
     private let sendButton: UIButton = {
         let button = UIButton()
         button.setTitle("Отправить", for: .normal)
-        button.titleLabel?.font = UIFont(name: "SFProDisplay-Bold", size: 16)
+        button.titleLabel?.font = UIFont(name: "SFProText-Bold", size: 16)
         button.setTitleColor(.white, for: .normal)
         button.backgroundColor = .init(hex: "#515151")
         button.layer.cornerRadius = 12
@@ -201,7 +201,7 @@ extension ClientEmailCodeView: IClientEmailCodeView {
             string: message,
             attributes: [
                 .foregroundColor: UIColor.red,
-                .font: UIFont(name: "SFProDisplay-Regular", size: 14)!
+                .font: UIFont(name: "SFProText-Regular", size: 14)!
             ]
         )
         

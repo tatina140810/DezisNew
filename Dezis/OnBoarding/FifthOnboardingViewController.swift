@@ -25,7 +25,7 @@ class FifthOnboardingViewController: UIViewController {
     private var titleLabel: UILabel = {
         let label = UILabel()
         label.text = "Готовы к действиям? оставьте заявку и вперед к чистоте!"
-        label.font = UIFont(name: "SFProDisplay-Bold", size: 18)
+        label.font = UIFont(name: "SFProText-Medium", size: 18)
         label.textColor = .white
         label.numberOfLines = 0
         label.textAlignment = .left

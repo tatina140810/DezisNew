@@ -31,7 +31,7 @@ class UserRegisterSecondPageViewController: UIViewController, IUserRegisterSecon
     private var titleLabel: UILabel = {
         let label = UILabel()
         label.text = "Регистрация"
-        label.font = UIFont(name: "SFProDisplay-Bold", size: 24)
+        label.font = UIFont(name: "SFProText-Bold", size: 24)
         label.textColor = .white
         label.textAlignment = .center
         label.numberOfLines = 0
@@ -44,7 +44,7 @@ class UserRegisterSecondPageViewController: UIViewController, IUserRegisterSecon
     private var adressErrorMessageLabel: UILabel = {
         let view = UILabel()
         view.text = ""
-        view.font = UIFont(name: "SFProDisplay-Regular", size: 12)
+        view.font = UIFont(name: "SFProText-Regular", size: 12)
         view.numberOfLines = 0
         view.textAlignment = .left
         view.textColor = .red
@@ -54,7 +54,7 @@ class UserRegisterSecondPageViewController: UIViewController, IUserRegisterSecon
     private var numberErrorMessageLabel: UILabel = {
         let view = UILabel()
         view.text = ""
-        view.font = UIFont(name: "SFProDisplay-Regular", size: 12)
+        view.font = UIFont(name: "SFProText-Regular", size: 12)
         view.numberOfLines = 0
         view.textAlignment = .left
         view.textColor = .red
@@ -64,7 +64,7 @@ class UserRegisterSecondPageViewController: UIViewController, IUserRegisterSecon
     private var errorLabel: UILabel = {
         let view = UILabel()
         view.text = ""
-        view.font = UIFont(name: "SFProDisplay-Regular", size: 12)
+        view.font = UIFont(name: "SFProText-Regular", size: 12)
         view.textColor = .red
         view.textAlignment = .left
         return view
@@ -76,7 +76,7 @@ class UserRegisterSecondPageViewController: UIViewController, IUserRegisterSecon
         view.setTitleColor(.white, for: .normal)
         view.backgroundColor = UIColor(hex: "#0A84FF")
         view.layer.cornerRadius = 12
-        view.titleLabel?.font = UIFont(name: "SFProDisplay-Bold", size: 16)
+        view.titleLabel?.font = UIFont(name: "SFProText-Bold", size: 16)
         view.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
         return view
     }()
@@ -84,7 +84,7 @@ class UserRegisterSecondPageViewController: UIViewController, IUserRegisterSecon
     private var privacyLabel: UILabel = {
         let view = UILabel()
         view.text = "Выбирая «Зарегистрироваться», вы подтверждаете свое согласие с Условием продажи и принимаете условия"
-        view.font = UIFont(name: "SFProDisplay-Regular", size: 12)
+        view.font = UIFont(name: "SFProText-Regular", size: 12)
         view.textColor = .white
         view.textAlignment = .center
         view.numberOfLines = 0
@@ -93,7 +93,7 @@ class UserRegisterSecondPageViewController: UIViewController, IUserRegisterSecon
     private var confidentialityLabel: UILabel = {
         let view = UILabel()
         view.text = "Положения о конфиденциальности."
-        view.font = UIFont(name: "SFProDisplay-Regular", size: 12)
+        view.font = UIFont(name: "SFProText-Regular", size: 12)
         view.textColor = .white
         view.textAlignment = .center
         view.numberOfLines = 0

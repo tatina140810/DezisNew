@@ -31,7 +31,7 @@ class СonfirmationСodeViewController: UIViewController, IСonfirmationСodeVie
     private var codeLabel: UILabel = {
         let view = UILabel()
         view.text = "Введите код"
-        view.font = UIFont(name: "SFProDisplay-Bold", size: 24)
+        view.font = UIFont(name: "SFProText-Bold", size: 24)
         view.textColor = .white
         return view
     }()
@@ -50,7 +50,7 @@ class СonfirmationСodeViewController: UIViewController, IСonfirmationСodeVie
     private var placeholderLabel: UILabel = {
         let view = UILabel()
         view.text = "Код:"
-        view.font = UIFont(name: "SFProDisplay-Regular", size: 14)
+        view.font = UIFont(name: "SFProText-Regular", size: 14)
         view.textColor = .white
         return view
     }()
@@ -67,7 +67,7 @@ class СonfirmationСodeViewController: UIViewController, IСonfirmationСodeVie
     private var errorMasageLabel: UILabel = {
         let view = UILabel()
         view.text = "Код введен неверно"
-        view.font = UIFont(name: "SFProDisplay-Regular", size: 12)
+        view.font = UIFont(name: "SFProText-Regular", size: 12)
         view.textColor = .red
         view.isHidden = true
         return view
@@ -75,7 +75,7 @@ class СonfirmationСodeViewController: UIViewController, IСonfirmationСodeVie
     private var timerLabel: UILabel = {
         let view = UILabel()
         view.text = "через 1:00 минуту"
-        view.font = UIFont(name: "SFProDisplay-Regular", size: 12)
+        view.font = UIFont(name: "SFProText-Regular", size: 12)
         view.textColor = .white
         view.isHidden = false
         return view
@@ -87,7 +87,7 @@ class СonfirmationСodeViewController: UIViewController, IСonfirmationСodeVie
         view.setTitleColor(.white, for: .normal)
         view.backgroundColor = UIColor(hex: "#0A84FF")
         view.layer.cornerRadius = 12
-        view.titleLabel?.font = UIFont(name: "SFProDisplay-Bold", size: 16)
+        view.titleLabel?.font = UIFont(name: "SFProText-Bold", size: 16)
         view.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
         return view
     }()
@@ -95,7 +95,7 @@ class СonfirmationСodeViewController: UIViewController, IСonfirmationСodeVie
     private var privacyLabel: UILabel = {
         let view = UILabel()
         view.text = "Выбирая «Зарегистрироваться», вы подтверждаете свое согласие с Условием продажи и принимаете условия"
-        view.font = UIFont(name: "SFProDisplay-Regular", size: 12)
+        view.font = UIFont(name: "SFProText-Regular", size: 12)
         view.textColor = .white
         view.textAlignment = .center
         view.numberOfLines = 0
@@ -104,7 +104,7 @@ class СonfirmationСodeViewController: UIViewController, IСonfirmationСodeVie
     private var confidentialityLabel: UILabel = {
         let view = UILabel()
         view.text = "Положения о конфиденциальности."
-        view.font = UIFont(name: "SFProDisplay-Regular", size: 12)
+        view.font = UIFont(name: "SFProText-Regular", size: 12)
         view.textColor = .white
         view.textAlignment = .center
         view.numberOfLines = 0
