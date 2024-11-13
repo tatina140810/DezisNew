@@ -80,6 +80,36 @@ struct UserProfile: Decodable {
     }
 }
 
+struct ClientOrder: Decodable {
+    let id: Int
+    let user: Int
+    let date: String
+    let time: String
+    let service: String
+    let isFirstProcessing: Bool
+    
+    enum CodingKeys: String, CodingKey {
+        case id, user, date, time, service
+        case isFirstProcessing = "is_first_processing"
+    }
+}
+
+extension ClientOrder {
+    func dateTime() -> Date? {
+        let dateTimeString = "\(date) \(time)"
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.timeZone = TimeZone(secondsFromGMT: 0)
+        
+        if let date = formatter.date(from: dateTimeString) {
+            return date
+        } else {
+            print("Ошибка преобразования для строки: \(dateTimeString)")
+            return nil
+        }
+    }
+}
 
 struct ErrorResponse: Codable {
     let message: String
@@ -275,14 +305,14 @@ class UserNetworkService {
         }
     }
     
-    func fetchClientOrders(completion: @escaping (Result<[Order], Error>) -> Void) {
-        provider.request(.fetchClientOrders) { result in
+    func fetchClientOrders(clientId: Int, completion: @escaping (Result<[ClientOrder], Error>) -> Void) {
+        provider.request(.fetchProcessingOrders(clientId: clientId)) { result in
             switch result {
             case .success(let response):
                 self.logResponse(response)
                 
                 do {
-                    let orders = try JSONDecoder().decode([Order].self, from: response.data)
+                    let orders = try JSONDecoder().decode([ClientOrder].self, from: response.data)
                     completion(.success(orders))
                 } catch {
                     print("Ошибка декодирования: \(error)")
@@ -374,8 +404,14 @@ class UserNetworkService {
             case .success(let response):
                 self.logResponse(response)
                 
+                if response.statusCode == 404 {
+                    let message = "Пользователь с таким email не найден."
+                    completion(.failure(NSError(domain: "", code: 404, userInfo: [NSLocalizedDescriptionKey: message])))
+                    return
+                }
+                
                 if response.statusCode == 400 {
-                    let message = "Пожалуйста, введите корректный адрес электронной почты"
+                    let message = "Пожалуйста, введите корректный email."
                     completion(.failure(NSError(domain: "", code: 400, userInfo: [NSLocalizedDescriptionKey: message])))
                     return
                 }
@@ -403,7 +439,12 @@ class UserNetworkService {
     }
     
     func updateUserPassword(userId: Int, newPassword: String, completion: @escaping (Result<Void, Error>) -> Void) {
-        provider.request(.updateUserPassword(userId: userId, newPassword: newPassword)) { result in
+        let parameters: [String: Any] = [
+            "password": newPassword,
+            "is_confirmed": true
+        ]
+        
+        provider.request(.updateUserInfo(userId: userId, parameters: parameters)) { result in
             switch result {
             case .success(let response):
                 self.logResponse(response)

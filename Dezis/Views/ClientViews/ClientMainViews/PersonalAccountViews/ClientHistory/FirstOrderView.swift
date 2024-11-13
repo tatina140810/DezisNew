@@ -235,7 +235,7 @@ class FirstOrderView: UIView {
         }
     }
     
-    func fill(with order: Order, userDetails: UserProfile?) {
+    func fill(with order: ClientOrder, userDetails: UserProfile?) {
         
         nameLabel.text = userDetails?.username ?? "Имя не указано"
         serviceDetailLabel.text = order.service

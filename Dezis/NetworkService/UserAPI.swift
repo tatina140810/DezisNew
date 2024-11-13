@@ -9,11 +9,11 @@ enum UserApi {
     case booking (user: Int, service: String, date: String, time: String, is_completed: Bool)
     case userDetails (id: Int)
     case getUserProfile(email: String)
-    case fetchClientOrders
+    case fetchProcessingOrders(clientId: Int)
     case logOut(email: String)
     case resendOtp (email: String)
     case forgotPassword(email: String)
-    case updateUserPassword(userId: Int, newPassword: String)
+    case updateUserInfo(userId: Int, parameters: [String: Any])
 }
 
 extension UserApi: TargetType {
@@ -38,15 +38,15 @@ extension UserApi: TargetType {
             return "/api/v1/user/list-user/\(id)/"
         case .getUserProfile(_):
             return "/api/v1/user/list-user/"
-        case .fetchClientOrders:
-            return "/api/v1/contact/booking/"
+        case .fetchProcessingOrders(let clientId):
+            return "/api/v1/contact/processing/\(clientId)/"
         case .logOut:
             return "/api/v1/user/logout-user/"
         case .resendOtp:
             return "/api/v1/user/resend-otp/"
         case .forgotPassword:
             return "/api/v1/user/forgot-password/"
-        case .updateUserPassword(let userId, _):
+        case .updateUserInfo(let userId, _):
             return "/api/v1/user/put-request/\(userId)/"
         }
     }
@@ -65,7 +65,7 @@ extension UserApi: TargetType {
             return .get
         case .getUserProfile:
             return .get
-        case .fetchClientOrders:
+        case .fetchProcessingOrders:
             return .get
         case .logOut:
             return .post
@@ -73,7 +73,7 @@ extension UserApi: TargetType {
             return .post
         case .forgotPassword:
             return .post
-        case .updateUserPassword:
+        case .updateUserInfo:
             return .put
         }
     }
@@ -115,7 +115,7 @@ extension UserApi: TargetType {
             
         case .getUserProfile(let email):
             return .requestParameters(parameters: ["email": email], encoding: URLEncoding.default)
-        case .fetchClientOrders:
+        case .fetchProcessingOrders:
             return .requestPlain
         case .logOut(let email):
             return .requestParameters(parameters: ["email": email], encoding: JSONEncoding.default)
@@ -123,8 +123,8 @@ extension UserApi: TargetType {
             return .requestParameters(parameters: ["email": email], encoding: JSONEncoding.default)
         case .forgotPassword(let email):
             return .requestParameters(parameters: ["email": email], encoding: JSONEncoding.default)
-        case .updateUserPassword(_, let newPassword):
-            return .requestParameters(parameters: ["password": newPassword], encoding: JSONEncoding.default)
+        case .updateUserInfo(_, let parameters):
+            return .requestParameters(parameters: parameters, encoding: JSONEncoding.default)
         }
     }
     

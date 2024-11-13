@@ -9,12 +9,29 @@ import UIKit
 
 protocol IClientEmailConfirmView: AnyObject {
     func showInputError(message: String)
+    func showLoading()
+    func hideLoading()
     func navigateToNextScreen(with email: String, userId: Int)
 }
 
 class ClientEmailConfirmView: UIViewController {
     
     private var presenter: IClientEmailConfirmPresenter?
+    
+    private let loadingIndicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView(style: .large)
+        indicator.color = .white
+        indicator.translatesAutoresizingMaskIntoConstraints = false
+        return indicator
+    }()
+    
+    private let loadingOverlay: UIView = {
+        let overlay = UIView()
+        overlay.backgroundColor = UIColor(hex: "#1B2228")
+        overlay.translatesAutoresizingMaskIntoConstraints = false
+        overlay.isHidden = true
+        return overlay
+    }()
     
     private let confirmLabel: UILabel = {
         let view = UILabel()
@@ -118,6 +135,21 @@ class ClientEmailConfirmView: UIViewController {
         view.addSubview(emailTextField)
         view.addSubview(sendButton)
         view.addSubview(termsTextView)
+        view.addSubview(loadingIndicator)
+        view.addSubview(loadingOverlay)
+        loadingOverlay.addSubview(loadingIndicator)
+        
+        
+        NSLayoutConstraint.activate([
+            loadingOverlay.topAnchor.constraint(equalTo: view.topAnchor),
+            loadingOverlay.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            loadingOverlay.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            loadingOverlay.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            
+            
+            loadingIndicator.centerXAnchor.constraint(equalTo: loadingOverlay.centerXAnchor),
+            loadingIndicator.centerYAnchor.constraint(equalTo: loadingOverlay.centerYAnchor)
+        ])
         
         confirmLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(278)
@@ -207,6 +239,15 @@ extension ClientEmailConfirmView: IClientEmailConfirmView {
     func navigateToNextScreen(with email: String, userId: Int) {
         let vc = ClientEmailCodeView(email: email, userId: userId)
         navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func showLoading() {
+        loadingOverlay.isHidden = false
+        loadingIndicator.startAnimating()
+    }
+    
+    func hideLoading() {
+        loadingIndicator.stopAnimating()
     }
     
     func showInputError(message: String) {
