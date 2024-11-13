@@ -12,6 +12,7 @@ class PersonalAccountViewController: UIViewController, PersonalAccountView {
     
     let imagePicker = ImagePicker()
     var presenter: IPersonalAccountPresenter?
+    var newNumber: String = ""
     
     private lazy var userImage: UIImageView = {
         let image = UIImageView()
@@ -123,28 +124,13 @@ class PersonalAccountViewController: UIViewController, PersonalAccountView {
         field.backgroundColor = UIColor(hex: "#2B373E")
         field.layer.cornerRadius = 8
         field.clipsToBounds = true
-        
-        let editButton = UIButton(type: .custom)
-        editButton.setImage(UIImage(named: "edit2"), for: .normal)
-        editButton.tintColor = .init(hex: "#0A84FF")
-        editButton.frame = CGRect(x: 0, y: 0, width: 24, height: 24)
-        editButton.addTarget(nil, action: #selector(enableEditing), for: .touchUpInside)
-        
-        let rightPaddingView = UIView(frame: CGRect(x: -15, y: 0, width: 24, height: 24))
-        rightPaddingView.addSubview(editButton)
-        editButton.center = rightPaddingView.center
-        
-        field.rightView = rightPaddingView
-        field.rightViewMode = .always
-        
+
         let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 15, height: field.frame.height))
         field.leftView = paddingView
         field.leftViewMode = .always
-        
-        field.isUserInteractionEnabled = false
+        field.isUserInteractionEnabled = true
         return field
     }()
-    
     private lazy var historyButton: UIButton = {
         let button = UIButton()
         button.setTitle("История заказов", for: .normal)
@@ -187,6 +173,22 @@ class PersonalAccountViewController: UIViewController, PersonalAccountView {
         setupUI()
         presenter = PersonalAccountPresenter(view: self, userService: UserNetworkService())
                presenter?.fetchUserData()
+        editButtonSetup()
+    }
+    func editButtonSetup(){
+        let editButton = UIButton(type: .custom)
+            editButton.setImage(UIImage(named: "edit2"), for: .normal)
+            editButton.tintColor = UIColor(hex: "#0A84FF")
+            editButton.frame = CGRect(x: 0, y: 0, width: 24, height: 24)
+            editButton.addTarget(self, action: #selector(enableEditing), for: .touchUpInside)
+
+           
+            let rightPaddingView = UIView(frame: CGRect(x: -15, y: 0, width: 24, height: 24))
+            rightPaddingView.addSubview(editButton)
+            editButton.center = rightPaddingView.center
+
+            phoneTextField.rightView = rightPaddingView
+            phoneTextField.rightViewMode = .always
     }
     
     func showUserData(user: UserProfile) {
@@ -326,9 +328,21 @@ class PersonalAccountViewController: UIViewController, PersonalAccountView {
     }
     
     @objc private func enableEditing() {
-        phoneTextField.isUserInteractionEnabled = true
-        phoneTextField.becomeFirstResponder()
+        saveUpdatedNumber()
+        print("button tupped")
+        
     }
+
+    @objc private func saveUpdatedNumber() {
+       
+        guard let newNumber = phoneTextField.text, !newNumber.isEmpty else {
+            print("Ошибка: номер телефона не может быть пустым")
+            return
+        }
+        
+        presenter?.updateUserNumber(newNumber: newNumber)
+    }
+
     
     private func showImagePicker(sourceType: UIImagePickerController.SourceType) {
         imagePicker.showImagePicker(in: self) { [weak self] image in

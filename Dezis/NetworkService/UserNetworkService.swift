@@ -460,6 +460,28 @@ class UserNetworkService {
             }
         }
     }
+    func updateUserNumber(userId: Int, newNumber: String, completion: @escaping (Result<Void, Error>) -> Void) {
+        let parameters: [String: Any] = [
+            "number": newNumber,
+            "is_confirmed": true
+        ]
+        
+        provider.request(.updateUserInfo(userId: userId, parameters: parameters)) { result in
+            switch result {
+            case .success(let response):
+                self.logResponse(response)
+                
+                guard (200...299).contains(response.statusCode) else {
+                    completion(.failure(self.decodeError(from: response.data, statusCode: response.statusCode)))
+                    return
+                }
+                completion(.success(()))
+                
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
 }
 
 

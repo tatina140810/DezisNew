@@ -3,6 +3,7 @@ import Foundation
 protocol IPersonalAccountPresenter: AnyObject {
     func fetchUserData()
     func logOut()
+    func updateUserNumber(newNumber: String)
 }
 
 class PersonalAccountPresenter: IPersonalAccountPresenter {
@@ -62,6 +63,22 @@ class PersonalAccountPresenter: IPersonalAccountPresenter {
                 
             case .failure(let error):
                 print("Ошибка выхода: \(error.localizedDescription)")
+            }
+        }
+    }
+    func updateUserNumber(newNumber: String) {
+         let id = UserDefaults.standard.integer(forKey: "userId")
+        guard id != 0 else {
+            print("Ошибка: Id не найден в UserDefaults")
+            return
+        }
+        userService.updateUserNumber(userId: id, newNumber: newNumber){result in
+            switch result {
+            case .success :
+                print("Номер пользователя успещна обновлен")
+            case .failure(let error):
+                print("Ошибка при оьновлении номера полтзователя: \(error)")
+                
             }
         }
     }
