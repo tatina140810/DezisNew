@@ -341,6 +341,8 @@ class PersonalAccountViewController: UIViewController, PersonalAccountView {
         }
         
         presenter?.updateUserNumber(newNumber: newNumber)
+        let vc = NumberSvedAlert()
+        navigationController?.present(vc, animated: true)
     }
 
     
