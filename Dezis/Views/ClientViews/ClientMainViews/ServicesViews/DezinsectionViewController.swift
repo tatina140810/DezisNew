@@ -13,7 +13,7 @@ class DezinsectionViewController: UIViewController {
         let backButton = UIButton(type: .system)
         backButton.setTitle("Назад", for: .normal)
 
-        backButton.titleLabel?.font = UIFont(name: "SFProDisplay-Regular", size: 17)
+        backButton.titleLabel?.font = UIFont(name: "SFProText-Regular", size: 17)
 
         let chevronImage = UIImage(resource: .shevron).withRenderingMode(.alwaysTemplate)
         let resizedChevron = UIGraphicsImageRenderer(size: CGSize(width: 8, height: 14)).image { _ in
@@ -79,7 +79,7 @@ class DezinsectionViewController: UIViewController {
             button.layer.cornerRadius = 8
             button.clipsToBounds = true
             button.addTarget(self, action: #selector(orderButtonTapped), for: .touchUpInside)
-            button.titleLabel?.font = UIFont(name: "SFProDisplay-Bold", size: 16)
+            button.titleLabel?.font = UIFont(name: "SFProText-Bold", size: 16)
             return button
             
         }()

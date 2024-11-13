@@ -93,7 +93,7 @@ class CalendarViewController: UIViewController, ICalendarViewController {
         let button = UIButton(type: .system)
         button.setTitleColor(UIColor(hex: "#007AFF"), for: .normal)
         button.setTitle("Сбросить", for: .normal)
-        button.titleLabel?.font = UIFont(name: "SFProDisplay-Regular", size: 17)
+        button.titleLabel?.font = UIFont(name: "SFProText-Regular", size: 17)
         button.addTarget(self, action: #selector(resetButtonTapped), for: .touchUpInside)
         return button
     }()
@@ -102,14 +102,14 @@ class CalendarViewController: UIViewController, ICalendarViewController {
         let button = UIButton(type: .system)
         button.setTitleColor(UIColor(hex: "#007AFF"), for: .normal)
         button.setTitle("Готово", for: .normal)
-        button.titleLabel?.font = UIFont(name: "SFProDisplay-Bold", size: 17)
+        button.titleLabel?.font = UIFont(name: "SFProText-Bold", size: 17)
         button.addTarget(self, action: #selector(doneButtonTapped), for: .touchUpInside)
         return button
     }()
     private var titleLabel: UILabel = {
         let label = UILabel()
         label.text = "Выберите услугу:"
-        label.font = UIFont(name: "SFProDisplay-Bold", size: 18)
+        label.font = UIFont(name: "SFProText-Bold", size: 18)
         label.textColor = .white
         label.textAlignment = .left
         return label
@@ -119,7 +119,7 @@ class CalendarViewController: UIViewController, ICalendarViewController {
         let button = UIButton()
         button.setTitle("Заказать услугу", for: .normal)
         button.backgroundColor = UIColor(hex: "#0A84FF")
-        button.titleLabel?.font = UIFont(name: "SFProDisplay-Bold", size: 16)
+        button.titleLabel?.font = UIFont(name: "SFProText-Bold", size: 16)
         button.layer.cornerRadius = 12
         button.clipsToBounds = true
         button.addTarget(self, action: #selector(orderButtonTapped), for: .touchUpInside)
@@ -128,7 +128,7 @@ class CalendarViewController: UIViewController, ICalendarViewController {
     private var dezinfectionLabel: UILabel = {
         let label = UILabel()
         label.text = "Дезинфекция"
-        label.font =  UIFont(name: "SFProDisplay-Regular", size: 18)
+        label.font =  UIFont(name: "SFProText-Regular", size: 18)
         label.textColor = .white
         return label
     }()
@@ -136,21 +136,21 @@ class CalendarViewController: UIViewController, ICalendarViewController {
     private var dezinsectionLabel: UILabel = {
         let label = UILabel()
         label.text = "Дезинcекция"
-        label.font =  UIFont(name: "SFProDisplay-Regular", size: 18)
+        label.font =  UIFont(name: "SFProText-Regular", size: 18)
         label.textColor = .white
         return label
     }()
     private var deratizationLabel: UILabel = {
         let label = UILabel()
         label.text = "Дератизация"
-        label.font =  UIFont(name: "SFProDisplay-Regular", size: 18)
+        label.font =  UIFont(name: "SFProText-Regular", size: 18)
         label.textColor = .white
         return label
     }()
     private var timeLabel: UILabel = {
         let label = UILabel()
         label.text = "Время"
-        label.font =  UIFont(name: "SFProDisplay-Bold", size: 17)
+        label.font =  UIFont(name: "SFProText-Regular", size: 17)
         label.textColor = .black
         return label
     }()

@@ -36,7 +36,7 @@ class CustomAlertView: UIView {
         let label = UILabel()
         //        label.text = "Вы завершили заказ!"
         label.textColor = .white
-        label.font = UIFont(name: "SFProDisplay-Bold", size: 16)
+        label.font = UIFont(name: "SFProText-Bold", size: 16)
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
         return label

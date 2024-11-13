@@ -24,7 +24,7 @@ class ClientLoginViewController: UIViewController, UITextFieldDelegate, IClientL
     private var titleLabel: UILabel = {
         let view = UILabel()
         view.text = "Вход"
-        view.font = UIFont(name: "SFProDisplay-Bold", size: 24)
+        view.font = UIFont(name: "SFProText-Bold", size: 24)
         view.textAlignment = .center
         view.textColor = .white
         
@@ -38,7 +38,7 @@ class ClientLoginViewController: UIViewController, UITextFieldDelegate, IClientL
     private var emailErrorMasageLabel: UILabel = {
         let view = UILabel()
         view.text = ""
-        view.font = UIFont(name: "SFProDisplay-Regular", size: 12)
+        view.font = UIFont(name: "SFProText-Regular", size: 12)
         view.numberOfLines = 0
         view.textAlignment = .left
         view.textColor = .red
@@ -48,7 +48,7 @@ class ClientLoginViewController: UIViewController, UITextFieldDelegate, IClientL
     private var passwordErrorMasageLabel: UILabel = {
         let view = UILabel()
         view.text = ""
-        view.font = UIFont(name: "SFProDisplay-Regular", size: 12)
+        view.font = UIFont(name: "SFProText-Regular", size: 12)
         view.numberOfLines = 0
         view.textAlignment = .left
         view.textColor = .red
@@ -59,7 +59,7 @@ class ClientLoginViewController: UIViewController, UITextFieldDelegate, IClientL
     private lazy var forgotPasswordButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Забыли пароль?", for: .normal)
-        button.titleLabel?.font = UIFont(name: "SFProDisplay-Regular", size: 14)
+        button.titleLabel?.font = UIFont(name: "SFProText-Regular", size: 14)
         button.titleLabel?.numberOfLines = 0
         button.contentHorizontalAlignment = .left
         button.setTitleColor(.white, for: .normal)
@@ -73,7 +73,7 @@ class ClientLoginViewController: UIViewController, UITextFieldDelegate, IClientL
         view.setTitleColor(.white, for: .normal)
         view.backgroundColor = UIColor(hex: "#0A84FF")
         view.layer.cornerRadius = 8
-        view.titleLabel?.font = UIFont(name: "SFProDisplay-Bold", size: 16)
+        view.titleLabel?.font = UIFont(name: "SFProText-Bold", size: 16)
         view.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
         return view
     }()
@@ -88,7 +88,7 @@ class ClientLoginViewController: UIViewController, UITextFieldDelegate, IClientL
     private var privacyLabel: UILabel = {
         let view = UILabel()
         view.text = "Выбирая «Зарегистрироваться», вы подтверждаете свое согласие с Условием продажи и принимаете условия"
-        view.font = UIFont(name: "SFProDisplay-Regular", size: 12)
+        view.font = UIFont(name: "SFProText-Regular", size: 12)
         view.textColor = .white
         view.textAlignment = .center
         view.numberOfLines = 0
@@ -97,7 +97,7 @@ class ClientLoginViewController: UIViewController, UITextFieldDelegate, IClientL
     private var confidentialityLabel: UILabel = {
         let view = UILabel()
         view.text = "Положения о конфиденциальности."
-        view.font = UIFont(name: "SFProDisplay-Regular", size: 12)
+        view.font = UIFont(name: "SFProText-Regular", size: 12)
         view.textColor = .white
         view.textAlignment = .center
         view.numberOfLines = 0

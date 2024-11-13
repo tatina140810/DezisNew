@@ -34,7 +34,7 @@ class PersonalAccountViewController: UIViewController, PersonalAccountView {
     private let nameLabel: UILabel = {
         let label = UILabel()
         label.text = "Ф.И.О."
-        label.font = UIFont(name: "SFProDisplay-Regular", size: 16)
+        label.font = UIFont(name: "SFProText-Regular", size: 16)
         label.textColor = .white
         label.textAlignment = .left
         return label
@@ -43,7 +43,7 @@ class PersonalAccountViewController: UIViewController, PersonalAccountView {
     private let nameTextField: UITextField = {
         let field = UITextField()
         field.text = " "
-        field.font = UIFont(name: "SFProDisplay-Regular", size: 16)
+        field.font = UIFont(name: "SFProText-Regular", size: 16)
         field.textColor = .white
         field.backgroundColor = UIColor(hex: "#2B373E")
         field.layer.cornerRadius = 8
@@ -60,7 +60,7 @@ class PersonalAccountViewController: UIViewController, PersonalAccountView {
     private let emailLabel: UILabel = {
         let label = UILabel()
         label.text = "E-mail"
-        label.font = UIFont(name: "SFProDisplay-Regular", size: 16)
+        label.font = UIFont(name: "SFProText-Regular", size: 16)
         label.textColor = .white
         return label
     }()
@@ -68,7 +68,7 @@ class PersonalAccountViewController: UIViewController, PersonalAccountView {
     private let emailTextField: UITextField = {
         let field = UITextField()
         field.text = ""
-        field.font = UIFont(name: "SFProDisplay-Regular", size: 16)
+        field.font = UIFont(name: "SFProText-Regular", size: 16)
         field.textColor = .white
         field.backgroundColor = UIColor(hex: "#2B373E")
         field.layer.cornerRadius = 8
@@ -85,7 +85,7 @@ class PersonalAccountViewController: UIViewController, PersonalAccountView {
     private let passwordLabel: UILabel = {
         let label = UILabel()
         label.text = "Пароль"
-        label.font = UIFont(name: "SFProDisplay-Regular", size: 16)
+        label.font = UIFont(name: "SFProText-Regular", size: 16)
         label.textColor = .white
         return label
     }()
@@ -93,7 +93,7 @@ class PersonalAccountViewController: UIViewController, PersonalAccountView {
     private let passwordTextField: UITextField = {
         let field = UITextField()
         field.text = ""
-        field.font = UIFont(name: "SFProDisplay-Regular", size: 16)
+        field.font = UIFont(name: "SFProText-Regular", size: 16)
         field.textColor = .white
         field.backgroundColor = UIColor(hex: "#2B373E")
         field.layer.cornerRadius = 8
@@ -111,7 +111,7 @@ class PersonalAccountViewController: UIViewController, PersonalAccountView {
     private let phoneLabel: UILabel = {
         let label = UILabel()
         label.text = "Номер телефона"
-        label.font = UIFont(name: "SFProDisplay-Regular", size: 16)
+        label.font = UIFont(name: "SFProText-Regular", size: 16)
         label.textColor = .white
         return label
     }()
@@ -119,7 +119,7 @@ class PersonalAccountViewController: UIViewController, PersonalAccountView {
     private let phoneTextField: UITextField = {
         let field = UITextField()
         field.text = ""
-        field.font = UIFont(name: "SFProDisplay-Regular", size: 16)
+        field.font = UIFont(name: "SFProText-Regular", size: 16)
         field.textColor = .white
         field.backgroundColor = UIColor(hex: "#2B373E")
         field.layer.cornerRadius = 8
@@ -134,7 +134,7 @@ class PersonalAccountViewController: UIViewController, PersonalAccountView {
     private lazy var historyButton: UIButton = {
         let button = UIButton()
         button.setTitle("История заказов", for: .normal)
-        button.titleLabel?.font = UIFont(name: "SFProDisplay-Regular", size: 16)
+        button.titleLabel?.font = UIFont(name: "SFProText-Regular", size: 16)
         button.setTitleColor(.white, for: .normal)
         button.backgroundColor = UIColor(hex: "#2B373E")
         button.layer.cornerRadius = 8
@@ -158,7 +158,7 @@ class PersonalAccountViewController: UIViewController, PersonalAccountView {
     private lazy var exitButton: UIButton = {
         let button = UIButton()
         button.setTitle("Выйти", for: .normal)
-        button.titleLabel?.font = UIFont(name: "SFProDisplay-Regular", size: 16)
+        button.titleLabel?.font = UIFont(name: "SFProText-Regular", size: 16)
         button.setTitleColor(.red, for: .normal)
         button.backgroundColor = UIColor(hex: "#2B373E")
         button.layer.cornerRadius = 8

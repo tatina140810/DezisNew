@@ -46,7 +46,7 @@ class ClientNewPasswordView: UIViewController {
     private let changePasswordLabel: UILabel = {
         let view = UILabel()
         view.text = "Смена пароля"
-        view.font = UIFont(name: "SFProDisplay-Bold", size: 24)
+        view.font = UIFont(name: "SFProText-Bold", size: 24)
         view.textColor = .init(UIColor(hex: "#FFFFFF"))
         view.numberOfLines = 0
         view.textAlignment = .center
@@ -65,10 +65,10 @@ class ClientNewPasswordView: UIViewController {
             string: "Введите новый пароль*",
             attributes: [
                 NSAttributedString.Key.foregroundColor: UIColor.white.withAlphaComponent(0.7),
-                NSAttributedString.Key.font: UIFont(name: "SFProDisplay-Regular", size: 14)!
+                NSAttributedString.Key.font: UIFont(name: "SFProText-Regular", size: 14)!
             ])
         field.layer.cornerRadius = 10
-        field.font = UIFont(name: "SFProDisplay-Regular", size: 14)
+        field.font = UIFont(name: "SFProText-Regular", size: 14)
         field.autocapitalizationType = .none
         field.translatesAutoresizingMaskIntoConstraints = false
         
@@ -88,10 +88,10 @@ class ClientNewPasswordView: UIViewController {
             string: "Повторите пароль*",
             attributes: [
                 NSAttributedString.Key.foregroundColor: UIColor.white.withAlphaComponent(0.7),
-                NSAttributedString.Key.font: UIFont(name: "SFProDisplay-Regular", size: 14)!
+                NSAttributedString.Key.font: UIFont(name: "SFProText-Regular", size: 14)!
             ])
         field.layer.cornerRadius = 10
-        field.font = UIFont(name: "SFProDisplay-Regular", size: 14)
+        field.font = UIFont(name: "SFProText-Regular", size: 14)
         field.autocapitalizationType = .none
         field.translatesAutoresizingMaskIntoConstraints = false
         
@@ -106,7 +106,7 @@ class ClientNewPasswordView: UIViewController {
     private let continueButton: UIButton = {
         let button = UIButton()
         button.setTitle("Продолжить", for: .normal)
-        button.titleLabel?.font = UIFont(name: "SFProDisplay-Bold", size: 16)
+        button.titleLabel?.font = UIFont(name: "SFProText-Bold", size: 16)
         button.setTitleColor(.white, for: .normal)
         button.backgroundColor = .init(hex: "#0A84FF")
         button.layer.cornerRadius = 12
@@ -120,7 +120,7 @@ class ClientNewPasswordView: UIViewController {
         textView.isEditable = false
         textView.isScrollEnabled = false
         textView.backgroundColor = .clear
-        textView.font = UIFont(name: "SFProDisplay-Regular", size: 12)
+        textView.font = UIFont(name: "SFProText-Regular", size: 12)
         textView.textColor = .white
         textView.linkTextAttributes = [
             .foregroundColor: UIColor.systemBlue
@@ -267,7 +267,7 @@ extension ClientNewPasswordView: IClientNewPasswordView {
             string: message,
             attributes: [
                 .foregroundColor: UIColor.red,
-                .font: UIFont(name: "SFProDisplay-Regular", size: 14)!
+                .font: UIFont(name: "SFProText-Regular", size: 14)!
             ]
         )
         
@@ -275,7 +275,7 @@ extension ClientNewPasswordView: IClientNewPasswordView {
             string: message,
             attributes: [
                 .foregroundColor: UIColor.red,
-                .font: UIFont(name: "SFProDisplay-Regular", size: 14)!
+                .font: UIFont(name: "SFProText-Regular", size: 14)!
             ]
         )
         

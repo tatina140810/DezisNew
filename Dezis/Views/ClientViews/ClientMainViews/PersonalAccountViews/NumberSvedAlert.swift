@@ -20,7 +20,7 @@ class NumberSvedAlert: UIViewController {
     private var titleLabel: UILabel = {
         let view = UILabel()
         view.text = "Изменения успешно сохранены изменения"
-        view.font = UIFont(name: "SFProDisplay-Regular", size: 20)
+        view.font = UIFont(name: "SFProText-Regular", size: 20)
         view.textColor = .white
         view.textAlignment = .center
         view.numberOfLines = 0

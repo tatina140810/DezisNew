@@ -18,7 +18,7 @@ class ViewControllerForAlert: UIViewController {
     private var titleLabel: UILabel = {
         let view = UILabel()
         view.text = "Заявка успешно отправлена!"
-        view.font = UIFont(name: "SFProDisplay-Regular", size: 18)
+        view.font = UIFont(name: "SFProText-Regular", size: 18)
         view.textAlignment = .center
         view.numberOfLines = 0
         return view

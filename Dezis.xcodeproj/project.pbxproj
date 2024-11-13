@@ -39,6 +39,9 @@
 		72D39BA82CB1870D00D9EB45 /* AdminLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D39BA72CB1870D00D9EB45 /* AdminLoginView.swift */; };
 		85C09B2E2CDBB872002B09BC /* keyboardExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C09B2D2CDBB872002B09BC /* keyboardExtension.swift */; };
 		AF3BFB222CE465D100A5BEE8 /* NumberSvedAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3BFB212CE465B800A5BEE8 /* NumberSvedAlert.swift */; };
+		AF3BFB242CE481C100A5BEE8 /* SFProText-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AF3BFB232CE481C100A5BEE8 /* SFProText-Bold.ttf */; };
+		AF3BFB262CE481D900A5BEE8 /* SFProText-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AF3BFB252CE481D900A5BEE8 /* SFProText-Regular.ttf */; };
+		AF3BFB282CE481ED00A5BEE8 /* SFProText-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AF3BFB272CE481ED00A5BEE8 /* SFProText-Medium.ttf */; };
 		AF3EDD0F2CB4696E00CAF1FE /* ClientChoiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3EDD0E2CB4696E00CAF1FE /* ClientChoiceViewController.swift */; };
 		AF4B1DD12C9AE38E00FDA3EC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1DD02C9AE38E00FDA3EC /* AppDelegate.swift */; };
 		AF4B1DD32C9AE38E00FDA3EC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1DD22C9AE38E00FDA3EC /* SceneDelegate.swift */; };
@@ -46,7 +49,6 @@
 		AF4B1DE92C9AEEC600FDA3EC /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1DE82C9AEEC600FDA3EC /* Profile.swift */; };
 		AF4B1DF12C9B153C00FDA3EC /* HexExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1DF02C9B153C00FDA3EC /* HexExtention.swift */; };
 		AF4B1DF52C9B28ED00FDA3EC /* ClientLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1DF42C9B28ED00FDA3EC /* ClientLoginViewController.swift */; };
-		AF4B1DF92C9B32A300FDA3EC /* SuccessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1DF82C9B32A300FDA3EC /* SuccessViewController.swift */; };
 		AF4B1DFB2C9B42D300FDA3EC /* UserRegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1DFA2C9B42D300FDA3EC /* UserRegisterViewController.swift */; };
 		AF4B1DFD2C9B52AE00FDA3EC /* СonfirmationСodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1DFC2C9B52AE00FDA3EC /* СonfirmationСodeViewController.swift */; };
 		AF4B1E022C9C17BA00FDA3EC /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1E012C9C17B900FDA3EC /* EndPoint.swift */; };
@@ -81,7 +83,6 @@
 		AF74D5502CA7C97B00B64D6E /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF74D54F2CA7C97B00B64D6E /* KeychainManager.swift */; };
 		AF74D5522CA7EB3200B64D6E /* UserRegisterSecondPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF74D5512CA7EB3200B64D6E /* UserRegisterSecondPageViewController.swift */; };
 		AF74D5562CAACEAC00B64D6E /* FirstStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF74D5552CAACEAC00B64D6E /* FirstStackView.swift */; };
-		AF74D55E2CAB1E5400B64D6E /* GradientLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF74D55D2CAB1E5400B64D6E /* GradientLayer.swift */; };
 		AF74D56D2CAD835C00B64D6E /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF74D56C2CAD835C00B64D6E /* CalendarViewController.swift */; };
 		AF74D5752CB1171700B64D6E /* FifthOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF74D56E2CB1171700B64D6E /* FifthOnboardingViewController.swift */; };
 		AF74D5762CB1171700B64D6E /* FirstOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF74D56F2CB1171700B64D6E /* FirstOnboardingViewController.swift */; };
@@ -145,6 +146,9 @@
 		9D594A6880D984FC3775947A /* Pods_Dezis.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Dezis.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ABC7905C0E1157EB74B80A5D /* Pods-Dezis.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dezis.release.xcconfig"; path = "Target Support Files/Pods-Dezis/Pods-Dezis.release.xcconfig"; sourceTree = "<group>"; };
 		AF3BFB212CE465B800A5BEE8 /* NumberSvedAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberSvedAlert.swift; sourceTree = "<group>"; };
+		AF3BFB232CE481C100A5BEE8 /* SFProText-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFProText-Bold.ttf"; sourceTree = "<group>"; };
+		AF3BFB252CE481D900A5BEE8 /* SFProText-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFProText-Regular.ttf"; sourceTree = "<group>"; };
+		AF3BFB272CE481ED00A5BEE8 /* SFProText-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFProText-Medium.ttf"; sourceTree = "<group>"; };
 		AF3EDD0E2CB4696E00CAF1FE /* ClientChoiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientChoiceViewController.swift; sourceTree = "<group>"; };
 		AF4B1DCD2C9AE38E00FDA3EC /* Dezis.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dezis.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF4B1DD02C9AE38E00FDA3EC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -154,7 +158,6 @@
 		AF4B1DE82C9AEEC600FDA3EC /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		AF4B1DF02C9B153C00FDA3EC /* HexExtention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexExtention.swift; sourceTree = "<group>"; };
 		AF4B1DF42C9B28ED00FDA3EC /* ClientLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientLoginViewController.swift; sourceTree = "<group>"; };
-		AF4B1DF82C9B32A300FDA3EC /* SuccessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessViewController.swift; sourceTree = "<group>"; };
 		AF4B1DFA2C9B42D300FDA3EC /* UserRegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRegisterViewController.swift; sourceTree = "<group>"; };
 		AF4B1DFC2C9B52AE00FDA3EC /* СonfirmationСodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "СonfirmationСodeViewController.swift"; sourceTree = "<group>"; };
 		AF4B1E012C9C17B900FDA3EC /* EndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
@@ -189,7 +192,6 @@
 		AF74D54F2CA7C97B00B64D6E /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
 		AF74D5512CA7EB3200B64D6E /* UserRegisterSecondPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRegisterSecondPageViewController.swift; sourceTree = "<group>"; };
 		AF74D5552CAACEAC00B64D6E /* FirstStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstStackView.swift; sourceTree = "<group>"; };
-		AF74D55D2CAB1E5400B64D6E /* GradientLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientLayer.swift; sourceTree = "<group>"; };
 		AF74D56C2CAD835C00B64D6E /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		AF74D56E2CB1171700B64D6E /* FifthOnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FifthOnboardingViewController.swift; sourceTree = "<group>"; };
 		AF74D56F2CB1171700B64D6E /* FirstOnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstOnboardingViewController.swift; sourceTree = "<group>"; };
@@ -438,7 +440,6 @@
 				AF9F2FEB2CA6BA1A00BBBB2C /* AttributedTextHelper.swift */,
 				AF9F2FED2CA6D3CF00BBBB2C /* ImagePicker.swift */,
 				AF74D54F2CA7C97B00B64D6E /* KeychainManager.swift */,
-				AF74D55D2CAB1E5400B64D6E /* GradientLayer.swift */,
 			);
 			path = TemplatesFiles;
 			sourceTree = "<group>";
@@ -565,7 +566,6 @@
 		AF51461F2CC64EE4000D9C97 /* GeneralViews */ = {
 			isa = PBXGroup;
 			children = (
-				AF4B1DF82C9B32A300FDA3EC /* SuccessViewController.swift */,
 				AF74D5C32CB41F6600B64D6E /* СhoiceViewController.swift */,
 				AFF6188A2CBBA3E700C64C95 /* EntryAllowedViewController.swift */,
 				AF6BC7232CD9075A00106766 /* EntryAllowedPresenter.swift */,
@@ -656,6 +656,9 @@
 		AFF6186E2CB692E700C64C95 /* Font */ = {
 			isa = PBXGroup;
 			children = (
+				AF3BFB232CE481C100A5BEE8 /* SFProText-Bold.ttf */,
+				AF3BFB252CE481D900A5BEE8 /* SFProText-Regular.ttf */,
+				AF3BFB272CE481ED00A5BEE8 /* SFProText-Medium.ttf */,
 				AFF618712CB693AD00C64C95 /* SFPRODISPLAYBOLD.OTF */,
 				AFF618732CB693C000C64C95 /* SFPRODISPLAYTHINITALIC.OTF */,
 				AFF618752CB693D200C64C95 /* SFPRODISPLAYSEMIBOLDITALIC.OTF */,
@@ -732,12 +735,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF3BFB282CE481ED00A5BEE8 /* SFProText-Medium.ttf in Resources */,
 				AFF618722CB693AD00C64C95 /* SFPRODISPLAYBOLD.OTF in Resources */,
 				AF74D57C2CB1179C00B64D6E /* LaunchScreen.storyboard in Resources */,
 				AFF618702CB6939B00C64C95 /* SFPRODISPLAYREGULAR.OTF in Resources */,
 				AF4B1DDA2C9AE39000FDA3EC /* Assets.xcassets in Resources */,
 				AFF618762CB693D200C64C95 /* SFPRODISPLAYSEMIBOLDITALIC.OTF in Resources */,
 				AFF618742CB693C000C64C95 /* SFPRODISPLAYTHINITALIC.OTF in Resources */,
+				AF3BFB242CE481C100A5BEE8 /* SFProText-Bold.ttf in Resources */,
+				AF3BFB262CE481D900A5BEE8 /* SFProText-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -811,7 +817,6 @@
 				72ABD5A22CC90463004E18E9 /* CompletedOrdersCollectionViewCell.swift in Sources */,
 				AF74D5802CB1561300B64D6E /* DezinfectionView.swift in Sources */,
 				AF4B1E072C9C1F6000FDA3EC /* NetworkError.swift in Sources */,
-				AF4B1DF92C9B32A300FDA3EC /* SuccessViewController.swift in Sources */,
 				AF4B1E172C9FFF3200FDA3EC /* LabelSettings.swift in Sources */,
 				18E576572CC5482700302739 /* ChatModel.swift in Sources */,
 				AF51461E2CC64A91000D9C97 /* UserNetworkService.swift in Sources */,
@@ -849,7 +854,6 @@
 				AF4B1E1B2CA0222A00FDA3EC /* ButtonSettings.swift in Sources */,
 				AF74D5C42CB41F6600B64D6E /* СhoiceViewController.swift in Sources */,
 				7257D4FD2CDEB5140042258A /* ClientNewPasswordView.swift in Sources */,
-				AF74D55E2CAB1E5400B64D6E /* GradientLayer.swift in Sources */,
 				AF51468D2CD297BC000D9C97 /* СonfirmationСodePresenter.swift in Sources */,
 				AFF6187C2CB69D5200C64C95 /* DezinfectionViewController.swift in Sources */,
 				85C09B2E2CDBB872002B09BC /* keyboardExtension.swift in Sources */,
