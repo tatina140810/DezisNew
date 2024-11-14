@@ -88,7 +88,7 @@ class SureAlertView: UIView {
         NSLayoutConstraint.activate([
             containerView.centerXAnchor.constraint(equalTo: centerXAnchor),
             containerView.centerYAnchor.constraint(equalTo: centerYAnchor),
-            containerView.widthAnchor.constraint(equalToConstant: 259),
+            containerView.widthAnchor.constraint(equalToConstant: 273),
             containerView.heightAnchor.constraint(equalToConstant: 120),
             
             buttonStackView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -15),

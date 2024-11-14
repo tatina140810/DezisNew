@@ -26,7 +26,6 @@ class CustomAlertView: UIView {
     
     private let checkmarkImageView: UIImageView = {
         let imageView = UIImageView()
-        //        imageView.image = UIImage(named: "check-circle")
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
@@ -34,7 +33,6 @@ class CustomAlertView: UIView {
     
     private let messageLabel: UILabel = {
         let label = UILabel()
-        //        label.text = "Вы завершили заказ!"
         label.textColor = .white
         label.font = UIFont(name: "SFProText-Bold", size: 16)
         label.textAlignment = .center

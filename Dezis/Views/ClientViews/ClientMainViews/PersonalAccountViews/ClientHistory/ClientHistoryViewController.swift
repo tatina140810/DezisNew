@@ -93,7 +93,7 @@ class ClientHistoryViewController: UIViewController, IClientHistoryViewControlle
     private func setupUI() {
         view.addSubview(firstOrderLabel)
         firstOrderLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(115)
+            make.top.equalToSuperview().offset(100)
             make.leading.equalToSuperview().offset(20)
         }
         

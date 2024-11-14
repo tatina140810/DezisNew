@@ -65,10 +65,10 @@ class ClientNewPasswordView: UIViewController {
             string: "Введите новый пароль*",
             attributes: [
                 NSAttributedString.Key.foregroundColor: UIColor.white.withAlphaComponent(0.7),
-                NSAttributedString.Key.font: UIFont(name: "SFProText-Regular", size: 14)!
+                NSAttributedString.Key.font: UIFont(name: "SFProText-Medium", size: 14)!
             ])
         field.layer.cornerRadius = 10
-        field.font = UIFont(name: "SFProText-Regular", size: 14)
+        field.font = UIFont(name: "SFProText-Medium", size: 14)
         field.autocapitalizationType = .none
         field.translatesAutoresizingMaskIntoConstraints = false
         
@@ -187,7 +187,7 @@ class ClientNewPasswordView: UIViewController {
         ])
         
         changePasswordLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(282)
+            make.centerY.equalToSuperview().offset(-105)
             make.centerX.equalToSuperview()
         }
         
