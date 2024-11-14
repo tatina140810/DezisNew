@@ -21,7 +21,7 @@ class EntryAllowedViewController: UIViewController, EntryAllowedView {
     
     private var titleLabel: UILabel = {
         let view = UILabel()
-        view.text = "Пожалуйста, подождите пока администратор даст вам разрешение на вход в приложение!"
+        view.text = "Пожалуйста, подождите. Aдминистратор даст Вам разрешение на вход в приложение в течение 24 часов!"
         view.font = UIFont(name: "SFProText-Regular", size: 16)
         view.textAlignment = .center
         view.textColor = .white
@@ -61,7 +61,7 @@ class EntryAllowedViewController: UIViewController, EntryAllowedView {
         }
     }
     func startCheckingUserStatus() {
-            statusCheckTimer = Timer.scheduledTimer(timeInterval: 10.0, target: self, selector: #selector(checkUserStatus), userInfo: nil, repeats: true)
+            statusCheckTimer = Timer.scheduledTimer(timeInterval: 600.0, target: self, selector: #selector(checkUserStatus), userInfo: nil, repeats: true)
         }
      
         func stopCheckingUserStatus() {
