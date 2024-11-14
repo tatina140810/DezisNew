@@ -38,9 +38,9 @@ class UserRegisterSecondPageViewController: UIViewController, IUserRegisterSecon
         return label
     }()
     
-    private var adressTextField = TextFieldSettings().textFieldMaker(placeholder: "Адрес", backgroundColor: UIColor(hex: "#2B373E"))
+    private var adressTextField = TextFieldSettings().textFieldMaker(placeholder: "Адрес*", backgroundColor: UIColor(hex: "#2B373E"))
     
-    private var apartmentNumberTextField = TextFieldSettings().textFieldMaker(placeholder: "Номер дома/квартиры", backgroundColor: UIColor(hex: "#2B373E"))
+    private var apartmentNumberTextField = TextFieldSettings().textFieldMaker(placeholder: "Номер дома/квартиры*", backgroundColor: UIColor(hex: "#2B373E"))
     private var adressErrorMessageLabel: UILabel = {
         let view = UILabel()
         view.text = ""

@@ -52,7 +52,7 @@ class CalendarViewController: UIViewController, ICalendarViewController {
         let timePicker = UIDatePicker()
         timePicker.datePickerMode = .time
         timePicker.preferredDatePickerStyle = .wheels
-        timePicker.layer.cornerRadius = 12
+        timePicker.layer.cornerRadius = 13
         timePicker.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         timePicker.clipsToBounds = true
         timePicker.backgroundColor = UIColor(hex: "F9F9F9")
@@ -67,7 +67,7 @@ class CalendarViewController: UIViewController, ICalendarViewController {
         view.distribution = .fillProportionally
         view.spacing = 8
         view.backgroundColor =  UIColor(hex: "#C8CACB")
-        view.layer.cornerRadius = 12
+        view.layer.cornerRadius = 13
         view.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
         view.clipsToBounds = true
         view.layoutMargins = UIEdgeInsets(top: 0, left: 16, bottom: 10, right: 16)
@@ -81,7 +81,7 @@ class CalendarViewController: UIViewController, ICalendarViewController {
         let view = UIStackView()
         view.axis = .horizontal
         view.backgroundColor = UIColor(hex: "#F9F9F9")
-        view.layer.cornerRadius = 12
+        view.layer.cornerRadius = 13
         view.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
         view.clipsToBounds = true
         view.isHidden = true
@@ -93,7 +93,7 @@ class CalendarViewController: UIViewController, ICalendarViewController {
         let button = UIButton(type: .system)
         button.setTitleColor(UIColor(hex: "#007AFF"), for: .normal)
         button.setTitle("Сбросить", for: .normal)
-        button.titleLabel?.font = UIFont(name: "SFProText-Regular", size: 17)
+        button.titleLabel?.font = UIFont(name: "SFProDisplay-Regular", size: 17)
         button.addTarget(self, action: #selector(resetButtonTapped), for: .touchUpInside)
         return button
     }()
@@ -102,7 +102,7 @@ class CalendarViewController: UIViewController, ICalendarViewController {
         let button = UIButton(type: .system)
         button.setTitleColor(UIColor(hex: "#007AFF"), for: .normal)
         button.setTitle("Готово", for: .normal)
-        button.titleLabel?.font = UIFont(name: "SFProText-Bold", size: 17)
+        button.titleLabel?.font = UIFont(name: "SFProDisplay-Bold", size: 17)
         button.addTarget(self, action: #selector(doneButtonTapped), for: .touchUpInside)
         return button
     }()
