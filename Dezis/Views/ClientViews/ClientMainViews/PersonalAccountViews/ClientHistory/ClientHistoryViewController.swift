@@ -57,6 +57,14 @@ class ClientHistoryViewController: UIViewController, IClientHistoryViewControlle
         
         presenter = ClientHistoryPresenter(view: self)
         presenter.fetchClientOrders()
+        
+        configureFirstOrderView()
+    }
+    
+    private func configureFirstOrderView() {
+        if let firstOrder = presenter.getFirstOrder() {
+            firstOrderView.fill(with: firstOrder, userDetails: presenter.getUserDetails())
+        }
     }
 
     private func setupCollectionViewDelegates() {
@@ -122,6 +130,7 @@ class ClientHistoryViewController: UIViewController, IClientHistoryViewControlle
     
     func reloadData() {
         ordersCollectionView.reloadData()
+        configureFirstOrderView()
     }
     
     @objc private func backButtonTapped() {

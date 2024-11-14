@@ -11,6 +11,7 @@ protocol IClientHistoryPresenter: AnyObject {
     func fetchClientOrders()
     func numberOfClientOrders() -> Int
     func clientOrderAt(_ index: Int) -> ClientOrder
+    func getFirstOrder() -> ClientOrder?
     func getUserDetails() -> UserProfile?
 }
 
@@ -18,6 +19,7 @@ class ClientHistoryPresenter: IClientHistoryPresenter {
     
     private let networkService = UserNetworkService()
     private var clientOrders: [ClientOrder] = []
+    private var firstOrder: ClientOrder?
     private var userDetails: UserProfile?
     private var view: IClientHistoryViewController?
 
@@ -51,12 +53,12 @@ class ClientHistoryPresenter: IClientHistoryPresenter {
         networkService.fetchClientOrders(clientId: clientId) { [weak self] result in
             switch result {
             case .success(let orders):
-                print("Fetched \(orders.count) orders")
+                self?.firstOrder = orders.first { $0.isFirstProcessing }
                 self?.clientOrders = orders
-                    .filter { $0.user == clientId }
+                    .filter { !$0.isFirstProcessing }
                     .sorted { ($0.dateTime() ?? Date.distantPast) > ($1.dateTime() ?? Date.distantPast) }
+                
                 self?.view?.reloadData()
-                print("Filtered and sorted orders count: \(self?.clientOrders.count ?? 0)")
             case .failure(let error):
                 print("Failed to fetch orders: \(error.localizedDescription)")
             }
@@ -69,6 +71,10 @@ class ClientHistoryPresenter: IClientHistoryPresenter {
     
     func clientOrderAt(_ index: Int) -> ClientOrder {
         return clientOrders[index]
+    }
+    
+    func getFirstOrder() -> ClientOrder? {
+        return firstOrder
     }
     
     func getUserDetails() -> UserProfile? {

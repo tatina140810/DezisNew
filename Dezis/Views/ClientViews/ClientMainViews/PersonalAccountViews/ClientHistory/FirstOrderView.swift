@@ -235,14 +235,13 @@ class FirstOrderView: UIView {
         }
     }
     
-    func fill(with order: ClientOrder, userDetails: UserProfile?) {
-        
+    func fill(with firstOrder: ClientOrder, userDetails: UserProfile?) {
         nameLabel.text = userDetails?.username ?? "Имя не указано"
-        serviceDetailLabel.text = order.service
-//        streetlabel.text = userDetails?. ?? "Не предоставлено"
-//        houseNumberlabel.text = user?.number ?? "Не предоставлено"
-        dateDetailLabel.text = order.date
-        timeDetailLabel.text = order.time
+        serviceDetailLabel.text = firstOrder.service
+        streetlabel.text = userDetails?.address ?? "Не предоставлено"
+        houseNumberlabel.text = userDetails?.apartmentNumber ?? "Не предоставлено"
+        dateDetailLabel.text = firstOrder.date
+        timeDetailLabel.text = firstOrder.time
     }
     
     required init?(coder: NSCoder) {
