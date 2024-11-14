@@ -61,7 +61,7 @@ class EntryAllowedViewController: UIViewController, EntryAllowedView {
         }
     }
     func startCheckingUserStatus() {
-            statusCheckTimer = Timer.scheduledTimer(timeInterval: 600.0, target: self, selector: #selector(checkUserStatus), userInfo: nil, repeats: true)
+            statusCheckTimer = Timer.scheduledTimer(timeInterval: 20.0, target: self, selector: #selector(checkUserStatus), userInfo: nil, repeats: true)
         }
      
         func stopCheckingUserStatus() {
