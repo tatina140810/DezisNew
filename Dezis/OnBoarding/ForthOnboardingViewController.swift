@@ -18,7 +18,7 @@ class ForthOnboardingViewController: UIPageViewController {
    
     private var titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Поддержка всегда рядом! Общайтесь с менеджером через встроенный чат."
+        label.text = "Поддержка всегда рядом!\nОбщайтесь с менеджером через\nвстроенный чат."
         label.font = UIFont(name: "SFProText-Medium", size: 18)
         label.textColor = .white
         label.numberOfLines = 0
@@ -58,7 +58,7 @@ class ForthOnboardingViewController: UIPageViewController {
         titleLabel.snp.makeConstraints{make in
             make.top.equalTo(orderImage.snp.bottom).offset(21.67)
             make.leading.equalToSuperview().offset(20)
-            make.trailing.equalToSuperview().offset(-60)
+            make.trailing.equalToSuperview().offset(-20)
         }
         view.addSubview(skipButton)
         skipButton.snp.makeConstraints{make in

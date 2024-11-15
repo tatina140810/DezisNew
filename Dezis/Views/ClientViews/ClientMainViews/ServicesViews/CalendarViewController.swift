@@ -109,7 +109,7 @@ class CalendarViewController: UIViewController, ICalendarViewController {
     private var titleLabel: UILabel = {
         let label = UILabel()
         label.text = "Выберите услугу:"
-        label.font = UIFont(name: "SFProText-Bold", size: 18)
+        label.font = UIFont(name: "SFProText-Regular", size: 18)
         label.textColor = .white
         label.textAlignment = .left
         return label
@@ -119,7 +119,7 @@ class CalendarViewController: UIViewController, ICalendarViewController {
         let button = UIButton()
         button.setTitle("Заказать услугу", for: .normal)
         button.backgroundColor = UIColor(hex: "#0A84FF")
-        button.titleLabel?.font = UIFont(name: "SFProText-Bold", size: 16)
+        button.titleLabel?.font = UIFont(name: "SFProDisplay-Bold", size: 18)
         button.layer.cornerRadius = 12
         button.clipsToBounds = true
         button.addTarget(self, action: #selector(orderButtonTapped), for: .touchUpInside)
@@ -150,7 +150,7 @@ class CalendarViewController: UIViewController, ICalendarViewController {
     private var timeLabel: UILabel = {
         let label = UILabel()
         label.text = "Время"
-        label.font =  UIFont(name: "SFProText-Regular", size: 17)
+        label.font =  UIFont(name: "SFProText-Bold", size: 17)
         label.textColor = .black
         return label
     }()
@@ -184,6 +184,7 @@ class CalendarViewController: UIViewController, ICalendarViewController {
         setupDatePicker()
         presenter = CalendarViewControllerPresenter(view: self)
         overrideUserInterfaceStyle = .light
+        navigationController?.navigationBar.isHidden = true
         
     }
     private func checkBoxSettings(){
@@ -200,9 +201,9 @@ class CalendarViewController: UIViewController, ICalendarViewController {
     private func setupUI() {
         view.addSubview(datePicker)
         datePicker.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(100)
+            make.top.equalToSuperview().offset(71)
             make.leading.trailing.equalToSuperview().inset(20)
-            make.height.equalTo(312.33)
+            make.height.equalToSuperview().multipliedBy(0.3846)
         }
         firstStackView.addArrangedSubview(timeLabel)
         
@@ -220,7 +221,7 @@ class CalendarViewController: UIViewController, ICalendarViewController {
         }
         view.addSubview(timePicker)
         timePicker.snp.makeConstraints { make in
-            make.top.equalTo(datePicker.snp.top).offset(78)
+            make.top.equalToSuperview().offset(149)
             make.leading.trailing.equalToSuperview().inset(71)
             make.centerX.equalToSuperview()
             make.height.equalTo(188)
@@ -238,9 +239,8 @@ class CalendarViewController: UIViewController, ICalendarViewController {
         view.addSubview(orderButton)
         orderButton.snp.makeConstraints { make in
             make.bottom.equalToSuperview().offset(-100)
-            make.leading.equalToSuperview().offset(14)
-            make.trailing.equalToSuperview().offset(-14)
-            make.height.equalTo(48)
+            make.leading.trailing.equalToSuperview().inset(20)
+            make.height.equalTo(52)
         }
         view.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { make in

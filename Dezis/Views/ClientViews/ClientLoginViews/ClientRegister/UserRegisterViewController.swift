@@ -169,7 +169,7 @@ class UserRegisterViewController: UIViewController {
         }
         view.addSubview(numberTextField)
         numberTextField.snp.makeConstraints { make in
-            make.top.equalTo(emailErrorMessageLabel.snp.bottom).offset(20)
+            make.top.equalTo(emailTextField.snp.bottom).offset(20)
             make.leading.equalToSuperview().offset(20)
             make.trailing.equalToSuperview().offset(-20)
             make.height.equalTo(50)
@@ -185,7 +185,7 @@ class UserRegisterViewController: UIViewController {
         passwordTextField.textContentType = .oneTimeCode
         passwordTextField.isSecureTextEntry = true
         passwordTextField.snp.makeConstraints { make in
-            make.top.equalTo(numberErrorMessageLabel.snp.bottom).offset(10)
+            make.top.equalTo(numberTextField.snp.bottom).offset(24)
             make.leading.equalToSuperview().offset(20)
             make.trailing.equalToSuperview().offset(-20)
             make.height.equalTo(50)
@@ -205,7 +205,7 @@ class UserRegisterViewController: UIViewController {
         }
         view.addSubview(nextButton)
         nextButton.snp.makeConstraints { make in
-            make.top.equalTo(passwordTextField.snp.bottom).offset(45)
+            make.top.equalTo(passwordErrorLabel.snp.bottom).offset(20)
             make.leading.equalToSuperview().offset(20)
             make.trailing.equalToSuperview().offset(-20)
             make.height.equalTo(52)

@@ -4,7 +4,7 @@ class SecondOnboardingViewController: UIViewController {
     
     private var titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Мы знаем, как эффективно избавиться от вредителей и бактерий. Мы-ваш щит от грязи!"
+        label.text = "Мы знаем, как эффективно\nизбавиться от вредителей и \nбактерий. Мы-ваш щит от грязи!"
         label.font = UIFont(name: "SFProText-Medium", size: 20)
         label.textColor = .white
         label.numberOfLines = 0
@@ -72,7 +72,7 @@ class SecondOnboardingViewController: UIViewController {
         titleLabel.snp.makeConstraints { make in
             make.bottom.equalTo(exterminatorImage.snp.top).offset(-24)
             make.leading.equalToSuperview().offset(20)
-            make.trailing.equalToSuperview().offset(-40)
+            make.trailing.equalToSuperview().offset(-20)
             
         }
         
