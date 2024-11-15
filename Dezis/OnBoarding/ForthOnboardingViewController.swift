@@ -44,21 +44,21 @@ class ForthOnboardingViewController: UIPageViewController {
             make.top.equalToSuperview().offset(66.4)
             make.leading.equalToSuperview()
             make.trailing.equalToSuperview().offset(25.16)
-            make.height.equalTo(537)
+            make.height.equalToSuperview().multipliedBy(0.661)
             
         }
         view.addSubview(orderImage)
         orderImage.snp.makeConstraints{make in
             make.top.equalToSuperview().offset(94)
             make.leading.trailing.equalToSuperview()
-            make.height.equalTo(333)
+            make.height.equalToSuperview().multipliedBy(0.4105)
             
         }
         view.addSubview(titleLabel)
         titleLabel.snp.makeConstraints{make in
             make.top.equalTo(orderImage.snp.bottom).offset(21.67)
             make.leading.equalToSuperview().offset(20)
-            make.trailing.equalToSuperview().offset(-40)
+            make.trailing.equalToSuperview().offset(-60)
         }
         view.addSubview(skipButton)
         skipButton.snp.makeConstraints{make in

@@ -63,15 +63,16 @@ class SecondOnboardingViewController: UIViewController {
         exterminatorImage.snp.makeConstraints { make in
             make.bottom.equalTo(nextButton.snp.top).offset(-24)
             make.leading.equalToSuperview()
-            make.height.equalTo(322)
-            make.width.equalTo(375)
+            make.trailing.equalToSuperview()
+            make.height.equalToSuperview().multipliedBy(0.396)
+           
             
         }
         view.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { make in
             make.bottom.equalTo(exterminatorImage.snp.top).offset(-24)
             make.leading.equalToSuperview().offset(20)
-            make.trailing.equalToSuperview().offset(-20)
+            make.trailing.equalToSuperview().offset(-40)
             
         }
         

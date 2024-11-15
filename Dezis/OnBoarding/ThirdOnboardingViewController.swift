@@ -36,7 +36,7 @@ class ThirdOnboardingViewController: UIPageViewController {
         view.addSubview(sprayImage)
         sprayImage.snp.makeConstraints{ make in
             make.top.equalToSuperview().offset(146)
-            make.height.equalTo(245)
+            make.height.equalToSuperview().multipliedBy(0.302)
             make.leading.trailing.equalToSuperview()
         }
        
