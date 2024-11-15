@@ -38,7 +38,7 @@
 		72D39BA62CB1796F00D9EB45 /* CategoriesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D39BA52CB1796F00D9EB45 /* CategoriesCollectionViewCell.swift */; };
 		72D39BA82CB1870D00D9EB45 /* AdminLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D39BA72CB1870D00D9EB45 /* AdminLoginView.swift */; };
 		85C09B2E2CDBB872002B09BC /* keyboardExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C09B2D2CDBB872002B09BC /* keyboardExtension.swift */; };
-		AF3BFB222CE465D100A5BEE8 /* NumberSvedAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3BFB212CE465B800A5BEE8 /* NumberSvedAlert.swift */; };
+		AF3BFB222CE465D100A5BEE8 /* NumberSavedAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3BFB212CE465B800A5BEE8 /* NumberSavedAlert.swift */; };
 		AF3BFB242CE481C100A5BEE8 /* SFProText-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AF3BFB232CE481C100A5BEE8 /* SFProText-Bold.ttf */; };
 		AF3BFB262CE481D900A5BEE8 /* SFProText-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AF3BFB252CE481D900A5BEE8 /* SFProText-Regular.ttf */; };
 		AF3BFB282CE481ED00A5BEE8 /* SFProText-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AF3BFB272CE481ED00A5BEE8 /* SFProText-Medium.ttf */; };
@@ -145,7 +145,7 @@
 		85C09B2D2CDBB872002B09BC /* keyboardExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = keyboardExtension.swift; sourceTree = "<group>"; };
 		9D594A6880D984FC3775947A /* Pods_Dezis.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Dezis.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ABC7905C0E1157EB74B80A5D /* Pods-Dezis.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dezis.release.xcconfig"; path = "Target Support Files/Pods-Dezis/Pods-Dezis.release.xcconfig"; sourceTree = "<group>"; };
-		AF3BFB212CE465B800A5BEE8 /* NumberSvedAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberSvedAlert.swift; sourceTree = "<group>"; };
+		AF3BFB212CE465B800A5BEE8 /* NumberSavedAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberSavedAlert.swift; sourceTree = "<group>"; };
 		AF3BFB232CE481C100A5BEE8 /* SFProText-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFProText-Bold.ttf"; sourceTree = "<group>"; };
 		AF3BFB252CE481D900A5BEE8 /* SFProText-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFProText-Regular.ttf"; sourceTree = "<group>"; };
 		AF3BFB272CE481ED00A5BEE8 /* SFProText-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFProText-Medium.ttf"; sourceTree = "<group>"; };
@@ -518,7 +518,7 @@
 		AF4B1E242CA0721700FDA3EC /* PersonalAccountViews */ = {
 			isa = PBXGroup;
 			children = (
-				AF3BFB212CE465B800A5BEE8 /* NumberSvedAlert.swift */,
+				AF3BFB212CE465B800A5BEE8 /* NumberSavedAlert.swift */,
 				AF6BC7252CD9499C00106766 /* ExitAlertView.swift */,
 				AF5BE5662CE1B3DA002532D4 /* ExitAlertPresenter.swift */,
 				AF4B1E142C9D9CB400FDA3EC /* PersonalAccountViewController.swift */,
@@ -858,7 +858,7 @@
 				AFF6187C2CB69D5200C64C95 /* DezinfectionViewController.swift in Sources */,
 				85C09B2E2CDBB872002B09BC /* keyboardExtension.swift in Sources */,
 				AF74D5502CA7C97B00B64D6E /* KeychainManager.swift in Sources */,
-				AF3BFB222CE465D100A5BEE8 /* NumberSvedAlert.swift in Sources */,
+				AF3BFB222CE465D100A5BEE8 /* NumberSavedAlert.swift in Sources */,
 				72ABD5AC2CC97EF9004E18E9 /* AdminRequestPresenter.swift in Sources */,
 				AF4B1E152C9D9CB400FDA3EC /* PersonalAccountViewController.swift in Sources */,
 				AF51464D2CCD750D000D9C97 /* ClientLogInPresenter.swift in Sources */,
