@@ -302,7 +302,7 @@ class CalendarViewController: UIViewController, ICalendarViewController {
     }
     
     @objc func orderButtonTapped() {
-        guard user != 0 else {
+        guard let userId = user, userId != 0 else {
             print("Error: User ID not found in UserDefaults.")
             return
         }
@@ -313,7 +313,7 @@ class CalendarViewController: UIViewController, ICalendarViewController {
         }
         
         let bookingInfo = BookingInfo(
-            user: user!,
+            user: userId,
             service: service,
             date: date,
             time: time,
@@ -340,7 +340,7 @@ class CalendarViewController: UIViewController, ICalendarViewController {
             }
         }
     }
-    
+
     private func showBookingSuccessAlert(response: BookingLoginResponse) {
         let vc = ViewControllerForAlert()
         navigationController?.present(vc, animated: true)
@@ -353,13 +353,11 @@ class CalendarViewController: UIViewController, ICalendarViewController {
     }
     
     @objc private func dateChanged(_ picker: UIDatePicker) {
-        
         let currentDate = picker.date
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
         date = dateFormatter.string(from: currentDate)
-        print("Выбор завершен, дата и время: \(date)")
-        
+        print("Выбрана дата: \(date)")
     }
     @objc private func timePickerButtonTapped() {
         showTimePicker()
@@ -370,8 +368,8 @@ class CalendarViewController: UIViewController, ICalendarViewController {
     }
     
     @objc private func doneButtonTapped() {
-        time = getFormattedTime()
-        print("Выбор завершен, дата и время:\(time)")
+        time = getFormattedTime(timePicker.date)
+        print("Выбор завершен, дата и время: \(time)")
         timePicker.isHidden = true
         stackView.isHidden = true
     }
@@ -383,10 +381,12 @@ class CalendarViewController: UIViewController, ICalendarViewController {
         datePicker.setDate(Date(), animated: true)
     }
     
-    private func getFormattedTime() -> String {
+    private func getFormattedTime(_ date: Date) -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = "HH:mm:ss"
-        return formatter.string(from: timePicker.date)
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.timeZone = TimeZone(abbreviation: "UTC") 
+        return formatter.string(from: date)
     }
     @objc func firstCheckBoxTapped() {
         selectService(service: "Дезинфекция", selectedCheckBox: firstCheckBox)
