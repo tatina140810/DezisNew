@@ -10,7 +10,7 @@ class ThirdOnboardingViewController: UIPageViewController {
     }()
     private var titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Вы указываете проблему-мы создаем чистоту быстро и профессионально."
+        label.text = "Вы указываете проблему-мы\nсоздаем чистоту быстро и\nпрофессионально."
         label.font = UIFont(name: "SFProText-Medium", size: 18)
         label.textColor = .white
         label.numberOfLines = 0

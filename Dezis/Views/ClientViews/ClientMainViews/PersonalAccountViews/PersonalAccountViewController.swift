@@ -5,6 +5,7 @@ import SnapKit
 protocol PersonalAccountView: AnyObject {
     func showUserData(user: UserProfile)
     func showError(_ error: String)
+    func showCustomAlert(_ alert: NumberSavedAlert)
 }
 
 class PersonalAccountViewController: UIViewController, PersonalAccountView {
@@ -341,8 +342,10 @@ class PersonalAccountViewController: UIViewController, PersonalAccountView {
         }
         
         presenter?.updateUserNumber(newNumber: newNumber)
-        let vc = NumberSvedAlert()
-        navigationController?.present(vc, animated: true)
+    
+    }
+    func showCustomAlert(_ alert: NumberSavedAlert) {
+        self.present(alert, animated: true)
     }
 
     

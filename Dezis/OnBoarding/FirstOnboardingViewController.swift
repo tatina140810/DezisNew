@@ -20,11 +20,11 @@ class FirstOnboardingViewController: UIViewController {
     
     private var titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Добро пожаловать! Готовы к чистым переменам?"
+        label.text = "Добро пожаловать!\nГотовы к чистым переменам?"
         label.font = UIFont(name: "SFProText-Medium", size: 18)
         label.textColor = .white
         label.numberOfLines = 0
-        label.textAlignment = .center
+        label.textAlignment = .left
         return label
     }()
     private lazy var nextButton = ButtonSettings().buttonMaker(title: "Продолжить", target: self, action: #selector(nextButtonTapped))

@@ -1,6 +1,6 @@
 import UIKit
 
-class NumberSvedAlert: UIViewController {
+class NumberSavedAlert: UIViewController {
    
     private var alertImage: UIImageView = {
         let view = UIImageView()
@@ -19,8 +19,8 @@ class NumberSvedAlert: UIViewController {
    
     private var titleLabel: UILabel = {
         let view = UILabel()
-        view.text = "Изменения успешно сохранены изменения"
-        view.font = UIFont(name: "SFProText-Regular", size: 20)
+        view.text = "Изменения успешно сохранены"
+        view.font = UIFont(name: "SFProDisplay-Regular", size: 20)
         view.textColor = .white
         view.textAlignment = .center
         view.numberOfLines = 0
@@ -59,7 +59,7 @@ class NumberSvedAlert: UIViewController {
         alertImage.addSubview(titleLabel)
         titleLabel.snp.makeConstraints{ make in
             make.top.equalTo(succesImage.snp.bottom).offset(20)
-            make.leading.trailing.equalTo(alertImage).inset(72)
+            make.leading.trailing.equalTo(alertImage).inset(50)
             
         }
     }
