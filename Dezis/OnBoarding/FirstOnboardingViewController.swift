@@ -50,15 +50,15 @@ class FirstOnboardingViewController: UIViewController {
         exterminatorImage.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(78)
             make.centerX.equalToSuperview()
-            make.height.equalTo(500)
-            make.width.equalTo(375)
+            make.height.equalToSuperview().multipliedBy(0.6157)
+            make.leading.trailing.equalToSuperview()
         }
-        
+        let topOffset = view.frame.height * 0.4987
         view.addSubview(cockroachImage)
         cockroachImage.snp.makeConstraints { make in
-            make.height.equalTo(112.42)
-            make.width.equalTo(200)
-            make.top.equalToSuperview().offset(422)
+            make.height.equalToSuperview().multipliedBy(0.1385)
+            make.width.equalToSuperview().multipliedBy(0.533)
+            make.top.equalToSuperview().offset(topOffset)
             make.leading.equalToSuperview().offset(16)
         }
         
