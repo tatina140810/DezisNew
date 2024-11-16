@@ -9,20 +9,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
         window = UIWindow(windowScene: windowScene)
-//       
         let hasCompletedOnboarding = UserDefaults.standard.bool(forKey: "hasCompletedOnboarding")
         
         if hasCompletedOnboarding {
-            let choiceVC = UINavigationController(rootViewController: ChoiceViewController()) 
+            let choiceVC = UINavigationController(rootViewController: ChoiceViewController())
             window?.rootViewController = choiceVC
         } else {
             let root = UINavigationController(rootViewController: FirstOnboardingViewController())
-            
+            window?.rootViewController = root
         }
         
         window?.makeKeyAndVisible()
         if #available(iOS 15, *) {
-            // MARK: Navigation bar appearance
+            
             let navigationBarAppearance = UINavigationBarAppearance()
             navigationBarAppearance.configureWithOpaqueBackground()
             navigationBarAppearance.titleTextAttributes = [
