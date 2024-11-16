@@ -34,7 +34,7 @@ class ClientHomeViewController: UIViewController {
         label.numberOfLines = 0
         return label
     }()
-    private var dezinsectionView = DezinsectionView()
+    private lazy var dezinsectionView = DezinsectionView()
    
     private lazy var dezinsectionDetailsButton: UIButton = {
         let button = UIButton()
@@ -47,6 +47,7 @@ class ClientHomeViewController: UIViewController {
         button.layer.cornerRadius = 12
         button.clipsToBounds = true
         button.contentHorizontalAlignment = .left
+        button.addTarget(self, action: #selector(dezinsectionButtonTapped), for: .touchUpInside)
         let screenWidth = UIScreen.main.bounds.width
 
         let imageLeftInset = screenWidth * 0.53
@@ -71,6 +72,7 @@ class ClientHomeViewController: UIViewController {
         button.layer.cornerRadius = 12
         button.clipsToBounds = true
         button.contentHorizontalAlignment = .left
+        button.addTarget(self, action: #selector(dezinfectionButtonTapped), for: .touchUpInside)
         let screenWidth = UIScreen.main.bounds.width
 
         let imageLeftInset = screenWidth * 0.53
@@ -82,7 +84,7 @@ class ClientHomeViewController: UIViewController {
         return button
     }()
     
-    private var deratizationView = DeratizationView()
+    private lazy var deratizationView = DeratizationView()
     
     private lazy var deratizationDetailsButton: UIButton = {
         let button = UIButton()
@@ -95,6 +97,7 @@ class ClientHomeViewController: UIViewController {
         button.layer.cornerRadius = 12
         button.clipsToBounds = true
         button.contentHorizontalAlignment = .left
+        button.addTarget(self, action: #selector(deratizationButtonTapped), for: .touchUpInside)
         
         let screenWidth = UIScreen.main.bounds.width
 
@@ -111,20 +114,14 @@ class ClientHomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(hex: "#1B2228")
-        setupAddTarget()
         setupUI()
         navigationController?.setNavigationBarHidden(true, animated: true)
        navigationItem.hidesBackButton = true
-   
+        print("DezinfectionView frame: \(dezinfectionView.frame)")
+           print("DeratizationView frame: \(deratizationView.frame)")
+           print("Spacing: \(deratizationView.frame.minY - dezinfectionView.frame.maxY)")
     }
   
-    private func setupAddTarget() {
-        deratizationDetailsButton.addTarget(self, action: #selector(deratizationButtonTapped), for: .touchUpInside)
-        dezinfectionDetailsButton.addTarget(self, action: #selector(dezinfectionButtonTapped), for: .touchUpInside)
-        dezinsectionDetailsButton.addTarget(self, action: #selector(dezinsectionButtonTapped), for: .touchUpInside)
-    }
-  
-    
     func setupUI(){
         view.addSubview(scrollView)
         
@@ -146,59 +143,60 @@ class ClientHomeViewController: UIViewController {
         
         contentView.addSubview(firstStackView)
         firstStackView.snp.makeConstraints { make in
-            make.top.equalTo(infoLabel.snp.bottom)
+            make.top.equalTo(infoLabel.snp.bottom).offset(24)
             make.leading.equalTo(contentView).offset(10)
             make.trailing.equalTo(contentView).offset(-10)
-            make.height.equalTo(370)
+            make.height.equalTo(256)
         }
         
         contentView.addSubview(orderLabel)
         orderLabel.snp.makeConstraints { make in
-            make.top.equalTo(firstStackView.snp.bottom).offset(5)
+            make.top.equalTo(firstStackView.snp.bottom).offset(40)
             make.centerX.equalToSuperview()
         }
         contentView.addSubview(dezinsectionView)
         dezinsectionView.snp.makeConstraints { make in
-            make.top.equalTo(orderLabel.snp.bottom).offset(20)
+            make.top.equalTo(orderLabel.snp.bottom).offset(24)
             make.leading.equalTo(contentView).offset(16)
             make.trailing.equalTo(contentView).offset(-16)
-            make.height.equalTo(270)
+            make.height.equalTo(193)
             
         }
         dezinsectionView.addSubview(dezinsectionDetailsButton)
         dezinsectionDetailsButton.snp.makeConstraints { make in
-            make.bottom.equalToSuperview().offset(-40)
+            make.bottom.equalToSuperview().offset(-18)
             make.leading.equalTo(contentView).offset(35)
             make.trailing.equalTo(contentView).offset(-35)
             make.height.equalTo(44)
         }
             
-        contentView.addSubview(dezinfectionView)
-        dezinfectionView.snp.makeConstraints { make in
-            make.top.equalTo(dezinsectionView.snp.bottom).offset(5)
+        contentView.addSubview(deratizationView)
+        deratizationView.snp.makeConstraints { make in
+            make.top.equalTo(dezinsectionView.snp.bottom).offset(11)
             make.leading.equalTo(contentView).offset(16)
             make.trailing.equalTo(contentView).offset(-16)
-            make.height.equalTo(290)
+            make.height.equalTo(172)
           
         }
-        dezinfectionView.addSubview(dezinfectionDetailsButton)
-        dezinfectionDetailsButton.snp.makeConstraints { make in
-            make.bottom.equalToSuperview().offset(-40)
+        deratizationView.addSubview(deratizationDetailsButton)
+        deratizationDetailsButton.snp.makeConstraints { make in
+            make.bottom.equalToSuperview().offset(-18)
             make.leading.equalTo(contentView).offset(35)
             make.trailing.equalTo(contentView).offset(-35)
             make.height.equalTo(44)
         }
-        contentView.addSubview(deratizationView)
-        deratizationView.snp.makeConstraints { make in
-            make.top.equalTo(dezinfectionView.snp.bottom).offset(5)
+        
+        contentView.addSubview(dezinfectionView)
+        dezinfectionView.snp.makeConstraints { make in
+            make.top.equalTo(deratizationView.snp.bottom).offset(11)
             make.leading.equalTo(contentView).offset(16)
             make.trailing.equalTo(contentView).offset(-16)
-            make.height.equalTo(270)
+            make.height.equalTo(208)
             make.bottom.equalTo(contentView.snp.bottom).offset(-20)
         }
-        deratizationView.addSubview(deratizationDetailsButton)
-        deratizationDetailsButton.snp.makeConstraints { make in
-            make.bottom.equalToSuperview().offset(-40)
+        dezinfectionView.addSubview(dezinfectionDetailsButton)
+        dezinfectionDetailsButton.snp.makeConstraints { make in
+            make.bottom.equalToSuperview().offset(-18)
             make.leading.equalTo(contentView).offset(35)
             make.trailing.equalTo(contentView).offset(-35)
             make.height.equalTo(44)

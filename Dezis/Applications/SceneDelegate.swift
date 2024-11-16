@@ -9,7 +9,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
         window = UIWindow(windowScene: windowScene)
-       
+//       
         let hasCompletedOnboarding = UserDefaults.standard.bool(forKey: "hasCompletedOnboarding")
         
         if hasCompletedOnboarding {
@@ -17,10 +17,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             window?.rootViewController = choiceVC
         } else {
             let root = UINavigationController(rootViewController: FirstOnboardingViewController())
-       
-   
-            window?.rootViewController = root
-  }
+            
+        }
         
         window?.makeKeyAndVisible()
         if #available(iOS 15, *) {

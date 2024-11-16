@@ -16,6 +16,7 @@
 		<string>SFProText-Medium.ttf</string>
 		<string>SFProText-Regular.ttf</string>
 		<string>SFProText-Bold.ttf</string>
+		<string>SF-Pro-Display-Medium.otf</string>
 	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>

@@ -20,7 +20,7 @@ class DezinsectionView: UIView {
     private let firstTextLabel: UILabel = {
         let label = UILabel()
         label.text = "Дезинсекция"
-        label.font = UIFont(name: "SFProText-Bold", size: 22)
+        label.font = UIFont(name: "SFProDisplay-Bold", size: 22)
         label.textColor = .white
         label.numberOfLines = 0
         label.textAlignment = .left
@@ -28,8 +28,8 @@ class DezinsectionView: UIView {
     }()
     private let dezinsectionDescriptionLabel: UILabel = {
         let label = UILabel()
-        label.text = "Уничтожение насекомых (тараканы, блохи, комары, мухи, клопы и др.), которые могут быть переносчиками болезней или причинять вред имуществу и человеку. "
-        label.font = UIFont(name: "SFProText-Regular", size: 16)
+        label.text = "Уничтожение микроорганизмов, плесени, патогенов, устранение запахов и высолов для безопасной среды."
+        label.font = UIFont(name: "SFProDisplay-Regular", size: 16)
         label.textColor = .white
         label.numberOfLines = 0
         label.textAlignment = .left
@@ -44,10 +44,10 @@ class DezinsectionView: UIView {
         
         addSubview(backgroundView)
         backgroundView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(16)
+            make.top.equalToSuperview()
             make.leading.equalToSuperview()
             make.trailing.equalToSuperview()
-            make.bottom.equalToSuperview().offset(-16)
+            make.bottom.equalToSuperview()
             
         }
         backgroundView.addSubview(firstTextLabel)
