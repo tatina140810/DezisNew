@@ -10,14 +10,16 @@ import UIKit
 protocol IClientHistoryPresenter: AnyObject {
     func fetchClientOrders()
     func numberOfClientOrders() -> Int
-    func clientOrderAt(_ index: Int) -> Order
+    func clientOrderAt(_ index: Int) -> ClientOrder
+    func getFirstOrder() -> ClientOrder?
     func getUserDetails() -> UserProfile?
 }
 
 class ClientHistoryPresenter: IClientHistoryPresenter {
     
     private let networkService = UserNetworkService()
-    private var clientOrders: [Order] = []
+    private var clientOrders: [ClientOrder] = []
+    private var firstOrder: ClientOrder?
     private var userDetails: UserProfile?
     private var view: IClientHistoryViewController?
 
@@ -48,25 +50,31 @@ class ClientHistoryPresenter: IClientHistoryPresenter {
     private func fetchOrders(for clientId: Int) {
         print("Fetching orders for clientId: \(clientId)")
         
-        networkService.fetchClientOrders { [weak self] result in
+        networkService.fetchClientOrders(clientId: clientId) { [weak self] result in
             switch result {
             case .success(let orders):
-                print("Fetched \(orders.count) orders")
-                self?.clientOrders = orders.filter { $0.user == clientId }
+                self?.firstOrder = orders.first { $0.isFirstProcessing }
+                self?.clientOrders = orders
+                    .filter { !$0.isFirstProcessing }
+                    .sorted { ($0.dateTime() ?? Date.distantPast) > ($1.dateTime() ?? Date.distantPast) }
+                
                 self?.view?.reloadData()
-                print("Filtered orders count: \(self?.clientOrders.count ?? 0)")
             case .failure(let error):
                 print("Failed to fetch orders: \(error.localizedDescription)")
             }
         }
     }
-
+    
     func numberOfClientOrders() -> Int {
         return clientOrders.count
     }
     
-    func clientOrderAt(_ index: Int) -> Order {
+    func clientOrderAt(_ index: Int) -> ClientOrder {
         return clientOrders[index]
+    }
+    
+    func getFirstOrder() -> ClientOrder? {
+        return firstOrder
     }
     
     func getUserDetails() -> UserProfile? {

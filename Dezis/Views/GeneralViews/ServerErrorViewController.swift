@@ -15,7 +15,7 @@ class ServerErrorViewController: UIViewController {
         let label = UILabel()
         label.text = "Технические неполадки"
         label.textColor = .white
-        label.font = UIFont(name: "SFProDisplay-Bold", size: 24)
+        label.font = UIFont(name: "SFProText-Bold", size: 24)
       
         label.textAlignment = .center
         return label
@@ -25,7 +25,7 @@ class ServerErrorViewController: UIViewController {
         let label = UILabel()
         label.text = "Извините за неудобства, возникли технические неполадки в нашем приложении. Мы работаем над исправлением проблемы. Пожалуйста, попробуйте обновить приложение. Спасибо за ваше понимание!"
         label.textColor = .white
-        label.font = UIFont(name: "SFProDisplay-Regular", size: 16)
+        label.font = UIFont(name: "SFProText-Regular", size: 16)
         label.textAlignment = .center
         label.numberOfLines = 0
         label.lineBreakMode = .byWordWrapping
@@ -35,7 +35,7 @@ class ServerErrorViewController: UIViewController {
     private lazy var refreshBtn: UIButton = {
         let btn = UIButton(type: .system)
         btn.setTitle("Обновить", for: .normal)
-        btn.titleLabel?.font = UIFont(name: "SFProDisplay-Bold", size: 16)!
+        btn.titleLabel?.font = UIFont(name: "SFProText-Bold", size: 16)!
         btn.tintColor = .white
         btn.backgroundColor = .init(hex: "0A84FF")
         btn.layer.cornerRadius = 12

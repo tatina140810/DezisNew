@@ -32,7 +32,7 @@ class SureAlertView: UIView {
         label.textAlignment = .center
         label.numberOfLines = 0
         label.lineBreakMode = .byWordWrapping
-        label.font = UIFont(name: "SFProDisplay-Bold", size: 16)
+        label.font = UIFont(name: "SFProText-Bold", size: 16)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -88,7 +88,7 @@ class SureAlertView: UIView {
         NSLayoutConstraint.activate([
             containerView.centerXAnchor.constraint(equalTo: centerXAnchor),
             containerView.centerYAnchor.constraint(equalTo: centerYAnchor),
-            containerView.widthAnchor.constraint(equalToConstant: 259),
+            containerView.widthAnchor.constraint(equalToConstant: 273),
             containerView.heightAnchor.constraint(equalToConstant: 120),
             
             buttonStackView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -15),

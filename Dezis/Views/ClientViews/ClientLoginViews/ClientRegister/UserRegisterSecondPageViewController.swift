@@ -27,24 +27,24 @@ protocol IUserRegisterSecondPageViewController {
 class UserRegisterSecondPageViewController: UIViewController, IUserRegisterSecondPageViewController {
     
     var presenter: IUserRegisterPresenters?
-
+    
     private var titleLabel: UILabel = {
         let label = UILabel()
         label.text = "Регистрация"
-        label.font = UIFont(name: "SFProDisplay-Bold", size: 24)
+        label.font = UIFont(name: "SFProText-Bold", size: 24)
         label.textColor = .white
         label.textAlignment = .center
         label.numberOfLines = 0
         return label
     }()
     
-    private var adressTextField = TextFieldSettings().textFieldMaker(placeholder: "Адрес", backgroundColor: UIColor(hex: "#2B373E"))
+    private var adressTextField = TextFieldSettings().textFieldMaker(placeholder: "Адрес*", backgroundColor: UIColor(hex: "#2B373E"))
     
-    private var apartmentNumberTextField = TextFieldSettings().textFieldMaker(placeholder: "Номер дома/квартиры", backgroundColor: UIColor(hex: "#2B373E"))
+    private var apartmentNumberTextField = TextFieldSettings().textFieldMaker(placeholder: "Номер дома/квартиры*", backgroundColor: UIColor(hex: "#2B373E"))
     private var adressErrorMessageLabel: UILabel = {
         let view = UILabel()
         view.text = ""
-        view.font = UIFont(name: "SFProDisplay-Regular", size: 12)
+        view.font = UIFont(name: "SFProText-Regular", size: 12)
         view.numberOfLines = 0
         view.textAlignment = .left
         view.textColor = .red
@@ -54,7 +54,7 @@ class UserRegisterSecondPageViewController: UIViewController, IUserRegisterSecon
     private var numberErrorMessageLabel: UILabel = {
         let view = UILabel()
         view.text = ""
-        view.font = UIFont(name: "SFProDisplay-Regular", size: 12)
+        view.font = UIFont(name: "SFProText-Regular", size: 12)
         view.numberOfLines = 0
         view.textAlignment = .left
         view.textColor = .red
@@ -64,26 +64,27 @@ class UserRegisterSecondPageViewController: UIViewController, IUserRegisterSecon
     private var errorLabel: UILabel = {
         let view = UILabel()
         view.text = ""
-        view.font = UIFont(name: "SFProDisplay-Regular", size: 12)
+        view.font = UIFont(name: "SFProText-Regular", size: 12)
         view.textColor = .red
         view.textAlignment = .left
         return view
     }()
     
-    private var nextButton: UIButton = {
+    private lazy var nextButton: UIButton = {
         let view = UIButton()
         view.setTitle("Продолжить", for: .normal)
         view.setTitleColor(.white, for: .normal)
         view.backgroundColor = UIColor(hex: "#0A84FF")
         view.layer.cornerRadius = 12
-        view.titleLabel?.font = UIFont(name: "SFProDisplay-Bold", size: 16)
+        view.titleLabel?.font = UIFont(name: "SFProText-Bold", size: 16)
+        view.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
         return view
     }()
     
     private var privacyLabel: UILabel = {
         let view = UILabel()
         view.text = "Выбирая «Зарегистрироваться», вы подтверждаете свое согласие с Условием продажи и принимаете условия"
-        view.font = UIFont(name: "SFProDisplay-Regular", size: 12)
+        view.font = UIFont(name: "SFProText-Regular", size: 12)
         view.textColor = .white
         view.textAlignment = .center
         view.numberOfLines = 0
@@ -92,19 +93,19 @@ class UserRegisterSecondPageViewController: UIViewController, IUserRegisterSecon
     private var confidentialityLabel: UILabel = {
         let view = UILabel()
         view.text = "Положения о конфиденциальности."
-        view.font = UIFont(name: "SFProDisplay-Regular", size: 12)
+        view.font = UIFont(name: "SFProText-Regular", size: 12)
         view.textColor = .white
         view.textAlignment = .center
         view.numberOfLines = 0
         return view
     }()
     private let activityIndicator: UIActivityIndicatorView = {
-            let indicator = UIActivityIndicatorView(style: .large)
-            indicator.color = .white // Можно изменить цвет
-            indicator.hidesWhenStopped = true // Скрывать, когда остановлен
-            return indicator
-        }()
-   
+        let indicator = UIActivityIndicatorView(style: .large)
+        indicator.color = .white
+        indicator.hidesWhenStopped = true
+        return indicator
+    }()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -112,16 +113,22 @@ class UserRegisterSecondPageViewController: UIViewController, IUserRegisterSecon
         setupUI()
         createAttributedText()
         createPrivaciAttributedText()
-        backButtonSetup()
+        navigationItem.backButtonTitle = "Назад"
         keyBoardSetUp()
-       
+        
     }
+    
    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+
     func keyBoardSetUp(){
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-
     }
+
     @objc func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             let keyboardHeight = keyboardSize.cgRectValue.height
@@ -132,42 +139,6 @@ class UserRegisterSecondPageViewController: UIViewController, IUserRegisterSecon
     @objc func keyboardWillHide(notification: NSNotification) {
         self.view.frame.origin.y = 0
     }
-    
-    private func backButtonSetup() {
-        let backButton = UIButton(type: .system)
-        
-        if #available(iOS 15.0, *) {
-            var config = UIButton.Configuration.plain()
-            config.title = "Назад"
-            config.image = UIImage(resource: .shevron).withRenderingMode(.alwaysTemplate)
-            config.baseForegroundColor = .systemBlue
-            config.imagePadding = 7
-            config.imagePlacement = .leading
-            backButton.configuration = config
-        } else {
-            backButton.setTitle("Назад", for: .normal)
-            backButton.setTitleColor(.systemBlue, for: .normal)
-            backButton.titleLabel?.font = UIFont(name: "SFProDisplay-Regular", size: 17)
-
-            let chevronImage = UIImage(resource: .shevron).withRenderingMode(.alwaysTemplate)
-            let resizedChevron = UIGraphicsImageRenderer(size: CGSize(width: 8, height: 14)).image { _ in
-                chevronImage.draw(in: CGRect(origin: .zero, size: CGSize(width: 8, height: 14)))
-            }
-            backButton.setImage(resizedChevron, for: .normal)
-            backButton.tintColor = .systemBlue
-
-            backButton.semanticContentAttribute = .forceLeftToRight
-            backButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: -12, bottom: 0, right: 0)
-            backButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 3, bottom: 0, right: 0)
-        }
-
-        backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
-        let backBarButtonItem = UIBarButtonItem(customView: backButton)
-        navigationItem.leftBarButtonItem = backBarButtonItem
-
-        nextButton.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
-    }
-
     private func createAttributedText() {
         AttributedTextHelper.configureAttributedText(
             for: privacyLabel,
@@ -222,10 +193,17 @@ class UserRegisterSecondPageViewController: UIViewController, IUserRegisterSecon
         numberErrorMessageLabel.snp.makeConstraints { make in
             make.top.equalTo(apartmentNumberTextField.snp.bottom).offset(4)
             make.leading.equalToSuperview().offset(20)
+            
+        }
+        view.addSubview(errorLabel)
+        errorLabel.snp.makeConstraints { make in
+            make.top.equalTo(numberErrorMessageLabel.snp.bottom).offset(4)
+            make.leading.equalToSuperview().offset(20)
+            
         }
         view.addSubview(nextButton)
         nextButton.snp.makeConstraints { make in
-            make.top.equalTo(apartmentNumberTextField.snp.bottom).offset(24)
+            make.top.equalTo(errorLabel.snp.bottom).offset(10)
             make.leading.equalToSuperview().offset(20)
             make.trailing.equalToSuperview().offset(-20)
             make.height.equalTo(52)
@@ -254,11 +232,15 @@ class UserRegisterSecondPageViewController: UIViewController, IUserRegisterSecon
         let vc = ConfidantionalyPage()
         navigationController?.pushViewController(vc, animated: true)
     }
-   
+    
     @objc private func nextButtonTapped() {
-        guard let adress = adressTextField.text, !adress.isEmpty,
+        errorLabel.isHidden = false
+        errorLabel.text = "Проверка данных. Ожидайте."
+        errorLabel.textColor = .white
+        
+        // Validate input fields
+        guard let address = adressTextField.text, !address.isEmpty,
               let apartmentNumber = apartmentNumberTextField.text, !apartmentNumber.isEmpty else {
-            
             
             if adressTextField.text?.isEmpty == true {
                 adressErrorMessageLabel.text = "Введите корректные данные"
@@ -266,53 +248,63 @@ class UserRegisterSecondPageViewController: UIViewController, IUserRegisterSecon
                 adressTextField.layer.borderColor = UIColor.red.cgColor
                 adressTextField.layer.borderWidth = 1.0
             }
-          
             if apartmentNumberTextField.text?.isEmpty == true {
                 numberErrorMessageLabel.text = "Введите корректные данные"
                 numberErrorMessageLabel.isHidden = false
                 apartmentNumberTextField.layer.borderColor = UIColor.red.cgColor
                 apartmentNumberTextField.layer.borderWidth = 1.0
             }
-            adressTextField.layer.borderColor = UIColor.red.cgColor
-            apartmentNumberTextField.layer.borderColor = UIColor.red.cgColor
-            adressTextField.layer.borderWidth = 1.0
-            apartmentNumberTextField.layer.borderWidth = 1.0
-            
             return
-           
         }
         
-        if var userInfo = presenter?.getUserInfo(){
-            userInfo.address = adress
+        if var userInfo = presenter?.getUserInfo() {
+            userInfo.address = address
             userInfo.apartmentNumber = apartmentNumber
-            print(userInfo)
             
-            let email = userInfo.email
-                    presenter?.registerUser(userInfo: userInfo) { [weak self] success in
-                        if success {
-                            UserDefaults.standard.set(email, forKey: "email")
-                            DispatchQueue.main.async {
-                                let vc = СonfirmationСodeViewController(email: email)
-                                self?.navigationController?.pushViewController(vc, animated: true)
+            presenter?.registerUser(userInfo: userInfo) { [weak self] result in
+                DispatchQueue.main.async {
+                    switch result {
+                        
+                    case .success(_):
+                        let vc = СonfirmationСodeViewController(email: userInfo.email)
+                        self?.navigationController?.pushViewController(vc, animated: true)
+                        self?.showSuccessMessage()
+                        
+                    case .failure(let error):
+                        if let moyaError = error as? MoyaError, case let .statusCode(response) = moyaError {
+                            do {
+                                if let errorResponse = try JSONSerialization.jsonObject(with: response.data, options: []) as? [String: Any],
+                                   let emailErrors = errorResponse["email"] as? [String],
+                                   emailErrors.contains("Пользователь с таким Email уже существует.") {
+                                    self?.errorLabel.text = "Пользователь с таким Email уже существует."
+                                    self?.errorLabel.textColor = .red
+                                    self?.errorLabel.isHidden = false
+                                    return
+                                }
+                            } catch {
+                                print("Error decoding error response: \(error)")
                             }
-                        } else {
-                            print("Registration failed.")
-                           
                         }
+                    
+                        print("Failed to register user: \(error)")
+                        self?.errorLabel.text = "Пользователь с таким Email уже существует."
+                        self?.errorLabel.textColor = .red
+                        self?.errorLabel.isHidden = false
                     }
                 }
             }
-        
-
-    @objc private func backButtonTapped() {
-        let vc = UserRegisterViewController()
-        navigationController?.popViewController(animated: true)
+        }
     }
-    deinit {
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
-    }
-
     
+    
+    private func showSuccessMessage() {
 
+        errorLabel.text = "Мы отправили Вам код на почту."
+        errorLabel.textColor = .green
+        errorLabel.isHidden = false
+    }
 }
+
+      
+
+

@@ -31,6 +31,23 @@ struct Order: Codable {
     let is_completed: Bool
 }
 
+extension Order {
+    func dateTime() -> Date? {
+        let dateTimeString = "\(date) \(time)"
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.timeZone = TimeZone(secondsFromGMT: 0)
+        
+        if let date = formatter.date(from: dateTimeString) {
+            return date
+        } else {
+            print("Ошибка преобразования для строки: \(dateTimeString)")
+            return nil
+        }
+    }
+}
+
 struct UserInformation: Codable {
     let id: Int
     let username: String?
@@ -40,6 +57,7 @@ struct UserInformation: Codable {
     let address: String?
     let avatar: String?
     let is_active: Bool
+    let is_confirmed: Bool
     let created_at: String?
 }
 

@@ -18,8 +18,8 @@ class ForthOnboardingViewController: UIPageViewController {
    
     private var titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Поддержка всегда рядом! Общайтесь с менеджером через встроенный чат."
-        label.font = UIFont(name: "SFProDisplay-Bold", size: 18)
+        label.text = "Поддержка всегда рядом!\nОбщайтесь с менеджером через\nвстроенный чат."
+        label.font = UIFont(name: "SFProText-Medium", size: 18)
         label.textColor = .white
         label.numberOfLines = 0
         label.textAlignment = .left
@@ -44,21 +44,21 @@ class ForthOnboardingViewController: UIPageViewController {
             make.top.equalToSuperview().offset(66.4)
             make.leading.equalToSuperview()
             make.trailing.equalToSuperview().offset(25.16)
-            make.height.equalTo(537)
+            make.height.equalToSuperview().multipliedBy(0.661)
             
         }
         view.addSubview(orderImage)
         orderImage.snp.makeConstraints{make in
             make.top.equalToSuperview().offset(94)
             make.leading.trailing.equalToSuperview()
-            make.height.equalTo(333)
+            make.height.equalToSuperview().multipliedBy(0.4105)
             
         }
         view.addSubview(titleLabel)
         titleLabel.snp.makeConstraints{make in
             make.top.equalTo(orderImage.snp.bottom).offset(21.67)
             make.leading.equalToSuperview().offset(20)
-            make.trailing.equalToSuperview().offset(-40)
+            make.trailing.equalToSuperview().offset(-20)
         }
         view.addSubview(skipButton)
         skipButton.snp.makeConstraints{make in
@@ -79,11 +79,10 @@ class ForthOnboardingViewController: UIPageViewController {
         
     }
     
-@objc func skipButtonTapped(){
-    let vc = ChoiceViewController()
-    navigationController?.pushViewController(vc, animated: true)
-    
-}
+    @objc func skipButtonTapped(){
+        let vc = ChoiceViewController()
+        navigationController?.pushViewController(vc, animated: true)
+    }
     @objc func nextButtonTapped(){
         let vc = FifthOnboardingViewController()
         navigationController?.pushViewController(vc, animated: true)

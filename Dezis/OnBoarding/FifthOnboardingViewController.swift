@@ -24,8 +24,8 @@ class FifthOnboardingViewController: UIViewController {
     }()
     private var titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Готовы к действиям? оставьте заявку и вперед к чистоте!"
-        label.font = UIFont(name: "SFProDisplay-Bold", size: 18)
+        label.text = "Готовы к действиям? Оставьте\nзаявку и вперед к чистоте!"
+        label.font = UIFont(name: "SFProText-Medium", size: 18)
         label.textColor = .white
         label.numberOfLines = 0
         label.textAlignment = .left
@@ -48,14 +48,14 @@ class FifthOnboardingViewController: UIViewController {
         logoImage.snp.makeConstraints{make in
             make.top.equalToSuperview().offset(100)
             make.centerX.equalToSuperview()
-            make.height.equalTo(203)
-            make.width.equalTo(190)
+            make.height.equalToSuperview().multipliedBy(0.25)
+            make.width.equalToSuperview().multipliedBy(0.5066)
         }
        
         view.addSubview(exterminatorImage)
         exterminatorImage.snp.makeConstraints{make in
             make.top.equalTo(logoImage.snp.bottom).offset(40)
-            make.height.equalTo(234)
+            make.height.equalToSuperview().multipliedBy(0.2881)
             make.leading.trailing.equalToSuperview()
         
         }

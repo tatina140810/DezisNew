@@ -64,7 +64,7 @@ extension AdminApi: TargetType {
         case .completeOrder:
             return .requestJSONEncodable(["is_completed": true])
         case .confirmUser:
-            return .requestJSONEncodable(["is_active": true])
+            return .requestJSONEncodable(["is_confirmed": true])
         }
     }
     

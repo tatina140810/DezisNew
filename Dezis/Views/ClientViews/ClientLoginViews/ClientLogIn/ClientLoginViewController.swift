@@ -24,7 +24,7 @@ class ClientLoginViewController: UIViewController, UITextFieldDelegate, IClientL
     private var titleLabel: UILabel = {
         let view = UILabel()
         view.text = "Вход"
-        view.font = UIFont(name: "SFProDisplay-Bold", size: 24)
+        view.font = UIFont(name: "SFProText-Bold", size: 24)
         view.textAlignment = .center
         view.textColor = .white
         
@@ -38,7 +38,7 @@ class ClientLoginViewController: UIViewController, UITextFieldDelegate, IClientL
     private var emailErrorMasageLabel: UILabel = {
         let view = UILabel()
         view.text = ""
-        view.font = UIFont(name: "SFProDisplay-Regular", size: 12)
+        view.font = UIFont(name: "SFProText-Regular", size: 12)
         view.numberOfLines = 0
         view.textAlignment = .left
         view.textColor = .red
@@ -48,7 +48,7 @@ class ClientLoginViewController: UIViewController, UITextFieldDelegate, IClientL
     private var passwordErrorMasageLabel: UILabel = {
         let view = UILabel()
         view.text = ""
-        view.font = UIFont(name: "SFProDisplay-Regular", size: 12)
+        view.font = UIFont(name: "SFProText-Regular", size: 12)
         view.numberOfLines = 0
         view.textAlignment = .left
         view.textColor = .red
@@ -59,7 +59,7 @@ class ClientLoginViewController: UIViewController, UITextFieldDelegate, IClientL
     private lazy var forgotPasswordButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Забыли пароль?", for: .normal)
-        button.titleLabel?.font = UIFont(name: "SFProDisplay-Regular", size: 14)
+        button.titleLabel?.font = UIFont(name: "SFProText-Regular", size: 14)
         button.titleLabel?.numberOfLines = 0
         button.contentHorizontalAlignment = .left
         button.setTitleColor(.white, for: .normal)
@@ -73,7 +73,7 @@ class ClientLoginViewController: UIViewController, UITextFieldDelegate, IClientL
         view.setTitleColor(.white, for: .normal)
         view.backgroundColor = UIColor(hex: "#0A84FF")
         view.layer.cornerRadius = 8
-        view.titleLabel?.font = UIFont(name: "SFProDisplay-Bold", size: 16)
+        view.titleLabel?.font = UIFont(name: "SFProText-Bold", size: 16)
         view.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
         return view
     }()
@@ -88,7 +88,7 @@ class ClientLoginViewController: UIViewController, UITextFieldDelegate, IClientL
     private var privacyLabel: UILabel = {
         let view = UILabel()
         view.text = "Выбирая «Зарегистрироваться», вы подтверждаете свое согласие с Условием продажи и принимаете условия"
-        view.font = UIFont(name: "SFProDisplay-Regular", size: 12)
+        view.font = UIFont(name: "SFProText-Regular", size: 12)
         view.textColor = .white
         view.textAlignment = .center
         view.numberOfLines = 0
@@ -97,7 +97,7 @@ class ClientLoginViewController: UIViewController, UITextFieldDelegate, IClientL
     private var confidentialityLabel: UILabel = {
         let view = UILabel()
         view.text = "Положения о конфиденциальности."
-        view.font = UIFont(name: "SFProDisplay-Regular", size: 12)
+        view.font = UIFont(name: "SFProText-Regular", size: 12)
         view.textColor = .white
         view.textAlignment = .center
         view.numberOfLines = 0
@@ -113,42 +113,10 @@ class ClientLoginViewController: UIViewController, UITextFieldDelegate, IClientL
         createPrivaciAttributedText()
         keyBoardSetUp()
         presenter = ClientLoginPresenter(view: self)
-        backButtonSetup()
         dismissKeyboardGesture()
+        navigationItem.backButtonTitle = "Назад"
     }
-    func backButtonSetup(){
-        let backButton = UIButton(type: .system)
-        
-        if #available(iOS 15.0, *) {
-            var config = UIButton.Configuration.plain()
-            config.title = "Назад"
-            config.image = UIImage(resource: .shevron).withRenderingMode(.alwaysTemplate)
-            config.baseForegroundColor = .systemBlue
-            config.imagePadding = 7
-            config.imagePlacement = .leading
-            backButton.configuration = config
-        } else {
-            backButton.setTitle("Назад", for: .normal)
-            backButton.setTitleColor(.systemBlue, for: .normal)
-            backButton.titleLabel?.font = UIFont(name: "SFProDisplay-Regular", size: 17)
-
-            let chevronImage = UIImage(resource: .shevron).withRenderingMode(.alwaysTemplate)
-            let resizedChevron = UIGraphicsImageRenderer(size: CGSize(width: 8, height: 14)).image { _ in
-                chevronImage.draw(in: CGRect(origin: .zero, size: CGSize(width: 8, height: 14)))
-            }
-            backButton.setImage(resizedChevron, for: .normal)
-            backButton.tintColor = .systemBlue
-
-            backButton.semanticContentAttribute = .forceLeftToRight
-            backButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-            backButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 3, bottom: 0, right: 0)
-        }
-
-        backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
-        let backBarButtonItem = UIBarButtonItem(customView: backButton)
-        navigationItem.leftBarButtonItem = backBarButtonItem
-
-    }
+    
     func keyBoardSetUp(){
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
            NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -166,7 +134,7 @@ class ClientLoginViewController: UIViewController, UITextFieldDelegate, IClientL
     }
     
     @objc private func handleForgotPassword() {
-        let vc = ClientForgetPasswordView()
+        let vc = ClientEmailConfirmView()
         navigationController?.pushViewController(vc, animated: true)
     }
 
@@ -356,10 +324,7 @@ class ClientLoginViewController: UIViewController, UITextFieldDelegate, IClientL
         navigationController?.pushViewController(vc, animated: true)
         print("Support contact tapped!")
     }
-    @objc private func backButtonTapped() {
-        
-        navigationController?.popViewController(animated: true)
-    }
+    
     deinit {
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)

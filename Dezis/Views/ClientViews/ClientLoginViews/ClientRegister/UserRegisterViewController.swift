@@ -8,7 +8,7 @@ class UserRegisterViewController: UIViewController {
     private var titleLabel: UILabel = {
         let label = UILabel()
         label.text = "Регистрация"
-        label.font = UIFont(name: "SFProDisplay-Bold", size: 24)
+        label.font = UIFont(name: "SFProText-Bold", size: 24)
         label.textColor = .white
         label.textAlignment = .center
         label.numberOfLines = 0
@@ -23,12 +23,13 @@ class UserRegisterViewController: UIViewController {
     
     private var passwordTextField = TextFieldSettings().textFieldMaker(placeholder: "Пароль*", backgroundColor: UIColor(hex: "#2B373E"))
     
-    private var passwordLabel: UILabel = {
+    private var passwordErrorLabel: UILabel = {
         let label = UILabel()
-        label.text = "Пароль должен содержать минимум 8 символов"
-        label.font = UIFont(name: "SFProDisplay-Regular", size: 14)
-        label.textColor = .white
+        label.text = ""
+        label.font = UIFont(name: "SFProText-Regular", size: 14)
+        label.textColor = .red
         label.textAlignment = .left
+        label.isHidden = true
         label.numberOfLines = 0
         return label
     }()
@@ -41,13 +42,14 @@ class UserRegisterViewController: UIViewController {
         return button
     }()
     
-    private var nextButton: UIButton = {
+    private lazy var nextButton: UIButton = {
         let view = UIButton()
         view.setTitle("Продолжить", for: .normal)
         view.setTitleColor(.white, for: .normal)
         view.backgroundColor = UIColor(hex: "#0A84FF")
         view.layer.cornerRadius = 12
         view.titleLabel?.font = UIFont(name: "SFProDisplay-Bold", size: 16)
+        view.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
         return view
     }()
     
@@ -72,7 +74,7 @@ class UserRegisterViewController: UIViewController {
     private var emailErrorMessageLabel: UILabel = {
         let view = UILabel()
         view.text = ""
-        view.font = UIFont(name: "SFProDisplay-Regular", size: 12)
+        view.font = UIFont(name: "SFProText-Regular", size: 12)
         view.numberOfLines = 0
         view.textAlignment = .left
         view.textColor = .red
@@ -82,7 +84,7 @@ class UserRegisterViewController: UIViewController {
     private var numberErrorMessageLabel: UILabel = {
         let view = UILabel()
         view.text = ""
-        view.font = UIFont(name: "SFProDisplay-Regular", size: 12)
+        view.font = UIFont(name: "SFProText-Regular", size: 12)
         view.numberOfLines = 0
         view.textAlignment = .left
         view.textColor = .red
@@ -96,46 +98,11 @@ class UserRegisterViewController: UIViewController {
         setupUI()
         createAttributedText()
         createPrivaciAttributedText()
-        setupAddTarget()
         keyBoardSetUp()
-        navigationController?.navigationBar.isHidden = false
+        navigationItem.backButtonTitle = "Назад"
+      
     }
     
-    private func setupAddTarget() {
-        let backButton = UIButton(type: .system)
-        
-        if #available(iOS 15.0, *) {
-            var config = UIButton.Configuration.plain()
-            config.title = "Назад"
-            config.image = UIImage(resource: .shevron).withRenderingMode(.alwaysTemplate)
-            config.baseForegroundColor = .systemBlue
-            config.imagePadding = 7
-            config.imagePlacement = .leading
-            backButton.configuration = config
-        } else {
-            backButton.setTitle("Назад", for: .normal)
-            backButton.setTitleColor(.systemBlue, for: .normal)
-            backButton.titleLabel?.font = UIFont(name: "SFProDisplay-Regular", size: 17)
-
-            let chevronImage = UIImage(resource: .shevron).withRenderingMode(.alwaysTemplate)
-            let resizedChevron = UIGraphicsImageRenderer(size: CGSize(width: 8, height: 14)).image { _ in
-                chevronImage.draw(in: CGRect(origin: .zero, size: CGSize(width: 8, height: 14)))
-            }
-            backButton.setImage(resizedChevron, for: .normal)
-            backButton.tintColor = .systemBlue
-
-            backButton.semanticContentAttribute = .forceLeftToRight
-            backButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-            backButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 3, bottom: 0, right: 0)
-        }
-
-        backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
-        let backBarButtonItem = UIBarButtonItem(customView: backButton)
-        navigationItem.leftBarButtonItem = backBarButtonItem
-
-        nextButton.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
-    }
-
     private func createAttributedText() {
         AttributedTextHelper.configureAttributedText(
             for: privacyLabel,
@@ -202,7 +169,7 @@ class UserRegisterViewController: UIViewController {
         }
         view.addSubview(numberTextField)
         numberTextField.snp.makeConstraints { make in
-            make.top.equalTo(emailErrorMessageLabel.snp.bottom).offset(20)
+            make.top.equalTo(emailTextField.snp.bottom).offset(20)
             make.leading.equalToSuperview().offset(20)
             make.trailing.equalToSuperview().offset(-20)
             make.height.equalTo(50)
@@ -218,7 +185,7 @@ class UserRegisterViewController: UIViewController {
         passwordTextField.textContentType = .oneTimeCode
         passwordTextField.isSecureTextEntry = true
         passwordTextField.snp.makeConstraints { make in
-            make.top.equalTo(numberErrorMessageLabel.snp.bottom).offset(10)
+            make.top.equalTo(numberTextField.snp.bottom).offset(24)
             make.leading.equalToSuperview().offset(20)
             make.trailing.equalToSuperview().offset(-20)
             make.height.equalTo(50)
@@ -230,15 +197,15 @@ class UserRegisterViewController: UIViewController {
             make.trailing.equalTo(passwordTextField.snp.trailing).offset(-16)
             make.width.height.equalTo(24)
         }
-        view.addSubview(passwordLabel)
-        passwordLabel.snp.makeConstraints { make in
+        view.addSubview(passwordErrorLabel)
+        passwordErrorLabel.snp.makeConstraints { make in
             make.top.equalTo(passwordTextField.snp.bottom).offset(5)
             make.leading.equalToSuperview().offset(20)
             make.trailing.equalToSuperview().offset(-20)
         }
         view.addSubview(nextButton)
         nextButton.snp.makeConstraints { make in
-            make.top.equalTo(passwordTextField.snp.bottom).offset(24)
+            make.top.equalTo(passwordErrorLabel.snp.bottom).offset(20)
             make.leading.equalToSuperview().offset(20)
             make.trailing.equalToSuperview().offset(-20)
             make.height.equalTo(52)
@@ -330,8 +297,13 @@ class UserRegisterViewController: UIViewController {
                  numberTextField.text = ""
                  return
              }
-        
-     
+        if let passwordError = isValidPassword(password) {
+               passwordErrorLabel.text = passwordError
+               passwordErrorLabel.isHidden = false
+               passwordTextField.layer.borderColor = UIColor.red.cgColor
+               passwordTextField.layer.borderWidth = 1.0
+               return
+           }
         emailTextField.layer.borderWidth = 0
         nameTextField.layer.borderWidth = 0
         numberTextField.layer.borderWidth = 0
@@ -361,6 +333,34 @@ class UserRegisterViewController: UIViewController {
            let phonePredicate = NSPredicate(format: "SELF MATCHES %@", phoneRegex)
            return phonePredicate.evaluate(with: number)
        }
+    func isValidPassword(_ password: String) -> String? {
+       
+        if password.count < 8 {
+            return "Пароль должен содержать не менее 8 символов."
+        }
+        
+        let lowercaseLetterRegex = ".*[a-z]+.*"
+        let lowercaseTest = NSPredicate(format:"SELF MATCHES %@", lowercaseLetterRegex)
+        if !lowercaseTest.evaluate(with: password) {
+            return "Пароль должен содержать хотя бы одну строчную букву."
+        }
+
+        let digitRegex = ".*[0-9]+.*"
+        let digitTest = NSPredicate(format:"SELF MATCHES %@", digitRegex)
+        if !digitTest.evaluate(with: password) {
+            return "Пароль должен содержать хотя бы одну цифру."
+        }
+  
+        let specialCharacterRegex = ".*[!@#$%^&*(),.?\":{}|<>]+.*"
+        let specialCharacterTest = NSPredicate(format:"SELF MATCHES %@", specialCharacterRegex)
+        if !specialCharacterTest.evaluate(with: password) {
+            return "Пароль должен содержать хотя бы один специальный символ *[!@#$%^&*(),.?\":{}|<>]+.*/."
+        }
+        
+        return nil
+    }
+
+
    
     private func showAlert(message: String) {
         let alert = UIAlertController(title: "Ошибка", message: message, preferredStyle: .alert)
@@ -378,9 +378,6 @@ class UserRegisterViewController: UIViewController {
         nextButton.alpha = isFormValid ? 1.0 : 0.5
     }
 
-    @objc func backButtonTapped(){
-        navigationController?.popViewController(animated: true)
-    }
     deinit {
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)

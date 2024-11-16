@@ -11,7 +11,7 @@ class ConfidantionalyPage: UIViewController {
     private var confidentialityLabel: UILabel = {
         let view = UILabel()
         view.text = "Положения о конфиденциальности."
-        view.font = UIFont(name: "SFProDisplay-Regular", size: 12)
+        view.font = UIFont(name: "SFProText-Regular", size: 12)
         view.textColor = .white
         view.textAlignment = .center
         view.numberOfLines = 0

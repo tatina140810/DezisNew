@@ -22,8 +22,8 @@ class DeratizationView: UIView {
     }()
     private let dezinsectionDescriptionLabel: UILabel = {
         let label = UILabel()
-        label.text = "Уничтожению или контролю численности грызунов (мышей, крыс и др.), которые могут быть переносчиками опасных заболеваний или причинять экономический ущерб."
-        label.font = UIFont(name: "SFProDisplay-Bold", size: 16)
+        label.text = "Избавление от грызунов для защиты вашего пространства и здоровья."
+        label.font = UIFont(name: "SFProDisplay-Regular", size: 16)
         label.textColor = .white
         label.numberOfLines = 0
         label.textAlignment = .left
@@ -38,16 +38,16 @@ class DeratizationView: UIView {
         
         addSubview(backgroundView)
         backgroundView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(16)
+            make.top.equalToSuperview()
             make.leading.equalToSuperview()
             make.trailing.equalToSuperview()
-            make.bottom.equalToSuperview().offset(-16)
+            make.bottom.equalToSuperview()
             
         }
         backgroundView.addSubview(firstTextLabel)
         firstTextLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(14)
-            make.leading.equalToSuperview().offset(20)
+            make.top.equalToSuperview().offset(18)
+            make.leading.equalToSuperview().offset(18)
         }
         backgroundView.addSubview(dezinsectionDescriptionLabel)
         dezinsectionDescriptionLabel.snp.makeConstraints { make in

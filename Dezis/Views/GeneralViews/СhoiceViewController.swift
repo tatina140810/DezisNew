@@ -17,7 +17,7 @@ class ChoiceViewController: UIViewController {
         label.text = "Для оформления заказов"
         label.textColor = .white
         label.textAlignment = .center
-        label.font = UIFont(name: "SFProDisplay-Regular", size: 16)
+        label.font = UIFont(name: "SFProText-Regular", size: 16)
         return label
     }()
     
@@ -28,7 +28,7 @@ class ChoiceViewController: UIViewController {
         label.text = "Для управления системой"
         label.textColor = .white
         label.textAlignment = .center
-        label.font = UIFont(name: "SFProDisplay-Regular", size: 16)
+        label.font = UIFont(name: "SFProText-Regular", size: 16)
         return label
     }()
     
@@ -37,8 +37,9 @@ class ChoiceViewController: UIViewController {
         view.backgroundColor = UIColor(hex: "#1B2228")
         setupUI()
         setupReachability()
+        navigationItem.backButtonTitle = "Назад"
+        }
         
-    }
 
     func setupReachability(){
         reachability.whenUnreachable = { [weak self] _ in
@@ -86,13 +87,13 @@ class ChoiceViewController: UIViewController {
         titleLabel.text = message
         titleLabel.textColor = .white
         titleLabel.textAlignment = .center
-        titleLabel.font = UIFont(name: "SFProDisplay-Bold", size: 16)
+        titleLabel.font = UIFont(name: "SFProText-Medium", size: 16)
        
         let subTitleLabel = UILabel()
         subTitleLabel.text = secondMessage
         subTitleLabel.textColor = .white
         subTitleLabel.textAlignment = .center
-        subTitleLabel.font = UIFont(name: "SFProDisplay-Regular", size: 14)
+        subTitleLabel.font = UIFont(name: "SFProText--Regular", size: 14)
         
         alertView.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { make in
@@ -187,8 +188,5 @@ class ChoiceViewController: UIViewController {
     @objc func adminButtonTapped() {
         let vc = AdminLoginView()
         navigationController?.pushViewController(vc, animated: true)
-    }
-    @objc func backButtonTapped(){
-        navigationController?.popViewController(animated: true)
     }
 }

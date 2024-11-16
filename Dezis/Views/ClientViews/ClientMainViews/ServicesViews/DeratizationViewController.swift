@@ -2,28 +2,44 @@ import UIKit
 
 class DeratizationViewController: UIViewController {
    
-        private lazy var backButton: UIButton = {
-            let backButton = UIButton(type: .system)
-            backButton.setTitle("Назад", for: .normal)
-            backButton.setTitleColor(.systemBlue, for: .normal)
-            backButton.titleLabel?.font = UIFont(name: "SFProDisplay-Regular", size: 17)
+    private lazy var backButton: UIButton = {
+        let backButton = UIButton(type: .system)
+        backButton.setTitle("Назад", for: .normal)
+        backButton.titleLabel?.font = UIFont(name: "SFProText-Regular", size: 17)
 
-            let chevronImage = UIImage(resource: .shevron).withRenderingMode(.alwaysTemplate)
-            let resizedChevron = UIGraphicsImageRenderer(size: CGSize(width: 8, height: 14)).image { _ in
-                chevronImage.draw(in: CGRect(origin: .zero, size: CGSize(width: 8, height: 14)))
-            }
+        // Создаем шаблонное изображение
+        let chevronImage = UIImage(resource: .shevron).withRenderingMode(.alwaysTemplate)
+        
+        // Изменяем цвет изображения
+        let tintedChevronImage = chevronImage.withTintColor(.systemBlue)
+
+        // Меняем размер изображения
+        let resizedChevron = UIGraphicsImageRenderer(size: CGSize(width: 8, height: 14)).image { _ in
+            tintedChevronImage.draw(in: CGRect(origin: .zero, size: CGSize(width: 8, height: 14)))
+        }
+
+        if #available(iOS 15.0, *) {
+            var config = UIButton.Configuration.plain()
+            config.image = resizedChevron
+            config.imagePadding = 5
+            config.baseForegroundColor = .systemBlue
+            config.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: -7, bottom: 0, trailing: 0)
+            backButton.configuration = config
+        } else {
+            backButton.setTitleColor(.systemBlue, for: .normal)
             backButton.setImage(resizedChevron, for: .normal)
             backButton.tintColor = .systemBlue
-
             backButton.semanticContentAttribute = .forceLeftToRight
             backButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: -7, bottom: 0, right: 5)
             backButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 3, bottom: 0, right: -5)
+        }
 
-           
-            backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
-
-            return backButton
+        backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
+        
+        return backButton
     }()
+
+    
 private var titleLable: UILabel = {
     let label = UILabel()
     label.font = UIFont.boldSystemFont(ofSize: 20)
@@ -59,7 +75,7 @@ private lazy var orderButton: UIButton = {
         button.layer.cornerRadius = 8
         button.clipsToBounds = true
         button.addTarget(self, action: #selector(orderButtonTapped), for: .touchUpInside)
-        button.titleLabel?.font = UIFont(name: "SFProDisplay-Bold", size: 16)
+        button.titleLabel?.font = UIFont(name: "SFProText-Bold", size: 16)
         return button
         
     }()

@@ -5,44 +5,47 @@ class FirstStackView: UIView {
         let view = UIStackView()
         view.axis = .vertical
         view.alignment = .fill
-        view.spacing = 8
-        view.backgroundColor = UIColor(hex: "#1B2228")
-        view.distribution = .fill
+        view.spacing = 4
+      view.backgroundColor = UIColor(hex: "#1B2228")
+        view.distribution = .fillProportionally
         view.isLayoutMarginsRelativeArrangement = true
-        view.layoutMargins = UIEdgeInsets(top: 0, left: 0, bottom: 14, right: 14)
+        view.layoutMargins = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 14)
         return view
     }()
     
     private var firstStackView: UIStackView = {
         let view = UIStackView()
         view.axis = .horizontal
-        view.spacing = 20
+        view.spacing = 12
         view.alignment = .center
-        view.distribution = .fill
+        view.distribution = .fillProportionally
         view.isLayoutMarginsRelativeArrangement = true
-        view.layoutMargins = UIEdgeInsets(top: 14, left: 14, bottom: 14, right: 14)
+       
+        view.layoutMargins = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         return view
     }()
     
     private var secondStackView: UIStackView = {
         let view = UIStackView()
         view.axis = .horizontal
-        view.spacing = 20
+        view.spacing = 12
         view.alignment = .center
-        view.distribution = .fill
+        view.distribution = .fillProportionally
+      
         view.isLayoutMarginsRelativeArrangement = true
-        view.layoutMargins = UIEdgeInsets(top: 14, left: 14, bottom: 14, right: 14)
+        view.layoutMargins = UIEdgeInsets(top: 0, left: 0, bottom:0, right: 0)
         return view
     }()
     
     private var thirdStackView: UIStackView = {
         let view = UIStackView()
         view.axis = .horizontal
-        view.spacing = 20
+        view.spacing = 12
         view.alignment = .center
         view.distribution = .fill
         view.isLayoutMarginsRelativeArrangement = true
-        view.layoutMargins = UIEdgeInsets(top: 14, left: 14, bottom: 14, right: 14)
+  
+        view.layoutMargins = UIEdgeInsets(top:0, left: 0, bottom:0, right: 0)
         return view
     }()
     
@@ -70,7 +73,7 @@ class FirstStackView: UIView {
     private let firstTextLabel: UILabel = {
         let label = UILabel()
         label.text = "Запись ведется не менее чем за один день до даты услуги."
-        label.font = UIFont(name: "SFProDisplay-Bold", size: 18)
+        label.font = UIFont(name: "SFProDisplay-Medium", size: 18)
         label.textColor = .white
         label.numberOfLines = 0
         label.textAlignment = .left
@@ -80,7 +83,7 @@ class FirstStackView: UIView {
     private let secondTextLabel: UILabel = {
         let label = UILabel()
         label.text = "После бронирования услуги, наш менеджер свяжется с вами для подтверждения заявки и уточнения деталей."
-        label.font = UIFont(name: "SFProDisplay-Bold", size: 18)
+        label.font = UIFont(name: "SFProDisplay-Medium", size: 18)
         label.textColor = .white
         label.textAlignment = .left
         label.numberOfLines = 0
@@ -90,7 +93,7 @@ class FirstStackView: UIView {
     private let thirdTextLabel: UILabel = {
         let label = UILabel()
         label.text = "Изменение или отмена бронирования возможны не позднее, чем за 24 часа до назначенного времени."
-        label.font = UIFont(name: "SFProDisplay-Bold", size: 18)
+        label.font = UIFont(name: "SFProDisplay-Medium", size: 18)
         label.textColor = .white
         label.textAlignment = .left
         label.numberOfLines = 0
@@ -103,7 +106,6 @@ class FirstStackView: UIView {
     }
     
     private func setupUI() {
-        // Первый горизонтальный стек
         firstStackView.addArrangedSubview(firstImage)
         firstImage.snp.makeConstraints { make in
             make.height.equalTo(36)
@@ -113,7 +115,6 @@ class FirstStackView: UIView {
         
         stackView.addArrangedSubview(firstStackView)
         
-        // Второй горизонтальный стек
         secondStackView.addArrangedSubview(secondImage)
         secondImage.snp.makeConstraints { make in
             make.height.equalTo(36)
@@ -123,7 +124,6 @@ class FirstStackView: UIView {
         
         stackView.addArrangedSubview(secondStackView)
         
-        // Третий горизонтальный стек
         thirdStackView.addArrangedSubview(thirdImage)
         thirdImage.snp.makeConstraints { make in
             make.height.equalTo(36)
@@ -135,10 +135,10 @@ class FirstStackView: UIView {
         
         addSubview(stackView)
         stackView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(16)
+            make.top.equalToSuperview()
             make.leading.equalToSuperview()
             make.trailing.equalToSuperview()
-            make.bottom.equalToSuperview().offset(-16)
+            make.bottom.equalToSuperview()
         }
     }
     

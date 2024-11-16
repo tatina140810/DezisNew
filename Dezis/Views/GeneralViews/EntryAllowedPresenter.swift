@@ -8,35 +8,35 @@ class EntryAllowedPresenter: IEntryAllowedPresenter {
     
     weak var view: EntryAllowedView?
     private let userService: UserNetworkService
-
+    
     init(view: EntryAllowedView, userService: UserNetworkService) {
         self.view = view
         self.userService = userService
     }
     
     func fetchUserData() {
-        guard let email = UserDefaults.standard.string(forKey: "email"), !email.isEmpty else {
-            print("Error: Email is empty or not saved in UserDefaults")
-            view?.showError("Email is not available in UserDefaults.")
+        let id = UserDefaults.standard.integer(forKey: "userId")
+        guard id != 0 else {
+            print("Error: Id is empty or not saved in UserDefaults")
+            view?.showError("Id не доступер в памяти.")
             return
         }
         
-        print("Fetching user data for email: \(email)")
-
-//        userService.getUserProfile(email: email) { [weak self] result in
-//            switch result {
-//            case .success(let userProfile):
-//                print("User profile fetched: \(userProfile)")
-//                if let userID = userProfile.id {
-//                                   UserDefaults.standard.set(userID, forKey: "userID")
-//                                   print("User ID saved in UserDefaults: \(userID)")
-//                               }
-//                
-//            case .failure(let error):
-//                DispatchQueue.main.async {
-//                    self?.view?.showError("Failed to load user data: \(error.localizedDescription)")
-//                }
-//            }
-//        }
-  }
+        print("Fetching user data for userId: \(id)")
+        
+        userService.userDetails(id: id) { result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let userProfile):
+                    if userProfile.isConfirmed {
+                        self.view?.updateUserProfile(userProfile)
+                    } 
+                case .failure(_):
+                    self.view?.showEntryDeniedScreen()
+                    
+                }
+            }
+        }
+    }
+   
 }

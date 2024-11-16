@@ -18,7 +18,7 @@ class ClientHistoryViewController: UIViewController, IClientHistoryViewControlle
     private let firstOrderLabel: UILabel = {
         let label = UILabel()
         label.text = "Первая обработка:"
-        label.font = UIFont(name: "SFProDisplay-Regular", size: 18)
+        label.font = UIFont(name: "SFProText-Regular", size: 18)
         label.textColor = .white
         label.textAlignment = .left
         return label
@@ -29,7 +29,7 @@ class ClientHistoryViewController: UIViewController, IClientHistoryViewControlle
     private let allOrdersLabel: UILabel = {
         let label = UILabel()
         label.text = "Все обработки:"
-        label.font = UIFont(name: "SFProDisplay-Regular", size: 18)
+        label.font = UIFont(name: "SFProText-Regular", size: 18)
         label.textColor = .white
         label.textAlignment = .left
         return label
@@ -57,6 +57,14 @@ class ClientHistoryViewController: UIViewController, IClientHistoryViewControlle
         
         presenter = ClientHistoryPresenter(view: self)
         presenter.fetchClientOrders()
+        
+        configureFirstOrderView()
+    }
+    
+    private func configureFirstOrderView() {
+        if let firstOrder = presenter.getFirstOrder() {
+            firstOrderView.fill(with: firstOrder, userDetails: presenter.getUserDetails())
+        }
     }
 
     private func setupCollectionViewDelegates() {
@@ -71,7 +79,7 @@ class ClientHistoryViewController: UIViewController, IClientHistoryViewControlle
         let backButton = UIButton(type: .system)
         backButton.setTitle("Назад", for: .normal)
         backButton.setTitleColor(.systemBlue, for: .normal)
-        backButton.titleLabel?.font = UIFont(name: "SFProDisplay-Regular", size: 17)
+        backButton.titleLabel?.font = UIFont(name: "SFProText-Regular", size: 17)
 
         let chevronImage = UIImage(resource: .shevron).withRenderingMode(.alwaysTemplate)
         let resizedChevron = UIGraphicsImageRenderer(size: CGSize(width: 8, height: 14)).image { _ in
@@ -93,7 +101,7 @@ class ClientHistoryViewController: UIViewController, IClientHistoryViewControlle
     private func setupUI() {
         view.addSubview(firstOrderLabel)
         firstOrderLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(115)
+            make.top.equalToSuperview().offset(100)
             make.leading.equalToSuperview().offset(20)
         }
         
@@ -122,6 +130,7 @@ class ClientHistoryViewController: UIViewController, IClientHistoryViewControlle
     
     func reloadData() {
         ordersCollectionView.reloadData()
+        configureFirstOrderView()
     }
     
     @objc private func backButtonTapped() {

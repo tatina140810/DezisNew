@@ -4,8 +4,8 @@ class SecondOnboardingViewController: UIViewController {
     
     private var titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Мы знаем, как эффективно избавиться от вредителей и бактерий. Мы-ваш щит от грязи!"
-        label.font = UIFont(name: "SFProDisplay-Bold", size: 20)
+        label.text = "Мы знаем, как эффективно\nизбавиться от вредителей и \nбактерий. Мы-ваш щит от грязи!"
+        label.font = UIFont(name: "SFProText-Medium", size: 20)
         label.textColor = .white
         label.numberOfLines = 0
         label.textAlignment = .left
@@ -63,8 +63,9 @@ class SecondOnboardingViewController: UIViewController {
         exterminatorImage.snp.makeConstraints { make in
             make.bottom.equalTo(nextButton.snp.top).offset(-24)
             make.leading.equalToSuperview()
-            make.height.equalTo(322)
-            make.width.equalTo(375)
+            make.trailing.equalToSuperview()
+            make.height.equalToSuperview().multipliedBy(0.396)
+           
             
         }
         view.addSubview(titleLabel)

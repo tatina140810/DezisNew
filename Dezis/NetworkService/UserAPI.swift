@@ -9,9 +9,11 @@ enum UserApi {
     case booking (user: Int, service: String, date: String, time: String, is_completed: Bool)
     case userDetails (id: Int)
     case getUserProfile(email: String)
-    case fetchClientOrders
+    case fetchProcessingOrders(clientId: Int)
     case logOut(email: String)
     case resendOtp (email: String)
+    case forgotPassword(email: String)
+    case updateUserInfo(userId: Int, parameters: [String: Any])
 }
 
 extension UserApi: TargetType {
@@ -36,12 +38,16 @@ extension UserApi: TargetType {
             return "/api/v1/user/list-user/\(id)/"
         case .getUserProfile(_):
             return "/api/v1/user/list-user/"
-        case .fetchClientOrders:
-            return "/api/v1/contact/booking/"
+        case .fetchProcessingOrders(let clientId):
+            return "/api/v1/contact/processing/\(clientId)/"
         case .logOut:
             return "/api/v1/user/logout-user/"
         case .resendOtp:
             return "/api/v1/user/resend-otp/"
+        case .forgotPassword:
+            return "/api/v1/user/forgot-password/"
+        case .updateUserInfo(let userId, _):
+            return "/api/v1/user/put-request/\(userId)/"
         }
     }
     
@@ -59,20 +65,23 @@ extension UserApi: TargetType {
             return .get
         case .getUserProfile:
             return .get
-        case .fetchClientOrders:
+        case .fetchProcessingOrders:
             return .get
         case .logOut:
             return .post
         case .resendOtp:
             return .post
-       
+        case .forgotPassword:
+            return .post
+        case .updateUserInfo:
+            return .put
         }
     }
     
     var task: Task {
         switch self {
         case .getToken(let email, let password):
-            return .requestParameters(parameters: ["email": email, 
+            return .requestParameters(parameters: ["email": email,
                                                    "password": password],
                                       encoding: JSONEncoding.default)
         case .refreshToken(let refreshToken):
@@ -92,27 +101,30 @@ extension UserApi: TargetType {
             
         case .userLogin(let email, let password):
             return .requestParameters(parameters: ["email": email,
-                                                   "password": password], 
+                                                   "password": password],
                                       encoding: JSONEncoding.default)
         case .booking(let user, let service, let date, let time, _):
             return .requestParameters(parameters: [ "user": user,
                                                     "service": service,
                                                     "date": date,
                                                     "time": time,
-                                                    "is_completed": true
+                                                    "is_completed": false
                                                   ], encoding: JSONEncoding.default)
         case .userDetails(let id):
             return .requestPlain
-
+            
         case .getUserProfile(let email):
             return .requestParameters(parameters: ["email": email], encoding: URLEncoding.default)
-        case .fetchClientOrders:
+        case .fetchProcessingOrders:
             return .requestPlain
         case .logOut(let email):
             return .requestParameters(parameters: ["email": email], encoding: JSONEncoding.default)
         case .resendOtp(let email):
             return .requestParameters(parameters: ["email": email], encoding: JSONEncoding.default)
-
+        case .forgotPassword(let email):
+            return .requestParameters(parameters: ["email": email], encoding: JSONEncoding.default)
+        case .updateUserInfo(_, let parameters):
+            return .requestParameters(parameters: parameters, encoding: JSONEncoding.default)
         }
     }
     

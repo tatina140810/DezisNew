@@ -23,7 +23,7 @@ class AdminLoginView: UIViewController {
     private let loginLabel: UILabel = {
         let view = UILabel()
         view.text = "Вход"
-        view.font = UIFont(name: "SFProDisplay-Bold", size: 24)
+        view.font = UIFont(name: "SFProText-Bold", size: 24)
         view.textColor = .init(UIColor(hex: "#FFFFFF"))
         view.numberOfLines = 0
         view.textAlignment = .center
@@ -39,13 +39,13 @@ class AdminLoginView: UIViewController {
         field.layer.borderWidth = 1
         field.layer.borderColor = UIColor.clear.cgColor
         field.attributedPlaceholder = NSAttributedString(
-            string: "Логин",
+            string: "Логин*",
             attributes: [
                 NSAttributedString.Key.foregroundColor: UIColor.white.withAlphaComponent(0.7),
-                NSAttributedString.Key.font: UIFont(name: "SFProDisplay-Regular", size: 14)!
+                NSAttributedString.Key.font: UIFont(name: "SFProText-Medium", size: 14)!
             ])
         field.layer.cornerRadius = 10
-        field.font = UIFont(name: "SFProDisplay-Regular", size: 14)
+        field.font = UIFont(name: "SFProText-Medium", size: 14)
         field.autocapitalizationType = .none
         field.translatesAutoresizingMaskIntoConstraints = false
         
@@ -55,6 +55,16 @@ class AdminLoginView: UIViewController {
         return field
     }()
     
+    private let loginErrorLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .red
+        label.font = UIFont(name: "SFProText-Regular", size: 14)
+        label.numberOfLines = 0
+        label.isHidden = true
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+
     private let passwordTextField: UITextField = {
         var field = UITextField()
         field.backgroundColor = UIColor(hex: "#2B373E")
@@ -63,13 +73,13 @@ class AdminLoginView: UIViewController {
         field.layer.borderWidth = 1
         field.layer.borderColor = UIColor.clear.cgColor
         field.attributedPlaceholder = NSAttributedString(
-            string: "Пароль",
+            string: "Пароль*",
             attributes: [
                 NSAttributedString.Key.foregroundColor: UIColor.white.withAlphaComponent(0.7),
-                NSAttributedString.Key.font: UIFont(name: "SFProDisplay-Regular", size: 14)!
+                NSAttributedString.Key.font: UIFont(name: "SFProText-Medium", size: 14)!
             ])
         field.layer.cornerRadius = 10
-        field.font = UIFont(name: "SFProDisplay-Regular", size: 14)
+        field.font = UIFont(name: "SFProText-Medium", size: 14)
         field.autocapitalizationType = .none
         field.translatesAutoresizingMaskIntoConstraints = false
         
@@ -93,11 +103,20 @@ class AdminLoginView: UIViewController {
         return field
     }()
     
+    private let passwordErrorLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .red
+        label.font = UIFont(name: "SFProText-Regular", size: 14)
+        label.numberOfLines = 0
+        label.isHidden = true
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
     
     private let continueButton: UIButton = {
         let button = UIButton()
         button.setTitle("Продолжить", for: .normal)
-        button.titleLabel?.font = UIFont(name: "SFProDisplay-Bold", size: 16)
+        button.titleLabel?.font = UIFont(name: "SFProText-Bold", size: 16)
         button.setTitleColor(.white, for: .normal)
         button.backgroundColor = .init(hex: "#0A84FF")
         button.layer.cornerRadius = 12
@@ -111,7 +130,7 @@ class AdminLoginView: UIViewController {
         textView.isEditable = false
         textView.isScrollEnabled = false
         textView.backgroundColor = .clear
-        textView.font = UIFont(name: "SFProDisplay-Regular", size: 12)
+        textView.font = UIFont(name: "SFProText-Regular", size: 12)
         textView.textColor = .white
         textView.linkTextAttributes = [
             .foregroundColor: UIColor.systemBlue
@@ -157,12 +176,14 @@ class AdminLoginView: UIViewController {
         
         view.addSubview(loginLabel)
         view.addSubview(loginTextField)
+        view.addSubview(loginErrorLabel)
         view.addSubview(passwordTextField)
+        view.addSubview(passwordErrorLabel)
         view.addSubview(continueButton)
         view.addSubview(termsTextView)
         
         loginLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(278)
+            make.centerY.equalToSuperview().offset(-105)
             make.centerX.equalToSuperview()
         }
         
@@ -173,15 +194,27 @@ class AdminLoginView: UIViewController {
             make.height.equalTo(50)
         }
         
+        loginErrorLabel.snp.makeConstraints { make in
+            make.top.equalTo(loginTextField.snp.bottom).offset(4)
+            make.leading.equalTo(loginTextField)
+            make.trailing.equalTo(loginTextField)
+        }
+        
         passwordTextField.snp.makeConstraints { make in
-            make.top.equalTo(loginTextField.snp.bottom).offset(10)
+            make.top.equalTo(loginErrorLabel.snp.bottom).offset(10)
             make.leading.equalToSuperview().offset(20)
             make.trailing.equalToSuperview().offset(-20)
             make.height.equalTo(50)
         }
         
+        passwordErrorLabel.snp.makeConstraints { make in
+            make.top.equalTo(passwordTextField.snp.bottom).offset(4)
+            make.leading.equalTo(passwordTextField)
+            make.trailing.equalTo(passwordTextField)
+        }
+        
         continueButton.snp.makeConstraints { make in
-            make.top.equalTo(passwordTextField.snp.bottom).offset(12)
+            make.top.equalTo(passwordErrorLabel.snp.bottom).offset(12)
             make.leading.equalToSuperview().offset(20)
             make.trailing.equalToSuperview().offset(-20)
             make.height.equalTo(52)
@@ -202,7 +235,7 @@ class AdminLoginView: UIViewController {
         let backButton = UIButton(type: .system)
         backButton.setTitle("Назад", for: .normal)
         backButton.setTitleColor(.systemBlue, for: .normal)
-        backButton.titleLabel?.font = UIFont(name: "SFProDisplay-Regular", size: 17)
+        backButton.titleLabel?.font = UIFont(name: "SFProText-Regular", size: 17)
 
         let chevronImage = UIImage(resource: .shevron).withRenderingMode(.alwaysTemplate)
         let resizedChevron = UIGraphicsImageRenderer(size: CGSize(width: 8, height: 14)).image { _ in
@@ -239,33 +272,29 @@ class AdminLoginView: UIViewController {
         let login = loginTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
         let password = passwordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
         
+        loginErrorLabel.isHidden = true
+        passwordErrorLabel.isHidden = true
+        
         if login.isEmpty || password.isEmpty {
             showInputError(message: "Пожалуйста, введите логин и пароль.")
         } else {
             presenter?.loginAdmin(login: login, password: password)
         }
     }
+
     
     func showInputError(message: String) {
         loginTextField.layer.borderColor = UIColor.red.cgColor
         passwordTextField.layer.borderColor = UIColor.red.cgColor
         loginTextField.text = ""
         passwordTextField.text = ""
-        loginTextField.attributedPlaceholder = NSAttributedString(
-            string: message,
-            attributes: [
-                .foregroundColor: UIColor.red,
-                .font: UIFont(name: "SFProDisplay-Regular", size: 14)!
-            ]
-        )
-        passwordTextField.attributedPlaceholder = NSAttributedString(
-            string: message,
-            attributes: [
-                .foregroundColor: UIColor.red,
-                .font: UIFont(name: "SFProDisplay-Regular", size: 14)!
-            ]
-        )
+        loginErrorLabel.text = message
+        passwordErrorLabel.text = message
+        
+        loginErrorLabel.isHidden = false
+        passwordErrorLabel.isHidden = false
     }
+
     
     func resetInputAppearance() {
         loginTextField.layer.borderColor = UIColor.clear.cgColor
@@ -290,7 +319,7 @@ extension AdminLoginView: UITextViewDelegate {
 extension AdminLoginView: IAdminLoginView {
     
     func showError(message: String) {
-        showInputError(message: "Введите еще раз")
+        showInputError(message: "Введите корректные данные")
     }
     
     func navigateToAdminDashboard() {
