@@ -370,6 +370,7 @@ class CalendarViewController: UIViewController, ICalendarViewController {
     @objc private func doneButtonTapped() {
         time = getFormattedTime(timePicker.date)
         print("Выбор завершен, дата и время: \(time)")
+        timePickerButton.setTitle(time, for: .normal)
         timePicker.isHidden = true
         stackView.isHidden = true
     }
@@ -383,9 +384,9 @@ class CalendarViewController: UIViewController, ICalendarViewController {
     
     private func getFormattedTime(_ date: Date) -> String {
         let formatter = DateFormatter()
-        formatter.dateFormat = "HH:mm:ss"
+        formatter.dateFormat = "HH:mm"
         formatter.locale = Locale(identifier: "en_US_POSIX")
-        formatter.timeZone = TimeZone(abbreviation: "UTC") 
+        formatter.timeZone = TimeZone(identifier: "Asia/Bishkek")
         return formatter.string(from: date)
     }
     @objc func firstCheckBoxTapped() {
@@ -419,6 +420,8 @@ class CalendarViewController: UIViewController, ICalendarViewController {
     func bookingRequestSuccessful() {
         print("Бронирование успешно выполнено")
     }
+    
+    
 }
 
 
