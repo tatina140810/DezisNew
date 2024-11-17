@@ -101,7 +101,7 @@ class AdminHistoryView: UIViewController, IAdminHistoryView {
         
         categoriesCollectionView.clipsToBounds = false
         categoriesCollectionView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(71)
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
             make.leading.equalToSuperview().offset(20)
             make.trailing.equalToSuperview().offset(-20)
             make.height.equalTo(50)
