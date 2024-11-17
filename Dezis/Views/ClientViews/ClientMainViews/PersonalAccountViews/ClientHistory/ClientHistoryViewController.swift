@@ -14,17 +14,23 @@ protocol IClientHistoryViewController {
 class ClientHistoryViewController: UIViewController, IClientHistoryViewController {
     
     private var presenter: IClientHistoryPresenter!
-    
+
+
     private let firstOrderLabel: UILabel = {
         let label = UILabel()
         label.text = "Первая обработка:"
         label.font = UIFont(name: "SFProText-Regular", size: 18)
         label.textColor = .white
         label.textAlignment = .left
+        label.isHidden = true
         return label
     }()
-    
-    private let firstOrderView = FirstOrderView()
+
+    private let firstOrderView: FirstOrderView = {
+        let view = FirstOrderView()
+        view.isHidden = true
+        return view
+    }()
     
     private let allOrdersLabel: UILabel = {
         let label = UILabel()
@@ -58,12 +64,16 @@ class ClientHistoryViewController: UIViewController, IClientHistoryViewControlle
         presenter = ClientHistoryPresenter(view: self)
         presenter.fetchClientOrders()
         
-        configureFirstOrderView()
     }
     
     private func configureFirstOrderView() {
         if let firstOrder = presenter.getFirstOrder() {
+            firstOrderLabel.isHidden = false
+            firstOrderView.isHidden = false
             firstOrderView.fill(with: firstOrder, userDetails: presenter.getUserDetails())
+        } else {
+            firstOrderLabel.isHidden = true
+            firstOrderView.isHidden = true
         }
     }
 
@@ -99,24 +109,34 @@ class ClientHistoryViewController: UIViewController, IClientHistoryViewControlle
     }
     
     private func setupUI() {
+        
         view.addSubview(firstOrderLabel)
-        firstOrderLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(100)
-            make.leading.equalToSuperview().offset(20)
-        }
-        
-        view.addSubview(firstOrderView)
-        firstOrderView.snp.makeConstraints { make in
-            make.top.equalTo(firstOrderLabel.snp.bottom).offset(12)
-            make.leading.equalToSuperview().offset(20)
-            make.trailing.equalToSuperview().offset(-20)
-            make.height.equalTo(184)
-        }
-        
-        view.addSubview(allOrdersLabel)
-        allOrdersLabel.snp.makeConstraints { make in
-            make.top.equalTo(firstOrderView.snp.bottom).offset(20)
-            make.leading.equalToSuperview().offset(20)
+        if firstOrderLabel.isHidden {
+            view.addSubview(allOrdersLabel)
+            allOrdersLabel.snp.makeConstraints { make in
+                make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(20)
+                make.leading.equalToSuperview().offset(20)
+            }
+        } else {
+            
+            firstOrderLabel.snp.makeConstraints { make in
+                make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(20)
+                make.leading.equalToSuperview().offset(20)
+            }
+            
+            view.addSubview(firstOrderView)
+            firstOrderView.snp.makeConstraints { make in
+                make.top.equalTo(firstOrderLabel.snp.bottom).offset(12)
+                make.leading.equalToSuperview().offset(20)
+                make.trailing.equalToSuperview().offset(-20)
+                make.height.equalTo(184)
+            }
+            
+            view.addSubview(allOrdersLabel)
+            allOrdersLabel.snp.makeConstraints { make in
+                make.top.equalTo(firstOrderView.snp.bottom).offset(20)
+                make.leading.equalToSuperview().offset(20)
+            }
         }
         
         view.addSubview(ordersCollectionView)
@@ -127,10 +147,11 @@ class ClientHistoryViewController: UIViewController, IClientHistoryViewControlle
             make.bottom.equalToSuperview().offset(-10)
         }
     }
+
     
     func reloadData() {
-        ordersCollectionView.reloadData()
         configureFirstOrderView()
+        ordersCollectionView.reloadData()
     }
     
     @objc private func backButtonTapped() {

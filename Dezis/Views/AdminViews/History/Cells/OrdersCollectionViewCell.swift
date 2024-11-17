@@ -54,7 +54,7 @@ class OrdersCollectionViewCell: UICollectionViewCell {
     private let serviceDetailLabel: UILabel = {
         let view = UILabel()
         
-        let attributedString = NSMutableAttributedString(string: "")
+        let attributedString = NSMutableAttributedString(string: "Не указано")
         attributedString.addAttribute(.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: NSRange(location: 0, length: attributedString.length))
         
         view.attributedText = attributedString
@@ -87,7 +87,7 @@ class OrdersCollectionViewCell: UICollectionViewCell {
     
     private let streetlabel: UILabel = {
         let view = UILabel()
-        let attributedString = NSMutableAttributedString(string: "")
+        let attributedString = NSMutableAttributedString(string: "Не указано")
         attributedString.addAttribute(.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: NSRange(location: 0, length: attributedString.length))
         
         view.attributedText = attributedString
@@ -101,7 +101,7 @@ class OrdersCollectionViewCell: UICollectionViewCell {
     
     private let houseNumberlabel: UILabel = {
         let view = UILabel()
-        let attributedString = NSMutableAttributedString(string: "")
+        let attributedString = NSMutableAttributedString(string: "Не указано")
         attributedString.addAttribute(.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: NSRange(location: 0, length: attributedString.length))
         
         view.attributedText = attributedString
@@ -134,7 +134,7 @@ class OrdersCollectionViewCell: UICollectionViewCell {
     
     private let dateDetailLabel: UILabel = {
         let view = UILabel()
-        let attributedString = NSMutableAttributedString(string: "")
+        let attributedString = NSMutableAttributedString(string: "Не указано")
         attributedString.addAttribute(.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: NSRange(location: 0, length: attributedString.length))
         
         view.attributedText = attributedString
@@ -148,7 +148,7 @@ class OrdersCollectionViewCell: UICollectionViewCell {
     
     private let timeDetailLabel: UILabel = {
         let view = UILabel()
-        let attributedString = NSMutableAttributedString(string: "")
+        let attributedString = NSMutableAttributedString(string: "Не указано")
         attributedString.addAttribute(.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: NSRange(location: 0, length: attributedString.length))
         
         view.attributedText = attributedString

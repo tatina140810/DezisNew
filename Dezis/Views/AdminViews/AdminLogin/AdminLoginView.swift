@@ -84,7 +84,7 @@ class AdminLoginView: UIViewController {
         field.translatesAutoresizingMaskIntoConstraints = false
         
         let eyeButton = UIButton(type: .custom)
-        eyeButton.setImage(UIImage(systemName: "eye"), for: .normal)
+        eyeButton.setImage(UIImage(systemName: "eye.slash"), for: .normal)
         eyeButton.tintColor = .white
         eyeButton.frame = CGRect(x: 0, y: 0, width: 24, height: 24)
         eyeButton.addTarget(nil, action: #selector(togglePasswordVisibility), for: .touchUpInside)
@@ -263,7 +263,7 @@ class AdminLoginView: UIViewController {
         passwordTextField.isSecureTextEntry.toggle()
         
         if let eyeButton = passwordTextField.rightView?.subviews.first as? UIButton {
-            let imageName = passwordTextField.isSecureTextEntry ? "eye" : "eye.slash"
+            let imageName = passwordTextField.isSecureTextEntry ? "eye.slash" : "eye"
             eyeButton.setImage(UIImage(systemName: imageName), for: .normal)
         }
     }

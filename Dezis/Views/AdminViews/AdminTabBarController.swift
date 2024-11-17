@@ -21,6 +21,16 @@ class AdminTabBarController: UITabBarController {
         tabBar.barTintColor = UIColor(hex: "#1B2228")
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        let newTabBarHeight: CGFloat = 82
+        var tabBarFrame = tabBar.frame
+        tabBarFrame.size.height = newTabBarHeight
+        tabBarFrame.origin.y = view.frame.height - newTabBarHeight
+        tabBar.frame = tabBarFrame
+    }
+    
     private func addTabBarBorder() {
         
         let borderView = UIView()

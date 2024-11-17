@@ -56,7 +56,6 @@ struct UserInformation: Codable {
     let number: String?
     let address: String?
     let avatar: String?
-    let is_active: Bool
     let is_confirmed: Bool
     let created_at: String?
 }
