@@ -63,7 +63,7 @@ class AdminRequestsView: UIViewController, IAdminRequestView {
         view.addSubview(titleLabel)
         
         titleLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(71)
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
             make.leading.equalToSuperview().offset(16)
             make.trailing.equalToSuperview().offset(-16)
         }
@@ -107,7 +107,13 @@ extension AdminRequestsView: UICollectionViewDataSource {
     private func confirmRequest(for indexPath: IndexPath) {
         DispatchQueue.main.async {
             let sureAlert = SureAlertView()
-            sureAlert.showAlert(on: self.view, message: "Вы уверены, что хотите подтвердить запрос?", yesButtonText: "Подтвердить", noButtonText: "Отмена")
+            sureAlert.showAlert(
+                on: self.view,
+                message: "Вы уверены, что хотите подтвердить запрос?",
+                yesButtonText: "Подтвердить",
+                noButtonText: "Отмена",
+                yesButtonColor: UIColor(hex: "#0A84FF")
+            )
             
             sureAlert.onConfirm = {
                 self.presenter.confirmUser(at: indexPath.row) { [weak self] success in
@@ -126,7 +132,13 @@ extension AdminRequestsView: UICollectionViewDataSource {
             guard let self = self else { return }
             
             let sureAlert = SureAlertView()
-            sureAlert.showAlert(on: self.view, message: "Вы уверены, что хотите отклонить запрос?", yesButtonText: "Отклонить", noButtonText: "Отмена")
+            sureAlert.showAlert(
+                on: self.view,
+                message: "Вы уверены, что хотите отклонить запрос?",
+                yesButtonText: "Отклонить",
+                noButtonText: "Отмена",
+                yesButtonColor: UIColor(hex: "#FF0000")
+            )
             
             sureAlert.onConfirm = {
                 self.presenter.denyUser(at: indexPath.row) { success in
@@ -138,5 +150,4 @@ extension AdminRequestsView: UICollectionViewDataSource {
             }
         }
     }
-
 }

@@ -13,9 +13,9 @@ class SureAlertView: UIView {
     
     private let dimmingOverlayView: UIView = {
         let view = UIView()
-           view.backgroundColor = UIColor.black.withAlphaComponent(0.5)
-           view.translatesAutoresizingMaskIntoConstraints = false
-           return view
+        view.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
     }()
     
     private let containerView: UIView = {
@@ -47,6 +47,7 @@ class SureAlertView: UIView {
     private let noButton: UIButton = {
         let button = UIButton()
         button.setTitleColor(UIColor(hex: "#0A84FF"), for: .normal)
+        button.titleLabel?.font = UIFont(name: "SFProText-Medium", size: 16)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -54,6 +55,7 @@ class SureAlertView: UIView {
     private let yesButton: UIButton = {
         let button = UIButton()
         button.setTitleColor(UIColor(hex: "#FF0000"), for: .normal)
+        button.titleLabel?.font = UIFont(name: "SFProText-Bold", size: 16)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -117,19 +119,20 @@ class SureAlertView: UIView {
         self.removeFromSuperview()
     }
     
-    func showAlert(on view: UIView, message: String, yesButtonText: String = "Да", noButtonText: String = "Нет") {
-            messageLabel.text = message
-            yesButton.setTitle(yesButtonText, for: .normal)
-            noButton.setTitle(noButtonText, for: .normal) 
+    func showAlert(on view: UIView, message: String, yesButtonText: String = "Да", noButtonText: String = "Нет", yesButtonColor: UIColor = UIColor(hex: "#FF0000")) {
+        messageLabel.text = message
+        yesButton.setTitle(yesButtonText, for: .normal)
+        yesButton.setTitleColor(yesButtonColor, for: .normal)
+        noButton.setTitle(noButtonText, for: .normal)
 
-            view.addSubview(self)
-            self.translatesAutoresizingMaskIntoConstraints = false
-            
-            NSLayoutConstraint.activate([
-                self.topAnchor.constraint(equalTo: view.topAnchor),
-                self.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-                self.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-                self.trailingAnchor.constraint(equalTo: view.trailingAnchor)
-            ])
-        }
+        view.addSubview(self)
+        self.translatesAutoresizingMaskIntoConstraints = false
+
+        NSLayoutConstraint.activate([
+            self.topAnchor.constraint(equalTo: view.topAnchor),
+            self.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            self.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            self.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        ])
+    }
 }

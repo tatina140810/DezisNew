@@ -153,6 +153,7 @@ private func startTimer() {
    @objc private func resendButtonTapped() {
        presenter?.resendOtp()
        startTimer()
+       otpTextField.text = ""
    }
     func keyBoardSetUp(){
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
@@ -200,13 +201,13 @@ private func startTimer() {
         
         view.addSubview(errorMasageLabel)
         errorMasageLabel.snp.makeConstraints {make in
-            make.top.equalTo(otpTextField.snp.bottom).offset(10)
+            make.top.equalTo(otpTextField.snp.bottom).offset(4)
             make.leading.equalToSuperview().offset(16)
         }
         view.addSubview(resendButton)
         resendButton.snp.makeConstraints {make in
             make.top.equalTo(errorMasageLabel.snp.bottom).offset(4)
-            make.leading.equalToSuperview().offset(20)
+            make.leading.equalToSuperview().offset(16)
         }
         view.addSubview(timerLabel)
         timerLabel.snp.makeConstraints {make in

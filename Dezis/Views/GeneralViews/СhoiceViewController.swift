@@ -31,6 +31,7 @@ class ChoiceViewController: UIViewController {
         label.font = UIFont(name: "SFProText-Regular", size: 16)
         return label
     }()
+   
     
     override func viewDidLoad() {
         super.viewDidLoad()
