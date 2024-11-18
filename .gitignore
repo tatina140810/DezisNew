@@ -1,0 +1,18 @@
+# macOS system files
+.DS_Store
+
+# Xcode files
+*.xcuserdatad
+*.xcuserdata
+*.swp
+*.swo
+
+# Build and intermediate files
+build/
+DerivedData/
+
+# CocoaPods
+Pods/
+
+# Logs
+*.log
