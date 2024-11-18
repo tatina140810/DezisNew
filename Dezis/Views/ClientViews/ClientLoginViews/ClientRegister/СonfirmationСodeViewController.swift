@@ -66,7 +66,7 @@ class СonfirmationСodeViewController: UIViewController, IСonfirmationСodeVie
     }()
     private var errorMasageLabel: UILabel = {
         let view = UILabel()
-        view.text = "Код введен неверно"
+        view.text = "Код введен не верно"
         view.font = UIFont(name: "SFProText-Regular", size: 12)
         view.textColor = .red
         view.isHidden = true
@@ -134,26 +134,35 @@ private func startTimer() {
        timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
    }
 
-   @objc private func updateTimer() {
-       if timeRemaining > 0 {
-           timeRemaining -= 1
-           updateTimerLabel()
-       } else {
-           timer?.invalidate()
-           timer = nil
-           resendButton.isEnabled = true
-           timerLabel.text = ""
-       }
-   }
+    @objc private func updateTimer() {
+        if timeRemaining > 0 {
+            timeRemaining -= 1
+            updateTimerLabel()
+        } else {
+            timer?.invalidate()
+            timer = nil
+            resendButton.isEnabled = true
+            resendButton.setTitleColor(UIColor(hex: "#0A84FF"), for: .normal)
+            
+            resetErrorState()
+        }
+    }
+    private func resetErrorState() {
+        otpTextField.layer.borderColor = UIColor.clear.cgColor
+        otpTextField.layer.borderWidth = 0.0
+        errorMasageLabel.isHidden = true
+    }
 
    private func updateTimerLabel() {
        timerLabel.text = "через 0:\(timeRemaining) секунд"
+       errorMasageLabel.isHidden = true
    }
 
    @objc private func resendButtonTapped() {
        presenter?.resendOtp()
        startTimer()
        otpTextField.text = ""
+       errorMasageLabel.isHidden = false
    }
     func keyBoardSetUp(){
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
@@ -206,12 +215,12 @@ private func startTimer() {
         }
         view.addSubview(resendButton)
         resendButton.snp.makeConstraints {make in
-            make.top.equalTo(errorMasageLabel.snp.bottom).offset(4)
+            make.top.equalTo(otpTextField.snp.bottom).offset(7)
             make.leading.equalToSuperview().offset(16)
         }
         view.addSubview(timerLabel)
         timerLabel.snp.makeConstraints {make in
-            make.top.equalTo(errorMasageLabel.snp.bottom).offset(10)
+            make.top.equalTo(otpTextField.snp.bottom).offset(13)
             make.leading.equalTo(resendButton.snp.trailing).offset(3)
         }
         view.addSubview(nextButton)
@@ -265,10 +274,12 @@ private func startTimer() {
         displayError(errorMessage)
     }
     private func displayError(_ message: String) {
-        errorMasageLabel.text = "Код введен неверно"
-        errorMasageLabel.isHidden = false
-        timerLabel.isHidden = false
-        resendButton.isHidden = false
+            otpTextField.layer.borderColor = UIColor.red.cgColor
+            otpTextField.layer.borderWidth = 1.5
+            otpTextField.layer.cornerRadius = 8
+            errorMasageLabel.text = message
+            errorMasageLabel.isHidden = false
+        
     }
     @objc func attributedTextTapped() {
         print("Условием продажи")
