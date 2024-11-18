@@ -36,7 +36,7 @@ class UserRegisterViewController: UIViewController {
     
     private lazy var passwordToggleButton: UIButton = {
         let button = UIButton(type: .custom)
-        button.setImage(UIImage(systemName: "eye.slash"), for: .normal)
+        button.setImage(UIImage(systemName: "eye"), for: .normal)
         button.tintColor = .white
         button.addTarget(self, action: #selector(togglePasswordVisibility), for: .touchUpInside)
         return button
@@ -239,7 +239,7 @@ class UserRegisterViewController: UIViewController {
     
     @objc private func togglePasswordVisibility() {
         passwordTextField.isSecureTextEntry.toggle()
-        let imageName = passwordTextField.isSecureTextEntry ? "eye.slash" : "eye"
+        let imageName = passwordTextField.isSecureTextEntry ? "eye" : "eye.slash"
         passwordToggleButton.setImage(UIImage(systemName: imageName), for: .normal)
     }
     
