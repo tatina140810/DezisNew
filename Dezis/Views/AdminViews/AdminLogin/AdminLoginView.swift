@@ -264,6 +264,8 @@ class AdminLoginView: UIViewController {
     
     private func setupAddTarget() {
         continueButton.addTarget(self, action: #selector(continueButtonTapped), for: .touchUpInside)
+        loginTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+        passwordTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
     }
     
     private func setupNavigation() {
@@ -289,6 +291,18 @@ class AdminLoginView: UIViewController {
         let backBarButtonItem = UIBarButtonItem(customView: backButton)
         navigationItem.leftBarButtonItem = backBarButtonItem
     }
+    
+    @objc private func textFieldDidChange() {
+        
+        let isLoginEmpty = loginTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true
+        let isPasswordEmpty = passwordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true
+
+        if !isLoginEmpty && !isPasswordEmpty {
+            continueButton.isEnabled = true
+            continueButton.backgroundColor = UIColor(hex: "#0A84FF")
+        }
+    }
+
     
     @objc private func backButtonTapped() {
         navigationController?.popViewController(animated: true)
@@ -321,15 +335,19 @@ class AdminLoginView: UIViewController {
     func showInputError(message: String) {
         loginTextField.layer.borderColor = UIColor.red.cgColor
         passwordTextField.layer.borderColor = UIColor.red.cgColor
+        
         loginTextField.text = ""
         passwordTextField.text = ""
+        
         loginErrorLabel.text = message
         passwordErrorLabel.text = message
         
         loginErrorLabel.isHidden = false
         passwordErrorLabel.isHidden = false
+        
+        continueButton.isEnabled = false
+        continueButton.backgroundColor = UIColor(hex: "#515151")
     }
-
     
     func resetInputAppearance() {
         loginTextField.layer.borderColor = UIColor.clear.cgColor

@@ -112,7 +112,8 @@ extension AdminRequestsView: UICollectionViewDataSource {
                 message: "Вы уверены, что хотите подтвердить запрос?",
                 yesButtonText: "Подтвердить",
                 noButtonText: "Отмена",
-                yesButtonColor: UIColor(hex: "#0A84FF")
+                yesButtonColor: UIColor(hex: "#0A84FF"),
+                noButtonColor: UIColor(hex: "#FF0000")
             )
             
             sureAlert.onConfirm = {
@@ -137,7 +138,8 @@ extension AdminRequestsView: UICollectionViewDataSource {
                 message: "Вы уверены, что хотите отклонить запрос?",
                 yesButtonText: "Отклонить",
                 noButtonText: "Отмена",
-                yesButtonColor: UIColor(hex: "#FF0000")
+                yesButtonColor: UIColor(hex: "#FF0000"),
+                noButtonColor: UIColor(hex: "#0A84FF")
             )
             
             sureAlert.onConfirm = {

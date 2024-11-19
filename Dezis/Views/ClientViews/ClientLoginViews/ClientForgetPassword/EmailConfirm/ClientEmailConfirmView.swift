@@ -66,7 +66,8 @@ class ClientEmailConfirmView: UIViewController {
         button.setTitle("Отправить", for: .normal)
         button.titleLabel?.font = UIFont(name: "SFProText-Bold", size: 16)
         button.setTitleColor(.white, for: .normal)
-        button.backgroundColor = .init(hex: "#0A84FF")
+        button.backgroundColor = UIColor(hex: "#515151")
+        button.isEnabled = false
         button.layer.cornerRadius = 12
         button.isEnabled = true
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -116,6 +117,7 @@ class ClientEmailConfirmView: UIViewController {
         setupUI()
         setupAddTarget()
         setupNavigation()
+        updateSendButtonState()
         presenter = ClientEmailConfirmPresenter(view: self)
         dismissKeyboardGesture()
         self.navigationController?.isNavigationBarHidden = false
@@ -163,8 +165,19 @@ class ClientEmailConfirmView: UIViewController {
         }
     }
     
+    private func updateSendButtonState() {
+        let isEmailEmpty = emailTextField.text?.isEmpty ?? true
+        sendButton.isEnabled = !isEmailEmpty
+        sendButton.backgroundColor = sendButton.isEnabled ? UIColor(hex: "#0A84FF") : UIColor(hex: "#515151")
+    }
+
     private func setupAddTarget() {
         sendButton.addTarget(self, action: #selector(sendButtonTapped), for: .touchUpInside)
+        emailTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+    }
+
+    @objc private func textFieldDidChange() {
+        updateSendButtonState()
     }
     
     private func setupNavigation() {
@@ -233,6 +246,7 @@ extension ClientEmailConfirmView: IClientEmailConfirmView {
         errorLabel.isHidden = false
         
         emailTextField.text = ""
+        updateSendButtonState()
     }
 
 }

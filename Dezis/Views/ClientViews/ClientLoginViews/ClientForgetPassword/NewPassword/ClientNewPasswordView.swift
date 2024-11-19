@@ -78,6 +78,16 @@ class ClientNewPasswordView: UIViewController {
         return field
     }()
     
+    private let newPasswordErrorLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .red
+        label.font = UIFont(name: "SFProText-Regular", size: 12)
+        label.numberOfLines = 0
+        label.isHidden = true
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+
     private let confirmPasswordTextField: UITextField = {
         var field = UITextField()
         field.backgroundColor = UIColor(hex: "#2B373E")
@@ -102,6 +112,15 @@ class ClientNewPasswordView: UIViewController {
         return field
     }()
     
+    private let confirmPasswordErrorLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .red
+        label.font = UIFont(name: "SFProText-Regular", size: 12)
+        label.numberOfLines = 0
+        label.isHidden = true
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
     
     private let continueButton: UIButton = {
         let button = UIButton()
@@ -161,13 +180,28 @@ class ClientNewPasswordView: UIViewController {
         presenter = ClientNewPasswordPresenter(view: self, userId: userId)
         dismissKeyboardGesture()
         self.navigationController?.isNavigationBarHidden = false
+        
+        newPasswordTextField.delegate = self
+        confirmPasswordTextField.delegate = self
+        
+        updateContinueButtonState()
+    }
+
+    private func updateContinueButtonState() {
+        let isNewPasswordEmpty = newPasswordTextField.text?.isEmpty ?? true
+        let isConfirmPasswordEmpty = confirmPasswordTextField.text?.isEmpty ?? true
+        
+        continueButton.isEnabled = !isNewPasswordEmpty && !isConfirmPasswordEmpty
+        continueButton.backgroundColor = continueButton.isEnabled ? UIColor(hex: "#0A84FF") : UIColor(hex: "#515151")
     }
     
     private func setupUI() {
         
         view.addSubview(changePasswordLabel)
         view.addSubview(newPasswordTextField)
+        view.addSubview(newPasswordErrorLabel)
         view.addSubview(confirmPasswordTextField)
+        view.addSubview(confirmPasswordErrorLabel)
         view.addSubview(continueButton)
         view.addSubview(termsTextView)
         view.addSubview(loadingIndicator)
@@ -198,15 +232,27 @@ class ClientNewPasswordView: UIViewController {
             make.height.equalTo(50)
         }
         
+        newPasswordErrorLabel.snp.makeConstraints { make in
+            make.top.equalTo(newPasswordTextField.snp.bottom).offset(4)
+            make.leading.equalTo(newPasswordTextField.snp.leading)
+            make.trailing.equalTo(newPasswordTextField.snp.trailing)
+        }
+        
         confirmPasswordTextField.snp.makeConstraints { make in
-            make.top.equalTo(newPasswordTextField.snp.bottom).offset(10)
+            make.top.equalTo(newPasswordErrorLabel.snp.bottom).offset(10)
             make.leading.equalToSuperview().offset(20)
             make.trailing.equalToSuperview().offset(-20)
             make.height.equalTo(50)
         }
         
+        confirmPasswordErrorLabel.snp.makeConstraints { make in
+            make.top.equalTo(confirmPasswordTextField.snp.bottom).offset(4)
+            make.leading.equalTo(confirmPasswordTextField.snp.leading)
+            make.trailing.equalTo(confirmPasswordTextField.snp.trailing)
+        }
+        
         continueButton.snp.makeConstraints { make in
-            make.top.equalTo(confirmPasswordTextField.snp.bottom).offset(12)
+            make.top.equalTo(confirmPasswordErrorLabel.snp.bottom).offset(12)
             make.leading.equalToSuperview().offset(20)
             make.trailing.equalToSuperview().offset(-24)
             make.height.equalTo(52)
@@ -257,13 +303,47 @@ class ClientNewPasswordView: UIViewController {
             showInputError(message: "Поля не могут быть пустыми")
             return
         }
-        
-        if newPassword == confirmPassword {
-            presenter?.updatePassword(newPassword: newPassword)
-        } else {
-            showInputError(message: "Пароли не совпадают")
+
+        if let passwordError = isValidPassword(newPassword) {
+            showInputError(message: passwordError)
+            return
         }
+
+        if newPassword != confirmPassword {
+            showInputError(message: "Пароли не совпадают")
+            return
+        }
+
+        presenter?.updatePassword(newPassword: newPassword)
     }
+    
+    private func isValidPassword(_ password: String) -> String? {
+        if password.count < 8 {
+            return "Пароль должен содержать не менее 8 символов."
+        }
+        
+        let lowercaseLetterRegex = ".*[a-z]+.*"
+        let lowercaseTest = NSPredicate(format: "SELF MATCHES %@", lowercaseLetterRegex)
+        if !lowercaseTest.evaluate(with: password) {
+            return "Пароль должен содержать хотя бы одну строчную букву."
+        }
+        
+        let digitRegex = ".*[0-9]+.*"
+        let digitTest = NSPredicate(format: "SELF MATCHES %@", digitRegex)
+        if !digitTest.evaluate(with: password) {
+            return "Пароль должен содержать хотя бы одну цифру."
+        }
+        
+        let specialCharacterRegex = ".*[!@#$%^&*(),.?\":{}|<>]+.*"
+        let specialCharacterTest = NSPredicate(format: "SELF MATCHES %@", specialCharacterRegex)
+        if !specialCharacterTest.evaluate(with: password) {
+            return "Пароль должен содержать хотя бы один специальный символ *[!@#$%^&*(),.?\":{}|<>]+.*."
+        }
+        
+        return nil
+    }
+
+
 }
 
 extension ClientNewPasswordView: UITextViewDelegate {
@@ -280,25 +360,16 @@ extension ClientNewPasswordView: UITextViewDelegate {
 extension ClientNewPasswordView: IClientNewPasswordView {
     
     func showInputError(message: String) {
-        newPasswordTextField.layer.borderColor = UIColor.red.cgColor
-        confirmPasswordTextField.layer.borderColor = UIColor.red.cgColor
-        
-        newPasswordTextField.attributedPlaceholder = NSAttributedString(
-            string: message,
-            attributes: [
-                .foregroundColor: UIColor.red,
-                .font: UIFont(name: "SFProText-Regular", size: 14)!
-            ]
-        )
-        
-        confirmPasswordTextField.attributedPlaceholder = NSAttributedString(
-            string: message,
-            attributes: [
-                .foregroundColor: UIColor.red,
-                .font: UIFont(name: "SFProText-Regular", size: 14)!
-            ]
-        )
-        
+        if message.contains("Пароль должен") {
+            newPasswordErrorLabel.text = message
+            newPasswordErrorLabel.isHidden = false
+            newPasswordTextField.layer.borderColor = UIColor.red.cgColor
+        } else if message.contains("Пароли не совпадают") {
+            confirmPasswordErrorLabel.text = message
+            confirmPasswordErrorLabel.isHidden = false
+            confirmPasswordTextField.layer.borderColor = UIColor.red.cgColor
+        }
+
         newPasswordTextField.text = ""
         confirmPasswordTextField.text = ""
     }
@@ -315,5 +386,11 @@ extension ClientNewPasswordView: IClientNewPasswordView {
     func navigateToLoginScreen() {
         let loginVC = ClientLoginViewController()
         navigationController?.setViewControllers([loginVC], animated: true)
+    }
+}
+
+extension ClientNewPasswordView: UITextFieldDelegate {
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        updateContinueButtonState()
     }
 }
