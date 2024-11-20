@@ -294,7 +294,7 @@ class ClientLoginViewController: UIViewController, UITextFieldDelegate, IClientL
     }
     @objc private func togglePasswordVisibility() {
         passwordTextField.isSecureTextEntry.toggle()
-        let imageName = passwordTextField.isSecureTextEntry ? "eyeeye.slash" : "eye"
+        let imageName = passwordTextField.isSecureTextEntry ? "eye.slash" : "eye"
         passwordToggleButton.setImage(UIImage(systemName: imageName), for: .normal)
     }
     

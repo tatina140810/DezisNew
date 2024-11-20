@@ -339,7 +339,7 @@ class CalendarViewController: UIViewController, ICalendarViewController {
 
     private func showBookingSuccessAlert(response: BookingLoginResponse) {
         let vc = ViewControllerForAlert()
-        navigationController?.present(vc, animated: true)
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     private func showBookingErrorAlert(error: Error) {

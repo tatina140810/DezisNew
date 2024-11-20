@@ -186,6 +186,12 @@ class UserRegisterSecondPageViewController: UIViewController, IUserRegisterSecon
             make.leading.equalToSuperview().offset(20)
             
         }
+        view.addSubview(activityIndicator)
+        activityIndicator.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+        }
+
+
         view.addSubview(nextButton)
         nextButton.snp.makeConstraints { make in
             make.top.equalTo(errorLabel.snp.bottom).offset(10)
@@ -219,11 +225,14 @@ class UserRegisterSecondPageViewController: UIViewController, IUserRegisterSecon
     }
     
     @objc private func nextButtonTapped() {
+        activityIndicator.startAnimating()
+               
+               DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
+                   self.activityIndicator.stopAnimating()
+               }
         errorLabel.isHidden = false
-        errorLabel.text = "Проверка данных. Ожидайте."
         errorLabel.textColor = .white
-        
-        // Validate input fields
+ 
         guard let address = adressTextField.text, !address.isEmpty,
               let apartmentNumber = apartmentNumberTextField.text, !apartmentNumber.isEmpty else {
             

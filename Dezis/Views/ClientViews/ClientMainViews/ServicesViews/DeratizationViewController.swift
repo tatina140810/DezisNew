@@ -2,44 +2,6 @@ import UIKit
 
 class DeratizationViewController: UIViewController {
    
-    private lazy var backButton: UIButton = {
-        let backButton = UIButton(type: .system)
-        backButton.setTitle("Назад", for: .normal)
-        backButton.titleLabel?.font = UIFont(name: "SFProText-Regular", size: 17)
-
-        // Создаем шаблонное изображение
-        let chevronImage = UIImage(resource: .shevron).withRenderingMode(.alwaysTemplate)
-        
-        // Изменяем цвет изображения
-        let tintedChevronImage = chevronImage.withTintColor(.systemBlue)
-
-        // Меняем размер изображения
-        let resizedChevron = UIGraphicsImageRenderer(size: CGSize(width: 8, height: 14)).image { _ in
-            tintedChevronImage.draw(in: CGRect(origin: .zero, size: CGSize(width: 8, height: 14)))
-        }
-
-        if #available(iOS 15.0, *) {
-            var config = UIButton.Configuration.plain()
-            config.image = resizedChevron
-            config.imagePadding = 5
-            config.baseForegroundColor = .systemBlue
-            config.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: -7, bottom: 0, trailing: 0)
-            backButton.configuration = config
-        } else {
-            backButton.setTitleColor(.systemBlue, for: .normal)
-            backButton.setImage(resizedChevron, for: .normal)
-            backButton.tintColor = .systemBlue
-            backButton.semanticContentAttribute = .forceLeftToRight
-            backButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: -7, bottom: 0, right: 5)
-            backButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 3, bottom: 0, right: -5)
-        }
-
-        backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
-        
-        return backButton
-    }()
-
-    
 private var titleLable: UILabel = {
     let label = UILabel()
     label.font = UIFont.boldSystemFont(ofSize: 20)
@@ -55,7 +17,6 @@ private var titleLable: UILabel = {
         return view
         
     }()
-   
     
     private var servicesDescriptionLabel: UILabel = {
         let label = UILabel()
@@ -84,19 +45,10 @@ private lazy var orderButton: UIButton = {
         super.viewDidLoad()
         setupUI()
         view.backgroundColor = UIColor(hex: "#1B2228")
-
-        
+ 
     }
     private func setupUI(){
-        view.addSubview(backButton)
-        backButton.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(60)
-            make.leading.equalToSuperview().offset(20)
-            make.width.equalTo(58)
-            make.height.equalTo(24)
-            
-        }
-        
+     
         view.addSubview(titleLable)
         titleLable.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(104)
@@ -131,9 +83,6 @@ private lazy var orderButton: UIButton = {
 
         self.dismiss(animated: true, completion: nil)
     }
-@objc func backButtonTapped(){
-    self.dismiss(animated: true, completion: nil)
-}
 
 
 }

@@ -21,21 +21,25 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         window?.makeKeyAndVisible()
         if #available(iOS 15, *) {
-            
             let navigationBarAppearance = UINavigationBarAppearance()
             navigationBarAppearance.configureWithOpaqueBackground()
             navigationBarAppearance.titleTextAttributes = [
-                NSAttributedString.Key.foregroundColor : UIColor.white
+                NSAttributedString.Key.foregroundColor: UIColor.white
             ]
             navigationBarAppearance.backgroundColor = UIColor(hex: "#1B2228")
+            
             UINavigationBar.appearance().standardAppearance = navigationBarAppearance
             UINavigationBar.appearance().compactAppearance = navigationBarAppearance
             UINavigationBar.appearance().scrollEdgeAppearance = navigationBarAppearance
-            
+        } else {
+            UINavigationBar.appearance().barTintColor = UIColor(hex: "#1B2228")
+            UINavigationBar.appearance().titleTextAttributes = [
+                NSAttributedString.Key.foregroundColor: UIColor.white
+            ]
+            UINavigationBar.appearance().isTranslucent = false
         }
     }
     
-   
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.
     }

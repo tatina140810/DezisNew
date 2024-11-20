@@ -63,6 +63,8 @@ class ClientHistoryViewController: UIViewController, IClientHistoryViewControlle
         
         presenter = ClientHistoryPresenter(view: self)
         presenter.fetchClientOrders()
+        navigationItem.hidesBackButton = false
+        navigationItem.backButtonTitle = "Назад"
         
     }
     
