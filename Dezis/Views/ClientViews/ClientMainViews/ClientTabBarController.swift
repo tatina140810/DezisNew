@@ -50,7 +50,7 @@ class ClientTabBarController: UITabBarController {
         calendarView.tabBarItem = UITabBarItem(title: "Календарь", image: UIImage(resource: .clock), selectedImage: UIImage(resource: .clock))
         
         let chatView = ClientChatViewController()
-        chatView.tabBarItem = UITabBarItem(title: "Чат", image: UIImage(resource: .message), selectedImage: UIImage(resource: .message))
+        chatView.tabBarItem = UITabBarItem(title: "Чаты", image: UIImage(resource: .message), selectedImage: UIImage(resource: .message))
 
         let personalAccount = PersonalAccountViewController() 
         personalAccount.tabBarItem = UITabBarItem(title: "Профиль", image: UIImage(resource: .profile), selectedImage: UIImage(resource: .profile))

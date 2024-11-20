@@ -118,7 +118,7 @@ private lazy var orderButton: UIButton = {
         }
         view.addSubview(orderButton)
         orderButton.snp.makeConstraints { make in
-            make.bottom.equalToSuperview().offset(-100)
+            make.top.equalTo(servicesDescriptionLabel.snp.bottom).offset(18)
             make.leading.equalToSuperview().offset(20)
             make.trailing.equalToSuperview().offset(-20)
             make.height.equalTo(52)

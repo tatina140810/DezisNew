@@ -155,6 +155,12 @@ class UserNetworkService {
                     }
                     
                     let registerResponse = try JSONDecoder().decode(UserRegisterResponse.self, from: response.data)
+                                    
+                                  
+                    let tokens = UserTokenResponseModel(accessToken: registerResponse.tokens.access,
+refreshToken: registerResponse.tokens.refresh)
+                    KeychainService.shared.saveToken(token: tokens)
+                  
                     completion(.success(registerResponse))
                 } catch {
                     print("Ошибка декодирования: \(error)")

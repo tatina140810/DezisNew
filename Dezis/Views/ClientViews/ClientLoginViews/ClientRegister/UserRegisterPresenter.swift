@@ -27,6 +27,17 @@ class UserRegisterPresenter: IUserRegisterPresenters {
                 } else {
                     print("User ID not found in response.")
                 }
+                let tokens = UserTokenResponseModel(
+                    accessToken: registerResponse.tokens.access,
+                    refreshToken: registerResponse.tokens.refresh
+                )
+                KeychainService.shared.saveToken(token: tokens)
+
+                if KeychainService.shared.hasTokens() {
+                    print("Токены успешно сохранены!")
+                } else {
+                    print("Токены не сохранены.")
+                }
                 completion(.success(registerResponse))
                 
             case .failure(let error):
