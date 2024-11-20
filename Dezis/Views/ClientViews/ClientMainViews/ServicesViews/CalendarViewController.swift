@@ -286,14 +286,10 @@ class CalendarViewController: UIViewController, ICalendarViewController {
         let calendar = Calendar.current
         let currentDate = Date()
         
-        if let startOfMonth = calendar.date(from: calendar.dateComponents([.year, .month], from: currentDate)),
-           let endOfMonth = calendar.date(byAdding: .month, value: 2, to: startOfMonth)?.addingTimeInterval(-1) {
-            
-            datePicker.minimumDate = startOfMonth
-            datePicker.maximumDate = endOfMonth
-        }
+        datePicker.minimumDate = currentDate
+        datePicker.maximumDate = calendar.date(byAdding: .day, value: 60, to: currentDate)
+        
     }
-    
     
     @objc private func timeChanged() {
         let formatter = DateFormatter()
