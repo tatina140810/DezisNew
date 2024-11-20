@@ -80,7 +80,6 @@ class ChoiceViewController: UIViewController {
         UITabBar.appearance().standardAppearance = temporaryTabBarAppearance
         UITabBar.appearance().scrollEdgeAppearance = temporaryTabBarAppearance
 
-        // Создание и показ алерта
         let alertView = UIView()
         alertView.backgroundColor = UIColor(hex: "#0A84FF")
        
