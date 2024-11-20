@@ -117,21 +117,6 @@ class ClientLoginViewController: UIViewController, UITextFieldDelegate, IClientL
         navigationItem.backButtonTitle = "Назад"
     }
     
-    func keyBoardSetUp(){
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-           NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-
-    }
-    @objc func keyboardWillShow(notification: NSNotification) {
-        if let keyboardSize = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
-            let keyboardHeight = keyboardSize.cgRectValue.height
-            self.view.frame.origin.y = -keyboardHeight / 2
-        }
-    }
-
-    @objc func keyboardWillHide(notification: NSNotification) {
-        self.view.frame.origin.y = 0
-    }
     
     @objc private func handleForgotPassword() {
         let vc = ClientEmailConfirmView()

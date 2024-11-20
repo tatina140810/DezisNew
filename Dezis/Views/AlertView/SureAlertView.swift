@@ -55,7 +55,7 @@ class SureAlertView: UIView {
     private let yesButton: UIButton = {
         let button = UIButton()
         button.setTitleColor(UIColor(hex: "#FF0000"), for: .normal)
-        button.titleLabel?.font = UIFont(name: "SFProText-Bold", size: 16)
+        button.titleLabel?.font = UIFont(name: "SFProText-Medium", size: 16)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -119,12 +119,13 @@ class SureAlertView: UIView {
         self.removeFromSuperview()
     }
     
-    func showAlert(on view: UIView, message: String, yesButtonText: String = "Да", noButtonText: String = "Нет", yesButtonColor: UIColor = UIColor(hex: "#FF0000")) {
+    func showAlert(on view: UIView, message: String, yesButtonText: String = "Да", noButtonText: String = "Нет", yesButtonColor: UIColor = UIColor(hex: "#FF0000"), noButtonColor: UIColor = UIColor(hex: "#FF0000")) {
         messageLabel.text = message
         yesButton.setTitle(yesButtonText, for: .normal)
         yesButton.setTitleColor(yesButtonColor, for: .normal)
         noButton.setTitle(noButtonText, for: .normal)
-
+        noButton.setTitleColor(noButtonColor, for: .normal)
+        
         view.addSubview(self)
         self.translatesAutoresizingMaskIntoConstraints = false
 

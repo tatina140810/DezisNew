@@ -184,8 +184,17 @@ extension AdminHistoryView: UICollectionViewDataSource {
     }
     private func completeOrder(for indexPath: IndexPath) {
         DispatchQueue.main.async {
+            
             let sureAlert = SureAlertView()
-            sureAlert.showAlert(on: self.view, message: "Заказ завершен?")
+            sureAlert.showAlert(
+                on: self.view,
+                message: "Заказ завершен?",
+                yesButtonText: "Да",
+                noButtonText: "Нет",
+                yesButtonColor: UIColor(hex: "#0A84FF"),
+                noButtonColor: UIColor(hex: "FF0000")
+            )
+            
             
             sureAlert.onConfirm = {
                 self.presenter.completeOrder(at: indexPath.row)

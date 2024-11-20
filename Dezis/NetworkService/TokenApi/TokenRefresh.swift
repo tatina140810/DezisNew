@@ -66,4 +66,7 @@ final class KeychainService {
     func deleteAll() {
         provider.clear()
     }
+    func hasTokens() -> Bool {
+        return !accessToken.isEmpty && !refreshToken.isEmpty
+    }
 }

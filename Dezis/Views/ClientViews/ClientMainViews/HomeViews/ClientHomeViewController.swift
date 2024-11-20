@@ -116,17 +116,21 @@ class ClientHomeViewController: UIViewController {
         view.backgroundColor = UIColor(hex: "#1B2228")
         setupUI()
         navigationController?.setNavigationBarHidden(true, animated: true)
-       navigationItem.hidesBackButton = true
-        print("DezinfectionView frame: \(dezinfectionView.frame)")
-           print("DeratizationView frame: \(deratizationView.frame)")
-           print("Spacing: \(deratizationView.frame.minY - dezinfectionView.frame.maxY)")
+        navigationItem.hidesBackButton = true
+
+        }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: true)
+        navigationItem.hidesBackButton = false
+        navigationItem.backButtonTitle = "Назад"
+        
     }
-  
     func setupUI(){
         view.addSubview(scrollView)
-        
         scrollView.snp.makeConstraints { make in
-            make.edges.equalTo(view.safeAreaLayoutGuide)
+            make.edges.equalToSuperview()
         }
         
         scrollView.addSubview(contentView)
@@ -206,20 +210,17 @@ class ClientHomeViewController: UIViewController {
     @objc func dezinsectionButtonTapped(){
      
         let vc = DezinsectionViewController()
-        vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: true, completion: nil)
+        navigationController?.pushViewController(vc, animated: true)
     }
     @objc func dezinfectionButtonTapped(){
   
         let vc = DezinfectionViewController()
-        vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: true, completion: nil)   
+        navigationController?.pushViewController(vc, animated: true)
     }
     @objc func deratizationButtonTapped(){
        
         let vc = DeratizationViewController()
-        vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: true, completion: nil)  
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
 

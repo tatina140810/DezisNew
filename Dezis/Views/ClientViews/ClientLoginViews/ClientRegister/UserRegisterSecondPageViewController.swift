@@ -124,21 +124,6 @@ class UserRegisterSecondPageViewController: UIViewController, IUserRegisterSecon
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
 
-    func keyBoardSetUp(){
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-    }
-
-    @objc func keyboardWillShow(notification: NSNotification) {
-        if let keyboardSize = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
-            let keyboardHeight = keyboardSize.cgRectValue.height
-            self.view.frame.origin.y = -keyboardHeight / 2.5
-        }
-    }
-
-    @objc func keyboardWillHide(notification: NSNotification) {
-        self.view.frame.origin.y = 0
-    }
     private func createAttributedText() {
         AttributedTextHelper.configureAttributedText(
             for: privacyLabel,
@@ -201,6 +186,12 @@ class UserRegisterSecondPageViewController: UIViewController, IUserRegisterSecon
             make.leading.equalToSuperview().offset(20)
             
         }
+        view.addSubview(activityIndicator)
+        activityIndicator.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+        }
+
+
         view.addSubview(nextButton)
         nextButton.snp.makeConstraints { make in
             make.top.equalTo(errorLabel.snp.bottom).offset(10)
@@ -234,11 +225,14 @@ class UserRegisterSecondPageViewController: UIViewController, IUserRegisterSecon
     }
     
     @objc private func nextButtonTapped() {
+        activityIndicator.startAnimating()
+               
+               DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
+                   self.activityIndicator.stopAnimating()
+               }
         errorLabel.isHidden = false
-        errorLabel.text = "Проверка данных. Ожидайте."
         errorLabel.textColor = .white
-        
-        // Validate input fields
+ 
         guard let address = adressTextField.text, !address.isEmpty,
               let apartmentNumber = apartmentNumberTextField.text, !apartmentNumber.isEmpty else {
             

@@ -155,6 +155,16 @@ class PersonalAccountViewController: UIViewController, PersonalAccountView {
         button.addTarget(self, action: #selector(historyButtonTapped), for: .touchUpInside)
         return button
     }()
+    private lazy var saveButton: UIButton = {
+        let view = UIButton()
+        view.setTitle("Сохранить", for: .normal)
+        view.setTitleColor(.white, for: .normal)
+        view.backgroundColor = UIColor(hex: "#0A84FF")
+        view.layer.cornerRadius = 12
+        view.titleLabel?.font = UIFont(name: "SFProDisplay-Bold", size: 16)
+        view.addTarget(self, action: #selector(saveUpdatedNumber), for: .touchUpInside)
+        return view
+    }()
     
     private lazy var exitButton: UIButton = {
         let button = UIButton()
@@ -167,6 +177,13 @@ class PersonalAccountViewController: UIViewController, PersonalAccountView {
         button.addTarget(self, action: #selector(exitButtonTapped), for: .touchUpInside)
         return button
     }()
+    private lazy var passwordToggleButton: UIButton = {
+        let button = UIButton(type: .custom)
+        button.setImage(UIImage(systemName: "eye.slash"), for: .normal)
+        button.tintColor = .white
+        button.addTarget(self, action: #selector(togglePasswordVisibility), for: .touchUpInside)
+        return button
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -177,22 +194,7 @@ class PersonalAccountViewController: UIViewController, PersonalAccountView {
         editButtonSetup()
         dismissKeyboardGesture()
     }
-    func keyBoardSetUp(){
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-           NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-
-    }
-    @objc func keyboardWillShow(notification: NSNotification) {
-        if let keyboardSize = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
-            let keyboardHeight = keyboardSize.cgRectValue.height
-            self.view.frame.origin.y = -keyboardHeight / 2
-        }
-    }
-
-    @objc func keyboardWillHide(notification: NSNotification) {
-        self.view.frame.origin.y = 0
-    }
-    
+   
 
     func editButtonSetup(){
         let editButton = UIButton(type: .custom)
@@ -284,6 +286,12 @@ class PersonalAccountViewController: UIViewController, PersonalAccountView {
             make.trailing.equalToSuperview().offset(-20)
             make.height.equalTo(35)
         }
+        view.addSubview(passwordToggleButton)
+        passwordToggleButton.snp.makeConstraints { make in
+            make.centerY.equalTo(passwordTextField)
+            make.trailing.equalTo(passwordTextField.snp.trailing).offset(-16)
+            make.width.height.equalTo(24)
+        }
         
         view.addSubview(phoneLabel)
         phoneLabel.snp.makeConstraints { make in
@@ -294,23 +302,27 @@ class PersonalAccountViewController: UIViewController, PersonalAccountView {
         view.addSubview(phoneTextField)
         phoneTextField.snp.makeConstraints { make in
             make.top.equalTo(phoneLabel.snp.bottom).offset(8)
-            make.leading.equalToSuperview().offset(20)
-            make.trailing.equalToSuperview().offset(-20)
+            make.leading.trailing.equalToSuperview().inset(20)
             make.height.equalTo(35)
+        }
+        view.addSubview(saveButton)
+        saveButton.snp.makeConstraints { make in
+            make.top.equalTo(phoneTextField.snp.bottom).offset(16)
+            make.leading.trailing.equalToSuperview().inset(20)
+            make.height.equalTo(52)
         }
         
         view.addSubview(historyButton)
         historyButton.snp.makeConstraints { make in
-            make.top.equalTo(phoneTextField.snp.bottom).offset(40)
-            make.leading.equalToSuperview().offset(20)
-            make.trailing.equalToSuperview().offset(-20)
+            make.top.equalTo(saveButton.snp.bottom).offset(10)
+            make.leading.trailing.equalToSuperview().inset(20)
             make.height.equalTo(40)
         }
+        
         view.addSubview(exitButton)
         exitButton.snp.makeConstraints { make in
             make.top.equalTo(historyButton.snp.bottom).offset(17)
-            make.leading.equalToSuperview().offset(20)
-            make.trailing.equalToSuperview().offset(-20)
+            make.leading.trailing.equalToSuperview().inset(20)
             make.height.equalTo(40)
         }
     }
@@ -319,6 +331,12 @@ class PersonalAccountViewController: UIViewController, PersonalAccountView {
         let vc = ClientHistoryViewController()
         navigationController?.pushViewController(vc, animated: true)
     }
+    @objc private func togglePasswordVisibility() {
+        passwordTextField.isSecureTextEntry.toggle()
+        let imageName = passwordTextField.isSecureTextEntry ? "eye.slash" : "eye"
+        passwordToggleButton.setImage(UIImage(systemName: imageName), for: .normal)
+    }
+    
     
     @objc private func userImageTapped() {
         let alertController = UIAlertController(title: "Выберите фото профиля", message: "Выберите фото из галереи или сделайте новое фото.", preferredStyle: .actionSheet)
@@ -347,7 +365,7 @@ class PersonalAccountViewController: UIViewController, PersonalAccountView {
     }
     
     @objc private func enableEditing() {
-        saveUpdatedNumber()
+        phoneTextField.isUserInteractionEnabled = true
         print("button tupped")
         
     }
