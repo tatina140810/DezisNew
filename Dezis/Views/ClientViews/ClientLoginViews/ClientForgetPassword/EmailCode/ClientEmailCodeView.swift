@@ -40,26 +40,41 @@ class ClientEmailCodeView: UIViewController {
     }()
     
     private lazy var codeTextField: UITextField = {
-        var field = UITextField()
+        let field = UITextField()
         field.backgroundColor = UIColor(hex: "#2B373E")
         field.textColor = .white
         field.layer.borderWidth = 1
         field.layer.borderColor = UIColor.clear.cgColor
-        field.attributedPlaceholder = NSAttributedString(
-            string: "Код:",
-            attributes: [
-                NSAttributedString.Key.foregroundColor: UIColor.white.withAlphaComponent(0.7),
-                NSAttributedString.Key.font: UIFont(name: "SFProText-Medium", size: 14)!
-            ])
         field.layer.cornerRadius = 10
         field.font = UIFont(name: "SFProText-Medium", size: 14)
         field.autocapitalizationType = .none
+        field.keyboardType = .numberPad
         field.translatesAutoresizingMaskIntoConstraints = false
         field.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
-        
-        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 15, height: field.frame.height))
-        field.leftView = paddingView
+
+        let container = UIView()
+        container.translatesAutoresizingMaskIntoConstraints = false
+
+        let leftLabel = UILabel()
+        leftLabel.text = "Код: "
+        leftLabel.textColor = .white
+        leftLabel.font = UIFont(name: "SFProText-Medium", size: 14)
+        leftLabel.sizeToFit()
+
+        let paddingView = UIView()
+        paddingView.frame = CGRect(x: 0, y: 0, width: 15, height: leftLabel.frame.height)
+
+        container.addSubview(paddingView)
+        container.addSubview(leftLabel)
+
+        container.frame = CGRect(x: 0, y: 0, width: leftLabel.frame.width + paddingView.frame.width, height: leftLabel.frame.height)
+
+        paddingView.frame.origin = .zero
+        leftLabel.frame.origin = CGPoint(x: paddingView.frame.width, y: 0)
+
+        field.leftView = container
         field.leftViewMode = .always
+
         return field
     }()
     
@@ -73,6 +88,43 @@ class ClientEmailCodeView: UIViewController {
         button.isEnabled = false
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
+    }()
+    
+    private let termsTextView: UITextView = {
+        let textView = UITextView()
+        textView.isEditable = false
+        textView.isScrollEnabled = false
+        textView.backgroundColor = .clear
+        textView.font = UIFont(name: "SFProText-Regular", size: 12)
+        textView.textColor = .white
+        textView.linkTextAttributes = [
+            .foregroundColor: UIColor.systemBlue
+        ]
+        
+        let fullText = "Выбирая «Зарегистрироваться», вы подтверждаете свое согласие с Условием продажи и принимаете условия Положения о конфиденциальности."
+        
+        let termsOfService = "Условием продажи"
+        let privacyPolicy = "Положения о конфиденциальности."
+        
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.alignment = .center
+        
+        let attributedString = NSMutableAttributedString(string: fullText, attributes: [
+            .font: UIFont.systemFont(ofSize: 12),
+            .foregroundColor: UIColor.white,
+            .paragraphStyle: paragraphStyle
+        ])
+        
+        let termsRange = (fullText as NSString).range(of: termsOfService)
+        let privacyRange = (fullText as NSString).range(of: privacyPolicy)
+        
+        attributedString.addAttribute(.link, value: "terms://", range: termsRange)
+        attributedString.addAttribute(.link, value: "privacy://", range: privacyRange)
+        
+        textView.attributedText = attributedString
+        textView.translatesAutoresizingMaskIntoConstraints = false
+        
+        return textView
     }()
     
     override func viewDidLoad() {
@@ -90,6 +142,7 @@ class ClientEmailCodeView: UIViewController {
         view.addSubview(sendCodeLabel)
         view.addSubview(codeTextField)
         view.addSubview(sendButton)
+        view.addSubview(termsTextView)
 
         sendCodeLabel.snp.makeConstraints { make in
             make.centerY.equalToSuperview().offset(-105)
@@ -110,6 +163,12 @@ class ClientEmailCodeView: UIViewController {
             make.leading.equalToSuperview().offset(20)
             make.trailing.equalToSuperview().offset(-24)
             make.height.equalTo(52)
+        }
+        
+        termsTextView.snp.makeConstraints { make in
+            make.bottom.equalToSuperview().offset(-34)
+            make.leading.equalToSuperview().offset(20)
+            make.trailing.equalToSuperview().offset(-20)
         }
     }
     
@@ -161,7 +220,7 @@ class ClientEmailCodeView: UIViewController {
             showInputError(message: "Введите код")
             return
         }
-        
+
         presenter?.verifyUser(email: email, otp: code)
     }
 }
@@ -175,15 +234,34 @@ extension ClientEmailCodeView: IClientEmailCodeView {
     
     func showInputError(message: String) {
         codeTextField.layer.borderColor = UIColor.red.cgColor
+
+        let alertLabel = UILabel()
+        alertLabel.text = message
+        alertLabel.textColor = .red
+        alertLabel.font = UIFont(name: "SFProText-Regular", size: 14)
+        alertLabel.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(alertLabel)
+
+        alertLabel.snp.makeConstraints { make in
+            make.top.equalTo(codeTextField.snp.bottom).offset(4)
+            make.leading.equalTo(codeTextField.snp.leading)
+        }
         
-        codeTextField.attributedPlaceholder = NSAttributedString(
-            string: message,
-            attributes: [
-                .foregroundColor: UIColor.red,
-                .font: UIFont(name: "SFProText-Regular", size: 14)!
-            ]
-        )
-        
-        codeTextField.text = ""
+        sendButton.snp.makeConstraints { make in
+            make.top.equalTo(alertLabel.snp.bottom).offset(4)
+            make.leading.equalToSuperview().offset(20)
+            make.trailing.equalToSuperview().offset(-24)
+            make.height.equalTo(52)
+        }
     }
+}
+
+extension ClientEmailCodeView: UITextViewDelegate {
+    
+    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
+           if URL.scheme == "terms" || URL.scheme == "privacy" {
+               return false
+           }
+           return true
+       }
 }

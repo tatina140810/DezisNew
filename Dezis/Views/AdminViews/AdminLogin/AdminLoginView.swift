@@ -170,7 +170,42 @@ class AdminLoginView: UIViewController {
         setupNavigation()
         presenter = AdminLoginPresenter(view: self)
         dismissKeyboardGesture()
+    
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
+
+    deinit {
+        
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+        
+    }
+
+    @objc private func keyboardWillShow(_ notification: Notification) {
+        guard let userInfo = notification.userInfo,
+              let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect,
+              let animationDuration = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double else { return }
+        
+        let keyboardHeight = keyboardFrame.height
+        let bottomOffset = continueButton.frame.maxY - (view.frame.height - keyboardHeight)
+        
+        if bottomOffset > 0 {
+            UIView.animate(withDuration: animationDuration) {
+                self.view.frame.origin.y = -bottomOffset - 10
+            }
+        }
+    }
+
+    @objc private func keyboardWillHide(_ notification: Notification) {
+        guard let userInfo = notification.userInfo,
+              let animationDuration = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double else { return }
+        
+        UIView.animate(withDuration: animationDuration) {
+            self.view.frame.origin.y = 0
+        }
+    }
+
     
     private func setupUI() {
         
@@ -229,6 +264,8 @@ class AdminLoginView: UIViewController {
     
     private func setupAddTarget() {
         continueButton.addTarget(self, action: #selector(continueButtonTapped), for: .touchUpInside)
+        loginTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+        passwordTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
     }
     
     private func setupNavigation() {
@@ -254,6 +291,18 @@ class AdminLoginView: UIViewController {
         let backBarButtonItem = UIBarButtonItem(customView: backButton)
         navigationItem.leftBarButtonItem = backBarButtonItem
     }
+    
+    @objc private func textFieldDidChange() {
+        
+        let isLoginEmpty = loginTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true
+        let isPasswordEmpty = passwordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true
+
+        if !isLoginEmpty && !isPasswordEmpty {
+            continueButton.isEnabled = true
+            continueButton.backgroundColor = UIColor(hex: "#0A84FF")
+        }
+    }
+
     
     @objc private func backButtonTapped() {
         navigationController?.popViewController(animated: true)
@@ -286,15 +335,19 @@ class AdminLoginView: UIViewController {
     func showInputError(message: String) {
         loginTextField.layer.borderColor = UIColor.red.cgColor
         passwordTextField.layer.borderColor = UIColor.red.cgColor
+        
         loginTextField.text = ""
         passwordTextField.text = ""
+        
         loginErrorLabel.text = message
         passwordErrorLabel.text = message
         
         loginErrorLabel.isHidden = false
         passwordErrorLabel.isHidden = false
+        
+        continueButton.isEnabled = false
+        continueButton.backgroundColor = UIColor(hex: "#515151")
     }
-
     
     func resetInputAppearance() {
         loginTextField.layer.borderColor = UIColor.clear.cgColor
