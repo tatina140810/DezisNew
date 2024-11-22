@@ -115,7 +115,8 @@ class UserRegisterSecondPageViewController: UIViewController, IUserRegisterSecon
         createPrivaciAttributedText()
         navigationItem.backButtonTitle = "Назад"
         keyBoardSetUp()
-        
+        adressTextField.delegate = self
+            apartmentNumberTextField.delegate = self
     }
     
    
@@ -250,7 +251,21 @@ class UserRegisterSecondPageViewController: UIViewController, IUserRegisterSecon
             }
             return
         }
-        
+//        if !isValidAdress(address) {
+//            adressTextField.layer.borderColor = UIColor.red.cgColor
+//            adressTextField.layer.borderWidth = 1.0
+//            return
+//        }
+//        if !isValidApartmentNumber(apartmentNumber) {
+//            apartmentNumberTextField.layer.borderColor = UIColor.red.cgColor
+//            apartmentNumberTextField.layer.borderWidth = 1.0
+//            return
+//        }
+//        adressTextField.layer.borderWidth = 0
+//        apartmentNumberTextField.layer.borderWidth = 0
+//        adressTextField.layer.borderWidth = 0
+//        apartmentNumberTextField.layer.borderWidth = 0
+//        
         if var userInfo = presenter?.getUserInfo() {
             userInfo.address = address
             userInfo.apartmentNumber = apartmentNumber
@@ -260,6 +275,11 @@ class UserRegisterSecondPageViewController: UIViewController, IUserRegisterSecon
                     switch result {
                         
                     case .success(_):
+                        self?.activityIndicator.startAnimating()
+                               
+                               DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
+                                   self?.activityIndicator.stopAnimating()
+                               }
                         let vc = СonfirmationСodeViewController(email: userInfo.email)
                         self?.navigationController?.pushViewController(vc, animated: true)
                         self?.showSuccessMessage()
@@ -281,7 +301,7 @@ class UserRegisterSecondPageViewController: UIViewController, IUserRegisterSecon
                         }
                     
                         print("Failed to register user: \(error)")
-                        self?.errorLabel.text = "Пользователь с таким Email уже существует."
+                        self?.errorLabel.text = "Ошибка регистрации"
                         self?.errorLabel.textColor = .red
                         self?.errorLabel.isHidden = false
                     }
@@ -289,8 +309,13 @@ class UserRegisterSecondPageViewController: UIViewController, IUserRegisterSecon
             }
         }
     }
-    
-    
+    private func showError(for textField: UITextField, errorLabel: UILabel, message: String) {
+        errorLabel.text = message
+        errorLabel.isHidden = false
+        textField.layer.borderColor = UIColor.red.cgColor
+        textField.layer.borderWidth = 1.0
+    }
+   
     private func showSuccessMessage() {
 
         errorLabel.text = "Мы отправили Вам код на почту."
@@ -299,6 +324,56 @@ class UserRegisterSecondPageViewController: UIViewController, IUserRegisterSecon
     }
 }
 
-      
+extension  UserRegisterSecondPageViewController: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        // Получаем обновленный текст
+        let currentText = textField.text ?? ""
+        let updatedText = (currentText as NSString).replacingCharacters(in: range, with: string)
+
+        // Определяем, какое поле обрабатывается
+        if textField == adressTextField {
+            validateAddress(updatedText)
+            return updatedText.count <= 50 // Ограничиваем длину до 50 символов
+        } else if textField == apartmentNumberTextField {
+            validateApartmentNumber(updatedText)
+            return updatedText.count <= 5 // Ограничиваем длину до 5 символов
+        }
+
+        return true
+    }
+
+    private func validateAddress(_ address: String) {
+        if address.isEmpty || !isValidAdress(address) {
+            showError(for: adressTextField, errorLabel: adressErrorMessageLabel, message: "Введите корректные данные")
+        } else {
+            clearError(for: adressTextField, errorLabel: adressErrorMessageLabel)
+        }
+    }
+
+    private func validateApartmentNumber(_ apartmentNumber: String) {
+        if apartmentNumber.isEmpty || !isValidApartmentNumber(apartmentNumber) {
+            showError(for: apartmentNumberTextField, errorLabel: numberErrorMessageLabel, message: "Некорректный номер квартиры")
+        } else {
+            clearError(for: apartmentNumberTextField, errorLabel: numberErrorMessageLabel)
+        }
+    }
+
+    private func clearError(for textField: UITextField, errorLabel: UILabel) {
+        errorLabel.isHidden = true
+        textField.layer.borderWidth = 0
+    }
+    func isValidAdress(_ username: String) -> Bool {
+        let characterSet = CharacterSet.letters.union(.whitespaces)
+        return username.count <= 50 && username.rangeOfCharacter(from: characterSet.inverted) == nil
+    }
+    func isValidApartmentNumber(_ apartmentNumber: String) -> Bool {
+        let allowedCharacters = CharacterSet.letters
+            .union(.decimalDigits)
+            .union(CharacterSet(charactersIn: "/"))
+        
+        return apartmentNumber.count <= 5 && apartmentNumber.rangeOfCharacter(from: allowedCharacters.inverted) == nil
+    }
+    
+}
 
 

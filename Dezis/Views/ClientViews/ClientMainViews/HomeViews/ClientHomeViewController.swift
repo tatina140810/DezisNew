@@ -6,6 +6,7 @@ class ClientHomeViewController: UIViewController {
     private lazy var scrollView: UIScrollView = {
         let view = UIScrollView()
         view.backgroundColor = UIColor(hex: "#1B2228")
+        
         return view
     }()
     private lazy var contentView: UIView = {
@@ -117,6 +118,7 @@ class ClientHomeViewController: UIViewController {
         setupUI()
         navigationController?.setNavigationBarHidden(true, animated: true)
         navigationItem.hidesBackButton = true
+        navigationController?.navigationBar.backgroundColor = UIColor(hex: "#1B2228")
 
         }
     

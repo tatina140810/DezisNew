@@ -3,7 +3,8 @@ import SnapKit
 
 
 class UserRegisterViewController: UIViewController {
-   
+    private let maxNumberCount = 12
+    private let regex = try! NSRegularExpression(pattern: "[\\+\\s-\\(\\)]", options: .caseInsensitive)
     
     private var titleLabel: UILabel = {
         let label = UILabel()
@@ -100,28 +101,9 @@ class UserRegisterViewController: UIViewController {
         createPrivaciAttributedText()
         keyBoardSetUp()
         navigationItem.backButtonTitle = "Назад"
-      
+        numberTextField.delegate = self
+        numberTextField.keyboardType = .numberPad
     }
-    
-    private func createAttributedText() {
-        AttributedTextHelper.configureAttributedText(
-            for: privacyLabel,
-            fullText: "Выбирая «Зарегистрироваться», вы подтверждаете свое согласие с Условием продажи и принимаете условия",
-            tappableText: "Условием продажи",
-            tapTarget: self,
-            action: #selector(attributedTextTapped)
-        )
-    }
-    private func createPrivaciAttributedText() {
-        AttributedTextHelper.configureAttributedText(
-            for: confidentialityLabel,
-            fullText: "Положения о конфиденциальности",
-            tappableText: "Положения о конфиденциальности",
-            tapTarget: self,
-            action: #selector(attributedPrivaciTextTapped)
-        )
-    }
-
     
     private func setupUI() {
         
@@ -173,7 +155,7 @@ class UserRegisterViewController: UIViewController {
             make.leading.equalToSuperview().offset(20)
             make.trailing.equalToSuperview().offset(-20)
             make.height.equalTo(50)
-           
+            
         }
         view.addSubview(passwordToggleButton)
         passwordToggleButton.snp.makeConstraints { make in
@@ -210,6 +192,25 @@ class UserRegisterViewController: UIViewController {
         
     }
     
+    private func createAttributedText() {
+        AttributedTextHelper.configureAttributedText(
+            for: privacyLabel,
+            fullText: "Выбирая «Зарегистрироваться», вы подтверждаете свое согласие с Условием продажи и принимаете условия",
+            tappableText: "Условием продажи",
+            tapTarget: self,
+            action: #selector(attributedTextTapped)
+        )
+    }
+    private func createPrivaciAttributedText() {
+        AttributedTextHelper.configureAttributedText(
+            for: confidentialityLabel,
+            fullText: "Положения о конфиденциальности",
+            tappableText: "Положения о конфиденциальности",
+            tapTarget: self,
+            action: #selector(attributedPrivaciTextTapped)
+        )
+    }
+    
     @objc func attributedTextTapped() {
         let vc = PrivacyPage()
         navigationController?.pushViewController(vc, animated: true)
@@ -231,11 +232,15 @@ class UserRegisterViewController: UIViewController {
         
         emailErrorMessageLabel.isHidden = true
         numberErrorMessageLabel.isHidden = true
+        passwordErrorLabel.isHidden = true
+        
         emailTextField.layer.borderWidth = 0
+        nameTextField.layer.borderWidth = 0
+        numberTextField.layer.borderWidth = 0
         passwordTextField.layer.borderWidth = 0
-
+        
         guard let username = nameTextField.text, !username.isEmpty,
-            let email = emailTextField.text, !email.isEmpty,
+              let email = emailTextField.text, !email.isEmpty,
               let number = numberTextField.text, !number.isEmpty,
               let password = passwordTextField.text, !password.isEmpty else {
             
@@ -249,7 +254,7 @@ class UserRegisterViewController: UIViewController {
                 emailTextField.layer.borderColor = UIColor.red.cgColor
                 emailTextField.layer.borderWidth = 1.0
             }
-          
+            
             if numberTextField.text?.isEmpty == true {
                 numberErrorMessageLabel.text = "Введите корректные данные"
                 numberErrorMessageLabel.isHidden = false
@@ -261,10 +266,14 @@ class UserRegisterViewController: UIViewController {
                 passwordTextField.layer.borderWidth = 1.0
             }
             
-            return 
+            return
+        }
+        if !isValidName(username) {
+            nameTextField.layer.borderColor = UIColor.red.cgColor
+            nameTextField.layer.borderWidth = 1.0
+            return
         }
         
-     
         if !isValidEmail(email) {
             emailErrorMessageLabel.text = "Введите корректные данные"
             emailErrorMessageLabel.isHidden = false
@@ -276,18 +285,18 @@ class UserRegisterViewController: UIViewController {
         if !isValidPhoneNumber(number) {
             numberErrorMessageLabel.text = "Введите корректные данные"
             numberErrorMessageLabel.isHidden = false
-                 numberTextField.layer.borderColor = UIColor.red.cgColor
-                 numberTextField.layer.borderWidth = 1.0
-                 numberTextField.text = ""
-                 return
-             }
-        if let passwordError = isValidPassword(password) {
-               passwordErrorLabel.text = passwordError
-               passwordErrorLabel.isHidden = false
-               passwordTextField.layer.borderColor = UIColor.red.cgColor
-               passwordTextField.layer.borderWidth = 1.0
-               return
-           }
+            numberTextField.layer.borderColor = UIColor.red.cgColor
+            numberTextField.layer.borderWidth = 1.0
+            numberTextField.text = ""
+            return
+        }
+        if !isValidPassword(password) {
+            passwordErrorLabel.text = "Пароль должен содержать заглавные и строчные буквы, цифры и спец символы, иметь длину 8 или более символов"
+            passwordErrorLabel.isHidden = false
+            passwordTextField.layer.borderColor = UIColor.red.cgColor
+            passwordTextField.layer.borderWidth = 1.0
+            return
+        }
         emailTextField.layer.borderWidth = 0
         nameTextField.layer.borderWidth = 0
         numberTextField.layer.borderWidth = 0
@@ -295,7 +304,7 @@ class UserRegisterViewController: UIViewController {
         
         
         UserDefaults.standard.set(email, forKey: "email")
-
+        
         
         let userInfo = UserInfo(username: username,
                                 password: password,
@@ -307,45 +316,53 @@ class UserRegisterViewController: UIViewController {
         let vc = UserRegisterBuilder.build(userinfo: userInfo)
         navigationController?.pushViewController(vc, animated: true)
     }
+    func isValidName(_ username: String) -> Bool {
+        let characterSet = CharacterSet.letters.union(.whitespaces)
+        return username.count >= 2 && username.count <= 20 && username.rangeOfCharacter(from: characterSet.inverted) == nil
+    }
+    
     func isValidEmail(_ email: String) -> Bool {
         let emailRegex = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}$"
         let emailPredicate = NSPredicate(format: "SELF MATCHES %@", emailRegex)
         return emailPredicate.evaluate(with: email)
     }
-    private func isValidPhoneNumber(_ number: String) -> Bool {
-           let phoneRegex = "^\\+996\\d{9}$"
-           let phonePredicate = NSPredicate(format: "SELF MATCHES %@", phoneRegex)
-           return phonePredicate.evaluate(with: number)
-       }
-    func isValidPassword(_ password: String) -> String? {
-       
-        if password.count < 8 {
-            return "Пароль должен содержать не менее 8 символов."
-        }
+    func isValidPhoneNumber(_ number: String) -> Bool {
+        guard number.hasPrefix("+996") else { return false }
         
-        let lowercaseLetterRegex = ".*[a-z]+.*"
-        let lowercaseTest = NSPredicate(format:"SELF MATCHES %@", lowercaseLetterRegex)
-        if !lowercaseTest.evaluate(with: password) {
-            return "Пароль должен содержать хотя бы одну строчную букву."
-        }
-
-        let digitRegex = ".*[0-9]+.*"
-        let digitTest = NSPredicate(format:"SELF MATCHES %@", digitRegex)
-        if !digitTest.evaluate(with: password) {
-            return "Пароль должен содержать хотя бы одну цифру."
-        }
-  
-        let specialCharacterRegex = ".*[!@#$%^&*(),.?\":{}|<>]+.*"
-        let specialCharacterTest = NSPredicate(format:"SELF MATCHES %@", specialCharacterRegex)
-        if !specialCharacterTest.evaluate(with: password) {
-            return "Пароль должен содержать хотя бы один специальный символ *[!@#$%^&*(),.?\":{}|<>]+.*/."
-        }
+        let sanitizedNumber = number.replacingOccurrences(of: "[^0-9]", with: "", options: .regularExpression)
         
-        return nil
+        return sanitizedNumber.count == 12
     }
-
-
-   
+    
+    
+    func isValidPassword(_ password: String) -> Bool {
+        // Минимальная длина
+        guard password.count >= 8 else { return false }
+        
+        // Проверка наличия строчных букв (включая кириллицу)
+        let lowercaseRegex = ".*[a-zа-яё]+.*"
+        let lowercaseTest = NSPredicate(format: "SELF MATCHES %@", lowercaseRegex)
+        guard lowercaseTest.evaluate(with: password) else { return false }
+        
+        // Проверка наличия заглавных букв (включая кириллицу)
+        let uppercaseRegex = ".*[A-ZА-ЯЁ]+.*"
+        let uppercaseTest = NSPredicate(format: "SELF MATCHES %@", uppercaseRegex)
+        guard uppercaseTest.evaluate(with: password) else { return false }
+        
+        // Проверка наличия цифр
+        let digitRegex = ".*[0-9]+.*"
+        let digitTest = NSPredicate(format: "SELF MATCHES %@", digitRegex)
+        guard digitTest.evaluate(with: password) else { return false }
+        
+        // Проверка наличия специальных символов
+        let specialCharacterRegex = ".*[!@#$%^&*(),.?\":{}|<>]+.*"
+        let specialCharacterTest = NSPredicate(format: "SELF MATCHES %@", specialCharacterRegex)
+        guard specialCharacterTest.evaluate(with: password) else { return false }
+        
+        // Все проверки пройдены
+        return true
+    }
+    
     private func showAlert(message: String) {
         let alert = UIAlertController(title: "Ошибка", message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default))
@@ -354,18 +371,51 @@ class UserRegisterViewController: UIViewController {
     
     private func updateNextButtonState() {
         let isFormValid = isValidEmail(emailTextField.text ?? "") &&
-                          !(nameTextField.text?.isEmpty ?? true) &&
-                          !(numberTextField.text?.isEmpty ?? true) &&
-                          !(passwordTextField.text?.isEmpty ?? true)
+        !(nameTextField.text?.isEmpty ?? true) &&
+        !(numberTextField.text?.isEmpty ?? true) &&
+        !(passwordTextField.text?.isEmpty ?? true)
         
         nextButton.isEnabled = isFormValid
         nextButton.alpha = isFormValid ? 1.0 : 0.5
     }
-
+    
     deinit {
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
 
+    private func format(phoneNumber: String, shouldRemoveLastDigit: Bool) -> String {
+        guard !(shouldRemoveLastDigit && phoneNumber.count <= 2) else {return "+"}
+        let range  = NSString (string: phoneNumber).range(of: phoneNumber)
+        var number = regex.stringByReplacingMatches(in: phoneNumber, options: [], range: range, withTemplate: "")
+        if number.count > maxNumberCount {
+            let maxIndex = number.index(number.startIndex, offsetBy: maxNumberCount)
+            number = String(number[number.startIndex..<maxIndex])
+        }
+      if shouldRemoveLastDigit, !number.isEmpty {
+        number.removeLast()
+    }
+       
+        let maxIndex = number.index(number.startIndex, offsetBy: number.count)
+        let regRange = number.startIndex..<maxIndex
+        
+        if number.count < 7 {
+            let patern = "(\\d{3})(\\d+)"
+            number = number.replacingOccurrences(of: patern, with: "$1 $2 $3", options: .regularExpression, range: regRange)
+        } else {
+            let patern = "(\\d{3})(\\d{3})(\\d{3})(\\d+)"
+            number = number.replacingOccurrences(of: patern, with: "$1 $2-$3-$4 ", options: .regularExpression, range: regRange)
+        }
+        return "+" + number
+    }
 }
 
+extension UserRegisterViewController: UITextFieldDelegate {
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let fullSrting = (textField.text ?? "") + string
+        textField.text = format(phoneNumber: fullSrting, shouldRemoveLastDigit: range.length == 1)
+        return false
+        
+    }
+}
