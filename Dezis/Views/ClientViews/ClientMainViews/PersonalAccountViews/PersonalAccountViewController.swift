@@ -193,18 +193,21 @@ class PersonalAccountViewController: UIViewController, PersonalAccountView {
         presenter?.fetchUserData()
         editButtonSetup()
         dismissKeyboardGesture()
-        navigationController?.setNavigationBarHidden(true, animated: true)
-        navigationItem.hidesBackButton = true
-
         }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: true)
+        navigationItem.hidesBackButton = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
         navigationController?.setNavigationBarHidden(false, animated: true)
         navigationItem.hidesBackButton = false
         navigationItem.backButtonTitle = "Назад"
-        
     }
+  
     private func setupUI() {
         view.addSubview(userImage)
         userImage.snp.makeConstraints { make in

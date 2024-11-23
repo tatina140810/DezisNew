@@ -289,8 +289,8 @@ class UserRegisterSecondPageViewController: UIViewController, IUserRegisterSecon
                             do {
                                 if let errorResponse = try JSONSerialization.jsonObject(with: response.data, options: []) as? [String: Any],
                                    let emailErrors = errorResponse["email"] as? [String],
-                                   emailErrors.contains("Пользователь с таким Email уже существует.") {
-                                    self?.errorLabel.text = "Пользователь с таким Email уже существует."
+                                   emailErrors.contains("Ошибка регистрации.") {
+                                    self?.errorLabel.text = "Ошибка регистрации."
                                     self?.errorLabel.textColor = .red
                                     self?.errorLabel.isHidden = false
                                     return
@@ -301,7 +301,7 @@ class UserRegisterSecondPageViewController: UIViewController, IUserRegisterSecon
                         }
                     
                         print("Failed to register user: \(error)")
-                        self?.errorLabel.text = "Ошибка регистрации"
+                        self?.errorLabel.text = "Пользователь с таким Email уже существует."
                         self?.errorLabel.textColor = .red
                         self?.errorLabel.isHidden = false
                     }

@@ -116,14 +116,31 @@ class ClientHomeViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = UIColor(hex: "#1B2228")
         setupUI()
-        navigationController?.setNavigationBarHidden(true, animated: true)
+       // navigationController?.setNavigationBarHidden(true, animated: true)
         navigationItem.hidesBackButton = true
-        navigationController?.navigationBar.backgroundColor = UIColor(hex: "#1B2228")
-
+      //  navigationController?.navigationBar.backgroundColor = UIColor(hex: "#1B2228")
+       // navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+     //   navigationController?.navigationBar.shadowImage = UIImage()
+      //  let appearance = UINavigationBarAppearance()
+      //     appearance.backgroundColor = .blue
+       //   navigationController?.navigationBar.scrollEdgeAppearance = appearance
+      //  let appearance = UINavigationBarAppearance()
+     //             appearance.configureWithOpaqueBackground()
+     //   appearance.backgroundColor = .red
+    //    navigationController?.navigationBar.standardAppearance = appearance;
+   //     navigationController?.navigationBar.scrollEdgeAppearance = navigationController?.navigationBar.standardAppearance
         }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+//        navigationController?.setNavigationBarHidden(false, animated: true)
+//        navigationItem.hidesBackButton = false
+//        navigationItem.backButtonTitle = "Назад"
+//        
+//    }
+    
+    override func viewWillDisappear (_ animated: Bool) {
+        super.viewWillDisappear(animated)
         navigationController?.setNavigationBarHidden(false, animated: true)
         navigationItem.hidesBackButton = false
         navigationItem.backButtonTitle = "Назад"
@@ -131,8 +148,11 @@ class ClientHomeViewController: UIViewController {
     }
     func setupUI(){
         view.addSubview(scrollView)
+       
+        
         scrollView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.top.equalToSuperview().offset(100)
+            make.left.right.bottom.equalToSuperview()
         }
         
         scrollView.addSubview(contentView)
@@ -212,6 +232,7 @@ class ClientHomeViewController: UIViewController {
     @objc func dezinsectionButtonTapped(){
      
         let vc = DezinsectionViewController()
+        vc.hidesBottomBarWhenPushed = false
         navigationController?.pushViewController(vc, animated: true)
     }
     @objc func dezinfectionButtonTapped(){
