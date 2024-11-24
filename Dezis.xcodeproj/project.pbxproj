@@ -37,6 +37,8 @@
 		72D39BA32CB15F7D00D9EB45 /* RequestsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D39BA22CB15F7D00D9EB45 /* RequestsCollectionViewCell.swift */; };
 		72D39BA62CB1796F00D9EB45 /* CategoriesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D39BA52CB1796F00D9EB45 /* CategoriesCollectionViewCell.swift */; };
 		72D39BA82CB1870D00D9EB45 /* AdminLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D39BA72CB1870D00D9EB45 /* AdminLoginView.swift */; };
+		8557C9B02CF0D31D0081F891 /* ChatApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8557C9AF2CF0D31D0081F891 /* ChatApi.swift */; };
+		8557C9B22CF0D3270081F891 /* ChatService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8557C9B12CF0D3270081F891 /* ChatService.swift */; };
 		85C09B2E2CDBB872002B09BC /* keyboardExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C09B2D2CDBB872002B09BC /* keyboardExtension.swift */; };
 		AF2C7EF52CE87E2E008615E6 /* SF-Pro-Display-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = AF2C7EF42CE87E2E008615E6 /* SF-Pro-Display-Medium.otf */; };
 		AF3BFB222CE465D100A5BEE8 /* NumberSavedAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3BFB212CE465B800A5BEE8 /* NumberSavedAlert.swift */; };
@@ -143,6 +145,8 @@
 		72D39BA22CB15F7D00D9EB45 /* RequestsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestsCollectionViewCell.swift; sourceTree = "<group>"; };
 		72D39BA52CB1796F00D9EB45 /* CategoriesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesCollectionViewCell.swift; sourceTree = "<group>"; };
 		72D39BA72CB1870D00D9EB45 /* AdminLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminLoginView.swift; sourceTree = "<group>"; };
+		8557C9AF2CF0D31D0081F891 /* ChatApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatApi.swift; sourceTree = "<group>"; };
+		8557C9B12CF0D3270081F891 /* ChatService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatService.swift; sourceTree = "<group>"; };
 		85C09B2D2CDBB872002B09BC /* keyboardExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = keyboardExtension.swift; sourceTree = "<group>"; };
 		9D594A6880D984FC3775947A /* Pods_Dezis.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Dezis.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ABC7905C0E1157EB74B80A5D /* Pods-Dezis.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dezis.release.xcconfig"; path = "Target Support Files/Pods-Dezis/Pods-Dezis.release.xcconfig"; sourceTree = "<group>"; };
@@ -374,6 +378,15 @@
 			path = History;
 			sourceTree = "<group>";
 		};
+		8557C9AE2CF0D2FF0081F891 /* ChatApi */ = {
+			isa = PBXGroup;
+			children = (
+				8557C9AF2CF0D31D0081F891 /* ChatApi.swift */,
+				8557C9B12CF0D3270081F891 /* ChatService.swift */,
+			);
+			path = ChatApi;
+			sourceTree = "<group>";
+		};
 		92F8C4BAC264DDF5D7E47087 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -458,8 +471,8 @@
 		AF4B1DFE2C9C0F7800FDA3EC /* Applications */ = {
 			isa = PBXGroup;
 			children = (
-				AF4B1DD22C9AE38E00FDA3EC /* SceneDelegate.swift */,
 				AF4B1DD02C9AE38E00FDA3EC /* AppDelegate.swift */,
+				AF4B1DD22C9AE38E00FDA3EC /* SceneDelegate.swift */,
 			);
 			path = Applications;
 			sourceTree = "<group>";
@@ -557,6 +570,7 @@
 		AF51461B2CC64A91000D9C97 /* NetworkService */ = {
 			isa = PBXGroup;
 			children = (
+				8557C9AE2CF0D2FF0081F891 /* ChatApi */,
 				AF5146172CC64A91000D9C97 /* TokenApi */,
 				AF5146182CC64A91000D9C97 /* UserApi */,
 				AF5146192CC64A91000D9C97 /* UserAPI.swift */,
@@ -800,6 +814,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8557C9B02CF0D31D0081F891 /* ChatApi.swift in Sources */,
 				AF74D5762CB1171700B64D6E /* FirstOnboardingViewController.swift in Sources */,
 				AF74D5772CB1171700B64D6E /* ForthOnboardingViewController.swift in Sources */,
 				AF74D56D2CAD835C00B64D6E /* CalendarViewController.swift in Sources */,
@@ -862,6 +877,7 @@
 				AFF6187C2CB69D5200C64C95 /* DezinfectionViewController.swift in Sources */,
 				85C09B2E2CDBB872002B09BC /* keyboardExtension.swift in Sources */,
 				AF74D5502CA7C97B00B64D6E /* KeychainManager.swift in Sources */,
+				8557C9B22CF0D3270081F891 /* ChatService.swift in Sources */,
 				AF3BFB222CE465D100A5BEE8 /* NumberSavedAlert.swift in Sources */,
 				72ABD5AC2CC97EF9004E18E9 /* AdminRequestPresenter.swift in Sources */,
 				AF4B1E152C9D9CB400FDA3EC /* PersonalAccountViewController.swift in Sources */,

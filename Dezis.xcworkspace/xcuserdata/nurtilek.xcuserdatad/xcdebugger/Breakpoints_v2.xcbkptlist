@@ -20,5 +20,255 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "1FA2BA12-B8E9-4797-BC08-AF529A90491D"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Dezis/Views/AdminViews/Chat/ChatModel/ChatWebSocket.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "41"
+            endingLineNumber = "41"
+            landmarkName = "didReceive(event:client:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "8E5E9CE6-5D2F-4D42-A256-138623CF9031"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Dezis/Views/AdminViews/Chat/ChatModel/ChatWebSocket.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "43"
+            endingLineNumber = "43"
+            landmarkName = "didReceive(event:client:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "9AD47075-B81F-4940-877B-B5B486D944DA"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Dezis/Views/AdminViews/Chat/ChatModel/ChatWebSocket.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "45"
+            endingLineNumber = "45"
+            landmarkName = "didReceive(event:client:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "26DC7632-28F0-4D38-8B97-4B4D18CB2707"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Dezis/Views/AdminViews/Chat/ChatModel/ChatWebSocket.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "47"
+            endingLineNumber = "47"
+            landmarkName = "didReceive(event:client:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "CCBB0A1A-2CD3-4133-AA29-6E1C02C7F497"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Dezis/Views/AdminViews/Chat/ChatModel/ChatWebSocket.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "49"
+            endingLineNumber = "49"
+            landmarkName = "didReceive(event:client:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "8AD8405E-A8B2-4932-AA3D-14B1645B2124"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Dezis/Views/AdminViews/Chat/ChatModel/ChatWebSocket.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "51"
+            endingLineNumber = "51"
+            landmarkName = "didReceive(event:client:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "B03C1F88-2461-4F91-AACC-B9EF4E71D840"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Dezis/Views/AdminViews/Chat/ChatModel/ChatWebSocket.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "39"
+            endingLineNumber = "39"
+            landmarkName = "didReceive(event:client:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "B03C1F88-2461-4F91-AACC-B9EF4E71D840 - 984f98b59f8afc13"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Dezis.ChatWebSocket.didReceive(event: Starscream.WebSocketEvent, client: Starscream.WebSocketClient) -&gt; ()"
+                  moduleName = "Dezis"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/nurtilek/my%20real%20project/dezisgroup-ios/Dezis/Views/AdminViews/Chat/ChatModel/ChatWebSocket.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "40"
+                  endingLineNumber = "40">
+               </Location>
+               <Location
+                  uuid = "B03C1F88-2461-4F91-AACC-B9EF4E71D840 - 984f98b59f8afc13"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Dezis.ChatWebSocket.didReceive(event: Starscream.WebSocketEvent, client: Starscream.WebSocketClient) -&gt; ()"
+                  moduleName = "Dezis"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/nurtilek/my%20real%20project/dezisgroup-ios/Dezis/Views/AdminViews/Chat/ChatModel/ChatWebSocket.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "40"
+                  endingLineNumber = "40">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "8478A6C9-7215-4AB4-AD46-C27725812583"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Dezis/NetworkService/ChatApi/ChatService.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "30"
+            endingLineNumber = "30"
+            landmarkName = "fetchChatList(completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "98457597-5305-4EA9-92AC-4F4481AEE15A"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Dezis/NetworkService/ChatApi/ChatService.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "29"
+            endingLineNumber = "29"
+            landmarkName = "fetchChatList(completion:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "98457597-5305-4EA9-92AC-4F4481AEE15A - 9cda38d0b3e2f5ad"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Result&lt;Moya.Response, Moya.MoyaError&gt;) -&gt; () in Dezis.ChatService.fetchChatList(completion: (Swift.Result&lt;Swift.Int, Swift.Error&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "Dezis"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/nurtilek/my%20real%20project/dezisgroup-ios/Dezis/NetworkService/ChatApi/ChatService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "29"
+                  endingLineNumber = "29">
+               </Location>
+               <Location
+                  uuid = "98457597-5305-4EA9-92AC-4F4481AEE15A - 9cda38d0b3e2f5ad"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Result&lt;Moya.Response, Moya.MoyaError&gt;) -&gt; () in Dezis.ChatService.fetchChatList(completion: (Swift.Result&lt;Swift.Int, Swift.Error&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "Dezis"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/nurtilek/my%20real%20project/dezisgroup-ios/Dezis/NetworkService/ChatApi/ChatService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "29"
+                  endingLineNumber = "29">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "3B4E0B3B-7A23-46F4-B8BE-444F8851EC8A"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Dezis/NetworkService/ChatApi/ChatService.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "17"
+            endingLineNumber = "17"
+            landmarkName = "sendMessage(message:completion:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "3B4E0B3B-7A23-46F4-B8BE-444F8851EC8A - 95c9d144308ce52e"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Result&lt;Moya.Response, Moya.MoyaError&gt;) -&gt; () in Dezis.ChatService.sendMessage(message: Dezis.ChatModel, completion: (Swift.Result&lt;Swift.Int, Swift.Error&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "Dezis"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/nurtilek/my%20real%20project/dezisgroup-ios/Dezis/NetworkService/ChatApi/ChatService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "18"
+                  endingLineNumber = "18">
+               </Location>
+               <Location
+                  uuid = "3B4E0B3B-7A23-46F4-B8BE-444F8851EC8A - 95c9d144308ce52e"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Result&lt;Moya.Response, Moya.MoyaError&gt;) -&gt; () in Dezis.ChatService.sendMessage(message: Dezis.ChatModel, completion: (Swift.Result&lt;Swift.Int, Swift.Error&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "Dezis"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/nurtilek/my%20real%20project/dezisgroup-ios/Dezis/NetworkService/ChatApi/ChatService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "18"
+                  endingLineNumber = "18">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

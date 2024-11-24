@@ -24,9 +24,11 @@ struct ClientTokens: Decodable {
 struct UserLoginResponse: Decodable {
     let detail: String
     let id: Int
+    let tokens: ClientTokens
     enum CodingKeys: String, CodingKey {
         case id = "user_id"
         case detail
+        case tokens
     }
 }
 struct UserLogOutResponse: Decodable {
@@ -211,6 +213,8 @@ refreshToken: registerResponse.tokens.refresh)
                     }
                     
                     let userResponse = try JSONDecoder().decode(UserLoginResponse.self, from: response.data)
+                    let userTokenResponseModel = UserTokenResponseModel(accessToken: userResponse.tokens.access, refreshToken: userResponse.tokens.refresh)
+                    KeychainService.shared.saveToken(token: userTokenResponseModel)
                     completion(.success(userResponse))
                 } catch {
                     print("Ошибка декодирования: \(error)")

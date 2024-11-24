@@ -129,7 +129,7 @@ extension UserApi: TargetType {
     }
     
     var headers: [String : String]? {
-        let token = KeychainService().accessToken
+        let token = KeychainService.shared.accessToken
         return [
             "Content-Type": "application/json",
            // "Authorization": "Bearer \(token)"
