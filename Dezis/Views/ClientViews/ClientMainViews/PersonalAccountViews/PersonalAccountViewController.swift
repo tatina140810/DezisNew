@@ -125,7 +125,7 @@ class PersonalAccountViewController: UIViewController, PersonalAccountView {
         field.backgroundColor = UIColor(hex: "#2B373E")
         field.layer.cornerRadius = 8
         field.clipsToBounds = true
-
+        
         let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 15, height: field.frame.height))
         field.leftView = paddingView
         field.leftViewMode = .always
@@ -190,45 +190,21 @@ class PersonalAccountViewController: UIViewController, PersonalAccountView {
         view.backgroundColor = UIColor(hex: "#1B2228")
         setupUI()
         presenter = PersonalAccountPresenter(view: self, userService: UserNetworkService())
-               presenter?.fetchUserData()
+        presenter?.fetchUserData()
         editButtonSetup()
         dismissKeyboardGesture()
-    }
-   
+        navigationController?.setNavigationBarHidden(true, animated: true)
+        navigationItem.hidesBackButton = true
 
-    func editButtonSetup(){
-        let editButton = UIButton(type: .custom)
-            editButton.setImage(UIImage(named: "edit2"), for: .normal)
-            editButton.tintColor = UIColor(hex: "#0A84FF")
-            editButton.frame = CGRect(x: 0, y: 0, width: 24, height: 24)
-            editButton.addTarget(self, action: #selector(enableEditing), for: .touchUpInside)
-
-           
-            let rightPaddingView = UIView(frame: CGRect(x: -15, y: 0, width: 24, height: 24))
-            rightPaddingView.addSubview(editButton)
-            editButton.center = rightPaddingView.center
-
-            phoneTextField.rightView = rightPaddingView
-            phoneTextField.rightViewMode = .always
-    }
-    
-    func showUserData(user: UserProfile) {
-        print("User data loaded: \(user)")
-        DispatchQueue.main.async {
-                self.nameTextField.text = user.username
-                self.emailTextField.text = user.email
-                self.phoneTextField.text = user.number
-                self.passwordTextField.text = user.password
-            }
-        }
-       
-    func showError(_ error: String) {
-           
-            let alert = UIAlertController(title: "Error", message: error, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-            present(alert, animated: true)
         }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: true)
+        navigationItem.hidesBackButton = false
+        navigationItem.backButtonTitle = "Назад"
+        
+    }
     private func setupUI() {
         view.addSubview(userImage)
         userImage.snp.makeConstraints { make in
@@ -237,7 +213,7 @@ class PersonalAccountViewController: UIViewController, PersonalAccountView {
             make.height.equalTo(120)
             make.width.equalTo(120)
         }
-
+        
         view.addSubview(editButton)
         editButton.snp.makeConstraints { make in
             make.bottom.equalTo(userImage.snp.bottom)
@@ -327,6 +303,42 @@ class PersonalAccountViewController: UIViewController, PersonalAccountView {
         }
     }
     
+    
+    func editButtonSetup(){
+        let editButton = UIButton(type: .custom)
+        editButton.setImage(UIImage(named: "edit2"), for: .normal)
+        editButton.tintColor = UIColor(hex: "#0A84FF")
+        editButton.frame = CGRect(x: 0, y: 0, width: 24, height: 24)
+        editButton.addTarget(self, action: #selector(enableEditing), for: .touchUpInside)
+        
+        
+        let rightPaddingView = UIView(frame: CGRect(x: -15, y: 0, width: 24, height: 24))
+        rightPaddingView.addSubview(editButton)
+        editButton.center = rightPaddingView.center
+        
+        phoneTextField.rightView = rightPaddingView
+        phoneTextField.rightViewMode = .always
+    }
+    
+    func showUserData(user: UserProfile) {
+        print("User data loaded: \(user)")
+        DispatchQueue.main.async {
+            self.nameTextField.text = user.username
+            self.emailTextField.text = user.email
+            self.phoneTextField.text = user.number
+            self.passwordTextField.text = user.password
+        }
+    }
+    
+    func showError(_ error: String) {
+        
+        let alert = UIAlertController(title: "Error", message: error, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        present(alert, animated: true)
+    }
+    
+    
+    
     @objc func historyButtonTapped() {
         let vc = ClientHistoryViewController()
         navigationController?.pushViewController(vc, animated: true)
@@ -369,21 +381,21 @@ class PersonalAccountViewController: UIViewController, PersonalAccountView {
         print("button tupped")
         
     }
-
+    
     @objc private func saveUpdatedNumber() {
-       
+        
         guard let newNumber = phoneTextField.text, !newNumber.isEmpty else {
             print("Ошибка: номер телефона не может быть пустым")
             return
         }
         
         presenter?.updateUserNumber(newNumber: newNumber)
-    
+        
     }
     func showCustomAlert(_ alert: NumberSavedAlert) {
         self.present(alert, animated: true)
     }
-
+    
     
     private func showImagePicker(sourceType: UIImagePickerController.SourceType) {
         imagePicker.showImagePicker(in: self) { [weak self] image in
@@ -394,7 +406,7 @@ class PersonalAccountViewController: UIViewController, PersonalAccountView {
         
         let vc = ExitAlertView()
         vc.modalPresentationStyle = .overFullScreen
-        vc.modalTransitionStyle = .crossDissolve   
+        vc.modalTransitionStyle = .crossDissolve
         
         present(vc, animated: true, completion: nil)
     }
