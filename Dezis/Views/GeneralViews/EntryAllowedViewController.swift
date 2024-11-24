@@ -79,7 +79,8 @@ class EntryAllowedViewController: UIViewController, EntryAllowedView {
     private func loadNextViewController() {
         
         let vc = ClientTabBarController()
-        navigationController?.pushViewController(vc, animated: true)
+       navigationController?.pushViewController(vc, animated: true)
+     //   navigationController?.setViewControllers([ClientTabBarController()], animated: true)
     }
     @objc func checkUserStatus() {
         presenter?.fetchUserData()

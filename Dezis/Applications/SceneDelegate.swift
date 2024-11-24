@@ -55,28 +55,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
            
         } else {
             let root = UINavigationController(rootViewController: FirstOnboardingViewController())
+          //  window?.overrideUserInterfaceStyle = .dark
             window?.rootViewController = root
         }
         
+        NotificationCenter.default.addObserver(self, selector: #selector(goToMain), name: NSNotification.Name("GoToMain"), object: nil)
+        
         window?.makeKeyAndVisible()
-        if #available(iOS 15, *) {
-            let navigationBarAppearance = UINavigationBarAppearance()
-            navigationBarAppearance.configureWithOpaqueBackground()
-            navigationBarAppearance.titleTextAttributes = [
-                NSAttributedString.Key.foregroundColor: UIColor.white
-            ]
-            navigationBarAppearance.backgroundColor = UIColor(hex: "#1B2228")
-            
-            UINavigationBar.appearance().standardAppearance = navigationBarAppearance
-            UINavigationBar.appearance().compactAppearance = navigationBarAppearance
-            UINavigationBar.appearance().scrollEdgeAppearance = navigationBarAppearance
-        } else {
-            UINavigationBar.appearance().barTintColor = UIColor(hex: "#1B2228")
-            UINavigationBar.appearance().titleTextAttributes = [
-                NSAttributedString.Key.foregroundColor: UIColor.white
-            ]
-            UINavigationBar.appearance().isTranslucent = false
-        }
+    }
+    
+    @objc private func goToMain() {
+        window?.rootViewController = ClientTabBarController()
     }
     
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -97,5 +86,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     func sceneDidEnterBackground(_ scene: UIScene) {
         // Called as the scene transitions from the foreground to the background.
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
 }

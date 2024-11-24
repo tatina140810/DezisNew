@@ -281,10 +281,13 @@ class ClientLoginViewController: UIViewController, UITextFieldDelegate, IClientL
         return emailPredicate.evaluate(with: email)
     }
     func loginSuccess() {
-        let vc = ClientTabBarController()
-        navigationController?.pushViewController(vc, animated: true)
-        print("Успешный вход")
-      
+  //      let vc = ClientTabBarController()
+//        navigationController?.pushViewController(vc, animated: true)
+//        let vc = ChoiceViewController()
+    //    .rootViewController = UINavigationController(rootViewController: vc)
+    //    window.makeKeyAndVisible()
+    //    print("Успешный вход")
+        NotificationCenter.default.post(name: NSNotification.Name("GoToMain"), object: nil, userInfo: nil)
     }
     
     func loginFailed(error: String) {
