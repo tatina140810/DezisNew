@@ -52,11 +52,11 @@ final class KeychainService {
         }
     }
     
-    func saveToken(token: UserTokenResponseModel?) {
-        if let token = token {
+    func saveToken(token: UserTokenResponseModel) {
+     //   if let token = token {
             accessToken = token.accessToken
             refreshToken = token.refreshToken
-        }
+    //    }
     }
     
     var hasToken: Bool {
