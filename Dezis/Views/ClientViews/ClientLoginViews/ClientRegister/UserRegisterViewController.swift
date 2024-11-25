@@ -20,7 +20,7 @@ class UserRegisterViewController: UIViewController {
     
     private var emailTextField = TextFieldSettings().textFieldMaker(placeholder: "Электронная почта*", backgroundColor: UIColor(hex: "#2B373E"))
     
-    private var numberTextField = TextFieldSettings().textFieldMaker(placeholder: "+996  ___ __ __ __*", backgroundColor: UIColor(hex: "#2B373E"))
+    private var numberTextField = TextFieldSettings().textFieldMaker(placeholder: "+996 ___ ___ ___*", backgroundColor: UIColor(hex: "#2B373E"))
     
     private var passwordTextField = TextFieldSettings().textFieldMaker(placeholder: "Пароль*", backgroundColor: UIColor(hex: "#2B373E"))
     
@@ -368,6 +368,30 @@ class UserRegisterViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "OK", style: .default))
         present(alert, animated: true)
     }
+    private func format(phoneNumber: String, shouldRemoveLastDigit: Bool) -> String {
+        guard !(shouldRemoveLastDigit && phoneNumber.count <= 2) else {return "+"}
+        let range  = NSString (string: phoneNumber).range(of: phoneNumber)
+        var number = regex.stringByReplacingMatches(in: phoneNumber, options: [], range: range, withTemplate: "")
+        if number.count > maxNumberCount {
+            let maxIndex = number.index(number.startIndex, offsetBy: maxNumberCount)
+            number = String(number[number.startIndex..<maxIndex])
+        }
+        if shouldRemoveLastDigit, !number.isEmpty {
+            number.removeLast()
+        }
+        
+        let maxIndex = number.index(number.startIndex, offsetBy: number.count)
+        let regRange = number.startIndex..<maxIndex
+        
+        if number.count < 7 {
+            let patern = "(\\d{3})(\\d+)"
+            number = number.replacingOccurrences(of: patern, with: "$1 $2 $3", options: .regularExpression, range: regRange)
+        } else {
+            let patern = "(\\d{3})(\\d{3})(\\d{3})(\\d+)"
+            number = number.replacingOccurrences(of: patern, with: "$1 $2-$3-$4 ", options: .regularExpression, range: regRange)
+        }
+        return "+" + number
+    }
     
     private func updateNextButtonState() {
         let isFormValid = isValidEmail(emailTextField.text ?? "") &&
@@ -382,31 +406,6 @@ class UserRegisterViewController: UIViewController {
     deinit {
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
-    }
-
-    private func format(phoneNumber: String, shouldRemoveLastDigit: Bool) -> String {
-        guard !(shouldRemoveLastDigit && phoneNumber.count <= 2) else {return "+"}
-        let range  = NSString (string: phoneNumber).range(of: phoneNumber)
-        var number = regex.stringByReplacingMatches(in: phoneNumber, options: [], range: range, withTemplate: "")
-        if number.count > maxNumberCount {
-            let maxIndex = number.index(number.startIndex, offsetBy: maxNumberCount)
-            number = String(number[number.startIndex..<maxIndex])
-        }
-      if shouldRemoveLastDigit, !number.isEmpty {
-        number.removeLast()
-    }
-       
-        let maxIndex = number.index(number.startIndex, offsetBy: number.count)
-        let regRange = number.startIndex..<maxIndex
-        
-        if number.count < 7 {
-            let patern = "(\\d{3})(\\d+)"
-            number = number.replacingOccurrences(of: patern, with: "$1 $2 $3", options: .regularExpression, range: regRange)
-        } else {
-            let patern = "(\\d{3})(\\d{3})(\\d{3})(\\d+)"
-            number = number.replacingOccurrences(of: patern, with: "$1 $2-$3-$4 ", options: .regularExpression, range: regRange)
-        }
-        return "+" + number
     }
 }
 

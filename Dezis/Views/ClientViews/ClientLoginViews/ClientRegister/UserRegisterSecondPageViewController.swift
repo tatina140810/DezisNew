@@ -322,6 +322,7 @@ class UserRegisterSecondPageViewController: UIViewController, IUserRegisterSecon
         errorLabel.textColor = .green
         errorLabel.isHidden = false
     }
+    
 }
 
 extension  UserRegisterSecondPageViewController: UITextFieldDelegate {
