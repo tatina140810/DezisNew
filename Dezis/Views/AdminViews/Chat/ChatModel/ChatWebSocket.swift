@@ -1,19 +1,27 @@
 import Starscream
 import SwiftSignalRClient
+import Starscream
 
 class ChatWebSocket: WebSocketDelegate {
-   
-    var socket: WebSocket?
+    private var socket: WebSocket?
+    private let roomId: Int
+    private let token: String
     
-    init() {
-        //var request = URLRequest(url: URL(string: "ws://dezis.pp.ua//ws/chat/\(285)/?token=\(KeychainService.shared.accessToken)")!)
-        var request = URLRequest(url: URL(string: "wss://dezis.pp.ua/ws/chat/\(285)")!)
-        request.addValue("Bearer \(KeychainService.shared.accessToken)", forHTTPHeaderField: "Authorization")
-        socket = WebSocket(request: request)
-        socket?.delegate = self
+    init(roomId: Int, token: String) {
+        self.roomId = roomId
+        self.token = token
     }
     
     func connect() {
+        let urlString = "wss://dezis.pp.ua/ws/chat/\(roomId)/?token=\(token)"
+        guard let url = URL(string: urlString) else {
+            print("Invalid WebSocket URL")
+            return
+        }
+        
+        var request = URLRequest(url: url)
+        socket = WebSocket(request: request)
+        socket?.delegate = self
         socket?.connect()
     }
     
@@ -23,19 +31,17 @@ class ChatWebSocket: WebSocketDelegate {
     
     func sendMessage(text: String) {
         let messageData: [String: Any] = ["message": text]
-        if let jsonData = try? JSONSerialization.data(withJSONObject: messageData, options: []) {
+        if let jsonData = try? JSONSerialization.data(withJSONObject: messageData) {
             socket?.write(data: jsonData)
         }
     }
     
     func sendText(text: String) {
-        guard let socket = socket
-            else { return }
-        socket.write(string: text)
+        socket?.write(string: text)
     }
     
-    // WebSocketDelegate methods
-    func didReceive(event: Starscream.WebSocketEvent, client: any Starscream.WebSocketClient) {
+    // MARK: - WebSocketDelegate
+    func didReceive(event: WebSocketEvent, client: WebSocketClient) {
         switch event {
         case .connected(let headers):
             print("WebSocket connected: \(headers)")
@@ -44,7 +50,7 @@ class ChatWebSocket: WebSocketDelegate {
         case .text(let text):
             handleIncomingMessage(text)
         case .binary(let data):
-            print("Received data: \(data)")
+            print("Received binary data: \(data)")
         case .error(let error):
             print("WebSocket error: \(error?.localizedDescription ?? "unknown error")")
         default:
@@ -52,56 +58,41 @@ class ChatWebSocket: WebSocketDelegate {
         }
     }
     
-    func handleIncomingMessage(_ text: String) {
-       //  DispatchQueue.main.async { [weak self] in
-       //      self?.messages.append((isUserMessage: false, message: text, time: self?.getCurrentTime() ?? ""))
-      //       self?.tableView.reloadData()
-      //   }
-     }
+    private func handleIncomingMessage(_ text: String) {
+        print("Incoming message: \(text)")
+    }
 }
 
-public class SignalRService {
+class SignalRService {
     private var connection: HubConnection
+    private let roomId: Int
+    private let token: String
     
-    public init(url: URL) {
-        connection = HubConnectionBuilder(url: url).withHttpConnectionOptions(configureHttpOptions: { httpConnectionOptions in
-                    httpConnectionOptions.headers = ["Authorization": "Bearer \(KeychainService.shared.accessToken)"]
-                })
-                .withAutoReconnect()
-               // .withLogging(minLogLevel: .debug)
-                .build()
-
-        connection.on(method: "MessageReceived", callback: { (user: String, message: String) in
-            do {
-                self.handleMessage(message, from: user)
-            } catch {
-                print(error)
+    init(roomId: Int, token: String) {
+        self.roomId = roomId
+        self.token = token
+        let urlString = "wss://dezis.pp.ua/ws/chat/\(roomId)/?token=\(token)"
+        guard let url = URL(string: urlString) else {
+            fatalError("Invalid SignalR URL")
+        }
+        
+        connection = HubConnectionBuilder(url: url)
+            .withHttpConnectionOptions { options in
+                options.headers = ["Authorization": "Bearer \(token)"]
             }
+            .withAutoReconnect()
+            .build()
+        
+        connection.on(method: "MessageReceived", callback: { (user: String, message: String) in
+            print("Message from \(user): \(message)")
         })
-      //  connection.start()
     }
     
     func connectionStart() {
         connection.start()
     }
     
-    private func handleMessage(_ message: String, from user: String) {
-        // Do something with the message.
+    func connectionStop() {
+        connection.stop()
     }
-}
-
-extension SignalRService: HubConnectionDelegate {
-    public func connectionDidOpen(hubConnection: SwiftSignalRClient.HubConnection) {
-        print("connection did open")
-    }
-    
-    public func connectionDidFailToOpen(error: any Error) {
-        print("connectionDidFailToOpen")
-    }
-    
-    public func connectionDidClose(error: (any Error)?) {
-        print("connectionDidClose")
-    }
-    
-    
 }
