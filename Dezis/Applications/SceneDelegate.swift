@@ -111,6 +111,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             
             window?.makeKeyAndVisible()
         }
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(goToMain), name: NSNotification.Name("GoToMain"), object: nil)
+        
+        window?.makeKeyAndVisible()
+    }
+    
+    @objc private func goToMain() {
+        window?.rootViewController = ClientTabBarController()
+    }
     
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.
@@ -130,5 +139,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     func sceneDidEnterBackground(_ scene: UIScene) {
         // Called as the scene transitions from the foreground to the background.
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
 }

@@ -118,13 +118,15 @@ class CalendarViewController: UIViewController, ICalendarViewController {
     private lazy var orderButton: UIButton = {
         let button = UIButton()
         button.setTitle("Заказать услугу", for: .normal)
-        button.backgroundColor = UIColor(hex: "#0A84FF")
+        button.backgroundColor = UIColor(hex: "#515151")
         button.titleLabel?.font = UIFont(name: "SFProDisplay-Bold", size: 18)
         button.layer.cornerRadius = 12
         button.clipsToBounds = true
+        button.isEnabled = false
         button.addTarget(self, action: #selector(orderButtonTapped), for: .touchUpInside)
         return button
     }()
+    
     private var dezinfectionLabel: UILabel = {
         let label = UILabel()
         label.text = "Дезинфекция"
@@ -185,7 +187,6 @@ class CalendarViewController: UIViewController, ICalendarViewController {
         presenter = CalendarViewControllerPresenter(view: self)
         overrideUserInterfaceStyle = .light
         navigationController?.navigationBar.isHidden = true
-        
     }
     private func checkBoxSettings(){
         
@@ -295,9 +296,16 @@ class CalendarViewController: UIViewController, ICalendarViewController {
         let formatter = DateFormatter()
         formatter.dateFormat = "HH:mm:ss"
         time = formatter.string(from: timePicker.date)
+
     }
+    private func updateOrderButtonState() {
+           let isFormValid = !service.isEmpty && !date.isEmpty && !time.isEmpty && user != nil && user != 0
+           orderButton.isEnabled = isFormValid
+        orderButton.backgroundColor = UIColor(hex: "#0A84FF")
+       }
     
     @objc func orderButtonTapped() {
+        
         guard let userId = user, userId != 0 else {
             print("Error: User ID not found in UserDefaults.")
             return
@@ -315,6 +323,7 @@ class CalendarViewController: UIViewController, ICalendarViewController {
             time: time,
             is_completed: false
         )
+        
         
         print("Создание информации о бронировании:", bookingInfo)
         guard let presenter = presenter else {
@@ -339,7 +348,8 @@ class CalendarViewController: UIViewController, ICalendarViewController {
 
     private func showBookingSuccessAlert(response: BookingLoginResponse) {
         let vc = ViewControllerForAlert()
-        navigationController?.pushViewController(vc, animated: true)
+        present(vc, animated: true)
+        
     }
     
     private func showBookingErrorAlert(error: Error) {
@@ -387,14 +397,17 @@ class CalendarViewController: UIViewController, ICalendarViewController {
     }
     @objc func firstCheckBoxTapped() {
         selectService(service: "Дезинфекция", selectedCheckBox: firstCheckBox)
+        updateOrderButtonState()
     }
     
     @objc func secondCheckBoxTapped() {
         selectService(service: "Дезинcекция", selectedCheckBox: secondCheckBox)
+        updateOrderButtonState()
     }
     
     @objc func thirdCheckBoxTapped() {
         selectService(service: "Дератизация", selectedCheckBox: thirdCheckBox)
+        updateOrderButtonState()
     }
     
     private func selectService(service: String, selectedCheckBox: CheckboxButton) {
@@ -410,6 +423,7 @@ class CalendarViewController: UIViewController, ICalendarViewController {
         
         self.service = self.serviceArray.joined(separator: ", ")
         print("Выбранные услуги: \(self.service)")
+        updateOrderButtonState()
     }
     
     

@@ -1,8 +1,8 @@
 import UIKit
 import SnapKit
 
-
 protocol PersonalAccountView: AnyObject {
+    
     func showUserData(user: UserProfile)
     func showError(_ error: String)
     func showCustomAlert(_ alert: NumberSavedAlert)
@@ -117,7 +117,7 @@ class PersonalAccountViewController: UIViewController, PersonalAccountView {
         return label
     }()
     
-    private let phoneTextField: UITextField = {
+    private let numberTextField: UITextField = {
         let field = UITextField()
         field.text = ""
         field.font = UIFont(name: "SFProText-Regular", size: 16)
@@ -193,18 +193,24 @@ class PersonalAccountViewController: UIViewController, PersonalAccountView {
         presenter?.fetchUserData()
         editButtonSetup()
         dismissKeyboardGesture()
-        navigationController?.setNavigationBarHidden(true, animated: true)
-        navigationItem.hidesBackButton = true
-
-        }
+        numberTextField.delegate = self
+        numberTextField.keyboardType = .numberPad
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: true)
+        navigationItem.hidesBackButton = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
         navigationController?.setNavigationBarHidden(false, animated: true)
         navigationItem.hidesBackButton = false
         navigationItem.backButtonTitle = "Назад"
-        
+      
     }
+    
     private func setupUI() {
         view.addSubview(userImage)
         userImage.snp.makeConstraints { make in
@@ -275,15 +281,15 @@ class PersonalAccountViewController: UIViewController, PersonalAccountView {
             make.leading.equalToSuperview().offset(20)
         }
         
-        view.addSubview(phoneTextField)
-        phoneTextField.snp.makeConstraints { make in
+        view.addSubview(numberTextField)
+        numberTextField.snp.makeConstraints { make in
             make.top.equalTo(phoneLabel.snp.bottom).offset(8)
             make.leading.trailing.equalToSuperview().inset(20)
             make.height.equalTo(35)
         }
         view.addSubview(saveButton)
         saveButton.snp.makeConstraints { make in
-            make.top.equalTo(phoneTextField.snp.bottom).offset(16)
+            make.top.equalTo(numberTextField.snp.bottom).offset(16)
             make.leading.trailing.equalToSuperview().inset(20)
             make.height.equalTo(52)
         }
@@ -316,8 +322,8 @@ class PersonalAccountViewController: UIViewController, PersonalAccountView {
         rightPaddingView.addSubview(editButton)
         editButton.center = rightPaddingView.center
         
-        phoneTextField.rightView = rightPaddingView
-        phoneTextField.rightViewMode = .always
+        numberTextField.rightView = rightPaddingView
+        numberTextField.rightViewMode = .always
     }
     
     func showUserData(user: UserProfile) {
@@ -325,7 +331,7 @@ class PersonalAccountViewController: UIViewController, PersonalAccountView {
         DispatchQueue.main.async {
             self.nameTextField.text = user.username
             self.emailTextField.text = user.email
-            self.phoneTextField.text = user.number
+            self.numberTextField.text = user.number
             self.passwordTextField.text = user.password
         }
     }
@@ -377,17 +383,66 @@ class PersonalAccountViewController: UIViewController, PersonalAccountView {
     }
     
     @objc private func enableEditing() {
-        phoneTextField.isUserInteractionEnabled = true
+        numberTextField.isUserInteractionEnabled = true
         print("button tupped")
         
+    }
+    func isValidPhoneNumber(_ number: String) -> Bool {
+        guard number.hasPrefix("+996") else { return false }
+        
+        let sanitizedNumber = number.replacingOccurrences(of: "[^0-9]", with: "", options: .regularExpression)
+        
+        return sanitizedNumber.count == 12
+    }
+    
+    private func format(phoneNumber: String, shouldRemoveLastDigit: Bool) -> String {
+         let maxNumberCount = 12
+         let regex = try! NSRegularExpression(pattern: "[\\+\\s-\\(\\)]", options: .caseInsensitive)
+        
+        guard !(shouldRemoveLastDigit && phoneNumber.count <= 2) else {return "+"}
+        let range  = NSString (string: phoneNumber).range(of: phoneNumber)
+        var newNumber = regex.stringByReplacingMatches(in: phoneNumber, options: [], range: range, withTemplate: "")
+        if newNumber.count > maxNumberCount {
+            let maxIndex = newNumber.index(newNumber.startIndex, offsetBy: maxNumberCount)
+            newNumber = String(newNumber[newNumber.startIndex..<maxIndex])
+        }
+        if shouldRemoveLastDigit, !newNumber.isEmpty {
+            newNumber.removeLast()
+        }
+        
+        let maxIndex = newNumber.index(newNumber.startIndex, offsetBy: newNumber.count)
+        let regRange = newNumber.startIndex..<maxIndex
+        
+        if newNumber.count < 7 {
+            let patern = "(\\d{3})(\\d+)"
+            newNumber = newNumber.replacingOccurrences(of: patern, with: "$1 $2 $3", options: .regularExpression, range: regRange)
+        } else {
+            let patern = "(\\d{3})(\\d{3})(\\d{3})(\\d+)"
+            newNumber = newNumber.replacingOccurrences(of: patern, with: "$1 $2-$3-$4 ", options: .regularExpression, range: regRange)
+        }
+        return "+" + newNumber
     }
     
     @objc private func saveUpdatedNumber() {
         
-        guard let newNumber = phoneTextField.text, !newNumber.isEmpty else {
+        guard let newNumber = numberTextField.text, !newNumber.isEmpty else {
+            if numberTextField.text?.isEmpty == true {
+                numberTextField.layer.borderColor = UIColor.red.cgColor
+                numberTextField.layer.borderWidth = 1.0
+            }
             print("Ошибка: номер телефона не может быть пустым")
             return
         }
+        numberTextField.layer.borderWidth = 0
+  
+        if !isValidPhoneNumber(newNumber) {
+            numberTextField.layer.borderColor = UIColor.red.cgColor
+            numberTextField.layer.borderWidth = 1.0
+            numberTextField.text = ""
+            return
+        }
+        
+        numberTextField.layer.borderWidth = 0
         
         presenter?.updateUserNumber(newNumber: newNumber)
         
@@ -409,6 +464,15 @@ class PersonalAccountViewController: UIViewController, PersonalAccountView {
         vc.modalTransitionStyle = .crossDissolve
         
         present(vc, animated: true, completion: nil)
+    }
+}
+extension PersonalAccountViewController: UITextFieldDelegate {
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let fullSrting = (textField.text ?? "") + string
+        textField.text = format(phoneNumber: fullSrting, shouldRemoveLastDigit: range.length == 1)
+        return false
+        
     }
 }
 

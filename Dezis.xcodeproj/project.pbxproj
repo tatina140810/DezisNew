@@ -10,7 +10,7 @@
 		18E576572CC5482700302739 /* ChatModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E576562CC5482700302739 /* ChatModel.swift */; };
 		18E576592CC548B100302739 /* ChatWebSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E576582CC548B100302739 /* ChatWebSocket.swift */; };
 		18FA88D62CB6D7EC00C66BAF /* OpenChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18FA88D52CB6D7EC00C66BAF /* OpenChatViewController.swift */; };
-		4061B8DFFEC52EF1268906C9 /* Pods_Dezis.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D594A6880D984FC3775947A /* Pods_Dezis.framework */; };
+		6CD86E37E873F17A87464298 /* Pods_Dezis.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BF54F9BFA095158B959FBB9 /* Pods_Dezis.framework */; };
 		7257D4FD2CDEB5140042258A /* ClientNewPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7257D4FC2CDEB5140042258A /* ClientNewPasswordView.swift */; };
 		7257D5002CDEB52E0042258A /* ClientNewPasswordPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7257D4FF2CDEB52E0042258A /* ClientNewPasswordPresenter.swift */; };
 		7257D50A2CDF6BA40042258A /* ClientEmailConfirmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7257D5092CDF6BA40042258A /* ClientEmailConfirmView.swift */; };
@@ -55,7 +55,6 @@
 		AF4B1DFB2C9B42D300FDA3EC /* UserRegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1DFA2C9B42D300FDA3EC /* UserRegisterViewController.swift */; };
 		AF4B1DFD2C9B52AE00FDA3EC /* СonfirmationСodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1DFC2C9B52AE00FDA3EC /* СonfirmationСodeViewController.swift */; };
 		AF4B1E022C9C17BA00FDA3EC /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1E012C9C17B900FDA3EC /* EndPoint.swift */; };
-		AF4B1E052C9C1C8B00FDA3EC /* URLSession+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1E042C9C1C8B00FDA3EC /* URLSession+Extension.swift */; };
 		AF4B1E072C9C1F6000FDA3EC /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1E062C9C1F6000FDA3EC /* NetworkError.swift */; };
 		AF4B1E092C9C221000FDA3EC /* NetworkRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1E082C9C221000FDA3EC /* NetworkRequest.swift */; };
 		AF4B1E0B2C9C24D300FDA3EC /* NetworkDataFetch.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4B1E0A2C9C24D300FDA3EC /* NetworkDataFetch.swift */; };
@@ -119,6 +118,7 @@
 		18E576562CC5482700302739 /* ChatModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatModel.swift; sourceTree = "<group>"; };
 		18E576582CC548B100302739 /* ChatWebSocket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatWebSocket.swift; sourceTree = "<group>"; };
 		18FA88D52CB6D7EC00C66BAF /* OpenChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenChatViewController.swift; sourceTree = "<group>"; };
+		1BF54F9BFA095158B959FBB9 /* Pods_Dezis.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Dezis.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7257D4FC2CDEB5140042258A /* ClientNewPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientNewPasswordView.swift; sourceTree = "<group>"; };
 		7257D4FF2CDEB52E0042258A /* ClientNewPasswordPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientNewPasswordPresenter.swift; sourceTree = "<group>"; };
 		7257D5092CDF6BA40042258A /* ClientEmailConfirmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientEmailConfirmView.swift; sourceTree = "<group>"; };
@@ -148,8 +148,8 @@
 		8557C9AF2CF0D31D0081F891 /* ChatApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatApi.swift; sourceTree = "<group>"; };
 		8557C9B12CF0D3270081F891 /* ChatService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatService.swift; sourceTree = "<group>"; };
 		85C09B2D2CDBB872002B09BC /* keyboardExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = keyboardExtension.swift; sourceTree = "<group>"; };
-		9D594A6880D984FC3775947A /* Pods_Dezis.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Dezis.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		ABC7905C0E1157EB74B80A5D /* Pods-Dezis.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dezis.release.xcconfig"; path = "Target Support Files/Pods-Dezis/Pods-Dezis.release.xcconfig"; sourceTree = "<group>"; };
+		8B13BE55A387EA2D8217EC1E /* Pods-Dezis.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dezis.debug.xcconfig"; path = "Target Support Files/Pods-Dezis/Pods-Dezis.debug.xcconfig"; sourceTree = "<group>"; };
+		A1C71FB03C64A51070A4EEEF /* Pods-Dezis.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dezis.release.xcconfig"; path = "Target Support Files/Pods-Dezis/Pods-Dezis.release.xcconfig"; sourceTree = "<group>"; };
 		AF2C7EF42CE87E2E008615E6 /* SF-Pro-Display-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Medium.otf"; sourceTree = "<group>"; };
 		AF3BFB212CE465B800A5BEE8 /* NumberSavedAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberSavedAlert.swift; sourceTree = "<group>"; };
 		AF3BFB232CE481C100A5BEE8 /* SFProText-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFProText-Bold.ttf"; sourceTree = "<group>"; };
@@ -167,7 +167,6 @@
 		AF4B1DFA2C9B42D300FDA3EC /* UserRegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRegisterViewController.swift; sourceTree = "<group>"; };
 		AF4B1DFC2C9B52AE00FDA3EC /* СonfirmationСodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "СonfirmationСodeViewController.swift"; sourceTree = "<group>"; };
 		AF4B1E012C9C17B900FDA3EC /* EndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
-		AF4B1E042C9C1C8B00FDA3EC /* URLSession+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+Extension.swift"; sourceTree = "<group>"; };
 		AF4B1E062C9C1F6000FDA3EC /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		AF4B1E082C9C221000FDA3EC /* NetworkRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequest.swift; sourceTree = "<group>"; };
 		AF4B1E0A2C9C24D300FDA3EC /* NetworkDataFetch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkDataFetch.swift; sourceTree = "<group>"; };
@@ -225,7 +224,6 @@
 		AFF6188A2CBBA3E700C64C95 /* EntryAllowedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryAllowedViewController.swift; sourceTree = "<group>"; };
 		AFF6188C2CBBA52600C64C95 /* EntryDeniedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryDeniedViewController.swift; sourceTree = "<group>"; };
 		AFF6188E2CBBAFA700C64C95 /* ClientChatPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ClientChatPresenter.swift; path = Dezis/Views/ClientChatPresenter.swift; sourceTree = SOURCE_ROOT; };
-		F7FB7E9CD196CCFDB56042EF /* Pods-Dezis.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dezis.debug.xcconfig"; path = "Target Support Files/Pods-Dezis/Pods-Dezis.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -233,7 +231,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4061B8DFFEC52EF1268906C9 /* Pods_Dezis.framework in Frameworks */,
+				6CD86E37E873F17A87464298 /* Pods_Dezis.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -390,8 +388,8 @@
 		92F8C4BAC264DDF5D7E47087 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				F7FB7E9CD196CCFDB56042EF /* Pods-Dezis.debug.xcconfig */,
-				ABC7905C0E1157EB74B80A5D /* Pods-Dezis.release.xcconfig */,
+				8B13BE55A387EA2D8217EC1E /* Pods-Dezis.debug.xcconfig */,
+				A1C71FB03C64A51070A4EEEF /* Pods-Dezis.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -402,7 +400,7 @@
 				AF4B1DCF2C9AE38E00FDA3EC /* Dezis */,
 				AF4B1DCE2C9AE38E00FDA3EC /* Products */,
 				92F8C4BAC264DDF5D7E47087 /* Pods */,
-				C763DB0EBC3E8B7B24CC5B50 /* Frameworks */,
+				D3C021C703E31C20C26EEE28 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -502,7 +500,6 @@
 			isa = PBXGroup;
 			children = (
 				AF4B1DF02C9B153C00FDA3EC /* HexExtention.swift */,
-				AF4B1E042C9C1C8B00FDA3EC /* URLSession+Extension.swift */,
 				85C09B2D2CDBB872002B09BC /* keyboardExtension.swift */,
 			);
 			path = Extensions;
@@ -684,10 +681,10 @@
 			path = Font;
 			sourceTree = "<group>";
 		};
-		C763DB0EBC3E8B7B24CC5B50 /* Frameworks */ = {
+		D3C021C703E31C20C26EEE28 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				9D594A6880D984FC3775947A /* Pods_Dezis.framework */,
+				1BF54F9BFA095158B959FBB9 /* Pods_Dezis.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -699,11 +696,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = AF4B1DE12C9AE39000FDA3EC /* Build configuration list for PBXNativeTarget "Dezis" */;
 			buildPhases = (
-				4A54431F471E028B3818FA8D /* [CP] Check Pods Manifest.lock */,
+				5C25693B30784C4C09C09D82 /* [CP] Check Pods Manifest.lock */,
 				AF4B1DC92C9AE38E00FDA3EC /* Sources */,
 				AF4B1DCA2C9AE38E00FDA3EC /* Frameworks */,
 				AF4B1DCB2C9AE38E00FDA3EC /* Resources */,
-				71E139D973546DA5615A0A9F /* [CP] Embed Pods Frameworks */,
+				0E3B6E94CA83476039C3B468 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -768,7 +765,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		4A54431F471E028B3818FA8D /* [CP] Check Pods Manifest.lock */ = {
+		0E3B6E94CA83476039C3B468 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Dezis/Pods-Dezis-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Dezis/Pods-Dezis-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Dezis/Pods-Dezis-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5C25693B30784C4C09C09D82 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -788,23 +802,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		71E139D973546DA5615A0A9F /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Dezis/Pods-Dezis-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Dezis/Pods-Dezis-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Dezis/Pods-Dezis-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -902,7 +899,6 @@
 				AF4B1E2D2CA19C6000FDA3EC /* ChekBoxButton.swift in Sources */,
 				AF5BE5672CE1B3E7002532D4 /* ExitAlertPresenter.swift in Sources */,
 				AF4B1DD12C9AE38E00FDA3EC /* AppDelegate.swift in Sources */,
-				AF4B1E052C9C1C8B00FDA3EC /* URLSession+Extension.swift in Sources */,
 				AF4B1DFD2C9B52AE00FDA3EC /* СonfirmationСodeViewController.swift in Sources */,
 				AF5146212CC652C8000D9C97 /* UserRegisterPresenter.swift in Sources */,
 				AF4B1DD32C9AE38E00FDA3EC /* SceneDelegate.swift in Sources */,
@@ -1036,7 +1032,7 @@
 		};
 		AF4B1DE22C9AE39000FDA3EC /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F7FB7E9CD196CCFDB56042EF /* Pods-Dezis.debug.xcconfig */;
+			baseConfigurationReference = 8B13BE55A387EA2D8217EC1E /* Pods-Dezis.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1071,7 +1067,7 @@
 		};
 		AF4B1DE32C9AE39000FDA3EC /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = ABC7905C0E1157EB74B80A5D /* Pods-Dezis.release.xcconfig */;
+			baseConfigurationReference = A1C71FB03C64A51070A4EEEF /* Pods-Dezis.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

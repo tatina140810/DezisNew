@@ -45,7 +45,7 @@ private lazy var orderButton: UIButton = {
         super.viewDidLoad()
         setupUI()
         view.backgroundColor = UIColor(hex: "#1B2228")
- 
+        navigationItem.backButtonTitle = "Назад"
     }
     private func setupUI(){
      

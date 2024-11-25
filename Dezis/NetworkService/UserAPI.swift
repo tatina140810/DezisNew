@@ -129,11 +129,36 @@ extension UserApi: TargetType {
     }
     
     var headers: [String : String]? {
-        let token = KeychainService.shared.accessToken
-        return [
-            "Content-Type": "application/json",
-           // "Authorization": "Bearer \(token)"
-        ]
+        let token = KeychainService().accessToken
+        
+        switch self {
+        case .userRegister(_,_,_,_,_,_):
+            return [
+                "Content-Type": "application/json"
+            ]
+        case .userLogin(_,_):
+            return [
+                "Content-Type": "application/json"
+            ]
+        case .verifyUser(_,_):
+            return [
+                "Content-Type": "application/json"
+            ]
+        case .booking(_,_,_,_,_):
+           return [
+                "Content-Type": "application/json"
+            ]
+        case .userDetails(id: _):
+            return [
+                 "Content-Type": "application/json"
+             ]
+        default:
+            return [
+                "Content-Type": "application/json",
+                "Authorization": "Bearer \(token)"
+            ]
+        }
+        
         
         var sampleData: Data {
             return Data()

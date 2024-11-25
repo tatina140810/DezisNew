@@ -37,7 +37,7 @@ class ViewControllerForAlert: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+        view.backgroundColor = UIColor.clear
         view.isUserInteractionEnabled = true
         setupUI()
         overrideUserInterfaceStyle = .light
@@ -72,11 +72,12 @@ class ViewControllerForAlert: UIViewController {
     }
 
     @objc func homeButtonTapped() {
-        let vc = ClientTabBarController()
-       
-        navigationController?.pushViewController(vc, animated: true)
+        NotificationCenter.default.post(name: NSNotification.Name("SwitchToTab"), object: nil, userInfo: ["tabIndex": 0])
+        
+        dismiss(animated: true)
         
     }
+    
     
    
 }
