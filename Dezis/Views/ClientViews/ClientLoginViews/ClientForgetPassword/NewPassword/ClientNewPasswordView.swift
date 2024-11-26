@@ -146,28 +146,29 @@ class ClientNewPasswordView: UIViewController {
         ]
         
         let fullText = "Выбирая «Зарегистрироваться», вы подтверждаете свое согласие с Условием продажи и принимаете условия Положения о конфиденциальности."
-        
+
         let termsOfService = "Условием продажи"
         let privacyPolicy = "Положения о конфиденциальности."
-        
+
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = .center
-        
+
         let attributedString = NSMutableAttributedString(string: fullText, attributes: [
             .font: UIFont.systemFont(ofSize: 12),
             .foregroundColor: UIColor.white,
             .paragraphStyle: paragraphStyle
         ])
-        
         let termsRange = (fullText as NSString).range(of: termsOfService)
         let privacyRange = (fullText as NSString).range(of: privacyPolicy)
-        
-        attributedString.addAttribute(.link, value: "terms://", range: termsRange)
-        attributedString.addAttribute(.link, value: "privacy://", range: privacyRange)
-        
+
+        attributedString.addAttribute(.foregroundColor, value: UIColor.systemBlue, range: termsRange)
+        attributedString.addAttribute(.foregroundColor, value: UIColor.systemBlue, range: privacyRange)
+
         textView.attributedText = attributedString
-        textView.translatesAutoresizingMaskIntoConstraints = false
         
+        textView.isEditable = false
+        textView.isSelectable = false
+
         return textView
     }()
     
@@ -267,6 +268,7 @@ class ClientNewPasswordView: UIViewController {
     
     private func setupAddTarget() {
         continueButton.addTarget(self, action: #selector(continueButtonTapped), for: .touchUpInside)
+        termsTextView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTextTap(_:))))
     }
     
     private func setupNavigation() {
@@ -291,6 +293,26 @@ class ClientNewPasswordView: UIViewController {
         
         let backBarButtonItem = UIBarButtonItem(customView: backButton)
         navigationItem.leftBarButtonItem = backBarButtonItem
+    }
+    
+    @objc private func handleTextTap(_ gesture: UITapGestureRecognizer) {
+        guard let textView = gesture.view as? UITextView else { return }
+
+        let layoutManager = textView.layoutManager
+        let location = gesture.location(in: textView)
+        let characterIndex = layoutManager.characterIndex(for: location, in: textView.textContainer, fractionOfDistanceBetweenInsertionPoints: nil)
+
+        let fullText = textView.attributedText.string
+        let termsRange = (fullText as NSString).range(of: "Условием продажи")
+        let privacyRange = (fullText as NSString).range(of: "Положения о конфиденциальности.")
+
+        if NSLocationInRange(characterIndex, termsRange) {
+            let privacyPage = PrivacyPage()
+            navigationController?.pushViewController(privacyPage, animated: true)
+        } else if NSLocationInRange(characterIndex, privacyRange) {
+            let confidentiallyPage = ConfidantionalyPage()
+            navigationController?.pushViewController(confidentiallyPage, animated: true)
+        }
     }
     
     @objc private func backButtonTapped() {
@@ -345,17 +367,6 @@ class ClientNewPasswordView: UIViewController {
 
 
 }
-
-extension ClientNewPasswordView: UITextViewDelegate {
-    
-    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
-           if URL.scheme == "terms" || URL.scheme == "privacy" {
-               return false
-           }
-           return true
-       }
-}
-
 
 extension ClientNewPasswordView: IClientNewPasswordView {
     

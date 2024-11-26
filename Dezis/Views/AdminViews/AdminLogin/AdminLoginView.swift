@@ -11,14 +11,11 @@ protocol IAdminLoginView {
     func showError(message: String)
     func showInputError(message: String)
     func navigateToAdminDashboard()
-    func showDocumentation(documentationList: [Documentation])
 }
 
 class AdminLoginView: UIViewController {
     
     private var presenter: IAdminLoginPresenter?
-    
-    private var documentationList: [Documentation] = []
     
     private let loginLabel: UILabel = {
         let view = UILabel()
@@ -137,28 +134,29 @@ class AdminLoginView: UIViewController {
         ]
         
         let fullText = "Выбирая «Зарегистрироваться», вы подтверждаете свое согласие с Условием продажи и принимаете условия Положения о конфиденциальности."
-        
+
         let termsOfService = "Условием продажи"
         let privacyPolicy = "Положения о конфиденциальности."
-        
+
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = .center
-        
+
         let attributedString = NSMutableAttributedString(string: fullText, attributes: [
             .font: UIFont.systemFont(ofSize: 12),
             .foregroundColor: UIColor.white,
             .paragraphStyle: paragraphStyle
         ])
-        
         let termsRange = (fullText as NSString).range(of: termsOfService)
         let privacyRange = (fullText as NSString).range(of: privacyPolicy)
-        
-        attributedString.addAttribute(.link, value: "terms://", range: termsRange)
-        attributedString.addAttribute(.link, value: "privacy://", range: privacyRange)
-        
+
+        attributedString.addAttribute(.foregroundColor, value: UIColor.systemBlue, range: termsRange)
+        attributedString.addAttribute(.foregroundColor, value: UIColor.systemBlue, range: privacyRange)
+
         textView.attributedText = attributedString
-        textView.translatesAutoresizingMaskIntoConstraints = false
         
+        textView.isEditable = false
+        textView.isSelectable = false
+
         return textView
     }()
     
@@ -266,6 +264,7 @@ class AdminLoginView: UIViewController {
         continueButton.addTarget(self, action: #selector(continueButtonTapped), for: .touchUpInside)
         loginTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         passwordTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+        termsTextView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTextTap(_:))))
     }
     
     private func setupNavigation() {
@@ -325,13 +324,32 @@ class AdminLoginView: UIViewController {
         passwordErrorLabel.isHidden = true
         
         if login.isEmpty || password.isEmpty {
-            showInputError(message: "Пожалуйста, введите логин и пароль.")
+            showInputError(message: "Введите корректные данные")
         } else {
             presenter?.loginAdmin(login: login, password: password)
         }
     }
-
     
+    @objc private func handleTextTap(_ gesture: UITapGestureRecognizer) {
+        guard let textView = gesture.view as? UITextView else { return }
+
+        let layoutManager = textView.layoutManager
+        let location = gesture.location(in: textView)
+        let characterIndex = layoutManager.characterIndex(for: location, in: textView.textContainer, fractionOfDistanceBetweenInsertionPoints: nil)
+
+        let fullText = textView.attributedText.string
+        let termsRange = (fullText as NSString).range(of: "Условием продажи")
+        let privacyRange = (fullText as NSString).range(of: "Положения о конфиденциальности.")
+
+        if NSLocationInRange(characterIndex, termsRange) {
+            let privacyPage = PrivacyPage()
+            navigationController?.pushViewController(privacyPage, animated: true)
+        } else if NSLocationInRange(characterIndex, privacyRange) {
+            let confidentiallyPage = ConfidantionalyPage()
+            navigationController?.pushViewController(confidentiallyPage, animated: true)
+        }
+    }
+
     func showInputError(message: String) {
         loginTextField.layer.borderColor = UIColor.red.cgColor
         passwordTextField.layer.borderColor = UIColor.red.cgColor
@@ -357,18 +375,6 @@ class AdminLoginView: UIViewController {
     }
 }
 
-extension AdminLoginView: UITextViewDelegate {
-    
-    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
-           if URL.scheme == "terms" || URL.scheme == "privacy" {
-               presenter?.fetchDocumentation() 
-               return false
-           }
-           return true
-       }
-}
-
-
 extension AdminLoginView: IAdminLoginView {
     
     func showError(message: String) {
@@ -378,10 +384,5 @@ extension AdminLoginView: IAdminLoginView {
     func navigateToAdminDashboard() {
         let tabBarController = AdminTabBarController()
         navigationController?.pushViewController(tabBarController, animated: true)
-    }
-    
-    func showDocumentation(documentationList: [Documentation]) {
-        let documentationVC = DocumentationsList(documentationList: documentationList)
-        navigationController?.pushViewController(documentationVC, animated: true)
     }
 }
