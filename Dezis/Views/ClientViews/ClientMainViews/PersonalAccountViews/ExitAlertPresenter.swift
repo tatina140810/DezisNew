@@ -25,6 +25,9 @@ class ExitAlertPresenter: IExitAlertPresenter {
             case .success:
                 UserDefaults.standard.removeObject(forKey: "email")
                 UserDefaults.standard.removeObject(forKey: "userId")
+                KeychainService.shared.deleteAll()
+                let token = KeychainService.shared.accessToken
+                print("Access Token после удаления:", token.isEmpty ? "Удален" : "Существует")
                 print("Пользователь успешно вышел из системы и данные удалены")
                 
             case .failure(let error):
