@@ -60,14 +60,6 @@ struct UserInformation: Codable {
     let created_at: String?
 }
 
-struct Documentation: Codable {
-    let id: Int
-    let title: String
-    let description: String
-    let file: String
-}
-
-
 class AdminNetworkService {
     
     private let provider = MoyaProvider<AdminApi>(requestClosure: { (endpoint, closure) in
@@ -160,24 +152,6 @@ class AdminNetworkService {
                     completion(.success(requests))
                 } catch {
                     print("Ошибка декодирования запросов: \(error)")
-                    completion(.failure(error))
-                }
-            case .failure(let error):
-                print("Ошибка сети: \(error)")
-                completion(.failure(error))
-            }
-        }
-    }
-    
-    func fetchDocumentation(completion: @escaping (Result<[Documentation], Error>) -> Void) {
-        provider.request(.fetchDocumentation) { result in
-            switch result {
-            case .success(let response):
-                do {
-                    let documentation = try JSONDecoder().decode([Documentation].self, from: response.data)
-                    completion(.success(documentation))
-                } catch {
-                    print("Ошибка декодирования документации: \(error)")
                     completion(.failure(error))
                 }
             case .failure(let error):

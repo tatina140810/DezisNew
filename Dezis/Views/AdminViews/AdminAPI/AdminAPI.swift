@@ -12,7 +12,6 @@ enum AdminApi {
     case fetchOrders
     case fetchUserDetails(userId: Int)
     case fetchRequests
-    case fetchDocumentation
     case completeOrder(orderId: Int)
     case confirmUser(userId: Int)
     case deleteUser(userId: Int)
@@ -31,8 +30,6 @@ extension AdminApi: TargetType {
             return "/api/v1/user/list-user/\(userId)"
         case . fetchRequests:
             return "/api/v1/user/inactive-users/"
-        case .fetchDocumentation:
-            return "/api/v1/about_us/documentations/"
         case .completeOrder(let orderId):
             return "/api/v1/contact/bookings/\(orderId)/complete/"
         case .confirmUser(let userId):
@@ -46,7 +43,7 @@ extension AdminApi: TargetType {
         switch self {
         case .loginAdmin:
             return .post
-        case .fetchOrders, .fetchUserDetails, .fetchRequests, .fetchDocumentation:
+        case .fetchOrders, .fetchUserDetails, .fetchRequests:
             return .get
         case .completeOrder, .confirmUser:
             return .put
@@ -59,7 +56,7 @@ extension AdminApi: TargetType {
         switch self {
         case .loginAdmin(let login, let password):
             return .requestParameters(parameters: ["login": login, "password": password], encoding: JSONEncoding.default)
-        case .fetchOrders, .fetchUserDetails, .fetchRequests, .fetchDocumentation, .deleteUser:
+        case .fetchOrders, .fetchUserDetails, .fetchRequests, .deleteUser:
             return .requestPlain
         case .completeOrder:
             return .requestJSONEncodable(["is_completed": true])

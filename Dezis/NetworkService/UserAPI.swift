@@ -145,13 +145,17 @@ extension UserApi: TargetType {
                 "Content-Type": "application/json"
             ]
         case .booking(_,_,_,_,_):
-           return [
+            return [
                 "Content-Type": "application/json"
             ]
         case .userDetails(id: _):
             return [
-                 "Content-Type": "application/json"
-             ]
+                "Content-Type": "application/json"
+            ]
+        case .forgotPassword:
+            return [
+                "Content-Type": "application/json"
+            ]
         default:
             return [
                 "Content-Type": "application/json",
