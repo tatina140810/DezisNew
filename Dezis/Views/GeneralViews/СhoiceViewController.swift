@@ -39,6 +39,7 @@ class ChoiceViewController: UIViewController {
         setupUI()
         setupReachability()
         navigationItem.backButtonTitle = "Назад"
+        navigationItem.hidesBackButton = true
         }
         
 

@@ -21,8 +21,6 @@ class ClientLoginPresenter: IClientLoginPresenter {
             case .success(let response):
                 print("Успешный логин: \(response.detail)")
                 UserDefaults.standard.set(email, forKey: "email")
-                print("сoхраненый email: \(email)")
-                UserDefaults.standard.set(email, forKey: "email")
                 UserDefaults.standard.set(response.id, forKey: "userId")
                 print("Сохраненный email: \(email)")
                 print("Сохраненный userId: \(response.id)")
