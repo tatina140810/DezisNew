@@ -56,7 +56,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
            window?.rootViewController = vc
            window?.makeKeyAndVisible()
            
-           setupWebSocketAndSignalR()
+//           setupWebSocketAndSignalR()
        }
 
        private func showOnboarding() {
@@ -71,17 +71,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
            window?.makeKeyAndVisible()
        }
        
-    private func setupWebSocketAndSignalR() {
-            let roomId = 1
-            let token = KeychainService.shared.accessToken
-            
-            let chatWebSocket = ChatWebSocket(roomId: roomId, token: token)
-            chatWebSocket.connect()
-            chatWebSocket.sendText(text: "Hello")
-         
-            let signalRService = SignalRService(roomId: roomId, token: token)
-            signalRService.connectionStart()
-        }
+//    private func setupWebSocketAndSignalR() {
+//            let roomId = 1
+//            let token = KeychainService.shared.accessToken
+//            
+//            let chatWebSocket = ChatWebSocket(roomId: roomId, token: token)
+//            chatWebSocket.connect()
+//            chatWebSocket.sendText(text: "Hello")
+//         
+////            let signalRService = SignalRService(roomId: roomId, token: token)
+////            signalRService.connectionStart()
+//        }
         
     
     func sceneDidDisconnect(_ scene: UIScene) {
