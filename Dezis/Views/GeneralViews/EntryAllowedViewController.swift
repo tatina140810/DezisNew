@@ -7,12 +7,12 @@ protocol EntryAllowedView: AnyObject {
 }
 
 class EntryAllowedViewController: UIViewController, EntryAllowedView {
-       var userId: Int?
-       var statusCheckTimer: Timer?
-      
+    var userId: Int?
+    var statusCheckTimer: Timer?
+    
     
     var presenter: IEntryAllowedPresenter?
-
+    
     private var entryAllowedImage: UIImageView = {
         let view = UIImageView()
         view.image = UIImage(named: "entryAllowed")
@@ -28,7 +28,7 @@ class EntryAllowedViewController: UIViewController, EntryAllowedView {
         view.numberOfLines = 0
         return view
     }()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(hex: "#1B2228")
@@ -36,16 +36,16 @@ class EntryAllowedViewController: UIViewController, EntryAllowedView {
         navigationController?.navigationBar.isHidden = true
         presenter = EntryAllowedPresenter(view: self, userService: UserNetworkService())
         startCheckingUserStatus()
-       
-    }
         
+    }
+    
     func showError(_ error: String) {
-            guard navigationController?.topViewController === self else { return }
-            let alert = UIAlertController(title: "Ошибка", message: error, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-            present(alert, animated: true)
-        }
-
+        guard navigationController?.topViewController === self else { return }
+        let alert = UIAlertController(title: "Ошибка", message: error, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        present(alert, animated: true)
+    }
+    
     private func setupUI() {
         view.addSubview(entryAllowedImage)
         entryAllowedImage.snp.makeConstraints { make in
@@ -61,39 +61,38 @@ class EntryAllowedViewController: UIViewController, EntryAllowedView {
         }
     }
     func startCheckingUserStatus() {
-            statusCheckTimer = Timer.scheduledTimer(timeInterval: 20.0, target: self, selector: #selector(checkUserStatus), userInfo: nil, repeats: true)
-        }
-     
-        func stopCheckingUserStatus() {
-            statusCheckTimer?.invalidate()
-            statusCheckTimer = nil
-        }
+        statusCheckTimer = Timer.scheduledTimer(timeInterval: 20.0, target: self, selector: #selector(checkUserStatus), userInfo: nil, repeats: true)
+    }
+    
+    func stopCheckingUserStatus() {
+        statusCheckTimer?.invalidate()
+        statusCheckTimer = nil
+    }
     func updateUserProfile(_ userProfile: UserProfile) {
         stopCheckingUserStatus()
+        UserDefaults.standard.set(true, forKey: "confirmed")
         DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) { [weak self] in
             self?.loadNextViewController()
             
         }
-        }
-
+    }
+    
     private func loadNextViewController() {
-        
         let vc = ClientTabBarController()
-       navigationController?.pushViewController(vc, animated: true)
-     //   navigationController?.setViewControllers([ClientTabBarController()], animated: true)
+        navigationController?.pushViewController(vc, animated: true)
     }
     @objc func checkUserStatus() {
         presenter?.fetchUserData()
     }
     deinit {
-            stopCheckingUserStatus()
-        }
+        stopCheckingUserStatus()
+    }
     func showEntryDeniedScreen() {
-            let deniedVC = EntryDeniedViewController()
-            deniedVC.modalPresentationStyle = .fullScreen
-            present(deniedVC, animated: true, completion: nil)
-        }
-
-   
+        let deniedVC = EntryDeniedViewController()
+        deniedVC.modalPresentationStyle = .fullScreen
+        present(deniedVC, animated: true, completion: nil)
+    }
+    
+    
 }
 

@@ -5,13 +5,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-      
+        
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
         
         determineInitialScreen()
     }
     private func determineInitialScreen() {
+        let userConfirmed = UserDefaults.standard.value(forKey: "confirmed")
            let hasCompletedOnboarding = UserDefaults.standard.bool(forKey: "hasCompletedOnboarding")
            let hasAccessToken = !KeychainService.shared.accessToken.isEmpty
            
@@ -20,7 +21,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                    DispatchQueue.main.async {
                        if isAuthorized {
                            print("Токен действителен. Переходим на главный экран.")
-                           self?.showMainScreen()
+                           self?.showMainScreen(userConfirmed: (userConfirmed != nil))
                        } else {
                            print("Токен истек. Переходим на экран входа.")
                            self?.showLoginScreen()
@@ -36,9 +37,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
            }
        }
  
-       private func showMainScreen() {
-           let clientTabBarVC = ClientTabBarController()
-           window?.rootViewController = clientTabBarVC
+    private func showMainScreen(userConfirmed: Bool) {
+        var vc = UIViewController()
+           if userConfirmed {
+             vc = ClientTabBarController()
+           } else {
+              vc = EntryAllowedViewController()
+           }
+
+           window?.rootViewController = vc
            window?.makeKeyAndVisible()
            
            setupWebSocketAndSignalR()
