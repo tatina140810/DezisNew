@@ -251,21 +251,7 @@ class UserRegisterSecondPageViewController: UIViewController, IUserRegisterSecon
             }
             return
         }
-//        if !isValidAdress(address) {
-//            adressTextField.layer.borderColor = UIColor.red.cgColor
-//            adressTextField.layer.borderWidth = 1.0
-//            return
-//        }
-//        if !isValidApartmentNumber(apartmentNumber) {
-//            apartmentNumberTextField.layer.borderColor = UIColor.red.cgColor
-//            apartmentNumberTextField.layer.borderWidth = 1.0
-//            return
-//        }
-//        adressTextField.layer.borderWidth = 0
-//        apartmentNumberTextField.layer.borderWidth = 0
-//        adressTextField.layer.borderWidth = 0
-//        apartmentNumberTextField.layer.borderWidth = 0
-//        
+        
         if var userInfo = presenter?.getUserInfo() {
             userInfo.address = address
             userInfo.apartmentNumber = apartmentNumber

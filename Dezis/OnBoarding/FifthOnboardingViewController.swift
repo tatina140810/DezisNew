@@ -42,6 +42,10 @@ class FifthOnboardingViewController: UIViewController {
         finishOnboarding()
        
     }
+    override func viewWillDisappear(_ animated: Bool) {
+            super.viewWillDisappear(animated)
+            navigationController?.navigationBar.isHidden = false
+        }
     private func setupUI(){
         
         view.addSubview(logoImage)

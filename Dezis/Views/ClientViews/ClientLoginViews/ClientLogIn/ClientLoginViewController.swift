@@ -281,14 +281,17 @@ class ClientLoginViewController: UIViewController, UITextFieldDelegate, IClientL
         return emailPredicate.evaluate(with: email)
     }
     func loginSuccess() {
-  //      let vc = ClientTabBarController()
-//        navigationController?.pushViewController(vc, animated: true)
-//        let vc = ChoiceViewController()
-    //    .rootViewController = UINavigationController(rootViewController: vc)
-    //    window.makeKeyAndVisible()
-    //    print("Успешный вход")
-        NotificationCenter.default.post(name: NSNotification.Name("GoToMain"), object: nil, userInfo: nil)
+        guard let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate,
+              let window = sceneDelegate.window else {
+            print("Не удалось получить доступ к SceneDelegate")
+            return
+        }
+
+        let clientTabBarVC = ClientTabBarController()
+        window.rootViewController = clientTabBarVC
+        window.makeKeyAndVisible()
     }
+
     
     func loginFailed(error: String) {
         

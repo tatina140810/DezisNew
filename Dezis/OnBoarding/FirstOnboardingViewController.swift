@@ -38,11 +38,6 @@ class FirstOnboardingViewController: UIViewController {
         view.backgroundColor = UIColor(hex: "#1B2228")
        navigationController?.navigationBar.isHidden = true
     }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        navigationController?.navigationBar.isHidden = false
-    }
 
     
     private func setupUI() {

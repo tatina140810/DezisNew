@@ -421,7 +421,7 @@ refreshToken: registerResponse.tokens.refresh)
                 }
                 
                 if response.statusCode == 400 {
-                    let message = "Пожалуйста, введите корректный адрес электронной почты."
+                    let message = "Указанный адрес электронной почты не найден. Пожалуйста, проверьте правильность введенных данных или зарегистрируйтесь."
                     completion(.failure(NSError(domain: "", code: 400, userInfo: [NSLocalizedDescriptionKey: message])))
                     return
                 }
