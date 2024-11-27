@@ -12,6 +12,5 @@ pod 'Moya', '~> 15.0'
 pod 'ReachabilitySwift'
 pod 'Starscream', '~> 4.0'
 pod 'JWTDecode'
-pod 'SwiftSignalRClient'
 
 end

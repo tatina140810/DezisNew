@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		18E576572CC5482700302739 /* ChatModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E576562CC5482700302739 /* ChatModel.swift */; };
 		18E576592CC548B100302739 /* ChatWebSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E576582CC548B100302739 /* ChatWebSocket.swift */; };
 		18FA88D62CB6D7EC00C66BAF /* OpenChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18FA88D52CB6D7EC00C66BAF /* OpenChatViewController.swift */; };
 		6CD86E37E873F17A87464298 /* Pods_Dezis.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BF54F9BFA095158B959FBB9 /* Pods_Dezis.framework */; };
@@ -39,6 +38,7 @@
 		72D39BA82CB1870D00D9EB45 /* AdminLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D39BA72CB1870D00D9EB45 /* AdminLoginView.swift */; };
 		8557C9B02CF0D31D0081F891 /* ChatApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8557C9AF2CF0D31D0081F891 /* ChatApi.swift */; };
 		8557C9B22CF0D3270081F891 /* ChatService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8557C9B12CF0D3270081F891 /* ChatService.swift */; };
+		858035342CF5B736001C4AB7 /* ChatListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 858035332CF5B736001C4AB7 /* ChatListModel.swift */; };
 		85C09B2E2CDBB872002B09BC /* keyboardExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C09B2D2CDBB872002B09BC /* keyboardExtension.swift */; };
 		AF2C7EF52CE87E2E008615E6 /* SF-Pro-Display-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = AF2C7EF42CE87E2E008615E6 /* SF-Pro-Display-Medium.otf */; };
 		AF3BFB222CE465D100A5BEE8 /* NumberSavedAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3BFB212CE465B800A5BEE8 /* NumberSavedAlert.swift */; };
@@ -115,7 +115,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		18E576562CC5482700302739 /* ChatModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatModel.swift; sourceTree = "<group>"; };
 		18E576582CC548B100302739 /* ChatWebSocket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatWebSocket.swift; sourceTree = "<group>"; };
 		18FA88D52CB6D7EC00C66BAF /* OpenChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenChatViewController.swift; sourceTree = "<group>"; };
 		1BF54F9BFA095158B959FBB9 /* Pods_Dezis.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Dezis.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -147,6 +146,7 @@
 		72D39BA72CB1870D00D9EB45 /* AdminLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminLoginView.swift; sourceTree = "<group>"; };
 		8557C9AF2CF0D31D0081F891 /* ChatApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatApi.swift; sourceTree = "<group>"; };
 		8557C9B12CF0D3270081F891 /* ChatService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatService.swift; sourceTree = "<group>"; };
+		858035332CF5B736001C4AB7 /* ChatListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListModel.swift; sourceTree = "<group>"; };
 		85C09B2D2CDBB872002B09BC /* keyboardExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = keyboardExtension.swift; sourceTree = "<group>"; };
 		8B13BE55A387EA2D8217EC1E /* Pods-Dezis.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dezis.debug.xcconfig"; path = "Target Support Files/Pods-Dezis/Pods-Dezis.debug.xcconfig"; sourceTree = "<group>"; };
 		A1C71FB03C64A51070A4EEEF /* Pods-Dezis.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dezis.release.xcconfig"; path = "Target Support Files/Pods-Dezis/Pods-Dezis.release.xcconfig"; sourceTree = "<group>"; };
@@ -241,7 +241,7 @@
 		18E576552CC5480F00302739 /* ChatModel */ = {
 			isa = PBXGroup;
 			children = (
-				18E576562CC5482700302739 /* ChatModel.swift */,
+				858035332CF5B736001C4AB7 /* ChatListModel.swift */,
 				18E576582CC548B100302739 /* ChatWebSocket.swift */,
 			);
 			path = ChatModel;
@@ -834,9 +834,9 @@
 				AF74D5802CB1561300B64D6E /* DezinfectionView.swift in Sources */,
 				AF4B1E072C9C1F6000FDA3EC /* NetworkError.swift in Sources */,
 				AF4B1E172C9FFF3200FDA3EC /* LabelSettings.swift in Sources */,
-				18E576572CC5482700302739 /* ChatModel.swift in Sources */,
 				AF51461E2CC64A91000D9C97 /* UserNetworkService.swift in Sources */,
 				72D39BA82CB1870D00D9EB45 /* AdminLoginView.swift in Sources */,
+				858035342CF5B736001C4AB7 /* ChatListModel.swift in Sources */,
 				AF74D5522CA7EB3200B64D6E /* UserRegisterSecondPageViewController.swift in Sources */,
 				72D39BA62CB1796F00D9EB45 /* CategoriesCollectionViewCell.swift in Sources */,
 				AF4B1DE92C9AEEC600FDA3EC /* Profile.swift in Sources */,
