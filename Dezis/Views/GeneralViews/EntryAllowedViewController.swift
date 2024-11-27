@@ -78,9 +78,17 @@ class EntryAllowedViewController: UIViewController, EntryAllowedView {
     }
     
     private func loadNextViewController() {
-        let vc = ClientTabBarController()
-        navigationController?.pushViewController(vc, animated: true)
+        guard let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate,
+              let window = sceneDelegate.window else {
+            print("Не удалось получить доступ к SceneDelegate")
+            return
+        }
+
+        let clientTabBarVC = ClientTabBarController()
+        window.rootViewController = clientTabBarVC
+        window.makeKeyAndVisible()
     }
+    
     @objc func checkUserStatus() {
         presenter?.fetchUserData()
     }
