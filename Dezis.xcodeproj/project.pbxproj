@@ -41,6 +41,7 @@
 		85C09B2E2CDBB872002B09BC /* keyboardExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C09B2D2CDBB872002B09BC /* keyboardExtension.swift */; };
 		AF2C7EF52CE87E2E008615E6 /* SF-Pro-Display-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = AF2C7EF42CE87E2E008615E6 /* SF-Pro-Display-Medium.otf */; };
 		AF3B4F622CF60B020025AC3D /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3B4F612CF60AEC0025AC3D /* AuthManager.swift */; };
+		AF3B4F642CF733810025AC3D /* TechnicalIssueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3B4F632CF7330C0025AC3D /* TechnicalIssueViewController.swift */; };
 		AF3BFB222CE465D100A5BEE8 /* NumberSavedAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3BFB212CE465B800A5BEE8 /* NumberSavedAlert.swift */; };
 		AF3BFB242CE481C100A5BEE8 /* SFProText-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AF3BFB232CE481C100A5BEE8 /* SFProText-Bold.ttf */; };
 		AF3BFB262CE481D900A5BEE8 /* SFProText-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AF3BFB252CE481D900A5BEE8 /* SFProText-Regular.ttf */; };
@@ -149,6 +150,7 @@
 		85C09B2D2CDBB872002B09BC /* keyboardExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = keyboardExtension.swift; sourceTree = "<group>"; };
 		AF2C7EF42CE87E2E008615E6 /* SF-Pro-Display-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Medium.otf"; sourceTree = "<group>"; };
 		AF3B4F612CF60AEC0025AC3D /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
+		AF3B4F632CF7330C0025AC3D /* TechnicalIssueViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TechnicalIssueViewController.swift; sourceTree = "<group>"; };
 		AF3BFB212CE465B800A5BEE8 /* NumberSavedAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberSavedAlert.swift; sourceTree = "<group>"; };
 		AF3BFB232CE481C100A5BEE8 /* SFProText-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFProText-Bold.ttf"; sourceTree = "<group>"; };
 		AF3BFB252CE481D900A5BEE8 /* SFProText-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFProText-Regular.ttf"; sourceTree = "<group>"; };
@@ -579,6 +581,7 @@
 		AF51461F2CC64EE4000D9C97 /* GeneralViews */ = {
 			isa = PBXGroup;
 			children = (
+				AF3B4F632CF7330C0025AC3D /* TechnicalIssueViewController.swift */,
 				AF74D5C32CB41F6600B64D6E /* СhoiceViewController.swift */,
 				AFF6188A2CBBA3E700C64C95 /* EntryAllowedViewController.swift */,
 				AF6BC7232CD9075A00106766 /* EntryAllowedPresenter.swift */,
@@ -826,7 +829,6 @@
 				AF74D5822CB1582000B64D6E /* DeratizationView.swift in Sources */,
 				AF4B1E2B2CA0736200FDA3EC /* ClientChatViewController.swift in Sources */,
 				AF3B4F622CF60B020025AC3D /* AuthManager.swift in Sources */,
-				7277F5AD2CD62D2B0010D6A2 /* DocumentationList.swift in Sources */,
 				72ABD5AA2CC96CF0004E18E9 /* SureAlertView.swift in Sources */,
 				AFF6187E2CB69D5A00C64C95 /* DeratizationViewController.swift in Sources */,
 				7257D50C2CDF6BA70042258A /* ClientEmailConfirmPresenter.swift in Sources */,
@@ -846,6 +848,7 @@
 				AF74D57A2CB1171700B64D6E /* ThirdOnboardingViewController.swift in Sources */,
 				AFF618782CB69D2800C64C95 /* DezinsectionViewController.swift in Sources */,
 				AF9F2FEE2CA6D3CF00BBBB2C /* ImagePicker.swift in Sources */,
+				AF3B4F642CF733810025AC3D /* TechnicalIssueViewController.swift in Sources */,
 				AF6BC7242CD9075F00106766 /* EntryAllowedPresenter.swift in Sources */,
 				72ABD59B2CC82F0A004E18E9 /* AdminLoginPresenter.swift in Sources */,
 				AF9F2FEC2CA6BA1A00BBBB2C /* AttributedTextHelper.swift in Sources */,
