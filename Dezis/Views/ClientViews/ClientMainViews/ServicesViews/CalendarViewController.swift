@@ -187,6 +187,7 @@ class CalendarViewController: UIViewController, ICalendarViewController {
         presenter = CalendarViewControllerPresenter(view: self)
         overrideUserInterfaceStyle = .light
         navigationController?.navigationBar.isHidden = true
+       
     }
     private func checkBoxSettings(){
         
@@ -425,12 +426,10 @@ class CalendarViewController: UIViewController, ICalendarViewController {
         print("Выбранные услуги: \(self.service)")
         updateOrderButtonState()
     }
-    
-    
+   
     func bookingRequestSuccessful() {
         print("Бронирование успешно выполнено")
     }
-    
     
 }
 
