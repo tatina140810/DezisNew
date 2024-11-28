@@ -102,6 +102,7 @@ class UserRegisterViewController: UIViewController {
         keyBoardSetUp()
         navigationItem.backButtonTitle = "Назад"
         numberTextField.delegate = self
+        nameTextField.delegate = self
         numberTextField.keyboardType = .numberPad
     }
     
@@ -235,7 +236,6 @@ class UserRegisterViewController: UIViewController {
         passwordErrorLabel.isHidden = true
         
         emailTextField.layer.borderWidth = 0
-        nameTextField.layer.borderWidth = 0
         numberTextField.layer.borderWidth = 0
         passwordTextField.layer.borderWidth = 0
         
@@ -316,11 +316,6 @@ class UserRegisterViewController: UIViewController {
         let vc = UserRegisterBuilder.build(userinfo: userInfo)
         navigationController?.pushViewController(vc, animated: true)
     }
-    func isValidName(_ username: String) -> Bool {
-        let characterSet = CharacterSet.letters.union(.whitespaces)
-        return username.count >= 2 && username.count <= 20 && username.rangeOfCharacter(from: characterSet.inverted) == nil
-    }
-    
     func isValidEmail(_ email: String) -> Bool {
         let emailRegex = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}$"
         let emailPredicate = NSPredicate(format: "SELF MATCHES %@", emailRegex)
@@ -412,9 +407,43 @@ class UserRegisterViewController: UIViewController {
 extension UserRegisterViewController: UITextFieldDelegate {
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        let fullSrting = (textField.text ?? "") + string
-        textField.text = format(phoneNumber: fullSrting, shouldRemoveLastDigit: range.length == 1)
-        return false
         
-    }
+           if textField == nameTextField {
+          
+               let currentText = textField.text ?? ""
+               let newText = (currentText as NSString).replacingCharacters(in: range, with: string)
+              
+               validateName(newText)
+           }
+           
+           if textField == numberTextField {
+      
+               let fullString = (textField.text ?? "") + string
+               textField.text = format(phoneNumber: fullString, shouldRemoveLastDigit: range.length == 1)
+               return false
+           }
+           
+           return true
+       }
+    func isValidName(_ username: String) -> Bool {
+       
+            let characterSet = CharacterSet.letters.union(.whitespaces)
+            return username.count >= 2 && username.count <= 20 && username.rangeOfCharacter(from: characterSet.inverted) == nil
+        }
+        
+        private func validateName(_ name: String) {
+            nameTextField.layer.borderWidth = 0
+            nameTextField.layer.borderColor = UIColor.clear.cgColor
+            if isValidName(name) {
+                nameTextField.layer.borderColor = UIColor.clear.cgColor
+                nameTextField.layer.borderWidth = 0
+            
+            } else {
+                nameTextField.layer.borderColor = UIColor.red.cgColor
+                nameTextField.layer.borderWidth = 1.0
+             
+            }
+        }
+    
+    
 }

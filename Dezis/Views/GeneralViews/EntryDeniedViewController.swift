@@ -17,7 +17,7 @@ class EntryDeniedViewController: UIViewController {
     }()
     private var titleLabel: UILabel = {
         let view = UILabel()
-        view.text = "К сожалению администратор не дал вам разрешение на вход в приложение! Попробуйте зайти с другого аккаунта."
+        view.text = "К сожалению администратор не дал Вам разрешение на вход в приложение! Попробуйте зайти с другого аккаунта."
         view.font = UIFont(name: "SFProText-Regular", size: 16)
         view.textAlignment = .center
         view.textColor = .white
