@@ -153,6 +153,3 @@ extension ClientChatViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
     }
-
-
-   

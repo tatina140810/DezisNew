@@ -3,6 +3,9 @@ import SnapKit
 
 class AdminChatViewController: UIViewController {
     
+    private var chatAPI: ChatAPI!
+      private var chats: [Chat] = []
+    
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.text = "Чаты"
@@ -20,21 +23,14 @@ class AdminChatViewController: UIViewController {
         return view
     }()
     
-    private var messages: [(userLogo: String, name: String, message: String, time: String, checkMark: String, unreadCount: String?)] = [
-        (userLogo: "chatUser", name: "Ishenbekov Bektur", message: "Спасибо большое!", time: "7/29/19", checkMark: "twoUnread", unreadCount: "11"),
-        (userLogo: "chatUser", name: "Ishenbekov Bektur", message: "Спасибо большое!", time: "18:49", checkMark: "twoRead", unreadCount: nil),
-        (userLogo: "chatUser", name: "Ishenbekov Bektur", message: "Спасибо большое!", time: "7/29/19", checkMark: "oneUnread", unreadCount: nil),
-        (userLogo: "chatUser", name: "Ishenbekov Bektur", message: "Спасибо большое!", time: "7/29/19", checkMark: "twoUnread", unreadCount: "1"),
-        (userLogo: "chatUser", name: "Ishenbekov Bektur", message: "Спасибо большое!", time: "18:49", checkMark: "twoRead", unreadCount: nil),
-        (userLogo: "chatUser", name: "Ishenbekov Bektur", message: "Спасибо большое!", time: "7/29/19", checkMark: "oneUnread", unreadCount: nil)
-    ]
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .init(hex: "#1B2228")
         tableView.delegate = self
         tableView.dataSource = self
         setupConstraints()
+        chatAPI = ChatAPI(token: KeychainService.shared.accessToken)
+               fetchChats()
     }
     
     private func setupConstraints() {
@@ -51,17 +47,31 @@ class AdminChatViewController: UIViewController {
             make.bottom.equalToSuperview()
         }
     }
+    
+    private func fetchChats() {
+           chatAPI.fetchChats { [weak self] result in
+               switch result {
+               case .success(let chats):
+                   self?.chats = chats
+                   DispatchQueue.main.async {
+                       self?.tableView.reloadData()
+                   }
+               case .failure(let error):
+                   print("Error fetching chats: \(error)")
+               }
+           }
+       }
 }
 
 extension AdminChatViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return messages.count
+        return chats.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let chat = chats[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "ChatMessageCell", for: indexPath) as! ChatMessageCell
-        let messageData = messages[indexPath.row]
-        cell.configure(userLogo: messageData.userLogo, name: messageData.name, message: messageData.message, time: messageData.time, checkmarkImage: messageData.checkMark, unreadCount: messageData.unreadCount)
+        cell.configure(userLogo: "chatUser", name: "User \(chat.user)", message: chat.messages.last?.text ?? "", time: chat.createdAt, checkmarkImage: "twoUnread", unreadCount: nil)
         return cell
     }
     

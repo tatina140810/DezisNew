@@ -6,14 +6,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         
-      
+        let roomId = 5
+        let user = 24
         let token = KeychainService.shared.accessToken
         
-        let chatWebSocket = ChatWebSocket(token: token)
+        let chatWebSocket = WebSocketManager(token: token, roomId: roomId)
         chatWebSocket.connect()
-        chatWebSocket.sendText(text: "Hello")
         
-        
+        chatWebSocket.sendMessage(chatId: "\(roomId)", userId: "\(user)", messageContent: "IOS работает")
+                
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
         
@@ -23,7 +24,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let userConfirmed = UserDefaults.standard.value(forKey: "confirmed")
            let hasCompletedOnboarding = UserDefaults.standard.bool(forKey: "hasCompletedOnboarding")
            let hasAccessToken = !KeychainService.shared.accessToken.isEmpty
-           
+            
            if hasAccessToken {
                AuthManager.shared.validateToken { [weak self] isAuthorized in
                    DispatchQueue.main.async {
@@ -55,8 +56,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
            window?.rootViewController = vc
            window?.makeKeyAndVisible()
-           
-//           setupWebSocketAndSignalR()
+    
        }
 
        private func showOnboarding() {
@@ -70,19 +70,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
            window?.rootViewController = loginVC
            window?.makeKeyAndVisible()
        }
-       
-//    private func setupWebSocketAndSignalR() {
-//            let roomId = 1
-//            let token = KeychainService.shared.accessToken
-//            
-//            let chatWebSocket = ChatWebSocket(roomId: roomId, token: token)
-//            chatWebSocket.connect()
-//            chatWebSocket.sendText(text: "Hello")
-//         
-////            let signalRService = SignalRService(roomId: roomId, token: token)
-////            signalRService.connectionStart()
-//        }
-        
     
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.

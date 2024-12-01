@@ -9,8 +9,11 @@
 //import SnapKit
 //
 //class OpenChatViewController: UIViewController {
-//    
-//    private var chatWebSocket: ChatWebSocket!
+//
+//    private var chatWebSocket: WebSocketManager?
+//    private var messages: [Message] = []
+//    private var chat: Chat? // Полученный чат
+//    private var chatAPI: ChatAPI!
 //    
 //    private lazy var backButton: UIButton = {
 //        let button = UIButton(type: .system)
@@ -62,7 +65,6 @@
 //    
 //    private let messageInputTextField: UITextField = {
 //        let textField = UITextField()
-//        //textField.placeholder = "Сообщение..."
 //        textField.textColor = .white
 //        textField.backgroundColor = UIColor(hex: "#161718")
 //        textField.layer.cornerRadius = 16
@@ -83,43 +85,62 @@
 //        return button
 //    }()
 //    
-//    private var messages: [(isUserMessage: Bool, message: String, time: String)] = [
-//        (isUserMessage: false, message: "Здравствуйте!", time: "10:10"),
-//        (isUserMessage: false, message: "Доброе утро!", time: "10:10"),
-//        (isUserMessage: false, message: "C вас 15000 сом", time: "10:10"),
-//        (isUserMessage: true, message: "Здравствуйте! Все хорошо, как я могу расплатится?", time: "11:45"),
-//    ]
-//    
 //    override func viewDidLoad() {
 //        super.viewDidLoad()
+//        chatWebSocket = WebSocketManager(token: KeychainService.shared.accessToken, roomId: self.chat?.id ?? 0) // Изначально 0, это будет изменяться на актуальное значение
+//        chatWebSocket?.connect()
 //        setupUI()
 //        setupConstraints()
 //        tableView.delegate = self
 //        tableView.dataSource = self
-//        chatWebSocket = ChatWebSocket()
-//        chatWebSocket.connect()
+//
+//        // Инициализируем chatAPI с токеном
+//        chatAPI = ChatAPI(token: KeychainService.shared.accessToken)
+//        fetchChatData()
 //    }
-//    
+//
 //    @objc private func backButtonTapped() {
 //        navigationController?.popViewController(animated: true)
 //    }
 //    
-//    @objc private func sendMessageButtonTapped() {
-//         guard let messageText = messageInputTextField.text, !messageText.isEmpty else { return }
-//         
-//         chatWebSocket.sendMessage(text: messageText)
-//         // Добавьте отправленное сообщение в массив `messages` и обновите `tableView`
-//         messages.append((isUserMessage: true, message: messageText, time: getCurrentTime()))
-//         tableView.reloadData()
-//         messageInputTextField.text = ""
-//     }
+//    private func fetchChatData() {
+//        chatAPI.fetchChatMessages(chatId: 5) { [weak self] result in
+//            switch result {
+//            case .success(let chatMessages):
+//                self?.chat = Chat(id: self?.chat?.id ?? 0, user: self?.chat?.user ?? 0, manager: 1, createdAt: "2024-12-01", messages: chatMessages)
+//                self?.messages = chatMessages
+//                DispatchQueue.main.async {
+//                    self?.tableView.reloadData()
+//                }
+//            case .failure(let error):
+//                print("Ошибка получения чатов: \(error.localizedDescription)")
+//            }
+//        }
+//    }
 //
-//     // Вспомогательная функция для получения текущего времени
-//     private func getCurrentTime() -> String {
-//         let dateFormatter = DateFormatter()
-//         dateFormatter.dateFormat = "HH:mm"
-//         return dateFormatter.string(from: Date())
-//     }
+//    @objc private func sendMessageButtonTapped() {
+//        guard let messageText = messageInputTextField.text, !messageText.isEmpty else { return }
+//
+//        guard let chat = chat else { return }
+//        
+//        // Отправляем сообщение через WebSocket
+//        chatWebSocket?.sendMessage(chatId: "\(chat.id)", userId: "\(chat.user)", messageContent: messageText)
+//
+//        // Добавляем отправленное сообщение в массив
+//        let newMessage = Message(id: messages.count + 1, chat: chat.id, sender: chat.user, text: messageText, createdAt: getCurrentTime(), isRead: true)
+//        messages.append(newMessage)
+//        tableView.reloadData()
+//        
+//        // Очищаем поле ввода
+//        messageInputTextField.text = ""
+//    }
+//
+//
+//    private func getCurrentTime() -> String {
+//        let dateFormatter = DateFormatter()
+//        dateFormatter.dateFormat = "HH:mm"
+//        return dateFormatter.string(from: Date())
+//    }
 //    
 //    private func setupUI() {
 //        view.backgroundColor = .init(hex: "#1B2228")
@@ -185,18 +206,19 @@
 //    
 //    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 //        let messageData = messages[indexPath.row]
-//        
-//        if messageData.isUserMessage {
-//            let cell = tableView.dequeueReusableCell(withIdentifier: "UserMessageCell", for: indexPath) as! UserMessageCell
-//            cell.configure(message: messageData.message, time: messageData.time)
-//            return cell
-//        } else {
-//            let cell = tableView.dequeueReusableCell(withIdentifier: "AdminMessageCell", for: indexPath) as! AdminMessageCell
-//            cell.configure(message: messageData.message, time: messageData.time)
-//            return cell
-//        }
+//          
+//          if messageData.sender == 0 { // Админ
+//              let cell = tableView.dequeueReusableCell(withIdentifier: "AdminMessageCell", for: indexPath) as! AdminMessageCell
+//              cell.configure(message: messageData.text, time: messageData.createdAt)
+//              return cell
+//          } else { // Пользователь
+//              let cell = tableView.dequeueReusableCell(withIdentifier: "UserMessageCell", for: indexPath) as! UserMessageCell
+//              cell.configure(message: messageData.text, time: messageData.createdAt)
+//              return cell
+//          }
 //    }
 //}
+//
 //
 //// MARK: - Message Cells
 //
@@ -343,6 +365,3 @@
 //        timeLabel.text = time
 //    }
 //}
-//
-//
-//
