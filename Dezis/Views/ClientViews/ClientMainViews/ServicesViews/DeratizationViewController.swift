@@ -46,6 +46,7 @@ private lazy var orderButton: UIButton = {
         setupUI()
         view.backgroundColor = UIColor(hex: "#1B2228")
         navigationItem.backButtonTitle = "Назад"
+       
     }
     private func setupUI(){
      
@@ -80,8 +81,6 @@ private lazy var orderButton: UIButton = {
         print("button tapped")
 
         NotificationCenter.default.post(name: NSNotification.Name("SwitchToTab"), object: nil, userInfo: ["tabIndex": 1])
-
-        self.dismiss(animated: true, completion: nil)
     }
 
 

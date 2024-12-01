@@ -313,17 +313,16 @@ class UserRegisterSecondPageViewController: UIViewController, IUserRegisterSecon
 
 extension  UserRegisterSecondPageViewController: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        // Получаем обновленный текст
+       
         let currentText = textField.text ?? ""
         let updatedText = (currentText as NSString).replacingCharacters(in: range, with: string)
 
-        // Определяем, какое поле обрабатывается
         if textField == adressTextField {
             validateAddress(updatedText)
-            return updatedText.count <= 50 // Ограничиваем длину до 50 символов
+            return updatedText.count <= 50
         } else if textField == apartmentNumberTextField {
             validateApartmentNumber(updatedText)
-            return updatedText.count <= 5 // Ограничиваем длину до 5 символов
+            return updatedText.count <= 5 
         }
 
         return true
